@@ -1,3 +1,17 @@
+privoxy (3.0.2-1) unstable; urgency=low
+
+  * New upstream version 3.0.2.
+  * Update Standards-Version to 3.5.9 (no changes).
+
+ -- Roland Rosenfeld <roland@debian.org>  Wed, 26 Mar 2003 19:45:07 +0100
+
+privoxy (3.0.0-6) unstable; urgency=low
+
+  * Fixed a bug in local user-manual patch, which failed when accessing
+    http://config.privoxy.org/user-manual/ (without a file name).
+
+ -- Roland Rosenfeld <roland@debian.org>  Sun,  2 Mar 2003 13:40:48 +0100
+
 privoxy (3.0.0-5) unstable; urgency=low
 
   * Stop build-depending on special versions of libc6-dev and gcc.
