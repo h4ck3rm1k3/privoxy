@@ -20,7 +20,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: index.sgml,v 1.16.2.4 2002/06/09 16:36:33 hal9 Exp $
+ $Id: index.sgml,v 1.16.2.5 2002/06/09 18:59:16 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -186,7 +186,7 @@
   <colspec colname=c1 align="center">
   <tbody>
    <row>
-    <entry align="center">Prixoxy is developed on:</entry>
+    <entry align="center">Privoxy is developed on:</entry>
    </row>
    <row>
     <entry align="center">
@@ -245,6 +245,9 @@
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: index.sgml,v $
+ Revision 1.16.2.5  2002/06/09 18:59:16  hal9
+ Correct typo.
+
  Revision 1.16.2.4  2002/06/09 16:36:33  hal9
  Clarifications on filtering and MIME. Hardcode 'latest release' in index.html.
 
