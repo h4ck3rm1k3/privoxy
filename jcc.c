@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.9 2003/04/03 15:08:42 oes Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.10 2003/05/08 15:13:46 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.9 2003/04/03 15:08:42 oes Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.92.2.10  2003/05/08 15:13:46  oes
+ *    Cosmetics: Killed a warning, a typo and an allocation left at exit
+ *
  *    Revision 1.92.2.9  2003/04/03 15:08:42  oes
  *    No longer rely on non-POSIX.1 extensions of getcwd().
  *    Fixes bug #711001
@@ -707,7 +710,7 @@ pthread_mutex_t gethostbyname_mutex;
 #endif /* def OSX_DARWIN */
 
 #if defined(unix) || defined(__EMX__)
-const char *basedir;
+const char *basedir = NULL;
 const char *pidfile = NULL;
 int received_hup_signal = 0;
 #endif /* defined unix */
@@ -1479,7 +1482,7 @@ static void chat(struct client_state *csp)
 
                   if (write_socket(csp->cfd, hdr, hdrlen)
                    || ((flushed = flush_socket(csp->cfd, csp)) < 0)
-                   || (write_socket(csp->cfd, buf, len)))
+                   || (write_socket(csp->cfd, buf, (size_t) len)))
                   {
                      log_error(LOG_LEVEL_CONNECT, "Flush header and buffers to client failed: %E");
 
@@ -1901,6 +1904,8 @@ int main(int argc, const char *argv[])
    pthread_mutex_init(&gethostbyaddr_mutex,0);
    pthread_mutex_init(&gethostbyname_mutex,0);
 #endif /* def OSX_DARWIN */
+
+   pthread_mutex_init(&inet_ntoa_mutex, 0);
 
    /*
     * Unix signal handling
@@ -2386,7 +2391,7 @@ static void listen_loop(void)
             serve(csp);
 
             /* 
-             * If we've been toggled or we'be blocked the request, tell Mom
+             * If we've been toggled or we've blocked the request, tell Mom
              */
 
 #ifdef FEATURE_TOGGLE
@@ -2499,12 +2504,14 @@ static void listen_loop(void)
    sweep();
 
 #if defined(unix)
-   free(basedir);
+   freez(basedir);
 #endif
 #if defined(_WIN32) && !defined(_WIN_CONSOLE)
    /* Cleanup - remove taskbar icon etc. */
    TermLogWindow();
 #endif
+   freez(configfile);
+
 
    exit(0);
 #endif /* FEATURE_GRACEFUL_TERMINATION */
