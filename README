@@ -31,19 +31,10 @@
  *
  *********************************************************************/
 
+This README is included with Privoxy 3.0.1. See http://www.privoxy.org/ for
+more information. The current code level is stable.
 
 -------------------------------------------------------------------------------
-
-     **********************************************************
-     
- NOTE: This is a pre-release version of Privoxy from the "stable" CVS branch.
- It is being readied for the next stable release -- 3.0.1 which could happen
- "soon". While this tree is in a transition state, the version will be
- intentionally stamped as "0.0.0" so as to make it clear that this code is not
- yet ready for release. If you try this code, and find problems which seem to
- be bugs, please report it to the developers list.
-
-     **********************************************************
 
 Privoxy is a web proxy with advanced filtering capabilities for protecting
 privacy, filtering web page content, managing cookies, controlling access, and
@@ -120,22 +111,16 @@ with FTP or other protocols for the simple reason it does not work.
 The actions list can be configured via the web interface accessed via http://
 p.p/, as well other options.
 
-All configuration files are subject to unannounced changes during the
-development process.
-
 -------------------------------------------------------------------------------
 
 5. DOCUMENTATION
 
-There should be documentation in the 'doc' subdirectory, but it is not
-completed at this point. In particular, see the User Manual there, the FAQ, and
-those interested in Privoxy development, should look at developer-manual.
+There should be documentation in the 'doc' subdirectory. In particular, see the
+User Manual there, the FAQ, and those interested in Privoxy development, should
+look at developer-manual.
 
-The most up to date source of information on the current development version,
-may still be either comments in the source code, or the included configuration
-files. The source and configuration files are all well commented. The main
-configuration files are: 'config', 'default.action', and 'default.filter' in
-the toplevel source directory.
+The source and configuration files are all well commented. The main
+configuration files are: 'config', 'default.action', and 'default.filter'.
 
 Included documentation may vary according to platform and packager. All
 documentation is posted on http://www.privoxy.org, in case you don't have it,
