@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.14 2003/03/15 17:14:58 oes Exp $
+#  $Id: default.action.master,v 1.1.2.15 2003/03/19 13:19:06 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -461,7 +461,7 @@ allow-ads   = -block -filter{banners-by-size} -filter{banners-by-link}
 #############################################################################
 # Needed for automatic feedback evaluation; Please don't change or delete!
 #############################################################################
-{+add-header{X-Actions-File-Version: 1.5} -filter -kill-popups}
+{+add-header{X-Actions-File-Version: 1.6} -filter -kill-popups}
 .privoxy.org
 .oesterhelt.org/actions
 
@@ -899,7 +899,7 @@ www.techtv.com
 www.nytimes.com
 
 #----------------------------------------------------------------------------
-# These sites require pop-ups
+# These sites require pop-ups, so don't use the unconditional filters.
 #----------------------------------------------------------------------------
 {allow-popups}
 #MASTER# PROBLEM-URL: http://www.aprilbarrows.com/discography.html
@@ -1119,6 +1119,16 @@ www.ameritrade.com
 #MASTER# PROBLEM-URL: http://www.planetspiele.de/
 .planetspiele.de
 216.12.219.40
+
+#----------------------------------------------------------------------------
+# The "site-specifics" filter has special cures for problems found here:
+#----------------------------------------------------------------------------
+{+filter{site-specifics}}
+#MASTER# PROBLEM-URL: http://www.spiegel.de/static/js/flash-plugin.js
+www.spiegel.de/static/js/flash-plugin\.js
+#MASTER# PROBLEM-URL: http://www.quelle-bausparkasse.de/
+www.quelle-bausparkasse.de/$
+
 
 #----------------------------------------------------------------------------
 # Misc special rules:
