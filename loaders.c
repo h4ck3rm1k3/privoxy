@@ -1,4 +1,4 @@
-const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.5 2003/05/08 15:19:15 oes Exp $";
+const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.6 2003/10/24 10:17:54 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loaders.c,v $
@@ -35,6 +35,9 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.5 2003/05/08 15:19:15 oes Ex
  *
  * Revisions   :
  *    $Log: loaders.c,v $
+ *    Revision 1.50.2.6  2003/10/24 10:17:54  oes
+ *    Nit: Allowed tabs as separators in filter headings
+ *
  *    Revision 1.50.2.5  2003/05/08 15:19:15  oes
  *    sweep: Made loop structure of sweep step mirror that of mark step
  *
@@ -1323,7 +1326,7 @@ int load_re_filterfile(struct client_state *csp)
 
          new_bl->name = chomp(buf + 7);
 
-         if (NULL != (new_bl->description = strchr(new_bl->name, ' ')))
+         if (NULL != (new_bl->description = strpbrk(new_bl->name, " \t")))
          {
             *new_bl->description++ = '\0';
             new_bl->description = strdup(chomp(new_bl->description));
