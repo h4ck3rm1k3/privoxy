@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.33 2003/12/01 22:24:31 oes Exp $
+#  $Id: default.action.master,v 1.1.2.34 2003/12/02 11:26:44 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -668,6 +668,9 @@ awrz.net/
 #MASTER# BLOCK-REFERRER: http://www.chip.de/artikel/c_artikelunterseite_10423683.html
 pagead*.googlesyndication.com/.*\.js
 a.tfag.de/js.ng/
+#MASTER# BLOCK-REFERRER: http://www.nbc4.com/news/2672416/detail.html
+y.nbc4.com/js.ng
+y.ibsys.com/event.ng/
 
 #############################################################################
 # Generic block-as-image patterns:
@@ -1577,6 +1580,8 @@ www.ukoln.ac.uk/cgi-bin/dcdot.pl
 www.metrolounge.de
 #MASTER# PROBLEM-URL: http://www.mcmaster.com
 www.mcmaster.com/products.html
+#MASTER# PROBLEM-URL: http://www.nbc4.com/news/2672416/detail.html
+cf.nbc4.com/
 
 {+fast-redirects -block}
 #MASTER# PROBLEM-URL: http://isbn.nu/0596001088/price/2.html
