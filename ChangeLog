@@ -2,17 +2,28 @@
 ChangeLog for Privoxy
 --------------------------------------------------------------------
 *** Version 3.0.1 ***
+	
 - Added basic support for the OPTIONS and TRACE http methods
 - Improved cookie logging
-- Fixed filter bug: Now preserves original quoting style in <img>
-  tags wherever possible.
-- Content cookie filter now part of default (Medium) profile
-- Add a demoronizer filter, which fixes MS's abuse of std charsets
-  (common cases anyway).
+- Fixed bug in pcrs which could cause crashes with user-defined filters
 - Rewrite make install target. Add uninstall and install-strip
   targets.
+- New filter: Demoronizer which fixes MS's abuse of std charsets
+  (common cases anyway).
+- New filter: Help those tiny or hard-wrap textareas.
+- Fixed bug in domain name matching
+- Fixed a memory leak
+- Fixed filter bug: Now preserves original quoting style in <img>
+  tags wherever possible.
+- Fixed a potential (application-level, NOT OS-level!) security
+  problem involving remote toggling and action file manipulation
+  by mailicious websites.
+- Content cookie filter now part of default (Medium) profile
+- Added more action aliases for prehistoric action names
+- Some filter optimizations
+- Assorted small fixes (Win32 menu, CGI URL editor, ..) 
 - Add Slackware support to Makefile.
-
+	
 *** Version 3.0  ***
 
 - Fixed Windows startmenu items, log window and tray icon menus.
