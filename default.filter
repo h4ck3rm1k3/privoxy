@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.11.2.17 2003/12/01 21:58:46 oes Exp $
+#  $Id: default.filter,v 1.11.2.18 2003/12/02 11:25:27 oes Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -178,7 +178,7 @@ s/<meta\s+http-equiv\s*=\s*(['"]?)refresh\1\s+content\s*=\s*(['"]?)\d{2,}\s*(;\s
 FILTER: unsolicited-popups Disable only unsolicited pop-up windows
 
 s+([^'"]\s*<head.*>)(?=\s*[^'"])+$1<script>function PrivoxyWindowOpen(){return(null);}</script>+isU
-s+((window|this|parent)\.)?open\s*\(+PrivoxyWindowOpen(+ig
+s+([^\w\s.]\s*)((window|this|parent)\.)?open\s*\(+$1PrivoxyWindowOpen(+ig
 s+([^'"]\s*)(?=</html>(\s*[^'"]|$))+$1<script>function PrivoxyWindowOpen(a, b, c){return(window.open(a, b, c));}</script>+iU     
 
 
@@ -486,6 +486,9 @@ s|(<img [^>]*)onload|$1never|sig
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.11.2.18  2003/12/02 11:25:27  oes
+#     Fixed a line trashed in previous commit
+#
 #     Revision 1.11.2.17  2003/12/01 21:58:46  oes
 #     Assorted tuning:
 #
