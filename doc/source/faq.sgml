@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.6 2002/07/30 20:04:56 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.7 2002/08/02 01:46:01 david__schmidt Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -72,7 +72,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.6 2002/07/30 20:04:56 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.7 2002/08/02 01:46:01 david__schmidt Exp $</pubdate>
 
 <!--
 
@@ -1602,6 +1602,25 @@ every time I start IE. What gives?</title>
  </para>
 </sect2>
 
+
+<!--   ~~~~~       New section      ~~~~~     -->
+<sect2 id="osxuninstall">
+<title>In Mac OSX, I dragged the Privoxy folder to the trash in order to 
+ uninstall it.  Now the finder tells me I don't have sufficient privileges to
+ empty the trash.</title>
+ <para>
+  <application>Privoxy</application> is installed with root permissions.  
+  When you drag the Privoxy folder to the trash, the general user does not
+  have (as the Finder says) sufficient privileges to delete it.  Unfortunately,
+  the finder does not offer a way to enter the administrator password in order
+  to prove you do in fact own this computer.  To fix this situation, open the
+  Terminal application and enter the following command:
+  <literal>sudo rm -rf ~/.Trash/*</literal>
+  The trash may still appear full after this command; emptying the trash 
+  from the desktop should make it appear empty again.
+ </para>
+</sect2>
+
 </sect1>
 <!--
 </sect1>
@@ -1694,6 +1713,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.7  2002/08/02 01:46:01  david__schmidt
+Added FAQ item for Mac OSX uninstall woes
+
 Revision 1.61.2.6  2002/07/30 20:04:56  hal9
 Fix typo: 'schould'.
 
