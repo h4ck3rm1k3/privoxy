@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.6 2003/03/12 01:26:25 david__schmidt Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.7 2003/04/03 13:50:58 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,11 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.6 2003/03/12 01:26:25 david__schmidt
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.70.2.7  2003/04/03 13:50:58  oes
+ *    - Don't call cgi_error_disabled ifndef FEATURE_CGI_EDIT_ACTIONS
+ *      (fixes bug #710056)
+ *    - Show toggle info only if we have it
+ *
  *    Revision 1.70.2.6  2003/03/12 01:26:25  david__schmidt
  *    Move declaration of struct tm dummy outside of a control block so it is
  *    accessible later on during snprintf in get_http_time.
@@ -471,7 +476,11 @@ static const struct cgi_dispatcher cgi_dispatchers[] = {
 #endif
    { "show-status", 
          cgi_show_status,  
+#ifdef FEATURE_CGI_EDIT_ACTIONS
         "View & change the current configuration",
+#else
+        "View the current configuration",
+#endif
          TRUE }, 
    { "show-version", 
          cgi_show_version,  
@@ -847,7 +856,7 @@ static struct http_response *dispatch_known_cgi(struct client_state * csp,
             }
             else
             {
-               err = cgi_error_disabled(csp, rsp);
+               err = cgi_error_404(csp, rsp, param_list);
             }
          }
 
@@ -2062,6 +2071,8 @@ struct map *default_exports(const struct client_state *csp, const char *caller)
    if (!err) err = map(exports, "actions-help-prefix", 1, ACTIONS_HELP_PREFIX ,1);
 #ifdef FEATURE_TOGGLE
    if (!err) err = map_conditional(exports, "enabled-display", global_toggle_state);
+#else
+   if (!err) err = map_block_killer(exports, "can-toggle");
 #endif
 
    snprintf(buf, 20, "%d", csp->config->hport);
