@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.15 2002/08/11 20:02:41 hal9 Exp $
+# $Id: GNUmakefile.in,v 1.104.2.16 2002/08/14 16:43:27 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -132,7 +132,8 @@ DOC_FILES = AUTHORS LICENSE README ChangeLog \
 		`find doc/text/ -type f | grep -v "CVS" | grep -v "\.\#" | grep -v ".*~" | grep -v ".cvsignore" | grep -v "TAGS"` \
 		`find doc/webserver/ -name "*.html" | grep -v "\(webserver\|team\)\/index\.html"` \
 		`find doc/webserver/ -name "*.css"` \
-                privoxy.1
+                privoxy.1 \
+		doc/pdf/*.pdf
 
 #############################################################################
 # Filenames and libraries
@@ -846,9 +847,13 @@ webserver: tidy
 	@$(ECHO) it will not remove obsolete documents.
 	@$(ECHO) -------------------------------------------------------
 
-	@$(ECHO) Uploading 
+	@$(ECHO) Uploading html
 	@cd doc/webserver; \
           upload=`find . -type f -a -not \( -path "*/CVS*" -o -path "*/results*" \)`; \
+          $(TAR) c $$upload | ssh ijbswa.sourceforge.net 'cd /home/groups/i/ij/ijbswa/htdocs/; tar xvm 2>&1 | grep -v timestamp'
+	@$(ECHO) Uploading pdf
+	@cd doc;\
+          upload="pdf/*pdf"; \
           $(TAR) c $$upload | ssh ijbswa.sourceforge.net 'cd /home/groups/i/ij/ijbswa/htdocs/; tar xvm 2>&1 | grep -v timestamp'
 
 	@$(ECHO) Fixing permissions
@@ -986,6 +991,9 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.16  2002/08/14 16:43:27  hal9
+# Added pdf docs to make webserver target.
+#
 # Revision 1.104.2.15  2002/08/11 20:02:41  hal9
 # New targets for man page (make man) and pdf (make dok-pdf) targets.
 #
