@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.1 2002/07/26 15:17:40 oes Exp $
+#  $Id: default.action.master,v 1.1.2.2 2002/07/26 17:15:29 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/faq/questions.html#CONFIGFILES
@@ -866,3 +866,8 @@ www.geocities.com/js_source
 #MASTER# PROBLEM-URL: http://www.privoxy.org/user-manual/filter-file.html
 #MASTER# REMARKS: Don't change the filter code with itself ;-)
 /(.*/)?user-manual/filter-file.html
+
+{+filter{img-reorder} +filter{banners-by-link}}
+#MASTER# PROBLEM-URL: http://www.dn.se/
+#MASTER# REMARKS: Can't catch by size or location
+www.dn.se
