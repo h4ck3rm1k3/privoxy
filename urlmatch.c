@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.10.2.4 2003/02/28 12:57:44 oes Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.10.2.5 2003/02/28 13:09:29 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -33,6 +33,9 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.10.2.4 2003/02/28 12:57:44 oes 
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.10.2.5  2003/02/28 13:09:29  oes
+ *    Fixed a rare double free condition as per Bug #694713
+ *
  *    Revision 1.10.2.4  2003/02/28 12:57:44  oes
  *    Moved freeing of http request structure to its owner
  *    as per Dan Price's observations in Bug #694713
@@ -261,12 +264,11 @@ jb_err parse_http_url(const char * url,
          http->hostport = strdup(url_noproto);
       }
 
-      free(buf);
+      freez(buf);
 
       if ( (http->path == NULL)
         || (http->hostport == NULL))
       {
-         free(buf);
          return JB_ERR_MEMORY;
       }
    }
