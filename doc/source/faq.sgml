@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.35 2003/06/26 13:38:08 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.36 2003/06/26 23:49:20 hal9 Exp $
 
  Copyright (C) 2001-2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.35 2003/06/26 13:38:08 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.36 2003/06/26 23:49:20 hal9 Exp $</pubdate>
 
 <!--
 
@@ -497,8 +497,7 @@ special I have to do now?</title>
  </para>
  <para>
   <application>Privoxy</application> does not currently handle
-  protocols such as FTP, SMTP, IM, IRC, ICQ, or other Internet
-  protocols. 
+  any other protocols such as FTP, SMTP, IM, IRC, ICQ, etc. 
  </para>
 </sect2>
 
@@ -1480,43 +1479,60 @@ from a webserver? FTP server?</title>
  viewing a document (i.e. a page), and downloading a file. The same is true of
  <application>Privoxy</application>. If there is a match for a <literal><ulink
  url="../user-manual/actions-file.html#BLOCK">block</ulink></literal> pattern,
- it will still be blocked, and of course this is obvious. Filtering is
- potentially more of a concern since the results are not always so obvious,
- and the effects of filtering are there whether the file is simply viewed, or
- downloaded.
+ it will still be blocked, and of course this is obvious. 
+ </para>
+ <para>
+ Filtering is potentially more of a concern since the results are not always
+ so obvious, and the effects of filtering are there whether the file is simply
+ viewed, or downloaded. And potentially whether the content is some obnoxious
+ advertizement, or Mr. Jimmy's latest/greatest source code jewel. Of course,
+ one of these presumably is <quote>bad</quote> content that we don't want, and
+ the other is <quote>good</quote> content that we do want.
+ <application>Privoxy</application> is blind to the differences, and can only
+ distinguish <quote>good from bad</quote> by the configuration parameters
+ <emphasis>we</emphasis> give it.
 </para>
 <para>
  <application>Privoxy</application> knows the differences in files according
  to the <quote>Document Type</quote> as reported by the webserver. If this is
  reported accurately (e.g. <quote>application/zip</quote> for a zip archive),
  then <application>Privoxy</application> knows to ignore these where
- appropriate. <application>Privoxy</application> filters html as well as plain
- text documents. Also, documents that are of an unknown type (generally
- assumed to be <quote>text/plain</quote>) will be filtered, as will those that
- might be incorrectly reported by the webserver. If such a file is a
- downloaded file that is intended to be saved to disk, then any content that
- might have been altered by filtering, will be saved too, for these (probably
- rare) cases.
+ appropriate. <application>Privoxy</application> potentially can filter HTML
+ as well as plain text documents, subject to configuration parameters of
+ course. Also, documents that are of an unknown type (generally assumed to be
+ <quote>text/plain</quote>) can be filtered, as will those that might be
+ incorrectly reported by the webserver. If such a file is a downloaded file
+ that is intended to be saved to disk, then any content that might have been
+ altered by filtering, will be saved too, for these (probably rare) cases.
+</para>
+<para>
+ In short, filtering is <quote>ON</quote> if a) the Document Type as reported
+ by the webserver is appropriate <emphasis>and</emphasis> b) the configuration
+ allows it (or at least does not disallow it). That's it. There is no magic
+ cookie anywhere to say this is <quote>good</quote> and this is
+ <quote>bad</quote>. It's the configuration that let's it all happen or not.
 </para>
 <para>
  If you download text files, you probably do not want these to be filtered,
  particularly if the content is source code, or other critical content. Source
- code sometimes might be mistaken for Javascript. It is recommended to turn
- off filtering for download sites (particularly if the content may be plain
- text files) in your <filename>user.action</filename> file.
-
+ code sometimes might be mistaken for Javascript (i.e. the kind that might
+ open a pop-up window). It is recommended to turn off filtering for download
+ sites (particularly if the content may be plain text files) in your
+ <filename>user.action</filename> file. And also, for any site or page where
+ making <emphasis>any</emphasis> changes at all to the content is to be
+ avoided.
 </para>
 <para>
  <application>Privoxy</application> does not do FTP at all, only HTTP 
-  protocols.
+  protocols, so please don't even try.
 </para>
 </sect2>
 
 <sect2 renderas="sect3" id="downloads2">
 <title>I just downloaded a Perl script, and <application>Privoxy</application>
-altered it! What is wrong!</title>
+altered it! Yikes, what is wrong!</title>
 <para>
- Please read above.
+ Your present configuration! Please read above.
 </para>
 </sect2>
 
@@ -1710,14 +1726,27 @@ every time I start IE. What gives?</title>
  <para>
   <application>Privoxy</application> cannot act as a proxy for FTP traffic, 
   so do not configure your browser to use <application>Privoxy</application>
-  as an FTP proxy. The same is true for any protocol other than HTTP or HTTPS.
+  as an FTP proxy. The same is true for <emphasis>any protocol other than HTTP
+  or HTTPS</emphasis>. 
  </para>
-  <para>
+ <para>
   Most browsers understand FTP as well as HTTP. If you connect to a site, with
   a URL like <literal>ftp://ftp.example.com</literal>, your browser is making
   an FTP connection, and not a HTTP connection. So while your browser may 
   speak FTP, <application>Privoxy</application> does not, and cannot proxy 
   such traffic.
+ </para>
+ <para>
+  To complicate matters, some systems may have a generic <quote>proxy</quote>
+  setting, which will silently enable <emphasis>both</emphasis> HTTP and FTP
+  proxying! So it is possible to accidentally enable FTP proxying in these
+  cases. And of course, if this happens, <application>Privoxy</application>
+  will indeed cause problems since it does not know FTP.
+ </para>
+ <para>
+  Will <application>Privoxy</application> ever proxy FTP traffic? Unlikely.
+  There just is not much reason, and the work to make this happen is more than
+  it may seem.
  </para>
 </sect2>
 
@@ -1908,6 +1937,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.36  2003/06/26 23:49:20  hal9
+More on the filter/source code problem.
+
 Revision 1.61.2.35  2003/06/26 13:38:08  hal9
 Add FAQ on whether configuring Privoxy is necessary or not.
 
