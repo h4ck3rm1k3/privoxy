@@ -21,7 +21,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: index.sgml,v 1.16.2.1 2002/05/26 17:40:02 hal9 Exp $
+ $Id: index.sgml,v 1.16.2.2 2002/05/26 22:04:46 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -31,8 +31,11 @@
  anything in this, or other Privoxy documentation. 
  ========================================================================
 
- Note: This is the privoxy home page. The Makefile is adding additional
+ Note: This is the Privoxy home page. The Makefile is adding additional
  meta data and content via perl.
+
+ This file also can be bundled with documentation as a focal point for 
+ docs and other points of interest to users.
 
 -->
 
@@ -69,7 +72,8 @@
 <!-- end boilerplate -->
 
   <para>
-   The most recent release is &p-version; (&p-status;).
+   The most recent version is &p-version; (&p-status;). (Odd numbered versions 
+   are available only through CVS.)
   </para>
 
  </abstract>
@@ -157,6 +161,8 @@
   </listitem>
   <listitem>
    <para>
+    <!-- please leave this link absolute so this file can be bundled with -->
+    <!-- documentation and still used locally -->
     <ulink url="http://privoxy.org/team/index.html">Pictures of the Privoxy Team</ulink>
    </para>
   </listitem>
@@ -229,6 +235,10 @@
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: index.sgml,v $
+ Revision 1.16.2.2  2002/05/26 22:04:46  hal9
+ Add several comments, and reworded 'most recent release', ie we don't officially
+ release odd numbered versions.
+
  Revision 1.16.2.1  2002/05/26 17:40:02  hal9
  Make team pictures link absolute for docs.
 
