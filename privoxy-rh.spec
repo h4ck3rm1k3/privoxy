@@ -1,4 +1,4 @@
-# $Id: privoxy-rh.spec,v 1.33.2.4 2002/06/26 17:32:45 morcego Exp $
+# $Id: privoxy-rh.spec,v 1.33.2.5 2002/07/02 11:43:20 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -121,7 +121,7 @@ cat trust | sed -e 's/\r$//' > %{buildroot}%{privoxyconf}/trust
 cd templates
 for i in `ls`
 do
-	cat $i | sed -e 's/\r$//' > buildroot}%{privoxyconf}/templates/$i
+	cat $i | sed -e 's/\r$//' > %{buildroot}%{privoxyconf}/templates/$i
 done
 )
 
@@ -332,6 +332,10 @@ fi
 %{_mandir}/man1/%{name}.*
 
 %changelog
+* Tue Jul 02 2002 Hal Burgiss <hal@foobox.net>
++ privoxy-2.9.15-4
+- Fix typo in templates creation.
+
 * Wed Jun 26 2002 Rodrigo Barbosa <rodrigob@tisbrasil.com.br>
 + privoxy-2.9.15-4
 - Fixing issues created by specfile sync between branches
@@ -704,6 +708,9 @@ fi
 	additional "-r @" flag.
 
 # $Log: privoxy-rh.spec,v $
+# Revision 1.33.2.5  2002/07/02 11:43:20  hal9
+# Fix typo in templates creation.
+#
 # Revision 1.33.2.4  2002/06/26 17:32:45  morcego
 # Integrating fixed from the main branch.
 #
