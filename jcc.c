@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.8 2003/03/31 13:12:32 oes Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.9 2003/04/03 15:08:42 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.8 2003/03/31 13:12:32 oes Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.92.2.9  2003/04/03 15:08:42  oes
+ *    No longer rely on non-POSIX.1 extensions of getcwd().
+ *    Fixes bug #711001
+ *
  *    Revision 1.92.2.8  2003/03/31 13:12:32  oes
  *    Replaced setenv() by posix-compliant putenv()
  *    Thanks to Neil McCalden (nmcc AT users.sf.net).
@@ -1856,16 +1860,17 @@ int main(int argc, const char *argv[])
 #if defined(unix)
    if ( *configfile != '/' )
    {
-      char *abs_file;
+      char *abs_file, cwd[1024];
 
       /* make config-filename absolute here */
-      if ( !(basedir = getcwd( NULL, 1024 )))
+      if ( !(getcwd(cwd, sizeof(cwd))))
       {
          perror("get working dir failed");
          exit( 1 );
       }
 
-      if ( !(abs_file = malloc( strlen( basedir ) + strlen( configfile ) + 5 )))
+      if (!(basedir = strdup(cwd))
+      || (!(abs_file = malloc( strlen( basedir ) + strlen( configfile ) + 5 ))))
       {
          perror("malloc failed");
          exit( 1 );
