@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl 
-dnl $Id: configure.in,v 1.68.2.10 2003/01/08 16:39:41 oes Exp $
+dnl $Id: configure.in,v 1.68.2.11 2003/03/06 15:22:37 oes Exp $
 dnl 
 dnl Written by and Copyright (C) 2001, 2002 the SourceForge
 dnl Privoxy team. http://www.privoxy.org/
@@ -28,6 +28,9 @@ dnl or write to the Free Software Foundation, Inc., 59
 dnl Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 dnl 
 dnl $Log: configure.in,v $
+dnl Revision 1.68.2.11  2003/03/06 15:22:37  oes
+dnl Fixed minor shell syntax bug
+dnl
 dnl Revision 1.68.2.10  2003/01/08 16:39:41  oes
 dnl Changing default to exclude FEATURE_IMAGE_DETECT_MSIE because of problem reports with recent IEs
 dnl
@@ -403,7 +406,7 @@ dnl =================================================================
 dnl AutoConf Initialization
 dnl =================================================================
 
-AC_REVISION($Revision: 1.68.2.10 $)
+AC_REVISION($Revision: 1.68.2.11 $)
 AC_INIT(jcc.c)
 
 if test ! -f config.h.in; then
@@ -478,7 +481,7 @@ dnl =================================================================
 
 dnl Keep AC_PROG_CC from setting its own defaults:
 if test "X$CFLAGS" = "X"; then
-   CFLAGS = " "
+   CFLAGS=" "
 fi
 
 AC_PROG_CC
