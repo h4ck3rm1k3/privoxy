@@ -1,4 +1,4 @@
-# $Id: privoxy-rh.spec,v 1.33.2.17 2002/08/07 01:08:49 hal9 Exp $
+# $Id: privoxy-rh.spec,v 1.33.2.18 2002/08/10 11:28:50 oes Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -37,7 +37,7 @@ Name: privoxy
 # ATTENTION
 # Version and release should be updated acordingly on configure.in and
 # configure. Otherwise, the package can be build with the wrong value
-Version: 2.9.18
+Version: 2.9.20
 Release: 1
 Summary: Privoxy - privacy enhancing proxy
 License: GPL
@@ -69,7 +69,7 @@ Privoxy is based on the Internet Junkbuster.
 # We check to see if versions match
 VERSION_MAJOR=2
 VERSION_MINOR=9
-VERSION_POINT=16
+VERSION_POINT=20
 
 CONFIG_VERSION=`cat configure.in | sed -n -e 's/^VERSION_MAJOR=\([0-9]*\)/\1./p' -e 's/^VERSION_MINOR=\([0-9]*\)/\1./p' -e 's/^VERSION_POINT=\([0-9]*\)/\1/p' | awk '{printf $1}'`
 if [ "%{version}" != "${CONFIG_VERSION}" ]; then
@@ -725,6 +725,9 @@ fi
 	additional "-r @" flag.
 
 # $Log: privoxy-rh.spec,v $
+# Revision 1.33.2.18  2002/08/10 11:28:50  oes
+# Bumped version
+#
 # Revision 1.33.2.17  2002/08/07 01:08:49  hal9
 # Bumped version to 2.9.18.
 #
