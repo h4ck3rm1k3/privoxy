@@ -11,11 +11,11 @@
 <!entity license SYSTEM "license.sgml">
 <!entity p-authors SYSTEM "p-authors.sgml">
 <!entity config SYSTEM "p-config.sgml">
-<!entity p-version "3.0.0">
-<!entity p-status "stable">
+<!entity p-version "0.0.0">
+<!entity p-status "UNRELEASED">
 <!entity % p-authors-formal "INCLUDE"> <!-- include additional text, etc  -->
-<!entity % p-not-stable "IGNORE">
-<!entity % p-stable "INCLUDE">
+<!entity % p-not-stable "INCLUDE">
+<!entity % p-stable "IGNORE">
 <!entity % p-text "IGNORE">        <!-- define we are not a text only doc -->
 <!entity % p-doc "INCLUDE">        <!-- and we are a formal doc           -->
 <!entity % p-readme "IGNORE">
@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.24 2002/11/17 06:41:06 hal9 Exp $
+ $Id: user-manual.sgml,v 1.123.2.25 2003/03/15 18:36:55 oes Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.24 2002/11/17 06:41:06 hal9 Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.25 2003/03/15 18:36:55 oes Exp $</pubdate>
 
 <!--
 
@@ -1495,7 +1495,7 @@ must find a better place for this paragraph
     <row>
       <entry>Feature</entry>
       <entry>Cautious</entry>
-      <entry>Intermadiate</entry>
+      <entry>Medium</entry>
       <entry>Radical</entry>
     </row>
     </thead>
@@ -1546,9 +1546,9 @@ must find a better place for this paragraph
 
     <row>
       <entry>Pop-up killing</entry>
-      <entry>no</entry>
-      <entry>yes</entry>
-      <entry>yes</entry>
+      <entry>unsolicited</entry>
+      <entry>unsolicited</entry>
+      <entry>all</entry>
     </row>
 
     <row>
@@ -1603,7 +1603,7 @@ must find a better place for this paragraph
     <row>
       <entry>Demoronizer</entry>
       <entry>no</entry>
-      <entry>no</entry>
+      <entry>yes</entry>
       <entry>yes</entry>
     </row>
 
@@ -1660,10 +1660,10 @@ must find a better place for this paragraph
  certainly a matter of personal taste. In general, it can be said that the more
  <quote>aggressive</quote> your default settings (in the top section of the
  actions file) are, the more exceptions for <quote>trusted</quote> sites you
- will have to make later. If, for example, you want to kill popup windows per
+ will have to make later. If, for example, you want to crunch all cookies per
  default, you'll have to make exceptions from that rule for sites that you
- regularly use and that require popups for actually useful content, like maybe
- your bank, favorite shop, or newspaper.
+ regularly use and that require cookies for actually useful puposes, like maybe
+ your bank, favorite shop, or newspaper. 
 </para>
 
 <para>
@@ -2669,68 +2669,84 @@ problem-host.example.com</screen>
   <term>Example usage (with filters from the distribution <filename>default.filter</filename> file):</term>
   <listitem>
    <para>
-    <anchor id="filter-html-annoyances">
-    <screen>+filter{html-annoyances}     # Get rid of particularly annoying HTML abuse.</screen>
-   </para>
-   <para>
     <anchor id="filter-js-annoyances">
     <screen>+filter{js-annoyances}       # Get rid of particularly annoying JavaScript abuse</screen>
    </para>
    <para>
-    <anchor id="filter-banners-by-size">
-    <screen>+filter{banners-by-size}     # Kill banners based on their size for this page (<emphasis>very</emphasis> efficient!)</screen>
+    <anchor id="filter-js-events">
+    <screen>+filter{js-events}           # Kill all JS event bindings (Radically destructive! Only for extra nasty sites)</screen>
    </para>
    <para>
-    <anchor id="filter-banners-by-link">
-    <screen>+filter{banners-by-link}     # Kill banners based on the link they are contained in (experimental)</screen>
-   </para>
-   <para>
-    <anchor id="filter-img-reorder">
-    <screen>+filter{img-reorder}         # Reorder attributes in &lt;img&gt; tags to make the banners-by-* filters more effective</screen>
+    <anchor id="filter-html-annoyances">
+    <screen>+filter{html-annoyances}     # Get rid of particularly annoying HTML abuse</screen>
    </para>
    <para>
     <anchor id="filter-content-cookies">
-    <screen>+filter{content-cookies}     # Kill cookies that come sneaking in the HTML or JS content</screen>
-   </para>
-   <para>
-    <anchor id="filter-popups">
-    <screen>+filter{popups}              # Kill all popups in JS and HTML</screen>
-   </para>
-   <para>
-    <anchor id="filter-webbugs">
-    <screen>+filter{webbugs}             # Squish WebBugs (1x1 invisible GIFs used for user tracking)</screen>
-   </para>
-   <para>
-    <anchor id="filter-fun">
-    <screen>+filter{fun}                 # Text replacements for subversive browsing fun!</screen>
-   </para>
-   <para>
-    <anchor id="filter-frameset-borders">
-    <screen>+filter{frameset-borders}    # Give frames a border and make them resizeable</screen> 
+    <screen>+filter{content-cookies}     # Kill cookies that come in the HTML or JS content</screen>
    </para>
    <para>
     <anchor id="filter-refresh-tags">
     <screen>+filter{refresh-tags}        # Kill automatic refresh tags (for dial-on-demand setups)</screen>
    </para>
    <para>
-    <anchor id="filter-nimda">
-    <screen>+filter{nimda}               # Remove Nimda (virus) code.</screen>
+    <anchor id="filter-unsolicited-popups">
+    <screen>+filter{unsolicited-popups}  # Disable only unsolicited pop-up windows</screen>
+   </para>
+   <para>
+    <anchor id="filter-all-popups">
+    <screen>+filter{all-popups}          # Kill all popups in JavaScript and HTML</screen>
+   </para>
+   <para>
+    <anchor id="filter-img-reorder">
+    <screen>+filter{img-reorder}         # Reorder attributes in &lt;img&gt; tags to make the banners-by-* filters more effective</screen>
+   </para>
+   <para>
+    <anchor id="filter-banners-by-size">
+    <screen>+filter{banners-by-size}     # Kill banners by size</screen>
+   </para>
+   <para>
+    <anchor id="filter-banners-by-link">
+    <screen>+filter{banners-by-link}     # Kill banners by their links to known clicktrackers</screen>
+   </para>
+   <para>
+    <anchor id="filter-webbugs">
+    <screen>+filter{webbugs}             # Squish WebBugs (1x1 invisible GIFs used for user tracking)</screen>
+   </para>
+   <para>
+    <anchor id="filter-tiny-textforms">
+    <screen>+filter{tiny-textforms}      # Extend those tiny textareas up to 40x80 and kill the hard wrap</screen>
+   </para>
+   <para>
+    <anchor id="filter-jumping-windows">
+    <screen>+filter{jumping-windows}     # Prevent windows from resizing and moving themselves</screen>
+   </para>
+   <para>
+    <anchor id="filter-frameset-borders">
+    <screen>+filter{frameset-borders}    # Give frames a border and make them resizable</screen>
+   </para>
+   <para>
+    <anchor id="filter-demoronizer">
+    <screen>+filter{demoronizer}         # Fix MS's non-standard use of standard charsets</screen>
    </para>
    <para>
     <anchor id="filter-shockwave-flash">
     <screen>+filter{shockwave-flash}     # Kill embedded Shockwave Flash objects</screen>
    </para>
    <para>
+    <anchor id="filter-quicktime-kioskmode">
+    <screen>+filter{quicktime-kioskmode} # Make Quicktime movies saveable</screen>
+   </para>
+   <para>
+    <anchor id="filter-fun">
+    <screen>+filter{fun}                 # Text replacements for subversive browsing fun!</screen>
+   </para>
+   <para>
     <anchor id="filter-crude-parental">
-    <screen>+filter{crude-parental}      # Kill all web pages that contain the words "sex" or "warez"</screen>
+    <screen>+filter{crude-parental}      # Crude parental filtering (demo only)</screen>
    </para>
    <para>
-    <anchor id="filter-js-events">
-    <screen>+filter{js-events}           # Kill all JS event bindings (<emphasis>Radically destructive!</emphasis> Only for extra nasty sites) </screen>
-   </para>
-   <para>
-    <anchor id="filter-demoronizer">
-    <screen>+filter{demoronizer}         # Fix non-standard MS font extensions for non-MS browsers</screen>
+    <anchor id="filter-ie-exploits">
+    <screen>+filter{ie-exploits}         # Disable some known Internet Explorer bug exploits</screen>
    </para>
   </listitem>
  </varlistentry>
@@ -3135,7 +3151,7 @@ ad.doubleclick.net
  <varlistentry>
   <term>Typical use:</term>
   <listitem>
-   <para>Eliminate those annoying pop-up windows</para>
+   <para>Eliminate those annoying pop-up windows (deprecated)</para>
   </listitem>
  </varlistentry>
 
@@ -3170,13 +3186,15 @@ ad.doubleclick.net
   <term>Notes:</term>
   <listitem>
    <para>
-    This action is easily confused with the built-in, hardwired <literal><link linkend="filter">filter</link></literal>
+    This action is basically a built-in, hardwired special-purpose filter
     action, but there are important differences: For <literal>kill-popups</literal>,
     the document need not be buffered, so it can be incrementally rendered while
     downloading. But <literal>kill-popups</literal> doesn't catch as many pop-ups as
     <literal><link
-    linkend="filter">filter</link>{<replaceable>popups</replaceable>}</literal>
-    does. 
+    linkend="FILTER-ALL-POPUPS">filter{<replaceable>all-popups</replaceable>}</link></literal>
+    does and is not as smart as <literal><link
+    linkend="FILTER-UNSOLICITED-POPUPS">filter{<replaceable>unsolicited-popups</replaceable>}</link>
+    </literal>is.
    </para>
    <para>
     Think of it as a fast and efficient replacement for a filter that you
@@ -3187,9 +3205,12 @@ ad.doubleclick.net
     the <literal>kill-popups</literal> action over its filter equivalent.
    </para>
    <para>
-    Killing all pop-ups is a dangerous business. Many shops and banks rely on
-    pop-ups to display forms, shopping carts etc, and killing only the unwanted pop-ups 
-    would require artificial intelligence in <application>Privoxy</application>.
+    Killing all pop-ups unconditionally is problematic. Many shops and banks rely on
+    pop-ups to display forms, shopping carts etc, and the <literal><link
+    linkend="FILTER-UNSOLICITED-POPUPS">filter{<replaceable>unsolicited-popups</replaceable>}</link>
+    </literal> does a fairly good job of catching only the unwanted ones.
+   </para>
+   <para>
     If the only kind of pop-ups that you want to kill are exit consoles (those
     <emphasis>really nasty</emphasis> windows that appear when you close an other
     one), you might want to use
@@ -3799,16 +3820,16 @@ my-internal-testing-server.void</screen>
  # These aliases just save typing later:
  # (Note that some already use other aliases!)
  #
- +crunch-all-cookies = +crunch-incoming-cookies +crunch-outgoing-cookies
- -crunch-all-cookies = -crunch-incoming-cookies -crunch-outgoing-cookies
+ +crunch-all-cookies = +<link linkend="CRUNCH-INCOMING-COOKIES">crunch-incoming-cookies</link> +<link linkend="CRUNCH-OUTGOING-COOKIES">crunch-outgoing-cookies</link>
+ -crunch-all-cookies = -<link linkend="CRUNCH-INCOMING-COOKIES">crunch-incoming-cookies</link> -<link linkend="CRUNCH-OUTGOING-COOKIES">crunch-outgoing-cookies</link>
  block-as-image      = +block +handle-as-image
- mercy-for-cookies   = -crunch-all-cookies -session-cookies-only
+ mercy-for-cookies   = -crunch-all-cookies -<link linkend="SESSION-COOKIES-ONLY">session-cookies-only</link> -<link linkend="FILTER-CONTENT-COOKIES">filter{content-cookies}</link>
 
  # These aliases define combinations of actions
  # that are useful for certain types of sites:
  #
- fragile     = -block -crunch-all-cookies -filter -fast-redirects -hide-referer -kill-popups
- shop        = -crunch-all-cookies -filter{popups} -kill-popups
+ fragile     = -<link linkend="BLOCK">block</link> -<link linkend="FILTER">filter</link> -crunch-all-cookies -<link linkend="FAST-REDIRECTS">fast-redirects</link> -<link linkend="HIDE-REFERER">hide-referrer</link> -<link linkend="KILL-POPUPS">kill-popups</link>
+ shop        = -crunch-all-cookies -<link linkend="FILTER-ALL-POPUPS">filter{all-popups}</link> -<link linkend="KILL-POPUPS">kill-popups</link>
 
  # Short names for other aliases, for really lazy people ;-)
  #
@@ -3842,7 +3863,7 @@ my-internal-testing-server.void</screen>
 
  # These shops require pop-ups:
  #
- {shop -kill-popups -filter{popups}}
+ {shop -kill-popups -filter{all-popups}}
   .dabs.com
   .overclockers.co.uk</screen>
 </para>
@@ -3906,19 +3927,19 @@ that also explains why and how aliases are used:
 ##########################################################################
 {{alias}}
 
-# These aliases just save typing later:
-# (Note that some already use other aliases!)
-#
-+crunch-all-cookies = +crunch-incoming-cookies +crunch-outgoing-cookies
--crunch-all-cookies = -crunch-incoming-cookies -crunch-outgoing-cookies
-block-as-image      = +block +handle-as-image
-mercy-for-cookies   = -crunch-all-cookies -session-cookies-only
+ # These aliases just save typing later:
+ # (Note that some already use other aliases!)
+ #
+ +crunch-all-cookies = +<link linkend="CRUNCH-INCOMING-COOKIES">crunch-incoming-cookies</link> +<link linkend="CRUNCH-OUTGOING-COOKIES">crunch-outgoing-cookies</link>
+ -crunch-all-cookies = -<link linkend="CRUNCH-INCOMING-COOKIES">crunch-incoming-cookies</link> -<link linkend="CRUNCH-OUTGOING-COOKIES">crunch-outgoing-cookies</link>
+ block-as-image      = +block +handle-as-image
+ mercy-for-cookies   = -crunch-all-cookies -<link linkend="SESSION-COOKIES-ONLY">session-cookies-only</link> -<link linkend="FILTER-CONTENT-COOKIES">filter{content-cookies}</link>
 
-# These aliases define combinations of actions
-# that are useful for certain types of sites:
-#
-fragile     = -block -crunch-all-cookies -filter -fast-redirects -hide-referer -kill-popups
-shop        = mercy-for-cookies -filter{popups} -kill-popups</screen>
+ # These aliases define combinations of actions
+ # that are useful for certain types of sites:
+ #
+ fragile     = -<link linkend="BLOCK">block</link> -<link linkend="FILTER">filter</link> -crunch-all-cookies -<link linkend="FAST-REDIRECTS">fast-redirects</link> -<link linkend="HIDE-REFERER">hide-referrer</link> -<link linkend="KILL-POPUPS">kill-popups</link>
+ shop        = -crunch-all-cookies -<link linkend="FILTER-ALL-POPUPS">filter{all-popups}</link> -<link linkend="KILL-POPUPS">kill-popups</link></screen>
 </para>
 
 <para>
@@ -3961,20 +3982,26 @@ shop        = mercy-for-cookies -filter{popups} -kill-popups</screen>
  +<link linkend="DEANIMATE-GIFS">deanimate-gifs</link> \
  -<link linkend="DOWNGRADE-HTTP-VERSION">downgrade-http-version</link> \
  +<link linkend="FAST-REDIRECTS">fast-redirects</link> \
- +<link linkend="FILTER-HTML-ANNOYANCES">filter{html-annoyances}</link> \
  +<link linkend="FILTER-JS-ANNOYANCES">filter{js-annoyances}</link> \
+ -<link linkend="FILTER-JS-EVENTS">filter{js-events}</link> \
+ +<link linkend="FILTER-HTML-ANNOYANCES">filter{html-annoyances}</link> \
  -<link linkend="FILTER-CONTENT-COOKIES">filter{content-cookies}</link> \
- +<link linkend="FILTER-POPUPS">filter{popups}</link> \
- +<link linkend="FILTER-WEBBUGS">filter{webbugs}</link> \
- -<link linkend="FILTER-REFRESH-TAGS">filter{refresh-tags}</link> \
- -<link linkend="FILTER-FUN">filter{fun}</link> \
- +<link linkend="FILTER-NIMDA">filter{nimda}</link> \
+ +<link linkend="FILTER-REFRESH-TAGS">filter{refresh-tags}</link> \
+ +<link linkend="FILTER-UNSOLICITED-POPUPS">filter{unsolicited-popups}</link> \
+ -<link linkend="FILTER-ALL-POPUPS">filter{all-popups}</link> \
+ +<link linkend="FILTER-IMG-REORDER">filter{img-reorder}</link> \
  +<link linkend="FILTER-BANNERS-BY-SIZE">filter{banners-by-size}</link> \
  -<link linkend="FILTER-BANNERS-BY-LINK">filter{banners-by-link}</link> \
- -<link linkend="FILTER-IMG-REORDER">filter{img-reorder}</link> \
+ +<link linkend="FILTER-WEBBUGS">filter{webbugs}</link> \
+ -<link linkend="FILTER-TINY-TEXTFORMS">filter{tiny-textforms}</link> \
+ +<link linkend="FILTER-JUMPING-WINDOWS">filter{jumping-windows}</link> \
+ -<link linkend="FILTER-FRAMESET-BORDERS">filter{frameset-borders}</link> \
+ +<link linkend="FILTER-DEMORONIZER">filter{demoronizer}</link> \
  -<link linkend="FILTER-SHOCKWAVE-FLASH">filter{shockwave-flash}</link> \
+ -<link linkend="FILTER-QUICKTIME-KIOSKMODE">filter{quicktime-kioskmode}</link> \
+ -<link linkend="FILTER-FUN">filter{fun}</link> \
  -<link linkend="FILTER-CRUDE-PARENTAL">filter{crude-parental}</link> \
- -<link linkend="FILTER-JS-EVENTS">filter{js-events}</link> \
+ +<link linkend="FILTER-IE-EXPLOITS">filter{ie-exploits}</link> \     
  -<link linkend="HANDLE-AS-IMAGE">handle-as-image</link> \
  +<link linkend="HIDE-FORWARDED-FOR-HEADERS">hide-forwarded-for-headers</link> \
  +<link linkend="HIDE-FROM-HEADER">hide-from-header{block}</link> \
@@ -3998,8 +4025,6 @@ shop        = mercy-for-cookies -filter{popups} -kill-popups</screen>
  like not blocking (which is <emphasis>understandably</emphasis> the
  default!) need exceptions, i.e. we need to specify explicitly what we
  want to block in later sections.
- We will also want to make exceptions from our general pop-up-killing,
- and use our defined aliases for that.
 </para>
 
 <para>
@@ -4041,13 +4066,15 @@ shop        = mercy-for-cookies -filter{popups} -kill-popups</screen>
 .scan.co.uk</screen>
 </para>
 
+<!-- No longer needed BEGIN OF COMMENTED OUT BLOCK 
+
 <para>
  Then, there are sites which rely on pop-up windows (yuck!) to work.
  Since we made pop-up-killing our default above, we need to make exceptions
  now. <ulink url="http://www.mozilla.org/">Mozilla</ulink> users, who
  can turn on smart handling of unwanted pop-ups in their browsers, can
  safely choose
- -<literal><link linkend="FILTER-POPUPS">filter{popups}</link></literal> (and
+ -<literal><link linkend="FILTER-ALL-POPUPS">filter{popups}</link></literal> (and
  -<literal><link linkend="KILL-POPUPS">kill-popups</link></literal>) above
  and hence don't need this section. Anyway, disabling an already disabled
  action doesn't hurt, so we'll define our exceptions regardless of what was
@@ -4058,11 +4085,13 @@ shop        = mercy-for-cookies -filter{popups} -kill-popups</screen>
  <screen>
 # These sites require pop-ups too :( 
 #
-{ -<link linkend="KILL-POPUPS">kill-popups</link> -<link linkend="FILTER-POPUPS">filter{popups}</link> }
+{ -<link linkend="KILL-POPUPS">kill-popups</link> -<link linkend="FILTER-ALL-POPUPS">filter{popups}</link> }
 .dabs.com
 .overclockers.co.uk
 .deutsche-bank-24.de</screen>
 </para>
+
+ END OF COMMENTED OUT BLOCK -->
 
 <para>
  The <literal><link linkend="FAST-REDIRECTS">fast-redirects</link></literal>
@@ -4302,7 +4331,7 @@ www.ugu.com/sui/ugu/adv</screen>
 +crunch-all-cookies = +crunch-incoming-cookies +crunch-outgoing-cookies
 -crunch-all-cookies = -crunch-incoming-cookies -crunch-outgoing-cookies
  allow-all-cookies  = -crunch-all-cookies -session-cookies-only
- allow-popups       = -filter{popups} -kill-popups
+ allow-popups       = -filter{all-popups} -kill-popups
 +block-as-image     = +block +handle-as-image
 -block-as-image     = -block
 
@@ -4339,18 +4368,17 @@ slashdot.org
 </para>
 
 <para>
- Your bank needs popups and is allergic to some filter, but you don't
- know which, so you disable them all:
+ Your bank is allergic to some filter, but you don't know which, so you disable them all:
 </para>
 
 <para>
  <screen>
-{ -<link linkend="FILTER">filter</link> -<link linkend="KILL-POPUPS">kill-popups</link> }
+{ -<link linkend="FILTER">filter</link> }
 .your-home-banking-site.com</screen>
 </para>
 
 <para>
- Some hosts and some file types you may not want to filter.
+ Some file types you may not want to filter.
  <application>Privoxy</application> makes no distinctions between regular web
  pages and downloads done via your web browser if it is an html or text type
  document.
@@ -4358,10 +4386,6 @@ slashdot.org
 
 <para>
  <screen>
-{ -<link linkend="FILTER">filter</link> }
-localhost
-apache_server.mylan
-
 # A list of common file extensions that are likely to indicate raw text, and best
 # if unfiltered.
 /(.*/)?.*\.(pl|(s|p)?h|c(c|xx|pp)?|tcl|am|init?|cfg?|conf(ig)?|txt|rc|bat)$
@@ -5904,6 +5928,9 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.25  2003/03/15 18:36:55  oes
+ Adapted to the new filters
+
  Revision 1.123.2.24  2002/11/17 06:41:06  hal9
  Move default profiles table from FAQ to U-M, and other minor related changes.
  Add faq on cookies.
