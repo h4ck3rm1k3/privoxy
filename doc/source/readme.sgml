@@ -4,10 +4,10 @@
 <!entity p-intro SYSTEM "privoxy.sgml">
 <!entity contacting SYSTEM "contacting.sgml">
 <!entity buildsource SYSTEM "buildsource.sgml">
-<!entity p-version "3.0.0">
-<!entity p-status "stable">
-<!entity % p-not-stable "IGNORE">
-<!entity % p-stable "INCLUDE">
+<!entity p-version "0.0.0">
+<!entity p-status "UNRELEASED">
+<!entity % p-not-stable "INCLUDE">
+<!entity % p-stable "IGNORE">
 <!entity % p-text "INCLUDE">       <!-- define we are a text only doc    -->
 <!entity % p-doc "IGNORE">         <!-- and never a text doc             -->
 <!entity % p-readme "INCLUDE">     <!-- all your README belong to us     -->
@@ -17,7 +17,7 @@
 
  Purpose     :  README for Privoxy
                 
- $Id: readme.sgml,v 1.16.2.4 2002/08/25 17:12:20 hal9 Exp $
+ $Id: readme.sgml,v 1.16.2.5 2002/10/24 22:07:39 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -150,9 +150,11 @@
 
 <!--   ~~~~~       New section      ~~~~~     -->
 <sect1 id="install" ><title>INSTALL</title>
-<!-- include buildsource.sgml boilerplate: -->
- &buildsource;
-<!-- end boilderplate -->
+<para> 
+ See the <filename>INSTALL</filename> file in this directory, for installing
+ from source, and the <citetitle>User Manual</citetitle>, for other
+ installation types. 
+</para>
 </sect1>
 
 <!--   ~~~~~       New section      ~~~~~     -->
@@ -250,7 +252,7 @@
 <!-- </LiteralLayout> -->
 <!-- </para> -->
 <!-- <para> -->
-<!--  $Id: readme.sgml,v 1.16.2.4 2002/08/25 17:12:20 hal9 Exp $ -->
+<!--  $Id: readme.sgml,v 1.16.2.5 2002/10/24 22:07:39 hal9 Exp $ -->
 <!-- </para> -->
 
 </article>
