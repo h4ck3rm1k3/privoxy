@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.14 2003/12/12 12:52:53 oes Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.15 2004/10/03 12:53:32 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,15 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.14 2003/12/12 12:52:53 oes Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.92.2.15  2004/10/03 12:53:32  david__schmidt
+ *    Add the ability to check jpeg images for invalid
+ *    lengths of comment blocks.  Defensive strategy
+ *    against the exploit:
+ *       Microsoft Security Bulletin MS04-028
+ *       Buffer Overrun in JPEG Processing (GDI+) Could
+ *       Allow Code Execution (833987)
+ *    Enabled with +inspect-jpegs in actions files.
+ *
  *    Revision 1.92.2.14  2003/12/12 12:52:53  oes
  *    - Fixed usage info for non-unix platforms
  *    - Fixed small cmdline parsing bug
@@ -849,6 +858,7 @@ static void chat(struct client_state *csp)
 
    int pcrs_filter;        /* bool, 1==will filter through pcrs */
    int gif_deanimate;      /* bool, 1==will deanimate gifs */
+   int jpeg_inspect;       /* bool, 1==will inspect jpegs */
 
    /* Function that does the content filtering for the current request */
    char *(*content_filter)() = NULL;
@@ -1079,6 +1089,8 @@ static void chat(struct client_state *csp)
                                 (!list_is_empty(csp->action->multi[ACTION_MULTI_FILTER]));
 
    gif_deanimate              = ((csp->action->flags & ACTION_DEANIMATE) != 0);
+
+   jpeg_inspect               = ((csp->action->flags & ACTION_JPEG_INSPECT) != 0);
 
    /* grab the rest of the client's headers */
 
@@ -1628,11 +1640,20 @@ static void chat(struct client_state *csp)
 
             /* Buffer and gif_deanimate this if appropriate. */
 
-            if ((csp->content_type & CT_GIF)  &&  /* It's a image/gif MIME-Type */
+            if ((csp->content_type & CT_GIF)  &&  /* It's an image/gif MIME-Type */
                 !http->ssl    &&                  /* We talk plaintext */
                 gif_deanimate)                    /* Policy allows */
             {
                content_filter = gif_deanimate_response;
+            }
+
+            /* Buffer and jpg_inspect this if appropriate. */
+
+            if ((csp->content_type & CT_JPEG)  &&  /* It's an image/jpeg MIME-Type */
+                !http->ssl    &&                   /* We talk plaintext */
+                jpeg_inspect)                      /* Policy allows */
+            {
+               content_filter = jpeg_inspect_response;
             }
 
             /*

@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.8 2003/07/11 13:21:25 oes Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.9 2004/10/03 12:53:45 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -40,6 +40,15 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.8 2003/07/11 13:21:25 oes Ex
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.56.2.9  2004/10/03 12:53:45  david__schmidt
+ *    Add the ability to check jpeg images for invalid
+ *    lengths of comment blocks.  Defensive strategy
+ *    against the exploit:
+ *       Microsoft Security Bulletin MS04-028
+ *       Buffer Overrun in JPEG Processing (GDI+) Could
+ *       Allow Code Execution (833987)
+ *    Enabled with +inspect-jpegs in actions files.
+ *
  *    Revision 1.56.2.8  2003/07/11 13:21:25  oes
  *    Excluded text/plain objects from filtering. This fixes a
  *    couple of client-crashing, download corruption and
@@ -857,6 +866,8 @@ jb_err server_content_type(struct client_state *csp, char **header)
          csp->content_type = CT_TEXT;
       else if (strstr(*header, " image/gif"))
          csp->content_type = CT_GIF;
+      else if (strstr(*header, " image/jpeg"))
+         csp->content_type = CT_JPEG;
       else
          csp->content_type = 0;
    }

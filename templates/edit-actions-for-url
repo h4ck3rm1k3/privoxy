@@ -32,6 +32,15 @@
 #
 # Revisions   :
 #    $Log: edit-actions-for-url,v $
+#    Revision 1.29.2.4  2004/10/03 12:53:46  david__schmidt
+#    Add the ability to check jpeg images for invalid
+#    lengths of comment blocks.  Defensive strategy
+#    against the exploit:
+#       Microsoft Security Bulletin MS04-028
+#       Buffer Overrun in JPEG Processing (GDI+) Could
+#       Allow Code Execution (833987)
+#    Enabled with +inspect-jpegs in actions files.
+#
 #    Revision 1.29.2.3  2002/08/23 02:22:53  hal9
 #    Fix a perl brain fart with <li> in comments.
 #
@@ -503,6 +512,19 @@ function show_send_wafer_opts(tf)
         type="radio" name="deanimate_gifs_mode" value="last" 
         id="deanimate_last" @deanimate-gifs-param-last@><label
         for="deanimate_last">last frame</label></td>
+    </tr>
+    <tr class="bg1" align="left" valign="top">
+      <td class="en1" align="center" valign="middle"><input type="radio"
+        name="inspect-jpegs" value="Y" @inspect-jpegs-y@
+        ></td>
+      <td class="dis1" align="center" valign="middle"><input type="radio"
+        name="inspect-jpegs" value="N" @inspect-jpegs-n@
+        ></td>
+      <td class="noc1" align="center" valign="middle"><input type="radio"
+        name="inspect-jpegs" value="X" @inspect-jpegs-x@
+        ></td>
+      <td class="action"><a href="@user-manual@@actions-help-prefix@INSPECT-JPEGS">inspect-jpegs</a></td>
+      <td>Checks jpeg images for malicious content.</td>
     </tr>
     <tr class="bg1" align="left" valign="top">
       <td class="en1" align="center" valign="middle"><input type="radio"
