@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.8 2002/08/23 19:42:35 oes Exp $
+#  $Id: default.action.master,v 1.1.2.9 2002/08/27 16:33:04 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/faq/questions.html#CONFIGFILES
@@ -451,7 +451,7 @@ allow-ads   = -block -filter{banners-by-size} -filter{banners-by-link}
 #############################################################################
 # Needed for automatic feedback evaluation; Please don't change or delete!
 #############################################################################
-{+add-header{X-Actions-File-Version: 1.4} -filter -kill-popups}
+{+add-header{X-Actions-File-Version: 1.5} -filter -kill-popups}
 .privoxy.org
 .oesterhelt.org/actions
 
