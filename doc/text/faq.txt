@@ -2,10 +2,10 @@ Privoxy Frequently Asked Questions
 
 Copyright © 2001, 2002 by Privoxy Developers
 
-$Id: faq.txt,v 1.42.2.2 2002/08/06 09:19:51 oes Exp $
+$Id: faq.txt,v 1.42.2.3 2002/08/10 15:31:16 oes Exp $
 
 
-This FAQ gives quick answers to frequently asked questions about Privoxy . It
+This FAQ gives quick answers to frequently asked questions about Privoxy. It
 can't and doesn't replace the User Manual.
 
 Privoxy is a web proxy with advanced filtering capabilities for protecting
@@ -17,8 +17,10 @@ networks.
 
 Privoxy is based on Internet Junkbuster (tm).
 
-You can find the latest version of the document at http://www.privoxy.org/faq/.
-Please see the Contact section if you want to contact the developers.
+Please note that this document is constantly evolving. This copy represents the
+state at the release of version 2.9.20. You can find the latest version of the
+document at http://www.privoxy.org/faq/. Please see the Contact section if you
+want to contact the developers.
 
 -------------------------------------------------------------------------------
 Table of Contents
@@ -48,9 +50,6 @@ Table of Contents
     2.5. What is the proxy address of Privoxy?
     2.6. I just installed Privoxy, and nothing is happening. All the ads are
         there. What's wrong?
-    2.7. In Mac OSX, I dragged the Privoxy folder to the trash in order to
-        uninstall it. Now the finder tells me I don't have sufficient
-        privileges to empty the trash.
    
    
 3. Configuration
@@ -113,6 +112,9 @@ Table of Contents
     5.5. I cannot connect to any FTP sites. Privoxy seems to be blocking me.
     5.6. In Mac OSX, I can't configure Microsoft Internet Explorer to use 
         Privoxy as the HTTP proxy.
+    5.7. In Mac OSX, I dragged the Privoxy folder to the trash in order to
+        uninstall it. Now the finder tells me I don't have sufficient
+        privileges to empty the trash.
    
    
 6. Contacting the developers, Bug Reporting and Feature Requests
@@ -423,33 +425,6 @@ good to go. If you receive a page saying "Privoxy is not running", then the
 browser is not set up to use your Privoxy installation. If you receive anything
 else (probably nothing at all), it could either be that the browser is not set
 up correctly, or that Privoxy is not running at all. Check the log file.
--------------------------------------------------------------------------------
-
-2.7. In Mac OSX, I dragged the Privoxy folder to the trash in order to
-uninstall it. Now the finder tells me I don't have sufficient privileges to
-empty the trash.
-
-Privoxy is installed with root permissions. When you drag the Privoxy folder to
-the trash, the general user does not have (as the Finder says) sufficient
-privileges to delete it. Unfortunately, the finder does not offer a way to
-enter the administrator password in order to prove you do in fact own this
-computer. To fix this situation, open the Terminal application and carefully
-enter the following commands:
-
-   cd ~                                                                        
-   cd .Trash                                                                   
-   sudo rm -rf Privoxy                                                         
-
-The trash may still appear full after this command; emptying the trash from the
-desktop should make it appear empty again.
-
-+-----------------------------------------------------------------------------+
-|                                   Warning                                   |
-+-----------------------------------------------------------------------------+
-|Be extra-sure to enter the commands EXACTLY as shown above. Removing files   |
-|recusively with administrator priviledges (as happens with sudo rm -rf is    |
-|serious business and even small typos can have devasting effects!            |
-+-----------------------------------------------------------------------------+
 -------------------------------------------------------------------------------
 
 3. Configuration
@@ -774,7 +749,7 @@ built-in editor for the actions files.
 Note that the built-in URLs from earlier versions of Junkbuster / Privoxy,
 http://example.com/show-proxy-args and http://i.j.b/, are no longer supported.
 If you still use such an old version, you should really consider upgrading to
-2.9.18.
+2.9.20.
 -------------------------------------------------------------------------------
 
 4.4. Do you still maintain the blocklists?
@@ -1097,6 +1072,20 @@ on the Network icon. In the settings pane that comes up, click on the Proxies
 tab. Ensure the "Web Proxy (HTTP)" checkbox is checked and enter 127.0.0.1 in
 the entry field. Enter 8118 in the Port field. The next time you start IE, it
 should reflect these values.
+-------------------------------------------------------------------------------
+
+5.7. In Mac OSX, I dragged the Privoxy folder to the trash in order to
+uninstall it. Now the finder tells me I don't have sufficient privileges to
+empty the trash.
+
+Just dragging the Privoxy folder to the trash is not enough to delete it. 
+Privoxy supplies an uninstall.command file that takes care of these details.
+Open the trash, drag the uninstall.command file out of the trash and
+double-click on it. You will be prompted for confirmation and the
+administration password.
+
+The trash may still appear full after this command; emptying the trash from the
+desktop should make it appear empty again.
 -------------------------------------------------------------------------------
 
 6. Contacting the developers, Bug Reporting and Feature Requests

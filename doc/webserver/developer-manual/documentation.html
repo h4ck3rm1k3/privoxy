@@ -122,22 +122,55 @@ CLASS="CITETITLE"
     <I
 CLASS="CITETITLE"
 >privoxy.1</I
-> (man page) files are also now maintained
-    as Docbook SGML. The finished files are all in the top-level source
-    directory are generated files! Also, <TT
-CLASS="FILENAME"
->index.html</TT
->, the
-    <SPAN
+> (man page), and
+    <I
+CLASS="CITETITLE"
+>config</I
+> files are also now maintained as Docbook
+    SGML. These files, when built, in the top-level source directory are
+    generated files! Also, the <SPAN
 CLASS="APPLICATION"
 >Privoxy</SPAN
-> home page, is maintained as SGML.
+> <TT
+CLASS="FILENAME"
+>index.html</TT
+> (and a 
+    variation on this file, <TT
+CLASS="FILENAME"
+>privoxy-index.html</TT
+>, 
+    meant for inclusion with doc packages), are maintained as SGML as well.
     <I
 CLASS="EMPHASIS"
 >DO NOT edit these directly</I
 >. Edit the SGML source, or
     contact someone involved in the documentation (at present Stefan and
     Hal).
+    </P
+><P
+>     <TT
+CLASS="FILENAME"
+>config</TT
+> requires some special handling. The reason it
+     is maintained this way is so that the extensive comments in the file
+     mirror those in <I
+CLASS="CITETITLE"
+>user-manual</I
+>. But the conversion 
+     process requires going from SGML to HTML to text to special formatting 
+     required for the embedded comments. Some of this does not survive so
+     well. Especially some of the examples that are longer than 80 characters.
+     The build process for this file outputs to <TT
+CLASS="FILENAME"
+>config.new</TT
+>, 
+     which should be reviewed for errors and mis-formatting. Once satisfied
+     that it is correct, then it should be hand copied to
+     <TT
+CLASS="FILENAME"
+>config</TT
+>.
+
     </P
 ><P
 >     Other, less formal documents (e.g. <TT
@@ -606,7 +639,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN210"
+NAME="AEN221"
 >3.3. Privoxy Custom Entities</A
 ></H2
 ><P
@@ -711,7 +744,7 @@ CLASS="APPLICATION"
 > 
     version string, e.g. <SPAN
 CLASS="QUOTE"
->"2.9.18"</SPAN
+>"2.9.20"</SPAN
 >.
    </TD
 ></TR

@@ -2,7 +2,7 @@ Privoxy Developer Manual
 
 Copyright © 2001, 2002 by Privoxy Developers
 
-$Id: developer-manual.txt,v 1.32.2.2 2002/08/06 09:19:51 oes Exp $
+$Id: developer-manual.txt,v 1.32.2.3 2002/08/10 15:31:16 oes Exp $
 
 
 The developer manual provides guidance on coding, testing, packaging,
@@ -10,9 +10,10 @@ documentation and other issues of importance to those involved with Privoxy
 development. It is mandatory (and helpful!) reading for anyone who wants to
 join the team.
 
-You can find the latest version of the this manual at http://www.privoxy.org/
-developer-manual/. Please see the Contact section on how to contact the
-developers.
+Please note that this document is constantly evolving. This copy represents the
+state at the release of version 2.9.20. You can find the latest version of the
+this manual at http://www.privoxy.org/developer-manual/. Please see the Contact
+section on how to contact the developers.
 
 -------------------------------------------------------------------------------
 Table of Contents
@@ -202,6 +203,10 @@ guidelines:
   * Before changing things on CVS, make sure that your changes are in line with
     the team's general consensus on what should be done (see below).
    
+  * Don't commit into the stable branch, unless immediately before a new
+    release. (See Version Numbers below for details.) Collect your changes on
+    the patches tracker instead.
+   
 
 -------------------------------------------------------------------------------
 2.3. Discussing Changes First
@@ -232,11 +237,21 @@ source/* directory. You will need Docbook, the Docbook DTD's and the Docbook
 modular stylesheets (or comparable alternatives), and either jade or openjade
 (recommended) installed in order to build docs from source. Currently there is 
 user-manual, FAQ, and, of course this, the developer-manual in this format. The
-README, AUTHORS privoxy.1 (man page) files are also now maintained as Docbook
-SGML. The finished files are all in the top-level source directory are
-generated files! Also, index.html, the Privoxy home page, is maintained as
-SGML. DO NOT edit these directly. Edit the SGML source, or contact someone
-involved in the documentation (at present Stefan and Hal).
+README, AUTHORS privoxy.1 (man page), and config files are also now maintained
+as Docbook SGML. These files, when built, in the top-level source directory are
+generated files! Also, the Privoxy index.html (and a variation on this file,
+privoxy-index.html, meant for inclusion with doc packages), are maintained as
+SGML as well. DO NOT edit these directly. Edit the SGML source, or contact
+someone involved in the documentation (at present Stefan and Hal).
+
+config requires some special handling. The reason it is maintained this way is
+so that the extensive comments in the file mirror those in user-manual. But the
+conversion process requires going from SGML to HTML to text to special
+formatting required for the embedded comments. Some of this does not survive so
+well. Especially some of the examples that are longer than 80 characters. The
+build process for this file outputs to config.new, which should be reviewed for
+errors and mis-formatting. Once satisfied that it is correct, then it should be
+hand copied to config.
 
 Other, less formal documents (e.g. LICENSE, INSTALL) are maintained as plain
 text files in the top-level source directory. At least for the time being.
@@ -411,7 +426,7 @@ entities are listed below. See any of the main docs for examples.
    
   * Commonly used "internal entities":
    
-    p-version: the Privoxy version string, e.g. "2.9.18".                      
+    p-version: the Privoxy version string, e.g. "2.9.20".                      
     p-status: the project status, either "alpha", "beta", or "stable".         
     p-not-stable: use to conditionally include text in "not stable" releases   
     (e.g. "beta").                                                             
@@ -1295,52 +1310,52 @@ from the project).
 4.8. Addendum: Template for files and function comment blocks:
 
 Example for file comments:
-const char FILENAME_rcs[] = "$Id: developer-manual.txt,v 1.32.2.2 2002/08/06 09:19:51 oes Exp $"; 
-/*********************************************************************                                
- *                                                                                                    
- * File        :  $Source: /cvsroot/ijbswa/current/doc/text/Attic/developer-manual.txt,v $                                                                            
- *                                                                                                    
- * Purpose     :  (Fill me in with a good description!)                                               
- *                                                                                                    
- * Copyright   :  Written by and Copyright (C) 2001 the SourceForge                                   
- *                Privoxy team. http://www.privoxy.org/                                               
- *                                                                                                    
- *                Based on the Internet Junkbuster originally written                                 
- *                by and Copyright (C) 1997 Anonymous Coders and                                      
- *                Junkbusters Corporation.  http://www.junkbusters.com                                
- *                                                                                                    
- *                This program is free software; you can redistribute it                              
- *                and/or modify it under the terms of the GNU General                                 
- *                Public License as published by the Free Software                                    
- *                Foundation; either version 2 of the License, or (at                                 
- *                your option) any later version.                                                     
- *                                                                                                    
- *                This program is distributed in the hope that it will                                
- *                be useful, but WITHOUT ANY WARRANTY; without even the                               
- *                implied warranty of MERCHANTABILITY or FITNESS FOR A                                
- *                PARTICULAR PURPOSE.  See the GNU General Public                                     
- *                License for more details.                                                           
- *                                                                                                    
- *                The GNU General Public License should be included with                              
- *                this file.  If not, you can view it at                                              
- *                http://www.gnu.org/copyleft/gpl.html                                                
- *                or write to the Free Software Foundation, Inc., 59                                  
- *                Temple Place - Suite 330, Boston, MA  02111-1307, USA.                              
- *                                                                                                    
- * Revisions   :                                                                                      
+const char FILENAME_rcs[] = "$Id: developer-manual.txt,v 1.32.2.3 2002/08/10 15:31:16 oes Exp $"; 
+/*********************************************************************                             
+ *                                                                                                 
+ * File        :  $Source: /cvsroot/ijbswa/current/doc/text/Attic/developer-manual.txt,v $                                                                         
+ *                                                                                                 
+ * Purpose     :  (Fill me in with a good description!)                                            
+ *                                                                                                 
+ * Copyright   :  Written by and Copyright (C) 2001 the SourceForge                                
+ *                Privoxy team. http://www.privoxy.org/                                            
+ *                                                                                                 
+ *                Based on the Internet Junkbuster originally written                              
+ *                by and Copyright (C) 1997 Anonymous Coders and                                   
+ *                Junkbusters Corporation.  http://www.junkbusters.com                             
+ *                                                                                                 
+ *                This program is free software; you can redistribute it                           
+ *                and/or modify it under the terms of the GNU General                              
+ *                Public License as published by the Free Software                                 
+ *                Foundation; either version 2 of the License, or (at                              
+ *                your option) any later version.                                                  
+ *                                                                                                 
+ *                This program is distributed in the hope that it will                             
+ *                be useful, but WITHOUT ANY WARRANTY; without even the                            
+ *                implied warranty of MERCHANTABILITY or FITNESS FOR A                             
+ *                PARTICULAR PURPOSE.  See the GNU General Public                                  
+ *                License for more details.                                                        
+ *                                                                                                 
+ *                The GNU General Public License should be included with                           
+ *                this file.  If not, you can view it at                                           
+ *                http://www.gnu.org/copyleft/gpl.html                                             
+ *                or write to the Free Software Foundation, Inc., 59                               
+ *                Temple Place - Suite 330, Boston, MA  02111-1307, USA.                           
+ *                                                                                                 
+ * Revisions   :                                                                                   
  *    $Log: developer-manual.txt,v $
- *    Revision 1.32.2.2  2002/08/06 09:19:51  oes
+ *    Revision 1.32.2.3  2002/08/10 15:31:16  oes
  *    Generated
- *                                                                                           
- *                                                                                                    
- *********************************************************************/                               
-                                                                                                      
-                                                                                                      
-#include "config.h"                                                                                   
-                                                                                                      
-   ...necessary include files for us to do our work...                                                
-                                                                                                      
-const char FILENAME_h_rcs[] = FILENAME_H_VERSION;                                                     
+ *                                                                                        
+ *                                                                                                 
+ *********************************************************************/                            
+                                                                                                   
+                                                                                                   
+#include "config.h"                                                                                
+                                                                                                   
+   ...necessary include files for us to do our work...                                             
+                                                                                                   
+const char FILENAME_h_rcs[] = FILENAME_H_VERSION;                                                  
 
 Note: This declares the rcs variables that should be added to the
 "show-proxy-args" page. If this is a brand new creation by you, you are free to
@@ -1352,74 +1367,74 @@ the code (via `forward-page' and `backward-page'). Please include it if you
 can.
 
 Example for file header comments:
-#ifndef _FILENAME_H                                                                                 
-#define _FILENAME_H                                                                                 
-#define FILENAME_H_VERSION "$Id: developer-manual.txt,v 1.32.2.2 2002/08/06 09:19:51 oes Exp $" 
-/*********************************************************************                              
- *                                                                                                  
- * File        :  $Source: /cvsroot/ijbswa/current/doc/text/Attic/developer-manual.txt,v $                                                                          
- *                                                                                                  
- * Purpose     :  (Fill me in with a good description!)                                             
- *                                                                                                  
- * Copyright   :  Written by and Copyright (C) 2001 the SourceForge                                 
- *                Privoxy team. http://www.privoxy.org/                                             
- *                                                                                                  
- *                Based on the Internet Junkbuster originally written                               
- *                by and Copyright (C) 1997 Anonymous Coders and                                    
- *                Junkbusters Corporation.  http://www.junkbusters.com                              
- *                                                                                                  
- *                This program is free software; you can redistribute it                            
- *                and/or modify it under the terms of the GNU General                               
- *                Public License as published by the Free Software                                  
- *                Foundation; either version 2 of the License, or (at                               
- *                your option) any later version.                                                   
- *                                                                                                  
- *                This program is distributed in the hope that it will                              
- *                be useful, but WITHOUT ANY WARRANTY; without even the                             
- *                implied warranty of MERCHANTABILITY or FITNESS FOR A                              
- *                PARTICULAR PURPOSE.  See the GNU General Public                                   
- *                License for more details.                                                         
- *                                                                                                  
- *                The GNU General Public License should be included with                            
- *                this file.  If not, you can view it at                                            
- *                http://www.gnu.org/copyleft/gpl.html                                              
- *                or write to the Free Software Foundation, Inc., 59                                
- *                Temple Place - Suite 330, Boston, MA  02111-1307, USA.                            
- *                                                                                                  
- * Revisions   :                                                                                    
+#ifndef _FILENAME_H                                                                              
+#define _FILENAME_H                                                                              
+#define FILENAME_H_VERSION "$Id: developer-manual.txt,v 1.32.2.3 2002/08/10 15:31:16 oes Exp $" 
+/*********************************************************************                           
+ *                                                                                               
+ * File        :  $Source: /cvsroot/ijbswa/current/doc/text/Attic/developer-manual.txt,v $                                                                       
+ *                                                                                               
+ * Purpose     :  (Fill me in with a good description!)                                          
+ *                                                                                               
+ * Copyright   :  Written by and Copyright (C) 2001 the SourceForge                              
+ *                Privoxy team. http://www.privoxy.org/                                          
+ *                                                                                               
+ *                Based on the Internet Junkbuster originally written                            
+ *                by and Copyright (C) 1997 Anonymous Coders and                                 
+ *                Junkbusters Corporation.  http://www.junkbusters.com                           
+ *                                                                                               
+ *                This program is free software; you can redistribute it                         
+ *                and/or modify it under the terms of the GNU General                            
+ *                Public License as published by the Free Software                               
+ *                Foundation; either version 2 of the License, or (at                            
+ *                your option) any later version.                                                
+ *                                                                                               
+ *                This program is distributed in the hope that it will                           
+ *                be useful, but WITHOUT ANY WARRANTY; without even the                          
+ *                implied warranty of MERCHANTABILITY or FITNESS FOR A                           
+ *                PARTICULAR PURPOSE.  See the GNU General Public                                
+ *                License for more details.                                                      
+ *                                                                                               
+ *                The GNU General Public License should be included with                         
+ *                this file.  If not, you can view it at                                         
+ *                http://www.gnu.org/copyleft/gpl.html                                           
+ *                or write to the Free Software Foundation, Inc., 59                             
+ *                Temple Place - Suite 330, Boston, MA  02111-1307, USA.                         
+ *                                                                                               
+ * Revisions   :                                                                                 
  *    $Log: developer-manual.txt,v $
- *    Revision 1.32.2.2  2002/08/06 09:19:51  oes
+ *    Revision 1.32.2.3  2002/08/10 15:31:16  oes
  *    Generated
- *                                                                                         
- *                                                                                                  
- *********************************************************************/                             
-                                                                                                    
-                                                                                                    
-#include "project.h"                                                                                
-                                                                                                    
-#ifdef __cplusplus                                                                                  
-extern "C" {                                                                                        
-#endif                                                                                              
-                                                                                                    
-   ... function headers here ...                                                                    
-                                                                                                    
-                                                                                                    
-/* Revision control strings from this header and associated .c file */                              
-extern const char FILENAME_rcs[];                                                                   
-extern const char FILENAME_h_rcs[];                                                                 
-                                                                                                    
-                                                                                                    
-#ifdef __cplusplus                                                                                  
-} /* extern "C" */                                                                                  
-#endif                                                                                              
-                                                                                                    
-#endif /* ndef _FILENAME_H */                                                                       
-                                                                                                    
-/*                                                                                                  
-  Local Variables:                                                                                  
-  tab-width: 3                                                                                      
-  end:                                                                                              
-*/                                                                                                  
+ *                                                                                      
+ *                                                                                               
+ *********************************************************************/                          
+                                                                                                 
+                                                                                                 
+#include "project.h"                                                                             
+                                                                                                 
+#ifdef __cplusplus                                                                               
+extern "C" {                                                                                     
+#endif                                                                                           
+                                                                                                 
+   ... function headers here ...                                                                 
+                                                                                                 
+                                                                                                 
+/* Revision control strings from this header and associated .c file */                           
+extern const char FILENAME_rcs[];                                                                
+extern const char FILENAME_h_rcs[];                                                              
+                                                                                                 
+                                                                                                 
+#ifdef __cplusplus                                                                               
+} /* extern "C" */                                                                               
+#endif                                                                                           
+                                                                                                 
+#endif /* ndef _FILENAME_H */                                                                    
+                                                                                                 
+/*                                                                                               
+  Local Variables:                                                                               
+  tab-width: 3                                                                                   
+  end:                                                                                           
+*/                                                                                               
 
 Example for function comments:
 /*********************************************************************         
@@ -1557,7 +1572,8 @@ The following must be done by one of the developers prior to each new release.
     last minute changes.
    
   * Increment the version number (point from odd to even in development
-    branches!) in configure.in.
+    branches!) in configure.in. (RPM spec files will need to be incremented as
+    well.)
    
   * If default.action has changed since last release (i.e. software release or
     standalone actions file release), bump up its version info to A.B in this
@@ -1568,9 +1584,17 @@ The following must be done by one of the developers prior to each new release.
     Then change the version info in doc/webserver/actions/index.php, line:
     '$required_actions_file_version = "A.B";'
    
-  * If the HTML documentation is not in sync with the SGML sources you need to
-    regenerate and upload it to the webserver. (If in doubt, just do it.) See
-    the Section "Updating the webserver" in this manual for details.
+  * All documentation should be rebuild after the version bump. Finished docs
+    should be then be committed to CVS (for those without the ability to build
+    these). Some docs may require rather obscure processing tools. config, the
+    man page (and the html version of the man page), and the PDF docs fall in
+    this category. REAMDE, the man page, AUTHORS, and config should all also be
+    committed to CVS for other packageers. The formal docs should be uploaded
+    to the webserver. See the Section "Updating the webserver" in this manual
+    for details.
+   
+  * All developers should look at the ChangeLog and make sure noteworthy
+    changes are referenced.
    
   * Commit all files that were changed in the above steps!
    
@@ -1595,7 +1619,7 @@ reasons the first package to be released is always the source tarball.
 
 For all types of packages, including the source tarball, you must make sure
 that you build from clean sources by exporting the right version from CVS into
-an empty directory:.
+an empty directory (just press return when asked for a password):
 
   mkdir dist # delete or choose different name if it already exists                                
   cd dist                                                                                          
@@ -1662,6 +1686,11 @@ package. These apply to all platforms!
     "Privoxy" packaging before for other platform specific issues. Conversely,
     please add any notes that you know are important for your platform (or
     contact one of the doc maintainers to do this if you can't).
+   
+  * Packagers should do a "clean" install of their package after building it.
+    So any previous installs should be removed first to ensure the integrity of
+    the newly built package. Then run the package for a while to make sure
+    there are no obvious problems, before uploading.
    
 
 -------------------------------------------------------------------------------
@@ -1804,13 +1833,13 @@ First, make sure that you have freshly exported the right version into an empty
 directory. (See "Building and releasing packages" above). Then add a log entry
 to debian/changelog, if it is not already there, for example by running:
 
-  debchange -v 2.9.18-beta-1 "New upstream version"                            
+  debchange -v 2.9.20-beta-1 "New upstream version"                            
 
 Then, run:
 
   dpkg-buildpackage -rfakeroot -us -uc -b                                      
 
-This will create ../privoxy_2.9.18-beta-1_i386.deb which can be uploaded. To
+This will create ../privoxy_2.9.20-beta-1_i386.deb which can be uploaded. To
 upload the package to Sourceforge, simply issue
 
   make debian-upload                                                           
@@ -1931,7 +1960,7 @@ Once this done go to http://sourceforge.net/project/admin/editpackages.php?
 group_id=11118, making sure you are logged in. Find your target platform in the
 second column, and click Add Release. You will then need to create a new
 release for your package, using the format of $VERSION ($CODE_STATUS), e.g.
-2.9.18 (beta).
+2.9.20 (beta).
 
 Now just follow the prompts. Be sure to add any appropriate Release notes. You
 should see your freshly uploaded packages in "Step 2. Add Files To This

@@ -1,8 +1,8 @@
-Privoxy 2.9.18 User Manual
+Privoxy 2.9.20 User Manual
 
 Copyright © 2001, 2002 by Privoxy Developers
 
-$Id: user-manual.txt,v 1.60.2.2 2002/08/06 09:19:51 oes Exp $
+$Id: user-manual.txt,v 1.60.2.3 2002/08/10 15:31:16 oes Exp $
 
 
 The User Manual gives users information on how to install, configure and use 
@@ -182,7 +182,7 @@ Table of Contents
 1. Introduction
 
 This documentation is included with the current beta version of Privoxy,
-v.2.9.18, and is mostly complete at this point. The most up to date reference
+v.2.9.20, and is mostly complete at this point. The most up to date reference
 for the time being is still the comments in the source files and in the
 individual configuration files. Development of version 3.0 is currently nearing
 completion, and includes many significant changes and enhancements over earlier
@@ -259,7 +259,7 @@ How to install the binary packages depends on your operating system:
 
 2.1.1. Red Hat, SuSE and Conectiva RPMs
 
-RPMs can be installed with rpm -Uvh privoxy-2.9.18-1.rpm, and will use /etc/
+RPMs can be installed with rpm -Uvh privoxy-2.9.20-1.rpm, and will use /etc/
 privoxy for the location of configuration files.
 
 Note that on Red Hat, Privoxy will not be automatically started on system boot.
@@ -267,7 +267,7 @@ You will need to enable that using chkconfig, ntsysv, or similar methods. Note
 that SuSE will automatically start Privoxy in the boot process.
 
 If you have problems with failed dependencies, try rebuilding the SRC RPM: rpm
---rebuild privoxy-2.9.18-1.src.rpm. This will use your locally installed
+--rebuild privoxy-2.9.20-1.src.rpm. This will use your locally installed
 libraries and RPM version.
 
 Also note that if you have a Junkbuster RPM installed on your system, you need
@@ -277,7 +277,7 @@ remove Junkbuster automatically, before installing Privoxy.
 
 2.1.2. Debian
 
-DEBs can be installed with dpkg -i privoxy_2.9.18-1.deb, and will use /etc/
+DEBs can be installed with dpkg -i privoxy_2.9.20-1.deb, and will use /etc/
 privoxy for the location of configuration files.
 -------------------------------------------------------------------------------
 
@@ -311,16 +311,20 @@ configuration files.
 
 2.1.6. Mac OSX
 
-Unzip the downloaded package (you can either double-click on the file in the
-finder, or on the desktop if you downloaded it there). The Privoxy.pkg package
-should appear after unzipping. Then, double-click on that Privoxy.pkg package
-installer icon and follow the installation process. Privoxy will be installed
-in the folder /Library/Privoxy. It will run automatically whenever you start
-up. To prevent it from running automatically, remove or rename the folder /
-Library/StartupItems/Privoxy.
+Unzip the downloaded file (you can either double-click on the file from the
+finder, or from the desktop if you downloaded it there). Then, double-click on
+the package installer icon named Privoxy.pkg and follow the installation
+process. Privoxy will be installed in the folder /Library/Privoxy. It will
+start automatically whenever you start up. To prevent it from starting
+automatically, remove or rename the folder /Library/StartupItems/Privoxy.
 
-To run Privoxy by hand, double-click on RunPrivoxy.command. To run Privoxy from
-Terminal, execute /Library/Privoxy/RunPrivoxy.command.
+To start Privoxy by hand, double-click on StartPrivoxy.command in the /Library/
+Privoxy folder. Or, type this command in the Terminal:
+
+  /Library/Privoxy/StartPrivoxy.command                                        
+                                                                               
+
+You will be prompted for the administrator password.
 -------------------------------------------------------------------------------
 
 2.1.7. AmigaOS
@@ -341,7 +345,7 @@ latest changes from the Portage tree. With emerge privoxy you install the
 latest version.
 
 Configuration files are in /etc/privoxy, the documentation is in /usr/share/doc
-/privoxy-2.9.18 and the Log directory is in /var/log/privoxy.
+/privoxy-2.9.20 and the Log directory is in /var/log/privoxy.
 -------------------------------------------------------------------------------
 
 2.2. Building from Source
@@ -359,8 +363,8 @@ compiler like gcc are required.
 When building from a source tarball (either release version or nightly CVS
 tarball), first unpack the source:
 
- tar xzvf privoxy-2.9.18-beta-src* [.tgz or .tar.gz]                           
- cd privoxy-2.9.18-beta                                                        
+ tar xzvf privoxy-2.9.20-beta-src* [.tgz or .tar.gz]                           
+ cd privoxy-2.9.20-beta                                                        
 
 For retrieving the current CVS sources, you'll need CVS installed. Note that
 sources from CVS are development quality, and may not be stable, or well
@@ -723,14 +727,14 @@ icon in the Privoxy folder.
 5.7. Mac OSX
 
 During installation, Privoxy is configured to start automatically when the
-system restarts. To run Privoxy by hand, double-click on the RunPrivoxy.command
-icon in the /Library/Privoxy folder. Or, type this command in the Terminal:
+system restarts. To start Privoxy by hand, double-click on the
+StartPrivoxy.command icon in the /Library/Privoxy folder. Or, type this command
+in the Terminal:
 
-  /Library/Privoxy/RunPrivoxy.command                                          
+  /Library/Privoxy/StartPrivoxy.command                                        
                                                                                
 
-If you are not logged in as an administrator, you will be asked for the
-administrator password when starting Privoxy by hand.
+You will be prompted for the administrator password.
 -------------------------------------------------------------------------------
 
 5.8. AmigaOS
@@ -1145,7 +1149,7 @@ Notes:
    
     Unix, in local filesystem:
    
-    user-manual  file:///usr/share/doc/privoxy-2.9.18/user-manual/     
+    user-manual  file:///usr/share/doc/privoxy-2.9.20/user-manual/     
    
     Any platform, on local webserver (called "local-webserver"):
    

@@ -206,7 +206,8 @@ CLASS="QUOTE"
          branches!) in <TT
 CLASS="FILENAME"
 >configure.in</TT
->.
+>. (RPM spec files 
+         will need to be incremented as well.)
        </P
 ></LI
 ><LI
@@ -242,10 +243,27 @@ CLASS="PROGRAMLISTING"
 ></LI
 ><LI
 ><P
->        If the HTML documentation is not in sync with the SGML sources
-        you need to regenerate and upload it to the webserver. (If in
-        doubt, just do it.) See the Section "Updating the webserver" in
-        this manual for details.
+>        All documentation should be rebuild after the version bump.
+        Finished docs should be then be committed to CVS (for those 
+        without the ability to build these). Some docs may require 
+        rather obscure processing tools. <TT
+CLASS="FILENAME"
+>config</TT
+>,
+        the man page (and the html version of the man page), and the PDF docs
+        fall in this category. REAMDE, the man page, AUTHORS, and config
+        should all also be committed to CVS for other packageers. The 
+        formal docs should be uploaded to the webserver. See the
+        Section "Updating the webserver" in this manual for details.
+       </P
+></LI
+><LI
+><P
+>        All developers should look at the <TT
+CLASS="FILENAME"
+>ChangeLog</TT
+> and
+        make sure noteworthy changes are referenced.
        </P
 ></LI
 ><LI
@@ -328,8 +346,9 @@ CLASS="EMPHASIS"
       <I
 CLASS="EMPHASIS"
 >you must make sure that you build from clean sources by exporting
-      the right version from CVS into an empty directory:</I
->.
+      the right version from CVS into an empty directory</I
+> (just press return when
+      asked for a password):
      </P
 ><P
 >      <TABLE
@@ -588,6 +607,18 @@ CLASS="QUOTE"
        are important for your platform (or contact one of the doc 
        maintainers to do this if you can't).
       </P
+></LI
+><LI
+><P
+>       Packagers should do a <SPAN
+CLASS="QUOTE"
+>"clean"</SPAN
+> install of their 
+       package after building it. So any previous installs should be 
+       removed first to ensure the integrity of the newly built package. 
+       Then run the package for a while to make sure there are no 
+       obvious problems, before uploading.
+     </P
 ></LI
 ></UL
 >
@@ -1136,7 +1167,7 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="PROGRAMLISTING"
->  debchange -v 2.9.18-beta-1 "New upstream version"</PRE
+>  debchange -v 2.9.20-beta-1 "New upstream version"</PRE
 ></TD
 ></TR
 ></TABLE
@@ -1164,7 +1195,7 @@ CLASS="PROGRAMLISTING"
 >        This will create
         <TT
 CLASS="FILENAME"
->../privoxy_2.9.18-beta-1_i386.deb</TT
+>../privoxy_2.9.20-beta-1_i386.deb</TT
 >
         which can be uploaded.  To upload the package to Sourceforge, simply
 	issue
@@ -1591,7 +1622,7 @@ CLASS="LITERAL"
 >$VERSION ($CODE_STATUS)</TT
 >, e.g. <I
 CLASS="EMPHASIS"
->2.9.18
+>2.9.20
      (beta)</I
 >.
     </P
