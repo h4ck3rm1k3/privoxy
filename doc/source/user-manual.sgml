@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.14 2002/08/06 09:16:13 oes Exp $
+ $Id: user-manual.sgml,v 1.123.2.15 2002/08/07 17:32:11 oes Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.14 2002/08/06 09:16:13 oes Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.15 2002/08/07 17:32:11 oes Exp $</pubdate>
 
 <!--
 
@@ -109,7 +109,7 @@ Hal.
  <para>
   You can find the latest version of the <citetitle>User Manual</citetitle> at  <ulink
   url="http://www.privoxy.org/user-manual/">http://www.privoxy.org/user-manual/</ulink>.
-  Please see the <ulink url="contact.html">Contact section</ulink> on how to
+  Please see the <link linkend="contact">Contact section</link> on how to
   contact the developers.
  </para>
 
@@ -1126,17 +1126,17 @@ must find a better place for this paragraph
 </para>
 
 <para>
- If the above paragraph sounds gibberish to you, you might want to <ulink
- url="actions-file.html#ACTIONSFILE">read more about the actions concept</ulink>
- or even dive deep into the <ulink url="appendix.html#ACTIONSANAT">Appendix
- on actions</ulink>.
+ If the above paragraph sounds gibberish to you, you might want to <link
+ linkend="actions-file">read more about the actions concept</link>
+ or even dive deep into the <link linkend="actionsanat">Appendix
+ on actions</link>.
 </para>
 
 <para>
  If you can't get rid of the problem at all, think you've found a bug in
  Privoxy, want to propose a new feature or smarter rules, please see the 
- section <ulink url="contact.html"><quote>Contacting the
- Developers</quote></ulink> below. 
+ section <link linkend="contact"><quote>Contacting the
+ Developers</quote></link> below. 
 </para>
 
 -->
@@ -1567,9 +1567,9 @@ must find a better place for this paragraph
  the same URL set the same action differently, the last match wins. If not, 
  the effects are aggregated. E.g. a URL might match a regular section with 
  a heading line of <literal>{ 
- +<ulink url="actions-file.html#HANDLE-AS-IMAGE">handle-as-image</ulink> }</literal>,
+ +<link linkend="handle-as-image">handle-as-image</link> }</literal>,
  then later another one with just <literal>{
- +<ulink url="actions-file.html#BLOCK">block</ulink> }</literal>, resulting
+ +<link linkend="block">block</link> }</literal>, resulting
  in <emphasis>both</emphasis> actions to apply.
 </para>
 
@@ -5116,7 +5116,7 @@ Requests</title>
 
 <para>
  Credit: The site which gave us the general idea for these bookmarklets is
- <ulink url="http://www.bookmarklets.com">www.bookmarklets.com</ulink>. They
+ <ulink url="http://www.bookmarklets.com/">www.bookmarklets.com</ulink>. They
  have more information about bookmarklets. 
 </para>
 
@@ -5644,6 +5644,9 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.15  2002/08/07 17:32:11  oes
+ Converted some internal links from ulink to link for PDF creation; no content changed
+
  Revision 1.123.2.14  2002/08/06 09:16:13  oes
  Nits re: actions file download
 
