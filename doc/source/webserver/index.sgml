@@ -20,7 +20,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: index.sgml,v 1.16.2.9 2003/03/26 02:03:45 oes Exp $
+ $Id: index.sgml,v 1.16.2.10 2003/03/28 03:33:09 hal9 Exp $
 
  Copyright (C) 2001 - 2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,7 +75,7 @@
 
 <![%p-homepage;[
   <para>
-   The most recent release is &p-version; (&p-status;). 
+   The most recent release is <ulink url="announce.txt">&p-version; (&p-status;)</ulink>. 
   </para>
 ]]>
 
@@ -222,9 +222,11 @@
 ]]>
 
 <!-- Formal copyright markup does not work here. HB. -->
+<!-- NOTE: I could not get docbook to completely ignore &copy; -->
+<!-- GNUMakefile is inserting this now -->
 <para>
  <subscript>
-  Copyright &copy; 2001 - 2003 by Privoxy Developers
+  Copyright __copy 2001 - 2003 by Privoxy Developers
  </subscript>
 </para>
 
@@ -251,6 +253,9 @@
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: index.sgml,v $
+ Revision 1.16.2.10  2003/03/28 03:33:09  hal9
+ Include link for announce.txt, and change handling of &copy;.
+
  Revision 1.16.2.9  2003/03/26 02:03:45  oes
  Updated hard-coded copyright dates
 
