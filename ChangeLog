@@ -14,6 +14,8 @@ ChangeLog for Privoxy
   error logging, hostname wildcards, correct detection of NetBSD.
 - Workarounds for client (iTunes etc) and server (PHP < 4.2.3) bugs
   including the notorious "blank page" problem.
+- Various filter improvements; most notably the unsolicited-popups
+  filter became less destructive     
 - Major revamp of the actions file
 	
 *** Version 3.0.2 ***
