@@ -31,6 +31,7 @@ ChangeLog for Privoxy
 - Fixed a potential (application-level, NOT OS-level!) security
   problem involving remote toggling and action file manipulation
   by mailicious websites.
+- Added ability to chroot (thanks to Sviatoslav Sviridov)
 - Added more action aliases for prehistoric action names
 - Add Slackware support to Makefile.
 
