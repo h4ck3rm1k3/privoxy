@@ -1,4 +1,4 @@
-# $Id: privoxy-rh.spec,v 1.33.2.16 2002/08/05 08:42:13 kick_ Exp $
+# $Id: privoxy-rh.spec,v 1.33.2.17 2002/08/07 01:08:49 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -37,7 +37,7 @@ Name: privoxy
 # ATTENTION
 # Version and release should be updated acordingly on configure.in and
 # configure. Otherwise, the package can be build with the wrong value
-Version: 2.9.17
+Version: 2.9.18
 Release: 1
 Summary: Privoxy - privacy enhancing proxy
 License: GPL
@@ -317,8 +317,11 @@ fi
 %{_mandir}/man1/%{name}.*
 
 %changelog
-* Tue Jul 30 2002 Hal Burgiss <hal@foobox.net>
+* Tue Aug 06 2002 Hal Burgiss <hal@foobox.net>
 - Reset version for 2.9.17.
+
+* Tue Jul 30 2002 Hal Burgiss <hal@foobox.net>
+- Reset version for 2.9.18.
 
 * Sat Jul 27 2002 Hal Burgiss <hal@foobox.net>
 - Reset version and release for 2.9.16.
@@ -722,6 +725,9 @@ fi
 	additional "-r @" flag.
 
 # $Log: privoxy-rh.spec,v $
+# Revision 1.33.2.17  2002/08/07 01:08:49  hal9
+# Bumped version to 2.9.18.
+#
 # Revision 1.33.2.16  2002/08/05 08:42:13  kick_
 # same permissions, same runlevels as all the other initscripts
 #
