@@ -1,8 +1,8 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl 
-dnl $Id: configure.in,v 1.68.2.18 2003/12/08 15:10:29 oes Exp $
+dnl $Id: configure.in,v 1.68.2.19 2004/01/30 09:26:03 oes Exp $
 dnl 
-dnl Written by and Copyright (C) 2001, 2002 the SourceForge
+dnl Written by and Copyright (C) 2001 - 2004 the SourceForge
 dnl Privoxy team. http://www.privoxy.org/
 dnl
 dnl Based on the Internet Junkbuster originally written
@@ -28,6 +28,9 @@ dnl or write to the Free Software Foundation, Inc., 59
 dnl Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 dnl 
 dnl $Log: configure.in,v $
+dnl Revision 1.68.2.19  2004/01/30 09:26:03  oes
+dnl Added docbook paths for debian sarge; set status for release
+dnl
 dnl Revision 1.68.2.18  2003/12/08 15:10:29  oes
 dnl Bugfix: --with-docbook now correctly accepts its path parameter. Thanks, Roland!
 dnl
@@ -428,7 +431,7 @@ dnl =================================================================
 dnl AutoConf Initialization
 dnl =================================================================
 
-AC_REVISION($Revision: 1.68.2.18 $)
+AC_REVISION($Revision: 1.68.2.19 $)
 AC_INIT(jcc.c)
 
 if test ! -f config.h.in; then
@@ -472,10 +475,10 @@ dnl =================================================================
 dnl Application version number
 dnl =================================================================
 
-VERSION_MAJOR=0
+VERSION_MAJOR=3
 VERSION_MINOR=0
-VERSION_POINT=0
-CODE_STATUS="UNRELEASED"
+VERSION_POINT=3
+CODE_STATUS="stable"
 
 dnl CODE_STATUS can be "alpha", "beta", or "stable", and will be
 dnl used for CGI output. Set version to 0.0.0 and status to "UNRELEASED"
@@ -754,7 +757,11 @@ dnl It is still not portable (directory slash)
 JADECAT=""
 if test $dodk = yes; then
   if test $DKPREFIX = none; then
-    for i in /usr/share/sgml/docbook/dsssl-stylesheets /usr/share/sgml/docbkdsl /usr/share/sgml/docbook-dsssl usr/local/share/sgml/docbook/dsssl/modular; do
+    for i in /usr/share/sgml/docbook/dsssl-stylesheets \
+             /usr/share/sgml/docbkdsl /usr/share/sgml/docbook-dsssl \
+             /usr/local/share/sgml/docbook/dsssl/modular \
+             /usr/share/sgml/docbook/stylesheet/dsssl/modular/ \
+             ; do
 dnl  echo -n does not fly with /bin/sh.
 dnl      echo -n "checking for $i/html/docbook.dsl..."
       AC_MSG_CHECKING([for $i])
@@ -771,7 +778,8 @@ dnl      echo -n "checking for $i/html/docbook.dsl..."
              /usr/share/sgml/CATALOG.docbk31 \
              /usr/share/sgml/CATALOG.docbk31 \
              /usr/local/share/sgml/docbook/3.0/docbook.cat \
-	        /usr/local/share/sgml/docbook/3.1/docbook.cat \
+             /usr/local/share/sgml/docbook/3.1/docbook.cat \
+             /usr/share/sgml/docbook/dtd/3.1/docbook.cat \
              ; do
 dnl     echo -n "checking for $i..."
       AC_MSG_CHECKING([for $i])
