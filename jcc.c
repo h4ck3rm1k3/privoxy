@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.11 2003/05/14 12:32:02 oes Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.12 2003/07/11 11:34:19 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.11 2003/05/14 12:32:02 oes Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.92.2.12  2003/07/11 11:34:19  oes
+ *    No longer ignore SIGCHLD. Fixes bug #769381
+ *
  *    Revision 1.92.2.11  2003/05/14 12:32:02  oes
  *    Close jarfile on graceful exit, remove stray line
  *
@@ -1913,14 +1916,13 @@ int main(int argc, const char *argv[])
     *
     * Catch the abort, interrupt and terminate signals for a graceful exit
     * Catch the hangup signal so the errlog can be reopened.
-    * Ignore the broken pipe and child signals
-    *  FIXME: Isn't ignoring the default for SIGCHLD anyway and why ignore SIGPIPE? 
+    * Ignore the broken pipe signals (FIXME: Why?)
     */
 #if !defined(_WIN32) && !defined(__OS2__) && !defined(AMIGA)
 {
    int idx;
    const int catched_signals[] = { SIGABRT, SIGTERM, SIGINT, SIGHUP, 0 };
-   const int ignored_signals[] = { SIGPIPE, SIGCHLD, 0 };
+   const int ignored_signals[] = { SIGPIPE, 0 };
 
    for (idx = 0; catched_signals[idx] != 0; idx++)
    {
