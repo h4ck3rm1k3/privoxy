@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.18 2002/08/23 12:22:40 oes Exp $
+# $Id: GNUmakefile.in,v 1.104.2.19 2002/09/26 22:50:02 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -822,8 +822,9 @@ config-file: dok-release
 	@$(ECHO)  "****************************************************"
 	@$(ECHO)  "The output file is config.new."
 	@$(ECHO)  "Now -- you need to hand edit the results!!!"
-	@$(ECHO)  "In particular, check the Debug levels, and the"
-	@$(ECHO)  "permit-access, forward & socks examples. They"
+	@$(ECHO)  "In particular, check the Debug levels, the"
+	@$(ECHO)  "permit-access, forward & socks examples and the"
+	@$(ECHO)  "various user-manual examples, which all"
 	@$(ECHO)  "probably got hammered."
 	@$(ECHO)  "****************************************************"
 
@@ -1007,6 +1008,9 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.19  2002/09/26 22:50:02  hal9
+# New user-manual examples in config-file are getting wrapped. Add warning.
+#
 # Revision 1.104.2.18  2002/08/23 12:22:40  oes
 # Added warning to broken install target
 #
