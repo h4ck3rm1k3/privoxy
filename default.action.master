@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.3 2002/07/27 18:13:36 oes Exp $
+#  $Id: default.action.master,v 1.1.2.4 2002/08/06 08:31:58 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/faq/questions.html#CONFIGFILES
@@ -451,7 +451,7 @@ allow-ads   = -block -filter{banners-by-size} -filter{banners-by-link}
 #############################################################################
 # Needed for automatic feedback evaluation; Please don't change or delete!
 #############################################################################
-{+add-header{X-Actions-File-Version: 1.3} -filter -kill-popups}
+{+add-header{X-Actions-File-Version: 1.4} -filter -kill-popups}
 .privoxy.org
 .oesterhelt.org/actions
 
@@ -660,7 +660,9 @@ www.comdirect.de/stat/count.php
 #MASTER# UNBLOCK-REFERRER: http://www.amazon.com/exec/obidos/tg/browse/-/130/ref=gw_br_dvd/102-9730978-3540926
 #MASTER# REMARKS: Part of site decoration
 .amazon.com/.*/banners/
-
+#MASTER# UNBLOCK-REFERRER: http://www.washingtonpost.com/wp-dyn/articles/A43890-2002Aug4.html
+#MASTER# REMARKS: Javascripts whose absence messes the page
+.washingtonpost.com/wp-srv/
 
 #############################################################################
 # Site-specific special rules:
