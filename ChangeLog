@@ -13,7 +13,8 @@ ChangeLog for Privoxy
   termination, compiler warnings, OSX support, Win32 systray,
   error logging, hostname wildcards, correct detection of NetBSD.
 - Workarounds for client (iTunes etc) and server (PHP < 4.2.3) bugs
-- Slighly updated the actions file.
+  including the notorious "blank page" problem.
+- Major revamp of the actions file
 	
 *** Version 3.0.2 ***
 
