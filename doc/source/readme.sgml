@@ -4,10 +4,10 @@
 <!entity p-intro SYSTEM "privoxy.sgml">
 <!entity contacting SYSTEM "contacting.sgml">
 <!entity buildsource SYSTEM "buildsource.sgml">
-<!entity p-version "2.9.20">
-<!entity p-status "beta">
-<!entity % p-not-stable "INCLUDE">
-<!entity % p-stable "IGNORE">
+<!entity p-version "3.0.0">
+<!entity p-status "stable">
+<!entity % p-not-stable "IGNORE">
+<!entity % p-stable "INCLUDE">
 <!entity % p-text "INCLUDE">       <!-- define we are a text only doc    -->
 <!entity % p-doc "IGNORE">         <!-- and never a text doc             -->
 <!entity % p-readme "INCLUDE">     <!-- all your README belong to us     -->
@@ -17,7 +17,7 @@
 
  Purpose     :  README for Privoxy
                 
- $Id: readme.sgml,v 1.16.2.3 2002/08/18 22:45:57 hal9 Exp $
+ $Id: readme.sgml,v 1.16.2.4 2002/08/25 17:12:20 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -127,13 +127,11 @@
 
 <!--   ~~~~~       New section      ~~~~~     -->
 <sect1 id="importantchanges" ><title>IMPORTANT CHANGES</title>
-<![%p-stable;[
 <para>
- REALLY BIG NEWS! The long-awaited, oft-delayed  stable version 
- of Privoxy 3.0 is finally released! This is way behind schedule, 
- but better late than never. The developers all hope the wait was worth it.
+ REALLY BIG NEWS! August 2002: The long-awaited, oft-delayed  stable version
+ of Privoxy 3.0 is finally released! This is way behind schedule, but better
+ late than never. The developers all hope the wait was worth it.
 </para>
-]]>
 <para>
  NEWS! As of 03/24/02, the name of this project has been changed from
  ijbswa/Junkbuster to Privoxy. This is reflected in many of the included
@@ -252,7 +250,7 @@
 <!-- </LiteralLayout> -->
 <!-- </para> -->
 <!-- <para> -->
-<!--  $Id: readme.sgml,v 1.16.2.3 2002/08/18 22:45:57 hal9 Exp $ -->
+<!--  $Id: readme.sgml,v 1.16.2.4 2002/08/25 17:12:20 hal9 Exp $ -->
 <!-- </para> -->
 
 </article>
