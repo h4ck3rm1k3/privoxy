@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.11.2.9 2002/11/08 16:39:17 oes Exp $
+#  $Id: default.filter,v 1.11.2.10 2002/11/11 13:39:47 oes Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -190,7 +190,7 @@ FILTER: refresh-tags Kill automatic refresh tags (for dial-on-demand setups)
 # Note: Only deactivates refreshes with more than 9 seconds delay to
 #       preserve monster-stupid but common redirections via meta tags.
 #
-s/<meta\s+http-equiv\s*=\s*(['"]?)refresh\1\s+content\s*=\s*(['"]?)\d{2,}\s*(;\s*url\s*=\s*([^>\2]*))?\2\s*>/<link rev="x-refresh" href="$4">/iU
+s/<meta\s+http-equiv\s*=\s*(['"]?)refresh\1\s+content\s*=\s*(['"]?)\d{2,}\s*(;\s*url\s*=\s*([^>\2]*))?\2/<link rev="x-refresh" href="$4"/iU
 
 
 #################################################################################
@@ -397,6 +397,9 @@ s/\x9B/>/g                  # 155
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.11.2.10  2002/11/11 13:39:47  oes
+#     Make refresh-tags filter work even on incorrect refresh tags like found on usatoday.com
+#
 #     Revision 1.11.2.9  2002/11/08 16:39:17  oes
 #     Made img-reorder more cautious. Fixes bug #632715
 #
