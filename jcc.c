@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.15 2004/10/03 12:53:32 david__schmidt Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.16 2005/04/03 20:10:50 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,11 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.15 2004/10/03 12:53:32 david__schmid
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.92.2.16  2005/04/03 20:10:50  david__schmidt
+ *    Thanks to Jindrich Makovicka for a race condition fix for the log
+ *    file.  The race condition remains for non-pthread implementations.
+ *    Reference patch #1175720.
+ *
  *    Revision 1.92.2.15  2004/10/03 12:53:32  david__schmidt
  *    Add the ability to check jpeg images for invalid
  *    lengths of comment blocks.  Defensive strategy
@@ -83,7 +88,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.15 2004/10/03 12:53:32 david__schmid
  *    watch for that code and toggle themselves if found.
  *
  *    Revision 1.92.2.4  2003/03/07 03:41:04  david__schmidt
- *    Wrapping all *_r functions (the non-_r versions of them) with mutex semaphores for OSX.  Hopefully this will take care of all of those pesky crash reports.
+ *    Wrapping all *_r functions (the non-_r versions of them) with 
+ *    mutex semaphores for OSX.  Hopefully this will take care of all 
+ *    of those pesky crash reports.
  *
  *    Revision 1.92.2.3  2003/02/28 12:53:06  oes
  *    Fixed two mostly harmless mem leaks
@@ -731,6 +738,11 @@ pthread_mutex_t localtime_mutex;
 pthread_mutex_t gethostbyaddr_mutex;
 pthread_mutex_t gethostbyname_mutex;
 #endif /* def OSX_DARWIN */
+
+#ifdef FEATURE_PTHREAD
+pthread_mutex_t log_mutex;
+pthread_mutex_t log_init_mutex;
+#endif /* FEATURE_PTHREAD */
 
 #if defined(unix) || defined(__EMX__)
 const char *basedir = NULL;
@@ -1944,6 +1956,11 @@ int main(int argc, const char *argv[])
    pthread_mutex_init(&gethostbyaddr_mutex,0);
    pthread_mutex_init(&gethostbyname_mutex,0);
 #endif /* def OSX_DARWIN */
+
+#ifdef FEATURE_PTHREAD
+   pthread_mutex_init(&log_mutex,0);
+   pthread_mutex_init(&log_init_mutex,0);
+#endif /* FEATURE_PTHREAD */
 
    /*
     * Unix signal handling
