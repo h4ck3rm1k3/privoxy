@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.2 2002/09/25 14:59:53 oes Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.3 2002/11/10 04:20:02 hal9 Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -40,6 +40,9 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.2 2002/09/25 14:59:53 oes Ex
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.56.2.3  2002/11/10 04:20:02  hal9
+ *    Fix typo: supressed -> suppressed
+ *
  *    Revision 1.56.2.2  2002/09/25 14:59:53  oes
  *    Improved cookie logging
  *
@@ -1012,7 +1015,7 @@ jb_err client_accept_encoding(struct client_state *csp, char **header)
 {
    if ((csp->action->flags & ACTION_NO_COMPRESSION) != 0)
    {
-      log_error(LOG_LEVEL_HEADER, "Supressed offer to compress content");
+      log_error(LOG_LEVEL_HEADER, "Suppressed offer to compress content");
 
       freez(*header);
       if (!strcmpic(csp->http->ver, "HTTP/1.1"))
@@ -1052,7 +1055,7 @@ jb_err client_te(struct client_state *csp, char **header)
    if ((csp->action->flags & ACTION_NO_COMPRESSION) != 0)
    {
       freez(*header);
-      log_error(LOG_LEVEL_HEADER, "Supressed offer to compress transfer");
+      log_error(LOG_LEVEL_HEADER, "Suppressed offer to compress transfer");
    }
 
    return JB_ERR_OK;
