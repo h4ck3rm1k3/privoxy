@@ -8,9 +8,12 @@
               This file belongs in
               ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
-  $Id: index.php,v 1.25.2.1 2002/07/27 18:47:49 oes Exp $
+  $Id: index.php,v 1.25.2.2 2002/08/06 08:39:09 oes Exp $
 
   $Log: index.php,v $
+  Revision 1.25.2.2  2002/08/06 08:39:09  oes
+  Require AF 1.4; link to new AF download location
+
   Revision 1.25.2.1  2002/07/27 18:47:49  oes
   Require Privoxy 2.9.16 and AF 1.3
 
@@ -129,9 +132,9 @@
 /*
  * Config:
  */
-$required_actions_file_version = "1.3";
-$required_privoxy_version = "2.9.16";
-$actions_file_download = "http://www.privoxy.org/actions/testdrive.action";
+$required_actions_file_version = "1.4";
+$required_privoxy_version = "2.9.18";
+$actions_file_download = "http://sourceforge.net/project/showfiles.php?group_id=11118&release_id=103670";
 $submit_target = "http://www.oesterhelt.org/actions/step2.php";
 
 
