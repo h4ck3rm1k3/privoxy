@@ -4,10 +4,9 @@
 >Appendix</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.60"><LINK
 REL="HOME"
-TITLE="Privoxy User Manual"
+TITLE="Privoxy 2.9.16 User Manual"
 HREF="index.html"><LINK
 REL="PREVIOUS"
 TITLE="See Also"
@@ -25,7 +24,6 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
-SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -34,7 +32,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Privoxy User Manual</TH
+>Privoxy 2.9.16 User Manual</TH
 ></TR
 ><TR
 ><TD
@@ -43,7 +41,6 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="seealso.html"
-ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -66,13 +63,17 @@ CLASS="SECT1"
 ><H1
 CLASS="SECT1"
 ><A
-NAME="APPENDIX">14. Appendix</H1
+NAME="APPENDIX"
+>14. Appendix</A
+></H1
 ><DIV
 CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="REGEX">14.1. Regular Expressions</H2
+NAME="REGEX"
+>14.1. Regular Expressions</A
+></H2
 ><P
 > <SPAN
 CLASS="APPLICATION"
@@ -174,12 +175,9 @@ BORDER="0"
 ><TBODY
 ><TR
 ><TD
->  <SPAN
-CLASS="emphasis"
-><I
+>  <I
 CLASS="EMPHASIS"
 >.</I
-></SPAN
 > - Matches any single character, e.g. <SPAN
 CLASS="QUOTE"
 >"a"</SPAN
@@ -212,12 +210,9 @@ BORDER="0"
 ><TBODY
 ><TR
 ><TD
->  <SPAN
-CLASS="emphasis"
-><I
+>  <I
 CLASS="EMPHASIS"
 >?</I
-></SPAN
 > - The preceding character or expression is matched ZERO or ONE
   times. Either/or.
  </TD
@@ -235,12 +230,9 @@ BORDER="0"
 ><TBODY
 ><TR
 ><TD
->  <SPAN
-CLASS="emphasis"
-><I
+>  <I
 CLASS="EMPHASIS"
 >+</I
-></SPAN
 > - The preceding character or expression is matched ONE or MORE
   times.
  </TD
@@ -258,12 +250,9 @@ BORDER="0"
 ><TBODY
 ><TR
 ><TD
->  <SPAN
-CLASS="emphasis"
-><I
+>  <I
 CLASS="EMPHASIS"
 >*</I
-></SPAN
 > - The preceding character or expression is matched ZERO or MORE
   times.
  </TD
@@ -281,12 +270,9 @@ BORDER="0"
 ><TBODY
 ><TR
 ><TD
->  <SPAN
-CLASS="emphasis"
-><I
+>  <I
 CLASS="EMPHASIS"
 >\</I
-></SPAN
 > - The <SPAN
 CLASS="QUOTE"
 >"escape"</SPAN
@@ -317,12 +303,9 @@ BORDER="0"
 ><TBODY
 ><TR
 ><TD
->  <SPAN
-CLASS="emphasis"
-><I
+>  <I
 CLASS="EMPHASIS"
 >[]</I
-></SPAN
 > - Characters enclosed in brackets will be matched if
   any of the enclosed characters are encountered. For instance, <SPAN
 CLASS="QUOTE"
@@ -351,12 +334,9 @@ BORDER="0"
 ><TBODY
 ><TR
 ><TD
->  <SPAN
-CLASS="emphasis"
-><I
+>  <I
 CLASS="EMPHASIS"
 >()</I
-></SPAN
 > - parentheses are used to group a sub-expression,
   or multiple sub-expressions.
  </TD
@@ -374,12 +354,9 @@ BORDER="0"
 ><TBODY
 ><TR
 ><TD
->  <SPAN
-CLASS="emphasis"
-><I
+>  <I
 CLASS="EMPHASIS"
 >|</I
-></SPAN
 > - The <SPAN
 CLASS="QUOTE"
 >"bar"</SPAN
@@ -420,15 +397,12 @@ CLASS="APPLICATION"
  list. This is enough to get us started with a few simple examples which may
  be more illuminating:</P
 ><P
-> <SPAN
-CLASS="emphasis"
-><I
+> <I
 CLASS="EMPHASIS"
 ><TT
 CLASS="LITERAL"
 >/.*/banners/.*</TT
 ></I
-></SPAN
 > - A  simple example
  that uses the common combination of <SPAN
 CLASS="QUOTE"
@@ -477,15 +451,12 @@ CLASS="QUOTE"
 ><P
 > A now something a little more complex:</P
 ><P
-> <SPAN
-CLASS="emphasis"
-><I
+> <I
 CLASS="EMPHASIS"
 ><TT
 CLASS="LITERAL"
 >/.*/adv((er)?ts?|ertis(ing|ements?))?/</TT
 ></I
-></SPAN
 > - 
  We have several literal forward slashes again (<SPAN
 CLASS="QUOTE"
@@ -496,13 +467,10 @@ CLASS="QUOTE"
 CLASS="QUOTE"
 >".*"</SPAN
 >, so we are matching against any conceivable sub-path, just so
- it matches our expression. The only true literal that <SPAN
-CLASS="emphasis"
-><I
+ it matches our expression. The only true literal that <I
 CLASS="EMPHASIS"
 >must
  match</I
-></SPAN
 > our pattern is <SPAN
 CLASS="APPLICATION"
 >adv</SPAN
@@ -551,12 +519,9 @@ CLASS="QUOTE"
 CLASS="QUOTE"
 >"ing"</SPAN
 > 
- <SPAN
-CLASS="emphasis"
-><I
+ <I
 CLASS="EMPHASIS"
 >OR</I
-></SPAN
 > <SPAN
 CLASS="QUOTE"
 >"ements?"</SPAN
@@ -601,15 +566,12 @@ CLASS="QUOTE"
 >, which would then match
  either spelling.</P
 ><P
-> <SPAN
-CLASS="emphasis"
-><I
+> <I
 CLASS="EMPHASIS"
 ><TT
 CLASS="LITERAL"
 >/.*/advert[0-9]+\.(gif|jpe?g)</TT
 ></I
-></SPAN
 > - Again 
  another path statement with forward slashes. Anything in the square brackets 
  <SPAN
@@ -740,10 +702,12 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN3388">14.2. <SPAN
+NAME="AEN3435"
+>14.2. <SPAN
 CLASS="APPLICATION"
 >Privoxy</SPAN
->'s Internal Pages</H2
+>'s Internal Pages</A
+></H2
 ><P
 > Since <SPAN
 CLASS="APPLICATION"
@@ -787,7 +751,9 @@ CLASS="APPLICATION"
    Privoxy main page: 
   </P
 ><A
-NAME="AEN3403"><BLOCKQUOTE
+NAME="AEN3450"
+></A
+><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -818,7 +784,9 @@ CLASS="APPLICATION"
     editing of actions files:
   </P
 ><A
-NAME="AEN3411"><BLOCKQUOTE
+NAME="AEN3458"
+></A
+><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -836,7 +804,9 @@ TARGET="_top"
     Show the source code version numbers:
   </P
 ><A
-NAME="AEN3416"><BLOCKQUOTE
+NAME="AEN3463"
+></A
+><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -854,7 +824,9 @@ TARGET="_top"
    Show the browser's request headers:
   </P
 ><A
-NAME="AEN3421"><BLOCKQUOTE
+NAME="AEN3468"
+></A
+><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -872,7 +844,9 @@ TARGET="_top"
    Show which actions apply to a URL and why:
   </P
 ><A
-NAME="AEN3426"><BLOCKQUOTE
+NAME="AEN3473"
+></A
+><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -894,7 +868,9 @@ CLASS="QUOTE"
    to run, but only as a pass-through proxy, with no actions taking place:
   </P
 ><A
-NAME="AEN3432"><BLOCKQUOTE
+NAME="AEN3479"
+></A
+><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -909,7 +885,9 @@ TARGET="_top"
 >   Short cuts. Turn off, then on: 
   </P
 ><A
-NAME="AEN3436"><BLOCKQUOTE
+NAME="AEN3483"
+></A
+><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -921,7 +899,9 @@ TARGET="_top"
    </P
 ></BLOCKQUOTE
 ><A
-NAME="AEN3439"><BLOCKQUOTE
+NAME="AEN3486"
+></A
+><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -942,7 +922,9 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="BOOKMARKLETS">14.2.1. Bookmarklets</H3
+NAME="BOOKMARKLETS"
+>14.2.1. Bookmarklets</A
+></H3
 ><P
 > Below are some <SPAN
 CLASS="QUOTE"
@@ -1056,7 +1038,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="CHAIN">14.3. Chain of Events</H2
+NAME="CHAIN"
+>14.3. Chain of Events</A
+></H2
 ><P
 > Let's take a quick look at the basic sequence of events when a web page is 
  requested by your browser and <SPAN
@@ -1280,7 +1264,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="ACTIONSANAT">14.4. Anatomy of an Action</H2
+NAME="ACTIONSANAT"
+>14.4. Anatomy of an Action</A
+></H2
 ><P
 > The way <SPAN
 CLASS="APPLICATION"
@@ -1295,12 +1281,9 @@ HREF="actions-file.html#FILTER"
 >
  to any given URL can be complex, and not always so
  easy to understand what is happening. And sometimes we need to be able to
- <SPAN
-CLASS="emphasis"
-><I
+ <I
 CLASS="EMPHASIS"
 >see</I
-></SPAN
 > just what <SPAN
 CLASS="APPLICATION"
 >Privoxy</SPAN
@@ -1506,12 +1489,9 @@ CLASS="QUOTE"
 ></A
 >
  (i.e. not persistent). So we will allow persistent cookies for google. The
- second turns <SPAN
-CLASS="emphasis"
-><I
+ second turns <I
 CLASS="EMPHASIS"
 >off</I
-></SPAN
 > any 
  <A
 HREF="actions-file.html#FAST-REDIRECTS"
@@ -1672,12 +1652,9 @@ CLASS="QUOTE"
 >"+block"</SPAN
 ></A
 >
- <SPAN
-CLASS="emphasis"
-><I
+ <I
 CLASS="EMPHASIS"
 >and</I
-></SPAN
 > an 
  <A
 HREF="actions-file.html#HANDLE-AS-IMAGE"
@@ -1759,12 +1736,9 @@ CLASS="QUOTE"
 >"/ads"</SPAN
 >! But 
  we did not want this at all! Now we see why we get the blank page. We could
- now add a new action below this that explicitly does <SPAN
-CLASS="emphasis"
-><I
+ now add a new action below this that explicitly does <I
 CLASS="EMPHASIS"
 >not</I
-></SPAN
 >
  block (<SPAN
 CLASS="QUOTE"
@@ -1904,7 +1878,6 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -1916,7 +1889,6 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="seealso.html"
-ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -1925,7 +1897,6 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="index.html"
-ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD

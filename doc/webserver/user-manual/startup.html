@@ -4,10 +4,9 @@
 >Starting Privoxy</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.60"><LINK
 REL="HOME"
-TITLE="Privoxy User Manual"
+TITLE="Privoxy 2.9.16 User Manual"
 HREF="index.html"><LINK
 REL="PREVIOUS"
 TITLE="Quickstart to Using Privoxy"
@@ -28,7 +27,6 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
-SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -37,7 +35,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Privoxy User Manual</TH
+>Privoxy 2.9.16 User Manual</TH
 ></TR
 ><TR
 ><TD
@@ -46,7 +44,6 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="quickstart.html"
-ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -60,7 +57,6 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="configuration.html"
-ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -73,9 +69,11 @@ CLASS="SECT1"
 ><H1
 CLASS="SECT1"
 ><A
-NAME="STARTUP">5. Starting <SPAN
+NAME="STARTUP"
+>5. Starting <SPAN
 CLASS="APPLICATION"
 >Privoxy</SPAN
+></A
 ></H1
 ><P
 > Before launching <SPAN
@@ -90,10 +88,18 @@ CLASS="APPLICATION"
  127.0.0.1 (or localhost) for the proxy address, and port 8118 (earlier versions
  used port 8000). This is the one configuration step that must be done!</P
 ><P
+> Please note that <SPAN
+CLASS="APPLICATION"
+>Privoxy</SPAN
+> can only proxy HTTP and 
+ HTTPS traffic. It will not work with FTP or other protocols.</P
+><P
 >  <DIV
 CLASS="FIGURE"
 ><A
-NAME="AEN404"><P
+NAME="AEN425"
+></A
+><P
 ><B
 >Figure 2. Proxy Configuration (Mozilla)</B
 ></P
@@ -101,7 +107,10 @@ NAME="AEN404"><P
 CLASS="MEDIAOBJECT"
 ><P
 ><IMG
-SRC="../images/proxy_setup.jpg"></P
+SRC="../images/proxy_setup.jpg"
+ALT="[ Screenshot of Mozilla Proxy Configuration ]"
+></IMG
+></P
 ></DIV
 ></DIV
 >
@@ -206,7 +215,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="START-REDHAT">5.1. Red Hat and Conectiva</H2
+NAME="START-REDHAT"
+>5.1. Red Hat and Conectiva</A
+></H2
 ><P
 > We use a script. Note that Red Hat does not start Privoxy upon booting per
  default. It will use the file <TT
@@ -234,7 +245,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="START-DEBIAN">5.2. Debian</H2
+NAME="START-DEBIAN"
+>5.2. Debian</A
+></H2
 ><P
 > We use a script. Note that Debian starts Privoxy upon booting per
  default.  It will use the file
@@ -263,7 +276,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="START-SUSE">5.3. SuSE</H2
+NAME="START-SUSE"
+>5.3. SuSE</A
+></H2
 ><P
 >We use a script. It will use the file <TT
 CLASS="FILENAME"
@@ -291,7 +306,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="START-WINDOWS">5.4. Windows</H2
+NAME="START-WINDOWS"
+>5.4. Windows</A
+></H2
 ><P
 >Click on the Privoxy Icon to start Privoxy. If no configuration file is
  specified on the command line, <SPAN
@@ -309,7 +326,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="START-UNICES">5.5. Solaris, NetBSD, FreeBSD, HP-UX and others</H2
+NAME="START-UNICES"
+>5.5. Solaris, NetBSD, FreeBSD, HP-UX and others</A
+></H2
 ><P
 >Example Unix startup command:</P
 ><P
@@ -332,7 +351,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="START-OS2">5.6. OS/2</H2
+NAME="START-OS2"
+>5.6. OS/2</A
+></H2
 ><P
 > During installation, <SPAN
 CLASS="APPLICATION"
@@ -353,14 +374,24 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="START-MACOSX">5.7. MAX OSX</H2
+NAME="START-MACOSX"
+>5.7. Mac OSX</A
+></H2
 ><P
 > During installation, <SPAN
 CLASS="APPLICATION"
 >Privoxy</SPAN
 > is configured to
- start automatically when the system restarts. You can start it manually
- through the Terminal with these commands:</P
+ start automatically when the system restarts.  To run Privoxy by hand,
+ double-click on the <TT
+CLASS="LITERAL"
+>RunPrivoxy.command</TT
+> icon in the
+ <TT
+CLASS="LITERAL"
+>/Library/Privoxy</TT
+> folder.  Or, type this command
+ in the Terminal:</P
 ><P
 >  <TABLE
 BORDER="0"
@@ -370,19 +401,28 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->  cd /Applications/Privoxy.app
-  ./privoxy</PRE
+>  /Library/Privoxy/RunPrivoxy.command
+  </PRE
 ></TD
 ></TR
 ></TABLE
 ></P
+><P
+> If you are not logged in as an administrator, you will be asked for the
+ administrator password when starting <SPAN
+CLASS="APPLICATION"
+>Privoxy</SPAN
+>
+ by hand.</P
 ></DIV
 ><DIV
 CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="START-AMIGAOS">5.8. AmigaOS</H2
+NAME="START-AMIGAOS"
+>5.8. AmigaOS</A
+></H2
 ><P
 > Start <SPAN
 CLASS="APPLICATION"
@@ -412,7 +452,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="CMDOPTIONS">5.9. Command Line Options</H2
+NAME="CMDOPTIONS"
+>5.9. Command Line Options</A
+></H2
 ><P
 > <SPAN
 CLASS="APPLICATION"
@@ -425,12 +467,9 @@ CLASS="APPLICATION"
 ><UL
 ><LI
 ><P
->    <SPAN
-CLASS="emphasis"
-><I
+>    <I
 CLASS="EMPHASIS"
 >--version</I
-></SPAN
 >
   </P
 ><P
@@ -439,12 +478,9 @@ CLASS="EMPHASIS"
 ></LI
 ><LI
 ><P
->    <SPAN
-CLASS="emphasis"
-><I
+>    <I
 CLASS="EMPHASIS"
 >--help</I
-></SPAN
 >
   </P
 ><P
@@ -453,12 +489,9 @@ CLASS="EMPHASIS"
 ></LI
 ><LI
 ><P
->   <SPAN
-CLASS="emphasis"
-><I
+>   <I
 CLASS="EMPHASIS"
 >--no-daemon</I
-></SPAN
 >
   </P
 ><P
@@ -468,86 +501,59 @@ CLASS="EMPHASIS"
 ></LI
 ><LI
 ><P
->   <SPAN
-CLASS="emphasis"
-><I
+>   <I
 CLASS="EMPHASIS"
 >--pidfile FILE</I
-></SPAN
 >
   
   </P
 ><P
->   On startup, write the process ID to <SPAN
-CLASS="emphasis"
-><I
+>   On startup, write the process ID to <I
 CLASS="EMPHASIS"
 >FILE</I
-></SPAN
 >. Delete the
-   <SPAN
-CLASS="emphasis"
-><I
+   <I
 CLASS="EMPHASIS"
 >FILE</I
-></SPAN
 > on exit. Failure to create or delete the
-   <SPAN
-CLASS="emphasis"
-><I
+   <I
 CLASS="EMPHASIS"
 >FILE</I
-></SPAN
-> is non-fatal. If no <SPAN
-CLASS="emphasis"
-><I
+> is non-fatal. If no <I
 CLASS="EMPHASIS"
 >FILE</I
-></SPAN
 >
    option is given, no PID file will be used. Unix only.
   </P
 ></LI
 ><LI
 ><P
->   <SPAN
-CLASS="emphasis"
-><I
+>   <I
 CLASS="EMPHASIS"
 >--user USER[.GROUP]</I
-></SPAN
 >
   
   </P
 ><P
 >   After (optionally) writing the PID file, assume the user  ID  of
-   <SPAN
-CLASS="emphasis"
-><I
+   <I
 CLASS="EMPHASIS"
 >USER</I
-></SPAN
 >, and if included the GID of GROUP.  Exit if the
    privileges are not sufficient to do so. Unix only.
   </P
 ></LI
 ><LI
 ><P
->    <SPAN
-CLASS="emphasis"
-><I
+>    <I
 CLASS="EMPHASIS"
 >configfile</I
-></SPAN
 >
   </P
 ><P
->    If no <SPAN
-CLASS="emphasis"
-><I
+>    If no <I
 CLASS="EMPHASIS"
 >configfile</I
-></SPAN
 > is included on the command line, 
     <SPAN
 CLASS="APPLICATION"
@@ -577,7 +583,6 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -589,7 +594,6 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="quickstart.html"
-ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -598,7 +602,6 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="index.html"
-ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -607,7 +610,6 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="configuration.html"
-ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR

@@ -4,10 +4,9 @@
 >The Main Configuration File</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.60"><LINK
 REL="HOME"
-TITLE="Privoxy User Manual"
+TITLE="Privoxy 2.9.16 User Manual"
 HREF="index.html"><LINK
 REL="PREVIOUS"
 TITLE="Privoxy Configuration"
@@ -28,7 +27,6 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
-SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -37,7 +35,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Privoxy User Manual</TH
+>Privoxy 2.9.16 User Manual</TH
 ></TR
 ><TR
 ><TD
@@ -46,7 +44,6 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="configuration.html"
-ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -60,7 +57,6 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="actions-file.html"
-ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -73,7 +69,9 @@ CLASS="SECT1"
 ><H1
 CLASS="SECT1"
 ><A
-NAME="CONFIG">7. The Main Configuration File</H1
+NAME="CONFIG"
+>7. The Main Configuration File</A
+></H1
 ><P
 > Again, the main configuration file is named <TT
 CLASS="FILENAME"
@@ -91,12 +89,9 @@ CLASS="FILENAME"
 CLASS="LITERAL"
 >  <P
 CLASS="LITERALLAYOUT"
->&nbsp;&nbsp;<SPAN
-CLASS="emphasis"
-><I
+>&nbsp;&nbsp;<I
 CLASS="EMPHASIS"
 >confdir /etc/privoxy</I
-></SPAN
 ></P
 >
  </TT
@@ -136,7 +131,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="CONF-LOG-LOC">7.1. Configuration and Log File Locations</H2
+NAME="CONF-LOG-LOC"
+>7.1. Configuration and Log File Locations</A
+></H2
 ><P
 > <SPAN
 CLASS="APPLICATION"
@@ -160,7 +157,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="CONFDIR">7.1.1. confdir</H4
+NAME="CONFDIR"
+>7.1.1. confdir</A
+></H4
 ><P
 ></P
 ><DIV
@@ -182,12 +181,9 @@ CLASS="VARIABLELIST"
 >Default value:</DT
 ><DD
 ><P
->/etc/privoxy (Unix) <SPAN
-CLASS="emphasis"
-><I
+>/etc/privoxy (Unix) <I
 CLASS="EMPHASIS"
 >or</I
-></SPAN
 > <SPAN
 CLASS="APPLICATION"
 >Privoxy</SPAN
@@ -197,12 +193,9 @@ CLASS="APPLICATION"
 >Effect if unset:</DT
 ><DD
 ><P
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >Mandatory</I
-></SPAN
 ></P
 ></DD
 ><DT
@@ -242,7 +235,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="LOGDIR">7.1.2. logdir</H4
+NAME="LOGDIR"
+>7.1.2. logdir</A
+></H4
 ><P
 ></P
 ><DIV
@@ -272,12 +267,9 @@ CLASS="FILENAME"
 >Default value:</DT
 ><DD
 ><P
->/var/log/privoxy (Unix) <SPAN
-CLASS="emphasis"
-><I
+>/var/log/privoxy (Unix) <I
 CLASS="EMPHASIS"
 >or</I
-></SPAN
 > <SPAN
 CLASS="APPLICATION"
 >Privoxy</SPAN
@@ -287,12 +279,9 @@ CLASS="APPLICATION"
 >Effect if unset:</DT
 ><DD
 ><P
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >Mandatory</I
-></SPAN
 ></P
 ></DD
 ><DT
@@ -316,7 +305,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="ACTIONSFILE">7.1.3. actionsfile</H4
+NAME="ACTIONSFILE"
+>7.1.3. actionsfile</A
+></H4
 ><A
 NAME="DEFAULT.ACTION"
 ></A
@@ -438,7 +429,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="FILTERFILE">7.1.4. filterfile</H4
+NAME="FILTERFILE"
+>7.1.4. filterfile</A
+></H4
 ><A
 NAME="DEFAULT.FILTER"
 ></A
@@ -470,12 +463,9 @@ CLASS="LITERAL"
 >Default value:</DT
 ><DD
 ><P
->default.filter (Unix) <SPAN
-CLASS="emphasis"
-><I
+>default.filter (Unix) <I
 CLASS="EMPHASIS"
 >or</I
-></SPAN
 > default.filter.txt (Windows)</P
 ></DD
 ><DT
@@ -567,7 +557,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="LOGFILE">7.1.5. logfile</H4
+NAME="LOGFILE"
+>7.1.5. logfile</A
+></H4
 ><P
 ></P
 ><DIV
@@ -593,12 +585,9 @@ CLASS="LITERAL"
 >Default value:</DT
 ><DD
 ><P
->logfile (Unix) <SPAN
-CLASS="emphasis"
-><I
+>logfile (Unix) <I
 CLASS="EMPHASIS"
 >or</I
-></SPAN
 > privoxy.log (Windows)</P
 ></DD
 ><DT
@@ -673,7 +662,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="JARFILE">7.1.6. jarfile</H4
+NAME="JARFILE"
+>7.1.6. jarfile</A
+></H4
 ><P
 ></P
 ><DIV
@@ -699,12 +690,9 @@ CLASS="LITERAL"
 >Default value:</DT
 ><DD
 ><P
->jarfile (Unix) <SPAN
-CLASS="emphasis"
-><I
+>jarfile (Unix) <I
 CLASS="EMPHASIS"
 >or</I
-></SPAN
 > privoxy.jar (Windows)</P
 ></DD
 ><DT
@@ -729,7 +717,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="TRUSTFILE">7.1.7. trustfile</H4
+NAME="TRUSTFILE"
+>7.1.7. trustfile</A
+></H4
 ><P
 ></P
 ><DIV
@@ -755,18 +745,12 @@ CLASS="LITERAL"
 >Default value:</DT
 ><DD
 ><P
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >Unset (commented out)</I
-></SPAN
->. When activated: trust (Unix) <SPAN
-CLASS="emphasis"
-><I
+>. When activated: trust (Unix) <I
 CLASS="EMPHASIS"
 >or</I
-></SPAN
 > trust.txt (Windows)</P
 ></DD
 ><DT
@@ -781,12 +765,9 @@ CLASS="EMPHASIS"
 ><DD
 ><P
 >    The trust mechanism is an experimental feature for building white-lists and should
-    be used with care. It is <SPAN
-CLASS="emphasis"
-><I
+    be used with care. It is <I
 CLASS="EMPHASIS"
 >NOT</I
-></SPAN
 > recommended for the casual user.
    </P
 ><P
@@ -823,7 +804,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="LOCAL-SET-UP">7.2. Local Set-up Documentation</H2
+NAME="LOCAL-SET-UP"
+>7.2. Local Set-up Documentation</A
+></H2
 ><P
 >    If you intend to operate <SPAN
 CLASS="APPLICATION"
@@ -837,7 +820,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="USER-MANUAL">7.2.1. user-manual</H4
+NAME="USER-MANUAL"
+>7.2.1. user-manual</A
+></H4
 ><P
 ></P
 ><DIV
@@ -863,12 +848,9 @@ CLASS="APPLICATION"
 >Default value:</DT
 ><DD
 ><P
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >Unset</I
-></SPAN
 ></P
 ></DD
 ><DT
@@ -920,7 +902,7 @@ WIDTH="90%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->user-manual  file:///usr/share/doc/privoxy-2.9.15/user-manual/</PRE
+>user-manual  file:///usr/share/doc/privoxy-2.9.16/user-manual/</PRE
 ></TD
 ></TR
 ></TABLE
@@ -966,13 +948,10 @@ ALIGN="CENTER"
 ><TD
 ALIGN="LEFT"
 ><P
->     If set, this option should be <SPAN
-CLASS="emphasis"
-><I
+>     If set, this option should be <I
 CLASS="EMPHASIS"
 >the first option in the config
      file</I
-></SPAN
 >, because it is used while the config file is being read.
    </P
 ></TD
@@ -988,7 +967,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="TRUST-INFO-URL">7.2.2. trust-info-url</H4
+NAME="TRUST-INFO-URL"
+>7.2.2. trust-info-url</A
+></H4
 ><P
 ></P
 ><DIV
@@ -1027,12 +1008,9 @@ CLASS="VARIABLELIST"
 >    The value of this option only matters if the experimental trust mechanism has been
     activated. (See <A
 HREF="config.html#TRUSTFILE"
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >trustfile</I
-></SPAN
 ></A
 > above.)
    </P
@@ -1054,7 +1032,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="ADMIN-ADDRESS">7.2.3. admin-address</H4
+NAME="ADMIN-ADDRESS"
+>7.2.3. admin-address</A
+></H4
 ><P
 ></P
 ><DIV
@@ -1077,12 +1057,9 @@ CLASS="VARIABLELIST"
 >Default value:</DT
 ><DD
 ><P
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >Unset</I
-></SPAN
 ></P
 ></DD
 ><DT
@@ -1115,7 +1092,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="PROXY-INFO-URL">7.2.4. proxy-info-url</H4
+NAME="PROXY-INFO-URL"
+>7.2.4. proxy-info-url</A
+></H4
 ><P
 ></P
 ><DIV
@@ -1142,12 +1121,9 @@ CLASS="APPLICATION"
 >Default value:</DT
 ><DD
 ><P
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >Unset</I
-></SPAN
 ></P
 ></DD
 ><DT
@@ -1184,7 +1160,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="DEBUGGING">7.3. Debugging</H2
+NAME="DEBUGGING"
+>7.3. Debugging</A
+></H2
 ><P
 >  These options are mainly useful when tracing a problem.
   Note that you might also want to invoke
@@ -1202,7 +1180,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="DEBUG">7.3.1. debug</H4
+NAME="DEBUG"
+>7.3.1. debug</A
+></H4
 ><P
 ></P
 ><DIV
@@ -1215,12 +1195,9 @@ CLASS="VARIABLELIST"
 >    Key values that determine what information gets logged to the 
     <A
 HREF="config.html#LOGFILE"
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >logfile</I
-></SPAN
 ></A
 >.
    </P
@@ -1286,12 +1263,9 @@ CLASS="LITERAL"
    </P
 ><P
 >    A debug level of 1 is informative because it will show you each request
-    as it happens. <SPAN
-CLASS="emphasis"
-><I
+    as it happens. <I
 CLASS="EMPHASIS"
 >1, 4096 and 8192 are highly recommended</I
-></SPAN
 >
     so that you will notice when things go wrong. The other levels are probably
     only of interest if you are hunting down a specific problem. They can produce
@@ -1299,12 +1273,9 @@ CLASS="EMPHASIS"
     
    </P
 ><P
->    The reporting of <SPAN
-CLASS="emphasis"
-><I
+>    The reporting of <I
 CLASS="EMPHASIS"
 >fatal</I
-></SPAN
 > errors (i.e. ones which crash 
     <SPAN
 CLASS="APPLICATION"
@@ -1316,12 +1287,9 @@ CLASS="APPLICATION"
 CLASS="QUOTE"
 >"debug
     512"</SPAN
-> <SPAN
-CLASS="emphasis"
-><I
+> <I
 CLASS="EMPHASIS"
 >ONLY</I
-></SPAN
 > and not enable anything else.
    </P
 ></DD
@@ -1333,7 +1301,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="SINGLE-THREADED">7.3.2. single-threaded</H4
+NAME="SINGLE-THREADED"
+>7.3.2. single-threaded</A
+></H4
 ><P
 ></P
 ><DIV
@@ -1350,24 +1320,18 @@ CLASS="VARIABLELIST"
 >Type of value:</DT
 ><DD
 ><P
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >None</I
-></SPAN
 ></P
 ></DD
 ><DT
 >Default value:</DT
 ><DD
 ><P
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >Unset</I
-></SPAN
 ></P
 ></DD
 ><DT
@@ -1383,12 +1347,9 @@ CLASS="EMPHASIS"
 ><DD
 ><P
 >    This option is only there for debug purposes and you should never
-    need to use it. <SPAN
-CLASS="emphasis"
-><I
+    need to use it. <I
 CLASS="EMPHASIS"
 >It will drastically reduce performance.</I
-></SPAN
 >
    </P
 ></DD
@@ -1401,7 +1362,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="ACCESS-CONTROL">7.4. Access Control and Security</H2
+NAME="ACCESS-CONTROL"
+>7.4. Access Control and Security</A
+></H2
 ><P
 >  This section of the config file controls the security-relevant aspects
   of <SPAN
@@ -1414,7 +1377,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="LISTEN-ADDRESS">7.4.1. listen-address</H4
+NAME="LISTEN-ADDRESS"
+>7.4.1. listen-address</A
+></H4
 ><P
 ></P
 ><DIV
@@ -1546,7 +1511,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="TOGGLE">7.4.2. toggle</H4
+NAME="TOGGLE"
+>7.4.2. toggle</A
+></H4
 ><P
 ></P
 ><DIV
@@ -1618,7 +1585,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="ENABLE-REMOTE-TOGGLE">7.4.3. enable-remote-toggle</H4
+NAME="ENABLE-REMOTE-TOGGLE"
+>7.4.3. enable-remote-toggle</A
+></H4
 ><P
 ></P
 ><DIV
@@ -1667,12 +1636,9 @@ CLASS="APPLICATION"
     any URL.
    </P
 ><P
->    For the time being, access to the toggle feature can <SPAN
-CLASS="emphasis"
-><I
+>    For the time being, access to the toggle feature can <I
 CLASS="EMPHASIS"
 >not</I
-></SPAN
 > be
     controlled separately by <SPAN
 CLASS="QUOTE"
@@ -1689,12 +1655,9 @@ CLASS="QUOTE"
 CLASS="LITERAL"
 >listen-address</TT
 > above) can
-    toggle it for all users. So this option is <SPAN
-CLASS="emphasis"
-><I
+    toggle it for all users. So this option is <I
 CLASS="EMPHASIS"
 >not recommended</I
-></SPAN
 >
     for multi-user environments with untrusted users.
    </P
@@ -1714,7 +1677,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="ENABLE-EDIT-ACTIONS">7.4.4. enable-edit-actions</H4
+NAME="ENABLE-EDIT-ACTIONS"
+>7.4.4. enable-edit-actions</A
+></H4
 ><P
 ></P
 ><DIV
@@ -1755,12 +1720,9 @@ TARGET="_top"
 >Notes:</DT
 ><DD
 ><P
->    For the time being, access to the editor can <SPAN
-CLASS="emphasis"
-><I
+>    For the time being, access to the editor can <I
 CLASS="EMPHASIS"
 >not</I
-></SPAN
 > be
     controlled separately by <SPAN
 CLASS="QUOTE"
@@ -1777,13 +1739,10 @@ CLASS="QUOTE"
 CLASS="LITERAL"
 >listen-address</TT
 > above) can
-    modify its configuration for all users. So this option is <SPAN
-CLASS="emphasis"
-><I
+    modify its configuration for all users. So this option is <I
 CLASS="EMPHASIS"
 >not
     recommended</I
-></SPAN
 > for multi-user environments with untrusted users.
    </P
 ><P
@@ -1802,7 +1761,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="ACLS">7.4.5. ACLs: permit-access and deny-access</H4
+NAME="ACLS"
+>7.4.5. ACLs: permit-access and deny-access</A
+></H4
 ><A
 NAME="PERMIT-ACCESS"
 ></A
@@ -1881,12 +1842,9 @@ CLASS="REPLACEABLE"
 >Default value:</DT
 ><DD
 ><P
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >Unset</I
-></SPAN
 ></P
 ></DD
 ><DT
@@ -1904,12 +1862,9 @@ CLASS="LITERAL"
 ><DD
 ><P
 >    Access controls are included at the request of ISPs and systems
-    administrators, and <SPAN
-CLASS="emphasis"
-><I
+    administrators, and <I
 CLASS="EMPHASIS"
 >are not usually needed by individual users</I
-></SPAN
 >.
     For a typical home user, it will normally suffice to ensure that 
     <SPAN
@@ -1919,12 +1874,9 @@ CLASS="APPLICATION"
     (127.0.0.1) or internal (home) network address by means of the
     <A
 HREF="config.html#LISTEN-ADDRESS"
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >listen-address</I
-></SPAN
 ></A
 >
     option. 
@@ -1967,12 +1919,9 @@ CLASS="REPLACEABLE"
 >dst_addr</I
 ></TT
 >
-    that is examined is the address of the forwarder and <SPAN
-CLASS="emphasis"
-><I
+    that is examined is the address of the forwarder and <I
 CLASS="EMPHASIS"
 >NOT</I
-></SPAN
 > the address
     of the ultimate target. This is necessary because it may be impossible for the local
     <SPAN
@@ -1983,12 +1932,9 @@ CLASS="APPLICATION"
    </P
 ><P
 >    You should prefer using IP addresses over DNS names, because the address lookups take
-    time. All DNS names must resolve! You can <SPAN
-CLASS="emphasis"
-><I
+    time. All DNS names must resolve! You can <I
 CLASS="EMPHASIS"
 >not</I
-></SPAN
 > use domain patterns
     like <SPAN
 CLASS="QUOTE"
@@ -2019,12 +1965,9 @@ CLASS="REPLACEABLE"
 >dst_addr</I
 ></TT
 > implies that
-    <SPAN
-CLASS="emphasis"
-><I
+    <I
 CLASS="EMPHASIS"
 >all</I
-></SPAN
 > destination addresses are OK:
    </P
 ><P
@@ -2090,7 +2033,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="BUFFER-LIMIT">7.4.6. buffer-limit</H4
+NAME="BUFFER-LIMIT"
+>7.4.6. buffer-limit</A
+></H4
 ><P
 ></P
 ><DIV
@@ -2153,12 +2098,9 @@ CLASS="LITERAL"
 CLASS="LITERAL"
 >buffer-limit</TT
 > Kbytes
-    <SPAN
-CLASS="emphasis"
-><I
+    <I
 CLASS="EMPHASIS"
 >each</I
-></SPAN
 >, unless you have enabled <SPAN
 CLASS="QUOTE"
 >"single-threaded"</SPAN
@@ -2175,7 +2117,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="FORWARDING">7.5. Forwarding</H2
+NAME="FORWARDING"
+>7.5. Forwarding</A
+></H2
 ><P
 > This feature allows routing of HTTP requests through a chain of
  multiple proxies.
@@ -2203,7 +2147,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="FORWARD">7.5.1. forward</H4
+NAME="FORWARD"
+>7.5.1. forward</A
+></H4
 ><P
 ></P
 ><DIV
@@ -2281,12 +2227,9 @@ CLASS="REPLACEABLE"
 >Default value:</DT
 ><DD
 ><P
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >Unset</I
-></SPAN
 ></P
 ></DD
 ><DT
@@ -2366,7 +2309,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="SOCKS">7.5.2. forward-socks4 and forward-socks4a</H4
+NAME="SOCKS"
+>7.5.2. forward-socks4 and forward-socks4a</A
+></H4
 ><A
 NAME="FORWARD-SOCKS4"
 ></A
@@ -2470,12 +2415,9 @@ CLASS="REPLACEABLE"
 >Default value:</DT
 ><DD
 ><P
-><SPAN
-CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >Unset</I
-></SPAN
 ></P
 ></DD
 ><DT
@@ -2571,7 +2513,9 @@ CLASS="SECT3"
 ><H4
 CLASS="SECT3"
 ><A
-NAME="ADVANCED-FORWARDING-EXAMPLES">7.5.3. Advanced Forwarding Examples</H4
+NAME="ADVANCED-FORWARDING-EXAMPLES"
+>7.5.3. Advanced Forwarding Examples</A
+></H4
 ><P
 > If you have links to multiple ISPs that provide various special content 
  only to their subscribers, you can configure multiple <SPAN
@@ -2579,12 +2523,9 @@ CLASS="APPLICATION"
 >Privoxies</SPAN
 >
  which have connections to the respective ISPs to act as forwarders to each other, so that
- <SPAN
-CLASS="emphasis"
-><I
+ <I
 CLASS="EMPHASIS"
 >your</I
-></SPAN
 > users can see the internal content of all ISPs.</P
 ><P
 > Assume that host-a has a PPP connection to isp-a.net. And host-b has a PPP connection to
@@ -2699,7 +2640,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="WINDOWS-GUI">7.6. Windows GUI Options</H2
+NAME="WINDOWS-GUI"
+>7.6. Windows GUI Options</A
+></H2
 ><P
 > <SPAN
 CLASS="APPLICATION"
@@ -2727,12 +2670,9 @@ CLASS="QUOTE"
 CLASS="LITERAL"
 >  <P
 CLASS="LITERALLAYOUT"
->&nbsp;&nbsp;<SPAN
-CLASS="emphasis"
-><I
+>&nbsp;&nbsp;<I
 CLASS="EMPHASIS"
 >activity-animation   1</I
-></SPAN
 ><br>
 &nbsp;&nbsp;&nbsp;</P
 > 
@@ -2756,12 +2696,9 @@ CLASS="APPLICATION"
 CLASS="LITERAL"
 >  <P
 CLASS="LITERALLAYOUT"
->&nbsp;&nbsp;<SPAN
-CLASS="emphasis"
-><I
+>&nbsp;&nbsp;<I
 CLASS="EMPHASIS"
 >log-messages       1</I
-></SPAN
 ><br>
 &nbsp;&nbsp;&nbsp;</P
 > 
@@ -2789,12 +2726,9 @@ CLASS="QUOTE"
 CLASS="LITERAL"
 >  <P
 CLASS="LITERALLAYOUT"
->&nbsp;&nbsp;<SPAN
-CLASS="emphasis"
-><I
+>&nbsp;&nbsp;<I
 CLASS="EMPHASIS"
 >log-buffer-size      1</I
-></SPAN
 ><br>
 &nbsp;&nbsp;&nbsp;</P
 > 
@@ -2814,12 +2748,9 @@ CLASS="APPLICATION"
 CLASS="LITERAL"
 >  <P
 CLASS="LITERALLAYOUT"
->&nbsp;&nbsp;<SPAN
-CLASS="emphasis"
-><I
+>&nbsp;&nbsp;<I
 CLASS="EMPHASIS"
 >log-max-lines      200</I
-></SPAN
 ><br>
 &nbsp;&nbsp;&nbsp;</P
 > 
@@ -2843,12 +2774,9 @@ CLASS="APPLICATION"
 CLASS="LITERAL"
 >  <P
 CLASS="LITERALLAYOUT"
->&nbsp;&nbsp;<SPAN
-CLASS="emphasis"
-><I
+>&nbsp;&nbsp;<I
 CLASS="EMPHASIS"
 >log-highlight-messages   1</I
-></SPAN
 ><br>
 &nbsp;&nbsp;&nbsp;</P
 > 
@@ -2864,12 +2792,9 @@ NAME="LOG-FONT-NAME"
 CLASS="LITERAL"
 >  <P
 CLASS="LITERALLAYOUT"
->&nbsp;&nbsp;<SPAN
-CLASS="emphasis"
-><I
+>&nbsp;&nbsp;<I
 CLASS="EMPHASIS"
 >log-font-name        Comic Sans MS</I
-></SPAN
 ><br>
 &nbsp;&nbsp;&nbsp;</P
 > 
@@ -2885,12 +2810,9 @@ NAME="LOG-FONT-SIZE"
 CLASS="LITERAL"
 >  <P
 CLASS="LITERALLAYOUT"
->&nbsp;&nbsp;<SPAN
-CLASS="emphasis"
-><I
+>&nbsp;&nbsp;<I
 CLASS="EMPHASIS"
 >log-font-size        8</I
-></SPAN
 ><br>
 &nbsp;&nbsp;&nbsp;</P
 > 
@@ -2915,12 +2837,9 @@ CLASS="APPLICATION"
 CLASS="LITERAL"
 >  <P
 CLASS="LITERALLAYOUT"
->&nbsp;&nbsp;<SPAN
-CLASS="emphasis"
-><I
+>&nbsp;&nbsp;<I
 CLASS="EMPHASIS"
 >show-on-task-bar     0</I
-></SPAN
 ><br>
 &nbsp;&nbsp;&nbsp;</P
 > 
@@ -2944,12 +2863,9 @@ CLASS="APPLICATION"
 CLASS="LITERAL"
 >  <P
 CLASS="LITERALLAYOUT"
->&nbsp;&nbsp;<SPAN
-CLASS="emphasis"
-><I
+>&nbsp;&nbsp;<I
 CLASS="EMPHASIS"
 >close-button-minimizes  1</I
-></SPAN
 ><br>
 &nbsp;&nbsp;&nbsp;</P
 > 
@@ -2977,12 +2893,9 @@ CLASS="APPLICATION"
 CLASS="LITERAL"
 >  <P
 CLASS="LITERALLAYOUT"
->&nbsp;&nbsp;#<SPAN
-CLASS="emphasis"
-><I
+>&nbsp;&nbsp;#<I
 CLASS="EMPHASIS"
 >hide-console</I
-></SPAN
 ><br>
 &nbsp;&nbsp;&nbsp;</P
 > 
@@ -2995,7 +2908,6 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -3007,7 +2919,6 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="configuration.html"
-ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -3016,7 +2927,6 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="index.html"
-ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -3025,7 +2935,6 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="actions-file.html"
-ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
