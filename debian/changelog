@@ -1,22 +1,32 @@
 privoxy (2.9.15-beta-0) unstable; urgency=low
 
   * New upstream version.
-  * Use upstream docbook build mechanism now.
-  * Force usage of w3m -dump to convert HTML to ASCII (build depend on it).
   * Exclude CVS files from dh_installdocs (when compiling from CVS).
   * Add user.action and standard.action to /etc/privoxy.
   * Install images for html version of documentation.
-  * Install p_doc.css in documentation directory.
+  * Do no longer build html and txt versions of documentation using
+    docbook, but use the converted versions which come with the upstream
+    package.
 
- -- Roland Rosenfeld <roland@debian.org>  Sun, 26 May 2002 01:37:33 +0200
+ -- Roland Rosenfeld <roland@debian.org>  Thu, 30 May 2002 14:21:10 +0200
+
+privoxy (2.9.14-beta-4) unstable; urgency=low
+
+  * Damn, why did I write "i386-linux" into the rules file, when I try to
+    write a work around for hppa?  Fixed now (Closes #148227).
+
+ -- Roland Rosenfeld <roland@debian.org>  Sun, 26 May 2002 22:33:26 +0200
 
 privoxy (2.9.14-beta-3) unstable; urgency=low
 
   * Fix typo ('[' instead of '{') in default.action (Closes: #148122).
   * Disable edit-actions and remote-toggle in config file by default
     (Closes: #148125).
+  * Use --disable-pthread on hppa, to avoid problem with hppa gcc not
+    supporting -pthread option (Closes: #148117).
+  * Install p_doc.css in documentation directory.
 
- -- Roland Rosenfeld <roland@debian.org>  Sat, 25 May 2002 11:53:49 +0200
+ -- Roland Rosenfeld <roland@debian.org>  Sun, 26 May 2002 01:40:18 +0200
 
 privoxy (2.9.14-beta-2) unstable; urgency=low
 

@@ -22,16 +22,21 @@ ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
 	WITHDEBUG="--with-debug"
 endif
 
+# hppa doesn't support -pthread option, so we complety disable pthread
+# on hppa until there is a better solution in configure.
+ifeq "$(DEB_HOST_GNU_TYPE)" "hppa-linux"
+	WITHOUTPTHREAD="--disable-pthread"
+endif
+
 configure: configure-stamp
 configure-stamp:
 	dh_testdir
 
 	autoheader
 	autoconf
-	env CFLAGS=$(CFLAGS) WDUMP=w3m \
+	env CFLAGS=$(CFLAGS)
 		./configure --prefix=/usr --sysconfdir=/etc \
-		--mandir=/usr/share/man	$(WITHDEBUG) \
-		--with-docbook=/usr/share/sgml/docbook/stylesheet/dsssl/modular
+		--mandir=/usr/share/man	$(WITHDEBUG) $(WITHOUTPTHREAD)
 
 	touch configure-stamp
 
@@ -40,7 +45,6 @@ build-stamp: configure-stamp
 	dh_testdir
 
 	$(MAKE)
-	$(MAKE) dok-devel dok-user dok-faq
 
 	touch build-stamp
 

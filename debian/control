@@ -1,0 +1,23 @@
+Source: privoxy
+Section: web
+Priority: optional
+Maintainer: Roland Rosenfeld <roland@debian.org>
+Build-Depends: debhelper (>> 3.0.0), autoconf, libpcre3-dev
+Standards-Version: 3.5.6
+
+Package: privoxy
+Architecture: any
+Depends: ${shlibs:Depends}, logrotate, adduser
+Description: Privacy enhancing HTTP Proxy
+ Privoxy is a web proxy with advanced filtering capabilities for
+ protecting privacy, filtering web page content, managing cookies,
+ controlling access, and removing ads, banners, pop-ups and other
+ obnoxious Internet junk. Privoxy has a very flexible configuration
+ and can be customized to suit individual needs and tastes. Privoxy
+ has application for both stand-alone systems and multi-user networks.
+ .
+ Privoxy is based on the code of the Internet Junkbuster. Junkbuster
+ was originally written by JunkBusters Corporation, and was released
+ as free open-source software under the GNU GPL. Stefan Waldherr made
+ many improvements, and started the SourceForge project to continue
+ development. Several other developers are now contributing.
