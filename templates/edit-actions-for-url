@@ -32,6 +32,9 @@
 #
 # Revisions   :
 #    $Log: edit-actions-for-url,v $
+#    Revision 1.29.2.5  2004/10/05 03:17:26  david__schmidt
+#    Typo: inspect_jpegs, not inspect-jpegs in form
+#
 #    Revision 1.29.2.4  2004/10/03 12:53:46  david__schmidt
 #    Add the ability to check jpeg images for invalid
 #    lengths of comment blocks.  Defensive strategy
@@ -515,13 +518,13 @@ function show_send_wafer_opts(tf)
     </tr>
     <tr class="bg1" align="left" valign="top">
       <td class="en1" align="center" valign="middle"><input type="radio"
-        name="inspect-jpegs" value="Y" @inspect-jpegs-y@
+        name="inspect_jpegs" value="Y" @inspect-jpegs-y@
         ></td>
       <td class="dis1" align="center" valign="middle"><input type="radio"
-        name="inspect-jpegs" value="N" @inspect-jpegs-n@
+        name="inspect_jpegs" value="N" @inspect-jpegs-n@
         ></td>
       <td class="noc1" align="center" valign="middle"><input type="radio"
-        name="inspect-jpegs" value="X" @inspect-jpegs-x@
+        name="inspect_jpegs" value="X" @inspect-jpegs-x@
         ></td>
       <td class="action"><a href="@user-manual@@actions-help-prefix@INSPECT-JPEGS">inspect-jpegs</a></td>
       <td>Checks jpeg images for malicious content.</td>
