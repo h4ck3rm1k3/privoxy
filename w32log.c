@@ -1,4 +1,4 @@
-const char w32log_rcs[] = "$Id: w32log.c,v 1.25.2.2 2002/09/25 15:23:10 oes Exp $";
+const char w32log_rcs[] = "$Id: w32log.c,v 1.25.2.3 2002/11/20 14:39:05 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/w32log.c,v $
@@ -32,6 +32,9 @@ const char w32log_rcs[] = "$Id: w32log.c,v 1.25.2.2 2002/09/25 15:23:10 oes Exp 
  *
  * Revisions   :
  *    $Log: w32log.c,v $
+ *    Revision 1.25.2.3  2002/11/20 14:39:05  oes
+ *    Fixed compiler warning
+ *
  *    Revision 1.25.2.2  2002/09/25 15:23:10  oes
  *    Uncheck the "Show Privoxy Window" taskbar menu item when window gets minimized. Fixes bug #606804
  *
@@ -320,6 +323,7 @@ static struct _Pattern
  * Public variables
  */
 HWND g_hwndLogFrame;
+HICON g_hiconApp;
 
 /*
  * Private variables
@@ -330,7 +334,6 @@ static HWND g_hwndLogBox;
 static WNDPROC g_fnLogBox;
 static HICON g_hiconAnim[ANIM_FRAMES];
 static HICON g_hiconIdle;
-static HICON g_hiconApp;
 static int g_nAnimFrame;
 static BOOL g_bClipPending = FALSE;
 static int g_nRichEditVersion = 0;
