@@ -1,4 +1,4 @@
-const char actions_rcs[] = "$Id: actions.c,v 1.32.2.2 2002/11/20 14:36:55 oes Exp $";
+const char actions_rcs[] = "$Id: actions.c,v 1.32.2.3 2003/02/28 12:52:10 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/actions.c,v $
@@ -33,6 +33,9 @@ const char actions_rcs[] = "$Id: actions.c,v 1.32.2.2 2002/11/20 14:36:55 oes Ex
  *
  * Revisions   :
  *    $Log: actions.c,v $
+ *    Revision 1.32.2.3  2003/02/28 12:52:10  oes
+ *    Fixed memory leak reported by Dan Price in Bug #694713
+ *
  *    Revision 1.32.2.2  2002/11/20 14:36:55  oes
  *    Extended unload_current_actions_file() to multiple AFs.
  *    Thanks to Oliver Stoeneberg for the hint.
@@ -1373,6 +1376,7 @@ static int load_one_actions_file(struct client_state *csp, int fileid)
    fclose(fp);
 
    free_action(cur_action);
+   freez(cur_action);
 
    free_alias_list(alias_list);
 
