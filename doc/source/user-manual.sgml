@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.7 2002/06/09 00:29:34 hal9 Exp $
+ $Id: user-manual.sgml,v 1.123.2.8 2002/06/09 16:36:32 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.7 2002/06/09 00:29:34 hal9 Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.8 2002/06/09 16:36:32 hal9 Exp $</pubdate>
 
 <!--
 
@@ -2354,14 +2354,7 @@ problem-host.example.com</screen>
     (typically <filename>default.filter</filename>, set by the
     <literal><link linkend="filterfile">filterfile</link></literal>
     option in the <link linkend="config">config file</link>). Filtering 
-    can be completely disabled without the use of parameters. Example:
-   </para>
-   <para>
-    <screen>  { -filter }
-     .example.com</screen>
-   </para>
-   <para>
-    Disables filters for that site.
+    can be completely disabled without the use of parameters.
    </para>
   </listitem>
  </varlistentry>
@@ -2390,7 +2383,8 @@ problem-host.example.com</screen>
     <literal><link linkend="buffer-limit">buffer-limit</link></literal>
     option in the main <link linkend="config">config file</link>. The 
     default is 4096 KB (4 Megs). Once this limit is exceeded, the buffered
-    data, and all pending data, is passed through unfiltered.
+    data, and all pending data, is passed through unfiltered. Inappropriate 
+    MIME types are not filtered.
    </para>
    <para>
     At this time, <application>Privoxy</application> cannot (yet!) uncompress compressed
@@ -5536,6 +5530,9 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.8  2002/06/09 16:36:32  hal9
+ Clarifications on filtering and MIME. Hardcode 'latest release' in index.html.
+
  Revision 1.123.2.7  2002/06/09 00:29:34  hal9
  Touch ups on filtering, in actions section and Anatomy.
 

@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.2 2002/06/06 02:51:34 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.3 2002/06/09 16:36:33 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -72,7 +72,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.2 2002/06/06 02:51:34 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.3 2002/06/09 16:36:33 hal9 Exp $</pubdate>
 
 <!--
 
@@ -603,7 +603,7 @@ the differences?</title>
 </sect2>
 
 <sect2 renderas="sect3" id="configfiles"> <title>What's the difference between the
-<quote>Cautious</quote>, <quote>Medium</quote> and <quote>Advenced</quote> defaults?</title>
+<quote>Cautious</quote>, <quote>Medium</quote> and <quote>Advanced</quote> defaults?</title>
  <para>
   Configuring <application>Privoxy</application> is not entirely trivial. To help you get
   started, we provide you with three different default action <quote>packages</quote> in
@@ -760,22 +760,25 @@ with a browser? Does that not raise security issues?</title>
 
 
 <sect2 renderas="sect3">
-<title id="filterfile">What is the <filename>default.filter</filename> file?</title>
+<title id="filterfile">What is the <filename>default.filter</filename> file? What is a <quote>filter</quote>?</title>
 <para>
  The <ulink url="../user-manual/filter-file.html"><filename>default.filter</filename></ulink>
  file is where <emphasis>filters</emphasis> are defined, which can be used to modify or
- remove, web page content on the fly. This applies to <emphasis>anything</emphasis>
+ remove, web page content on the fly. Filters apply to <emphasis>anything</emphasis>
  in the page source, including HTML tags, and JavaScript. Regular expressions are used
  to accomplish this. There are a number of pre-defined filters to deal with common
  annoyances. The filters are only defined here, to invoke them, you need to use the
- <ulink url="../user-manual/actions-file.html#FILTER"><literal>filter</literal> action</ulink>.
+ <ulink
+ url="../user-manual/actions-file.html#FILTER"><literal>filter</literal>
+ action</ulink> in one of the actions files. Filtering is automatically
+ disabled for inappropriate MIME types.
 </para>
 
 <para>
  If you are familiar with regular expressions, and HTML, you can look at 
  the provided <filename>default.filter</filename> with a text editor and define
  your own filters.  This is potentially a very powerful feature, but
- requires some expertise. 
+ requires some expertise in both regular expressions and HTML/HTTP. 
 </para>
 
 <para>
@@ -1069,6 +1072,10 @@ delays in page requests compared to the old Junkbuster. What's wrong?</title>
  content, giving the user a feeling of "it works". This effect is especially
  noticeable on slow dialup connections.
  </para>
+<para>
+ Filtering is automatically disabled for inappropriate MIME types.
+
+</para>
 </sect2>
 
 
@@ -1367,6 +1374,21 @@ secure is it? Do I need to take any special precautions?</title>
  The easiest way is to access <application>Privoxy</application> with your 
  browser by using the remote toggle URL: <ulink
  url="http://config.privoxy.org/toggle">http://config.privoxy.org/toggle</ulink>.
+ See the <ulink url="../user-manual/appendix.html#BOOKMARKLETS">Bookmarklets section</ulink> 
+ of the <citetitle>User Manual</citetitle> for an easy way to access this 
+ feature.
+</para>
+</sect2>
+
+<sect2 renderas="sect3" id="reallyoff">
+<title>When <quote>disabled</quote> is <application>Privoxy</application> totally 
+out of the picture?</title>
+<para>
+ No, this just means all filtering and actions are disabled.
+ <application>Privoxy</application> is still acting as a proxy, but just not 
+ doing any of the things that <application>Privoxy</application> would
+ normally be expected to do. It is still a <quote>middle-man</quote> in 
+ the interaction between your browser and web sites.
 </para>
 </sect2>
 
@@ -1627,6 +1649,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.3  2002/06/09 16:36:33  hal9
+Clarifications on filtering and MIME. Hardcode 'latest release' in index.html.
+
 Revision 1.61.2.2  2002/06/06 02:51:34  hal9
 Fix typo in URL http:/config.privoxy.org
 

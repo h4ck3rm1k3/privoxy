@@ -20,7 +20,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: index.sgml,v 1.16.2.3 2002/05/28 02:31:38 hal9 Exp $
+ $Id: index.sgml,v 1.16.2.4 2002/06/09 16:36:33 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,8 +75,8 @@
 
 <![%p-homepage;[
   <para>
-   The most recent version is &p-version; (&p-status;). (Odd numbered versions 
-   are available only through CVS.)
+  <!-- FIXME: Temporarily hard coding this. HB.  -->
+   The most recent release is 2.9.14 (&p-status;). 
   </para>
 ]]>
 
@@ -245,6 +245,9 @@
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: index.sgml,v $
+ Revision 1.16.2.4  2002/06/09 16:36:33  hal9
+ Clarifications on filtering and MIME. Hardcode 'latest release' in index.html.
+
  Revision 1.16.2.3  2002/05/28 02:31:38  hal9
  New file, privoxy-index.html, for bundling with documentation. Built from
  index.sgml, like homepage, but with content toggles more suitable for this use.
