@@ -17,7 +17,7 @@
 
  Purpose     :  README for Privoxy
                 
- $Id: readme.sgml,v 1.16.2.1 2002/05/26 17:04:25 hal9 Exp $
+ $Id: readme.sgml,v 1.16.2.2 2002/07/25 21:49:52 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -192,7 +192,8 @@
 <para>
  Be sure to set your browser(s) for HTTP/HTTPS Proxy at &lt;IP&gt;:&lt;Port&gt;, or
  whatever you specify in the config file under 'listen-address'. DEFAULT is
- localhost:8118.
+ localhost:8118. Note that Privoxy ONLY proxies HTTP (and HTTPS) traffic. Do not try it 
+ with FTP or other protocols for the simple reason it does not work.
 </para>
 <para>
  The actions list can be configured via the web interface accessed via
@@ -242,7 +243,7 @@
 <!-- </LiteralLayout> -->
 <!-- </para> -->
 <!-- <para> -->
-<!--  $Id: readme.sgml,v 1.16.2.1 2002/05/26 17:04:25 hal9 Exp $ -->
+<!--  $Id: readme.sgml,v 1.16.2.2 2002/07/25 21:49:52 hal9 Exp $ -->
 <!-- </para> -->
 
 </article>

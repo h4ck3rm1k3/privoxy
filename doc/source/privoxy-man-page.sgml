@@ -5,7 +5,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: privoxy-man-page.sgml,v 1.13.2.1 2002/05/26 17:04:25 hal9 Exp $
+ $Id: privoxy-man-page.sgml,v 1.13.2.2 2002/07/25 21:49:52 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -191,7 +191,10 @@
 </para>
 <para>
  The Secure (SSL) Proxy should also be set to the same values, otherwise
- https: URLs will not be proxied. 
+ https: URLs will not be proxied. Note: <command>Privoxy</command> can only
+ proxy HTTP and HTTPS traffic. Do not try it with FTP or other protocols.
+</para>
+
 </para>
 <para>
  For other browsers, check the documentation.
