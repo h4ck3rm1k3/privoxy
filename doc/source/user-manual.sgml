@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.28 2003/03/19 00:35:24 hal9 Exp $
+ $Id: user-manual.sgml,v 1.123.2.29 2003/03/20 02:45:29 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.28 2003/03/19 00:35:24 hal9 Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.29 2003/03/20 02:45:29 hal9 Exp $</pubdate>
 
 <!--
 
@@ -5941,8 +5941,11 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.29  2003/03/20 02:45:29  hal9
+ More problems with \-\-chroot causing markup problems :(
+
  Revision 1.123.2.28  2003/03/19 00:35:24  hal9
- Manual edit of revision log because '--chroot' (even inside a comment) was
+ Manual edit of revision log because 'chroot' (even inside a comment) was
  causing Docbook to hang here (due to double hyphen and the processor thinking
  it was a comment).
 
