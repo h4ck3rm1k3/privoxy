@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.4 2003/04/11 12:06:14 oes Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.5 2003/05/08 15:17:25 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,10 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.4 2003/04/11 12:06:14 oes Ex
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.48.2.5  2003/05/08 15:17:25  oes
+ *    Closed two memory leaks; hopefully the last remaining ones
+ *    (in the main execution paths, anyway).
+ *
  *    Revision 1.48.2.4  2003/04/11 12:06:14  oes
  *    Addressed bug #719435
  *     - Extraneous filterfile directives now logged as errors
@@ -521,8 +525,13 @@ void unload_configfile (void * data)
    freez(config->jarfile);
 #endif /* def FEATURE_COOKIE_JAR */
 
-   freez(config->re_filterfile);
+#ifdef FEATURE_TRUST
+   freez(config->trustfile);
+   list_remove_all(config->trust_info);
+#endif /* def FEATURE_TRUST */
 
+   freez(config->re_filterfile);
+   freez(config);
 }
 
 
