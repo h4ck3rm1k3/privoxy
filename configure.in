@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl 
-dnl $Id: configure.in,v 1.68.2.2 2002/07/30 19:36:09 hal9 Exp $
+dnl $Id: configure.in,v 1.68.2.3 2002/08/06 11:29:36 oes Exp $
 dnl 
 dnl Written by and Copyright (C) 2001, 2002 the SourceForge
 dnl Privoxy team. http://www.privoxy.org/
@@ -28,6 +28,9 @@ dnl or write to the Free Software Foundation, Inc., 59
 dnl Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 dnl 
 dnl $Log: configure.in,v $
+dnl Revision 1.68.2.3  2002/08/06 11:29:36  oes
+dnl Fixed detection/inclusion of pcre.h, which is in a pcre subdir on RH
+dnl
 dnl Revision 1.68.2.2  2002/07/30 19:36:09  hal9
 dnl Bump version to 2.9.17.
 dnl
@@ -376,7 +379,7 @@ dnl =================================================================
 dnl AutoConf Initialization
 dnl =================================================================
 
-AC_REVISION($Revision: 1.68.2.2 $)
+AC_REVISION($Revision: 1.68.2.3 $)
 AC_INIT(jcc.c)
 
 if test ! -f config.h.in; then
@@ -422,7 +425,7 @@ dnl =================================================================
 
 VERSION_MAJOR=2
 VERSION_MINOR=9
-VERSION_POINT=17
+VERSION_POINT=18
 CODE_STATUS="beta"
 
 dnl CODE_STATUS can be "alpha", "beta", or "stable", and will be
@@ -963,8 +966,10 @@ dnl =================================================================
 dnl Note: Some systems may have the library but not the system header
 dnl       file, so we must check for both.
 dnl       Also check for correct version
-AC_CHECK_LIB(pcre, pcre_compile, [AC_CHECK_HEADER(pcre.h, [AC_EGREP_HEADER(pcre_fullinfo, pcre.h, [have_pcre=yes], [AC_MSG_WARN([[pcre old version installed]]); have_pcre=no])], [have_pcre=no])], [have_pcre=no])
-AC_CHECK_LIB(pcreposix, regcomp, [AC_CHECK_HEADER(pcreposix.h, [AC_EGREP_HEADER(pcreposix_regerror, pcreposix.h, [AC_MSG_WARN([[pcreposix old version installed]]); have_pcreposix=no], [have_pcreposix=yes])], [have_pcreposix=no])], [have_pcreposix=no], -lpcre)
+AC_CHECK_LIB(pcre, pcre_compile, [AC_CHECK_HEADER(pcre.h, [AC_EGREP_HEADER(pcre_fullinfo, pcre.h, [have_pcre=yes], [AC_MSG_WARN([[pcre old version installed]]); have_pcre=no])], [AC_CHECK_HEADER(pcre/pcre.h, [AC_EGREP_HEADER(pcre_fullinfo, pcre/pcre.h, [have_pcre=yes], [AC_MSG_WARN([[pcre old version installed]]); have_pcre=no])], [have_pcre=no])])], [have_pcre=no])
+
+AC_CHECK_LIB(pcreposix, regcomp, [AC_CHECK_HEADER(pcreposix.h, [AC_EGREP_HEADER(pcreposix_regerror, pcreposix.h, [AC_MSG_WARN([[pcreposix old version installed]]); have_pcreposix=no], [have_pcreposix=yes])], [AC_CHECK_HEADER(pcre/pcreposix.h, [AC_EGREP_HEADER(pcreposix_regerror, pcre/pcreposix.h, [AC_MSG_WARN([[pcreposix old version installed]]); have_pcreposix=no], [have_pcreposix=yes])], [have_pcreposix=no])])], [have_pcreposix=no], -lpcre)
+
 AC_CHECK_LIB(pcrs, pcrs_compile, [AC_CHECK_HEADER(pcrs.h, [have_pcrs=yes], [have_pcrs=no])], [have_pcrs=no])
 
 

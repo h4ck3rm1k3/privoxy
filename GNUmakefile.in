@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.11 2002/07/30 19:38:11 hal9 Exp $
+# $Id: GNUmakefile.in,v 1.104.2.12 2002/08/06 11:29:36 oes Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -197,8 +197,7 @@ SPECIAL_CFLAGS = @SPECIAL_CFLAGS@
 # Add your flags here 
 OTHER_CFLAGS =   
 
-CFLAGS = @CFLAGS@ @CPPFLAGS@ $(OTHER_CFLAGS) $(SPECIAL_CFLAGS) -Wall \
-         @STATIC_PCRE_ONLY@ -Ipcre 
+CFLAGS = @CFLAGS@ @CPPFLAGS@ $(OTHER_CFLAGS) $(SPECIAL_CFLAGS) -Wall -Ipcre 
 
 LDFLAGS = $(DEBUG_CFLAGS) $(SPECIAL_CFLAGS)
 
@@ -979,6 +978,9 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.12  2002/08/06 11:29:36  oes
+# Fixed detection/inclusion of pcre.h, which is in a pcre subdir on RH
+#
 # Revision 1.104.2.11  2002/07/30 19:38:11  hal9
 # Add redhat-test target for testing purposes only. Fix RPM_PACKAGEV to what
 # *I think* it was supposed to be (was breaking upload targets since it was
