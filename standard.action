@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/Attic/standard.action,v $
 # 
-#  $Id: standard.action,v 1.2.2.6 2003/03/15 14:09:31 oes Exp $
+#  $Id: standard.action,v 1.2.2.7 2003/03/18 19:37:11 oes Exp $
 #
 #  Purpose     :  Provide prefedined sets of actions, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -48,7 +48,7 @@
 -filter{tiny-textforms} \
 -filter{jumping-windows} \
 -filter{frameset-borders} \
-+filter{demoronizer} \
+-filter{demoronizer} \
 -filter{shockwave-flash} \
 -filter{quicktime-kioskmode} \
 -filter{fun} \
@@ -161,4 +161,4 @@ standard.Medium
 -session-cookies-only \
 +set-image-blocker{pattern} \
 }
-standard.Advanced
+standard.Adventuresome

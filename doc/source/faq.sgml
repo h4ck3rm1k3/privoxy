@@ -8,10 +8,10 @@
 <!entity history SYSTEM "history.sgml">
 <!entity copyright SYSTEM "copyright.sgml">
 <!entity license SYSTEM "license.sgml">
-<!entity p-version "3.0.0">
-<!entity p-status "stable">
-<!entity % p-not-stable "IGNORE">
-<!entity % p-stable "INCLUDE">
+<!entity p-version "0.0.0">
+<!entity p-status "UNRELEASED">
+<!entity % p-not-stable "INCLUDE">
+<!entity % p-stable "IGNORE">
 <!entity % p-text "IGNORE">        <!-- define we are not a text only doc -->
 <!entity % p-doc "INCLUDE">        <!-- and we are a formal doc           -->
 <!entity % p-supp-userman "INCLUDE"> <!-- Include all from supported.sgml -->
@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.27 2002/12/01 06:31:58 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.28 2003/03/18 19:37:21 oes Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.27 2002/12/01 06:31:58 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.28 2003/03/18 19:37:21 oes Exp $</pubdate>
 
 <!--
 
@@ -645,7 +645,7 @@ the differences?</title>
 </sect2>
 
 <sect2 renderas="sect3" id="configfiles"> <title>What's the difference between the
-<quote>Cautious</quote>, <quote>Medium</quote> and <quote>Radical</quote> defaults?</title>
+<quote>Cautious</quote>, <quote>Medium</quote> and <quote>Adventuresome</quote> defaults?</title>
  <para>
   Configuring <application>Privoxy</application> is not entirely trivial. To
   help you get started, we provide you with three different default action
@@ -666,7 +666,7 @@ the differences?</title>
 </para>
 
 <para>
- It should be noted that the <quote>Radical</quote> profile (formerly known 
+ It should be noted that the <quote>Adventuresome</quote> profile (formerly known 
  as the <quote>Advanced</quote> profile) is not only more
  aggressive, but also includes fun and, extreme usage of most of
  <application>Privoxy's</application> features. Use at your own risk!
@@ -1505,7 +1505,7 @@ and related issues?</title>
  activated the <quote><literal>fun</literal></quote> filter which
  is clearly labeled <quote>Text replacements for subversive browsing
  fun!</quote> or you have implicitly activated it by choosing the
- <quote>Radical</quote> profile in the web-based editor (formerly known 
+ <quote>Adventuresome</quote> profile in the web-based editor (formerly known 
  as the <application>Advanced</application> profile).
 </para>
 </sect2>
@@ -1848,6 +1848,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.28  2003/03/18 19:37:21  oes
+s/Advanced|Radical/Adventuresome/g to avoid complaints re fun filter
+
 Revision 1.61.2.27  2002/12/01 06:31:58  hal9
 Add faq on win32 error 503 due to ZoneAlarm.
 
