@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.30 2003/06/25 01:13:52 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.31 2003/06/25 01:27:51 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -70,12 +70,12 @@
  <subscript>
 <!-- Completely the wrong markup, but very little is allowed  -->
 <!-- in this part of an article. FIXME -->
- <link linkend="copyright">Copyright</link> &my-copy; 2001, 2002 by 
+ <link linkend="copyright">Copyright</link> &my-copy; 2001-2003 by 
  <ulink url="http://www.privoxy.org">Privoxy Developers</ulink>
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.30 2003/06/25 01:13:52 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.31 2003/06/25 01:27:51 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1481,9 +1481,10 @@ from a webserver? FTP server?</title>
 </para>
 <para>
  If you download text files, you probably do not want these to be filtered,
- particularly if the content is source code since source code sometimes might
- be mistaken for javascript. It is recommend to turn off filtering for
- download sites (particularly if the content may be plain text files).
+ particularly if the content is source code, or other critcal content. Source
+ code sometimes might be mistaken for javascript. It is recommended to turn
+ off filtering for download sites (particularly if the content may be plain
+ text files) in your <filename>user.action</filename> file.
 
 </para>
 <para>
@@ -1888,6 +1889,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.31  2003/06/25 01:27:51  hal9
+Fix copyright, and a few nits.
+
 Revision 1.61.2.30  2003/06/25 01:13:52  hal9
 Add:
 
