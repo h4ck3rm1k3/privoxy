@@ -1,4 +1,4 @@
-const char miscutil_rcs[] = "$Id: miscutil.c,v 1.37.2.1 2002/09/25 12:58:51 oes Exp $";
+const char miscutil_rcs[] = "$Id: miscutil.c,v 1.37.2.2 2002/11/12 14:28:18 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/miscutil.c,v $
@@ -36,6 +36,9 @@ const char miscutil_rcs[] = "$Id: miscutil.c,v 1.37.2.1 2002/09/25 12:58:51 oes 
  *
  * Revisions   :
  *    $Log: miscutil.c,v $
+ *    Revision 1.37.2.2  2002/11/12 14:28:18  oes
+ *    Proper backtracking in simplematch; fixes bug #632888
+ *
  *    Revision 1.37.2.1  2002/09/25 12:58:51  oes
  *    Made strcmpic and strncmpic safe against NULL arguments
  *    (which are now treated as empty strings).
@@ -761,7 +764,6 @@ int simplematch(char *pattern, char *text)
    unsigned i;
    unsigned char charmap[32];
   
-  
    while (*txt)
    {
 
@@ -817,26 +819,31 @@ int simplematch(char *pattern, char *text)
       } /* -END- if Character range specification */
 
 
-      /* Compare: Char match, or char range match*/
+      /* 
+       * Char match, or char range match? 
+       */
       if ((*pat == *txt)  
       || ((*pat == ']') && (charmap[*txt / 8] & (1 << (*txt % 8)))) )
       {
-         /* Sucess, go ahead */
+         /* 
+          * Sucess: Go ahead
+          */
          pat++;
       }
-      else
+      else if (!wildcard)
       {
-         /* In wildcard mode, just try again after failiure */
-         if(wildcard)
-         {
-            pat = fallback;
-         }
-
-         /* Else, bad luck */
-         else
-         {
-            return 1;
-         }
+         /* 
+          * No match && no wildcard: No luck
+          */
+         return 1;
+      }
+      else if (pat != fallback)
+      {
+         /*
+          * Wildcard mode && nonmatch beyond fallback: Rewind pattern
+          */
+         pat = fallback;
+         continue;
       }
       txt++;
    }
