@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.11.2.2 2002/08/01 11:20:13 oes Exp $
+#  $Id: default.filter,v 1.11.2.3 2002/08/05 11:43:56 oes Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -161,8 +161,8 @@ s/<img\s+[^>]*(?:width|height)\s*=\s*['"]?1(?=\D)[^>]*(?:width|height)\s*=\s*['"
 #################################################################################
 FILTER: popups Kill all popups in JS and HTML
 
-s/([\n =;{}]|window\.)open\s*\\?\(/$1concat(/ig     # JavaScript
-s/ target\s*=\s*(['"]?)(_blank|_new)\1?/notarget/ig # HTML
+s/([\n =;{}]|window\.)open\s*\\?\(/$1concat(/ig      # JavaScript
+s/ target\s*=\s*(['"]?)(_blank|_new)\1?/ notarget/ig # HTML
 
 
 #################################################################################
@@ -347,6 +347,9 @@ s+^.*warez.*$+<html><head><title>No Warez</title></head><body><h3>You're not sea
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.11.2.3  2002/08/05 11:43:56  oes
+#     Fixed a bug in the popups filter that was introduced with the last fix :-(
+#
 #     Revision 1.11.2.2  2002/08/01 11:20:13  oes
 #     Fixed bugs 587802, 577802 and an unreported one
 #
