@@ -9,7 +9,7 @@ ChangeLog for Privoxy
 - Assorted small fixes (Win32 menu, CGI URL editor, ..) 
 
 - Added basic support for the OPTIONS and TRACE http methods
-- Added workaround for Bug in Max OSX that made Privoxy crash occasionally
+- Added workaround for Bug in Mac OSX that made Privoxy crash occasionally
 - Refined the default action file through >400 items of user feedback
 - Filter changes:
   - Assorted refinements, optimizations and fixes in the js-annoyances,
