@@ -8,7 +8,7 @@
                  This file belongs in
                  ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
-  $Id: index.php,v 1.4.2.2 2003/03/04 15:50:53 oes Exp $
+  $Id: index.php,v 1.4.2.3 2003/10/16 13:40:52 oes Exp $
 
   Written by and Copyright (C) 2001 the SourceForge
   Privoxy team. http://www.privoxy.org/
@@ -37,9 +37,12 @@
 
 -->
 
-<html><head>
-<title>Privoxy is not being used</title>
-    <link rel="stylesheet" type="text/css" href="../p_web.css">
+<html>
+<head>
+  <title>Privoxy is not being used</title>
+  <link rel="stylesheet" type="text/css" href="../p_web.css">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
 </head>
 
 <body>
