@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.26 2002/11/17 06:41:06 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.27 2002/12/01 06:31:58 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.26 2002/11/17 06:41:06 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.27 2002/12/01 06:31:58 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1744,6 +1744,17 @@ every time I start IE. What gives?</title>
  </para>
 </sect2>
 
+<!--   ~~~~~       New section      ~~~~~     -->
+<sect2 renderas="sect3" id="error503">
+<title>Why am I getting a 503 Error (WSAECONNREFUSED) on every page?</title>
+ <para>
+  More than likely this is a problem with the network stack. ZoneAlarm has
+  been reported to cause this symptom -- even if not running. The solution is
+  to either fight the ZA configuration, or uninstall ZoneAlarm, and then find
+  something better behaved in its place. Other firewall type products may
+  cause similar type problems if not configured correctly.
+ </para>
+</sect2>
 
 </sect1>
 <!--
@@ -1837,6 +1848,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.27  2002/12/01 06:31:58  hal9
+Add faq on win32 error 503 due to ZoneAlarm.
+
 Revision 1.61.2.26  2002/11/17 06:41:06  hal9
 Move default profiles table from FAQ to U-M, and other minor related changes.
 Add faq on cookies.
