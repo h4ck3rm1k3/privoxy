@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.20 2002/10/10 03:49:21 hal9 Exp $
+ $Id: user-manual.sgml,v 1.123.2.21 2002/10/10 04:09:35 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.20 2002/10/10 03:49:21 hal9 Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.21 2002/10/10 04:09:35 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1548,7 +1548,10 @@ must find a better place for this paragraph
  url="http://config.privoxy.org/show-status">http://config.privoxy.org/show-status</ulink>.
  The editor allows both fine-grained control over every single feature on a
  per-URL basis, and easy choosing from wholesale sets of defaults like
- <quote>Cautious</quote>, <quote>Medium</quote> or <quote>Advanced</quote>.
+ <quote>Cautious</quote>, <quote>Medium</quote> or <quote>Radical</quote>.
+ Warning: the <quote>Radical</quote> setting is not only more aggressive, 
+ but includes settings that are fun and subversive, and which some may find of 
+ dubious merit!
 </para>
 
 <para>
@@ -5686,6 +5689,9 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.21  2002/10/10 04:09:35  hal9
+ s/Advanced/Radical/ and added very brief note.
+
  Revision 1.123.2.20  2002/10/10 03:49:21  hal9
  Add notes to session-cookies-only and Quickstart about pre-existing
  cookies. Also, note content-cookies work differently.
