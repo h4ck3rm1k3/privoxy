@@ -8,7 +8,7 @@
 <!entity history SYSTEM "history.sgml">
 <!entity copyright SYSTEM "copyright.sgml">
 <!entity license SYSTEM "license.sgml">
-<!entity p-version "2.9.16">
+<!entity p-version "2.9.17">
 <!entity p-status "beta">
 <!entity % p-not-stable "INCLUDE">
 <!entity % p-stable "IGNORE">
@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.5 2002/07/26 15:22:58 oes Exp $
+ $Id: faq.sgml,v 1.61.2.6 2002/07/30 20:04:56 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -72,7 +72,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.5 2002/07/26 15:22:58 oes Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.6 2002/07/30 20:04:56 hal9 Exp $</pubdate>
 
 <!--
 
@@ -836,7 +836,7 @@ with a browser? Does that not raise security issues?</title>
  it is uncommented, and assign it the address of the LAN gateway interface,
  and port number to use. Assuming your LAN address is 192.168.1.1 and you
  wish to run <application>Privoxy</application> on port 8118, this line
- schould look like:
+ should look like:
 </para>
 
 <para>
@@ -1694,6 +1694,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.6  2002/07/30 20:04:56  hal9
+Fix typo: 'schould'.
+
 Revision 1.61.2.5  2002/07/26 15:22:58  oes
 - Updated to reflect changes in standard.action
 - Added info on where to get updated actions files
