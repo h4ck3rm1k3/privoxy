@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.12 2002/08/06 11:43:46 david__schmidt Exp $
+ $Id: faq.sgml,v 1.61.2.13 2002/08/06 11:55:32 oes Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -72,7 +72,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.12 2002/08/06 11:43:46 david__schmidt Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.13 2002/08/06 11:55:32 oes Exp $</pubdate>
 
 <!--
 
@@ -489,7 +489,7 @@ All the ads are there. What's wrong?</title>
   Just dragging the <application>Privoxy</application> folder to the trash is
   not enough to delete it.  <application>Privoxy</application> supplies an
   <application>uninstall.command</application> file that takes care of
-  these details.  Open the trash, drag the <application>uninstall.command>
+  these details.  Open the trash, drag the <application>uninstall.command</application>
   file out of the trash and double-click on it.  You will be prompted for
   confirmation and the administration password.
  </para> 
@@ -1726,6 +1726,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.13  2002/08/06 11:55:32  oes
+Added missing close tag
+
 Revision 1.61.2.12  2002/08/06 11:43:46  david__schmidt
 Updated OSX uninstall FAQ... we have an uninstall script now.
 
