@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.7 2002/08/02 01:46:01 david__schmidt Exp $
+ $Id: faq.sgml,v 1.61.2.8 2002/08/02 02:01:42 david__schmidt Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -72,7 +72,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.7 2002/08/02 01:46:01 david__schmidt Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.8 2002/08/02 02:01:42 david__schmidt Exp $</pubdate>
 
 <!--
 
@@ -1621,6 +1621,22 @@ every time I start IE. What gives?</title>
  </para>
 </sect2>
 
+
+<!--   ~~~~~       New section      ~~~~~     -->
+<sect2 id="osxie">
+<title>In Mac OSX, I can't configure Microsoft Internet Explorer to use 
+ <application>Privoxy</application> as the HTTP proxy.</title>
+ <para>
+  Microsoft Internet Explorer (in versions like 5.1) respects system-wide
+  network settings.  In order to change the HTTP proxy, open System
+  Preferences, and click on the Network icon.  In the settings pane that
+  comes up, click on the Proxies tab.  Ensure the "Web Proxy (HTTP)" checkbox 
+  is checked and enter <literal>127.0.0.1</literal> in the entry field.  
+  Enter <literal>8118</literal> in the Port field.  The next time you start
+  IE, it should reflect these values.
+ </para>
+</sect2>
+
 </sect1>
 <!--
 </sect1>
@@ -1713,6 +1729,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.8  2002/08/02 02:01:42  david__schmidt
+Add FAQ item for MSIE on OSX HTTP proxy confusion
+
 Revision 1.61.2.7  2002/08/02 01:46:01  david__schmidt
 Added FAQ item for Mac OSX uninstall woes
 
