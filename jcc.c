@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.7 2003/03/17 16:48:59 oes Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.8 2003/03/31 13:12:32 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.7 2003/03/17 16:48:59 oes Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.92.2.8  2003/03/31 13:12:32  oes
+ *    Replaced setenv() by posix-compliant putenv()
+ *    Thanks to Neil McCalden (nmcc AT users.sf.net).
+ *
  *    Revision 1.92.2.7  2003/03/17 16:48:59  oes
  *    Added chroot ability, thanks to patch by Sviatoslav Sviridov
  *
@@ -2038,13 +2042,18 @@ int main(int argc, const char *argv[])
       }
       if (do_chroot)
       {
-         if (setenv ("HOME", "/", 1) < 0)
+         char putenv_dummy[64];
+
+         strcpy(putenv_dummy, "HOME=/");
+         if (putenv(putenv_dummy) != 0)
          {
-            log_error(LOG_LEVEL_FATAL, "Cannot setenv(): HOME");
-         }
-         if (setenv ("USER", pw->pw_name, 1) < 0)
+            log_error(LOG_LEVEL_FATAL, "Cannot putenv(): HOME");
+         }                
+
+         snprintf(putenv_dummy, 64, "USER=%s", pw->pw_name);
+         if (putenv(putenv_dummy) != 0)
          {
-            log_error(LOG_LEVEL_FATAL, "Cannot setenv(): USER");
+            log_error(LOG_LEVEL_FATAL, "Cannot putenv(): USER");
          }
       }
    }
