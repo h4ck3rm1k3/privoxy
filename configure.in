@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl 
-dnl $Id: configure.in,v 1.68.2.17 2003/10/18 18:41:26 david__schmidt Exp $
+dnl $Id: configure.in,v 1.68.2.18 2003/12/08 15:10:29 oes Exp $
 dnl 
 dnl Written by and Copyright (C) 2001, 2002 the SourceForge
 dnl Privoxy team. http://www.privoxy.org/
@@ -28,6 +28,9 @@ dnl or write to the Free Software Foundation, Inc., 59
 dnl Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 dnl 
 dnl $Log: configure.in,v $
+dnl Revision 1.68.2.18  2003/12/08 15:10:29  oes
+dnl Bugfix: --with-docbook now correctly accepts its path parameter. Thanks, Roland!
+dnl
 dnl Revision 1.68.2.17  2003/10/18 18:41:26  david__schmidt
 dnl Update to remain buildable on OS/2 - remove the failures
 dnl due to missing unixisms
@@ -425,7 +428,7 @@ dnl =================================================================
 dnl AutoConf Initialization
 dnl =================================================================
 
-AC_REVISION($Revision: 1.68.2.17 $)
+AC_REVISION($Revision: 1.68.2.18 $)
 AC_INIT(jcc.c)
 
 if test ! -f config.h.in; then
@@ -452,7 +455,7 @@ case "$with_docbook" in
 yes) dodk=yes;;
 no) dodk=no;;
 *) 
-	dodk=no
+	dodk=yes
 	DKPREFIX=$withval
 	;;
 esac
