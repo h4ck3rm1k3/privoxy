@@ -1,4 +1,4 @@
-# $Id: privoxy-rh.spec,v 1.33.2.5 2002/07/02 11:43:20 hal9 Exp $
+# $Id: privoxy-rh.spec,v 1.33.2.6 2002/07/02 17:38:10 morcego Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -38,7 +38,7 @@ Name: privoxy
 # Version and release should be updated acordingly on configure.in and
 # configure. Otherwise, the package can be build with the wrong value
 Version: 2.9.15
-Release: 4
+Release: 5
 Summary: Privoxy - privacy enhancing proxy
 License: GPL
 Source0: http://www.waldherr.org/%{name}/%{name}-%{version}.tar.gz
@@ -332,6 +332,11 @@ fi
 %{_mandir}/man1/%{name}.*
 
 %changelog
+* Tue Jul 02 2002 Rodrigo Barbosa <rodrigob@tisbrasil.com.br>
++ privoxy-2.9.15-5
+- Bumping Release number (which should be changed every time the specfile
+  is)
+
 * Tue Jul 02 2002 Hal Burgiss <hal@foobox.net>
 + privoxy-2.9.15-4
 - Fix typo in templates creation.
@@ -708,6 +713,9 @@ fi
 	additional "-r @" flag.
 
 # $Log: privoxy-rh.spec,v $
+# Revision 1.33.2.6  2002/07/02 17:38:10  morcego
+# Bumping Release number
+#
 # Revision 1.33.2.5  2002/07/02 11:43:20  hal9
 # Fix typo in templates creation.
 #
