@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.21 2003/04/12 16:12:00 oes Exp $
+#  $Id: default.action.master,v 1.1.2.22 2003/04/14 11:27:02 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -1012,47 +1012,26 @@ swscan.apple.com
 www.powie.de
 #MASTER# PROBLEM-URL: http://www.phpcenter.de/
 www.phpcenter.de
-#MASTER# PROBLEM-URL: http://www.debianhelp.org/
-www.debianhelp.org
 #MASTER# PROBLEM-URL: http://www.timeanddate.com
 www.timeanddate.com
 #MASTER# PROBLEM-URL: http://www.pclinuxonline.com/
 #MASTER# PROBLEM-URL: http://pclinuxonline.com/
 .pclinuxonline.com
-#MASTER# PROBLEM-URL: http://www.dhd24.com/
-www.dhd24.com
-#MASTER# PROBLEM-URL: http://www.linuxandmain.com/
-.linuxandmain.com
-#MASTER# PROBLEM-URL: http://www.ofb.biz/
-.ofb.biz
 #MASTER# PROBLEM-URL: http://www.dungeoncrawl.org/
 .dungeoncrawl.org
-#MASTER# PROBLEM-URL: http://www.deviantart.com/
-.deviantart.com
-#MASTER# PROBLEM-URL: http://www.planetspiele.de/wbboard/
-www.planetspiele.de/wbboard/
 #MASTER# PROBLEM-URL: http://www.digitalspy.co.uk/
 www.digitalspy.co.uk
-#MASTER# PROBLEM-URL: http://www.dealnews.com/
-.dealnews.com   
 #MASTER# PROBLEM-URL: http://www.audio-illumination.org/forums/
 www.audio-illumination.org/forums/
 #MASTER# PROBLEM-URL: http://www.catchword.com/
 www.catchword.com
-#MASTER# PROBLEM-URL: http://www.mysql.com/
-www.mysql.com
 #MASTER# PROBLEM-URL: http://www.ubernet.org
 www.ubernet.org
 #MASTER# PROBLEM-URL: http://www.ooodocs.org/
 www.ooodocs.org
-#MASTER# PROBLEM-URL: http://ooextras.sourceforge.net/
-ooextras.sourceforge.net
 #MASTER# PROBLEM-URL: http://www.ntcompatible.com/
 www.ntcompatible.com
-#MASTER# PROBLEM-URL: http://www.jabbercentral.org/
-www.jabbercentral.org
-#MASTER# PROBLEM-URL: http://www.kde-look.org/    
-www.kde-look.org
+
 
 #----------------------------------------------------------------------------
 # The first frame of the gif animation is more useful here:
