@@ -3,7 +3,7 @@
 
  Purpose     :  Entity included in other project documents.
                 
- $Id: p-authors.sgml,v 1.8.2.6 2002/10/10 06:09:11 hal9 Exp $
+ $Id: p-authors.sgml,v 1.8.2.7 2002/11/13 01:35:09 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -45,6 +45,7 @@
 
 <literallayout>
 ]]>
+ Johny Agotnes 
  Rodrigo Barbosa (RPM specfiles)
  Moritz Barsnick
  Hal Burgiss (docs)
@@ -78,7 +79,6 @@
 </para>
 
 <literallayout>
- Johny Agotnes 
  Ken Arromdee
  Devin Bayer
  Reiner Buehl
@@ -89,8 +89,10 @@
  Peter E
  Aaron Hamid
  Magnus Holmgren
+ Don Libes  
  Paul Lieverse
  David Mediavilla 
+ Oliver Stoeneberg
  Roberto Ragusa
  Maynard Riley
  Bart Schelstraete
