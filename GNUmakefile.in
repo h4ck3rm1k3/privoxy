@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.6 2002/06/02 03:26:25 hal9 Exp $
+# $Id: GNUmakefile.in,v 1.104.2.7 2002/06/07 00:23:47 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -607,18 +607,22 @@ dok: dok-release dok-devel dok-user dok-faq dok-readme dok-webserver dok-authors
 redhat-dok: dok-release dok-devel dok-user dok-faq redhat-readme dok-webserver dok-authors
 	@$(ECHO) Documentation created.
 
-# For those with man2html ala RH7's.
+# For those with man2html ala RH7s.
 man2html:
 	mkdir -p doc/webserver/man-page
 ifneq ($(MAN2HTML),false)
 	$(MAN2HTML) privoxy.1 |grep -v "^Content-type" > tmp.html
 	$(PERL) -pi.bak -e 's/<A .*Contents<\/A>//; s/<A .*man2html<\/A>/man2html/' tmp.html
 	$(PERL) -pi.bak -e 's/(<\/HEAD>)/<LINK REL=\"STYLESHEET\" TYPE=\"text\/css\" HREF=\"..\/p_doc.css\"><\/HEAD>/' tmp.html
+# Twice because my version of man2html is pulling in commas and periods in URLs.
+	$(PERL) -pi.bak -e 's/(<A.*),(">)/$$1$$2/g' tmp.html
+	$(PERL) -pi.bak -e 's,\.">,">,g' tmp.html
 # Get rid of spurious  from conversion. (How to do this with perl?)
 	$(SED) -e 's///g' tmp.html > doc/webserver/man-page/privoxy-man-page.html && $(RM) tmp.*
 else
 	$(MAKE) groff2html
 endif
+
 
 # Otherwise we get plain groff conversion.
 groff2html:
@@ -894,6 +898,10 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.7  2002/06/07 00:23:47  hal9
+# Fixing a quirk of man2html (on my system) that pulls punctuation into URLs,
+# thus breaking them completely.
+#
 # Revision 1.104.2.6  2002/06/02 03:26:25  hal9
 # Update CONFIG_FILES (ie update basic.action, etc), and also DOC_FILES (exclude
 # index.html and team/index.html)
