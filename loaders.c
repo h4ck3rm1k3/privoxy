@@ -1,4 +1,4 @@
-const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.2 2002/11/20 14:38:15 oes Exp $";
+const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.3 2002/11/20 17:12:30 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loaders.c,v $
@@ -35,6 +35,9 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.2 2002/11/20 14:38:15 oes Ex
  *
  * Revisions   :
  *    $Log: loaders.c,v $
+ *    Revision 1.50.2.3  2002/11/20 17:12:30  oes
+ *    Ooops, forgot one change.
+ *
  *    Revision 1.50.2.2  2002/11/20 14:38:15  oes
  *    Fixed delayed/incomplete freeing of client resources and
  *    simplified loop structure in sweep.
@@ -400,6 +403,8 @@ void sweep(void)
             csp->tlist->active = 1;
          }
 #endif /* def FEATURE_TRUST */
+         
+         csp = csp->next;
 
       }
       else 
