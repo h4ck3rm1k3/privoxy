@@ -11,7 +11,7 @@
 <!entity license SYSTEM "license.sgml">
 <!entity p-authors SYSTEM "p-authors.sgml">
 <!entity config SYSTEM "p-config.sgml">
-<!entity p-version "2.9.16">
+<!entity p-version "2.9.18">
 <!entity p-status "beta">
 <!entity % p-authors-formal "INCLUDE"> <!-- include additional text, etc  -->
 <!entity % p-not-stable "INCLUDE">
@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.13 2002/08/02 18:23:19 g_sauthoff Exp $
+ $Id: user-manual.sgml,v 1.123.2.14 2002/08/06 09:16:13 oes Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.13 2002/08/02 18:23:19 g_sauthoff Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.14 2002/08/06 09:16:13 oes Exp $</pubdate>
 
 <!--
 
@@ -358,8 +358,10 @@ automatically start Privoxy in the boot process.
 <sect2 id="installation-keepupdated"><title>Keeping your Installation Up-to-Date</title>
 <para>
  As user feedback comes in and development continues, we will make updated versions
- of both the software and the main <link linkend="actions-file">actions file</link>
- (<literal>default.action</literal>) available for download.
+ of both the main <link linkend="actions-file">actions file</link> (as a <ulink
+ url="http://sourceforge.net/project/showfiles.php?group_id=11118&amp;release_id=103670">separate
+ package</ulink>) and the software itself (including the actions file) available for
+ download.
 </para>
 
 <para>
@@ -367,12 +369,6 @@ automatically start Privoxy in the boot process.
  <application>Privoxy</application> or the actions file, <ulink
  url="http://lists.sourceforge.net/lists/listinfo/ijbswa-announce/">subscribe
  to our announce  mailing list</ulink>, ijbswa-announce@lists.sourceforge.net.
-</para>
-
-<para>
- Both can be downloaded from the <ulink
- url="http://sourceforge.net/project/showfiles.php?group_id=11118">files
- section</ulink> on <ulink url="http://sourceforge.net/">SourceForge</ulink>.
 </para>
 
 <para>
@@ -5648,6 +5644,9 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.14  2002/08/06 09:16:13  oes
+ Nits re: actions file download
+
  Revision 1.123.2.13  2002/08/02 18:23:19  g_sauthoff
  Just 2 small corrections to the Gentoo sections
 
