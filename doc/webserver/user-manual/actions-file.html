@@ -1775,26 +1775,7 @@ HREF="config.html#FILTERFILE"
 HREF="config.html"
 >config file</A
 >). Filtering 
-    can be completely disabled without the use of parameters. Example:
-   </P
-><P
->    <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="90%"
-><TR
-><TD
-><PRE
-CLASS="SCREEN"
->  { -filter }
-     .example.com</PRE
-></TD
-></TR
-></TABLE
->
-   </P
-><P
->    Disables filters for that site.
+    can be completely disabled without the use of parameters.
    </P
 ></DD
 ><DT
@@ -1833,7 +1814,8 @@ HREF="config.html"
 >config file</A
 >. The 
     default is 4096 KB (4 Megs). Once this limit is exceeded, the buffered
-    data, and all pending data, is passed through unfiltered.
+    data, and all pending data, is passed through unfiltered. Inappropriate 
+    MIME types are not filtered.
    </P
 ><P
 >    At this time, <SPAN
@@ -3653,7 +3635,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN2638">8.5.21. Summary</H3
+NAME="AEN2635">8.5.21. Summary</H3
 ><P
 > Note that many of these actions have the potential to cause a page to
  misbehave, possibly even not to display at all. There are many ways 
@@ -3912,7 +3894,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN2690">8.7.1. default.action</H3
+NAME="AEN2687">8.7.1. default.action</H3
 ><P
 >Every config file should start with a short comment stating its purpose:</P
 ><P
@@ -4732,7 +4714,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN2844">8.7.2. user.action</H3
+NAME="AEN2841">8.7.2. user.action</H3
 ><P
 > So far we are painting with a broad brush by setting general policies,
  which would be a reasonable starting point for many people. Now, 

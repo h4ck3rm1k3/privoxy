@@ -338,7 +338,7 @@ CLASS="QUOTE"
 >"Medium"</SPAN
 > and <SPAN
 CLASS="QUOTE"
->"Advenced"</SPAN
+>"Advanced"</SPAN
 > defaults?</H3
 ><P
 >  Configuring <SPAN
@@ -740,7 +740,10 @@ CLASS="SECT2"
 NAME="AEN413">3.9. What is the <TT
 CLASS="FILENAME"
 >default.filter</TT
-> file?</H3
+> file? What is a <SPAN
+CLASS="QUOTE"
+>"filter"</SPAN
+>?</H3
 ><P
 > The <A
 HREF="../user-manual/filter-file.html"
@@ -757,7 +760,7 @@ CLASS="EMPHASIS"
 >filters</I
 ></SPAN
 > are defined, which can be used to modify or
- remove, web page content on the fly. This applies to <SPAN
+ remove, web page content on the fly. Filters apply to <SPAN
 CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
@@ -773,8 +776,10 @@ TARGET="_top"
 ><TT
 CLASS="LITERAL"
 >filter</TT
-> action</A
->.</P
+>
+ action</A
+> in one of the actions files. Filtering is automatically
+ disabled for inappropriate MIME types.</P
 ><P
 > If you are familiar with regular expressions, and HTML, you can look at 
  the provided <TT
@@ -782,7 +787,7 @@ CLASS="FILENAME"
 >default.filter</TT
 > with a text editor and define
  your own filters.  This is potentially a very powerful feature, but
- requires some expertise. </P
+ requires some expertise in both regular expressions and HTML/HTTP. </P
 ><P
 > Presently, there is no GUI editor option for this part of the configuration, 
  but you can disable/enable the various pre-defined filters of the included 
@@ -800,7 +805,7 @@ CLASS="SECT2"
 ><H3
 CLASS="SECT2"
 ><A
-NAME="AEN428">3.10. How can I set up <SPAN
+NAME="AEN429">3.10. How can I set up <SPAN
 CLASS="APPLICATION"
 >Privoxy</SPAN
 > to act as a proxy for my 
@@ -875,7 +880,7 @@ CLASS="SECT2"
 ><H3
 CLASS="SECT2"
 ><A
-NAME="AEN446">3.11. Instead of ads, now I get a checkerboard pattern. I don't want to see anything.</H3
+NAME="AEN447">3.11. Instead of ads, now I get a checkerboard pattern. I don't want to see anything.</H3
 ><P
 > The replacement for blocked images can be controlled with the <A
 HREF="../user-manual/actions-file.html#SET-IMAGE-BLOCKER"
@@ -940,7 +945,7 @@ CLASS="SECT2"
 ><H3
 CLASS="SECT2"
 ><A
-NAME="AEN463">3.12. Why would anybody want to see a checkerboard pattern?</H3
+NAME="AEN464">3.12. Why would anybody want to see a checkerboard pattern?</H3
 ><P
 > Remember that <A
 HREF="general.html#WHATSANAD"
@@ -964,7 +969,7 @@ CLASS="SECT2"
 ><H3
 CLASS="SECT2"
 ><A
-NAME="AEN468">3.13. I see some images being replaced by a text
+NAME="AEN469">3.13. I see some images being replaced by a text
 instead of the checkerboard image. Why and how do I get rid of this?</H3
 ><P
 > This happens when the banners are not embedded in the HTML code of the
