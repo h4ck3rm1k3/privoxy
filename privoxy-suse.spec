@@ -1,4 +1,4 @@
-# $Id: privoxy-suse.spec,v 1.20.2.3 2002/07/27 15:47:10 hal9 Exp $
+# $Id: privoxy-suse.spec,v 1.20.2.4 2002/07/30 21:51:19 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -36,7 +36,7 @@ Summary:      Privoxy - privacy enhancing proxy
 Vendor:       Privoxy.Org
 Name:         privoxy-suse
 Distribution: defineme
-Version: 2.9.16
+Version: 2.9.17
 Release: 1
 # Needs makefile change: Source: http://prdownloads.sourceforge.net/ijbswa/privoxy-%{version}-%{status}-src.tar.gz
 Source: http://prdownloads.sourceforge.net/ijbswa/privoxy-%{version}.tar.gz
@@ -217,6 +217,9 @@ id privoxy > /dev/null 2>&1 && /usr/sbin/userdel privoxy || /bin/true
 # -----------------------------------------------------------------------------
 #
 %changelog
+* Wed Jul 30 2002 Hal Burgiss <hal@foobox.net>
+- Reset version for 2.9.17.
+
 * Sat Jul 27 2002 Hal Burgiss <hal@foobox.net>
 - Reset version and release for 2.9.16.
 
@@ -332,6 +335,9 @@ id privoxy > /dev/null 2>&1 && /usr/sbin/userdel privoxy || /bin/true
 - new package: version 2.0
 
 # $Log: privoxy-suse.spec,v $
+# Revision 1.20.2.4  2002/07/30 21:51:19  hal9
+# Bump version to 2.9.17.
+#
 # Revision 1.20.2.3  2002/07/27 15:47:10  hal9
 # Reset version and release for 2.9.16.
 #
