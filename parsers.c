@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.5 2003/04/14 12:08:16 oes Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.6 2003/04/14 21:28:30 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -40,6 +40,9 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.5 2003/04/14 12:08:16 oes Ex
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.56.2.6  2003/04/14 21:28:30  oes
+ *    Completing the previous change
+ *
  *    Revision 1.56.2.5  2003/04/14 12:08:16  oes
  *    Added temporary workaround for bug in PHP < 4.2.3
  *
@@ -494,7 +497,7 @@ const add_header_func_ptr add_client_headers[] = {
    client_cookie_adder,
    client_x_forwarded_adder,
    client_xtra_adder,
-   client_accept_encoding_adder,
+   /* Temporarily disabled:    client_accept_encoding_adder, */
    connection_close_adder,
    NULL
 };
