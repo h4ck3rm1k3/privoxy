@@ -1,9 +1,10 @@
 --------------------------------------------------------------------
 ChangeLog for Privoxy
 --------------------------------------------------------------------
-*** Version 2.9.15 (current CVS) *** 
+*** Version 2.9.16  *** 
 
 - Major revamp of default.action to get rid of years of cruft.
+- Same for default.filter
 - Re-design and major improvements to the CGI editor interface.
 - Address spurious 'out of memory' error due to incorrect file permissions.
 - Impose buffer limits while reading client and server headers.
@@ -14,7 +15,7 @@ ChangeLog for Privoxy
 - Multiple actions files can now be specified in config.
 - Actions files are changed to: default.action, standard.action, and 
   user.action. user.action is for personal/local configuration.
-- The usual many small and miscellaneous fixes.
+- The usual many small and miscellaneous bug and security fixes.
 
 *** Version 2.9.14 Beta *** 
 
