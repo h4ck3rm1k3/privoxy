@@ -2,7 +2,7 @@
 #  
 #  Copyright (C) 2001, 2002 Privoxy Developers http://privoxy.org
 #  
-#  $Id: config,v 1.39.2.8 2002/10/09 01:43:58 hal9 Exp $
+#  $Id: config,v 1.39.2.9 2003/02/20 13:34:08 hal9 Exp $
 #  
 ####################################################################
 #                                                                  #
@@ -104,7 +104,7 @@
 #      flat, except for confdir/templates, where the HTML templates
 #      for CGI output reside (e.g. Privoxy's 404 error page).
 #  
-confdir .
+confdir /home/hal/ptmp/etc
 
 #  
 #  1.2. logdir
@@ -131,7 +131,7 @@ confdir .
 #  
 #      No trailing "/", please
 #  
-logdir .
+logdir /home/hal/ptmp/var/log/privoxy
 
 #  
 #  1.3. actionsfile
@@ -236,8 +236,6 @@ filterfile default.filter
 #      No log file is used, all log messages go to the console (STDERR).
 #  
 #  Notes:
-#  
-#      The windows version will additionally log to the console.
 #  
 #      The logfile is where all logging and error messages are
 #      written. The level of detail and number of messages are set with
