@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.10.2.1 2002/06/06 19:06:44 jongfoster Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.10.2.2 2002/09/25 14:53:15 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -33,6 +33,11 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.10.2.1 2002/06/06 19:06:44 jong
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.10.2.2  2002/09/25 14:53:15  oes
+ *    Added basic support for OPTIONS and TRACE HTTP methods:
+ *    parse_http_url now recognizes the "*" URI as well as
+ *    the OPTIONS and TRACE method keywords.
+ *
  *    Revision 1.10.2.1  2002/06/06 19:06:44  jongfoster
  *    Adding support for proprietary Microsoft WebDAV extensions
  *
@@ -158,8 +163,8 @@ void free_http_request(struct http_request *http)
  *
  * Returns     :  JB_ERR_OK on success
  *                JB_ERR_MEMORY on out of memory
- *                JB_ERR_CGI_PARAMS on malformed command/URL
- *                                  or >100 domains deep.
+ *                JB_ERR_PARSE on malformed command/URL
+ *                             or >100 domains deep.
  *
  *********************************************************************/
 jb_err parse_http_url(const char * url,
@@ -179,6 +184,17 @@ jb_err parse_http_url(const char * url,
    if (http->url == NULL)
    {
       return JB_ERR_MEMORY;
+   }
+
+
+   /*
+    * Check for * URI. If found, we're done.
+    */  
+   if (*http->url == '*')
+   {
+      http->path = strdup("*");
+      http->hostport = strdup("");
+      return JB_ERR_OK;
    }
 
 
@@ -304,10 +320,10 @@ jb_err parse_http_url(const char * url,
       }
    }
 
-
    /*
     * Split domain name so we can compare it against wildcards
     */
+
    {
       char *vec[BUFFER_SIZE];
       size_t size;
@@ -352,8 +368,8 @@ jb_err parse_http_url(const char * url,
       memcpy(http->dvec, vec, size);
    }
 
-
    return JB_ERR_OK;
+
 }
 
 
@@ -412,6 +428,8 @@ jb_err parse_http_request(const char *req,
          || (0 == strcmpic(v[0], "post"))
          || (0 == strcmpic(v[0], "put"))
          || (0 == strcmpic(v[0], "delete"))
+         || (0 == strcmpic(v[0], "options"))
+         || (0 == strcmpic(v[0], "trace"))
  
          /* or a webDAV extension (RFC2518) */
          || (0 == strcmpic(v[0], "propfind"))
