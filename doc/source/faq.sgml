@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.29 2003/06/15 21:32:58 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.30 2003/06/25 01:13:52 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.29 2003/06/15 21:32:58 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.30 2003/06/25 01:13:52 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1106,7 +1106,12 @@ delays in page requests compared to the old Junkbuster. What's wrong?</title>
  noticeable on slow dialup connections.
  </para>
 <para>
- Filtering is automatically disabled for inappropriate MIME types.
+ Filtering is automatically disabled for inappropriate MIME types. But note 
+ that if the web server mis-reports the MIME type, then content that should
+ not be filtered, could be. <application>Privoxy</application> only knows how
+ to differentiate filterable content because of the MIME type as reported by
+ the server, or because of some configuration setting that enables/disables
+ filtering.
 
 </para>
 </sect2>
@@ -1472,8 +1477,7 @@ from a webserver? FTP server?</title>
  <quote>text/plain</quote>) will be filtered, as will those that might be
  incorrectly reported by the webserver. If such a file is a downloaded file
  that is intended to be saved to disk, then any content that might have been
- altered by filtering, will be saved too, for these (probably very rare)
- cases.
+ altered by filtering, will be saved too, for these (probably rare) cases.
 </para>
 <para>
  If you download text files, you probably do not want these to be filtered,
@@ -1485,6 +1489,14 @@ from a webserver? FTP server?</title>
 <para>
  <application>Privoxy</application> does not do FTP at all, only HTTP 
   protocols.
+</para>
+</sect2>
+
+<sect2 renderas="sect3" id="downloads2">
+<title>I just downloaded a Perl script, and <application>Privoxy</application>
+altered it! What is wrong!</title>
+<para>
+ Read above very carefully.
 </para>
 </sect2>
 
@@ -1766,6 +1778,24 @@ every time I start IE. What gives?</title>
  </para>
 </sect2>
 
+<sect2 renderas="sect3" id="nohostname">
+<title>My logs show many <quote>Unable to get my own hostname</quote> lines.
+Why?</title>
+<para>
+ <application>Privoxy</application> tries to get the hostname of the system
+ its running on from the IP address of the system interface it is bound to
+ (from the <filename>config</filename> file
+ <emphasis>listen-address</emphasis> setting). If the system cannot supply
+ this information, <application>Privoxy</application> logs this condition. 
+</para>
+<para>
+ Typically, this would be considered a system configuration error. It is not a
+ fatal error to <application>Privoxy</application> however, and you may choose
+ to ignore it if you want.
+</para>
+</sect2>
+
+
 </sect1>
 <!--
 </sect1>
@@ -1858,6 +1888,12 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.30  2003/06/25 01:13:52  hal9
+Add:
+
+ - FAQ on "Unable to get my own hostname"
+ - Another one on filtering effects on text files.
+
 Revision 1.61.2.29  2003/06/15 21:32:58  hal9
 Add to the 4.17 (filtering effects on downloaded files).
 
