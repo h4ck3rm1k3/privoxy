@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.11.2.19 2003/12/17 17:09:25 oes Exp $
+#  $Id: default.filter,v 1.11.2.20 2004/01/06 16:46:14 oes Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -303,7 +303,7 @@ s/(<textarea[^>]*?)wrap=(['"]?)hard\2/$1/ig
 #################################################################################
 FILTER: jumping-windows Prevent windows from resizing and moving themselves
 
-s/(?:window|this|self)\.(?:move|resize)(?:to|by)\(/concat(/ig
+s/(?:window|this|self)\.(?:move|resize)(?:to|by)\(/''.concat(/ig
 
 
 #################################################################################
@@ -485,10 +485,14 @@ s|<IMG SRC="http://media.monster.com/mm/usen/my/no_thanks_211x40.gif".+?>|<meta 
 #
 s|(<img [^>]*)onload|$1never|sig
 
+
 ############################################################################## 
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.11.2.20  2004/01/06 16:46:14  oes
+#     Fixed a JS syntax problem in jumping-windows
+#
 #     Revision 1.11.2.19  2003/12/17 17:09:25  oes
 #     Added remedy against IE address bar spoofing
 #
