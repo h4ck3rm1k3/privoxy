@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.1 2002/08/21 17:58:05 oes Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.2 2002/11/12 16:28:20 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.1 2002/08/21 17:58:05 oes Ex
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.48.2.2  2002/11/12 16:28:20  oes
+ *    Move unrelated variable declaration out of #ifdef FEATURE_ACL; fixes bug #636655
+ *
  *    Revision 1.48.2.1  2002/08/21 17:58:05  oes
  *    Temp kludge to let user and default action file be edited through win32 GUI (FR 592080)
  *
@@ -455,9 +458,10 @@ void unload_configfile (void * data)
 {
    struct configuration_spec * config = (struct configuration_spec *)data;
    struct forward_spec *cur_fwd = config->forward;
+   int i;
+
 #ifdef FEATURE_ACL
    struct access_control_list *cur_acl = config->acl;
-   int i;
 
    while (cur_acl != NULL)
    {
