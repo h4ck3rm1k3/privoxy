@@ -1,6 +1,13 @@
 --------------------------------------------------------------------
 ChangeLog for Privoxy
 --------------------------------------------------------------------
+*** Version 2.9.18  ***
+
+- Added workaround for IE bug that broke CGI interface
+- Bugfix: String actions now reliably editable through CGI interface
+- Three filters fixed (again!)
+- Assorted small fixes and doc enhancements
+
 *** Version 2.9.16  *** 
 
 - Major revamp of default.action to get rid of years of cruft.
