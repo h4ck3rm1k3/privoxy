@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.5 2002/05/30 15:35:01 hal9 Exp $
+# $Id: GNUmakefile.in,v 1.104.2.6 2002/06/02 03:26:25 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -88,7 +88,7 @@ TARGET_OS  = @host@
 PERL       = perl
 DOC_DIR	 = doc/source
 DOC_TMP    = $(DOC_DIR)/tmp
-
+DOC_STATUS = @DOC_STATUS@
 
 #User Group paras
 USER       = @USER@
@@ -118,13 +118,13 @@ RPM_BASE = @RPM_BASE@
 # and escape every '#' in the find. doh.
 CONFIG_FILES = config trust \
 		default.action \
-		basic.action intermediate.action advanced.action \
+		standard.action user.action \
 		default.filter \
 		`find templates/ -type f | grep -v "CVS" | grep -v "\.\#" | grep -v ".*~" | grep -v ".cvsignore" | grep -v "TAGS"`
 
 DOC_FILES = AUTHORS LICENSE README ChangeLog \
 		`find doc/text/ -type f | grep -v "CVS" | grep -v "\.\#" | grep -v ".*~" | grep -v ".cvsignore" | grep -v "TAGS"` \
-		`find doc/webserver/ -name "*.html"` \
+		`find doc/webserver/ -name "*.html" | grep -v "\(webserver\|team\)\/index\.html"` \
 		`find doc/webserver/ -name "*.css"` \
                 privoxy.1
 
@@ -894,6 +894,10 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.6  2002/06/02 03:26:25  hal9
+# Update CONFIG_FILES (ie update basic.action, etc), and also DOC_FILES (exclude
+# index.html and team/index.html)
+#
 # Revision 1.104.2.5  2002/05/30 15:35:01  hal9
 # This is more cleanup on the make config-file target. Most issues for
 # automatic generation are taken care of. There are still some problems
