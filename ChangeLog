@@ -7,7 +7,8 @@ ChangeLog for Privoxy
 - Fixed filter bug: Now preserves original quoting style in <img>
   tags wherever possible.
 - Content cookie filter now part of default (Medium) profile
-- 
+- Add a demoronizer filter, which fixes MS's abuse of std charsets
+  (common cases anyway).
 
 *** Version 3.0  ***
 
