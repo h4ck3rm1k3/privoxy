@@ -1,4 +1,4 @@
-const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.4 2003/05/06 15:57:12 oes Exp $";
+const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.5 2003/05/08 15:19:15 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loaders.c,v $
@@ -35,6 +35,9 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.4 2003/05/06 15:57:12 oes Ex
  *
  * Revisions   :
  *    $Log: loaders.c,v $
+ *    Revision 1.50.2.5  2003/05/08 15:19:15  oes
+ *    sweep: Made loop structure of sweep step mirror that of mark step
+ *
  *    Revision 1.50.2.4  2003/05/06 15:57:12  oes
  *    Bugfix: Update last_active pointer in sweep() before
  *    leaving an active client. Closes bugs #724395, #727882
@@ -446,17 +449,26 @@ void sweep(void)
       }
    }
 
-   for (fl = files; fl && ((nfl = fl->next) != NULL) ; fl = fl->next)
+   nfl = files;
+   fl = files->next;
+
+   while (fl != NULL)
    {
-      if ( ( 0 == nfl->active ) && ( NULL != nfl->unloader ) )
+      if ( ( 0 == fl->active ) && ( NULL != fl->unloader ) )
       {
-         fl->next = nfl->next;
+         nfl->next = fl->next;
 
-         (nfl->unloader)(nfl->f);
+         (fl->unloader)(fl->f);
 
-         freez(nfl->filename);
+         freez(fl->filename);
+         freez(fl);
 
-         freez(nfl);
+         fl = nfl->next;
+      }
+      else
+      {
+         nfl = fl;
+         fl = fl->next;
       }
    }
 
@@ -517,6 +529,7 @@ int check_file_changed(const struct file_list * current,
       /* Out of memory error */
       return 1;
    }
+
 
    fs->filename = strdup(filename);
    fs->lastmodified = statbuf->st_mtime;
