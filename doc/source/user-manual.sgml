@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.41 2004/03/23 12:58:42 oes Exp $
+ $Id: user-manual.sgml,v 1.123.2.42 2004/12/04 14:39:57 hal9 Exp $
 
  Copyright (C) 2001- 2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.41 2004/03/23 12:58:42 oes Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.42 2004/12/04 14:39:57 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1719,7 +1719,7 @@ must find a better place for this paragraph
 
 <para>
  To determine which actions apply to a request, the URL of the request is
- compared to all patterns in each action file file. Every time it matches, the list of
+ compared to all patterns in each <quote>action file</quote> file. Every time it matches, the list of
  applicable actions for the URL is incrementally updated, using the heading
  of the section in which the pattern is located. If multiple matches for
  the same URL set the same action differently, the last match wins. If not, 
@@ -5251,7 +5251,7 @@ pre-defined filters for your convenience:
  blocks of HTML code disappear when a specific symbol is set. We use this
  for many purposes, one of them being to include the beta warning in all
  our user interface (CGI) pages when <application>Privoxy</application>
- in in an alpha or beta development stage:
+ is in an alpha or beta development stage:
 </para>
 
 <para>
@@ -6295,6 +6295,9 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.42  2004/12/04 14:39:57  hal9
+ Fix two minor typos per bug SF report.
+
  Revision 1.123.2.41  2004/03/23 12:58:42  oes
  Fixed an inaccuracy
 
