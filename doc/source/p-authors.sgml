@@ -3,7 +3,7 @@
 
  Purpose     :  Entity included in other project documents.
                 
- $Id: p-authors.sgml,v 1.8.2.1 2002/05/26 17:04:24 hal9 Exp $
+ $Id: p-authors.sgml,v 1.8.2.2 2002/05/27 22:02:47 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -19,6 +19,7 @@
 
   privoxy-man-page
   AUTHORS
+  user-manual
 
 -->
 <![%p-authors-formal;[
@@ -58,7 +59,7 @@
 
 <![%p-authors-formal;[
 <para>
- Originally developed by:
+ Based in part on code originally developed by:
 </para>
 
 <literallayout>
@@ -73,17 +74,19 @@
 
 <literallayout>
  Ken Arromdee
+ Devin Bayer
  Reiner Buehl
  Andrew J. Caines
  Clifford Caoile
+ Michael T. Davis
  Peter E
  Aaron Hamid
  Magnus Holmgren
  Paul Lieverse
  Roberto Ragusa
+ Maynard Riley
  Bart Schelstraete
  Darren Wiebe
  jwz
- Michael T. Davis
 </literallayout>
 ]]>
