@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl 
-dnl $Id: configure.in,v 1.68.2.8 2002/11/27 12:55:26 oes Exp $
+dnl $Id: configure.in,v 1.68.2.9 2002/12/13 23:47:45 hal9 Exp $
 dnl 
 dnl Written by and Copyright (C) 2001, 2002 the SourceForge
 dnl Privoxy team. http://www.privoxy.org/
@@ -28,6 +28,9 @@ dnl or write to the Free Software Foundation, Inc., 59
 dnl Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 dnl 
 dnl $Log: configure.in,v $
+dnl Revision 1.68.2.9  2002/12/13 23:47:45  hal9
+dnl Add openbsd $specialflags per gunner at styx2002.no-ip.org
+dnl
 dnl Revision 1.68.2.8  2002/11/27 12:55:26  oes
 dnl Fixed broken handling of pre-set CFLAGS
 dnl
@@ -397,7 +400,7 @@ dnl =================================================================
 dnl AutoConf Initialization
 dnl =================================================================
 
-AC_REVISION($Revision: 1.68.2.8 $)
+AC_REVISION($Revision: 1.68.2.9 $)
 AC_INIT(jcc.c)
 
 if test ! -f config.h.in; then
@@ -984,6 +987,15 @@ dnl =================================================================
 case "$host" in
 *-apple-darwin*) SPECIAL_CFLAGS="-Dunix"
 ;;  
+esac
+
+dnl =================================================================
+dnl OpenBSD specific
+dnl =================================================================
+
+case "$host" in
+*-openbsd*) SPECIAL_CFLAGS="$SPECIAL_CFLAGS -Dunix"
+;;
 esac
 
 dnl =================================================================
