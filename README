@@ -31,7 +31,7 @@
  *
  *********************************************************************/
 
-This README is included with the development version of Privoxy 2.9.15, which
+This README is included with the development version of Privoxy 2.9.18, which
 will eventually become Privoxy v3.0 (and soon we hope!). See http://
 www.privoxy.org/ for more information. The current code level is beta, and
 seems stable to us :).
@@ -71,8 +71,8 @@ compiler like gcc are required.
 When building from a source tarball (either release version or nightly CVS
 tarball), first unpack the source:
 
- tar xzvf privoxy-2.9.15-beta-src* [.tgz or .tar.gz]                           
- cd privoxy-2.9.15-beta                                                        
+ tar xzvf privoxy-2.9.18-beta-src* [.tgz or .tar.gz]                           
+ cd privoxy-2.9.18-beta                                                        
 
 For retrieving the current CVS sources, you'll need CVS installed. Note that
 sources from CVS are development quality, and may not be stable, or well
@@ -143,7 +143,7 @@ options, and examples: http://www.privoxy.org/user-manual/.
 
 Be sure to set your browser(s) for HTTP/HTTPS Proxy at <IP>:<Port>, or whatever
 you specify in the config file under 'listen-address'. DEFAULT is localhost:
-8118. Note that Privoxy ONLY proxies HTTP (and HTTPS) traffic. Do not try it 
+8118. Note that Privoxy ONLY proxies HTTP (and HTTPS) traffic. Do not try it
 with FTP or other protocols for the simple reason it does not work.
 
 The actions list can be configured via the web interface accessed via http://
@@ -227,7 +227,7 @@ troubled site and even pre-fill the form!
 
 New, improved default.action files will occasionally be made available based on
 your feedback. These will be announced on the ijbswa-announce list and
-available from our project page.
+available from our the files section of our project page.
 
 -------------------------------------------------------------------------------
 
