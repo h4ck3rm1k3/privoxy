@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.5 2003/03/10 23:45:32 oes Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.6 2003/03/11 11:55:00 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,13 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.5 2003/03/10 23:45:32 oes Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.92.2.6  2003/03/11 11:55:00  oes
+ *    Clean-up and extension of improvements for forked mode:
+ *     - Child's return code now consists of flags RC_FLAG_*
+ *     - Reporting toggle to parent now properly #ifdef'ed
+ *     - Children now report blocking to parent. This enables
+ *       statistics in forked mode
+ *
  *    Revision 1.92.2.5  2003/03/10 23:45:32  oes
  *    Fixed bug #700381: Non-Threaded version now capable of being toggled.
  *    Children now report having been toggled through _exit(17), parents
@@ -2208,7 +2215,7 @@ static void listen_loop(void)
       }
 
 #ifdef FEATURE_TOGGLE
-      if (g_bToggleIJB)
+      if (global_toggle_state)
       {
          csp->flags |= CSP_FLAG_TOGGLED_ON;
       }
@@ -2293,6 +2300,7 @@ static void listen_loop(void)
 #if defined(AMIGA) && !defined(SELECTED_ONE_OPTION)
 #define SELECTED_ONE_OPTION
          csp->cfd = ReleaseSocket(csp->cfd, -1);
+         
          if((child_id = (int)CreateNewProcTags(
             NP_Entry, (ULONG)server_thread,
             NP_Output, Output(),
@@ -2317,20 +2325,32 @@ static void listen_loop(void)
           */
          if (child_id == 0)   /* child */
          {
-            int inherited_toggle_state = g_bToggleIJB;
+            int rc = 0;
+#ifdef FEATURE_TOGGLE
+            int inherited_toggle_state = global_toggle_state;
+#endif /* def FEATURE_TOGGLE */
 
             serve(csp);
+
             /* 
-             * If we've been toggled, tell Mom
+             * If we've been toggled or we'be blocked the request, tell Mom
              */
-            if (inherited_toggle_state != g_bToggleIJB)
+
+#ifdef FEATURE_TOGGLE
+            if (inherited_toggle_state != global_toggle_state)
             {
-               _exit(17);
+               rc |= RC_FLAG_TOGGLED;
             }
-            else
+#endif /* def FEATURE_TOGGLE */
+
+#ifdef FEATURE_STATISTICS  
+            if (csp->flags & CSP_FLAG_REJECTED)
             {
-               _exit(0);
+               rc |= RC_FLAG_BLOCKED;
             }
+#endif /* ndef FEATURE_STATISTICS */
+
+            _exit(rc);
          }
          else if (child_id > 0) /* parent */
          {
@@ -2340,14 +2360,30 @@ static void listen_loop(void)
              */
             int child_status;
 #if !defined(_WIN32) && !defined(__CYGWIN__)
+
             wait( &child_status );
+
             /* 
-             * If the child has been toggled (return code 17), toggle ourselves
+             * Evaluate child's return code: If the child has
+             *  - been toggled, toggle ourselves
+             *  - blocked its request, bump up the stats counter
              */
-            if (WIFEXITED(child_status) && (WEXITSTATUS(child_status) == 17))
+
+#ifdef FEATURE_TOGGLE
+            if (WIFEXITED(child_status) && (WEXITSTATUS(child_status) & RC_FLAG_TOGGLED))
             {
-               g_bToggleIJB = !g_bToggleIJB;
+               global_toggle_state = !global_toggle_state;
             }
+#endif /* def FEATURE_TOGGLE */
+
+#ifdef FEATURE_STATISTICS
+            urls_read++;
+            if (WIFEXITED(child_status) && (WEXITSTATUS(child_status) & RC_FLAG_BLOCKED))
+            {
+               urls_rejected++;
+            }
+#endif /* def FEATURE_STATISTICS */ 
+
 #endif /* !defined(_WIN32) && defined(__CYGWIN__) */
             close_socket(csp->cfd);
             csp->flags &= ~CSP_FLAG_ACTIVE;
