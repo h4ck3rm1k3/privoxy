@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.40.2.1 2002/09/25 12:47:42 oes Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.40.2.2 2002/09/28 00:30:57 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,11 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.40.2.1 2002/09/25 12:47:42 oes Exp 
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.40.2.2  2002/09/28 00:30:57  david__schmidt
+ *    Update error logging to give sane values for thread IDs on Mach kernels.
+ *    It's still a hack, but at least it looks farily normal.  We print the
+ *    absolute value of the first 4 bytes of the pthread_t modded with 1000.
+ *
  *    Revision 1.40.2.1  2002/09/25 12:47:42  oes
  *    Make log_error safe against NULL string arguments
  *
@@ -423,6 +428,15 @@ void log_error(int loglevel, char *fmt, ...)
    /* FIXME get current thread id */
 #ifdef FEATURE_PTHREAD
    this_thread = (long)pthread_self();
+#ifdef __MACH__
+   /*
+    * Mac OSX (and perhaps other Mach instances) doesn't have a debuggable
+    * value at the first 4 bytes of pthread_self()'s return value, a pthread_t.
+    * pthread_t is supposed to be opaque... but it's fairly random, though, so
+    * we make it mostly presentable.
+    */
+   this_thread = abs(this_thread % 1000);
+#endif /* def __MACH__ */
 #elif defined(_WIN32)
    this_thread = GetCurrentThreadId();
 #elif defined(__OS2__)
