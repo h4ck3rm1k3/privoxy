@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.4 2003/04/04 12:40:20 oes Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.5 2003/04/29 11:32:54 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -35,6 +35,10 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.4 2003/04/04 12:40:20 oe
  *
  * Revisions   :
  *    $Log: jbsockets.c,v $
+ *    Revision 1.35.2.5  2003/04/29 11:32:54  oes
+ *    Don't rely on h_addr being non-NULL after gethostbyname.
+ *    Works around an oddness in Max OSX and closes bug #724796
+ *
  *    Revision 1.35.2.4  2003/04/04 12:40:20  oes
  *    Made sure the errno set by bind, not close[socket] is used in
  *    bind_port. Probably fixes bugs #713777, #705562.
@@ -814,7 +818,13 @@ unsigned long resolve_hostname_to_ip(const char *host)
 #else
       hostp = gethostbyname(host);
 #endif /* def HAVE_GETHOSTBYNAME_R_(6|5|3)_ARGS */
-      if (hostp == NULL)
+      /*
+       * On Mac OSX, if a domain exists but doesn't have a type A
+       * record associated with it, the h_addr member of the struct
+       * hostent returned by gethostbyname is NULL, even if h_length
+       * is 4. Therefore the second test below.
+       */
+      if (hostp == NULL || hostp->h_addr == NULL)
       {
          errno = EINVAL;
          log_error(LOG_LEVEL_ERROR, "could not resolve hostname %s", host);
