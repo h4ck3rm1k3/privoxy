@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.9 2002/07/26 15:17:02 oes Exp $
+# $Id: GNUmakefile.in,v 1.104.2.10 2002/07/27 22:56:53 kick_ Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -287,12 +287,11 @@ dist-check:
 # This creates a tar.gz and spec-file for a Red Hat 6.x version.
 #############################################################################
 create-snapshot:
-	@tag=`cvs status Makefile | awk ' /Sticky Tag/ { print $$3 } '` 2> /dev/null; \
+	@tag=`cvs -d $(CVSROOT) status Makefile | awk ' /Sticky Tag/ { print $$3 } '` 2> /dev/null; \
 	[ x"$$tag" = x"(none)" ] && tag=HEAD; \
 	echo "*** Creating package from $$tag!"; \
 	cd $(TMPDIR) ; cvs -Q -d $(CVSROOT) export -r $$tag current || echo "Um... export aborted."
-	@$(MV) $(TMPDIR)/current $(TMPDIR)/$(PROGRAM)-$(VERSION); \
-	cd $(TMPDIR)/$(PROGRAM)-$(VERSION); \
+	@cd $(TMPDIR)/current; \
 	TMPFILE=$$(mktemp -q /tmp/$(PROGRAM).XXXXXX); \
 	if $(SED) -e 's/^\(Version:\).*/\1 $(RPM_VERSION)/g' \
 		-e 's/^\(Release:\).*/\1 $(SNAPVERSION)/g' \
@@ -300,24 +299,22 @@ create-snapshot:
 			$(MV) -f $$TMPFILE privoxy-rh.spec; \
 	else \
 		$(ECHO) "Could not set version info in specfile."; \
-	exit 1;\
+		exit 1;\
 	fi;\
 	if $(SED) -e 's/^\(Version:\).*/\1 $(RPM_VERSION)/g' \
              -e 's/^\(Release:\).*/\1 $(SNAPVERSION)/g' \
               privoxy-suse.spec > $$TMPFILE ; then \
-	$(MV) -f $$TMPFILE privoxy-suse.spec; \
+			$(MV) -f $$TMPFILE privoxy-suse.spec; \
 	else \
 		$(ECHO) "Could not set version info in specfile."; \
-	exit 1;\
+		exit 1;\
 	fi; \
-	$(RM) $(TMPFILE)
-	@cd $(TMPDIR); \
+	$(RM) $(TMPFILE); \
+	cd $(TMPDIR)/current; \
 	$(TAR) --exclude ".cvsignore" --exclude "CVS" --exclude \
-		"privoxy-suse.spec" -czf $(PROGRAM)-rh-$(VERSION).tar.gz \
-		$(PROGRAM)-$(VERSION); \
+		"privoxy-suse.spec" -czf $(TMPDIR)/$(PROGRAM)-rh-$(VERSION).tar.gz .; \
 	$(TAR) --exclude ".cvsignore" --exclude "CVS" --exclude \
-		"privoxy-rh.spec" -czf $(PROGRAM)-suse-$(VERSION).tar.gz \
-		$(PROGRAM)-$(VERSION);
+		"privoxy-rh.spec" -czf $(TMPDIR)/$(PROGRAM)-suse-$(VERSION).tar.gz .
 	@$(MV) -f $(TMPDIR)/$(PROGRAM)-rh-$(VERSION).tar.gz .
 	@$(MV) -f $(TMPDIR)/$(PROGRAM)-suse-$(VERSION).tar.gz .
 	@$(RM) -rf $(TMPDIR)
@@ -974,6 +971,9 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.10  2002/07/27 22:56:53  kick_
+# cleanups of the redhat-srpm target
+#
 # Revision 1.104.2.9  2002/07/26 15:17:02  oes
 # - Added generation of default.action from defaul.action.master
 # - Deleted obsolete re_filterfile.txt generation
