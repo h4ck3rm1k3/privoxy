@@ -9,9 +9,9 @@
 <!entity copyright SYSTEM "copyright.sgml">
 <!entity license SYSTEM "license.sgml">
 <!entity p-version "3.0.2">
-<!entity p-status "STABLE">
-<!entity % p-not-stable "INCLUDE">
-<!entity % p-stable "IGNORE">
+<!entity p-status "stable">
+<!entity % p-not-stable "IGNORE">
+<!entity % p-stable "INCLUDE">
 <!entity % p-text "IGNORE">        <!-- define we are not a text only doc -->
 <!entity % p-doc "INCLUDE">        <!-- and we are a formal doc           -->
 <!entity % p-supp-userman "INCLUDE"> <!-- Include all from supported.sgml -->
@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.36 2003/06/26 23:49:20 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.37 2003/10/17 11:01:50 oes Exp $
 
  Copyright (C) 2001-2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.36 2003/06/26 23:49:20 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.37 2003/10/17 11:01:50 oes Exp $</pubdate>
 
 <!--
 
@@ -511,7 +511,9 @@ All the ads are there. What's wrong?</title>
  the browser's caches to force a full re-reading of pages. You can verify 
  that <application>Privoxy</application> is running, and your browser 
  is correctly configured by entering the special URL: 
- <ulink url="http://config.privoxy.org/">http://config.privoxy.org/</ulink>.
+ <ulink url="http://p.p/">http://p.p/</ulink>. 
+ <!-- Use http://p.p/ instead of http://config.privoxy.org/ here because
+      of potential redirect caching problem (see next Q). -->
  This should take you to a page titled <quote>This is Privoxy..</quote> with
  access to <application>Privoxy's</application> internal configuration.
  If you see this, then you are good to go. If you receive a page saying 
@@ -520,9 +522,45 @@ All the ads are there. What's wrong?</title>
  If you receive anything else (probably nothing at all), it could either
  be that the browser is not set up correctly, or that
  <application>Privoxy</application> is not running at all. Check the <ulink
- url="../user-manual/config.html#LOGFILE">log file</ulink>.
+ url="../user-manual/config.html#LOGFILE">log file</ulink>. For instructions
+ on starting <application>Privoxy</application> and browser configuration,
+ see the <ulink url="http://www.privoxy.org/user-manual/startup.html">chapter
+ on starting <application>Privoxy</application></ulink> in the
+ <ulink url="http://www.privoxy.org/user-manual/">user manual</ulink>.
 </para>
 
+</sect2>
+
+<sect2 renderas="sect3" id="notused">
+<title>I get a <quote>Privoxy is not being used</quote> dummy page although
+<application>Privoxy</application> is running and being used.</title>
+
+<para>
+ First, make sure that Privoxy is <emphasis>really</emphasis> running and
+ being used by visiting <ulink url="http://p.p/">http://p.p/</ulink>. You
+ should see the <application>Privoxy</application> main page. If not, see
+ the <ulink url="http://www.privoxy.org/user-manual/startup.html">chapter
+ on starting <application>Privoxy</application></ulink> in the
+ <ulink url="http://www.privoxy.org/user-manual/">user manual</ulink>.
+</para>
+
+<para>
+ Now if <ulink url="http://p.p/">http://p.p/</ulink> works for you, but
+ other parts of <application>Privoxy</application>'s web interface show
+ the dummy page, your browser has cached a redirection it encountered before
+ <application>Privoxy</application> was being used. You need to clear your
+ browser's cache. Note that shift-reloading the dummy page won't help, since
+ that'll only refresh the dummy page, not the redirection that lead you there.
+</para>
+
+<para>
+ The procedure for clearing the cache varies from browser to browser. As an
+ example, <application>Mozilla</application> users would click 
+ <guibutton>Edit</guibutton> --> <guibutton>Preferences</guibutton> -->
+ <guibutton>Advanced</guibutton> --> <guibutton>Cache</guibutton> and
+ then click both <quote><guibutton>Clear Memory Cache</guibutton></quote>
+ and <quote><guibutton>Clear Disk Cache</guibutton></quote>.
+</para>
 </sect2>
 
 </sect1>
@@ -1937,6 +1975,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.37  2003/10/17 11:01:50  oes
+Added Q&A for "not being used" page problem
+
 Revision 1.61.2.36  2003/06/26 23:49:20  hal9
 More on the filter/source code problem.
 
