@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.11.2.12 2003/03/15 14:06:58 oes Exp $
+#  $Id: default.filter,v 1.11.2.13 2003/03/18 19:28:59 oes Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -208,7 +208,7 @@ FILTER: img-reorder Reorder attributes in <img> tags to make the banners-by-* fi
 s|<img\s+?([^>]*) src\s*=\s*(['"])([^>\\\2]+)\2|<img src=$2$3$2 $1|siUg
 s|<img\s+?([^>]*) src\s*=\s*([^'">\\\s]+)|<img src=$2 $1|sig
 
-s|<img (src=(?:(['"])[^>\\\\2]+\2\|[^'">\\\s]+?))([^>]*)width\s*=\s*(["']?)(\d+?)|<img $1 width=$4$5$4$3|siUg
+s|<img (src=(?:(['"])[^>\\\\2]+\2\|[^'">\\\s]+?))([^>]*)width\s*=\s*(["']?)(\d+?)\4|<img $1 width=$4$5$4$3|siUg
 
 
 #################################################################################
@@ -442,6 +442,9 @@ s%<script language="JavaScript">(window\.open|1;''\.concat)\("readme\.eml", null
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.11.2.13  2003/03/18 19:28:59  oes
+#     Fixed a minor problem in the img-reorder filter
+#
 #     Revision 1.11.2.12  2003/03/15 14:06:58  oes
 #      - Assorted refinements, optimizations and fixes in the js-annoyances,
 #        img-reorder, banners-by-size, banners-by-link, webbugs, refresh-tags,
