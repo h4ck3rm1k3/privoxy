@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.72.2.1 2002/08/10 11:25:18 oes Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.72.2.2 2002/11/28 18:15:44 oes Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,11 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.72.2.2  2002/11/28 18:15:44  oes
+ *    Added flag to each cgi_dispatcher that allows or denies
+ *    external linking and removed const qualifier from
+ *    struct list_entry.str.
+ *
  *    Revision 1.72.2.1  2002/08/10 11:25:18  oes
  *    - Include config.h for access to config data
  *    - Include <pcre*.h> depending on where they are
@@ -627,16 +632,12 @@ struct configuration_spec;
 struct list_entry
 {
    /**
-    * The string.  The "const" is only to discourage modification,
-    * you can actually change it if you *really* want to.
-    * You can even freez() it and replace it with another
-    * malloc()d string.  If you replace it with NULL, the list
-    * functions will work, just be careful next time you iterate
-    * through the list in your own code.
-    *
-    * FIXME: Should we remove the "const"?
+    * The string pointer. It must point to a dynamically malloc()ed
+    * string or be NULL for the list functions to work. In the latter
+    * case, just be careful next time you iterate through the list in
+    * your own code.
     */
-   const char *str;
+   char *str;
    
    /** Next entry in the linked list, or NULL if no more. */
    struct list_entry *next;
@@ -1103,6 +1104,9 @@ struct cgi_dispatcher
 
    /** The description of the CGI, to appear on the main menu, or NULL to hide it. */
    const char * const description;
+
+   /** A flag that indicates whether unintentional calls to this CGI can cause damage */
+   int harmless;
 };
 
 
