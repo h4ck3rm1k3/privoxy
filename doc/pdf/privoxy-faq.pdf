@@ -1,0 +1,3773 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj<</Producer(htmldoc 1.8.20 Copyright 1997-2002 Easy Software Products, All Rights Reserved.)/CreationDate(D:20020806224332+0400)/Title(Privoxy Frequently Asked Questions)/Creator(Modular DocBook HTML Stylesheet Version 1.76b+)>>endobj
+2 0 obj<</Type/Encoding/Differences[ 32/space/exclam/quotedbl/numbersign/dollar/percent/ampersand/quotesingle/parenleft/parenright/asterisk/plus/comma/minus/period/slash/zero/one/two/three/four/five/six/seven/eight/nine/colon/semicolon/less/equal/greater/question/at/A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash/bracketright/asciicircum/underscore/grave/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/asciitilde 128/Euro 130/quotesinglbase/florin/quotedblbase/ellipsis/dagger/daggerdbl/circumflex/perthousand/Scaron/guilsinglleft/OE 145/quoteleft/quoteright/quotedblleft/quotedblright/bullet/endash/emdash/tilde/trademark/scaron/guilsinglright/oe 159/Ydieresis/space/exclamdown/cent/sterling/currency/yen/brokenbar/section/dieresis/copyright/ordfeminine/guillemotleft/logicalnot/hyphen/registered/macron/degree/plusminus/twosuperior/threesuperior/acute/mu/paragraph/periodcentered/cedilla/onesuperior/ordmasculine/guillemotright/onequarter/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde/Adieresis/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex/udieresis/yacute/thorn/ydieresis]>>endobj
+3 0 obj<</Type/Font/Subtype/Type1/BaseFont/Courier/Encoding 2 0 R>>endobj
+4 0 obj<</Type/Font/Subtype/Type1/BaseFont/Courier-Bold/Encoding 2 0 R>>endobj
+5 0 obj<</Type/Font/Subtype/Type1/BaseFont/Courier-Oblique/Encoding 2 0 R>>endobj
+6 0 obj<</Type/Font/Subtype/Type1/BaseFont/Times-Roman/Encoding 2 0 R>>endobj
+7 0 obj<</Type/Font/Subtype/Type1/BaseFont/Times-Bold/Encoding 2 0 R>>endobj
+8 0 obj<</Type/Font/Subtype/Type1/BaseFont/Times-Italic/Encoding 2 0 R>>endobj
+9 0 obj<</Type/Font/Subtype/Type1/BaseFont/Times-BoldItalic/Encoding 2 0 R>>endobj
+10 0 obj<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding 2 0 R>>endobj
+11 0 obj<</Type/Font/Subtype/Type1/BaseFont/Helvetica-Bold/Encoding 2 0 R>>endobj
+12 0 obj<</Type/Font/Subtype/Type1/BaseFont/Symbol>>endobj
+13 0 obj<</Subtype/Link/Rect[36.0 685.3 68.4 695.3]/Border[0 0 0]/Dest[501 0 R/XYZ 0 718 0]>>endobj
+14 0 obj<</S/URI/URI(http://www.privoxy.org)>>endobj
+15 0 obj<</Subtype/Link/Rect[124.5 685.3 190.3 695.3]/Border[0 0 0]/A 14 0 R>>endobj
+16 0 obj<</S/URI/URI(http://www.privoxy.org/)>>endobj
+17 0 obj<</Subtype/Link/Rect[330.2 617.8 367.8 630.8]/Border[0 0 0]/A 16 0 R>>endobj
+18 0 obj<</S/Launch/F(index.html)>>endobj
+19 0 obj<</Subtype/Link/Rect[508.6 617.8 569.7 630.8]/Border[0 0 0]/A 18 0 R>>endobj
+20 0 obj<</S/URI/URI(http://www.privoxy.org/faq/)>>endobj
+21 0 obj<</Subtype/Link/Rect[255.7 499.0 383.1 512.0]/Border[0 0 0]/A 20 0 R>>endobj
+22 0 obj<</Subtype/Link/Rect[449.7 499.0 520.6 512.0]/Border[0 0 0]/Dest[499 0 R/XYZ 0 734 0]>>endobj
+23 0 obj<</Subtype/Link/Rect[44.2 431.0 138.4 444.0]/Border[0 0 0]/Dest[-591248737 0 R/XYZ 0 126 0]>>endobj
+24 0 obj<</Subtype/Link/Rect[88.5 417.8 252.6 430.8]/Border[0 0 0]/Dest[471 0 R/XYZ 0 734 0]>>endobj
+25 0 obj<</Subtype/Link/Rect[88.5 404.6 285.3 417.6]/Border[0 0 0]/Dest[471 0 R/XYZ 0 467 0]>>endobj
+26 0 obj<</Subtype/Link/Rect[88.5 391.4 311.5 404.4]/Border[0 0 0]/Dest[471 0 R/XYZ 0 267 0]>>endobj
+27 0 obj<</Subtype/Link/Rect[88.5 378.2 289.0 391.2]/Border[0 0 0]/Dest[473 0 R/XYZ 0 507 0]>>endobj
+28 0 obj<</Subtype/Link/Rect[88.5 365.0 338.1 378.0]/Border[0 0 0]/Dest[473 0 R/XYZ 0 320 0]>>endobj
+29 0 obj<</Subtype/Link/Rect[88.5 351.8 376.0 364.8]/Border[0 0 0]/Dest[475 0 R/XYZ 0 734 0]>>endobj
+30 0 obj<</Subtype/Link/Rect[88.5 338.6 436.8 351.6]/Border[0 0 0]/Dest[475 0 R/XYZ 0 599 0]>>endobj
+31 0 obj<</Subtype/Link/Rect[88.5 325.4 383.0 338.4]/Border[0 0 0]/Dest[475 0 R/XYZ 0 492 0]>>endobj
+32 0 obj<</Subtype/Link/Rect[88.5 312.2 261.1 325.2]/Border[0 0 0]/Dest[475 0 R/XYZ 0 371 0]>>endobj
+33 0 obj<</Subtype/Link/Rect[132.8 299.0 230.8 312.0]/Border[0 0 0]/Dest[475 0 R/XYZ 0 345 0]>>endobj
+34 0 obj<</Subtype/Link/Rect[132.8 285.8 174.6 298.8]/Border[0 0 0]/Dest[475 0 R/XYZ 0 266 0]>>endobj
+35 0 obj<</Subtype/Link/Rect[132.8 272.6 252.6 285.6]/Border[0 0 0]/Dest[475 0 R/XYZ 0 187 0]>>endobj
+36 0 obj<</Subtype/Link/Rect[44.2 259.4 97.7 272.4]/Border[0 0 0]/Dest[477 0 R/XYZ 0 734 0]>>endobj
+37 0 obj<</Subtype/Link/Rect[88.5 246.2 282.2 259.2]/Border[0 0 0]/Dest[477 0 R/XYZ 0 700 0]>>endobj
+38 0 obj<</Subtype/Link/Rect[88.5 233.0 270.9 246.0]/Border[0 0 0]/Dest[477 0 R/XYZ 0 619 0]>>endobj
+39 0 obj<</Subtype/Link/Rect[88.5 219.8 262.0 232.8]/Border[0 0 0]/Dest[477 0 R/XYZ 0 471 0]>>endobj
+40 0 obj<</Subtype/Link/Rect[88.5 206.6 386.7 219.6]/Border[0 0 0]/Dest[477 0 R/XYZ 0 364 0]>>endobj
+41 0 obj<</Subtype/Link/Rect[88.5 193.4 259.3 206.4]/Border[0 0 0]/Dest[477 0 R/XYZ 0 283 0]>>endobj
+42 0 obj<</Subtype/Link/Rect[88.5 180.2 475.9 193.2]/Border[0 0 0]/Dest[479 0 R/XYZ 0 718 0]>>endobj
+43 0 obj<</Subtype/Link/Rect[88.5 167.0 567.8 180.0]/Border[0 0 0]/Dest[479 0 R/XYZ 0 584 0]>>endobj
+44 0 obj<</Subtype/Link/Rect[72.0 153.8 266.6 166.8]/Border[0 0 0]/Dest[479 0 R/XYZ 0 584 0]>>endobj
+45 0 obj<</Subtype/Link/Rect[44.2 140.6 109.3 153.6]/Border[0 0 0]/Dest[479 0 R/XYZ 0 443 0]>>endobj
+46 0 obj<</Subtype/Link/Rect[88.5 127.4 265.4 140.4]/Border[0 0 0]/Dest[479 0 R/XYZ 0 409 0]>>endobj
+47 0 obj<</Subtype/Link/Rect[88.5 114.2 222.6 127.2]/Border[0 0 0]/Dest[479 0 R/XYZ 0 302 0]>>endobj
+48 0 obj<</Subtype/Link/Rect[88.5 101.0 204.4 114.0]/Border[0 0 0]/Dest[479 0 R/XYZ 0 207 0]>>endobj
+49 0 obj<</Subtype/Link/Rect[88.5 87.8 404.3 100.8]/Border[0 0 0]/Dest[481 0 R/XYZ 0 718 0]>>endobj
+50 0 obj<</Subtype/Link/Rect[88.5 74.6 395.6 87.6]/Border[0 0 0]/Dest[481 0 R/XYZ 0 650 0]>>endobj
+51 0 obj<</Subtype/Link/Rect[88.5 61.4 392.6 74.4]/Border[0 0 0]/Dest[481 0 R/XYZ 0 569 0]>>endobj
+52 0 obj[13 0 R
+15 0 R
+17 0 R
+19 0 R
+21 0 R
+22 0 R
+23 0 R
+24 0 R
+25 0 R
+26 0 R
+27 0 R
+28 0 R
+29 0 R
+30 0 R
+31 0 R
+32 0 R
+33 0 R
+34 0 R
+35 0 R
+36 0 R
+37 0 R
+38 0 R
+39 0 R
+40 0 R
+41 0 R
+42 0 R
+43 0 R
+44 0 R
+45 0 R
+46 0 R
+47 0 R
+48 0 R
+49 0 R
+50 0 R
+51 0 R]endobj
+53 0 obj<</Subtype/Link/Rect[88.5 721.0 343.3 734.0]/Border[0 0 0]/Dest[481 0 R/XYZ 0 435 0]>>endobj
+54 0 obj<</Subtype/Link/Rect[88.5 707.8 459.2 720.8]/Border[0 0 0]/Dest[481 0 R/XYZ 0 281 0]>>endobj
+55 0 obj<</Subtype/Link/Rect[88.5 694.6 482.3 707.6]/Border[0 0 0]/Dest[483 0 R/XYZ 0 534 0]>>endobj
+56 0 obj<</Subtype/Link/Rect[94.0 681.4 146.2 694.4]/Border[0 0 0]/Dest[483 0 R/XYZ 0 334 0]>>endobj
+57 0 obj<</Subtype/Link/Rect[149.0 681.4 346.9 694.4]/Border[0 0 0]/Dest[483 0 R/XYZ 0 334 0]>>endobj
+58 0 obj<</Subtype/Link/Rect[94.0 668.2 343.9 681.2]/Border[0 0 0]/Dest[483 0 R/XYZ 0 134 0]>>endobj
+59 0 obj<</Subtype/Link/Rect[94.0 655.0 441.0 668.0]/Border[0 0 0]/Dest[485 0 R/XYZ 0 599 0]>>endobj
+60 0 obj<</Subtype/Link/Rect[94.0 641.8 349.7 654.8]/Border[0 0 0]/Dest[485 0 R/XYZ 0 465 0]>>endobj
+61 0 obj<</Subtype/Link/Rect[94.0 628.6 568.5 641.6]/Border[0 0 0]/Dest[485 0 R/XYZ 0 370 0]>>endobj
+62 0 obj<</Subtype/Link/Rect[72.0 615.4 93.4 628.4]/Border[0 0 0]/Dest[485 0 R/XYZ 0 370 0]>>endobj
+63 0 obj<</Subtype/Link/Rect[94.0 602.2 293.8 615.2]/Border[0 0 0]/Dest[485 0 R/XYZ 0 157 0]>>endobj
+64 0 obj<</Subtype/Link/Rect[94.0 589.0 365.0 602.0]/Border[0 0 0]/Dest[487 0 R/XYZ 0 705 0]>>endobj
+65 0 obj<</Subtype/Link/Rect[94.0 575.8 287.5 588.8]/Border[0 0 0]/Dest[487 0 R/XYZ 0 637 0]>>endobj
+66 0 obj<</Subtype/Link/Rect[44.2 562.6 110.5 575.6]/Border[0 0 0]/Dest[487 0 R/XYZ 0 529 0]>>endobj
+67 0 obj<</Subtype/Link/Rect[88.5 549.4 487.9 562.4]/Border[0 0 0]/Dest[487 0 R/XYZ 0 496 0]>>endobj
+68 0 obj<</Subtype/Link/Rect[88.5 536.2 509.1 549.2]/Border[0 0 0]/Dest[487 0 R/XYZ 0 362 0]>>endobj
+69 0 obj<</Subtype/Link/Rect[88.5 523.0 335.5 536.0]/Border[0 0 0]/Dest[487 0 R/XYZ 0 201 0]>>endobj
+70 0 obj<</Subtype/Link/Rect[88.5 509.8 250.5 522.8]/Border[0 0 0]/Dest[489 0 R/XYZ 0 626 0]>>endobj
+71 0 obj<</Subtype/Link/Rect[88.5 496.6 213.2 509.6]/Border[0 0 0]/Dest[489 0 R/XYZ 0 558 0]>>endobj
+72 0 obj<</Subtype/Link/Rect[88.5 483.4 229.9 496.4]/Border[0 0 0]/Dest[489 0 R/XYZ 0 490 0]>>endobj
+73 0 obj<</Subtype/Link/Rect[88.5 470.2 274.9 483.2]/Border[0 0 0]/Dest[489 0 R/XYZ 0 224 0]>>endobj
+74 0 obj<</Subtype/Link/Rect[88.5 457.0 450.9 470.0]/Border[0 0 0]/Dest[491 0 R/XYZ 0 665 0]>>endobj
+75 0 obj<</Subtype/Link/Rect[88.5 443.8 380.7 456.8]/Border[0 0 0]/Dest[491 0 R/XYZ 0 373 0]>>endobj
+76 0 obj<</Subtype/Link/Rect[94.0 430.6 324.1 443.6]/Border[0 0 0]/Dest[491 0 R/XYZ 0 305 0]>>endobj
+77 0 obj<</Subtype/Link/Rect[94.0 417.4 469.5 430.4]/Border[0 0 0]/Dest[491 0 R/XYZ 0 237 0]>>endobj
+78 0 obj<</Subtype/Link/Rect[94.0 404.2 305.7 417.2]/Border[0 0 0]/Dest[493 0 R/XYZ 0 734 0]>>endobj
+79 0 obj<</Subtype/Link/Rect[94.0 391.0 487.0 404.0]/Border[0 0 0]/Dest[493 0 R/XYZ 0 560 0]>>endobj
+80 0 obj<</Subtype/Link/Rect[94.0 377.8 274.3 390.8]/Border[0 0 0]/Dest[493 0 R/XYZ 0 413 0]>>endobj
+81 0 obj<</Subtype/Link/Rect[94.0 364.6 332.7 377.6]/Border[0 0 0]/Dest[493 0 R/XYZ 0 345 0]>>endobj
+82 0 obj<</Subtype/Link/Rect[94.0 351.4 402.9 364.4]/Border[0 0 0]/Dest[493 0 R/XYZ 0 263 0]>>endobj
+83 0 obj<</Subtype/Link/Rect[44.2 338.2 119.7 351.2]/Border[0 0 0]/Dest[495 0 R/XYZ 0 554 0]>>endobj
+84 0 obj<</Subtype/Link/Rect[88.5 325.0 421.0 338.0]/Border[0 0 0]/Dest[495 0 R/XYZ 0 520 0]>>endobj
+85 0 obj<</Subtype/Link/Rect[88.5 311.8 412.7 324.8]/Border[0 0 0]/Dest[495 0 R/XYZ 0 413 0]>>endobj
+86 0 obj<</Subtype/Link/Rect[88.5 298.6 391.9 311.6]/Border[0 0 0]/Dest[495 0 R/XYZ 0 292 0]>>endobj
+87 0 obj<</Subtype/Link/Rect[88.5 285.4 416.9 298.4]/Border[0 0 0]/Dest[497 0 R/XYZ 0 639 0]>>endobj
+88 0 obj<</Subtype/Link/Rect[88.5 272.2 391.3 285.2]/Border[0 0 0]/Dest[497 0 R/XYZ 0 303 0]>>endobj
+89 0 obj<</Subtype/Link/Rect[88.5 259.0 503.3 272.0]/Border[0 0 0]/Dest[497 0 R/XYZ 0 232 0]>>endobj
+90 0 obj<</Subtype/Link/Rect[44.2 245.8 331.1 258.8]/Border[0 0 0]/Dest[499 0 R/XYZ 0 734 0]>>endobj
+91 0 obj<</Subtype/Link/Rect[88.5 232.6 144.7 245.6]/Border[0 0 0]/Dest[499 0 R/XYZ 0 638 0]>>endobj
+92 0 obj<</Subtype/Link/Rect[88.5 219.4 145.9 232.4]/Border[0 0 0]/Dest[499 0 R/XYZ 0 540 0]>>endobj
+93 0 obj<</Subtype/Link/Rect[88.5 206.2 190.2 219.2]/Border[0 0 0]/Dest[499 0 R/XYZ 0 336 0]>>endobj
+94 0 obj<</Subtype/Link/Rect[88.5 193.0 303.1 206.0]/Border[0 0 0]/Dest[499 0 R/XYZ 0 265 0]>>endobj
+95 0 obj<</Subtype/Link/Rect[88.5 179.8 116.9 192.8]/Border[0 0 0]/Dest[499 0 R/XYZ 0 140 0]>>endobj
+96 0 obj<</Subtype/Link/Rect[44.2 166.6 222.7 179.6]/Border[0 0 0]/Dest[501 0 R/XYZ 0 718 0]>>endobj
+97 0 obj<</Subtype/Link/Rect[88.5 153.4 124.9 166.4]/Border[0 0 0]/Dest[501 0 R/XYZ 0 577 0]>>endobj
+98 0 obj<</Subtype/Link/Rect[88.5 140.2 124.2 153.2]/Border[0 0 0]/Dest[501 0 R/XYZ 0 347 0]>>endobj
+99 0 obj[53 0 R
+54 0 R
+55 0 R
+56 0 R
+57 0 R
+58 0 R
+59 0 R
+60 0 R
+61 0 R
+62 0 R
+63 0 R
+64 0 R
+65 0 R
+66 0 R
+67 0 R
+68 0 R
+69 0 R
+70 0 R
+71 0 R
+72 0 R
+73 0 R
+74 0 R
+75 0 R
+76 0 R
+77 0 R
+78 0 R
+79 0 R
+80 0 R
+81 0 R
+82 0 R
+83 0 R
+84 0 R
+85 0 R
+86 0 R
+87 0 R
+88 0 R
+89 0 R
+90 0 R
+91 0 R
+92 0 R
+93 0 R
+94 0 R
+95 0 R
+96 0 R
+97 0 R
+98 0 R]endobj
+100 0 obj<</S/URI/URI(http://www.junkbusters.com/ijb.html)>>endobj
+101 0 obj<</Subtype/Link/Rect[171.6 694.6 259.0 707.6]/Border[0 0 0]/A 100 0 R>>endobj
+102 0 obj<</S/URI/URI(http://www.junkbusters.com/)>>endobj
+103 0 obj<</Subtype/Link/Rect[384.6 694.6 495.2 707.6]/Border[0 0 0]/A 102 0 R>>endobj
+104 0 obj<</S/URI/URI(http://www.junkbusters.com/ijbdist.html#release)>>endobj
+105 0 obj<</Subtype/Link/Rect[242.2 628.6 275.5 641.6]/Border[0 0 0]/A 104 0 R>>endobj
+106 0 obj<</S/URI/URI(http://www.junkbusters.com)>>endobj
+107 0 obj<</Subtype/Link/Rect[342.1 628.6 452.7 641.6]/Border[0 0 0]/A 106 0 R>>endobj
+108 0 obj<</S/URI/URI(http://www.gnu.org/licenses/gpl.html)>>endobj
+109 0 obj<</Subtype/Link/Rect[142.6 615.4 166.1 628.4]/Border[0 0 0]/A 108 0 R>>endobj
+110 0 obj<</S/URI/URI(http://www.waldherr.org/junkbuster/)>>endobj
+111 0 obj<</Subtype/Link/Rect[223.3 589.0 372.1 602.0]/Border[0 0 0]/A 110 0 R>>endobj
+112 0 obj<</S/URI/URI(http://www.privoxy.org/user-manual/copyright.html#AUTHORS)>>endobj
+113 0 obj<</Subtype/Link/Rect[87.3 523.0 137.7 536.0]/Border[0 0 0]/A 112 0 R>>endobj
+114 0 obj<</S/URI/URI(http://www.privoxy.org/user-manual/introduction.html#FEATURES)>>endobj
+115 0 obj<</Subtype/Link/Rect[161.9 509.8 220.5 522.8]/Border[0 0 0]/A 114 0 R>>endobj
+116 0 obj<</S/URI/URI(http://junkbusters.com/)>>endobj
+117 0 obj<</Subtype/Link/Rect[36.0 389.0 143.9 402.0]/Border[0 0 0]/A 116 0 R>>endobj
+118 0 obj<</S/URI/URI(http://junkbusters.com/)>>endobj
+119 0 obj<</Subtype/Link/Rect[92.5 336.2 203.1 349.2]/Border[0 0 0]/A 118 0 R>>endobj
+120 0 obj<</S/Launch/F(upgradersnote.html)>>endobj
+121 0 obj<</Subtype/Link/Rect[224.5 149.4 303.6 162.4]/Border[0 0 0]/A 120 0 R>>endobj
+122 0 obj<</S/URI/URI(http://config.privoxy.org/)>>endobj
+123 0 obj<</Subtype/Link/Rect[336.9 96.6 451.5 109.6]/Border[0 0 0]/A 122 0 R>>endobj
+124 0 obj<</S/URI/URI(http://p.p/)>>endobj
+125 0 obj<</Subtype/Link/Rect[496.4 96.6 542.2 109.6]/Border[0 0 0]/A 124 0 R>>endobj
+126 0 obj[101 0 R
+103 0 R
+105 0 R
+107 0 R
+109 0 R
+111 0 R
+113 0 R
+115 0 R
+117 0 R
+119 0 R
+121 0 R
+123 0 R
+125 0 R]endobj
+127 0 obj<</S/Launch/F(#AF-PATTERNS)>>endobj
+128 0 obj<</Subtype/Link/Rect[491.5 228.6 553.8 241.6]/Border[0 0 0]/A 127 0 R>>endobj
+129 0 obj[128 0 R]endobj
+130 0 obj<</Subtype/Link/Rect[504.4 628.6 536.4 641.6]/Border[0 0 0]/Dest[495 0 R/XYZ 0 292 0]>>endobj
+131 0 obj<</Subtype/Link/Rect[36.0 615.4 172.3 628.4]/Border[0 0 0]/Dest[495 0 R/XYZ 0 292 0]>>endobj
+132 0 obj<</S/URI/URI(http://www.gnu.org/copyleft/gpl.html)>>endobj
+133 0 obj<</Subtype/Link/Rect[163.7 453.0 326.5 466.0]/Border[0 0 0]/A 132 0 R>>endobj
+134 0 obj<</Subtype/Link/Rect[234.9 439.8 282.2 452.8]/Border[0 0 0]/Dest[501 0 R/XYZ 0 718 0]>>endobj
+135 0 obj<</S/URI/URI(mailto:developers@privoxy.org)>>endobj
+136 0 obj<</Subtype/Link/Rect[95.9 281.8 160.7 294.8]/Border[0 0 0]/A 135 0 R>>endobj
+137 0 obj<</S/URI/URI(https://sourceforge.net/account/register.php)>>endobj
+138 0 obj<</Subtype/Link/Rect[67.8 137.4 223.0 150.4]/Border[0 0 0]/A 137 0 R>>endobj
+139 0 obj<</S/URI/URI(mailto:developers@privoxy.org)>>endobj
+140 0 obj<</Subtype/Link/Rect[325.6 137.4 428.6 150.4]/Border[0 0 0]/A 139 0 R>>endobj
+141 0 obj<</S/Launch/F(index.html)>>endobj
+142 0 obj<</Subtype/Link/Rect[494.6 137.4 549.4 150.4]/Border[0 0 0]/A 141 0 R>>endobj
+143 0 obj<</S/Launch/F(index.html)>>endobj
+144 0 obj<</Subtype/Link/Rect[36.0 124.2 69.6 137.2]/Border[0 0 0]/A 143 0 R>>endobj
+145 0 obj<</S/URI/URI(http://sourceforge.net/cvs/?group_id=11118)>>endobj
+146 0 obj<</Subtype/Link/Rect[335.5 97.8 407.0 110.8]/Border[0 0 0]/A 145 0 R>>endobj
+147 0 obj[130 0 R
+131 0 R
+133 0 R
+134 0 R
+136 0 R
+138 0 R
+140 0 R
+142 0 R
+144 0 R
+146 0 R]endobj
+148 0 obj<</S/Launch/F(upgradersnote.html)>>endobj
+149 0 obj<</Subtype/Link/Rect[212.3 406.2 291.4 419.2]/Border[0 0 0]/A 148 0 R>>endobj
+150 0 obj<</S/Launch/F(installation.html)>>endobj
+151 0 obj<</Subtype/Link/Rect[310.0 406.2 396.8 419.2]/Border[0 0 0]/A 150 0 R>>endobj
+152 0 obj<</S/Launch/F(index.html)>>endobj
+153 0 obj<</Subtype/Link/Rect[424.3 406.2 480.5 419.2]/Border[0 0 0]/A 152 0 R>>endobj
+154 0 obj<</S/Launch/F(#LISTEN-ADDRESS)>>endobj
+155 0 obj<</Subtype/Link/Rect[132.8 204.2 198.6 217.2]/Border[0 0 0]/A 154 0 R>>endobj
+156 0 obj[149 0 R
+151 0 R
+153 0 R
+155 0 R]endobj
+157 0 obj<</S/URI/URI(http://config.privoxy.org/)>>endobj
+158 0 obj<</Subtype/Link/Rect[265.4 653.0 380.0 666.0]/Border[0 0 0]/A 157 0 R>>endobj
+159 0 obj<</S/Launch/F(#LOGFILE)>>endobj
+160 0 obj<</Subtype/Link/Rect[96.8 600.2 131.0 613.2]/Border[0 0 0]/A 159 0 R>>endobj
+161 0 obj<</S/URI/URI(http://sourceforge.net/project/showfiles.php?group_id=11118)>>endobj
+162 0 obj<</Subtype/Link/Rect[514.1 370.6 569.7 383.6]/Border[0 0 0]/A 161 0 R>>endobj
+163 0 obj<</S/URI/URI(http://sf.net/projects/ijbswa/)>>endobj
+164 0 obj<</Subtype/Link/Rect[62.6 357.4 119.4 370.4]/Border[0 0 0]/A 163 0 R>>endobj
+165 0 obj<</S/URI/URI(http://lists.sourceforge.net/lists/listinfo/ijbswa-announce/)>>endobj
+166 0 obj<</Subtype/Link/Rect[488.1 331.0 561.1 344.0]/Border[0 0 0]/A 165 0 R>>endobj
+167 0 obj<</S/URI/URI(http://lists.sourceforge.net/lists/listinfo/ijbswa-announce/)>>endobj
+168 0 obj<</Subtype/Link/Rect[36.0 317.8 130.7 330.8]/Border[0 0 0]/A 167 0 R>>endobj
+169 0 obj<</S/Launch/F(actions-file.html)>>endobj
+170 0 obj<</Subtype/Link/Rect[36.0 168.6 91.9 181.6]/Border[0 0 0]/A 169 0 R>>endobj
+171 0 obj<</S/Launch/F(#ACTIONS)>>endobj
+172 0 obj<</Subtype/Link/Rect[172.9 168.6 206.8 181.6]/Border[0 0 0]/A 171 0 R>>endobj
+173 0 obj<</S/Launch/F(#AF-PATTERNS)>>endobj
+174 0 obj<</Subtype/Link/Rect[158.5 115.8 216.5 128.8]/Border[0 0 0]/A 173 0 R>>endobj
+175 0 obj[158 0 R
+160 0 R
+162 0 R
+164 0 R
+166 0 R
+168 0 R
+170 0 R
+172 0 R
+174 0 R]endobj
+176 0 obj<</S/Launch/F(actions-file.html)>>endobj
+177 0 obj<</Subtype/Link/Rect[359.8 679.4 446.3 692.4]/Border[0 0 0]/A 176 0 R>>endobj
+178 0 obj<</S/Launch/F(index.html)>>endobj
+179 0 obj<</Subtype/Link/Rect[473.8 679.4 530.0 692.4]/Border[0 0 0]/A 178 0 R>>endobj
+180 0 obj<</S/Launch/F(#ACTIONS)>>endobj
+181 0 obj<</Subtype/Link/Rect[80.3 666.2 156.1 679.2]/Border[0 0 0]/A 180 0 R>>endobj
+182 0 obj<</S/Launch/F(#ACT-EXAMPLES)>>endobj
+183 0 obj<</Subtype/Link/Rect[187.8 666.2 273.7 679.2]/Border[0 0 0]/A 182 0 R>>endobj
+184 0 obj<</S/URI/URI(http://config.privoxy.org/)>>endobj
+185 0 obj<</Subtype/Link/Rect[285.4 598.2 400.0 611.2]/Border[0 0 0]/A 184 0 R>>endobj
+186 0 obj<</S/URI/URI(http://p.p/)>>endobj
+187 0 obj<</Subtype/Link/Rect[446.8 598.2 492.6 611.2]/Border[0 0 0]/A 186 0 R>>endobj
+188 0 obj<</S/URI/URI(http://config.privoxy.org/show-status)>>endobj
+189 0 obj<</Subtype/Link/Rect[40.5 585.0 221.6 598.0]/Border[0 0 0]/A 188 0 R>>endobj
+190 0 obj<</S/Launch/F(actions-file.html)>>endobj
+191 0 obj<</Subtype/Link/Rect[123.4 490.6 208.6 503.6]/Border[0 0 0]/A 190 0 R>>endobj
+192 0 obj<</S/Launch/F(index.html)>>endobj
+193 0 obj<</Subtype/Link/Rect[236.1 490.6 292.3 503.6]/Border[0 0 0]/A 192 0 R>>endobj
+194 0 obj<</S/Launch/F(#CRUNCH-INCOMING-COOKIES)>>endobj
+195 0 obj<</Subtype/Link/Rect[53.8 309.0 178.0 320.0]/Border[0 0 0]/A 194 0 R>>endobj
+196 0 obj<</S/Launch/F(#CRUNCH-OUTGOING-COOKIES)>>endobj
+197 0 obj<</Subtype/Link/Rect[188.8 309.0 313.0 320.0]/Border[0 0 0]/A 196 0 R>>endobj
+198 0 obj<</S/Launch/F(#SESSION-COOKIES-ONLY)>>endobj
+199 0 obj<</Subtype/Link/Rect[323.8 309.0 431.8 320.0]/Border[0 0 0]/A 198 0 R>>endobj
+200 0 obj<</S/URI/URI(http://config.privoxy.org/show-status)>>endobj
+201 0 obj<</Subtype/Link/Rect[252.1 229.0 421.2 242.0]/Border[0 0 0]/A 200 0 R>>endobj
+202 0 obj[177 0 R
+179 0 R
+181 0 R
+183 0 R
+185 0 R
+187 0 R
+189 0 R
+191 0 R
+193 0 R
+195 0 R
+197 0 R
+199 0 R
+201 0 R]endobj
+203 0 obj<</S/Launch/F(index.html)>>endobj
+204 0 obj<</Subtype/Link/Rect[525.1 563.6 546.2 576.6]/Border[0 0 0]/A 203 0 R>>endobj
+205 0 obj<</S/Launch/F(index.html)>>endobj
+206 0 obj<</Subtype/Link/Rect[36.0 550.4 68.4 563.4]/Border[0 0 0]/A 205 0 R>>endobj
+207 0 obj<</S/Launch/F(#ENABLE-EDIT-ACTIONS)>>endobj
+208 0 obj<</Subtype/Link/Rect[203.0 403.2 328.4 416.2]/Border[0 0 0]/A 207 0 R>>endobj
+209 0 obj<</S/Launch/F(#ENABLE-REMOTE-TOGGLE)>>endobj
+210 0 obj<</Subtype/Link/Rect[372.0 403.2 504.0 416.2]/Border[0 0 0]/A 209 0 R>>endobj
+211 0 obj<</S/Launch/F(config.html)>>endobj
+212 0 obj<</Subtype/Link/Rect[549.2 403.2 573.9 416.2]/Border[0 0 0]/A 211 0 R>>endobj
+213 0 obj<</S/Launch/F(config.html)>>endobj
+214 0 obj<</Subtype/Link/Rect[36.0 390.0 112.7 403.0]/Border[0 0 0]/A 213 0 R>>endobj
+215 0 obj<</S/Launch/F(filter-file.html)>>endobj
+216 0 obj<</Subtype/Link/Rect[55.9 295.6 148.3 308.6]/Border[0 0 0]/A 215 0 R>>endobj
+217 0 obj<</S/Launch/F(#FILTER)>>endobj
+218 0 obj<</Subtype/Link/Rect[255.4 256.0 324.6 269.0]/Border[0 0 0]/A 217 0 R>>endobj
+219 0 obj<</S/URI/URI(http://config.privoxy.org/show-status)>>endobj
+220 0 obj<</Subtype/Link/Rect[337.5 150.4 469.5 163.4]/Border[0 0 0]/A 219 0 R>>endobj
+221 0 obj<</S/Launch/F(config.html)>>endobj
+222 0 obj<</Subtype/Link/Rect[152.4 82.4 256.6 95.4]/Border[0 0 0]/A 221 0 R>>endobj
+223 0 obj<</S/Launch/F(#LISTEN-ADDRESS)>>endobj
+224 0 obj<</Subtype/Link/Rect[319.8 82.4 412.2 95.4]/Border[0 0 0]/A 223 0 R>>endobj
+225 0 obj[204 0 R
+206 0 R
+208 0 R
+210 0 R
+212 0 R
+214 0 R
+216 0 R
+218 0 R
+220 0 R
+222 0 R
+224 0 R]endobj
+226 0 obj<</S/Launch/F(#ACCESS-CONTROL)>>endobj
+227 0 obj<</Subtype/Link/Rect[447.9 627.8 568.9 640.8]/Border[0 0 0]/A 226 0 R>>endobj
+228 0 obj<</S/Launch/F(#SET-IMAGE-BLOCKER)>>endobj
+229 0 obj<</Subtype/Link/Rect[316.4 559.8 458.3 572.8]/Border[0 0 0]/A 228 0 R>>endobj
+230 0 obj<</S/Launch/F(#HANDLE-AS-IMAGE)>>endobj
+231 0 obj<</Subtype/Link/Rect[470.7 533.4 569.7 546.4]/Border[0 0 0]/A 230 0 R>>endobj
+232 0 obj<</S/Launch/F(#BLOCK)>>endobj
+233 0 obj<</Subtype/Link/Rect[55.2 520.2 88.2 533.2]/Border[0 0 0]/A 232 0 R>>endobj
+234 0 obj<</S/Launch/F(#SET-IMAGE-BLOCKER)>>endobj
+235 0 obj<</Subtype/Link/Rect[228.5 493.8 370.3 506.8]/Border[0 0 0]/A 234 0 R>>endobj
+236 0 obj<</S/URI/URI(http://config.privoxy.org/show-status)>>endobj
+237 0 obj<</Subtype/Link/Rect[208.1 480.6 340.2 493.6]/Border[0 0 0]/A 236 0 R>>endobj
+238 0 obj<</Subtype/Link/Rect[103.5 425.8 298.9 438.8]/Border[0 0 0]/Dest[473 0 R/XYZ 0 320 0]>>endobj
+239 0 obj<</S/URI/URI(http://sourceforge.net/tracker/?func=detail&atid=361118&aid=485617&group_id=11118)>>endobj
+240 0 obj<</Subtype/Link/Rect[36.0 65.4 429.6 78.4]/Border[0 0 0]/A 239 0 R>>endobj
+241 0 obj[227 0 R
+229 0 R
+231 0 R
+233 0 R
+235 0 R
+237 0 R
+238 0 R
+240 0 R]endobj
+242 0 obj<</S/Launch/F(#FORWARDING)>>endobj
+243 0 obj<</Subtype/Link/Rect[520.5 666.2 572.2 679.2]/Border[0 0 0]/A 242 0 R>>endobj
+244 0 obj<</S/Launch/F(#FORWARDING)>>endobj
+245 0 obj<</Subtype/Link/Rect[36.0 653.0 68.4 666.0]/Border[0 0 0]/A 244 0 R>>endobj
+246 0 obj<</S/Launch/F(index.html)>>endobj
+247 0 obj<</Subtype/Link/Rect[95.9 653.0 152.1 666.0]/Border[0 0 0]/A 246 0 R>>endobj
+248 0 obj<</S/Launch/F(#FORWARDING)>>endobj
+249 0 obj<</Subtype/Link/Rect[425.3 558.6 512.0 571.6]/Border[0 0 0]/A 248 0 R>>endobj
+250 0 obj<</S/Launch/F(index.html)>>endobj
+251 0 obj<</Subtype/Link/Rect[539.5 558.6 560.6 571.6]/Border[0 0 0]/A 250 0 R>>endobj
+252 0 obj<</S/Launch/F(index.html)>>endobj
+253 0 obj<</Subtype/Link/Rect[36.0 545.4 68.4 558.4]/Border[0 0 0]/A 252 0 R>>endobj
+254 0 obj<</S/URI/URI(http://www.transproxy.nlc.net.au/)>>endobj
+255 0 obj<</Subtype/Link/Rect[407.5 545.4 556.0 558.4]/Border[0 0 0]/A 254 0 R>>endobj
+256 0 obj<</S/Launch/F(#FILTER)>>endobj
+257 0 obj<</Subtype/Link/Rect[153.1 391.0 192.7 404.0]/Border[0 0 0]/A 256 0 R>>endobj
+258 0 obj<</S/Launch/F(#DEANIMATE-GIFS)>>endobj
+259 0 obj<</Subtype/Link/Rect[207.4 391.0 299.8 404.0]/Border[0 0 0]/A 258 0 R>>endobj
+260 0 obj<</S/Launch/F(#FILTER)>>endobj
+261 0 obj<</Subtype/Link/Rect[101.4 323.0 141.0 336.0]/Border[0 0 0]/A 260 0 R>>endobj
+262 0 obj<</S/Launch/F(#DEANIMATE-GIFS)>>endobj
+263 0 obj<</Subtype/Link/Rect[416.9 323.0 509.3 336.0]/Border[0 0 0]/A 262 0 R>>endobj
+264 0 obj<</S/URI/URI(http://config.privoxy.org/)>>endobj
+265 0 obj<</Subtype/Link/Rect[36.0 162.6 147.8 175.6]/Border[0 0 0]/A 264 0 R>>endobj
+266 0 obj<</S/URI/URI(http://p.p/)>>endobj
+267 0 obj<</Subtype/Link/Rect[387.0 162.6 432.8 175.6]/Border[0 0 0]/A 266 0 R>>endobj
+268 0 obj<</S/URI/URI(http://config.privoxy.org/)>>endobj
+269 0 obj<</Subtype/Link/Rect[404.4 96.6 519.0 109.6]/Border[0 0 0]/A 268 0 R>>endobj
+270 0 obj[243 0 R
+245 0 R
+247 0 R
+249 0 R
+251 0 R
+253 0 R
+255 0 R
+257 0 R
+259 0 R
+261 0 R
+263 0 R
+265 0 R
+267 0 R
+269 0 R]endobj
+271 0 obj<</S/Launch/F(actions-file.html)>>endobj
+272 0 obj<</Subtype/Link/Rect[245.7 681.4 301.3 694.4]/Border[0 0 0]/A 271 0 R>>endobj
+273 0 obj<</S/Launch/F(actions-file.html)>>endobj
+274 0 obj<</Subtype/Link/Rect[339.7 587.0 395.3 600.0]/Border[0 0 0]/A 273 0 R>>endobj
+275 0 obj<</Subtype/Link/Rect[171.3 519.0 242.2 532.0]/Border[0 0 0]/Dest[499 0 R/XYZ 0 734 0]>>endobj
+276 0 obj<</S/URI/URI(http://www.multiproxy.org/anon_list.htm)>>endobj
+277 0 obj<</Subtype/Link/Rect[258.7 305.8 327.8 318.8]/Border[0 0 0]/A 276 0 R>>endobj
+278 0 obj<</S/URI/URI(http://anon.inf.tu-dresden.de/index_en.html)>>endobj
+279 0 obj<</Subtype/Link/Rect[39.7 279.4 233.5 292.4]/Border[0 0 0]/A 278 0 R>>endobj
+280 0 obj[272 0 R
+274 0 R
+275 0 R
+277 0 R
+279 0 R]endobj
+281 0 obj<</S/URI/URI(http://www.squid-cache.org/)>>endobj
+282 0 obj<</Subtype/Link/Rect[314.7 334.2 343.1 347.2]/Border[0 0 0]/A 281 0 R>>endobj
+283 0 obj<</S/Launch/F(#FORWARDING)>>endobj
+284 0 obj<</Subtype/Link/Rect[279.9 321.0 366.7 334.0]/Border[0 0 0]/A 283 0 R>>endobj
+285 0 obj<</S/Launch/F(index.html)>>endobj
+286 0 obj<</Subtype/Link/Rect[394.2 321.0 450.4 334.0]/Border[0 0 0]/A 285 0 R>>endobj
+287 0 obj[282 0 R
+284 0 R
+286 0 R]endobj
+288 0 obj<</S/Launch/F(#ACCESS-CONTROL)>>endobj
+289 0 obj<</Subtype/Link/Rect[442.9 468.2 563.9 481.2]/Border[0 0 0]/A 288 0 R>>endobj
+290 0 obj<</S/Launch/F(#ACCESS-CONTROL)>>endobj
+291 0 obj<</Subtype/Link/Rect[36.0 455.0 68.4 468.0]/Border[0 0 0]/A 290 0 R>>endobj
+292 0 obj<</S/URI/URI(http://config.privoxy.org/toggle)>>endobj
+293 0 obj<</Subtype/Link/Rect[427.4 373.8 569.5 386.8]/Border[0 0 0]/A 292 0 R>>endobj
+294 0 obj<</S/Launch/F(#BOOKMARKLETS)>>endobj
+295 0 obj<</Subtype/Link/Rect[68.1 360.6 166.5 373.6]/Border[0 0 0]/A 294 0 R>>endobj
+296 0 obj<</S/URI/URI(http://www.privoxy.org/)>>endobj
+297 0 obj<</Subtype/Link/Rect[37.6 196.6 145.1 209.6]/Border[0 0 0]/A 296 0 R>>endobj
+298 0 obj<</S/URI/URI(http://www.privoxy.org/faq/)>>endobj
+299 0 obj<</Subtype/Link/Rect[37.6 167.0 162.3 180.0]/Border[0 0 0]/A 298 0 R>>endobj
+300 0 obj<</S/URI/URI(http://sourceforge.net/projects/ijbswa/)>>endobj
+301 0 obj<</Subtype/Link/Rect[37.6 137.5 204.7 150.5]/Border[0 0 0]/A 300 0 R>>endobj
+302 0 obj<</S/URI/URI(http://sourceforge.net)>>endobj
+303 0 obj<</Subtype/Link/Rect[348.6 137.5 407.6 150.5]/Border[0 0 0]/A 302 0 R>>endobj
+304 0 obj<</S/URI/URI(http://config.privoxy.org/)>>endobj
+305 0 obj<</Subtype/Link/Rect[37.6 107.9 149.4 120.9]/Border[0 0 0]/A 304 0 R>>endobj
+306 0 obj<</S/URI/URI(http://p.p/)>>endobj
+307 0 obj<</Subtype/Link/Rect[514.3 107.9 560.2 120.9]/Border[0 0 0]/A 306 0 R>>endobj
+308 0 obj<</S/Launch/F(actions','Feedback','screenx='+w+',width='+w+',height='+h+',scrollbars=yes,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no'\).focus\(\)\);)>>endobj
+309 0 obj<</Subtype/Link/Rect[37.6 78.3 179.4 91.3]/Border[0 0 0]/A 308 0 R>>endobj
+310 0 obj[289 0 R
+291 0 R
+293 0 R
+295 0 R
+297 0 R
+299 0 R
+301 0 R
+303 0 R
+305 0 R
+307 0 R
+309 0 R]endobj
+311 0 obj<</S/URI/URI(http://www.junkbusters.com/ht/en/cookies.html)>>endobj
+312 0 obj<</Subtype/Link/Rect[37.6 719.4 247.5 732.4]/Border[0 0 0]/A 311 0 R>>endobj
+313 0 obj<</S/URI/URI(http://www.junkbusters.com/ijb.html)>>endobj
+314 0 obj<</Subtype/Link/Rect[37.6 689.8 200.5 702.8]/Border[0 0 0]/A 313 0 R>>endobj
+315 0 obj<</S/URI/URI(http://www.waldherr.org/junkbuster/)>>endobj
+316 0 obj<</Subtype/Link/Rect[37.6 660.3 199.5 673.3]/Border[0 0 0]/A 315 0 R>>endobj
+317 0 obj<</S/URI/URI(http://privacy.net/analyze/)>>endobj
+318 0 obj<</Subtype/Link/Rect[37.6 630.7 152.8 643.7]/Border[0 0 0]/A 317 0 R>>endobj
+319 0 obj<</S/URI/URI(http://www.squid-cache.org/)>>endobj
+320 0 obj<</Subtype/Link/Rect[37.6 601.1 166.0 614.1]/Border[0 0 0]/A 319 0 R>>endobj
+321 0 obj<</S/URI/URI(http://www.privoxy.org/developer-manual/)>>endobj
+322 0 obj<</Subtype/Link/Rect[37.6 571.5 230.2 584.5]/Border[0 0 0]/A 321 0 R>>endobj
+323 0 obj<</S/Launch/F(#LISTEN-ADDRESS)>>endobj
+324 0 obj<</Subtype/Link/Rect[227.8 428.7 351.1 441.7]/Border[0 0 0]/A 323 0 R>>endobj
+325 0 obj<</S/Launch/F(config.html)>>endobj
+326 0 obj<</Subtype/Link/Rect[406.3 428.7 510.4 441.7]/Border[0 0 0]/A 325 0 R>>endobj
+327 0 obj<</S/URI/URI(http://config.privoxy.org/show-url-info)>>endobj
+328 0 obj<</Subtype/Link/Rect[36.0 307.9 213.4 320.9]/Border[0 0 0]/A 327 0 R>>endobj
+329 0 obj<</S/URI/URI(http://config.privoxy.org/toggle)>>endobj
+330 0 obj<</Subtype/Link/Rect[386.2 253.1 528.3 266.1]/Border[0 0 0]/A 329 0 R>>endobj
+331 0 obj<</S/URI/URI(http://config.privoxy.org/show-url-info)>>endobj
+332 0 obj<</Subtype/Link/Rect[137.4 200.3 317.6 213.3]/Border[0 0 0]/A 331 0 R>>endobj
+333 0 obj<</S/URI/URI(http://config.privoxy.org/show-status)>>endobj
+334 0 obj<</Subtype/Link/Rect[235.8 173.9 404.9 186.9]/Border[0 0 0]/A 333 0 R>>endobj
+335 0 obj[312 0 R
+314 0 R
+316 0 R
+318 0 R
+320 0 R
+322 0 R
+324 0 R
+326 0 R
+328 0 R
+330 0 R
+332 0 R
+334 0 R]endobj
+336 0 obj<</S/Launch/F(#ACTIONSANAT)>>endobj
+337 0 obj<</Subtype/Link/Rect[289.0 655.0 391.7 668.0]/Border[0 0 0]/A 336 0 R>>endobj
+338 0 obj<</S/Launch/F(#ACT-EXAMPLES)>>endobj
+339 0 obj<</Subtype/Link/Rect[466.6 655.0 535.0 668.0]/Border[0 0 0]/A 338 0 R>>endobj
+340 0 obj[337 0 R
+339 0 R]endobj
+341 0 obj<</S/URI/URI(http://sourceforge.net/)>>endobj
+342 0 obj<</Subtype/Link/Rect[203.1 595.4 262.1 608.4]/Border[0 0 0]/A 341 0 R>>endobj
+343 0 obj<</S/URI/URI(http://sourceforge.net/tracker/?group_id=11118&atid=211118)>>endobj
+344 0 obj<</Subtype/Link/Rect[36.0 582.2 309.6 595.2]/Border[0 0 0]/A 343 0 R>>endobj
+345 0 obj<</S/URI/URI(http://lists.sourceforge.net/lists/listinfo/ijbswa-users)>>endobj
+346 0 obj<</Subtype/Link/Rect[305.1 555.8 383.1 568.8]/Border[0 0 0]/A 345 0 R>>endobj
+347 0 obj<</S/URI/URI(http://sourceforge.net/tracker/?group_id=11118&atid=111118)>>endobj
+348 0 obj<</Subtype/Link/Rect[262.1 497.4 538.4 510.4]/Border[0 0 0]/A 347 0 R>>endobj
+349 0 obj<</S/URI/URI(http://sourceforge.net/tracker/?func=add&group_id=11118&atid=111118)>>endobj
+350 0 obj<</Subtype/Link/Rect[61.4 457.8 118.2 470.8]/Border[0 0 0]/A 349 0 R>>endobj
+351 0 obj<</S/Launch/F(toggle?mini=y&set=disabled','ijbstatus','width=250,height=100,resizable=yes,scrollbars=no,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no'\).focus\(\)\);)>>endobj
+352 0 obj<</Subtype/Link/Rect[438.4 431.4 493.4 444.4]/Border[0 0 0]/A 351 0 R>>endobj
+353 0 obj<</S/URI/URI(http://www.privoxy.org/user-manual/appendix.html#ACTIONSANAT)>>endobj
+354 0 obj<</Subtype/Link/Rect[156.7 418.2 284.1 431.2]/Border[0 0 0]/A 353 0 R>>endobj
+355 0 obj<</S/URI/URI(http://www.privoxy.org/user-manual/installation.html)>>endobj
+356 0 obj<</Subtype/Link/Rect[150.6 365.4 277.4 378.4]/Border[0 0 0]/A 355 0 R>>endobj
+357 0 obj<</S/URI/URI(http://sourceforge.net/tracker/?atid=361118&group_id=11118)>>endobj
+358 0 obj<</Subtype/Link/Rect[43.9 280.6 320.3 293.6]/Border[0 0 0]/A 357 0 R>>endobj
+359 0 obj<</S/Launch/F(actions','Feedback','screenx='+w+',width='+w+',height='+h+',scrollbars=yes,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no'\).focus\(\)\);)>>endobj
+360 0 obj<</Subtype/Link/Rect[390.8 209.0 535.3 222.0]/Border[0 0 0]/A 359 0 R>>endobj
+361 0 obj<</S/URI/URI(http://lists.sourceforge.net/lists/listinfo/ijbswa-announce)>>endobj
+362 0 obj<</Subtype/Link/Rect[113.6 156.2 193.4 169.2]/Border[0 0 0]/A 361 0 R>>endobj
+363 0 obj<</S/URI/URI(http://sourceforge.net/project/showfiles.php?group_id=11118)>>endobj
+364 0 obj<</Subtype/Link/Rect[328.5 156.2 384.1 169.2]/Border[0 0 0]/A 363 0 R>>endobj
+365 0 obj<</S/URI/URI(http://sf.net/projects/ijbswa/)>>endobj
+366 0 obj<</Subtype/Link/Rect[413.4 156.2 470.2 169.2]/Border[0 0 0]/A 365 0 R>>endobj
+367 0 obj<</S/URI/URI(http://sourceforge.net/mail/?group_id=11118)>>endobj
+368 0 obj<</Subtype/Link/Rect[149.7 71.4 350.8 84.4]/Border[0 0 0]/A 367 0 R>>endobj
+369 0 obj[342 0 R
+344 0 R
+346 0 R
+348 0 R
+350 0 R
+352 0 R
+354 0 R
+356 0 R
+358 0 R
+360 0 R
+362 0 R
+364 0 R
+366 0 R
+368 0 R]endobj
+370 0 obj<</S/URI/URI(mailto:developers@privoxy.org)>>endobj
+371 0 obj<</Subtype/Link/Rect[257.5 672.2 402.7 685.2]/Border[0 0 0]/A 370 0 R>>endobj
+372 0 obj<</S/URI/URI(http://www.gnu.org/copyleft/gpl.html)>>endobj
+373 0 obj<</Subtype/Link/Rect[210.4 429.0 343.0 442.0]/Border[0 0 0]/A 372 0 R>>endobj
+374 0 obj<</S/URI/URI(http://www.junkbusters.com/ijb.html)>>endobj
+375 0 obj<</Subtype/Link/Rect[171.6 304.6 259.0 317.6]/Border[0 0 0]/A 374 0 R>>endobj
+376 0 obj<</S/URI/URI(http://www.junkbusters.com/)>>endobj
+377 0 obj<</Subtype/Link/Rect[384.6 304.6 495.2 317.6]/Border[0 0 0]/A 376 0 R>>endobj
+378 0 obj<</S/URI/URI(http://www.junkbusters.com/ijbdist.html#release)>>endobj
+379 0 obj<</Subtype/Link/Rect[242.2 238.6 275.5 251.6]/Border[0 0 0]/A 378 0 R>>endobj
+380 0 obj<</S/URI/URI(http://www.junkbusters.com)>>endobj
+381 0 obj<</Subtype/Link/Rect[342.1 238.6 452.7 251.6]/Border[0 0 0]/A 380 0 R>>endobj
+382 0 obj<</S/URI/URI(http://www.gnu.org/licenses/gpl.html)>>endobj
+383 0 obj<</Subtype/Link/Rect[142.6 225.4 166.1 238.4]/Border[0 0 0]/A 382 0 R>>endobj
+384 0 obj<</S/URI/URI(http://www.waldherr.org/junkbuster/)>>endobj
+385 0 obj<</Subtype/Link/Rect[223.3 199.0 372.1 212.0]/Border[0 0 0]/A 384 0 R>>endobj
+386 0 obj<</S/URI/URI(http://www.privoxy.org/user-manual/copyright.html#AUTHORS)>>endobj
+387 0 obj<</Subtype/Link/Rect[87.3 133.0 137.7 146.0]/Border[0 0 0]/A 386 0 R>>endobj
+388 0 obj<</S/URI/URI(http://www.privoxy.org/user-manual/introduction.html#FEATURES)>>endobj
+389 0 obj<</Subtype/Link/Rect[161.9 119.8 220.5 132.8]/Border[0 0 0]/A 388 0 R>>endobj
+390 0 obj[371 0 R
+373 0 R
+375 0 R
+377 0 R
+379 0 R
+381 0 R
+383 0 R
+385 0 R
+387 0 R
+389 0 R]endobj
+391 0 obj<</Dests 392 0 R>>endobj
+392 0 obj<</Kids[393 0 R]>>endobj
+393 0 obj<</Limits[(actionss)(yahoo)]/Names[(actionss)394 0 R(aen136)395 0 R(aen2)396 0 R(aen209)397 0 R(aen237)398 0 R(aen274)399 0 R(aen293)400 0 R(aen301)401 0 R(aen336)402 0 R(aen439)403 0 R(aen45)404 0 R(aen455)405 0 R(aen473)406 0 R(aen490)407 0 R(aen495)408 0 R(aen531)409 0 R(aen591)410 0 R(aen602)411 0 R(aen613)412 0 R(aen623)413 0 R(aen629)414 0 R(aen634)415 0 R(aen645)416 0 R(aen726)417 0 R(aen739)418 0 R(aen745)419 0 R(aen841)420 0 R(aen857)421 0 R(aen9)422 0 R(blocklist)423 0 R(browseconfig)424 0 R(browsers2)425 0 R(configfiles)426 0 R(configuration)427 0 R(configurl)428 0 R(contact)429 0 R(contact-ads)430 0 R(contact-bugs)431 0 R(contact-feature)432 0 R(contact-other)433 0 R(contact-support)434 0 R(copyright)435 0 R(differs)436 0 R(dun)437 0 R(ftp)438 0 R(general)439 0 R(getupdates)440 0 R(installation)441 0 R(ip)442 0 R(jointeam)443 0 R(jointeam-money)444 0 R(jointeam-software)445 0 R(jointeam-work)446 0 R(license)447 0 R(loadingtimes)448 0 R(localhost)449 0 R(misc)450 0 R(newads)451 0 R(newconfig)452 0 R(newinstall)453 0 R(newjb)454 0 R(osxie)455 0 R(osxuninstall)456 0 R(otherproxy)457 0 R(privoxy-faq.html)458 0 R(proxymoron)459 0 R(reallyoff)460 0 R(seealso)461 0 R(srvany)462 0 R(transparent)463 0 R(trouble)464 0 R(turnoff)465 0 R(whatsanad)466 0 R(whichbrowsers)467 0 R(whichos)468 0 R(yahoo)469 0 R]>>endobj
+394 0 obj<</D[483 0 R/XYZ 0 718 0]>>endobj
+395 0 obj<</D[477 0 R/XYZ 0 734 0]>>endobj
+396 0 obj<</D[-591248737 0 R/XYZ 0 0 0]>>endobj
+397 0 obj<</D[479 0 R/XYZ 0 364 0]>>endobj
+398 0 obj<</D[481 0 R/XYZ 0 718 0]>>endobj
+399 0 obj<</D[481 0 R/XYZ 0 207 0]>>endobj
+400 0 obj<</D[483 0 R/XYZ 0 650 0]>>endobj
+401 0 obj<</D[483 0 R/XYZ 0 569 0]>>endobj
+402 0 obj<</D[483 0 R/XYZ 0 202 0]>>endobj
+403 0 obj<</D[485 0 R/XYZ 0 334 0]>>endobj
+404 0 obj<</D[473 0 R/XYZ 0 467 0]>>endobj
+405 0 obj<</D[485 0 R/XYZ 0 134 0]>>endobj
+406 0 obj<</D[487 0 R/XYZ 0 599 0]>>endobj
+407 0 obj<</D[487 0 R/XYZ 0 465 0]>>endobj
+408 0 obj<</D[487 0 R/XYZ 0 370 0]>>endobj
+409 0 obj<</D[489 0 R/XYZ 0 496 0]>>endobj
+410 0 obj<</D[491 0 R/XYZ 0 224 0]>>endobj
+411 0 obj<</D[493 0 R/XYZ 0 665 0]>>endobj
+412 0 obj<</D[493 0 R/XYZ 0 373 0]>>endobj
+413 0 obj<</D[493 0 R/XYZ 0 305 0]>>endobj
+414 0 obj<</D[493 0 R/XYZ 0 237 0]>>endobj
+415 0 obj<</D[495 0 R/XYZ 0 734 0]>>endobj
+416 0 obj<</D[495 0 R/XYZ 0 560 0]>>endobj
+417 0 obj<</D[497 0 R/XYZ 0 520 0]>>endobj
+418 0 obj<</D[497 0 R/XYZ 0 413 0]>>endobj
+419 0 obj<</D[497 0 R/XYZ 0 292 0]>>endobj
+420 0 obj<</D[503 0 R/XYZ 0 577 0]>>endobj
+421 0 obj<</D[503 0 R/XYZ 0 347 0]>>endobj
+422 0 obj<</D[-591248737 0 R/XYZ 0 0 0]>>endobj
+423 0 obj<</D[491 0 R/XYZ 0 626 0]>>endobj
+424 0 obj<</D[485 0 R/XYZ 0 534 0]>>endobj
+425 0 obj<</D[477 0 R/XYZ 0 599 0]>>endobj
+426 0 obj<</D[483 0 R/XYZ 0 281 0]>>endobj
+427 0 obj<</D[481 0 R/XYZ 0 443 0]>>endobj
+428 0 obj<</D[489 0 R/XYZ 0 201 0]>>endobj
+429 0 obj<</D[501 0 R/XYZ 0 734 0]>>endobj
+430 0 obj<</D[501 0 R/XYZ 0 265 0]>>endobj
+431 0 obj<</D[501 0 R/XYZ 0 540 0]>>endobj
+432 0 obj<</D[501 0 R/XYZ 0 336 0]>>endobj
+433 0 obj<</D[501 0 R/XYZ 0 140 0]>>endobj
+434 0 obj<</D[501 0 R/XYZ 0 638 0]>>endobj
+435 0 obj<</D[503 0 R/XYZ 0 718 0]>>endobj
+436 0 obj<</D[473 0 R/XYZ 0 267 0]>>endobj
+437 0 obj<</D[499 0 R/XYZ 0 639 0]>>endobj
+438 0 obj<</D[499 0 R/XYZ 0 303 0]>>endobj
+439 0 obj<</D[471 0 R/XYZ 0 126 0]>>endobj
+440 0 obj<</D[481 0 R/XYZ 0 409 0]>>endobj
+441 0 obj<</D[479 0 R/XYZ 0 734 0]>>endobj
+442 0 obj<</D[491 0 R/XYZ 0 490 0]>>endobj
+443 0 obj<</D[477 0 R/XYZ 0 371 0]>>endobj
+444 0 obj<</D[477 0 R/XYZ 0 345 0]>>endobj
+445 0 obj<</D[477 0 R/XYZ 0 266 0]>>endobj
+446 0 obj<</D[477 0 R/XYZ 0 187 0]>>endobj
+447 0 obj<</D[477 0 R/XYZ 0 492 0]>>endobj
+448 0 obj<</D[489 0 R/XYZ 0 362 0]>>endobj
+449 0 obj<</D[479 0 R/XYZ 0 283 0]>>endobj
+450 0 obj<</D[489 0 R/XYZ 0 529 0]>>endobj
+451 0 obj<</D[491 0 R/XYZ 0 558 0]>>endobj
+452 0 obj<</D[481 0 R/XYZ 0 302 0]>>endobj
+453 0 obj<</D[479 0 R/XYZ 0 471 0]>>endobj
+454 0 obj<</D[473 0 R/XYZ 0 734 0]>>endobj
+455 0 obj<</D[499 0 R/XYZ 0 232 0]>>endobj
+456 0 obj<</D[481 0 R/XYZ 0 584 0]>>endobj
+457 0 obj<</D[489 0 R/XYZ 0 705 0]>>endobj
+458 0 obj<</D[-591248737 0 R/XYZ 0 0 0]>>endobj
+459 0 obj<</D[475 0 R/XYZ 0 507 0]>>endobj
+460 0 obj<</D[495 0 R/XYZ 0 345 0]>>endobj
+461 0 obj<</D[495 0 R/XYZ 0 263 0]>>endobj
+462 0 obj<</D[487 0 R/XYZ 0 157 0]>>endobj
+463 0 obj<</D[489 0 R/XYZ 0 637 0]>>endobj
+464 0 obj<</D[497 0 R/XYZ 0 554 0]>>endobj
+465 0 obj<</D[495 0 R/XYZ 0 413 0]>>endobj
+466 0 obj<</D[475 0 R/XYZ 0 320 0]>>endobj
+467 0 obj<</D[479 0 R/XYZ 0 700 0]>>endobj
+468 0 obj<</D[479 0 R/XYZ 0 619 0]>>endobj
+469 0 obj<</D[483 0 R/XYZ 0 435 0]>>endobj
+470 0 obj<</Type/Pages/Count 18/Kids[471 0 R
+473 0 R
+475 0 R
+477 0 R
+479 0 R
+481 0 R
+483 0 R
+485 0 R
+487 0 R
+489 0 R
+491 0 R
+493 0 R
+495 0 R
+497 0 R
+499 0 R
+501 0 R
+503 0 R
+505 0 R
+]>>endobj
+471 0 obj<</Type/Page/Parent 470 0 R/Contents 472 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F4 6 0 R/F6 8 0 R/F7 9 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 52 0 R>>endobj
+472 0 obj<</Length 12196     >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+0.0 650.3 m 32.4 650.3 l S
+88.5 650.3 m 115.9 650.3 l S
+115.9 650.3 m 154.3 650.3 l S
+294.2 582.8 m 331.8 582.8 l S
+472.6 582.8 m 496.7 582.8 l S
+496.7 582.8 m 533.7 582.8 l S
+219.7 464.0 m 347.1 464.0 l S
+413.7 464.0 m 450.6 464.0 l S
+450.6 464.0 m 484.6 464.0 l S
+0.00 0.00 0.00 rg 0.0 441.0 540.0 2.0 re f
+8.2 396.0 m 47.0 396.0 l S
+47.0 396.0 m 102.4 396.0 l S
+52.5 382.8 m 78.5 382.8 l S
+78.5 382.8 m 88.6 382.8 l S
+88.6 382.8 m 107.2 382.8 l S
+107.2 382.8 m 127.7 382.8 l S
+127.7 382.8 m 162.8 382.8 l S
+162.8 382.8 m 174.1 382.8 l S
+174.1 382.8 m 211.1 382.8 l S
+211.1 382.8 m 216.6 382.8 l S
+52.5 369.6 m 74.8 369.6 l S
+74.8 369.6 m 121.0 369.6 l S
+121.0 369.6 m 126.5 369.6 l S
+126.5 369.6 m 148.8 369.6 l S
+148.8 369.6 m 157.0 369.6 l S
+157.0 369.6 m 183.6 369.6 l S
+183.6 369.6 m 218.1 369.6 l S
+218.1 369.6 m 229.4 369.6 l S
+229.4 369.6 m 249.3 369.6 l S
+52.5 356.4 m 76.0 356.4 l S
+76.0 356.4 m 98.9 356.4 l S
+98.9 356.4 m 135.9 356.4 l S
+135.9 356.4 m 162.5 356.4 l S
+162.5 356.4 m 186.0 356.4 l S
+186.0 356.4 m 202.2 356.4 l S
+202.2 356.4 m 219.0 356.4 l S
+219.0 356.4 m 275.5 356.4 l S
+52.5 343.2 m 78.5 343.2 l S
+78.5 343.2 m 88.6 343.2 l S
+88.6 343.2 m 96.8 343.2 l S
+96.8 343.2 m 133.8 343.2 l S
+133.8 343.2 m 139.3 343.2 l S
+139.3 343.2 m 162.9 343.2 l S
+162.9 343.2 m 185.8 343.2 l S
+185.8 343.2 m 222.7 343.2 l S
+222.7 343.2 m 253.0 343.2 l S
+52.5 330.0 m 76.0 330.0 l S
+76.0 330.0 m 98.9 330.0 l S
+98.9 330.0 m 135.9 330.0 l S
+135.9 330.0 m 161.9 330.0 l S
+161.9 330.0 m 186.0 330.0 l S
+186.0 330.0 m 196.1 330.0 l S
+196.1 330.0 m 209.9 330.0 l S
+209.9 330.0 m 226.4 330.0 l S
+226.4 330.0 m 245.6 330.0 l S
+245.6 330.0 m 269.8 330.0 l S
+269.8 330.0 m 279.8 330.0 l S
+279.8 330.0 m 302.1 330.0 l S
+52.5 316.8 m 73.6 316.8 l S
+73.6 316.8 m 110.5 316.8 l S
+110.5 316.8 m 136.5 316.8 l S
+136.5 316.8 m 182.6 316.8 l S
+182.6 316.8 m 204.3 316.8 l S
+204.3 316.8 m 227.3 316.8 l S
+227.3 316.8 m 244.1 316.8 l S
+244.1 316.8 m 273.1 316.8 l S
+273.1 316.8 m 294.8 316.8 l S
+294.8 316.8 m 340.0 316.8 l S
+52.5 303.6 m 69.3 303.6 l S
+69.3 303.6 m 108.1 303.6 l S
+108.1 303.6 m 131.0 303.6 l S
+131.0 303.6 m 147.2 303.6 l S
+147.2 303.6 m 172.6 303.6 l S
+172.6 303.6 m 202.2 303.6 l S
+202.2 303.6 m 214.7 303.6 l S
+214.7 303.6 m 251.7 303.6 l S
+251.7 303.6 m 254.4 303.6 l S
+254.4 303.6 m 276.7 303.6 l S
+276.7 303.6 m 308.8 303.6 l S
+308.8 303.6 m 315.2 303.6 l S
+315.2 303.6 m 332.7 303.6 l S
+332.7 303.6 m 369.6 303.6 l S
+369.6 303.6 m 380.9 303.6 l S
+380.9 303.6 m 400.8 303.6 l S
+52.5 290.4 m 63.2 290.4 l S
+63.2 290.4 m 88.5 290.4 l S
+88.5 290.4 m 98.6 290.4 l S
+98.6 290.4 m 106.9 290.4 l S
+106.9 290.4 m 140.2 290.4 l S
+140.2 290.4 m 152.7 290.4 l S
+152.7 290.4 m 173.8 290.4 l S
+173.8 290.4 m 199.8 290.4 l S
+199.8 290.4 m 227.6 290.4 l S
+227.6 290.4 m 235.8 290.4 l S
+235.8 290.4 m 284.4 290.4 l S
+284.4 290.4 m 347.0 290.4 l S
+52.5 277.2 m 58.9 277.2 l S
+58.9 277.2 m 88.6 277.2 l S
+88.6 277.2 m 107.2 277.2 l S
+107.2 277.2 m 118.5 277.2 l S
+118.5 277.2 m 140.2 277.2 l S
+140.2 277.2 m 161.6 277.2 l S
+161.6 277.2 m 185.7 277.2 l S
+185.7 277.2 m 199.5 277.2 l S
+199.5 277.2 m 205.9 277.2 l S
+205.9 277.2 m 225.1 277.2 l S
+96.8 264.0 m 129.4 264.0 l S
+129.4 264.0 m 162.1 264.0 l S
+162.1 264.0 m 194.8 264.0 l S
+96.8 250.8 m 138.6 250.8 l S
+96.8 237.6 m 116.6 237.6 l S
+116.6 237.6 m 140.8 237.6 l S
+140.8 237.6 m 152.1 237.6 l S
+152.1 237.6 m 176.8 237.6 l S
+176.8 237.6 m 198.5 237.6 l S
+198.5 237.6 m 216.6 237.6 l S
+8.2 224.4 m 61.7 224.4 l S
+52.5 211.2 m 83.4 211.2 l S
+83.4 211.2 m 126.4 211.2 l S
+126.4 211.2 m 143.9 211.2 l S
+143.9 211.2 m 190.6 211.2 l S
+190.6 211.2 m 203.7 211.2 l S
+203.7 211.2 m 240.7 211.2 l S
+240.7 211.2 m 246.2 211.2 l S
+52.5 198.0 m 83.4 198.0 l S
+83.4 198.0 m 128.9 198.0 l S
+128.9 198.0 m 165.2 198.0 l S
+165.2 198.0 m 182.7 198.0 l S
+182.7 198.0 m 234.9 198.0 l S
+52.5 184.8 m 73.6 184.8 l S
+73.6 184.8 m 80.0 184.8 l S
+80.0 184.8 m 110.3 184.8 l S
+110.3 184.8 m 147.2 184.8 l S
+147.2 184.8 m 169.5 184.8 l S
+169.5 184.8 m 220.5 184.8 l S
+220.5 184.8 m 226.0 184.8 l S
+52.5 171.6 m 58.9 171.6 l S
+58.9 171.6 m 77.6 171.6 l S
+77.6 171.6 m 118.2 171.6 l S
+118.2 171.6 m 155.2 171.6 l S
+155.2 171.6 m 157.9 171.6 l S
+157.9 171.6 m 168.6 171.6 l S
+168.6 171.6 m 194.0 171.6 l S
+194.0 171.6 m 235.2 171.6 l S
+235.2 171.6 m 269.1 171.6 l S
+269.1 171.6 m 275.5 171.6 l S
+275.5 171.6 m 299.1 171.6 l S
+299.1 171.6 m 310.4 171.6 l S
+310.4 171.6 m 324.1 171.6 l S
+324.1 171.6 m 350.7 171.6 l S
+52.5 158.4 m 78.5 158.4 l S
+78.5 158.4 m 88.6 158.4 l S
+88.6 158.4 m 104.7 158.4 l S
+104.8 158.4 m 132.5 158.4 l S
+132.5 158.4 m 169.5 158.4 l S
+169.5 158.4 m 180.8 158.4 l S
+180.8 158.4 m 217.8 158.4 l S
+217.8 158.4 m 223.3 158.4 l S
+52.5 145.2 m 58.9 145.2 l S
+58.9 145.2 m 77.6 145.2 l S
+77.6 145.2 m 118.2 145.2 l S
+118.2 145.2 m 155.2 145.2 l S
+155.2 145.2 m 157.9 145.2 l S
+157.9 145.2 m 177.2 145.2 l S
+177.2 145.2 m 213.5 145.2 l S
+213.5 145.2 m 223.6 145.2 l S
+223.6 145.2 m 275.6 145.2 l S
+275.6 145.2 m 291.1 145.2 l S
+291.1 145.2 m 307.3 145.2 l S
+307.3 145.2 m 325.4 145.2 l S
+325.4 145.2 m 342.8 145.2 l S
+342.8 145.2 m 370.9 145.2 l S
+370.9 145.2 m 403.5 145.2 l S
+403.5 145.2 m 439.9 145.2 l S
+52.5 132.0 m 64.4 132.0 l S
+64.4 132.0 m 86.7 132.0 l S
+86.7 132.0 m 112.4 132.0 l S
+112.4 132.0 m 118.8 132.0 l S
+118.8 132.0 m 158.2 132.0 l S
+158.2 132.0 m 174.4 132.0 l S
+174.4 132.0 m 211.4 132.0 l S
+211.4 132.0 m 240.4 132.0 l S
+240.4 132.0 m 251.7 132.0 l S
+251.7 132.0 m 267.9 132.0 l S
+267.9 132.0 m 293.2 132.0 l S
+293.2 132.0 m 304.6 132.0 l S
+304.6 132.0 m 331.7 132.0 l S
+331.7 132.0 m 343.1 132.0 l S
+343.1 132.0 m 384.3 132.0 l S
+384.3 132.0 m 395.9 132.0 l S
+395.9 132.0 m 418.9 132.0 l S
+418.9 132.0 m 435.0 132.0 l S
+435.0 132.0 m 464.1 132.0 l S
+464.1 132.0 m 485.2 132.0 l S
+485.2 132.0 m 500.7 132.0 l S
+500.7 132.0 m 507.2 132.0 l S
+507.2 132.0 m 531.8 132.0 l S
+36.0 118.8 m 56.8 118.8 l S
+56.8 118.8 m 99.9 118.8 l S
+99.9 118.8 m 146.0 118.8 l S
+146.0 118.8 m 157.3 118.8 l S
+157.3 118.8 m 186.3 118.8 l S
+186.3 118.8 m 202.5 118.8 l S
+202.5 118.8 m 230.6 118.8 l S
+8.2 105.6 m 73.3 105.6 l S
+52.5 92.4 m 84.0 92.4 l S
+84.0 92.4 m 102.6 92.4 l S
+102.6 92.4 m 109.0 92.4 l S
+109.0 92.4 m 125.2 92.4 l S
+125.2 92.4 m 163.4 92.4 l S
+163.4 92.4 m 199.1 92.4 l S
+199.1 92.4 m 229.4 92.4 l S
+52.5 79.2 m 73.6 79.2 l S
+73.6 79.2 m 80.0 79.2 l S
+80.0 79.2 m 97.4 79.2 l S
+97.4 79.2 m 113.0 79.2 l S
+113.0 79.2 m 129.8 79.2 l S
+129.8 79.2 m 160.0 79.2 l S
+160.0 79.2 m 186.6 79.2 l S
+52.5 66.0 m 78.5 66.0 l S
+78.5 66.0 m 88.6 66.0 l S
+88.6 66.0 m 102.3 66.0 l S
+102.3 66.0 m 146.1 66.0 l S
+146.1 66.0 m 168.4 66.0 l S
+52.5 52.8 m 71.8 52.8 l S
+71.8 52.8 m 115.5 52.8 l S
+115.5 52.8 m 152.5 52.8 l S
+152.5 52.8 m 193.1 52.8 l S
+193.1 52.8 m 211.4 52.8 l S
+211.4 52.8 m 243.5 52.8 l S
+243.5 52.8 m 259.7 52.8 l S
+259.7 52.8 m 285.1 52.8 l S
+285.1 52.8 m 296.4 52.8 l S
+296.4 52.8 m 321.7 52.8 l S
+321.7 52.8 m 365.5 52.8 l S
+365.5 52.8 m 368.3 52.8 l S
+52.5 39.6 m 76.0 39.6 l S
+76.0 39.6 m 93.4 39.6 l S
+93.4 39.6 m 128.0 39.6 l S
+128.0 39.6 m 149.1 39.6 l S
+149.1 39.6 m 205.0 39.6 l S
+205.0 39.6 m 230.9 39.6 l S
+230.9 39.6 m 241.0 39.6 l S
+241.0 39.6 m 257.2 39.6 l S
+257.2 39.6 m 289.9 39.6 l S
+289.9 39.6 m 310.4 39.6 l S
+310.4 39.6 m 321.7 39.6 l S
+321.7 39.6 m 335.4 39.6 l S
+335.4 39.6 m 359.6 39.6 l S
+52.5 26.4 m 80.9 26.4 l S
+80.9 26.4 m 98.3 26.4 l S
+98.3 26.4 m 132.8 26.4 l S
+132.8 26.4 m 172.9 26.4 l S
+172.9 26.4 m 216.6 26.4 l S
+216.6 26.4 m 240.5 26.4 l S
+240.5 26.4 m 266.5 26.4 l S
+266.5 26.4 m 283.9 26.4 l S
+283.9 26.4 m 300.1 26.4 l S
+300.1 26.4 m 356.6 26.4 l S
+BT
+/F9 20 Tf 0 678 Td 0.000 Tc(Privoxy Frequently Asked Questions)Tj
+0.00 0.00 1.00 rg /F4 8 Tf 0 -29.7 Td(Copyright)Tj
+0.00 0.00 0.00 rg ( \251 2001, 2002 by)Tj
+0.00 0.00 1.00 rg ( Privoxy Developers)Tj
+0.00 0.00 0.00 rg /F4 11 Tf 0 -24.9 Td($Id: faq.sgml,v 1.61.2.13 2002/08/06 11:55:32 oes Exp $)Tj
+0 -39.6 Td(This FAQ gives quick answers to frequently asked questions about)Tj
+0.00 0.00 1.00 rg ( Privoxy)Tj
+0.00 0.00 0.00 rg ( . It can't and doesn't replace the)Tj
+0.00 0.00 1.00 rg /F6 11 Tf ( User Manual)Tj
+0.00 0.00 0.00 rg /F4 11 Tf (.)Tj
+0 -26.4 Td(Privoxy is a web proxy with advanced filtering capabilities for protecting privacy, filtering web page content, managing)Tj
+0 -13.2 Td(cookies, controlling access, and removing ads, banners, pop-ups and other obnoxious Internet junk. Privoxy has a very)Tj
+0 -13.2 Td(flexible configuration and can be customized to suit individual needs and tastes. Privoxy has application for both)Tj
+0 -13.2 Td(stand-alone systems and multi-user networks.)Tj
+0 -26.4 Td(Privoxy is based on Internet Junkbuster \(tm\).)Tj
+0 -26.4 Td(You can find the latest version of the document at)Tj
+0.00 0.00 1.00 rg ( http://www.privoxy.org/faq/)Tj
+0.00 0.00 0.00 rg (. Please see the)Tj
+0.00 0.00 1.00 rg ( Contact section)Tj
+0.00 0.00 0.00 rg ( if you want)Tj
+0 -13.2 Td(to contact the developers.)Tj
+/F7 11 Tf 0 -41.6 Td(Table of Contents)Tj
+/F6 11 Tf 0 -13.2 Td(1.)Tj
+0.00 0.00 1.00 rg ( General Information)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(1.1.)Tj
+0.00 0.00 1.00 rg ( What is this new version of Privoxy?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(1.2.)Tj
+0.00 0.00 1.00 rg ( Why "Privoxy"? Why a name change at all?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(1.3.)Tj
+0.00 0.00 1.00 rg ( How does Privoxy differ from the old Junkbuster?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(1.4.)Tj
+0.00 0.00 1.00 rg ( What is a "proxy"? How does Privoxy work?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(1.5.)Tj
+0.00 0.00 1.00 rg ( How does Privoxy know what is an ad, and what is not?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(1.6.)Tj
+0.00 0.00 1.00 rg ( Can Privoxy make mistakes? This does not sound very scientific.)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(1.7.)Tj
+0.00 0.00 1.00 rg ( My browser does the same things as Privoxy. Why should I use Privoxy at all?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(1.8.)Tj
+0.00 0.00 1.00 rg ( Is there is a license or fee? What about a warranty? Registration?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(1.9.)Tj
+0.00 0.00 1.00 rg ( I would like to help you, what do I do?)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(1.9.1.)Tj
+0.00 0.00 1.00 rg ( Money Money Money)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(1.9.2.)Tj
+0.00 0.00 1.00 rg ( Software)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(1.9.3.)Tj
+0.00 0.00 1.00 rg ( You want to work with us?)Tj
+0.00 0.00 0.00 rg -72 -13.2 Td(2.)Tj
+0.00 0.00 1.00 rg ( Installation)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(2.1.)Tj
+0.00 0.00 1.00 rg ( Which browsers are supported by Privoxy?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(2.2.)Tj
+0.00 0.00 1.00 rg ( Which operating systems are supported?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(2.3.)Tj
+0.00 0.00 1.00 rg ( Can I install Privoxy over Junkbuster?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(2.4.)Tj
+0.00 0.00 1.00 rg ( I just installed Privoxy. Is there anything special I have to do now?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(2.5.)Tj
+0.00 0.00 1.00 rg ( What is the proxy address of Privoxy?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(2.6.)Tj
+0.00 0.00 1.00 rg ( I just installed Privoxy, and nothing is happening. All the ads are there. What's wrong?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(2.7.)Tj
+0.00 0.00 1.00 rg ( In Mac OSX, I dragged the Privoxy folder to the trash in order to uninstall it. Now the finder tells me I don't)Tj
+0 -13.2 Td(have sufficient privileges to empty the trash.)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(3.)Tj
+0.00 0.00 1.00 rg ( Configuration)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(3.1.)Tj
+0.00 0.00 1.00 rg ( Where can I get updated Actions Files?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.2.)Tj
+0.00 0.00 1.00 rg ( Can I use my old config files?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.3.)Tj
+0.00 0.00 1.00 rg ( What is an "actions" file?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.4.)Tj
+0.00 0.00 1.00 rg ( The "actions" concept confuses me. Please list some of these "actions".)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.5.)Tj
+0.00 0.00 1.00 rg ( How are actions files configured? What is the easiest way to do this?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.6.)Tj
+0.00 0.00 1.00 rg ( There are several different "actions" files. What are the differences?)Tj
+0.00 0.00 0.00 rg /F8 11 Tf -36 692.6 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-172.463 -720 Td(1/18)Tj
+ET
+Q
+endstream
+endobj
+473 0 obj<</Type/Page/Parent 470 0 R/Contents 474 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F2 5 0 R/F6 8 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 99 0 R>>endobj
+474 0 obj<</Length 17509     >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+52.5 686.0 m 76.0 686.0 l S
+76.0 686.0 m 94.7 686.0 l S
+94.7 686.0 m 101.1 686.0 l S
+101.1 686.0 m 127.0 686.0 l S
+127.0 686.0 m 142.6 686.0 l S
+142.6 686.0 m 239.5 686.0 l S
+239.5 686.0 m 277.1 686.0 l S
+277.1 686.0 m 307.3 686.0 l S
+52.5 672.8 m 85.1 672.8 l S
+85.1 672.8 m 101.3 672.8 l S
+101.3 672.8 m 148.0 672.8 l S
+148.0 672.8 m 186.8 672.8 l S
+186.8 672.8 m 203.0 672.8 l S
+203.0 672.8 m 254.7 672.8 l S
+254.7 672.8 m 257.5 672.8 l S
+257.5 672.8 m 305.5 672.8 l S
+305.5 672.8 m 324.8 672.8 l S
+324.8 672.8 m 380.1 672.8 l S
+380.1 672.8 m 423.2 672.8 l S
+52.5 659.6 m 74.8 659.6 l S
+74.8 659.6 m 93.4 659.6 l S
+93.4 659.6 m 99.8 659.6 l S
+99.8 659.6 m 134.4 659.6 l S
+134.4 659.6 m 150.6 659.6 l S
+150.6 659.6 m 213.2 659.6 l S
+213.2 659.6 m 234.9 659.6 l S
+234.9 659.6 m 243.2 659.6 l S
+243.2 659.6 m 287.5 659.6 l S
+287.5 659.6 m 312.8 659.6 l S
+312.8 659.6 m 332.7 659.6 l S
+332.7 659.6 m 349.5 659.6 l S
+349.5 659.6 m 374.2 659.6 l S
+374.2 659.6 m 411.8 659.6 l S
+411.8 659.6 m 446.3 659.6 l S
+58.0 646.4 m 84.0 646.4 l S
+84.0 646.4 m 94.1 646.4 l S
+94.1 646.4 m 110.2 646.4 l S
+113.0 646.4 m 205.4 646.4 l S
+205.4 646.4 m 227.7 646.4 l S
+227.7 646.4 m 253.7 646.4 l S
+253.7 646.4 m 263.8 646.4 l S
+263.8 646.4 m 272.0 646.4 l S
+272.0 646.4 m 305.4 646.4 l S
+305.4 646.4 m 310.9 646.4 l S
+58.0 633.2 m 81.5 633.2 l S
+81.5 633.2 m 100.2 633.2 l S
+100.2 633.2 m 106.6 633.2 l S
+106.6 633.2 m 121.5 633.2 l S
+121.5 633.2 m 135.3 633.2 l S
+135.3 633.2 m 172.3 633.2 l S
+172.3 633.2 m 183.6 633.2 l S
+183.6 633.2 m 199.8 633.2 l S
+199.8 633.2 m 212.3 633.2 l S
+212.3 633.2 m 220.5 633.2 l S
+220.5 633.2 m 248.3 633.2 l S
+248.3 633.2 m 263.9 633.2 l S
+263.9 633.2 m 279.5 633.2 l S
+279.5 633.2 m 307.9 633.2 l S
+58.0 620.0 m 93.1 620.0 l S
+93.1 620.0 m 104.4 620.0 l S
+104.4 620.0 m 125.2 620.0 l S
+125.2 620.0 m 146.3 620.0 l S
+146.3 620.0 m 152.7 620.0 l S
+152.7 620.0 m 168.9 620.0 l S
+168.9 620.0 m 177.2 620.0 l S
+177.2 620.0 m 240.4 620.0 l S
+240.4 620.0 m 277.7 620.0 l S
+277.7 620.0 m 284.1 620.0 l S
+284.1 620.0 m 308.7 620.0 l S
+308.7 620.0 m 332.9 620.0 l S
+332.9 620.0 m 344.2 620.0 l S
+344.2 620.0 m 361.0 620.0 l S
+361.0 620.0 m 405.0 620.0 l S
+58.0 606.8 m 80.3 606.8 l S
+80.3 606.8 m 109.9 606.8 l S
+109.9 606.8 m 150.0 606.8 l S
+150.0 606.8 m 174.1 606.8 l S
+174.1 606.8 m 185.4 606.8 l S
+185.4 606.8 m 202.2 606.8 l S
+202.2 606.8 m 210.5 606.8 l S
+210.5 606.8 m 273.7 606.8 l S
+273.7 606.8 m 313.7 606.8 l S
+58.0 593.6 m 64.4 593.6 l S
+64.4 593.6 m 81.2 593.6 l S
+81.2 593.6 m 106.6 593.6 l S
+106.6 593.6 m 140.5 593.6 l S
+140.5 593.6 m 167.7 593.6 l S
+167.7 593.6 m 208.9 593.6 l S
+208.9 593.6 m 222.0 593.6 l S
+222.0 593.6 m 230.3 593.6 l S
+230.3 593.6 m 248.9 593.6 l S
+248.9 593.6 m 283.5 593.6 l S
+283.5 593.6 m 294.8 593.6 l S
+294.8 593.6 m 311.0 593.6 l S
+311.0 593.6 m 374.2 593.6 l S
+374.2 593.6 m 406.6 593.6 l S
+406.6 593.6 m 428.9 593.6 l S
+428.9 593.6 m 448.1 593.6 l S
+448.1 593.6 m 469.2 593.6 l S
+469.2 593.6 m 483.0 593.6 l S
+483.0 593.6 m 489.4 593.6 l S
+489.4 593.6 m 505.6 593.6 l S
+505.6 593.6 m 521.1 593.6 l S
+521.1 593.6 m 532.5 593.6 l S
+36.0 580.4 m 57.4 580.4 l S
+58.0 567.2 m 79.1 567.2 l S
+79.1 567.2 m 116.0 567.2 l S
+116.0 567.2 m 134.1 567.2 l S
+134.1 567.2 m 146.6 567.2 l S
+146.6 567.2 m 154.9 567.2 l S
+154.9 567.2 m 188.8 567.2 l S
+188.8 567.2 m 202.5 567.2 l S
+202.5 567.2 m 257.8 567.2 l S
+58.0 554.0 m 81.5 554.0 l S
+81.5 554.0 m 100.2 554.0 l S
+100.2 554.0 m 106.6 554.0 l S
+106.6 554.0 m 132.5 554.0 l S
+132.5 554.0 m 169.5 554.0 l S
+169.5 554.0 m 194.2 554.0 l S
+194.2 554.0 m 215.9 554.0 l S
+215.9 554.0 m 241.9 554.0 l S
+241.9 554.0 m 277.1 554.0 l S
+277.1 554.0 m 295.7 554.0 l S
+295.7 554.0 m 323.5 554.0 l S
+323.5 554.0 m 329.0 554.0 l S
+58.0 540.8 m 79.1 540.8 l S
+79.1 540.8 m 116.0 540.8 l S
+116.0 540.8 m 134.1 540.8 l S
+134.1 540.8 m 146.6 540.8 l S
+146.6 540.8 m 154.9 540.8 l S
+154.9 540.8 m 218.2 540.8 l S
+218.2 540.8 m 251.5 540.8 l S
+8.2 527.6 m 74.5 527.6 l S
+52.5 514.4 m 76.0 514.4 l S
+76.0 514.4 m 102.6 514.4 l S
+102.6 514.4 m 125.5 514.4 l S
+125.5 514.4 m 162.5 514.4 l S
+162.5 514.4 m 185.4 514.4 l S
+185.4 514.4 m 201.0 514.4 l S
+201.0 514.4 m 244.7 514.4 l S
+244.7 514.4 m 276.8 514.4 l S
+276.8 514.4 m 298.5 514.4 l S
+298.5 514.4 m 316.5 514.4 l S
+316.5 514.4 m 327.8 514.4 l S
+327.8 514.4 m 347.1 514.4 l S
+347.1 514.4 m 372.4 514.4 l S
+372.4 514.4 m 394.1 514.4 l S
+394.1 514.4 m 405.4 514.4 l S
+405.4 514.4 m 451.9 514.4 l S
+52.5 501.2 m 58.9 501.2 l S
+58.9 501.2 m 94.0 501.2 l S
+94.0 501.2 m 153.6 501.2 l S
+153.6 501.2 m 184.5 501.2 l S
+184.5 501.2 m 195.8 501.2 l S
+195.8 501.2 m 219.9 501.2 l S
+219.9 501.2 m 259.3 501.2 l S
+259.3 501.2 m 306.1 501.2 l S
+306.1 501.2 m 317.4 501.2 l S
+317.4 501.2 m 333.6 501.2 l S
+333.6 501.2 m 350.4 501.2 l S
+350.4 501.2 m 404.1 501.2 l S
+404.1 501.2 m 436.8 501.2 l S
+436.8 501.2 m 473.1 501.2 l S
+52.5 488.0 m 78.5 488.0 l S
+78.5 488.0 m 95.9 488.0 l S
+95.9 488.0 m 219.1 488.0 l S
+219.1 488.0 m 238.3 488.0 l S
+238.3 488.0 m 299.5 488.0 l S
+52.5 474.8 m 68.7 474.8 l S
+68.7 474.8 m 87.3 474.8 l S
+87.3 474.8 m 106.6 474.8 l S
+106.6 474.8 m 148.5 474.8 l S
+148.5 474.8 m 164.6 474.8 l S
+164.6 474.8 m 214.5 474.8 l S
+52.5 461.6 m 76.0 461.6 l S
+76.0 461.6 m 94.7 461.6 l S
+94.7 461.6 m 101.1 461.6 l S
+101.1 461.6 m 133.2 461.6 l S
+133.2 461.6 m 153.6 461.6 l S
+153.6 461.6 m 177.2 461.6 l S
+52.5 448.4 m 76.0 448.4 l S
+76.0 448.4 m 94.7 448.4 l S
+94.7 448.4 m 101.1 448.4 l S
+101.1 448.4 m 122.8 448.4 l S
+122.8 448.4 m 138.3 448.4 l S
+138.3 448.4 m 151.5 448.4 l S
+151.5 448.4 m 193.9 448.4 l S
+52.5 435.2 m 73.6 435.2 l S
+73.6 435.2 m 110.5 435.2 l S
+110.5 435.2 m 157.9 435.2 l S
+157.9 435.2 m 164.3 435.2 l S
+164.3 435.2 m 180.5 435.2 l S
+180.5 435.2 m 238.9 435.2 l S
+52.5 422.0 m 81.5 422.0 l S
+81.5 422.0 m 106.9 422.0 l S
+106.9 422.0 m 136.5 422.0 l S
+136.5 422.0 m 164.3 422.0 l S
+164.3 422.0 m 202.5 422.0 l S
+202.5 422.0 m 235.8 422.0 l S
+235.8 422.0 m 290.5 422.0 l S
+290.5 422.0 m 303.0 422.0 l S
+303.0 422.0 m 338.2 422.0 l S
+338.2 422.0 m 348.3 422.0 l S
+348.3 422.0 m 375.4 422.0 l S
+375.4 422.0 m 414.9 422.0 l S
+52.5 408.8 m 73.6 408.8 l S
+73.6 408.8 m 110.5 408.8 l S
+110.5 408.8 m 126.7 408.8 l S
+126.7 408.8 m 139.3 408.8 l S
+139.3 408.8 m 147.5 408.8 l S
+147.5 408.8 m 194.3 408.8 l S
+194.3 408.8 m 222.1 408.8 l S
+222.1 408.8 m 233.4 408.8 l S
+233.4 408.8 m 261.2 408.8 l S
+261.2 408.8 m 275.0 408.8 l S
+275.0 408.8 m 295.5 408.8 l S
+295.5 408.8 m 344.7 408.8 l S
+58.0 395.6 m 84.0 395.6 l S
+84.0 395.6 m 111.8 395.6 l S
+111.8 395.6 m 124.3 395.6 l S
+124.3 395.6 m 132.6 395.6 l S
+132.6 395.6 m 175.0 395.6 l S
+175.0 395.6 m 196.1 395.6 l S
+196.1 395.6 m 233.1 395.6 l S
+233.1 395.6 m 267.0 395.6 l S
+267.0 395.6 m 288.1 395.6 l S
+58.0 382.4 m 64.4 382.4 l S
+64.4 382.4 m 87.9 382.4 l S
+87.9 382.4 m 113.9 382.4 l S
+113.9 382.4 m 142.9 382.4 l S
+142.9 382.4 m 175.0 382.4 l S
+175.0 382.4 m 180.8 382.4 l S
+180.8 382.4 m 189.1 382.4 l S
+189.1 382.4 m 252.3 382.4 l S
+252.3 382.4 m 286.8 382.4 l S
+286.8 382.4 m 307.9 382.4 l S
+307.9 382.4 m 337.5 382.4 l S
+337.5 382.4 m 355.6 382.4 l S
+355.6 382.4 m 378.5 382.4 l S
+378.5 382.4 m 389.8 382.4 l S
+389.8 382.4 m 405.7 382.4 l S
+405.7 382.4 m 433.5 382.4 l S
+58.0 369.2 m 81.5 369.2 l S
+81.5 369.2 m 100.2 369.2 l S
+100.2 369.2 m 137.1 369.2 l S
+137.1 369.2 m 161.3 369.2 l S
+161.3 369.2 m 193.9 369.2 l S
+193.9 369.2 m 236.4 369.2 l S
+236.4 369.2 m 269.7 369.2 l S
+58.0 356.0 m 95.0 356.0 l S
+95.0 356.0 m 117.3 356.0 l S
+117.3 356.0 m 129.8 356.0 l S
+129.8 356.0 m 138.0 356.0 l S
+138.0 356.0 m 177.5 356.0 l S
+177.5 356.0 m 180.3 356.0 l S
+180.3 356.0 m 203.8 356.0 l S
+203.8 356.0 m 235.3 356.0 l S
+235.3 356.0 m 245.4 356.0 l S
+245.4 356.0 m 259.7 356.0 l S
+259.7 356.0 m 275.9 356.0 l S
+275.9 356.0 m 282.3 356.0 l S
+282.3 356.0 m 305.8 356.0 l S
+305.8 356.0 m 317.1 356.0 l S
+317.1 356.0 m 338.2 356.0 l S
+338.2 356.0 m 356.9 356.0 l S
+356.9 356.0 m 390.8 356.0 l S
+390.8 356.0 m 451.0 356.0 l S
+58.0 342.8 m 81.5 342.8 l S
+81.5 342.8 m 100.2 342.8 l S
+100.2 342.8 m 106.6 342.8 l S
+106.6 342.8 m 161.3 342.8 l S
+161.3 342.8 m 195.8 342.8 l S
+195.8 342.8 m 232.8 342.8 l S
+232.8 342.8 m 238.3 342.8 l S
+58.0 329.6 m 85.8 329.6 l S
+85.8 329.6 m 135.1 329.6 l S
+135.1 329.6 m 145.2 329.6 l S
+145.2 329.6 m 182.1 329.6 l S
+182.1 329.6 m 213.0 329.6 l S
+213.0 329.6 m 229.8 329.6 l S
+229.8 329.6 m 241.1 329.6 l S
+241.1 329.6 m 257.3 329.6 l S
+257.3 329.6 m 296.7 329.6 l S
+58.0 316.4 m 89.5 316.4 l S
+89.5 316.4 m 108.1 316.4 l S
+108.1 316.4 m 114.5 316.4 l S
+114.5 316.4 m 134.4 316.4 l S
+134.4 316.4 m 159.7 316.4 l S
+159.7 316.4 m 214.4 316.4 l S
+214.4 316.4 m 242.2 316.4 l S
+242.2 316.4 m 279.2 316.4 l S
+279.2 316.4 m 298.4 316.4 l S
+298.4 316.4 m 332.4 316.4 l S
+332.4 316.4 m 366.9 316.4 l S
+8.2 303.2 m 83.7 303.2 l S
+52.5 290.0 m 58.9 290.0 l S
+58.9 290.0 m 77.6 290.0 l S
+77.6 290.0 m 122.5 290.0 l S
+122.5 290.0 m 141.7 290.0 l S
+141.7 290.0 m 157.9 290.0 l S
+157.9 290.0 m 191.2 290.0 l S
+191.2 290.0 m 246.9 290.0 l S
+246.9 290.0 m 286.6 290.0 l S
+286.6 290.0 m 308.3 290.0 l S
+308.3 290.0 m 334.9 290.0 l S
+334.9 290.0 m 355.4 290.0 l S
+355.4 290.0 m 385.0 290.0 l S
+52.5 276.8 m 58.9 276.8 l S
+58.9 276.8 m 77.6 276.8 l S
+77.6 276.8 m 107.2 276.8 l S
+107.2 276.8 m 115.4 276.8 l S
+115.4 276.8 m 135.9 276.8 l S
+135.9 276.8 m 159.1 276.8 l S
+159.1 276.8 m 175.9 276.8 l S
+175.9 276.8 m 192.1 276.8 l S
+192.1 276.8 m 230.9 276.8 l S
+230.9 276.8 m 244.7 276.8 l S
+244.7 276.8 m 254.8 276.8 l S
+254.8 276.8 m 274.0 276.8 l S
+274.0 276.8 m 307.3 276.8 l S
+307.3 276.8 m 347.7 276.8 l S
+347.7 276.8 m 376.7 276.8 l S
+52.5 263.6 m 73.6 263.6 l S
+73.6 263.6 m 84.9 263.6 l S
+84.9 263.6 m 100.5 263.6 l S
+100.5 263.6 m 137.4 263.6 l S
+137.4 263.6 m 159.7 263.6 l S
+159.7 263.6 m 182.7 263.6 l S
+182.7 263.6 m 199.5 263.6 l S
+199.5 263.6 m 224.2 263.6 l S
+224.2 263.6 m 245.9 263.6 l S
+245.9 263.6 m 282.9 263.6 l S
+282.9 263.6 m 285.6 263.6 l S
+285.6 263.6 m 311.6 263.6 l S
+311.6 263.6 m 330.2 263.6 l S
+330.2 263.6 m 336.6 263.6 l S
+336.6 263.6 m 355.9 263.6 l S
+52.5 250.4 m 77.2 250.4 l S
+77.2 250.4 m 121.6 250.4 l S
+121.6 250.4 m 158.5 250.4 l S
+158.5 250.4 m 161.3 250.4 l S
+161.3 250.4 m 167.7 250.4 l S
+167.7 250.4 m 191.2 250.4 l S
+191.2 250.4 m 202.5 250.4 l S
+202.5 250.4 m 219.3 250.4 l S
+219.3 250.4 m 230.6 250.4 l S
+230.6 250.4 m 257.2 250.4 l S
+257.2 250.4 m 278.9 250.4 l S
+278.9 250.4 m 285.3 250.4 l S
+285.3 250.4 m 308.2 250.4 l S
+308.2 250.4 m 324.1 250.4 l S
+324.1 250.4 m 350.1 250.4 l S
+350.1 250.4 m 380.9 250.4 l S
+52.5 237.2 m 58.9 237.2 l S
+58.9 237.2 m 91.6 237.2 l S
+91.6 237.2 m 128.6 237.2 l S
+128.6 237.2 m 139.9 237.2 l S
+139.9 237.2 m 158.5 237.2 l S
+158.5 237.2 m 180.8 237.2 l S
+180.8 237.2 m 205.9 237.2 l S
+205.9 237.2 m 242.8 237.2 l S
+242.8 237.2 m 271.9 237.2 l S
+271.9 237.2 m 283.2 237.2 l S
+283.2 237.2 m 296.3 237.2 l S
+296.3 237.2 m 336.9 237.2 l S
+336.9 237.2 m 355.3 237.2 l S
+52.5 224.0 m 64.4 224.0 l S
+64.4 224.0 m 86.7 224.0 l S
+86.7 224.0 m 112.4 224.0 l S
+112.4 224.0 m 118.8 224.0 l S
+118.8 224.0 m 142.8 224.0 l S
+142.8 224.0 m 187.7 224.0 l S
+187.7 224.0 m 233.3 224.0 l S
+233.3 224.0 m 270.9 224.0 l S
+270.9 224.0 m 312.7 224.0 l S
+312.7 224.0 m 324.0 224.0 l S
+324.0 224.0 m 341.4 224.0 l S
+341.4 224.0 m 378.4 224.0 l S
+378.4 224.0 m 390.9 224.0 l S
+390.9 224.0 m 407.1 224.0 l S
+407.1 224.0 m 436.8 224.0 l S
+436.8 224.0 m 467.3 224.0 l S
+8.2 210.8 m 59.9 210.8 l S
+59.9 210.8 m 76.1 210.8 l S
+76.1 210.8 m 129.2 210.8 l S
+129.2 210.8 m 149.7 210.8 l S
+149.7 210.8 m 196.5 210.8 l S
+196.5 210.8 m 215.7 210.8 l S
+215.7 210.8 m 253.3 210.8 l S
+253.3 210.8 m 295.1 210.8 l S
+52.5 197.6 m 71.1 197.6 l S
+71.1 197.6 m 108.7 197.6 l S
+52.5 184.4 m 85.2 184.4 l S
+85.2 184.4 m 109.9 184.4 l S
+52.5 171.2 m 90.1 171.2 l S
+90.1 171.2 m 112.4 171.2 l S
+112.4 171.2 m 154.2 171.2 l S
+52.5 158.0 m 85.2 158.0 l S
+85.2 158.0 m 104.4 158.0 l S
+104.4 158.0 m 117.0 158.0 l S
+117.0 158.0 m 145.4 158.0 l S
+145.4 158.0 m 222.2 158.0 l S
+222.2 158.0 m 267.1 158.0 l S
+52.5 144.8 m 80.9 144.8 l S
+8.2 131.6 m 45.2 131.6 l S
+45.2 131.6 m 95.3 131.6 l S
+95.3 131.6 m 131.7 131.6 l S
+131.7 131.6 m 150.9 131.6 l S
+150.9 131.6 m 186.7 131.6 l S
+52.5 118.4 m 88.9 118.4 l S
+52.5 105.2 m 88.3 105.2 l S
+BT
+0.00 0.00 0.00 rg /F6 11 Tf 36 687 Td 0.000 Tc(3.7.)Tj
+0.00 0.00 1.00 rg ( How can I make my Yahoo/Hotmail/GMX account work?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.8.)Tj
+0.00 0.00 1.00 rg ( What's the difference between the "Cautious", "Medium" and "Advanced" defaults?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.9.)Tj
+0.00 0.00 1.00 rg ( Why can I change the configuration with a browser? Does that not raise security issues?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.10.)Tj
+0.00 0.00 1.00 rg ( What is the)Tj
+/F2 11 Tf 77 0 Td(default.filter)Tj
+/F6 11 Tf ( file? What is a "filter"?)Tj
+0.00 0.00 0.00 rg -77 -13.2 Td(3.11.)Tj
+0.00 0.00 1.00 rg ( How can I set up Privoxy to act as a proxy for my LAN?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.12.)Tj
+0.00 0.00 1.00 rg ( Instead of ads, now I get a checkerboard pattern. I don't want to see anything.)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.13.)Tj
+0.00 0.00 1.00 rg ( Why would anybody want to see a checkerboard pattern?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.14.)Tj
+0.00 0.00 1.00 rg ( I see some images being replaced by a text instead of the checkerboard image. Why and how do I get rid of)Tj
+0 -13.2 Td(this?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.15.)Tj
+0.00 0.00 1.00 rg ( Can Privoxy run as a service on Win2K/NT?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.16.)Tj
+0.00 0.00 1.00 rg ( How can I make Privoxy work with other proxies like Squid?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.17.)Tj
+0.00 0.00 1.00 rg ( Can Privoxy run as a "transparent" proxy?)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(4.)Tj
+0.00 0.00 1.00 rg ( Miscellaneous)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(4.1.)Tj
+0.00 0.00 1.00 rg ( How much does Privoxy slow my browsing down? This has to add extra time to browsing.)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.2.)Tj
+0.00 0.00 1.00 rg ( I noticed considerable delays in page requests compared to the old Junkbuster. What's wrong?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.3.)Tj
+0.00 0.00 1.00 rg ( What are "http://config.privoxy.org/" and "http://p.p/"?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.4.)Tj
+0.00 0.00 1.00 rg ( Do you still maintain the blocklists?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.5.)Tj
+0.00 0.00 1.00 rg ( How can I submit new ads?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.6.)Tj
+0.00 0.00 1.00 rg ( How can I hide my IP address?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.7.)Tj
+0.00 0.00 1.00 rg ( Can Privoxy guarantee I am anonymous?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.8.)Tj
+0.00 0.00 1.00 rg ( Might some things break because header information or content is being altered?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.9.)Tj
+0.00 0.00 1.00 rg ( Can Privoxy act as a "caching" proxy to speed up web browsing?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.10.)Tj
+0.00 0.00 1.00 rg ( What about as a firewall? Can Privoxy protect me?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.11.)Tj
+0.00 0.00 1.00 rg ( I have large empty spaces / a checkerboard pattern now where ads used to be. Why?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.12.)Tj
+0.00 0.00 1.00 rg ( How can Privoxy filter Secure \(HTTPS\) URLs?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.13.)Tj
+0.00 0.00 1.00 rg ( Privoxy runs as a "server". How secure is it? Do I need to take any special precautions?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.14.)Tj
+0.00 0.00 1.00 rg ( How can I temporarily disable Privoxy?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.15.)Tj
+0.00 0.00 1.00 rg ( When "disabled" is Privoxy totally out of the picture?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.16.)Tj
+0.00 0.00 1.00 rg ( Where can I find more information about Privoxy and related issues?)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(5.)Tj
+0.00 0.00 1.00 rg ( Troubleshooting)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(5.1.)Tj
+0.00 0.00 1.00 rg ( I just upgraded and am getting "connection refused" with every web page?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(5.2.)Tj
+0.00 0.00 1.00 rg ( I just added a new rule, but the steenkin ad is still getting through. How?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(5.3.)Tj
+0.00 0.00 1.00 rg ( One of my favorite sites does not work with Privoxy. What can I do?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(5.4.)Tj
+0.00 0.00 1.00 rg ( After installing Privoxy, I have to log in every time I start IE. What gives?)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(5.5.)Tj
+0.00 0.00 1.00 rg ( I cannot connect to any FTP sites. Privoxy seems to be blocking me.)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(5.6.)Tj
+0.00 0.00 1.00 rg ( In Mac OSX, I can't configure Microsoft Internet Explorer to use Privoxy as the HTTP proxy.)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(6.)Tj
+0.00 0.00 1.00 rg ( Contacting the developers, Bug Reporting and Feature Requests)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(6.1.)Tj
+0.00 0.00 1.00 rg ( Get Support)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.2.)Tj
+0.00 0.00 1.00 rg ( Report Bugs)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.3.)Tj
+0.00 0.00 1.00 rg ( Request New Features)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.4.)Tj
+0.00 0.00 1.00 rg ( Report Ads or Other Actions-Related Problems)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.5.)Tj
+0.00 0.00 1.00 rg ( Other)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(7.)Tj
+0.00 0.00 1.00 rg ( Privoxy Copyright, License and History)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(7.1.)Tj
+0.00 0.00 1.00 rg ( License)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(7.2.)Tj
+0.00 0.00 1.00 rg ( History)Tj
+0.00 0.00 0.00 rg /F9 17 Tf -36 -32.4 Td(1. General Information)Tj
+/F8 11 Tf 0 646.2 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-172.463 -720 Td(2/18)Tj
+ET
+Q
+endstream
+endobj
+475 0 obj<</Type/Page/Parent 470 0 R/Contents 476 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F4 6 0 R/F6 8 0 R/F8 10 0 R/F9 11 0 R/Fc 12 0 R>>/XObject<<>>>>/Annots 126 0 R>>endobj
+476 0 obj<</Length 5600      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+135.6 659.6 m 172.6 659.6 l S
+172.6 659.6 m 223.0 659.6 l S
+348.6 659.6 m 403.3 659.6 l S
+403.3 659.6 m 459.2 659.6 l S
+206.2 593.6 m 239.5 593.6 l S
+306.1 593.6 m 360.8 593.6 l S
+360.8 593.6 m 416.7 593.6 l S
+106.6 580.4 m 130.1 580.4 l S
+187.3 554.0 m 232.2 554.0 l S
+232.2 554.0 m 267.3 554.0 l S
+267.3 554.0 m 279.2 554.0 l S
+279.2 554.0 m 295.4 554.0 l S
+295.4 554.0 m 336.1 554.0 l S
+51.3 488.0 m 101.7 488.0 l S
+125.9 474.8 m 146.9 474.8 l S
+146.9 474.8 m 184.5 474.8 l S
+0.00 0.00 0.00 rg 0.0 438.6 540.0 2.0 re f
+0.0 354.0 m 51.9 354.0 l S
+51.9 354.0 m 107.9 354.0 l S
+56.5 301.2 m 111.2 301.2 l S
+111.2 301.2 m 167.1 301.2 l S
+0.0 238.6 540.0 2.0 re f
+188.5 114.4 m 210.2 114.4 l S
+210.2 114.4 m 221.5 114.4 l S
+221.5 114.4 m 267.6 114.4 l S
+300.9 61.6 m 415.5 61.6 l S
+460.4 61.6 m 506.2 61.6 l S
+BT
+/F9 11 Tf 0 687 Td 0.000 Tc(1.1. What is this new version of Privoxy?)Tj
+/F4 11 Tf 0 -26.4 Td(In the beginning, there was the)Tj
+0.00 0.00 1.00 rg ( Internet Junkbuster)Tj
+0.00 0.00 0.00 rg (, by Anonymous Coders and)Tj
+0.00 0.00 1.00 rg ( Junkbusters Corporation)Tj
+0.00 0.00 0.00 rg (. It saved many)Tj
+0 -13.2 Td(users a lot of pain in the early days of web advertising and user tracking.)Tj
+0 -26.4 Td(But the web, its protocols and standards, and with it, the techniques for forcing users to consume ads, give up autonomy)Tj
+0 -13.2 Td(over their browsing, and for spying on them, kept evolving. Unfortunately, the Internet Junkbuster did not. Version 2.0.2,)Tj
+0 -13.2 Td(published in 1998, was \(and is\) the last official)Tj
+0.00 0.00 1.00 rg ( release)Tj
+0.00 0.00 0.00 rg ( available from)Tj
+0.00 0.00 1.00 rg ( Junkbusters Corporation)Tj
+0.00 0.00 0.00 rg (. Fortunately, it had been)Tj
+0 -13.2 Td(released under the GNU)Tj
+0.00 0.00 1.00 rg ( GPL)Tj
+0.00 0.00 0.00 rg (, which allowed further development by others.)Tj
+0 -26.4 Td(So Stefan Waldherr started maintaining an)Tj
+0.00 0.00 1.00 rg ( improved version of the software)Tj
+0.00 0.00 0.00 rg (, to which eventually a number of people)Tj
+0 -13.2 Td(contributed patches. It could already replace banners with a transparent image, and had a first version of pop-up killing,)Tj
+0 -13.2 Td(but it was still very closely based on the original, with all its limitations, such as the lack of HTTP/1.1 support, flexible)Tj
+0 -13.2 Td(per-site configuration, or content modification. The last release from this effort was version 2.0.2-10, published in 2000.)Tj
+0 -26.4 Td(Then, some)Tj
+0.00 0.00 1.00 rg ( developers)Tj
+0.00 0.00 0.00 rg ( picked up the thread, and started turning the software inside out, upside down, and then)Tj
+0 -13.2 Td(reassembled it, adding many)Tj
+0.00 0.00 1.00 rg ( new features)Tj
+0.00 0.00 0.00 rg ( along the way.)Tj
+0 -26.4 Td(The result of this is Privoxy, whose first stable release, 3.0, is due late summer or early fall 2002.)Tj
+/F9 11 Tf 0 -28.4 Td(1.2. Why "Privoxy"? Why a name change at all?)Tj
+/F4 11 Tf 0 -26.4 Td(Privoxy is the ")Tj
+/F6 11 Tf (Privacy Enhancing Proxy)Tj
+/F4 11 Tf (". Also, its content modification and junk suppression allow you to browse your)Tj
+0 -13.2 Td(")Tj
+/F6 11 Tf (private)Tj
+/F4 11 Tf ( edition" of the web.)Tj
+0.00 0.00 1.00 rg 0 -26.4 Td(Junkbusters Corporation)Tj
+0.00 0.00 0.00 rg ( continues to offer their original version of the Internet Junkbuster, so publishing our)Tj
+0 -13.2 Td(Junkbuster-derived software under the same name led to confusion.)Tj
+0 -26.4 Td(There are also potential legal complications from the continued use of the Junkbuster name, which is a registered)Tj
+0 -13.2 Td(trademark of)Tj
+0.00 0.00 1.00 rg ( Junkbusters Corporation)Tj
+0.00 0.00 0.00 rg (. There are, however, no objections from Junkbusters Corporation to the Privoxy)Tj
+0 -13.2 Td(project itself, and they, in fact, still share our ideals and goals.)Tj
+0 -26.4 Td(The developers also believed that there are so many changes from the original code, that it was time to make a clean break)Tj
+0 -13.2 Td(from the past and make a name in their own right, especially now with the pending release of version 3.0.)Tj
+/F9 11 Tf 0 -28.4 Td(1.3. How does Privoxy differ from the old Junkbuster?)Tj
+/F4 11 Tf 0 -26.4 Td(Privoxy picks up where Junkbuster left off. All the old features remain. The new Privoxy still blocks ads and banners, still)Tj
+0 -13.2 Td(manages cookies, and still helps protect your privacy. But, these are all enhanced, and many new features have been)Tj
+0 -13.2 Td(added, all in the same vein.)Tj
+0 -26.4 Td(The configuration has changed significantly as well. This is something that users will notice right off the bat if upgrading)Tj
+0 -13.2 Td(from Junkbuster 2.0.x. The "blocklist" "cookielist", "imagelist" and much more has been combined into the "actions" files,)Tj
+0 -13.2 Td(with a completely different syntax. See the)Tj
+0.00 0.00 1.00 rg ( note to upgraders)Tj
+0.00 0.00 0.00 rg ( for details.)Tj
+0 -26.4 Td(Privoxy's new features include:)Tj
+36 -26.4 Td(Integrated browser based configuration and control utility at)Tj
+0.00 0.00 1.00 rg ( http://config.privoxy.org/)Tj
+0.00 0.00 0.00 rg ( \(shortcut:)Tj
+0.00 0.00 1.00 rg ( http://p.p/)Tj
+0.00 0.00 0.00 rg (\).)Tj
+-0 -13.2 Td(Browser-based tracing of rule and filter effects. Remote toggling.)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(Web page content filtering \(removes banners based on size, invisible "web-bugs", JavaScript and HTML)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F8 11 Tf -28.19 683.8 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-172.463 -720 Td(3/18)Tj
+ET
+Q
+endstream
+endobj
+477 0 obj<</Type/Page/Parent 470 0 R/Contents 478 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F4 6 0 R/F6 8 0 R/F8 10 0 R/F9 11 0 R/Fc 12 0 R>>/XObject<<>>>>/Annots 129 0 R>>endobj
+478 0 obj<</Length 4618      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 478.2 540.0 2.0 re f
+0.0 291.4 540.0 2.0 re f
+0.00 0.00 1.00 RG
+455.5 193.6 m 480.3 193.6 l S
+480.3 193.6 m 517.8 193.6 l S
+0.0 78.2 540.0 2.0 re f
+BT
+/F4 11 Tf 36 687 Td 0.000 Tc(annoyances, pop-up windows, etc.\))Tj
+0 -13.2 Td(Modularized configuration that allows for standard settings and user settings to reside in separate files, so that)Tj
+0 -13.2 Td(installing updated actions files won't overwrite individual user settings.)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(HTTP/1.1 compliant \(but not all optional 1.1 features are supported\).)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(Support for Perl Compatible Regular Expressions in the configuration files, and generally a more sophisticated)Tj
+0 -13.2 Td(and flexible configuration syntax over previous versions.)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(Improved cookie management features \(e.g. session based cookies\).)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(GIF de-animation.)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(Bypass many click-tracking scripts \(avoids script redirection\).)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(Multi-threaded \(POSIX and native threads\).)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(User-customizable HTML templates for all proxy-generated pages \(e.g. "blocked" page\).)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(Auto-detection and re-reading of config file changes.)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(Improved signal handling, and a true daemon mode \(Unix\).)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(Every feature now controllable on a per-site or per-location basis, configuration more powerful and versatile)Tj
+0 -13.2 Td(over-all.)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(Many smaller new features added, limitations and bugs removed, and security holes fixed.)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F9 11 Tf -28.19 -28.4 Td(1.4. What is a "proxy"? How does Privoxy work?)Tj
+/F4 11 Tf 0 -26.4 Td(A web proxy is a service, based on a software such as Privoxy, that clients \(i.e. browsers\) can use instead of connecting)Tj
+0 -13.2 Td(directly to the web servers on the Internet. The clients then ask the proxy to fetch the objects they need \(web pages,)Tj
+0 -13.2 Td(images, movies etc\) on their behalf, and when the proxy has done so, it hands the results back to the client.)Tj
+0 -26.4 Td(There are many reasons to use web proxies, such as security \(firewalling\), efficiency \(caching\) and others, and there are)Tj
+0 -13.2 Td(just as many different proxies to accommodate those needs.)Tj
+0 -26.4 Td(Privoxy is a proxy that is solely focused on privacy protection and junk elimination. Sitting between your browser\(s\) and)Tj
+0 -13.2 Td(the Internet, it is in a perfect position to filter outbound personal information that your browser is leaking, as well as)Tj
+0 -13.2 Td(inbound junk. It uses a variety of techniques to do this, all of which are under your control via the various configuration)Tj
+0 -13.2 Td(files and options.)Tj
+/F9 11 Tf 0 -28.4 Td(1.5. How does Privoxy know what is an ad, and what is not?)Tj
+/F4 11 Tf 0 -26.4 Td(Privoxy's approach to blocking ads is twofold:)Tj
+0 -26.4 Td(First, there are certain patterns in the)Tj
+/F6 11 Tf ( locations)Tj
+/F4 11 Tf ( \(URLs\) of banner images. This applies to both the path \(you wouldn't)Tj
+0 -13.2 Td(guess how many web sites serve their banners from a directory called "banners"!\) and the host \(blocking the big banner)Tj
+0 -13.2 Td(hosting services like doublecklick.net already helps a lot\). Privoxy takes advantage of this fact by using)Tj
+0.00 0.00 1.00 rg ( URL patterns)Tj
+0.00 0.00 0.00 rg ( to)Tj
+0 -13.2 Td(sort out and block the requests for banners.)Tj
+0 -26.4 Td(Second, banners tend to come in certain)Tj
+/F6 11 Tf ( sizes)Tj
+/F4 11 Tf (. But you can't tell the size of an image by its URL without downloading it,)Tj
+0 -13.2 Td(and if you do, it's too late to save bandwidth. Therefore, Privoxy also inspects the HTML sources of web pages while they)Tj
+0 -13.2 Td(are loaded, and replaces references to images with standard banner sizes by dummy references, so that your browser)Tj
+0 -13.2 Td(doesn't request them anymore in the first place.)Tj
+0 -26.4 Td(Both of this involves a certain amount of guesswork and is, of course, freely configurable.)Tj
+/F8 11 Tf 0 631 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-172.463 -720 Td(4/18)Tj
+ET
+Q
+endstream
+endobj
+479 0 obj<</Type/Page/Parent 470 0 R/Contents 480 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 6 0 R/F6 8 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 147 0 R>>endobj
+480 0 obj<</Length 5028      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+468.4 593.6 m 484.2 593.6 l S
+484.2 593.6 m 500.4 593.6 l S
+0.0 580.4 m 72.7 580.4 l S
+72.7 580.4 m 106.6 580.4 l S
+106.6 580.4 m 136.3 580.4 l S
+0.00 0.00 0.00 rg 0.0 570.6 540.0 2.0 re f
+0.0 463.0 540.0 2.0 re f
+127.7 418.0 m 154.3 418.0 l S
+154.3 418.0 m 191.9 418.0 l S
+191.9 418.0 m 222.7 418.0 l S
+222.7 418.0 m 259.7 418.0 l S
+259.7 418.0 m 290.5 418.0 l S
+198.9 404.8 m 246.2 404.8 l S
+0.0 342.2 540.0 2.0 re f
+59.9 246.8 m 82.8 246.8 l S
+82.8 246.8 m 95.3 246.8 l S
+95.3 246.8 m 103.0 246.8 l S
+103.0 246.8 m 124.7 246.8 l S
+0.0 237.0 540.0 2.0 re f
+0.0 158.2 540.0 2.0 re f
+31.8 102.4 m 48.0 102.4 l S
+48.0 102.4 m 61.1 102.4 l S
+61.1 102.4 m 98.1 102.4 l S
+98.1 102.4 m 111.8 102.4 l S
+111.8 102.4 m 187.0 102.4 l S
+289.6 102.4 m 340.0 102.4 l S
+340.0 102.4 m 376.4 102.4 l S
+376.4 102.4 m 392.6 102.4 l S
+458.6 102.4 m 513.4 102.4 l S
+0.0 89.2 m 33.6 89.2 l S
+299.5 62.8 m 323.7 62.8 l S
+323.7 62.8 m 371.0 62.8 l S
+0.0 39.8 540.0 2.0 re f
+BT
+/F9 11 Tf 0 687 Td 0.000 Tc(1.6. Can Privoxy make mistakes? This does not sound very scientific.)Tj
+/F4 11 Tf 0 -26.4 Td(Actually, it's a black art ;-\) And yes, it is always possible to have a broad rule accidentally block or change something by)Tj
+0 -13.2 Td(mistake. There is a good chance you may run into such a situation at some point. It is tricky writing rules to cover every)Tj
+0 -13.2 Td(conceivable possibility, and not occasionally get false positives.)Tj
+0 -26.4 Td(But this should not be a big concern since the Privoxy configuration is very flexible, and includes tools to help identify)Tj
+0 -13.2 Td(these types of situations so they can be addressed as needed, allowing you to customize your installation. \()Tj
+0.00 0.00 1.00 rg (See the)Tj
+0 -13.2 Td(Troubleshooting section below)Tj
+0.00 0.00 0.00 rg (.\))Tj
+/F9 11 Tf 0 -28.4 Td(1.7. My browser does the same things as Privoxy. Why should I use Privoxy at all?)Tj
+/F4 11 Tf 0 -26.4 Td(Modern browsers do indeed have)Tj
+/F6 11 Tf ( some)Tj
+/F4 11 Tf ( of the same functionality as Privoxy. Maybe this is adequate for you. But Privoxy)Tj
+0 -13.2 Td(is much more versatile and powerful, and can do a number of things that browsers just can't.)Tj
+0 -26.4 Td(In addition, a proxy is good choice if you use multiple browsers, or have a LAN with multiple computers. This way all the)Tj
+0 -13.2 Td(configuration is in one place, and you don't have to maintain a similar configuration for possibly many browsers.)Tj
+/F9 11 Tf 0 -28.4 Td(1.8. Is there is a license or fee? What about a warranty? Registration?)Tj
+/F4 11 Tf 0 -26.4 Td(Privoxy is licensed under the)Tj
+0.00 0.00 1.00 rg ( GNU General Public License \(GPL\))Tj
+0.00 0.00 0.00 rg (. It is free to use, copy, modify or distribute as you wish)Tj
+0 -13.2 Td(under the terms of this license. Please see the)Tj
+0.00 0.00 1.00 rg ( Copyright)Tj
+0.00 0.00 0.00 rg ( section for more information on the license and copyright. Or the)Tj
+/F0 11 Tf 0 -13.2 Td(LICENSE)Tj
+/F4 11 Tf ( file that should be included.)Tj
+0 -26.4 Td(There is)Tj
+/F6 11 Tf ( no warranty)Tj
+/F4 11 Tf ( of any kind, expressed, implied or otherwise. That is something that would cost real money ;-\))Tj
+0 -13.2 Td(There is no registration either. Privoxy really is)Tj
+/F6 11 Tf ( free)Tj
+/F4 11 Tf ( in every respect!)Tj
+/F9 11 Tf 0 -28.4 Td(1.9. I would like to help you, what do I do?)Tj
+/F9 9 Tf 0 -24.4 Td(1.9.1. Money Money Money)Tj
+/F4 11 Tf 0 -26 Td(We, of course, welcome donations and could use money for domain registering, buying software to test Privoxy with, and,)Tj
+0 -13.2 Td(of course, for regular world-wide get-togethers \(hahaha\). If you enjoy the software and feel like helping us with a)Tj
+0 -13.2 Td(donation, just)Tj
+0.00 0.00 1.00 rg ( drop us a note)Tj
+0.00 0.00 0.00 rg (.)Tj
+/F9 9 Tf 0 -26.4 Td(1.9.2. Software)Tj
+/F4 11 Tf 0 -26 Td(If you are a vendor of a web-related software like a browser, web server or proxy, and would like us to ensure that)Tj
+0 -13.2 Td(Privoxy runs smoothly with your product, you might consider supplying us with a copy or license. We can't, however,)Tj
+0 -13.2 Td(guarantee that we will fix all potential compatibility issues as a result.)Tj
+/F9 9 Tf 0 -26.4 Td(1.9.3. You want to work with us?)Tj
+/F4 11 Tf 0 -26 Td(Well, helping the team is always a good idea. We welcome new developers, packaging gurus or documentation writers.)Tj
+0 -13.2 Td(Simply)Tj
+0.00 0.00 1.00 rg ( get an account on SourceForge.net)Tj
+0.00 0.00 0.00 rg ( and mail your id to the)Tj
+0.00 0.00 1.00 rg ( developers mailing list)Tj
+0.00 0.00 0.00 rg (. Then read the)Tj
+0.00 0.00 1.00 rg ( Developer's)Tj
+0 -13.2 Td(Manual)Tj
+0.00 0.00 0.00 rg (.)Tj
+0 -26.4 Td(Once we have added you to the team, you'll have write access to the)Tj
+0.00 0.00 1.00 rg ( CVS repository)Tj
+0.00 0.00 0.00 rg (, and together we'll find a suitable)Tj
+0 -13.2 Td(task for you.)Tj
+/F8 11 Tf 0 669.4 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-172.463 -720 Td(5/18)Tj
+ET
+Q
+endstream
+endobj
+481 0 obj<</Type/Page/Parent 470 0 R/Contents 482 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 6 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 156 0 R>>endobj
+482 0 obj<</Length 4248      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 589.8 540.0 2.0 re f
+0.0 442.6 540.0 2.0 re f
+0.00 0.00 1.00 RG
+176.3 371.2 m 198.0 371.2 l S
+198.0 371.2 m 209.3 371.2 l S
+209.3 371.2 m 255.4 371.2 l S
+274.0 371.2 m 325.7 371.2 l S
+325.7 371.2 m 360.8 371.2 l S
+388.3 371.2 m 409.4 371.2 l S
+409.4 371.2 m 444.5 371.2 l S
+0.0 335.0 540.0 2.0 re f
+0.0 253.8 540.0 2.0 re f
+96.8 169.2 m 162.6 169.2 l S
+BT
+/F9 17 Tf 0 681 Td 0.000 Tc(2. Installation)Tj
+/F9 11 Tf 0 -27.6 Td(2.1. Which browsers are supported by Privoxy?)Tj
+/F4 11 Tf 0 -26.4 Td(Any browser that can be configured to use a proxy, which should be virtually all browsers. Direct browser support is not)Tj
+0 -13.2 Td(necessary since Privoxy runs as a separate application and talks to the browser in the standardized HTTP protocol, just)Tj
+0 -13.2 Td(like a web server does.)Tj
+/F9 11 Tf 0 -28.4 Td(2.2. Which operating systems are supported?)Tj
+/F4 11 Tf 0 -26.4 Td(At present, Privoxy is known to run on Windows\(95, 98, ME, 2000, XP\), Linux \(RedHat, SuSE, Debian, Conectiva,)Tj
+0 -13.2 Td(Gentoo\), Mac OSX, OS/2, AmigaOS, BeOS, FreeBSD, NetBSD, Solaris, and many more flavors of Unix.)Tj
+0 -26.4 Td(But any operating system that runs TCP/IP, can conceivably take advantage of Privoxy in a networked situation where)Tj
+0 -13.2 Td(Privoxy would run as a server on a LAN gateway. Then only the "gateway" needs to be running one of the above)Tj
+0 -13.2 Td(operating systems.)Tj
+0 -26.4 Td(Source code is freely available, so porting to other operating systems is always a possibility.)Tj
+/F9 11 Tf 0 -28.4 Td(2.3. Can I install Privoxy over Junkbuster?)Tj
+/F4 11 Tf 0 -26.4 Td(We recommend you un-install Junkbuster first to minimize conflicts and confusion. You may want to save your old)Tj
+0 -13.2 Td(configuration files for future reference. The configuration files and syntax have substantially changed, so you will need to)Tj
+0 -13.2 Td(manually port your old patterns. See the)Tj
+0.00 0.00 1.00 rg ( note to upgraders)Tj
+0.00 0.00 0.00 rg ( and)Tj
+0.00 0.00 1.00 rg ( installation chapter)Tj
+0.00 0.00 0.00 rg ( in the)Tj
+0.00 0.00 1.00 rg ( user manual)Tj
+0.00 0.00 0.00 rg ( for details.)Tj
+0 -26.4 Td(Note: Some installers may automatically un-install Junkbuster, if present!)Tj
+/F9 11 Tf 0 -28.4 Td(2.4. I just installed Privoxy. Is there anything special I have to do now?)Tj
+/F4 11 Tf 0 -26.4 Td(All browsers must be told to use Privoxy as a proxy by specifying the correct proxy address and port number in the)Tj
+0 -13.2 Td(appropriate configuration area for the browser. See below. You should also flush your browser's memory and disk cache)Tj
+0 -13.2 Td(to get rid of any cached junk items.\15)Tj
+/F9 11 Tf 0 -28.4 Td(2.5. What is the proxy address of Privoxy?)Tj
+/F4 11 Tf 0 -26.4 Td(If you set up the Privoxy to run on the computer you browse from \(rather than your ISP's server or some networked)Tj
+0 -13.2 Td(computer on a LAN\), the proxy will be on )Tj
+/F0 11 Tf (127.0.0.1)Tj
+/F4 11 Tf ( \(sometimes referred to as "localhost", which is the special name)Tj
+0 -13.2 Td(used by every computer on the Internet to refer to itself\) and the port will be 8118 \(unless you have Privoxy to run on a)Tj
+0 -13.2 Td(different port with the)Tj
+0.00 0.00 1.00 rg ( listen-address)Tj
+0.00 0.00 0.00 rg ( config option\).)Tj
+0 -26.4 Td(When configuring your browser's proxy settings you typically enter the word "localhost" or the IP address "127.0.0.1" in)Tj
+0 -13.2 Td(the boxes next to "HTTP" and "Secure" \(HTTPS\) and then the number "8118" for "port". This tells your browser to send)Tj
+0 -13.2 Td(all web requests to Privoxy instead of directly to the Internet.)Tj
+0 -26.4 Td(Privoxy can also be used to proxy for a Local Area Network. In this case, your would enter either the IP address of the)Tj
+0 -13.2 Td(LAN host where Privoxy is running, or the equivalent hostname. Port assignment would be same as above. Note that)Tj
+0 -13.2 Td(Privoxy doesn't listen on any LAN interfaces by default.)Tj
+0 -26.4 Td(Privoxy does not currently handle protocols such as FTP, SMTP, IM, IRC, ICQ, or other Internet protocols.)Tj
+/F8 11 Tf 0 681.8 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-172.463 -720 Td(6/18)Tj
+ET
+Q
+endstream
+endobj
+483 0 obj<</Type/Page/Parent 470 0 R/Contents 484 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 6 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 175 0 R>>endobj
+484 0 obj<</Length 5018      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 689.4 540.0 2.0 re f
+0.00 0.00 1.00 RG
+229.4 618.0 m 344.0 618.0 l S
+60.8 565.2 m 77.6 565.2 l S
+77.6 565.2 m 95.0 565.2 l S
+0.0 555.4 540.0 2.0 re f
+0.0 414.2 540.0 2.0 re f
+478.1 335.6 m 499.8 335.6 l S
+499.8 335.6 m 533.7 335.6 l S
+26.6 322.4 m 59.9 322.4 l S
+59.9 322.4 m 83.4 322.4 l S
+452.1 296.0 m 496.4 296.0 l S
+496.4 296.0 m 507.7 296.0 l S
+507.7 296.0 m 525.1 296.0 l S
+0.0 282.8 m 42.2 282.8 l S
+42.2 282.8 m 78.5 282.8 l S
+78.5 282.8 m 94.7 282.8 l S
+0.0 273.0 540.0 2.0 re f
+0.0 178.6 540.0 2.0 re f
+0.0 133.6 m 34.2 133.6 l S
+34.2 133.6 m 55.9 133.6 l S
+136.9 133.6 m 170.8 133.6 l S
+122.5 80.8 m 147.2 80.8 l S
+147.2 80.8 m 180.5 80.8 l S
+BT
+/F9 11 Tf 0 671.8 Td 0.000 Tc(2.6. I just installed Privoxy, and nothing is happening. All the ads are there. What's wrong?)Tj
+/F4 11 Tf 0 -26.4 Td(Did you configure your browser to use Privoxy as a proxy? It does not sound like it. See above. You might also try)Tj
+0 -13.2 Td(flushing the browser's caches to force a full re-reading of pages. You can verify that Privoxy is running, and your browser)Tj
+0 -13.2 Td(is correctly configured by entering the special URL:)Tj
+0.00 0.00 1.00 rg ( http://config.privoxy.org/)Tj
+0.00 0.00 0.00 rg (. This should take you to a page titled "This)Tj
+0 -13.2 Td(is Privoxy.." with access to Privoxy's internal configuration. If you see this, then you are good to go. If you receive a page)Tj
+0 -13.2 Td(saying "Privoxy is not running", then the browser is not set up to use your Privoxy installation. If you receive anything)Tj
+0 -13.2 Td(else \(probably nothing at all\), it could either be that the browser is not set up correctly, or that Privoxy is not running at)Tj
+0 -13.2 Td(all. Check the)Tj
+0.00 0.00 1.00 rg ( log file)Tj
+0.00 0.00 0.00 rg (.)Tj
+/F9 14 Tf 0 -31.4 Td(2.7. In Mac OSX, I dragged the Privoxy folder to the trash in order to uninstall it.)Tj
+0 -16.8 Td(Now the finder tells me I don't have sufficient privileges to empty the trash.)Tj
+/F4 11 Tf 0 -27 Td(Just dragging the Privoxy folder to the trash is not enough to delete it. Privoxy supplies an uninstall.command file that)Tj
+0 -13.2 Td(takes care of these details. Open the trash, drag the uninstall.command file out of the trash and double-click on it. You)Tj
+0 -13.2 Td(will be prompted for confirmation and the administration password.)Tj
+0 -26.4 Td(The trash may still appear full after this command; emptying the trash from the desktop should make it appear empty)Tj
+0 -13.2 Td(again.)Tj
+/F9 17 Tf 0 -34.4 Td(3. Configuration)Tj
+/F9 11 Tf 0 -27.6 Td(3.1. Where can I get updated Actions Files?)Tj
+/F4 11 Tf 0 -26.4 Td(Based on your feedback and the continuing development, updated actions files will be made available on the)Tj
+0.00 0.00 1.00 rg ( files section)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(of our)Tj
+0.00 0.00 1.00 rg ( project page)Tj
+0.00 0.00 0.00 rg (.)Tj
+0 -26.4 Td(If you wish to receive an email notification whenever we release updates of Privoxy or the actions file,)Tj
+0.00 0.00 1.00 rg ( subscribe to our)Tj
+0 -13.2 Td(announce mailing list)Tj
+0.00 0.00 0.00 rg (, ijbswa-announce@lists.sourceforge.net.)Tj
+/F9 11 Tf 0 -28.4 Td(3.2. Can I use my old config files?)Tj
+/F4 11 Tf 0 -26.4 Td(The syntax, number, and purpose of configuration files has substantially changed from Junkbuster and earlier versions of)Tj
+0 -13.2 Td(Privoxy. The old files, like )Tj
+/F0 11 Tf (blocklist)Tj
+/F4 11 Tf ( will not work at all. If you are upgrading from a 2.0.x version, you will need to)Tj
+0 -13.2 Td(port your configuration data to the new format. Note that even the pattern syntax has changed! Even configuration files)Tj
+0 -13.2 Td(from the 2.9.x versions will need to be adapted, as configuration syntax has been very much in flow in the 2.9.x series.)Tj
+/F9 11 Tf 0 -28.4 Td(3.3. What is an "actions" file?)Tj
+0.00 0.00 1.00 rg /F4 11 Tf 0 -26.4 Td(Actions files)Tj
+0.00 0.00 0.00 rg ( are where various)Tj
+0.00 0.00 1.00 rg ( actions)Tj
+0.00 0.00 0.00 rg ( that Privoxy might take while processing a certain request, are configured.)Tj
+0 -13.2 Td(Typically, you would define a set of default actions that apply to all URLs, then add exceptions to these defaults where)Tj
+0 -13.2 Td(needed.)Tj
+0 -26.4 Td(Actions can be defined on a)Tj
+0.00 0.00 1.00 rg ( URL pattern)Tj
+0.00 0.00 0.00 rg ( basis, i.e. for single URLs, whole web sites, groups or parts thereof etc. Actions)Tj
+0 -13.2 Td(can also be grouped together and then applied to requests matching one or more patterns. There are many possible actions)Tj
+0 -13.2 Td(that might apply to any given site. As an example, if you are blocking cookies as one of your default actions, but need to)Tj
+0 -13.2 Td(accept cookies from a given site, you would need to define an exception for this site in one of your actions files,)Tj
+0 -13.2 Td(preferably in )Tj
+/F0 11 Tf (user.action)Tj
+/F8 11 Tf 0 691 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-172.463 -720 Td(7/18)Tj
+ET
+Q
+endstream
+endobj
+485 0 obj<</Type/Page/Parent 470 0 R/Contents 486 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 6 0 R/F5 7 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 202 0 R>>endobj
+486 0 obj<</Length 7840      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 689.4 540.0 2.0 re f
+0.00 0.00 1.00 RG
+323.8 644.4 m 357.7 644.4 l S
+357.7 644.4 m 375.1 644.4 l S
+375.1 644.4 m 410.3 644.4 l S
+437.8 644.4 m 458.8 644.4 l S
+458.8 644.4 m 494.0 644.4 l S
+44.3 631.2 m 60.5 631.2 l S
+60.5 631.2 m 72.4 631.2 l S
+72.4 631.2 m 86.2 631.2 l S
+86.2 631.2 m 120.1 631.2 l S
+151.8 631.2 m 185.8 631.2 l S
+185.8 631.2 m 203.2 631.2 l S
+203.2 631.2 m 237.7 631.2 l S
+0.0 621.4 540.0 2.0 re f
+249.4 563.2 m 364.0 563.2 l S
+410.8 563.2 m 456.6 563.2 l S
+4.5 550.0 m 28.3 550.0 l S
+28.3 550.0 m 39.6 550.0 l S
+39.6 550.0 m 73.5 550.0 l S
+73.5 550.0 m 89.7 550.0 l S
+89.7 550.0 m 123.6 550.0 l S
+123.6 550.0 m 185.6 550.0 l S
+0.0 540.2 540.0 2.0 re f
+87.4 455.6 m 103.6 455.6 l S
+103.6 455.6 m 137.5 455.6 l S
+137.5 455.6 m 172.6 455.6 l S
+200.1 455.6 m 221.2 455.6 l S
+221.2 455.6 m 256.3 455.6 l S
+0.0 406.2 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 260.8 540.0 46.4 re f
+17.8 274.0 m 142.0 274.0 l S
+152.8 274.0 m 277.0 274.0 l S
+287.8 274.0 m 395.8 274.0 l S
+0.00 0.00 0.00 rg 0.0 252.2 540.0 2.0 re f
+216.1 194.0 m 385.2 194.0 l S
+0.0 126.8 135.8 0.8 re f
+0.0 110.4 0.8 17.2 re f
+135.0 110.4 0.8 17.2 re f
+0.0 110.4 135.8 0.8 re f
+135.0 126.8 135.8 0.8 re f
+135.0 110.4 0.8 17.2 re f
+270.0 110.4 0.8 17.2 re f
+135.0 110.4 135.8 0.8 re f
+270.0 126.8 135.8 0.8 re f
+270.0 110.4 0.8 17.2 re f
+405.0 110.4 0.8 17.2 re f
+270.0 110.4 135.8 0.8 re f
+405.0 126.8 135.8 0.8 re f
+405.0 110.4 0.8 17.2 re f
+540.0 110.4 0.8 17.2 re f
+405.0 110.4 135.8 0.8 re f
+0.0 110.4 135.8 0.8 re f
+0.0 94.1 0.8 17.2 re f
+135.0 94.1 0.8 17.2 re f
+0.0 94.1 135.8 0.8 re f
+135.0 110.4 135.8 0.8 re f
+135.0 94.1 0.8 17.2 re f
+270.0 94.1 0.8 17.2 re f
+135.0 94.1 135.8 0.8 re f
+270.0 110.4 135.8 0.8 re f
+270.0 94.1 0.8 17.2 re f
+405.0 94.1 0.8 17.2 re f
+270.0 94.1 135.8 0.8 re f
+405.0 110.4 135.8 0.8 re f
+405.0 94.1 0.8 17.2 re f
+540.0 94.1 0.8 17.2 re f
+405.0 94.1 135.8 0.8 re f
+0.0 94.1 135.8 0.8 re f
+0.0 77.7 0.8 17.2 re f
+135.0 77.7 0.8 17.2 re f
+0.0 77.7 135.8 0.8 re f
+135.0 94.1 135.8 0.8 re f
+135.0 77.7 0.8 17.2 re f
+270.0 77.7 0.8 17.2 re f
+135.0 77.7 135.8 0.8 re f
+270.0 94.1 135.8 0.8 re f
+270.0 77.7 0.8 17.2 re f
+405.0 77.7 0.8 17.2 re f
+270.0 77.7 135.8 0.8 re f
+405.0 94.1 135.8 0.8 re f
+405.0 77.7 0.8 17.2 re f
+540.0 77.7 0.8 17.2 re f
+405.0 77.7 135.8 0.8 re f
+0.0 77.7 135.8 0.8 re f
+0.0 61.3 0.8 17.2 re f
+135.0 61.3 0.8 17.2 re f
+0.0 61.3 135.8 0.8 re f
+135.0 77.7 135.8 0.8 re f
+135.0 61.3 0.8 17.2 re f
+270.0 61.3 0.8 17.2 re f
+135.0 61.3 135.8 0.8 re f
+270.0 77.7 135.8 0.8 re f
+270.0 61.3 0.8 17.2 re f
+405.0 61.3 0.8 17.2 re f
+270.0 61.3 135.8 0.8 re f
+405.0 77.7 135.8 0.8 re f
+405.0 61.3 0.8 17.2 re f
+540.0 61.3 0.8 17.2 re f
+405.0 61.3 135.8 0.8 re f
+0.0 61.3 135.8 0.8 re f
+0.0 44.9 0.8 17.2 re f
+135.0 44.9 0.8 17.2 re f
+0.0 44.9 135.8 0.8 re f
+135.0 61.3 135.8 0.8 re f
+135.0 44.9 0.8 17.2 re f
+270.0 44.9 0.8 17.2 re f
+135.0 44.9 135.8 0.8 re f
+270.0 61.3 135.8 0.8 re f
+270.0 44.9 0.8 17.2 re f
+405.0 44.9 0.8 17.2 re f
+270.0 44.9 135.8 0.8 re f
+405.0 61.3 135.8 0.8 re f
+405.0 44.9 0.8 17.2 re f
+540.0 44.9 0.8 17.2 re f
+405.0 44.9 135.8 0.8 re f
+0.0 44.9 135.8 0.8 re f
+0.0 28.6 0.8 17.2 re f
+135.0 28.6 0.8 17.2 re f
+0.0 28.6 135.8 0.8 re f
+135.0 44.9 135.8 0.8 re f
+135.0 28.6 0.8 17.2 re f
+270.0 28.6 0.8 17.2 re f
+135.0 28.6 135.8 0.8 re f
+270.0 44.9 135.8 0.8 re f
+270.0 28.6 0.8 17.2 re f
+405.0 28.6 0.8 17.2 re f
+270.0 28.6 135.8 0.8 re f
+405.0 44.9 135.8 0.8 re f
+405.0 28.6 0.8 17.2 re f
+540.0 28.6 0.8 17.2 re f
+405.0 28.6 135.8 0.8 re f
+BT
+/F9 11 Tf 0 671.8 Td 0.000 Tc(3.4. The "actions" concept confuses me. Please list some of these "actions".)Tj
+/F4 11 Tf 0 -26.4 Td(For a comprehensive discussion of the actions concept, please refer to the)Tj
+0.00 0.00 1.00 rg ( actions file chapter)Tj
+0.00 0.00 0.00 rg ( in the)Tj
+0.00 0.00 1.00 rg ( user manual)Tj
+0.00 0.00 0.00 rg (. It)Tj
+0 -13.2 Td(includes a)Tj
+0.00 0.00 1.00 rg ( list of all actions)Tj
+0.00 0.00 0.00 rg ( and an)Tj
+0.00 0.00 1.00 rg ( actions file tutorial)Tj
+0.00 0.00 0.00 rg ( to get you started.)Tj
+/F9 11 Tf 0 -28.4 Td(3.5. How are actions files configured? What is the easiest way to do this?)Tj
+/F4 11 Tf 0 -26.4 Td(Actions files are just text files in a special syntax and can be edited with a text editor. The probably easiest way is to)Tj
+0 -13.2 Td(access Privoxy's user interface with your web browser at)Tj
+0.00 0.00 1.00 rg ( http://config.privoxy.org/)Tj
+0.00 0.00 0.00 rg ( \(Shortcut:)Tj
+0.00 0.00 1.00 rg ( http://p.p/)Tj
+0.00 0.00 0.00 rg (\) and then select)Tj
+0 -13.2 Td(")Tj
+0.00 0.00 1.00 rg (View & change the current configuration)Tj
+0.00 0.00 0.00 rg (" from the menu.)Tj
+/F9 11 Tf 0 -28.4 Td(3.6. There are several different "actions" files. What are the differences?)Tj
+/F4 11 Tf 0 -26.4 Td(As of Privoxy v2.9.15, three actions files are being included, to be used for different purposes: These are)Tj
+/F0 11 Tf 0 -13.2 Td(default.action)Tj
+/F4 11 Tf (, the "main" actions file which is actively maintained by the Privoxy developers, )Tj
+/F0 11 Tf (user.action)Tj
+/F4 11 Tf (,)Tj
+0 -13.2 Td(where users are encouraged to make their private customizations, and )Tj
+/F0 11 Tf (standard.action)Tj
+/F4 11 Tf (, which is for internal Privoxy)Tj
+0 -13.2 Td(use only. Please see)Tj
+0.00 0.00 1.00 rg ( the actions chapter)Tj
+0.00 0.00 0.00 rg ( in the)Tj
+0.00 0.00 1.00 rg ( user manual)Tj
+0.00 0.00 0.00 rg ( for a more detailed explanation.)Tj
+0 -26.4 Td(Earlier versions included three different versions of the )Tj
+/F0 11 Tf (default.action)Tj
+/F4 11 Tf ( file. The new scheme allows for greater)Tj
+0 -13.2 Td(flexibility of local configuration, and for browser based selection of pre-defined "aggressiveness" levels.)Tj
+/F9 11 Tf 0 -28.4 Td(3.7. How can I make my Yahoo/Hotmail/GMX account work?)Tj
+/F4 11 Tf 0 -26.4 Td(The default configuration shouldn't impact the usability of any of these services. It will, however, make all cookies)Tj
+0 -13.2 Td(temporary, so that your browser will forget your login credentials in between browser sessions. If you would like not to)Tj
+0 -13.2 Td(have to log in manually each time you access those websites, simply turn off all cookie handling for them in the)Tj
+/F0 11 Tf 0 -13.2 Td(user.action)Tj
+/F4 11 Tf ( file. An example for yahoo might look like:)Tj
+/F0 9 Tf 1.588 -25.988 Td(# Allow all cookies for Yahoo login:)Tj
+0 -10.8 Td(#)Tj
+0 -10.8 Td({ -)Tj
+0.00 0.00 1.00 rg (crunch-incoming-cookies)Tj
+( -)Tj
+(crunch-outgoing-cookies)Tj
+( -)Tj
+(session-cookies-only)Tj
+( })Tj
+0.00 0.00 0.00 rg 0 -10.8 Td(.login.yahoo.com)Tj
+/F9 11 Tf -1.588 -29.588 Td(3.8. What's the difference between the "Cautious", "Medium" and "Advanced" defaults?)Tj
+/F4 11 Tf 0 -26.4 Td(Configuring Privoxy is not entirely trivial. To help you get started, we provide you with three different default action)Tj
+0 -13.2 Td("packages" in the web based actions file editor at)Tj
+0.00 0.00 1.00 rg ( http://config.privoxy.org/show-status)Tj
+0.00 0.00 0.00 rg (. The following table shows you,)Tj
+0 -13.2 Td(which of the most important features are enabled in each configuration:)Tj
+/F5 11 Tf 0 -39.6 Td(Table 1. Default Configurations)Tj
+1.588 -27.988 Td(Feature)Tj
+135 0 Td(Cautious)Tj
+135 0 Td(Intermadiate)Tj
+135 0 Td(Advanced)Tj
+/F4 11 Tf -405 -16.376 Td(Ad-blocking by URL)Tj
+135 0 Td(yes)Tj
+135 0 Td(yes)Tj
+135 0 Td(yes)Tj
+-405 -16.376 Td(Ad-filtering by size)Tj
+135 0 Td(yes)Tj
+135 0 Td(yes)Tj
+135 0 Td(yes)Tj
+-405 -16.376 Td(GIF de-animation)Tj
+135 0 Td(no)Tj
+135 0 Td(yes)Tj
+135 0 Td(yes)Tj
+-405 -16.376 Td(Referer forging)Tj
+135 0 Td(no)Tj
+135 0 Td(yes)Tj
+135 0 Td(yes)Tj
+-405 -16.376 Td(Cookie handling)Tj
+135 0 Td(none)Tj
+135 0 Td(session-only)Tj
+135 0 Td(kill)Tj
+/F8 11 Tf -406.588 687.647 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-172.463 -720 Td(8/18)Tj
+ET
+Q
+endstream
+endobj
+487 0 obj<</Type/Page/Parent 470 0 R/Contents 488 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F1 4 0 R/F4 6 0 R/F6 8 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 225 0 R>>endobj
+488 0 obj<</Length 8625      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 698.0 135.8 0.8 re f
+0.0 681.6 0.8 17.2 re f
+135.0 681.6 0.8 17.2 re f
+0.0 681.6 135.8 0.8 re f
+135.0 698.0 135.8 0.8 re f
+135.0 681.6 0.8 17.2 re f
+270.0 681.6 0.8 17.2 re f
+135.0 681.6 135.8 0.8 re f
+270.0 698.0 135.8 0.8 re f
+270.0 681.6 0.8 17.2 re f
+405.0 681.6 0.8 17.2 re f
+270.0 681.6 135.8 0.8 re f
+405.0 698.0 135.8 0.8 re f
+405.0 681.6 0.8 17.2 re f
+540.0 681.6 0.8 17.2 re f
+405.0 681.6 135.8 0.8 re f
+0.0 681.6 135.8 0.8 re f
+0.0 665.2 0.8 17.2 re f
+135.0 665.2 0.8 17.2 re f
+0.0 665.2 135.8 0.8 re f
+135.0 681.6 135.8 0.8 re f
+135.0 665.2 0.8 17.2 re f
+270.0 665.2 0.8 17.2 re f
+135.0 665.2 135.8 0.8 re f
+270.0 681.6 135.8 0.8 re f
+270.0 665.2 0.8 17.2 re f
+405.0 665.2 0.8 17.2 re f
+270.0 665.2 135.8 0.8 re f
+405.0 681.6 135.8 0.8 re f
+405.0 665.2 0.8 17.2 re f
+540.0 665.2 0.8 17.2 re f
+405.0 665.2 135.8 0.8 re f
+0.0 665.2 135.8 0.8 re f
+0.0 648.9 0.8 17.2 re f
+135.0 648.9 0.8 17.2 re f
+0.0 648.9 135.8 0.8 re f
+135.0 665.2 135.8 0.8 re f
+135.0 648.9 0.8 17.2 re f
+270.0 648.9 0.8 17.2 re f
+135.0 648.9 135.8 0.8 re f
+270.0 665.2 135.8 0.8 re f
+270.0 648.9 0.8 17.2 re f
+405.0 648.9 0.8 17.2 re f
+270.0 648.9 135.8 0.8 re f
+405.0 665.2 135.8 0.8 re f
+405.0 648.9 0.8 17.2 re f
+540.0 648.9 0.8 17.2 re f
+405.0 648.9 135.8 0.8 re f
+0.0 648.9 135.8 0.8 re f
+0.0 632.5 0.8 17.2 re f
+135.0 632.5 0.8 17.2 re f
+0.0 632.5 135.8 0.8 re f
+135.0 648.9 135.8 0.8 re f
+135.0 632.5 0.8 17.2 re f
+270.0 632.5 0.8 17.2 re f
+135.0 632.5 135.8 0.8 re f
+270.0 648.9 135.8 0.8 re f
+270.0 632.5 0.8 17.2 re f
+405.0 632.5 0.8 17.2 re f
+270.0 632.5 135.8 0.8 re f
+405.0 648.9 135.8 0.8 re f
+405.0 632.5 0.8 17.2 re f
+540.0 632.5 0.8 17.2 re f
+405.0 632.5 135.8 0.8 re f
+0.0 632.5 135.8 0.8 re f
+0.0 616.1 0.8 17.2 re f
+135.0 616.1 0.8 17.2 re f
+0.0 616.1 135.8 0.8 re f
+135.0 632.5 135.8 0.8 re f
+135.0 616.1 0.8 17.2 re f
+270.0 616.1 0.8 17.2 re f
+135.0 616.1 135.8 0.8 re f
+270.0 632.5 135.8 0.8 re f
+270.0 616.1 0.8 17.2 re f
+405.0 616.1 0.8 17.2 re f
+270.0 616.1 135.8 0.8 re f
+405.0 632.5 135.8 0.8 re f
+405.0 616.1 0.8 17.2 re f
+540.0 616.1 0.8 17.2 re f
+405.0 616.1 135.8 0.8 re f
+0.0 616.1 135.8 0.8 re f
+0.0 599.7 0.8 17.2 re f
+135.0 599.7 0.8 17.2 re f
+0.0 599.7 135.8 0.8 re f
+135.0 616.1 135.8 0.8 re f
+135.0 599.7 0.8 17.2 re f
+270.0 599.7 0.8 17.2 re f
+135.0 599.7 135.8 0.8 re f
+270.0 616.1 135.8 0.8 re f
+270.0 599.7 0.8 17.2 re f
+405.0 599.7 0.8 17.2 re f
+270.0 599.7 135.8 0.8 re f
+405.0 616.1 135.8 0.8 re f
+405.0 599.7 0.8 17.2 re f
+540.0 599.7 0.8 17.2 re f
+405.0 599.7 135.8 0.8 re f
+0.0 599.7 135.8 0.8 re f
+0.0 583.4 0.8 17.2 re f
+135.0 583.4 0.8 17.2 re f
+0.0 583.4 135.8 0.8 re f
+135.0 599.7 135.8 0.8 re f
+135.0 583.4 0.8 17.2 re f
+270.0 583.4 0.8 17.2 re f
+135.0 583.4 135.8 0.8 re f
+270.0 599.7 135.8 0.8 re f
+270.0 583.4 0.8 17.2 re f
+405.0 583.4 0.8 17.2 re f
+270.0 583.4 135.8 0.8 re f
+405.0 599.7 135.8 0.8 re f
+405.0 583.4 0.8 17.2 re f
+540.0 583.4 0.8 17.2 re f
+405.0 583.4 135.8 0.8 re f
+0.0 583.4 135.8 0.8 re f
+0.0 567.0 0.8 17.2 re f
+135.0 567.0 0.8 17.2 re f
+0.0 567.0 135.8 0.8 re f
+135.0 583.4 135.8 0.8 re f
+135.0 567.0 0.8 17.2 re f
+270.0 567.0 0.8 17.2 re f
+135.0 567.0 135.8 0.8 re f
+270.0 583.4 135.8 0.8 re f
+270.0 567.0 0.8 17.2 re f
+405.0 567.0 0.8 17.2 re f
+270.0 567.0 135.8 0.8 re f
+405.0 583.4 135.8 0.8 re f
+405.0 567.0 0.8 17.2 re f
+540.0 567.0 0.8 17.2 re f
+405.0 567.0 135.8 0.8 re f
+0.00 0.00 1.00 RG
+489.1 528.6 m 510.2 528.6 l S
+0.0 515.4 m 32.4 515.4 l S
+0.0 505.6 540.0 2.0 re f
+167.0 368.2 m 292.4 368.2 l S
+336.0 368.2 m 468.0 368.2 l S
+513.2 368.2 m 537.9 368.2 l S
+0.0 355.0 m 59.3 355.0 l S
+59.3 355.0 m 76.7 355.0 l S
+0.0 305.6 540.0 2.0 re f
+19.9 260.6 m 112.3 260.6 l S
+219.4 221.0 m 259.0 221.0 l S
+259.0 221.0 m 288.6 221.0 l S
+301.5 115.4 m 353.8 115.4 l S
+353.8 115.4 m 387.7 115.4 l S
+387.7 115.4 m 405.1 115.4 l S
+405.1 115.4 m 433.5 115.4 l S
+0.0 105.6 540.0 2.0 re f
+116.4 47.4 m 141.1 47.4 l S
+141.1 47.4 m 203.2 47.4 l S
+203.2 47.4 m 220.6 47.4 l S
+283.8 47.4 m 376.2 47.4 l S
+BT
+/F4 11 Tf 1.588 685.412 Td 0.000 Tc(Pop-up killing)Tj
+135 0 Td(no)Tj
+135 0 Td(yes)Tj
+135 0 Td(yes)Tj
+-405 -16.377 Td(Fast redirects)Tj
+135 0 Td(no)Tj
+135 0 Td(no)Tj
+135 0 Td(yes)Tj
+-405 -16.377 Td(HTML taming)Tj
+135 0 Td(yes)Tj
+135 0 Td(yes)Tj
+135 0 Td(yes)Tj
+-405 -16.377 Td(JavaScript taming)Tj
+135 0 Td(yes)Tj
+135 0 Td(yes)Tj
+135 0 Td(yes)Tj
+-405 -16.377 Td(Web-bug killing)Tj
+135 0 Td(yes)Tj
+135 0 Td(yes)Tj
+135 0 Td(yes)Tj
+-405 -16.377 Td(Fun text replacements)Tj
+135 0 Td(no)Tj
+135 0 Td(no)Tj
+135 0 Td(yes)Tj
+-405 -16.377 Td(Image tag reordering)Tj
+135 0 Td(no)Tj
+135 0 Td(no)Tj
+135 0 Td(yes)Tj
+-405 -16.377 Td(Ad-filtering by link)Tj
+135 0 Td(no)Tj
+135 0 Td(no)Tj
+135 0 Td(yes)Tj
+-406.588 -27.988 Td(Where the defaults are likely to break some sites, exceptions for known popular "problem" sites are included, but in)Tj
+0 -13.2 Td(general, the more aggressive your default settings are, the more exceptions you will have to make later. See the)Tj
+0.00 0.00 1.00 rg ( user)Tj
+0 -13.2 Td(manual)Tj
+0.00 0.00 0.00 rg ( for a more deatiled discussion.)Tj
+/F9 11 Tf 0 -28.4 Td(3.9. Why can I change the configuration with a browser? Does that not raise security issues?)Tj
+/F4 11 Tf 0 -26.4 Td(It may seem strange that regular users can edit the config files with their browsers, although the whole )Tj
+/F0 11 Tf (/etc/privoxy)Tj
+/F4 11 Tf 0 -13.2 Td(hierarchy belongs to the user "privoxy", with only 644 permissions.)Tj
+0 -26.4 Td(When you use the browser-based editor, Privoxy itself is writing to the config files. Because Privoxy is running as the)Tj
+0 -13.2 Td(user "privoxy", it can update the config files.)Tj
+0 -26.4 Td(If you run Privoxy for multiple untrusted users \(e.g. in a LAN\), you will probably want to turn the web-based editor and)Tj
+0 -13.2 Td(remote toggle features off by setting ")Tj
+0.00 0.00 1.00 rg /F0 11 Tf (enable-edit-actions)Tj
+0.00 0.00 0.00 rg ( 0)Tj
+/F4 11 Tf (" and ")Tj
+0.00 0.00 1.00 rg /F0 11 Tf (enable-remote-toggle)Tj
+0.00 0.00 0.00 rg ( 0)Tj
+/F4 11 Tf (" in the)Tj
+0.00 0.00 1.00 rg ( main)Tj
+0 -13.2 Td(configuration file)Tj
+0.00 0.00 0.00 rg (.)Tj
+0 -26.4 Td(Note that in the default configuration, only local users \(i.e. those on "localhost"\) can connect to Privoxy, so this is not)Tj
+0 -13.2 Td(\(normally\) a security problem.)Tj
+/F9 11 Tf 0 -28.4 Td(3.10. What is the )Tj
+/F1 11 Tf (default.filter)Tj
+/F9 11 Tf ( file? What is a "filter"?)Tj
+/F4 11 Tf 0 -26.4 Td(The )Tj
+0.00 0.00 1.00 rg /F0 11 Tf (default.filter)Tj
+0.00 0.00 0.00 rg /F4 11 Tf ( file is where)Tj
+/F6 11 Tf ( filters)Tj
+/F4 11 Tf ( are defined, which can be used to modify or remove, web page content on)Tj
+0 -13.2 Td(the fly. Filters apply to)Tj
+/F6 11 Tf ( anything)Tj
+/F4 11 Tf ( in the page source, including HTML tags, and JavaScript. Regular expressions are used)Tj
+0 -13.2 Td(to accomplish this. There are a number of pre-defined filters to deal with common annoyances. The filters are only)Tj
+0 -13.2 Td(defined here, to invoke them, you need to use the )Tj
+0.00 0.00 1.00 rg /F0 11 Tf (filter)Tj
+/F4 11 Tf ( action)Tj
+0.00 0.00 0.00 rg ( in one of the actions files. Filtering is automatically)Tj
+0 -13.2 Td(disabled for inappropriate MIME types.)Tj
+0 -26.4 Td(If you are familiar with regular expressions, and HTML, you can look at the provided )Tj
+/F0 11 Tf (default.filter)Tj
+/F4 11 Tf ( with a text)Tj
+0 -13.2 Td(editor and define your own filters. This is potentially a very powerful feature, but requires some expertise in both regular)Tj
+0 -13.2 Td(expressions and HTML/HTTP.)Tj
+0 -26.4 Td(Presently, there is no GUI editor option for this part of the configuration, but you can disable/enable the various)Tj
+0 -13.2 Td(pre-defined filters of the included )Tj
+/F0 11 Tf (default.filter)Tj
+/F4 11 Tf ( file with the)Tj
+0.00 0.00 1.00 rg ( web-based actions file editor)Tj
+0.00 0.00 0.00 rg (.)Tj
+/F9 11 Tf 0 -28.4 Td(3.11. How can I set up Privoxy to act as a proxy for my LAN?)Tj
+/F4 11 Tf 0 -26.4 Td(By default, Privoxy only responds to requests from )Tj
+/F0 11 Tf (127.0.0.1)Tj
+/F4 11 Tf ( \(localhost\). To have it act as a server for a network, this)Tj
+0 -13.2 Td(needs to be changed in the)Tj
+0.00 0.00 1.00 rg ( main configuration file)Tj
+0.00 0.00 0.00 rg (. Look for the )Tj
+0.00 0.00 1.00 rg /F0 11 Tf (listen-address)Tj
+0.00 0.00 0.00 rg /F4 11 Tf ( option, which may be commented)Tj
+0 -13.2 Td(out with a "#" symbol. Make sure it is uncommented, and assign it the address of the LAN gateway interface, and port)Tj
+/F8 11 Tf 0 684.812 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-172.463 -720 Td(9/18)Tj
+ET
+Q
+endstream
+endobj
+489 0 obj<</Type/Page/Parent 470 0 R/Contents 490 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 6 0 R/F5 7 0 R/F6 8 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 241 0 R>>endobj
+490 0 obj<</Length 5397      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 644.4 540.0 14.0 re f
+0.00 0.00 1.00 RG
+411.9 592.8 m 442.8 592.8 l S
+442.8 592.8 m 476.7 592.8 l S
+476.7 592.8 m 495.3 592.8 l S
+495.3 592.8 m 532.9 592.8 l S
+0.00 0.00 0.00 rg 0.0 569.8 540.0 2.0 re f
+280.4 524.8 m 392.6 524.8 l S
+392.6 524.8 m 422.3 524.8 l S
+434.7 498.4 m 533.7 498.4 l S
+19.2 485.2 m 52.2 485.2 l S
+192.5 458.8 m 304.7 458.8 l S
+304.7 458.8 m 334.3 458.8 l S
+172.1 445.6 m 224.5 445.6 l S
+224.5 445.6 m 258.4 445.6 l S
+258.4 445.6 m 275.8 445.6 l S
+275.8 445.6 m 304.2 445.6 l S
+0.0 435.8 540.0 2.0 re f
+67.5 390.8 m 98.4 390.8 l S
+98.4 390.8 m 128.0 390.8 l S
+128.0 390.8 m 157.7 390.8 l S
+157.7 390.8 m 167.7 390.8 l S
+167.7 390.8 m 180.9 390.8 l S
+180.9 390.8 m 194.0 390.8 l S
+194.0 390.8 m 212.6 390.8 l S
+212.6 390.8 m 242.3 390.8 l S
+242.3 390.8 m 262.9 390.8 l S
+0.0 341.4 540.0 2.0 re f
+0.0 128.2 540.0 2.0 re f
+0.0 30.4 m 393.6 30.4 l S
+BT
+/F4 11 Tf 0 687 Td 0.000 Tc(number to use. Assuming your LAN address is 192.168.1.1 and you wish to run Privoxy on port 8118, this line should)Tj
+0 -13.2 Td(look like:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  listen-address  192.168.1.1:8118)Tj
+/F4 11 Tf -1.588 -27.588 Td(Save the file, and restart Privoxy. Configure all browsers on the network then to use this address and port number.)Tj
+0 -26.4 Td(If you run Privoxy on a LAN with untrusted users, we recommend that you double-check the)Tj
+0.00 0.00 1.00 rg ( access control and security)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(options!)Tj
+/F9 11 Tf 0 -28.4 Td(3.12. Instead of ads, now I get a checkerboard pattern. I don't want to see anything.)Tj
+/F4 11 Tf 0 -26.4 Td(The replacement for blocked images can be controlled with the )Tj
+0.00 0.00 1.00 rg /F0 11 Tf (set-image-blocker)Tj
+/F4 11 Tf ( action)Tj
+0.00 0.00 0.00 rg (. You have the choice of a)Tj
+0 -13.2 Td(checkerboard pattern, a transparent 1x1 GIF image \(aka "blank"\), or a redirect to a custom image of your choice. Note that)Tj
+0 -13.2 Td(this choice only has effect for images which are blocked as images, i.e. whose URLs match both a )Tj
+0.00 0.00 1.00 rg /F0 11 Tf (handle-as-image)Tj
+0.00 0.00 0.00 rg /F6 11 Tf 0 -13.2 Td(and)Tj
+0.00 0.00 1.00 rg /F0 11 Tf 19.25 0 Td(block)Tj
+0.00 0.00 0.00 rg /F4 11 Tf ( action.)Tj
+-19.25 -26.4 Td(If you want to see nothing, then change the )Tj
+0.00 0.00 1.00 rg /F0 11 Tf (set-image-blocker)Tj
+/F4 11 Tf ( action)Tj
+0.00 0.00 0.00 rg ( to "blank". This can be done by editing the)Tj
+/F0 11 Tf 0 -13.2 Td(default.action)Tj
+/F4 11 Tf ( file, or trough the)Tj
+0.00 0.00 1.00 rg ( web-based actions file editor)Tj
+0.00 0.00 0.00 rg (.)Tj
+/F9 11 Tf 0 -28.4 Td(3.13. Why would anybody want to see a checkerboard pattern?)Tj
+/F4 11 Tf 0 -26.4 Td(Remember that)Tj
+0.00 0.00 1.00 rg ( telling which image is an ad and which isn't)Tj
+0.00 0.00 0.00 rg (, is mostly guesswork. While we hope that the standard)Tj
+0 -13.2 Td(configuration is rather smart, it can and will make errors. The checkerboard image is visually decent, but it shows you that)Tj
+0 -13.2 Td(and where images were blocked, which can be very helpful in case some navigation aid or otherwise innocent image was)Tj
+0 -13.2 Td(erraneously blocked. Some people might also enjoy seeing how many banners they)Tj
+/F6 11 Tf ( don't)Tj
+/F4 11 Tf ( have to see..)Tj
+/F9 11 Tf 0 -28.4 Td(3.14. I see some images being replaced by a text instead of the checkerboard image. Why and how do I)Tj
+0 -13.2 Td(get rid of this?)Tj
+/F4 11 Tf 0 -26.4 Td(This happens when the banners are not embedded in the HTML code of the page itself, but in separate HTML)Tj
+0 -13.2 Td(\(sub\)documents that are loaded into \(i\)frames or \(i\)layers, and these external HTML documents are blocked. Being)Tj
+0 -13.2 Td(non-images they get replaced by a substitute HTML page rather than a substitute image, which wouldn't work out)Tj
+0 -13.2 Td(technically, since the browser expects and accepts only HTML when it has requested an HTML document.)Tj
+0 -26.4 Td(The substitute page adapts to the available space and shows itself as a miniature two-liner if loaded into small frames, or)Tj
+0 -13.2 Td(full-blown with a large red "BLOCKED" banner if space allows.)Tj
+0 -26.4 Td(If you prefer the banners to be blocked by images, you must see to it that the HTML documents in which they are)Tj
+0 -13.2 Td(embedded are not blocked. Clicking the "See why" link offered in the substitute page will show you which rule blocked)Tj
+0 -13.2 Td(the page. After changing the rule and un-blocking the HTML documents, the browser will try to load the actual banner)Tj
+0 -13.2 Td(images and the usual image blocking will \(hopefully!\) kick in.)Tj
+/F9 11 Tf 0 -28.4 Td(3.15. Can Privoxy run as a service on Win2K/NT?)Tj
+/F4 11 Tf 0 -26.4 Td(Yes, it can run as a system service using)Tj
+/F5 11 Tf ( srvany.exe)Tj
+/F4 11 Tf (. The only catch is that this will effectively disable the Privoxy icon)Tj
+0 -13.2 Td(\(and its menu!\) in the taskbar. You can have one or the other, but not both at this time :\()Tj
+0 -26.4 Td(There is a pending feature request for this functionality. See the discussion at)Tj
+0.00 0.00 1.00 rg 0 -13.2 Td(http://sourceforge.net/tracker/?func=detail&atid=361118&aid=485617&group_id=11118)Tj
+0.00 0.00 0.00 rg (, for details, and a sample)Tj
+/F8 11 Tf 0 688.577 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-175.521 -720 Td(10/18)Tj
+ET
+Q
+endstream
+endobj
+491 0 obj<</Type/Page/Parent 470 0 R/Contents 492 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 6 0 R/F6 8 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 270 0 R>>endobj
+492 0 obj<</Length 4846      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 676.2 540.0 2.0 re f
+0.00 0.00 1.00 RG
+484.5 631.2 m 536.2 631.2 l S
+0.0 618.0 m 32.4 618.0 l S
+59.9 618.0 m 80.9 618.0 l S
+80.9 618.0 m 116.1 618.0 l S
+0.0 608.2 540.0 2.0 re f
+389.3 523.6 m 440.9 523.6 l S
+440.9 523.6 m 476.0 523.6 l S
+503.5 523.6 m 524.6 523.6 l S
+0.0 510.4 m 32.4 510.4 l S
+371.5 510.4 m 520.0 510.4 l S
+0.0 500.6 540.0 2.0 re f
+117.1 356.0 m 156.7 356.0 l S
+171.4 356.0 m 263.8 356.0 l S
+0.0 333.0 540.0 2.0 re f
+65.4 288.0 m 105.0 288.0 l S
+380.9 288.0 m 473.3 288.0 l S
+0.0 172.6 540.0 2.0 re f
+0.0 127.6 m 111.8 127.6 l S
+351.0 127.6 m 396.8 127.6 l S
+368.4 61.6 m 483.0 61.6 l S
+BT
+/F4 11 Tf 0 687 Td 0.000 Tc(configuration.\15)Tj
+/F9 11 Tf 0 -28.4 Td(3.16. How can I make Privoxy work with other proxies like Squid?)Tj
+/F4 11 Tf 0 -26.4 Td(This can be done and is often useful to combine the benefits of Privoxy with those of a caching proxy. See the)Tj
+0.00 0.00 1.00 rg ( forwarding)Tj
+0 -13.2 Td(chapter)Tj
+0.00 0.00 0.00 rg ( in the)Tj
+0.00 0.00 1.00 rg ( user manual)Tj
+0.00 0.00 0.00 rg ( which describes how to do this.)Tj
+/F9 11 Tf 0 -28.4 Td(3.17. Can Privoxy run as a "transparent" proxy?)Tj
+/F4 11 Tf 0 -26.4 Td(No, Privoxy currently does not have this ability, though it is planned for a future release. Transparent proxies require)Tj
+0 -13.2 Td(special handling of the request headers beyond what Privoxy is now capable of.)Tj
+0 -26.4 Td(Chaining Privoxy behind another proxy that has this ability should work though. See the)Tj
+0.00 0.00 1.00 rg ( forwarding chapter)Tj
+0.00 0.00 0.00 rg ( in the)Tj
+0.00 0.00 1.00 rg ( user)Tj
+0 -13.2 Td(manual)Tj
+0.00 0.00 0.00 rg (. As a transparent proxy to be used for chaining we recommend Transproxy \()Tj
+0.00 0.00 1.00 rg (http://www.transproxy.nlc.net.au/)Tj
+0.00 0.00 0.00 rg (\).)Tj
+/F9 17 Tf 0 -34.4 Td(4. Miscellaneous)Tj
+/F9 11 Tf 0 -27.6 Td(4.1. How much does Privoxy slow my browsing down? This has to add extra time to browsing.)Tj
+/F4 11 Tf 0 -26.4 Td(It should not slow you down any in real terms, and may actually help speed things up since ads, banners and other junk)Tj
+0 -13.2 Td(are not being displayed. The actual processing time required by Privoxy itself for each page, is relatively small in the)Tj
+0 -13.2 Td(overall scheme of things, and happens very quickly. This is typically more than offset by time saved not downloading and)Tj
+0 -13.2 Td(rendering ad images.)Tj
+0 -26.4 Td("Filtering" content via the )Tj
+0.00 0.00 1.00 rg /F0 11 Tf (filter)Tj
+0.00 0.00 0.00 rg /F4 11 Tf ( or )Tj
+0.00 0.00 1.00 rg /F0 11 Tf (deanimate-gifs)Tj
+0.00 0.00 0.00 rg /F4 11 Tf ( actions may cause a perceived slowdown, since the entire)Tj
+0 -13.2 Td(document needs to be buffered before displaying. See below.)Tj
+/F9 11 Tf 0 -28.4 Td(4.2. I noticed considerable delays in page requests compared to the old Junkbuster. What's wrong?)Tj
+/F4 11 Tf 0 -26.4 Td(If you use any )Tj
+0.00 0.00 1.00 rg /F0 11 Tf (filter)Tj
+0.00 0.00 0.00 rg /F4 11 Tf ( action, such as filtering banners by size, web-bugs etc, or the )Tj
+0.00 0.00 1.00 rg /F0 11 Tf (deanimate-gifs)Tj
+0.00 0.00 0.00 rg /F4 11 Tf ( action, the)Tj
+0 -13.2 Td(entire document must be loaded into memory in order for the filtering mechanism to work, and nothing is sent to the)Tj
+0 -13.2 Td(browser during this time.)Tj
+0 -26.4 Td(The loading time does not really change in real numbers, but the feeling is different, because most browsers are able to)Tj
+0 -13.2 Td(start rendering incomplete content, giving the user a feeling of "it works". This effect is especially noticeable on slow)Tj
+0 -13.2 Td(dialup connections.)Tj
+0 -26.4 Td(Filtering is automatically disabled for inappropriate MIME types.\15)Tj
+/F9 11 Tf 0 -28.4 Td(4.3. What are "http://config.privoxy.org/" and "http://p.p/"?)Tj
+0.00 0.00 1.00 rg /F4 11 Tf 0 -26.4 Td(http://config.privoxy.org/)Tj
+0.00 0.00 0.00 rg ( is the address of Privoxy's built-in user interface, and)Tj
+0.00 0.00 1.00 rg ( http://p.p/)Tj
+0.00 0.00 0.00 rg ( is a shortcut for it.)Tj
+0 -26.4 Td(Since Privoxy sits between your web browser and the Internet, it can simply intercept requests for these addresses and)Tj
+0 -13.2 Td(answer them with its built-in "web server".)Tj
+0 -26.4 Td(This also makes for a good test for your browser configuration: If entering the URL)Tj
+0.00 0.00 1.00 rg ( http://config.privoxy.org/)Tj
+0.00 0.00 0.00 rg ( takes you to)Tj
+0 -13.2 Td(a page saying "This is Privoxy..", everything is OK. If you get a page saying "Privoxy is not working" instead, then your)Tj
+0 -13.2 Td(browser didn't use Privoxy for the request, hence it could not be intercepted, and you have accessed the)Tj
+/F6 11 Tf ( real)Tj
+/F4 11 Tf ( web site at)Tj
+/F8 11 Tf 0 683.8 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-175.521 -720 Td(11/18)Tj
+ET
+Q
+endstream
+endobj
+493 0 obj<</Type/Page/Parent 470 0 R/Contents 494 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F4 6 0 R/F6 8 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 280 0 R>>endobj
+494 0 obj<</Length 4299      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+209.7 646.4 m 243.6 646.4 l S
+243.6 646.4 m 265.3 646.4 l S
+0.00 0.00 0.00 rg 0.0 597.0 540.0 2.0 re f
+303.7 552.0 m 337.6 552.0 l S
+337.6 552.0 m 359.3 552.0 l S
+0.0 529.0 540.0 2.0 re f
+135.3 484.0 m 172.3 484.0 l S
+172.3 484.0 m 206.2 484.0 l S
+0.0 461.0 540.0 2.0 re f
+222.7 270.8 m 291.8 270.8 l S
+3.7 244.4 m 197.5 244.4 l S
+0.0 195.0 540.0 2.0 re f
+BT
+/F4 11 Tf 0 687 Td 0.000 Tc(config.privoxy.org.)Tj
+0 -26.4 Td(With recent versions of Privoxy \(version 2.9.x and later\), the user interface features information on the run time status, the)Tj
+0 -13.2 Td(configuration, and even a built-in editor for the)Tj
+0.00 0.00 1.00 rg ( actions files)Tj
+0.00 0.00 0.00 rg (.)Tj
+0 -26.4 Td(Note that the built-in URLs from earlier versions of Junkbuster / Privoxy, http://example.com/show-proxy-args and)Tj
+0 -13.2 Td(http://i.j.b/, are no longer supported. If you still use such an old version, you should really consider upgrading to 2.9.18.)Tj
+/F9 11 Tf 0 -28.4 Td(4.4. Do you still maintain the blocklists?)Tj
+/F4 11 Tf 0 -26.4 Td(No. The patterns for blocking now reside \(among other things\) in the)Tj
+0.00 0.00 1.00 rg ( actions files)Tj
+0.00 0.00 0.00 rg (, which are actively maintained instead.)Tj
+0 -13.2 Td(See next question ...)Tj
+/F9 11 Tf 0 -28.4 Td(4.5. How can I submit new ads?)Tj
+/F4 11 Tf 0 -26.4 Td(Yes, absolutely! Please see the)Tj
+0.00 0.00 1.00 rg ( Contact section)Tj
+0.00 0.00 0.00 rg ( for how to do that. Please note that you \(technically\) need the latest)Tj
+0 -13.2 Td(Privoxy version for this to work.)Tj
+/F9 11 Tf 0 -28.4 Td(4.6. How can I hide my IP address?)Tj
+/F4 11 Tf 0 -26.4 Td(If you run both the browser and the proxy locally, you cannot hide your IP address with Privoxy or any other software.)Tj
+0 -13.2 Td(The server needs to know your IP address to send the answers back to you.)Tj
+0 -26.4 Td(Fortunately there are many publicly usable anonymous proxies out there, which solve the problem by providing a further)Tj
+0 -13.2 Td(level of indirection between you and the web server, shared by many people, and thus letting your requests "drown" in)Tj
+0 -13.2 Td(white noise of unrelated requests as far as user tracking is concerned.)Tj
+0 -26.4 Td(Most of them will, however, log your IP address and make it available to the authorities in case you abuse that anonymity)Tj
+0 -13.2 Td(for criminal purposes. In fact you can't even rule out that some of them only exist to *collect* information on \(those)Tj
+0 -13.2 Td(suspicious\) people with a more than average preference for privacy.)Tj
+0 -26.4 Td(You can find a list of anonymous public proxies at)Tj
+0.00 0.00 1.00 rg ( multiproxy.org)Tj
+0.00 0.00 0.00 rg ( and many more through Google. A particularly)Tj
+0 -13.2 Td(interesting project is the JAP service offered by the Technical University of Dresden)Tj
+0 -13.2 Td(\()Tj
+0.00 0.00 1.00 rg (http://anon.inf.tu-dresden.de/index_en.html)Tj
+0.00 0.00 0.00 rg (.)Tj
+0 -26.4 Td(There is, however, even in the single-machine case the possibility to make the server believe that your machine is in fact)Tj
+0 -13.2 Td(a shared proxy serving a whole big LAN, and we are looking into that.)Tj
+/F9 11 Tf 0 -28.4 Td(4.7. Can Privoxy guarantee I am anonymous?)Tj
+/F4 11 Tf 0 -26.4 Td(No. Your chances of remaining anonymous are greatly improved, but unless you are an expert on Internet security it)Tj
+0 -13.2 Td(would be safest to assume that everything you do on the Web can be traced back to you.)Tj
+0 -26.4 Td(Privoxy can remove various information about you, and allows)Tj
+/F6 11 Tf ( you)Tj
+/F4 11 Tf ( more freedom to decide which sites you can trust, and)Tj
+0 -13.2 Td(what details you want to reveal. But it's still possible that web sites can find out who you are. Here's one way this can)Tj
+0 -13.2 Td(happen.)Tj
+0 -26.4 Td(A few browsers disclose the user's email address in certain situations, such as when transferring a file by FTP. Privoxy)Tj
+0 -13.2 Td(does not filter FTP. If you need this feature, or are concerned about the mail handler of your browser disclosing your)Tj
+0 -13.2 Td(email address, you might consider products such as NSClean.)Tj
+/F8 11 Tf 0 687.8 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-175.521 -720 Td(12/18)Tj
+ET
+Q
+endstream
+endobj
+495 0 obj<</Type/Page/Parent 470 0 R/Contents 496 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F4 6 0 R/F6 8 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 287 0 R>>endobj
+496 0 obj<</Length 4656      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 636.6 540.0 2.0 re f
+0.0 344.2 540.0 2.0 re f
+0.00 0.00 1.00 RG
+278.7 299.2 m 307.1 299.2 l S
+243.9 286.0 m 295.5 286.0 l S
+295.5 286.0 m 330.7 286.0 l S
+358.2 286.0 m 379.2 286.0 l S
+379.2 286.0 m 414.4 286.0 l S
+0.0 276.2 540.0 2.0 re f
+0.0 208.2 540.0 2.0 re f
+0.0 47.8 540.0 2.0 re f
+BT
+/F4 11 Tf 0 687 Td 0.000 Tc(Browsers available only as binaries could use non-standard headers to give out any information they can have access to:)Tj
+0 -13.2 Td(see the manufacturer's license agreement. It's impossible to anticipate and prevent every breach of privacy that might)Tj
+0 -13.2 Td(occur. The professionally paranoid prefer browsers available as source code, because anticipating their behavior is easier.)Tj
+0 -13.2 Td(Trust the source, Luke!)Tj
+/F9 11 Tf 0 -28.4 Td(4.8. Might some things break because header information or content is being altered?)Tj
+/F4 11 Tf 0 -26.4 Td(Definitely. More and more sites use HTTP header content to decide what to display and how to display it. There is many)Tj
+0 -13.2 Td(ways that this can be handled, so having hard and fast rules, is tricky.)Tj
+0 -26.4 Td("User-Agent" in particular is often used in this way to identify the browser, and adjust content accordingly. Changing this)Tj
+0 -13.2 Td(now \(at least not further than removing the OS information\) is not recommended, since so many sites do look for it. You)Tj
+0 -13.2 Td(may get undesirable results by changing this.)Tj
+0 -26.4 Td(For instance, different browsers use different encodings of Russian and Czech characters, certain web servers convert)Tj
+0 -13.2 Td(pages on-the-fly according to the User Agent header. Giving a "User Agent" with the wrong operating system or browser)Tj
+0 -13.2 Td(manufacturer causes some sites in these languages to be garbled; Surfers to Eastern European sites should change it to)Tj
+0 -13.2 Td(something closer. And then some page access counters work by looking at the "Referer" header; they may fail or break if)Tj
+0 -13.2 Td(unavailable. The weather maps of Intellicast have been blocked by their server when no "Referer" or cookie is provided, is)Tj
+0 -13.2 Td(another example. \(But you can forge both headers without giving information away\). There are many other ways things)Tj
+0 -13.2 Td(can go wrong when trying to fool a web server.)Tj
+0 -26.4 Td(Similar thoughts apply to modifying JavaScript, and, to a lesser degree, HTML elements.)Tj
+0 -26.4 Td(If you have problems with a site, you will have to adjust your configuration accordingly. Cookies are probably the most)Tj
+0 -13.2 Td(likely adjustment that may be required, but by no means the only one.)Tj
+/F9 11 Tf 0 -28.4 Td(4.9. Can Privoxy act as a "caching" proxy to speed up web browsing?)Tj
+/F4 11 Tf 0 -26.4 Td(No, it does not have this ability at all. You want something like)Tj
+0.00 0.00 1.00 rg ( Squid)Tj
+0.00 0.00 0.00 rg ( for this. And, yes, before you ask, Privoxy can)Tj
+0 -13.2 Td(co-exist with other kinds of proxies like Squid. See the)Tj
+0.00 0.00 1.00 rg ( forwarding chapter)Tj
+0.00 0.00 0.00 rg ( in the)Tj
+0.00 0.00 1.00 rg ( user manual)Tj
+0.00 0.00 0.00 rg ( for details.)Tj
+/F9 11 Tf 0 -28.4 Td(4.10. What about as a firewall? Can Privoxy protect me?)Tj
+/F4 11 Tf 0 -26.4 Td(Not in the way you mean, or in the way a true firewall can. Privoxy can help protect your privacy, but not protect you)Tj
+0 -13.2 Td(from intrusion attempts. It is, of course, perfectly possible and recommended to use)Tj
+/F6 11 Tf ( both)Tj
+/F4 11 Tf (.)Tj
+/F9 11 Tf 0 -28.4 Td(4.11. I have large empty spaces / a checkerboard pattern now where ads used to be. Why?)Tj
+/F4 11 Tf 0 -26.4 Td(It would be technically possible eliminate the banners in a way that frees their screen estate in many cases, by doing all)Tj
+0 -13.2 Td(banner blocking with filters, i.e. eliminating the whole image references from the HTML pages instead of letting them)Tj
+0 -13.2 Td(stay in, and blocking the resulting requests for the banners themselves.)Tj
+0 -26.4 Td(But this would consume considerable CPU resources, would likely destroy the layout of many web pages which rely on)Tj
+0 -13.2 Td(the banners consuming a certain amount of screen space, and would fail in other cases, where the screen space is reserved)Tj
+0 -13.2 Td(e.g. by tables anyway. Also, making the banners disappear without a visual trace complicates troubleshooting.)Tj
+0 -26.4 Td(So we won't support this in the default configuration, but you can of course define appropriate filters yourself.)Tj
+/F8 11 Tf 0 661.4 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-175.521 -720 Td(13/18)Tj
+ET
+Q
+endstream
+endobj
+497 0 obj<</Type/Page/Parent 470 0 R/Contents 498 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 6 0 R/F6 8 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 310 0 R>>endobj
+498 0 obj<</Length 4674      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 531.0 540.0 2.0 re f
+0.00 0.00 1.00 RG
+406.9 433.2 m 437.8 433.2 l S
+437.8 433.2 m 471.7 433.2 l S
+471.7 433.2 m 490.3 433.2 l S
+490.3 433.2 m 527.9 433.2 l S
+0.0 420.0 m 32.4 420.0 l S
+0.0 383.8 540.0 2.0 re f
+391.4 338.8 m 533.5 338.8 l S
+32.1 325.6 m 96.5 325.6 l S
+96.5 325.6 m 130.5 325.6 l S
+0.0 315.8 540.0 2.0 re f
+0.0 234.6 540.0 2.0 re f
+1.6 161.6 m 109.1 161.6 l S
+1.6 132.0 m 126.3 132.0 l S
+1.6 102.5 m 168.7 102.5 l S
+312.6 102.5 m 371.6 102.5 l S
+1.6 72.9 m 113.4 72.9 l S
+478.3 72.9 m 524.2 72.9 l S
+1.6 43.3 m 143.4 43.3 l S
+BT
+/F9 11 Tf 0 687 Td 0.000 Tc(4.12. How can Privoxy filter Secure \(HTTPS\) URLs?)Tj
+/F4 11 Tf 0 -26.4 Td(Since secure HTTP connections are encrypted SSL sessions between your browser and the secure site, and are meant to be)Tj
+0 -13.2 Td(reliably)Tj
+/F6 11 Tf ( secure)Tj
+/F4 11 Tf (, there is little that Privoxy can do but hand the raw gibberish data though from one end to the other)Tj
+0 -13.2 Td(unprocessed.)Tj
+0 -26.4 Td(The only exception to this is blocking by host patterns, as the client needs to tell Privoxy the name of the remote server, so)Tj
+0 -13.2 Td(that Privoxy can establish the connection. If that name matches a host-only pattern, the connection will be blocked.)Tj
+0 -26.4 Td(As far as ad blocking is concerned, this is less of a restriction than it may seem, since ad sources are often identifiable by)Tj
+0 -13.2 Td(the host name, and often the banners to be placed in an encrypted page come unencrypted nonetheless for efficiency)Tj
+0 -13.2 Td(reasons, which exposes them to the full power of Privoxy's ad blocking.)Tj
+/F9 11 Tf 0 -28.4 Td(4.13. Privoxy runs as a "server". How secure is it? Do I need to take any special precautions?)Tj
+/F4 11 Tf 0 -26.4 Td(There are no known exploits that might affect Privoxy. On Unix-like systems, Privoxy can run as a non-privileged user,)Tj
+0 -13.2 Td(which is how we recommend it be run. Also, by default Privoxy only listens to requests from "localhost" only. The server)Tj
+0 -13.2 Td(aspect of Privoxy is not itself directly exposed to the Internet in this configuration. If you want to have Privoxy serve as a)Tj
+0 -13.2 Td(LAN proxy, this will have to be opened up to allow for LAN requests. In this case, we'd recommend you specify only the)Tj
+0 -13.2 Td(LAN gateway address, e.g. 192.168.1.1, in the main Privoxy configuration file and check all)Tj
+0.00 0.00 1.00 rg ( access control and security)Tj
+0 -13.2 Td(options)Tj
+0.00 0.00 0.00 rg (. All LAN hosts can then use this as their proxy address in the browser proxy configuration, but Privoxy will not)Tj
+0 -13.2 Td(listen on any external interfaces. ACLs can be defined in addition, and using a firewall is always good too. Better safe)Tj
+0 -13.2 Td(than sorry.)Tj
+/F9 11 Tf 0 -28.4 Td(4.14. How can I temporarily disable Privoxy?)Tj
+/F4 11 Tf 0 -26.4 Td(The easiest way is to access Privoxy with your browser by using the remote toggle URL:)Tj
+0.00 0.00 1.00 rg ( http://config.privoxy.org/toggle)Tj
+0.00 0.00 0.00 rg (.)Tj
+0 -13.2 Td(See the)Tj
+0.00 0.00 1.00 rg ( Bookmarklets section)Tj
+0.00 0.00 0.00 rg ( of the)Tj
+/F6 11 Tf ( User Manual)Tj
+/F4 11 Tf ( for an easy way to access this feature.)Tj
+/F9 11 Tf 0 -28.4 Td(4.15. When "disabled" is Privoxy totally out of the picture?)Tj
+/F4 11 Tf 0 -26.4 Td(No, this just means all filtering and actions are disabled. Privoxy is still acting as a proxy, but just not doing any of the)Tj
+0 -13.2 Td(things that Privoxy would normally be expected to do. It is still a "middle-man" in the interaction between your browser)Tj
+0 -13.2 Td(and web sites.)Tj
+/F9 11 Tf 0 -28.4 Td(4.16. Where can I find more information about Privoxy and related issues?)Tj
+/F4 11 Tf 0 -26.4 Td(Other references and sites of interest to Privoxy users:)Tj
+0.00 0.00 1.00 rg 1.588 -27.988 Td(http://www.privoxy.org/)Tj
+0.00 0.00 0.00 rg (, the Privoxy Home page.)Tj
+0.00 0.00 1.00 rg 0 -29.576 Td(http://www.privoxy.org/faq/)Tj
+0.00 0.00 0.00 rg (, the Privoxy FAQ.)Tj
+0.00 0.00 1.00 rg 0 -29.576 Td(http://sourceforge.net/projects/ijbswa/)Tj
+0.00 0.00 0.00 rg (, the Project Page for Privoxy on)Tj
+0.00 0.00 1.00 rg ( SourceForge)Tj
+0.00 0.00 0.00 rg (.)Tj
+0.00 0.00 1.00 rg -0 -29.576 Td(http://config.privoxy.org/)Tj
+0.00 0.00 0.00 rg (, the web-based user interface. Privoxy must be running for this to work. Shortcut:)Tj
+0.00 0.00 1.00 rg ( http://p.p/)Tj
+0 -29.576 Td(http://www.privoxy.org/actions/)Tj
+0.00 0.00 0.00 rg (, to submit "misses" to the developers.)Tj
+/F8 11 Tf -1.588 675.694 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-175.521 -720 Td(14/18)Tj
+ET
+Q
+endstream
+endobj
+499 0 obj<</Type/Page/Parent 470 0 R/Contents 500 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 6 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 335 0 R>>endobj
+500 0 obj<</Length 4788      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+1.6 684.4 m 211.5 684.4 l S
+1.6 654.8 m 164.5 654.8 l S
+1.6 625.3 m 163.5 625.3 l S
+1.6 595.7 m 116.8 595.7 l S
+1.6 566.1 m 130.0 566.1 l S
+1.6 536.5 m 194.2 536.5 l S
+0.00 0.00 0.00 rg 0.0 525.1 540.0 2.0 re f
+191.8 393.7 m 284.2 393.7 l S
+284.2 393.7 m 315.1 393.7 l S
+370.3 393.7 m 395.0 393.7 l S
+395.0 393.7 m 457.0 393.7 l S
+457.0 393.7 m 474.4 393.7 l S
+0.0 383.9 540.0 2.0 re f
+0.0 272.9 m 177.4 272.9 l S
+0.0 263.1 540.0 2.0 re f
+350.2 218.1 m 492.3 218.1 l S
+101.4 165.3 m 281.6 165.3 l S
+199.8 138.9 m 368.9 138.9 l S
+BT
+0.00 0.00 1.00 rg /F4 11 Tf 1.588 685.412 Td 0.000 Tc(http://www.junkbusters.com/ht/en/cookies.html)Tj
+0.00 0.00 0.00 rg (, an explanation how cookies are used to track web users.)Tj
+0.00 0.00 1.00 rg 0 -29.577 Td(http://www.junkbusters.com/ijb.html)Tj
+0.00 0.00 0.00 rg (, the original Internet Junkbuster.)Tj
+0.00 0.00 1.00 rg 0 -29.577 Td(http://www.waldherr.org/junkbuster/)Tj
+0.00 0.00 0.00 rg (, Stefan Waldherr's version of Junkbuster, from which Privoxy was derived.)Tj
+0.00 0.00 1.00 rg -0 -29.577 Td(http://privacy.net/analyze/)Tj
+0.00 0.00 0.00 rg (, a useful site to check what information about you is leaked while you browse the web.)Tj
+0.00 0.00 1.00 rg 0 -29.577 Td(http://www.squid-cache.org/)Tj
+0.00 0.00 0.00 rg (, a very popular caching proxy, which is often used together with Privoxy.)Tj
+0.00 0.00 1.00 rg 0 -29.577 Td(http://www.privoxy.org/developer-manual/)Tj
+0.00 0.00 0.00 rg (, the Privoxy developer manual.)Tj
+/F9 17 Tf -1.588 -35.988 Td(5. Troubleshooting)Tj
+/F9 11 Tf 0 -27.6 Td(5.1. I just upgraded and am getting "connection refused" with every web page?)Tj
+/F4 11 Tf 0 -26.4 Td(Either Privoxy is not running, or your browser is configured for a different port than what Privoxy is using.)Tj
+0 -26.4 Td(The old Privoxy \(and also Junkbuster\) used port 8000 by default. This has been changed to port 8118 now, due to a)Tj
+0 -13.2 Td(conflict with NAS \(Network Audio Service\), which uses port 8000. If you haven't, you need to change your browser to the)Tj
+0 -13.2 Td(new port number, or alternately change the )Tj
+0.00 0.00 1.00 rg /F0 11 Tf (listen-address)Tj
+/F4 11 Tf ( option)Tj
+0.00 0.00 0.00 rg ( in Privoxy's)Tj
+0.00 0.00 1.00 rg ( main configuration file)Tj
+0.00 0.00 0.00 rg (.)Tj
+/F9 11 Tf 0 -28.4 Td(5.2. I just added a new rule, but the steenkin ad is still getting through. How?)Tj
+/F4 11 Tf 0 -26.4 Td(If the ad had been displayed before you added its URL, it will probably be held in the browser's cache for some time, so it)Tj
+0 -13.2 Td(will be displayed without the need for any request to the server, and Privoxy will not be in the picture. The best thing to)Tj
+0 -13.2 Td(do is try flushing the browser's caches. And then try again.)Tj
+0 -26.4 Td(If this doesn't help, you probably have an error in the rule you applied. Try pasting the full URL of the offending ad into)Tj
+0.00 0.00 1.00 rg 0 -13.2 Td(http://config.privoxy.org/show-url-info)Tj
+0.00 0.00 0.00 rg ( and see if it really matches your new rule.)Tj
+/F9 11 Tf 0 -28.4 Td(5.3. One of my favorite sites does not work with Privoxy. What can I do?)Tj
+/F4 11 Tf 0 -26.4 Td(First verify that it is indeed a Privoxy problem, by toggling off Privoxy through)Tj
+0.00 0.00 1.00 rg ( http://config.privoxy.org/toggle)Tj
+0.00 0.00 0.00 rg (, and then)Tj
+0 -13.2 Td(shift-reloading the problem page \(i.e. holding down the shift key while clicking reload. Alternatively, flush your)Tj
+0 -13.2 Td(browser's disk and memory caches\).)Tj
+0 -26.4 Td(If still a problem, go to)Tj
+0.00 0.00 1.00 rg ( http://config.privoxy.org/show-url-info)Tj
+0.00 0.00 0.00 rg ( and paste the full URL of the page in question into the)Tj
+0 -13.2 Td(prompt. See which actions are being applied to the URL, and which matches in which actions files are responsible for)Tj
+0 -13.2 Td(that. Now, armed with this information, go to)Tj
+0.00 0.00 1.00 rg ( http://config.privoxy.org/show-status)Tj
+0.00 0.00 0.00 rg ( and select the appropriate actions files)Tj
+0 -13.2 Td(for editing.)Tj
+0 -26.4 Td(You can now either look for a section which disables the actions that you suspect to cause the problem and add a pattern)Tj
+0 -13.2 Td(for your site there, or make up a completely new section for your site. In any case, the recommended way is to disable)Tj
+0 -13.2 Td(only the prime suspect, reload the problem page, and only if the problem persists, disable more and more actions until you)Tj
+0 -13.2 Td(have identified the culprit. You may or may not want to turn the other actions on again. Remember to flush your browser's)Tj
+0 -13.2 Td(caches in between any such changes!)Tj
+/F8 11 Tf 0 672.459 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-175.521 -720 Td(15/18)Tj
+ET
+Q
+endstream
+endobj
+501 0 obj<</Type/Page/Parent 470 0 R/Contents 502 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 6 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 340 0 R>>endobj
+502 0 obj<</Length 4396      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+253.0 620.0 m 312.7 620.0 l S
+312.7 620.0 m 355.7 620.0 l S
+430.6 620.0 m 464.5 620.0 l S
+464.5 620.0 m 499.0 620.0 l S
+0.00 0.00 0.00 rg 0.0 610.2 540.0 2.0 re f
+0.0 274.6 540.0 2.0 re f
+0.0 203.0 540.0 2.0 re f
+0.0 88.2 540.0 2.0 re f
+BT
+/F4 11 Tf 0 687 Td 0.000 Tc(Alternately, if you are comfortable with a text editor, you can accomplish the same thing by editing the appropriate)Tj
+0 -13.2 Td(actions file. Probably the easiest way to deal with such problems when editing by hand is to add your site to a )Tj
+/F0 11 Tf ({)Tj
+0 -13.2 Td(fragile })Tj
+/F4 11 Tf ( section in )Tj
+/F0 11 Tf (user.action)Tj
+/F4 11 Tf (, which is an alias that turns off most "dangerous" actions, but is also likely to)Tj
+0 -13.2 Td(turn off more actions then needed, and thus lower your privacy and protection more than necessary,)Tj
+0 -26.4 Td(Troubleshooting actions is discussed in more detail in the)Tj
+0.00 0.00 1.00 rg ( user-manual appendix)Tj
+0.00 0.00 0.00 rg (. There is also an)Tj
+0.00 0.00 1.00 rg ( actions tutorial)Tj
+0.00 0.00 0.00 rg (.)Tj
+/F9 14 Tf 0 -31.4 Td(5.4. After installing Privoxy, I have to log in every time I start IE. What gives?)Tj
+/F4 11 Tf 0 -27 Td(This is a quirk that effects the installation of Privoxy, in conjunction with Internet Explorer and Internet Connection)Tj
+0 -13.2 Td(Sharing on Windows 2000 and Windows XP. The symptoms may appear to be corrupted or invalid DUN settings, or)Tj
+0 -13.2 Td(passwords.)Tj
+0 -26.4 Td(When setting up an NT based Windows system with Privoxy you may find that things do not seem to be doing what you)Tj
+0 -13.2 Td(expect. When you set your system up you will probably have set up Internet Connection Sharing \(ICS\) with Dial up)Tj
+0 -13.2 Td(Networking \(DUN\) when logged in with administrator privileges. You will probably have made this DUN connection)Tj
+0 -13.2 Td(available to other accounts that you may have set-up on your system. E.g. Mum or Dad sets up the system and makes)Tj
+0 -13.2 Td(accounts suitably configured for the kids.)Tj
+0 -26.4 Td(When setting up Privoxy in this environment you will have to alter the proxy set-up of Internet Explorer \(IE\) for the)Tj
+0 -13.2 Td(specific DUN connection on which you wish to use Privoxy. When you do this the ICS DUN set-up becomes user)Tj
+0 -13.2 Td(specific. In this instance you will see no difference if you change the DUN connection under the account used to set-up)Tj
+0 -13.2 Td(the connection. However when you do this from another user you will notice that the DUN connection changes to make)Tj
+0 -13.2 Td(available to "Me only". You will also find that you have to store the password under each different user!)Tj
+0 -26.4 Td(The reason for this is that each user's set-up for IE is user specific. Each set-up DUN connection and each LAN)Tj
+0 -13.2 Td(connection in IE store the settings for each user individually. As such this enforces individual configurations rather than)Tj
+0 -13.2 Td(common ones. Hence the first time you use a DUN connection after re-booting your system it may not perform as you)Tj
+0 -13.2 Td(expect, and prompt you for the password. Just set and save the password again and all should be OK.)Tj
+0 -26.4 Td([Thanks to Ray Griffith for this submission.])Tj
+/F9 14 Tf 0 -31.4 Td(5.5. I cannot connect to any FTP sites. Privoxy seems to be blocking me.)Tj
+/F4 11 Tf 0 -27 Td(Privoxy cannot act as a proxy for FTP traffic, so do not configure your browser to use Privoxy as an FTP proxy. The same)Tj
+0 -13.2 Td(is true for any protocol other than HTTP or HTTPS.)Tj
+/F9 14 Tf 0 -31.4 Td(5.6. In Mac OSX, I can't configure Microsoft Internet Explorer to use Privoxy as)Tj
+0 -16.8 Td(the HTTP proxy.)Tj
+/F4 11 Tf 0 -27 Td(Microsoft Internet Explorer \(in versions like 5.1\) respects system-wide network settings. In order to change the HTTP)Tj
+0 -13.2 Td(proxy, open System Preferences, and click on the Network icon. In the settings pane that comes up, click on the Proxies)Tj
+0 -13.2 Td(tab. Ensure the "Web Proxy \(HTTP\)" checkbox is checked and enter )Tj
+/F0 11 Tf (127.0.0.1)Tj
+/F4 11 Tf ( in the entry field. Enter )Tj
+/F0 11 Tf (8118)Tj
+/F4 11 Tf ( in the)Tj
+0 -13.2 Td(Port field. The next time you start IE, it should reflect these values.)Tj
+/F8 11 Tf 0 621 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-175.521 -720 Td(16/18)Tj
+ET
+Q
+endstream
+endobj
+503 0 obj<</Type/Page/Parent 470 0 R/Contents 504 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 6 0 R/F6 8 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 369 0 R>>endobj
+504 0 obj<</Length 5018      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 609.0 540.0 2.0 re f
+0.00 0.00 1.00 RG
+167.1 560.4 m 226.1 560.4 l S
+0.0 547.2 m 273.6 547.2 l S
+269.1 520.8 m 294.5 520.8 l S
+294.5 520.8 m 330.9 520.8 l S
+330.9 520.8 m 347.1 520.8 l S
+0.0 511.0 540.0 2.0 re f
+226.1 462.4 m 502.4 462.4 l S
+25.4 422.8 m 58.1 422.8 l S
+58.1 422.8 m 82.2 422.8 l S
+402.4 396.4 m 441.8 396.4 l S
+441.8 396.4 m 457.4 396.4 l S
+120.7 383.2 m 163.8 383.2 l S
+163.8 383.2 m 175.7 383.2 l S
+175.7 383.2 m 191.9 383.2 l S
+191.9 383.2 m 212.9 383.2 l S
+212.9 383.2 m 248.1 383.2 l S
+114.6 330.4 m 152.8 330.4 l S
+152.8 330.4 m 164.1 330.4 l S
+164.1 330.4 m 180.3 330.4 l S
+180.3 330.4 m 206.2 330.4 l S
+206.2 330.4 m 241.4 330.4 l S
+0.0 307.4 540.0 2.0 re f
+7.9 245.6 m 284.3 245.6 l S
+0.0 235.8 540.0 2.0 re f
+354.8 174.0 m 499.3 174.0 l S
+77.6 121.2 m 157.4 121.2 l S
+292.5 121.2 m 314.1 121.2 l S
+314.1 121.2 m 348.1 121.2 l S
+377.4 121.2 m 410.7 121.2 l S
+410.7 121.2 m 434.2 121.2 l S
+0.0 111.4 540.0 2.0 re f
+113.7 36.4 m 314.8 36.4 l S
+BT
+/F9 17 Tf 0 681 Td 0.000 Tc(6. Contacting the developers, Bug Reporting and Feature)Tj
+0 -20.4 Td(Requests)Tj
+/F4 11 Tf 0 -27.6 Td(We value your feedback. In fact, we rely on it to improve Privoxy and its configuration. However, please note the)Tj
+0 -13.2 Td(following hints, so we can provide you with the best support:)Tj
+/F9 14 Tf 0 -31.4 Td(6.1. Get Support)Tj
+/F4 11 Tf 0 -27 Td(For casual users, our support forum at)Tj
+0.00 0.00 1.00 rg ( SourceForge)Tj
+0.00 0.00 0.00 rg ( is probably best suited:)Tj
+0.00 0.00 1.00 rg 0 -13.2 Td(http://sourceforge.net/tracker/?group_id=11118&atid=211118)Tj
+0.00 0.00 0.00 rg 0 -26.4 Td(All users are of course welcome to discuss their issues on the)Tj
+0.00 0.00 1.00 rg ( users mailing list)Tj
+0.00 0.00 0.00 rg (, where the developers also hang around.)Tj
+/F9 14 Tf 0 -31.4 Td(6.2. Report Bugs)Tj
+/F4 11 Tf 0 -27 Td(Please report all bugs)Tj
+/F6 11 Tf ( only)Tj
+/F4 11 Tf ( through our bug tracker:)Tj
+0.00 0.00 1.00 rg ( http://sourceforge.net/tracker/?group_id=11118&atid=111118)Tj
+0.00 0.00 0.00 rg (.)Tj
+0 -26.4 Td(Before doing so, please make sure that the bug has not already been submitted and observe the additional hints at the top)Tj
+0 -13.2 Td(of the)Tj
+0.00 0.00 1.00 rg ( submit form)Tj
+0.00 0.00 0.00 rg (.)Tj
+0 -26.4 Td(Please try to verify that it is a Privoxy bug, and not a browser or site bug first. If unsure, try)Tj
+0.00 0.00 1.00 rg ( toggling off)Tj
+0.00 0.00 0.00 rg ( Privoxy, and see)Tj
+0 -13.2 Td(if the problem persists. The)Tj
+0.00 0.00 1.00 rg ( appendix of the user manual)Tj
+0.00 0.00 0.00 rg ( also has helpful information on action debugging. If you are)Tj
+0 -13.2 Td(using your own custom configuration, please try the stock configs to see if the problem is configuration related.)Tj
+0 -26.4 Td(If not using the latest version, chances are that the bug has been found and fixed in the meantime. We would appreciate if)Tj
+0 -13.2 Td(you could take the time to)Tj
+0.00 0.00 1.00 rg ( upgrade to the latest version)Tj
+0.00 0.00 0.00 rg ( \(or even the latest CVS snapshot\) and verify your bug, but this is)Tj
+0 -13.2 Td(not required for reporting.)Tj
+/F9 14 Tf 0 -31.4 Td(6.3. Request New Features)Tj
+/F4 11 Tf 0 -27 Td(You are welcome to submit ideas on new features or other proposals for improvement through our feature request tracker)Tj
+0 -13.2 Td(at)Tj
+0.00 0.00 1.00 rg ( http://sourceforge.net/tracker/?atid=361118&group_id=11118)Tj
+0.00 0.00 0.00 rg (.)Tj
+/F9 14 Tf 0 -31.4 Td(6.4. Report Ads or Other Actions-Related Problems)Tj
+/F4 11 Tf 0 -27 Td(Please send feedback on ads that slipped through, innocent images that were blocked, and any other problems relating to)Tj
+0 -13.2 Td(the )Tj
+/F0 11 Tf (default.action)Tj
+/F4 11 Tf ( file through our actions feedback mechanism located at)Tj
+0.00 0.00 1.00 rg ( http://www.privoxy.org/actions/)Tj
+0.00 0.00 0.00 rg (. On this)Tj
+0 -13.2 Td(page, you will also find a bookmark which will take you back there from any troubled site and even pre-fill the form!)Tj
+0 -26.4 Td(New, improved )Tj
+/F0 11 Tf (default.action)Tj
+/F4 11 Tf ( files will occasionally be made available based on your feedback. These will be)Tj
+0 -13.2 Td(announced on the)Tj
+0.00 0.00 1.00 rg ( ijbswa-announce)Tj
+0.00 0.00 0.00 rg ( list and available from our the)Tj
+0.00 0.00 1.00 rg ( files section)Tj
+0.00 0.00 0.00 rg ( of our)Tj
+0.00 0.00 1.00 rg ( project page)Tj
+0.00 0.00 0.00 rg (.)Tj
+/F9 14 Tf 0 -31.4 Td(6.5. Other)Tj
+/F4 11 Tf 0 -27 Td(For any other issues, feel free to use the mailing lists. Technically interested users and people who wish to contribute to)Tj
+0 -13.2 Td(the project are also welcome on the developers list! You can find an overview of all Privoxy-related mailing lists,)Tj
+0 -13.2 Td(including list archives, at:)Tj
+0.00 0.00 1.00 rg ( http://sourceforge.net/mail/?group_id=11118)Tj
+0.00 0.00 0.00 rg (.)Tj
+/F8 11 Tf 0 682.6 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-175.521 -720 Td(17/18)Tj
+ET
+Q
+endstream
+endobj
+505 0 obj<</Type/Page/Parent 470 0 R/Contents 506 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 6 0 R/F6 8 0 R/F8 10 0 R/F9 11 0 R>>/XObject<<>>>>/Annots 390 0 R>>endobj
+506 0 obj<</Length 4549      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 689.4 540.0 2.0 re f
+0.00 0.00 1.00 RG
+221.5 637.2 m 366.7 637.2 l S
+0.0 548.2 540.0 2.0 re f
+174.4 394.0 m 200.4 394.0 l S
+200.4 394.0 m 239.2 394.0 l S
+239.2 394.0 m 270.7 394.0 l S
+270.7 394.0 m 307.0 394.0 l S
+0.0 318.2 540.0 2.0 re f
+135.6 269.6 m 172.6 269.6 l S
+172.6 269.6 m 223.0 269.6 l S
+348.6 269.6 m 403.3 269.6 l S
+403.3 269.6 m 459.2 269.6 l S
+206.2 203.6 m 239.5 203.6 l S
+306.1 203.6 m 360.8 203.6 l S
+360.8 203.6 m 416.7 203.6 l S
+106.6 190.4 m 130.1 190.4 l S
+187.3 164.0 m 232.2 164.0 l S
+232.2 164.0 m 267.3 164.0 l S
+267.3 164.0 m 279.2 164.0 l S
+279.2 164.0 m 295.4 164.0 l S
+295.4 164.0 m 336.1 164.0 l S
+51.3 98.0 m 101.7 98.0 l S
+125.9 84.8 m 146.9 84.8 l S
+146.9 84.8 m 184.5 84.8 l S
+BT
+/F9 17 Tf 0 665.8 Td 0.000 Tc(7. Privoxy Copyright, License and History)Tj
+/F4 11 Tf 0 -27.6 Td(Copyright \251 2001, 2002 by Privoxy Developers )Tj
+/F0 11 Tf (<)Tj
+0.00 0.00 1.00 rg (developers@privoxy.org)Tj
+0.00 0.00 0.00 rg (>)Tj
+/F4 11 Tf 0 -26.4 Td(Some source code is based on code Copyright \251 1997 by Anonymous Coders and Junkbusters, Inc. and licensed under the)Tj
+/F6 11 Tf 0 -13.2 Td(GNU General Public License)Tj
+/F4 11 Tf (.)Tj
+0 -26.4 Td(Portions of this document are "borrowed" from the original Junkbuster \(tm\) FAQ, and modified as appropriate for)Tj
+0 -13.2 Td(Privoxy.)Tj
+/F9 14 Tf 0 -31.4 Td(7.1. License)Tj
+/F4 11 Tf 0 -27 Td(Privoxy is free software; you can redistribute it and/or modify it under the terms of the)Tj
+/F6 11 Tf ( GNU General Public License)Tj
+/F4 11 Tf (,)Tj
+0 -13.2 Td(version 2, as published by the Free Software Foundation.)Tj
+0 -26.4 Td(This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the)Tj
+0 -13.2 Td(implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the)Tj
+/F6 11 Tf ( GNU General)Tj
+0 -13.2 Td(Public License)Tj
+/F4 11 Tf ( for more details, which is available from the Free Software Foundation, Inc, 59 Temple Place - Suite 330,)Tj
+0 -13.2 Td(Boston, MA 02111-1307, USA.)Tj
+0 -26.4 Td(You should have received a copy of the)Tj
+0.00 0.00 1.00 rg /F6 11 Tf ( GNU General Public License)Tj
+0.00 0.00 0.00 rg /F4 11 Tf ( along with this program; if not, write to the)Tj
+0 -26.4 Td( Free Software)Tj
+0 -13.2 Td( Foundation, Inc. 59 Temple Place - Suite 330)Tj
+0 -13.2 Td( Boston, MA 02111-1307)Tj
+0 -13.2 Td( USA )Tj
+/F9 14 Tf 0 -31.4 Td(7.2. History)Tj
+/F4 11 Tf 0 -27 Td(In the beginning, there was the)Tj
+0.00 0.00 1.00 rg ( Internet Junkbuster)Tj
+0.00 0.00 0.00 rg (, by Anonymous Coders and)Tj
+0.00 0.00 1.00 rg ( Junkbusters Corporation)Tj
+0.00 0.00 0.00 rg (. It saved many)Tj
+0 -13.2 Td(users a lot of pain in the early days of web advertising and user tracking.)Tj
+0 -26.4 Td(But the web, its protocols and standards, and with it, the techniques for forcing users to consume ads, give up autonomy)Tj
+0 -13.2 Td(over their browsing, and for spying on them, kept evolving. Unfortunately, the Internet Junkbuster did not. Version 2.0.2,)Tj
+0 -13.2 Td(published in 1998, was \(and is\) the last official)Tj
+0.00 0.00 1.00 rg ( release)Tj
+0.00 0.00 0.00 rg ( available from)Tj
+0.00 0.00 1.00 rg ( Junkbusters Corporation)Tj
+0.00 0.00 0.00 rg (. Fortunately, it had been)Tj
+0 -13.2 Td(released under the GNU)Tj
+0.00 0.00 1.00 rg ( GPL)Tj
+0.00 0.00 0.00 rg (, which allowed further development by others.)Tj
+0 -26.4 Td(So Stefan Waldherr started maintaining an)Tj
+0.00 0.00 1.00 rg ( improved version of the software)Tj
+0.00 0.00 0.00 rg (, to which eventually a number of people)Tj
+0 -13.2 Td(contributed patches. It could already replace banners with a transparent image, and had a first version of pop-up killing,)Tj
+0 -13.2 Td(but it was still very closely based on the original, with all its limitations, such as the lack of HTTP/1.1 support, flexible)Tj
+0 -13.2 Td(per-site configuration, or content modification. The last release from this effort was version 2.0.2-10, published in 2000.)Tj
+0 -26.4 Td(Then, some)Tj
+0.00 0.00 1.00 rg ( developers)Tj
+0.00 0.00 0.00 rg ( picked up the thread, and started turning the software inside out, upside down, and then)Tj
+0 -13.2 Td(reassembled it, adding many)Tj
+0.00 0.00 1.00 rg ( new features)Tj
+0.00 0.00 0.00 rg ( along the way.)Tj
+0 -26.4 Td(The result of this is Privoxy, whose first stable release, 3.0, is due late summer or early fall 2002.)Tj
+/F8 11 Tf 0 660.6 Td(Privoxy Frequently Asked Questions)Tj
+431.76 0 Td(08/06/02 10:43:32 PM)Tj
+-175.521 -720 Td(18/18)Tj
+ET
+Q
+endstream
+endobj
+507 0 obj<</Type/Catalog/Pages 470 0 R/PageLayout/SinglePage/PageMode/UseNone/PageLabels<</Nums[0<</S/D/St 1/P()>>0<</S/D/St 1/P()>>]>>>>endobj
+xref
+0 508 
+0000000000 65535 f 
+0000000015 00000 n 
+0000000257 00000 n 
+0000001823 00000 n 
+0000001897 00000 n 
+0000001976 00000 n 
+0000002058 00000 n 
+0000002136 00000 n 
+0000002213 00000 n 
+0000002292 00000 n 
+0000002375 00000 n 
+0000002452 00000 n 
+0000002534 00000 n 
+0000002593 00000 n 
+0000002693 00000 n 
+0000002746 00000 n 
+0000002831 00000 n 
+0000002885 00000 n 
+0000002970 00000 n 
+0000003012 00000 n 
+0000003097 00000 n 
+0000003155 00000 n 
+0000003240 00000 n 
+0000003342 00000 n 
+0000003450 00000 n 
+0000003551 00000 n 
+0000003652 00000 n 
+0000003753 00000 n 
+0000003854 00000 n 
+0000003955 00000 n 
+0000004056 00000 n 
+0000004157 00000 n 
+0000004258 00000 n 
+0000004359 00000 n 
+0000004461 00000 n 
+0000004563 00000 n 
+0000004665 00000 n 
+0000004765 00000 n 
+0000004866 00000 n 
+0000004967 00000 n 
+0000005068 00000 n 
+0000005169 00000 n 
+0000005270 00000 n 
+0000005371 00000 n 
+0000005472 00000 n 
+0000005573 00000 n 
+0000005674 00000 n 
+0000005775 00000 n 
+0000005876 00000 n 
+0000005977 00000 n 
+0000006077 00000 n 
+0000006176 00000 n 
+0000006275 00000 n 
+0000006536 00000 n 
+0000006637 00000 n 
+0000006738 00000 n 
+0000006839 00000 n 
+0000006940 00000 n 
+0000007042 00000 n 
+0000007143 00000 n 
+0000007244 00000 n 
+0000007345 00000 n 
+0000007446 00000 n 
+0000007546 00000 n 
+0000007647 00000 n 
+0000007748 00000 n 
+0000007849 00000 n 
+0000007950 00000 n 
+0000008051 00000 n 
+0000008152 00000 n 
+0000008253 00000 n 
+0000008354 00000 n 
+0000008455 00000 n 
+0000008556 00000 n 
+0000008657 00000 n 
+0000008758 00000 n 
+0000008859 00000 n 
+0000008960 00000 n 
+0000009061 00000 n 
+0000009162 00000 n 
+0000009263 00000 n 
+0000009364 00000 n 
+0000009465 00000 n 
+0000009566 00000 n 
+0000009667 00000 n 
+0000009768 00000 n 
+0000009869 00000 n 
+0000009970 00000 n 
+0000010071 00000 n 
+0000010172 00000 n 
+0000010273 00000 n 
+0000010374 00000 n 
+0000010475 00000 n 
+0000010576 00000 n 
+0000010677 00000 n 
+0000010778 00000 n 
+0000010879 00000 n 
+0000010980 00000 n 
+0000011081 00000 n 
+0000011182 00000 n 
+0000011520 00000 n 
+0000011587 00000 n 
+0000011674 00000 n 
+0000011733 00000 n 
+0000011820 00000 n 
+0000011899 00000 n 
+0000011986 00000 n 
+0000012044 00000 n 
+0000012131 00000 n 
+0000012199 00000 n 
+0000012286 00000 n 
+0000012353 00000 n 
+0000012440 00000 n 
+0000012529 00000 n 
+0000012615 00000 n 
+0000012708 00000 n 
+0000012795 00000 n 
+0000012850 00000 n 
+0000012936 00000 n 
+0000012991 00000 n 
+0000013077 00000 n 
+0000013128 00000 n 
+0000013215 00000 n 
+0000013273 00000 n 
+0000013359 00000 n 
+0000013402 00000 n 
+0000013488 00000 n 
+0000013609 00000 n 
+0000013654 00000 n 
+0000013741 00000 n 
+0000013766 00000 n 
+0000013869 00000 n 
+0000013971 00000 n 
+0000014039 00000 n 
+0000014126 00000 n 
+0000014229 00000 n 
+0000014290 00000 n 
+0000014376 00000 n 
+0000014452 00000 n 
+0000014538 00000 n 
+0000014599 00000 n 
+0000014686 00000 n 
+0000014729 00000 n 
+0000014816 00000 n 
+0000014859 00000 n 
+0000014944 00000 n 
+0000015018 00000 n 
+0000015104 00000 n 
+0000015201 00000 n 
+0000015252 00000 n 
+0000015339 00000 n 
+0000015389 00000 n 
+0000015476 00000 n 
+0000015519 00000 n 
+0000015606 00000 n 
+0000015654 00000 n 
+0000015741 00000 n 
+0000015790 00000 n 
+0000015848 00000 n 
+0000015935 00000 n 
+0000015976 00000 n 
+0000016062 00000 n 
+0000016153 00000 n 
+0000016240 00000 n 
+0000016302 00000 n 
+0000016388 00000 n 
+0000016480 00000 n 
+0000016567 00000 n 
+0000016659 00000 n 
+0000016745 00000 n 
+0000016795 00000 n 
+0000016880 00000 n 
+0000016921 00000 n 
+0000017008 00000 n 
+0000017053 00000 n 
+0000017140 00000 n 
+0000017229 00000 n 
+0000017279 00000 n 
+0000017366 00000 n 
+0000017409 00000 n 
+0000017496 00000 n 
+0000017537 00000 n 
+0000017623 00000 n 
+0000017669 00000 n 
+0000017756 00000 n 
+0000017814 00000 n 
+0000017901 00000 n 
+0000017944 00000 n 
+0000018031 00000 n 
+0000018100 00000 n 
+0000018186 00000 n 
+0000018236 00000 n 
+0000018323 00000 n 
+0000018366 00000 n 
+0000018453 00000 n 
+0000018510 00000 n 
+0000018596 00000 n 
+0000018653 00000 n 
+0000018740 00000 n 
+0000018794 00000 n 
+0000018881 00000 n 
+0000018950 00000 n 
+0000019037 00000 n 
+0000019158 00000 n 
+0000019201 00000 n 
+0000019288 00000 n 
+0000019331 00000 n 
+0000019416 00000 n 
+0000019469 00000 n 
+0000019556 00000 n 
+0000019610 00000 n 
+0000019697 00000 n 
+0000019741 00000 n 
+0000019828 00000 n 
+0000019872 00000 n 
+0000019958 00000 n 
+0000020007 00000 n 
+0000020093 00000 n 
+0000020133 00000 n 
+0000020220 00000 n 
+0000020289 00000 n 
+0000020376 00000 n 
+0000020420 00000 n 
+0000020505 00000 n 
+0000020553 00000 n 
+0000020638 00000 n 
+0000020743 00000 n 
+0000020791 00000 n 
+0000020878 00000 n 
+0000020929 00000 n 
+0000021016 00000 n 
+0000021065 00000 n 
+0000021152 00000 n 
+0000021191 00000 n 
+0000021276 00000 n 
+0000021327 00000 n 
+0000021414 00000 n 
+0000021483 00000 n 
+0000021570 00000 n 
+0000021673 00000 n 
+0000021786 00000 n 
+0000021870 00000 n 
+0000021951 00000 n 
+0000021995 00000 n 
+0000022082 00000 n 
+0000022126 00000 n 
+0000022211 00000 n 
+0000022254 00000 n 
+0000022340 00000 n 
+0000022384 00000 n 
+0000022471 00000 n 
+0000022514 00000 n 
+0000022601 00000 n 
+0000022644 00000 n 
+0000022729 00000 n 
+0000022794 00000 n 
+0000022881 00000 n 
+0000022921 00000 n 
+0000023008 00000 n 
+0000023056 00000 n 
+0000023143 00000 n 
+0000023183 00000 n 
+0000023270 00000 n 
+0000023318 00000 n 
+0000023405 00000 n 
+0000023463 00000 n 
+0000023549 00000 n 
+0000023592 00000 n 
+0000023679 00000 n 
+0000023737 00000 n 
+0000023823 00000 n 
+0000023952 00000 n 
+0000024002 00000 n 
+0000024089 00000 n 
+0000024139 00000 n 
+0000024226 00000 n 
+0000024329 00000 n 
+0000024400 00000 n 
+0000024487 00000 n 
+0000024562 00000 n 
+0000024648 00000 n 
+0000024705 00000 n 
+0000024764 00000 n 
+0000024851 00000 n 
+0000024895 00000 n 
+0000024982 00000 n 
+0000025025 00000 n 
+0000025112 00000 n 
+0000025153 00000 n 
+0000025201 00000 n 
+0000025288 00000 n 
+0000025336 00000 n 
+0000025421 00000 n 
+0000025485 00000 n 
+0000025572 00000 n 
+0000025618 00000 n 
+0000025704 00000 n 
+0000025759 00000 n 
+0000025845 00000 n 
+0000025904 00000 n 
+0000025990 00000 n 
+0000026061 00000 n 
+0000026147 00000 n 
+0000026201 00000 n 
+0000026288 00000 n 
+0000026346 00000 n 
+0000026432 00000 n 
+0000026475 00000 n 
+0000026562 00000 n 
+0000026759 00000 n 
+0000026843 00000 n 
+0000026948 00000 n 
+0000027025 00000 n 
+0000027111 00000 n 
+0000027178 00000 n 
+0000027264 00000 n 
+0000027331 00000 n 
+0000027417 00000 n 
+0000027476 00000 n 
+0000027562 00000 n 
+0000027621 00000 n 
+0000027707 00000 n 
+0000027779 00000 n 
+0000027865 00000 n 
+0000027913 00000 n 
+0000028000 00000 n 
+0000028044 00000 n 
+0000028131 00000 n 
+0000028202 00000 n 
+0000028288 00000 n 
+0000028352 00000 n 
+0000028439 00000 n 
+0000028510 00000 n 
+0000028597 00000 n 
+0000028666 00000 n 
+0000028753 00000 n 
+0000028866 00000 n 
+0000028911 00000 n 
+0000028998 00000 n 
+0000029044 00000 n 
+0000029131 00000 n 
+0000029164 00000 n 
+0000029219 00000 n 
+0000029306 00000 n 
+0000029396 00000 n 
+0000029482 00000 n 
+0000029570 00000 n 
+0000029657 00000 n 
+0000029747 00000 n 
+0000029834 00000 n 
+0000029933 00000 n 
+0000030019 00000 n 
+0000030231 00000 n 
+0000030318 00000 n 
+0000030410 00000 n 
+0000030497 00000 n 
+0000030581 00000 n 
+0000030668 00000 n 
+0000030758 00000 n 
+0000030844 00000 n 
+0000031041 00000 n 
+0000031128 00000 n 
+0000031219 00000 n 
+0000031306 00000 n 
+0000031397 00000 n 
+0000031484 00000 n 
+0000031546 00000 n 
+0000031633 00000 n 
+0000031708 00000 n 
+0000031793 00000 n 
+0000031922 00000 n 
+0000031983 00000 n 
+0000032070 00000 n 
+0000032138 00000 n 
+0000032225 00000 n 
+0000032292 00000 n 
+0000032379 00000 n 
+0000032438 00000 n 
+0000032525 00000 n 
+0000032604 00000 n 
+0000032691 00000 n 
+0000032749 00000 n 
+0000032836 00000 n 
+0000032904 00000 n 
+0000032991 00000 n 
+0000033058 00000 n 
+0000033145 00000 n 
+0000033234 00000 n 
+0000033320 00000 n 
+0000033413 00000 n 
+0000033500 00000 n 
+0000033597 00000 n 
+0000033631 00000 n 
+0000033665 00000 n 
+0000035011 00000 n 
+0000035054 00000 n 
+0000035097 00000 n 
+0000035145 00000 n 
+0000035188 00000 n 
+0000035231 00000 n 
+0000035274 00000 n 
+0000035317 00000 n 
+0000035360 00000 n 
+0000035403 00000 n 
+0000035446 00000 n 
+0000035489 00000 n 
+0000035532 00000 n 
+0000035575 00000 n 
+0000035618 00000 n 
+0000035661 00000 n 
+0000035704 00000 n 
+0000035747 00000 n 
+0000035790 00000 n 
+0000035833 00000 n 
+0000035876 00000 n 
+0000035919 00000 n 
+0000035962 00000 n 
+0000036005 00000 n 
+0000036048 00000 n 
+0000036091 00000 n 
+0000036134 00000 n 
+0000036177 00000 n 
+0000036220 00000 n 
+0000036268 00000 n 
+0000036311 00000 n 
+0000036354 00000 n 
+0000036397 00000 n 
+0000036440 00000 n 
+0000036483 00000 n 
+0000036526 00000 n 
+0000036569 00000 n 
+0000036612 00000 n 
+0000036655 00000 n 
+0000036698 00000 n 
+0000036741 00000 n 
+0000036784 00000 n 
+0000036827 00000 n 
+0000036870 00000 n 
+0000036913 00000 n 
+0000036956 00000 n 
+0000036999 00000 n 
+0000037042 00000 n 
+0000037085 00000 n 
+0000037128 00000 n 
+0000037171 00000 n 
+0000037214 00000 n 
+0000037257 00000 n 
+0000037300 00000 n 
+0000037343 00000 n 
+0000037386 00000 n 
+0000037429 00000 n 
+0000037472 00000 n 
+0000037515 00000 n 
+0000037558 00000 n 
+0000037601 00000 n 
+0000037644 00000 n 
+0000037687 00000 n 
+0000037730 00000 n 
+0000037773 00000 n 
+0000037821 00000 n 
+0000037864 00000 n 
+0000037907 00000 n 
+0000037950 00000 n 
+0000037993 00000 n 
+0000038036 00000 n 
+0000038079 00000 n 
+0000038122 00000 n 
+0000038165 00000 n 
+0000038208 00000 n 
+0000038251 00000 n 
+0000038294 00000 n 
+0000038485 00000 n 
+0000038684 00000 n 
+0000050935 00000 n 
+0000051125 00000 n 
+0000068689 00000 n 
+0000068890 00000 n 
+0000074545 00000 n 
+0000074746 00000 n 
+0000079419 00000 n 
+0000079619 00000 n 
+0000084702 00000 n 
+0000084893 00000 n 
+0000089196 00000 n 
+0000089387 00000 n 
+0000094460 00000 n 
+0000094660 00000 n 
+0000102555 00000 n 
+0000102764 00000 n 
+0000111444 00000 n 
+0000111653 00000 n 
+0000117105 00000 n 
+0000117305 00000 n 
+0000122206 00000 n 
+0000122397 00000 n 
+0000126751 00000 n 
+0000126942 00000 n 
+0000131653 00000 n 
+0000131853 00000 n 
+0000136582 00000 n 
+0000136773 00000 n 
+0000141616 00000 n 
+0000141807 00000 n 
+0000146258 00000 n 
+0000146458 00000 n 
+0000151531 00000 n 
+0000151731 00000 n 
+0000156335 00000 n 
+trailer
+<</Size 508/Root 507 0 R/Info 1 0 R/ID[<977ba68cf88f3290367937a4ee67513d><977ba68cf88f3290367937a4ee67513d>]>>
+startxref
+156479
+%%EOF

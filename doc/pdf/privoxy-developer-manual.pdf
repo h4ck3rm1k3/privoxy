@@ -1,0 +1,3835 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj<</Producer(htmldoc 1.8.20 Copyright 1997-2002 Easy Software Products, All Rights Reserved.)/CreationDate(D:20020806221129+0400)/Title(Privoxy Developer Manual)/Creator(Modular DocBook HTML Stylesheet Version 1.76b+)>>endobj
+2 0 obj<</Type/Encoding/Differences[ 32/space/exclam/quotedbl/numbersign/dollar/percent/ampersand/quotesingle/parenleft/parenright/asterisk/plus/comma/minus/period/slash/zero/one/two/three/four/five/six/seven/eight/nine/colon/semicolon/less/equal/greater/question/at/A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash/bracketright/asciicircum/underscore/grave/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/asciitilde 128/Euro 130/quotesinglbase/florin/quotedblbase/ellipsis/dagger/daggerdbl/circumflex/perthousand/Scaron/guilsinglleft/OE 145/quoteleft/quoteright/quotedblleft/quotedblright/bullet/endash/emdash/tilde/trademark/scaron/guilsinglright/oe 159/Ydieresis/space/exclamdown/cent/sterling/currency/yen/brokenbar/section/dieresis/copyright/ordfeminine/guillemotleft/logicalnot/hyphen/registered/macron/degree/plusminus/twosuperior/threesuperior/acute/mu/paragraph/periodcentered/cedilla/onesuperior/ordmasculine/guillemotright/onequarter/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde/Adieresis/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex/udieresis/yacute/thorn/ydieresis]>>endobj
+3 0 obj<</Type/Font/Subtype/Type1/BaseFont/Courier/Encoding 2 0 R>>endobj
+4 0 obj<</Type/Font/Subtype/Type1/BaseFont/Courier-Oblique/Encoding 2 0 R>>endobj
+5 0 obj<</Type/Font/Subtype/Type1/BaseFont/Times-Roman/Encoding 2 0 R>>endobj
+6 0 obj<</Type/Font/Subtype/Type1/BaseFont/Times-Bold/Encoding 2 0 R>>endobj
+7 0 obj<</Type/Font/Subtype/Type1/BaseFont/Times-Italic/Encoding 2 0 R>>endobj
+8 0 obj<</Type/Font/Subtype/Type1/BaseFont/Times-BoldItalic/Encoding 2 0 R>>endobj
+9 0 obj<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding 2 0 R>>endobj
+10 0 obj<</Type/Font/Subtype/Type1/BaseFont/Helvetica-Bold/Encoding 2 0 R>>endobj
+11 0 obj<</Type/Font/Subtype/Type1/BaseFont/Symbol>>endobj
+12 0 obj<</Subtype/Link/Rect[36.0 685.3 68.4 695.3]/Border[0 0 0]/Dest[394 0 R/XYZ 0 249 0]>>endobj
+13 0 obj<</S/URI/URI(http://www.privoxy.org)>>endobj
+14 0 obj<</Subtype/Link/Rect[124.5 685.3 190.3 695.3]/Border[0 0 0]/A 13 0 R>>endobj
+15 0 obj<</S/URI/URI(http://www.privoxy.org/developer-manual/)>>endobj
+16 0 obj<</Subtype/Link/Rect[263.3 578.2 458.6 591.2]/Border[0 0 0]/A 15 0 R>>endobj
+17 0 obj<</Subtype/Link/Rect[509.0 578.2 562.2 591.2]/Border[0 0 0]/Dest[392 0 R/XYZ 0 282 0]>>endobj
+18 0 obj<</Subtype/Link/Rect[36.0 565.0 67.2 578.0]/Border[0 0 0]/Dest[392 0 R/XYZ 0 282 0]>>endobj
+19 0 obj<</Subtype/Link/Rect[44.2 510.2 102.0 523.2]/Border[0 0 0]/Dest[332 0 R/XYZ 0 681 0]>>endobj
+20 0 obj<</Subtype/Link/Rect[88.5 497.0 246.7 510.0]/Border[0 0 0]/Dest[332 0 R/XYZ 0 566 0]>>endobj
+21 0 obj<</Subtype/Link/Rect[44.2 483.8 136.2 496.8]/Border[0 0 0]/Dest[332 0 R/XYZ 0 468 0]>>endobj
+22 0 obj<</Subtype/Link/Rect[88.5 470.6 154.8 483.6]/Border[0 0 0]/Dest[332 0 R/XYZ 0 393 0]>>endobj
+23 0 obj<</Subtype/Link/Rect[88.5 457.4 194.5 470.4]/Border[0 0 0]/Dest[332 0 R/XYZ 0 308 0]>>endobj
+24 0 obj<</Subtype/Link/Rect[88.5 444.2 204.9 457.2]/Border[0 0 0]/Dest[334 0 R/XYZ 0 734 0]>>endobj
+25 0 obj<</Subtype/Link/Rect[44.2 431.0 165.2 444.0]/Border[0 0 0]/Dest[334 0 R/XYZ 0 556 0]>>endobj
+26 0 obj<</Subtype/Link/Rect[88.5 417.8 242.2 430.8]/Border[0 0 0]/Dest[336 0 R/XYZ 0 705 0]>>endobj
+27 0 obj<</Subtype/Link/Rect[88.5 404.6 220.2 417.6]/Border[0 0 0]/Dest[336 0 R/XYZ 0 193 0]>>endobj
+28 0 obj<</Subtype/Link/Rect[88.5 391.4 198.2 404.4]/Border[0 0 0]/Dest[338 0 R/XYZ 0 177 0]>>endobj
+29 0 obj<</Subtype/Link/Rect[44.2 378.2 129.8 391.2]/Border[0 0 0]/Dest[340 0 R/XYZ 0 425 0]>>endobj
+30 0 obj<</Subtype/Link/Rect[88.5 365.0 146.2 378.0]/Border[0 0 0]/Dest[340 0 R/XYZ 0 392 0]>>endobj
+31 0 obj<</Subtype/Link/Rect[88.5 351.8 166.7 364.8]/Border[0 0 0]/Dest[340 0 R/XYZ 0 267 0]>>endobj
+32 0 obj<</Subtype/Link/Rect[132.8 338.6 273.0 351.6]/Border[0 0 0]/Dest[340 0 R/XYZ 0 237 0]>>endobj
+33 0 obj<</Subtype/Link/Rect[132.8 325.4 245.8 338.4]/Border[0 0 0]/Dest[342 0 R/XYZ 0 553 0]>>endobj
+34 0 obj<</Subtype/Link/Rect[132.8 312.2 284.9 325.2]/Border[0 0 0]/Dest[344 0 R/XYZ 0 734 0]>>endobj
+35 0 obj<</Subtype/Link/Rect[132.8 299.0 255.0 312.0]/Border[0 0 0]/Dest[344 0 R/XYZ 0 190 0]>>endobj
+36 0 obj<</Subtype/Link/Rect[132.8 285.8 294.1 298.8]/Border[0 0 0]/Dest[346 0 R/XYZ 0 718 0]>>endobj
+37 0 obj<</Subtype/Link/Rect[132.8 272.6 465.5 285.6]/Border[0 0 0]/Dest[346 0 R/XYZ 0 571 0]>>endobj
+38 0 obj<</Subtype/Link/Rect[88.5 259.4 183.8 272.4]/Border[0 0 0]/Dest[346 0 R/XYZ 0 228 0]>>endobj
+39 0 obj<</Subtype/Link/Rect[132.8 246.2 206.7 259.2]/Border[0 0 0]/Dest[346 0 R/XYZ 0 198 0]>>endobj
+40 0 obj<</Subtype/Link/Rect[132.8 233.0 207.9 246.0]/Border[0 0 0]/Dest[348 0 R/XYZ 0 651 0]>>endobj
+41 0 obj<</Subtype/Link/Rect[132.8 219.8 234.5 232.8]/Border[0 0 0]/Dest[348 0 R/XYZ 0 425 0]>>endobj
+42 0 obj<</Subtype/Link/Rect[132.8 206.6 258.6 219.6]/Border[0 0 0]/Dest[348 0 R/XYZ 0 191 0]>>endobj
+43 0 obj<</Subtype/Link/Rect[132.8 193.4 179.5 206.4]/Border[0 0 0]/Dest[350 0 R/XYZ 0 557 0]>>endobj
+44 0 obj<</Subtype/Link/Rect[88.5 180.2 146.5 193.2]/Border[0 0 0]/Dest[350 0 R/XYZ 0 273 0]>>endobj
+45 0 obj<</Subtype/Link/Rect[132.8 167.0 290.4 180.0]/Border[0 0 0]/Dest[350 0 R/XYZ 0 243 0]>>endobj
+46 0 obj<</Subtype/Link/Rect[132.8 153.8 328.6 166.8]/Border[0 0 0]/Dest[352 0 R/XYZ 0 442 0]>>endobj
+47 0 obj<</Subtype/Link/Rect[132.8 140.6 337.9 153.6]/Border[0 0 0]/Dest[354 0 R/XYZ 0 734 0]>>endobj
+48 0 obj<</Subtype/Link/Rect[132.8 127.4 311.8 140.4]/Border[0 0 0]/Dest[354 0 R/XYZ 0 559 0]>>endobj
+49 0 obj<</Subtype/Link/Rect[132.8 114.2 354.2 127.2]/Border[0 0 0]/Dest[354 0 R/XYZ 0 349 0]>>endobj
+50 0 obj<</Subtype/Link/Rect[132.8 101.0 324.3 114.0]/Border[0 0 0]/Dest[354 0 R/XYZ 0 126 0]>>endobj
+51 0 obj<</Subtype/Link/Rect[132.8 87.8 255.0 100.8]/Border[0 0 0]/Dest[356 0 R/XYZ 0 464 0]>>endobj
+52 0 obj<</Subtype/Link/Rect[88.5 74.6 139.5 87.6]/Border[0 0 0]/Dest[358 0 R/XYZ 0 734 0]>>endobj
+53 0 obj<</Subtype/Link/Rect[132.8 61.4 232.7 74.4]/Border[0 0 0]/Dest[358 0 R/XYZ 0 704 0]>>endobj
+54 0 obj[12 0 R
+14 0 R
+16 0 R
+17 0 R
+18 0 R
+19 0 R
+20 0 R
+21 0 R
+22 0 R
+23 0 R
+24 0 R
+25 0 R
+26 0 R
+27 0 R
+28 0 R
+29 0 R
+30 0 R
+31 0 R
+32 0 R
+33 0 R
+34 0 R
+35 0 R
+36 0 R
+37 0 R
+38 0 R
+39 0 R
+40 0 R
+41 0 R
+42 0 R
+43 0 R
+44 0 R
+45 0 R
+46 0 R
+47 0 R
+48 0 R
+49 0 R
+50 0 R
+51 0 R
+52 0 R
+53 0 R]endobj
+55 0 obj<</Subtype/Link/Rect[88.5 721.0 135.2 734.0]/Border[0 0 0]/Dest[358 0 R/XYZ 0 468 0]>>endobj
+56 0 obj<</Subtype/Link/Rect[132.8 707.8 364.4 720.8]/Border[0 0 0]/Dest[358 0 R/XYZ 0 438 0]>>endobj
+57 0 obj<</Subtype/Link/Rect[132.8 694.6 325.5 707.6]/Border[0 0 0]/Dest[358 0 R/XYZ 0 282 0]>>endobj
+58 0 obj<</Subtype/Link/Rect[132.8 681.4 388.8 694.4]/Border[0 0 0]/Dest[358 0 R/XYZ 0 187 0]>>endobj
+59 0 obj<</Subtype/Link/Rect[132.8 668.2 296.5 681.2]/Border[0 0 0]/Dest[360 0 R/XYZ 0 441 0]>>endobj
+60 0 obj<</Subtype/Link/Rect[132.8 655.0 249.8 668.0]/Border[0 0 0]/Dest[360 0 R/XYZ 0 294 0]>>endobj
+61 0 obj<</Subtype/Link/Rect[132.8 641.8 233.0 654.8]/Border[0 0 0]/Dest[360 0 R/XYZ 0 160 0]>>endobj
+62 0 obj<</Subtype/Link/Rect[132.8 628.6 300.2 641.6]/Border[0 0 0]/Dest[362 0 R/XYZ 0 563 0]>>endobj
+63 0 obj<</Subtype/Link/Rect[132.8 615.4 290.8 628.4]/Border[0 0 0]/Dest[362 0 R/XYZ 0 356 0]>>endobj
+64 0 obj<</Subtype/Link/Rect[132.8 602.2 440.1 615.2]/Border[0 0 0]/Dest[364 0 R/XYZ 0 734 0]>>endobj
+65 0 obj<</Subtype/Link/Rect[88.5 589.0 206.7 602.0]/Border[0 0 0]/Dest[364 0 R/XYZ 0 490 0]>>endobj
+66 0 obj<</Subtype/Link/Rect[132.8 575.8 214.3 588.8]/Border[0 0 0]/Dest[364 0 R/XYZ 0 460 0]>>endobj
+67 0 obj<</Subtype/Link/Rect[132.8 562.6 344.2 575.6]/Border[0 0 0]/Dest[364 0 R/XYZ 0 365 0]>>endobj
+68 0 obj<</Subtype/Link/Rect[132.8 549.4 383.0 562.4]/Border[0 0 0]/Dest[366 0 R/XYZ 0 626 0]>>endobj
+69 0 obj<</Subtype/Link/Rect[132.8 536.2 287.7 549.2]/Border[0 0 0]/Dest[366 0 R/XYZ 0 426 0]>>endobj
+70 0 obj<</Subtype/Link/Rect[132.8 523.0 276.9 536.0]/Border[0 0 0]/Dest[366 0 R/XYZ 0 292 0]>>endobj
+71 0 obj<</Subtype/Link/Rect[132.8 509.8 350.9 522.8]/Border[0 0 0]/Dest[366 0 R/XYZ 0 184 0]>>endobj
+72 0 obj<</Subtype/Link/Rect[132.8 496.6 258.9 509.6]/Border[0 0 0]/Dest[368 0 R/XYZ 0 535 0]>>endobj
+73 0 obj<</Subtype/Link/Rect[132.8 483.4 445.3 496.4]/Border[0 0 0]/Dest[368 0 R/XYZ 0 363 0]>>endobj
+74 0 obj<</Subtype/Link/Rect[132.8 470.2 358.5 483.2]/Border[0 0 0]/Dest[370 0 R/XYZ 0 734 0]>>endobj
+75 0 obj<</Subtype/Link/Rect[138.2 457.0 437.4 470.0]/Border[0 0 0]/Dest[370 0 R/XYZ 0 599 0]>>endobj
+76 0 obj<</Subtype/Link/Rect[88.5 443.8 357.4 456.8]/Border[0 0 0]/Dest[370 0 R/XYZ 0 320 0]>>endobj
+77 0 obj<</Subtype/Link/Rect[44.2 430.6 129.8 443.6]/Border[0 0 0]/Dest[376 0 R/XYZ 0 705 0]>>endobj
+78 0 obj<</Subtype/Link/Rect[88.5 417.4 183.5 430.4]/Border[0 0 0]/Dest[376 0 R/XYZ 0 643 0]>>endobj
+79 0 obj<</Subtype/Link/Rect[88.5 404.2 144.1 417.2]/Border[0 0 0]/Dest[376 0 R/XYZ 0 400 0]>>endobj
+80 0 obj<</Subtype/Link/Rect[44.2 391.0 157.9 404.0]/Border[0 0 0]/Dest[376 0 R/XYZ 0 262 0]>>endobj
+81 0 obj<</Subtype/Link/Rect[88.5 377.8 166.1 390.8]/Border[0 0 0]/Dest[378 0 R/XYZ 0 734 0]>>endobj
+82 0 obj<</Subtype/Link/Rect[88.5 364.6 210.1 377.6]/Border[0 0 0]/Dest[378 0 R/XYZ 0 411 0]>>endobj
+83 0 obj<</Subtype/Link/Rect[88.5 351.4 255.6 364.4]/Border[0 0 0]/Dest[380 0 R/XYZ 0 734 0]>>endobj
+84 0 obj<</Subtype/Link/Rect[132.8 338.2 256.8 351.2]/Border[0 0 0]/Dest[380 0 R/XYZ 0 484 0]>>endobj
+85 0 obj<</Subtype/Link/Rect[132.8 325.0 201.8 338.0]/Border[0 0 0]/Dest[382 0 R/XYZ 0 626 0]>>endobj
+86 0 obj<</Subtype/Link/Rect[132.8 311.8 285.8 324.8]/Border[0 0 0]/Dest[382 0 R/XYZ 0 373 0]>>endobj
+87 0 obj<</Subtype/Link/Rect[132.8 298.6 157.5 311.6]/Border[0 0 0]/Dest[384 0 R/XYZ 0 665 0]>>endobj
+88 0 obj<</Subtype/Link/Rect[132.8 285.4 166.7 298.4]/Border[0 0 0]/Dest[384 0 R/XYZ 0 277 0]>>endobj
+89 0 obj<</Subtype/Link/Rect[132.8 272.2 175.8 285.2]/Border[0 0 0]/Dest[386 0 R/XYZ 0 679 0]>>endobj
+90 0 obj<</Subtype/Link/Rect[132.8 259.0 167.9 272.0]/Border[0 0 0]/Dest[386 0 R/XYZ 0 414 0]>>endobj
+91 0 obj<</Subtype/Link/Rect[132.8 245.8 178.0 258.8]/Border[0 0 0]/Dest[386 0 R/XYZ 0 198 0]>>endobj
+92 0 obj<</Subtype/Link/Rect[132.8 232.6 176.4 245.6]/Border[0 0 0]/Dest[388 0 R/XYZ 0 532 0]>>endobj
+93 0 obj<</Subtype/Link/Rect[138.2 219.4 191.5 232.4]/Border[0 0 0]/Dest[388 0 R/XYZ 0 266 0]>>endobj
+94 0 obj<</Subtype/Link/Rect[138.2 206.2 185.9 219.2]/Border[0 0 0]/Dest[388 0 R/XYZ 0 134 0]>>endobj
+95 0 obj<</Subtype/Link/Rect[138.2 193.0 158.1 206.0]/Border[0 0 0]/Dest[390 0 R/XYZ 0 667 0]>>endobj
+96 0 obj<</Subtype/Link/Rect[88.5 179.8 268.5 192.8]/Border[0 0 0]/Dest[390 0 R/XYZ 0 401 0]>>endobj
+97 0 obj<</Subtype/Link/Rect[88.5 166.6 166.4 179.6]/Border[0 0 0]/Dest[392 0 R/XYZ 0 734 0]>>endobj
+98 0 obj<</Subtype/Link/Rect[44.2 153.4 145.4 166.4]/Border[0 0 0]/Dest[392 0 R/XYZ 0 649 0]>>endobj
+99 0 obj<</Subtype/Link/Rect[44.2 140.2 331.1 153.2]/Border[0 0 0]/Dest[392 0 R/XYZ 0 282 0]>>endobj
+100 0 obj<</Subtype/Link/Rect[88.5 127.0 144.7 140.0]/Border[0 0 0]/Dest[392 0 R/XYZ 0 186 0]>>endobj
+101 0 obj<</Subtype/Link/Rect[88.5 113.8 145.9 126.8]/Border[0 0 0]/Dest[394 0 R/XYZ 0 734 0]>>endobj
+102 0 obj<</Subtype/Link/Rect[88.5 100.6 190.2 113.6]/Border[0 0 0]/Dest[394 0 R/XYZ 0 530 0]>>endobj
+103 0 obj<</Subtype/Link/Rect[88.5 87.4 303.1 100.4]/Border[0 0 0]/Dest[394 0 R/XYZ 0 458 0]>>endobj
+104 0 obj<</Subtype/Link/Rect[88.5 74.2 116.9 87.2]/Border[0 0 0]/Dest[394 0 R/XYZ 0 334 0]>>endobj
+105 0 obj<</Subtype/Link/Rect[44.2 61.0 222.7 74.0]/Border[0 0 0]/Dest[394 0 R/XYZ 0 249 0]>>endobj
+106 0 obj[55 0 R
+56 0 R
+57 0 R
+58 0 R
+59 0 R
+60 0 R
+61 0 R
+62 0 R
+63 0 R
+64 0 R
+65 0 R
+66 0 R
+67 0 R
+68 0 R
+69 0 R
+70 0 R
+71 0 R
+72 0 R
+73 0 R
+74 0 R
+75 0 R
+76 0 R
+77 0 R
+78 0 R
+79 0 R
+80 0 R
+81 0 R
+82 0 R
+83 0 R
+84 0 R
+85 0 R
+86 0 R
+87 0 R
+88 0 R
+89 0 R
+90 0 R
+91 0 R
+92 0 R
+93 0 R
+94 0 R
+95 0 R
+96 0 R
+97 0 R
+98 0 R
+99 0 R
+100 0 R
+101 0 R
+102 0 R
+103 0 R
+104 0 R
+105 0 R]endobj
+107 0 obj<</Subtype/Link/Rect[88.5 721.0 124.9 734.0]/Border[0 0 0]/Dest[394 0 R/XYZ 0 147 0]>>endobj
+108 0 obj<</Subtype/Link/Rect[88.5 707.8 124.2 720.8]/Border[0 0 0]/Dest[396 0 R/XYZ 0 573 0]>>endobj
+109 0 obj<</Subtype/Link/Rect[49.8 694.6 88.9 707.6]/Border[0 0 0]/Dest[396 0 R/XYZ 0 303 0]>>endobj
+110 0 obj<</S/URI/URI(http://sourceforge.net/)>>endobj
+111 0 obj<</Subtype/Link/Rect[150.4 523.4 206.9 536.4]/Border[0 0 0]/A 110 0 R>>endobj
+112 0 obj<</S/URI/URI(mailto:developers@privoxy.org)>>endobj
+113 0 obj<</Subtype/Link/Rect[405.8 523.4 438.2 536.4]/Border[0 0 0]/A 112 0 R>>endobj
+114 0 obj<</S/URI/URI(http://sourceforge.net/)>>endobj
+115 0 obj<</Subtype/Link/Rect[219.5 350.2 281.2 363.2]/Border[0 0 0]/A 114 0 R>>endobj
+116 0 obj<</S/URI/URI(http://sourceforge.net/docman/?group_id=1)>>endobj
+117 0 obj<</Subtype/Link/Rect[448.9 350.2 556.3 363.2]/Border[0 0 0]/A 116 0 R>>endobj
+118 0 obj[107 0 R
+108 0 R
+109 0 R
+111 0 R
+113 0 R
+115 0 R
+117 0 R]endobj
+119 0 obj<</S/URI/URI(mailto:developers@privoxy.org)>>endobj
+120 0 obj<</Subtype/Link/Rect[151.1 625.0 200.9 638.0]/Border[0 0 0]/A 119 0 R>>endobj
+121 0 obj<</S/URI/URI(mailto:developers@privoxy.org)>>endobj
+122 0 obj<</Subtype/Link/Rect[263.2 611.8 313.0 624.8]/Border[0 0 0]/A 121 0 R>>endobj
+123 0 obj<</S/URI/URI(http://sourceforge.net/tracker/?atid=311118&group_id=11118&func=browse)>>endobj
+124 0 obj<</Subtype/Link/Rect[187.6 572.2 256.6 585.2]/Border[0 0 0]/A 123 0 R>>endobj
+125 0 obj<</S/URI/URI(http://www.docbook.org)>>endobj
+126 0 obj<</Subtype/Link/Rect[36.0 497.0 76.3 510.0]/Border[0 0 0]/A 125 0 R>>endobj
+127 0 obj<</S/Launch/F(index.html)>>endobj
+128 0 obj<</Subtype/Link/Rect[423.1 483.8 485.2 496.8]/Border[0 0 0]/A 127 0 R>>endobj
+129 0 obj<</S/Launch/F(index.html)>>endobj
+130 0 obj<</Subtype/Link/Rect[487.9 483.8 512.1 496.8]/Border[0 0 0]/A 129 0 R>>endobj
+131 0 obj[120 0 R
+122 0 R
+124 0 R
+126 0 R
+128 0 R
+130 0 R]endobj
+132 0 obj<</S/URI/URI(http://www.bureau-cornavin.com/opensource/crash-course/)>>endobj
+133 0 obj<</Subtype/Link/Rect[131.5 208.4 392.3 221.4]/Border[0 0 0]/A 132 0 R>>endobj
+134 0 obj[133 0 R]endobj
+135 0 obj<</S/URI/URI(http://sourceforge.net/tracker/?func=add&group_id=11118&atid=395005)>>endobj
+136 0 obj<</Subtype/Link/Rect[208.9 357.4 251.1 370.4]/Border[0 0 0]/A 135 0 R>>endobj
+137 0 obj[136 0 R]endobj
+138 0 obj<</S/URI/URI(http://sourceforge.net/project/showfiles.php?group_id=11118)>>endobj
+139 0 obj<</Subtype/Link/Rect[80.3 228.7 113.9 241.7]/Border[0 0 0]/A 138 0 R>>endobj
+140 0 obj[139 0 R]endobj
+141 0 obj<</S/URI/URI(http://www.xworkplace.org/)>>endobj
+142 0 obj<</Subtype/Link/Rect[144.5 519.4 198.5 532.4]/Border[0 0 0]/A 141 0 R>>endobj
+143 0 obj[142 0 R]endobj
+144 0 obj<</S/URI/URI(http://www.cygwin.com/)>>endobj
+145 0 obj<</Subtype/Link/Rect[315.9 639.8 428.6 652.8]/Border[0 0 0]/A 144 0 R>>endobj
+146 0 obj[145 0 R]endobj
+147 0 obj<</S/URI/URI(ftp://upload.sourceforge.net/incoming)>>endobj
+148 0 obj<</Subtype/Link/Rect[118.8 319.1 288.3 332.1]/Border[0 0 0]/A 147 0 R>>endobj
+149 0 obj<</S/URI/URI(http://sourceforge.net/project/admin/editpackages.php?group_id=11118)>>endobj
+150 0 obj<</Subtype/Link/Rect[127.0 239.9 445.8 252.9]/Border[0 0 0]/A 149 0 R>>endobj
+151 0 obj[148 0 R
+150 0 R]endobj
+152 0 obj<</S/URI/URI(mailto:ijbswa-announce@lists.sourceforge.net)>>endobj
+153 0 obj<</Subtype/Link/Rect[464.9 691.0 562.4 704.0]/Border[0 0 0]/A 152 0 R>>endobj
+154 0 obj<</S/URI/URI(http://sourceforge.net/project/showfiles.php?group_id=11118)>>endobj
+155 0 obj<</Subtype/Link/Rect[355.1 677.8 439.4 690.8]/Border[0 0 0]/A 154 0 R>>endobj
+156 0 obj<</S/URI/URI(http://www.privoxy.org/)>>endobj
+157 0 obj<</Subtype/Link/Rect[149.4 323.8 213.5 336.8]/Border[0 0 0]/A 156 0 R>>endobj
+158 0 obj<</S/URI/URI(http://sourceforge.net/)>>endobj
+159 0 obj<</Subtype/Link/Rect[203.1 143.4 262.1 156.4]/Border[0 0 0]/A 158 0 R>>endobj
+160 0 obj<</S/URI/URI(http://sourceforge.net/tracker/?group_id=11118&atid=211118)>>endobj
+161 0 obj<</Subtype/Link/Rect[36.0 130.2 309.6 143.2]/Border[0 0 0]/A 160 0 R>>endobj
+162 0 obj<</S/URI/URI(http://lists.sourceforge.net/lists/listinfo/ijbswa-users)>>endobj
+163 0 obj<</Subtype/Link/Rect[305.1 103.8 383.1 116.8]/Border[0 0 0]/A 162 0 R>>endobj
+164 0 obj[153 0 R
+155 0 R
+157 0 R
+159 0 R
+161 0 R
+163 0 R]endobj
+165 0 obj<</S/URI/URI(http://sourceforge.net/tracker/?group_id=11118&atid=111118)>>endobj
+166 0 obj<</Subtype/Link/Rect[262.1 691.0 538.4 704.0]/Border[0 0 0]/A 165 0 R>>endobj
+167 0 obj<</S/URI/URI(http://sourceforge.net/tracker/?func=add&group_id=11118&atid=111118)>>endobj
+168 0 obj<</Subtype/Link/Rect[61.4 651.4 118.2 664.4]/Border[0 0 0]/A 167 0 R>>endobj
+169 0 obj<</S/Launch/F(toggle?mini=y&set=disabled','ijbstatus','width=250,height=100,resizable=yes,scrollbars=no,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no'\).focus\(\)\);)>>endobj
+170 0 obj<</Subtype/Link/Rect[438.4 625.0 493.4 638.0]/Border[0 0 0]/A 169 0 R>>endobj
+171 0 obj<</S/URI/URI(http://www.privoxy.org/user-manual/appendix.html#ACTIONSANAT)>>endobj
+172 0 obj<</Subtype/Link/Rect[156.7 611.8 284.1 624.8]/Border[0 0 0]/A 171 0 R>>endobj
+173 0 obj<</S/URI/URI(http://www.privoxy.org/user-manual/installation.html)>>endobj
+174 0 obj<</Subtype/Link/Rect[150.6 559.0 277.4 572.0]/Border[0 0 0]/A 173 0 R>>endobj
+175 0 obj<</S/URI/URI(http://sourceforge.net/tracker/?atid=361118&group_id=11118)>>endobj
+176 0 obj<</Subtype/Link/Rect[43.9 474.2 320.3 487.2]/Border[0 0 0]/A 175 0 R>>endobj
+177 0 obj<</S/Launch/F(actions','Feedback','screenx='+w+',width='+w+',height='+h+',scrollbars=yes,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no'\).focus\(\)\);)>>endobj
+178 0 obj<</Subtype/Link/Rect[390.8 402.6 535.3 415.6]/Border[0 0 0]/A 177 0 R>>endobj
+179 0 obj<</S/URI/URI(http://lists.sourceforge.net/lists/listinfo/ijbswa-announce)>>endobj
+180 0 obj<</Subtype/Link/Rect[113.6 349.8 193.4 362.8]/Border[0 0 0]/A 179 0 R>>endobj
+181 0 obj<</S/URI/URI(http://sourceforge.net/project/showfiles.php?group_id=11118)>>endobj
+182 0 obj<</Subtype/Link/Rect[328.5 349.8 384.1 362.8]/Border[0 0 0]/A 181 0 R>>endobj
+183 0 obj<</S/URI/URI(http://sf.net/projects/ijbswa/)>>endobj
+184 0 obj<</Subtype/Link/Rect[413.4 349.8 470.2 362.8]/Border[0 0 0]/A 183 0 R>>endobj
+185 0 obj<</S/URI/URI(http://sourceforge.net/mail/?group_id=11118)>>endobj
+186 0 obj<</Subtype/Link/Rect[149.7 265.0 350.8 278.0]/Border[0 0 0]/A 185 0 R>>endobj
+187 0 obj<</S/URI/URI(mailto:developers@privoxy.org)>>endobj
+188 0 obj<</Subtype/Link/Rect[257.5 203.0 402.7 216.0]/Border[0 0 0]/A 187 0 R>>endobj
+189 0 obj[166 0 R
+168 0 R
+170 0 R
+172 0 R
+174 0 R
+176 0 R
+178 0 R
+180 0 R
+182 0 R
+184 0 R
+186 0 R
+188 0 R]endobj
+190 0 obj<</S/URI/URI(http://www.gnu.org/copyleft/gpl.html)>>endobj
+191 0 obj<</Subtype/Link/Rect[210.4 655.0 343.0 668.0]/Border[0 0 0]/A 190 0 R>>endobj
+192 0 obj<</S/URI/URI(http://www.junkbusters.com/ijb.html)>>endobj
+193 0 obj<</Subtype/Link/Rect[171.6 530.6 259.0 543.6]/Border[0 0 0]/A 192 0 R>>endobj
+194 0 obj<</S/URI/URI(http://www.junkbusters.com/)>>endobj
+195 0 obj<</Subtype/Link/Rect[384.6 530.6 495.2 543.6]/Border[0 0 0]/A 194 0 R>>endobj
+196 0 obj<</S/URI/URI(http://www.junkbusters.com/ijbdist.html#release)>>endobj
+197 0 obj<</Subtype/Link/Rect[242.2 464.6 275.5 477.6]/Border[0 0 0]/A 196 0 R>>endobj
+198 0 obj<</S/URI/URI(http://www.junkbusters.com)>>endobj
+199 0 obj<</Subtype/Link/Rect[342.1 464.6 452.7 477.6]/Border[0 0 0]/A 198 0 R>>endobj
+200 0 obj<</S/URI/URI(http://www.gnu.org/licenses/gpl.html)>>endobj
+201 0 obj<</Subtype/Link/Rect[142.6 451.4 166.1 464.4]/Border[0 0 0]/A 200 0 R>>endobj
+202 0 obj<</S/URI/URI(http://www.waldherr.org/junkbuster/)>>endobj
+203 0 obj<</Subtype/Link/Rect[223.3 425.0 372.1 438.0]/Border[0 0 0]/A 202 0 R>>endobj
+204 0 obj<</S/URI/URI(http://www.privoxy.org/user-manual/copyright.html#AUTHORS)>>endobj
+205 0 obj<</Subtype/Link/Rect[87.3 359.0 137.7 372.0]/Border[0 0 0]/A 204 0 R>>endobj
+206 0 obj<</S/URI/URI(http://www.privoxy.org/user-manual/introduction.html#FEATURES)>>endobj
+207 0 obj<</Subtype/Link/Rect[161.9 345.8 220.5 358.8]/Border[0 0 0]/A 206 0 R>>endobj
+208 0 obj<</S/URI/URI(http://www.privoxy.org/)>>endobj
+209 0 obj<</Subtype/Link/Rect[37.6 229.4 145.1 242.4]/Border[0 0 0]/A 208 0 R>>endobj
+210 0 obj<</S/URI/URI(http://www.privoxy.org/faq/)>>endobj
+211 0 obj<</Subtype/Link/Rect[37.6 199.8 162.3 212.8]/Border[0 0 0]/A 210 0 R>>endobj
+212 0 obj<</S/URI/URI(http://sourceforge.net/projects/ijbswa/)>>endobj
+213 0 obj<</Subtype/Link/Rect[37.6 170.3 204.7 183.3]/Border[0 0 0]/A 212 0 R>>endobj
+214 0 obj<</S/URI/URI(http://sourceforge.net)>>endobj
+215 0 obj<</Subtype/Link/Rect[348.6 170.3 407.6 183.3]/Border[0 0 0]/A 214 0 R>>endobj
+216 0 obj<</S/URI/URI(http://config.privoxy.org/)>>endobj
+217 0 obj<</Subtype/Link/Rect[37.6 140.7 149.4 153.7]/Border[0 0 0]/A 216 0 R>>endobj
+218 0 obj<</S/URI/URI(http://p.p/)>>endobj
+219 0 obj<</Subtype/Link/Rect[514.3 140.7 560.2 153.7]/Border[0 0 0]/A 218 0 R>>endobj
+220 0 obj<</S/Launch/F(actions','Feedback','screenx='+w+',width='+w+',height='+h+',scrollbars=yes,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no'\).focus\(\)\);)>>endobj
+221 0 obj<</Subtype/Link/Rect[37.6 111.1 179.4 124.1]/Border[0 0 0]/A 220 0 R>>endobj
+222 0 obj<</S/URI/URI(http://www.junkbusters.com/ht/en/cookies.html)>>endobj
+223 0 obj<</Subtype/Link/Rect[37.6 81.5 247.5 94.5]/Border[0 0 0]/A 222 0 R>>endobj
+224 0 obj[191 0 R
+193 0 R
+195 0 R
+197 0 R
+199 0 R
+201 0 R
+203 0 R
+205 0 R
+207 0 R
+209 0 R
+211 0 R
+213 0 R
+215 0 R
+217 0 R
+219 0 R
+221 0 R
+223 0 R]endobj
+225 0 obj<</S/URI/URI(http://www.junkbusters.com/ijb.html)>>endobj
+226 0 obj<</Subtype/Link/Rect[37.6 719.4 200.5 732.4]/Border[0 0 0]/A 225 0 R>>endobj
+227 0 obj<</S/URI/URI(http://www.waldherr.org/junkbuster/)>>endobj
+228 0 obj<</Subtype/Link/Rect[37.6 689.8 199.5 702.8]/Border[0 0 0]/A 227 0 R>>endobj
+229 0 obj<</S/URI/URI(http://privacy.net/analyze/)>>endobj
+230 0 obj<</Subtype/Link/Rect[37.6 660.3 152.8 673.3]/Border[0 0 0]/A 229 0 R>>endobj
+231 0 obj<</S/URI/URI(http://www.squid-cache.org/)>>endobj
+232 0 obj<</Subtype/Link/Rect[37.6 630.7 166.0 643.7]/Border[0 0 0]/A 231 0 R>>endobj
+233 0 obj<</S/URI/URI(http://www.privoxy.org/developer-manual/)>>endobj
+234 0 obj<</Subtype/Link/Rect[37.6 601.1 230.2 614.1]/Border[0 0 0]/A 233 0 R>>endobj
+235 0 obj[226 0 R
+228 0 R
+230 0 R
+232 0 R
+234 0 R]endobj
+236 0 obj<</Dests 237 0 R>>endobj
+237 0 obj<</Kids[238 0 R]>>endobj
+238 0 obj<</Limits[(aen1138)(webserver-update)]/Names[(aen1138)239 0 R(aen1154)240 0 R(aen2)241 0 R(aen217)242 0 R(aen9)243 0 R(afterrelease)244 0 R(beforerelease)245 0 R(coding)246 0 R(contact)247 0 R(contact-ads)248 0 R(contact-bugs)249 0 R(contact-feature)250 0 R(contact-other)251 0 R(contact-support)252 0 R(copyright)253 0 R(cvs)254 0 R(cvsaccess)255 0 R(cvscommit)256 0 R(cvswhenask)257 0 R(docstyle)258 0 R(documentation)259 0 R(introduction)260 0 R(newrelease)261 0 R(newrelease-aix)262 0 R(newrelease-amiga)263 0 R(newrelease-debian)264 0 R(newrelease-freebsd)265 0 R(newrelease-hpux)266 0 R(newrelease-macosx)267 0 R(newrelease-os2)268 0 R(newrelease-rpm)269 0 R(newrelease-solaris)270 0 R(newrelease-tarball)271 0 R(newrelease-windows)272 0 R(pack-guidelines)273 0 R(privoxy-developer-manual.html)274 0 R(quickstart)275 0 R(releasing)276 0 R(s1)277 0 R(s10)278 0 R(s11)279 0 R(s12)280 0 R(s13)281 0 R(s14)282 0 R(s15)283 0 R(s16)284 0 R(s17)285 0 R(s18)286 0 R(s19)287 0 R(s2)288 0 R(s20)289 0 R(s21)290 0 R(s22)291 0 R(s23)292 0 R(s24)293 0 R(s25)294 0 R(s26)295 0 R(s27)296 0 R(s28)297 0 R(s29)298 0 R(s3)299 0 R(s30)300 0 R(s31)301 0 R(s32)302 0 R(s33)303 0 R(s34)304 0 R(s35)305 0 R(s36)306 0 R(s37)307 0 R(s38)308 0 R(s39)309 0 R(s4)310 0 R(s40)311 0 R(s41)312 0 R(s42)313 0 R(s43)314 0 R(s44)315 0 R(s45)316 0 R(s46)317 0 R(s5)318 0 R(s6)319 0 R(s7)320 0 R(s8)321 0 R(s9)322 0 R(seealso)323 0 R(sgml)324 0 R(testing)325 0 R(testing-plan)326 0 R(testing-report)327 0 R(therelease)328 0 R(versionnumbers)329 0 R(webserver-update)330 0 R]>>endobj
+239 0 obj<</D[396 0 R/XYZ 0 147 0]>>endobj
+240 0 obj<</D[398 0 R/XYZ 0 573 0]>>endobj
+241 0 obj<</D[-691616724 0 R/XYZ 0 0 0]>>endobj
+242 0 obj<</D[340 0 R/XYZ 0 177 0]>>endobj
+243 0 obj<</D[-691616724 0 R/XYZ 0 0 0]>>endobj
+244 0 obj<</D[394 0 R/XYZ 0 734 0]>>endobj
+245 0 obj<</D[380 0 R/XYZ 0 411 0]>>endobj
+246 0 obj<</D[342 0 R/XYZ 0 425 0]>>endobj
+247 0 obj<</D[394 0 R/XYZ 0 282 0]>>endobj
+248 0 obj<</D[396 0 R/XYZ 0 458 0]>>endobj
+249 0 obj<</D[396 0 R/XYZ 0 734 0]>>endobj
+250 0 obj<</D[396 0 R/XYZ 0 530 0]>>endobj
+251 0 obj<</D[396 0 R/XYZ 0 334 0]>>endobj
+252 0 obj<</D[394 0 R/XYZ 0 186 0]>>endobj
+253 0 obj<</D[396 0 R/XYZ 0 249 0]>>endobj
+254 0 obj<</D[334 0 R/XYZ 0 468 0]>>endobj
+255 0 obj<</D[334 0 R/XYZ 0 393 0]>>endobj
+256 0 obj<</D[334 0 R/XYZ 0 308 0]>>endobj
+257 0 obj<</D[336 0 R/XYZ 0 734 0]>>endobj
+258 0 obj<</D[338 0 R/XYZ 0 193 0]>>endobj
+259 0 obj<</D[336 0 R/XYZ 0 556 0]>>endobj
+260 0 obj<</D[334 0 R/XYZ 0 681 0]>>endobj
+261 0 obj<</D[378 0 R/XYZ 0 262 0]>>endobj
+262 0 obj<</D[392 0 R/XYZ 0 667 0]>>endobj
+263 0 obj<</D[390 0 R/XYZ 0 134 0]>>endobj
+264 0 obj<</D[388 0 R/XYZ 0 414 0]>>endobj
+265 0 obj<</D[390 0 R/XYZ 0 532 0]>>endobj
+266 0 obj<</D[390 0 R/XYZ 0 266 0]>>endobj
+267 0 obj<</D[388 0 R/XYZ 0 198 0]>>endobj
+268 0 obj<</D[386 0 R/XYZ 0 665 0]>>endobj
+269 0 obj<</D[384 0 R/XYZ 0 373 0]>>endobj
+270 0 obj<</D[386 0 R/XYZ 0 277 0]>>endobj
+271 0 obj<</D[384 0 R/XYZ 0 626 0]>>endobj
+272 0 obj<</D[388 0 R/XYZ 0 679 0]>>endobj
+273 0 obj<</D[382 0 R/XYZ 0 484 0]>>endobj
+274 0 obj<</D[-691616724 0 R/XYZ 0 0 0]>>endobj
+275 0 obj<</D[334 0 R/XYZ 0 566 0]>>endobj
+276 0 obj<</D[392 0 R/XYZ 0 401 0]>>endobj
+277 0 obj<</D[342 0 R/XYZ 0 392 0]>>endobj
+278 0 obj<</D[348 0 R/XYZ 0 198 0]>>endobj
+279 0 obj<</D[350 0 R/XYZ 0 651 0]>>endobj
+280 0 obj<</D[350 0 R/XYZ 0 425 0]>>endobj
+281 0 obj<</D[350 0 R/XYZ 0 191 0]>>endobj
+282 0 obj<</D[352 0 R/XYZ 0 557 0]>>endobj
+283 0 obj<</D[352 0 R/XYZ 0 273 0]>>endobj
+284 0 obj<</D[352 0 R/XYZ 0 243 0]>>endobj
+285 0 obj<</D[354 0 R/XYZ 0 442 0]>>endobj
+286 0 obj<</D[356 0 R/XYZ 0 734 0]>>endobj
+287 0 obj<</D[356 0 R/XYZ 0 559 0]>>endobj
+288 0 obj<</D[342 0 R/XYZ 0 267 0]>>endobj
+289 0 obj<</D[356 0 R/XYZ 0 349 0]>>endobj
+290 0 obj<</D[356 0 R/XYZ 0 126 0]>>endobj
+291 0 obj<</D[358 0 R/XYZ 0 464 0]>>endobj
+292 0 obj<</D[360 0 R/XYZ 0 734 0]>>endobj
+293 0 obj<</D[360 0 R/XYZ 0 704 0]>>endobj
+294 0 obj<</D[360 0 R/XYZ 0 468 0]>>endobj
+295 0 obj<</D[360 0 R/XYZ 0 438 0]>>endobj
+296 0 obj<</D[360 0 R/XYZ 0 282 0]>>endobj
+297 0 obj<</D[360 0 R/XYZ 0 187 0]>>endobj
+298 0 obj<</D[362 0 R/XYZ 0 441 0]>>endobj
+299 0 obj<</D[342 0 R/XYZ 0 237 0]>>endobj
+300 0 obj<</D[362 0 R/XYZ 0 294 0]>>endobj
+301 0 obj<</D[362 0 R/XYZ 0 160 0]>>endobj
+302 0 obj<</D[364 0 R/XYZ 0 563 0]>>endobj
+303 0 obj<</D[364 0 R/XYZ 0 356 0]>>endobj
+304 0 obj<</D[366 0 R/XYZ 0 734 0]>>endobj
+305 0 obj<</D[366 0 R/XYZ 0 490 0]>>endobj
+306 0 obj<</D[366 0 R/XYZ 0 460 0]>>endobj
+307 0 obj<</D[366 0 R/XYZ 0 365 0]>>endobj
+308 0 obj<</D[368 0 R/XYZ 0 626 0]>>endobj
+309 0 obj<</D[368 0 R/XYZ 0 426 0]>>endobj
+310 0 obj<</D[344 0 R/XYZ 0 553 0]>>endobj
+311 0 obj<</D[368 0 R/XYZ 0 292 0]>>endobj
+312 0 obj<</D[368 0 R/XYZ 0 184 0]>>endobj
+313 0 obj<</D[370 0 R/XYZ 0 535 0]>>endobj
+314 0 obj<</D[370 0 R/XYZ 0 363 0]>>endobj
+315 0 obj<</D[372 0 R/XYZ 0 734 0]>>endobj
+316 0 obj<</D[372 0 R/XYZ 0 599 0]>>endobj
+317 0 obj<</D[372 0 R/XYZ 0 320 0]>>endobj
+318 0 obj<</D[346 0 R/XYZ 0 734 0]>>endobj
+319 0 obj<</D[346 0 R/XYZ 0 190 0]>>endobj
+320 0 obj<</D[348 0 R/XYZ 0 718 0]>>endobj
+321 0 obj<</D[348 0 R/XYZ 0 571 0]>>endobj
+322 0 obj<</D[348 0 R/XYZ 0 228 0]>>endobj
+323 0 obj<</D[398 0 R/XYZ 0 303 0]>>endobj
+324 0 obj<</D[338 0 R/XYZ 0 705 0]>>endobj
+325 0 obj<</D[378 0 R/XYZ 0 705 0]>>endobj
+326 0 obj<</D[378 0 R/XYZ 0 643 0]>>endobj
+327 0 obj<</D[378 0 R/XYZ 0 400 0]>>endobj
+328 0 obj<</D[382 0 R/XYZ 0 734 0]>>endobj
+329 0 obj<</D[380 0 R/XYZ 0 734 0]>>endobj
+330 0 obj<</D[394 0 R/XYZ 0 649 0]>>endobj
+331 0 obj<</Type/Pages/Count 36/Kids[332 0 R
+334 0 R
+336 0 R
+338 0 R
+340 0 R
+342 0 R
+344 0 R
+346 0 R
+348 0 R
+350 0 R
+352 0 R
+354 0 R
+356 0 R
+358 0 R
+360 0 R
+362 0 R
+364 0 R
+366 0 R
+368 0 R
+370 0 R
+372 0 R
+374 0 R
+376 0 R
+378 0 R
+380 0 R
+382 0 R
+384 0 R
+386 0 R
+388 0 R
+390 0 R
+392 0 R
+394 0 R
+396 0 R
+398 0 R
+400 0 R
+402 0 R
+]>>endobj
+332 0 obj<</Type/Page/Parent 331 0 R/Contents 333 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F4 5 0 R/F6 7 0 R/F7 8 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>/Annots 54 0 R>>endobj
+333 0 obj<</Length 8412      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+0.0 650.3 m 32.4 650.3 l S
+88.5 650.3 m 115.9 650.3 l S
+115.9 650.3 m 154.3 650.3 l S
+227.3 543.2 m 422.6 543.2 l S
+473.0 543.2 m 489.2 543.2 l S
+489.2 543.2 m 526.2 543.2 l S
+0.0 530.0 m 31.2 530.0 l S
+0.00 0.00 0.00 rg 0.0 520.2 540.0 2.0 re f
+8.2 475.2 m 66.0 475.2 l S
+52.5 462.0 m 101.7 462.0 l S
+101.7 462.0 m 113.0 462.0 l S
+113.0 462.0 m 150.0 462.0 l S
+150.0 462.0 m 210.7 462.0 l S
+8.2 448.8 m 27.5 448.8 l S
+27.5 448.8 m 49.8 448.8 l S
+49.8 448.8 m 100.2 448.8 l S
+52.5 435.6 m 85.2 435.6 l S
+85.2 435.6 m 96.5 435.6 l S
+96.5 435.6 m 118.8 435.6 l S
+52.5 422.4 m 74.8 422.4 l S
+74.8 422.4 m 112.4 422.4 l S
+112.4 422.4 m 158.5 422.4 l S
+52.5 409.2 m 103.5 409.2 l S
+103.5 409.2 m 144.8 409.2 l S
+144.8 409.2 m 168.9 409.2 l S
+8.2 396.0 m 78.8 396.0 l S
+78.8 396.0 m 129.2 396.0 l S
+52.5 382.8 m 101.7 382.8 l S
+101.7 382.8 m 113.0 382.8 l S
+113.0 382.8 m 155.5 382.8 l S
+155.5 382.8 m 174.7 382.8 l S
+174.7 382.8 m 206.2 382.8 l S
+52.5 369.6 m 89.5 369.6 l S
+89.5 369.6 m 160.0 369.6 l S
+160.0 369.6 m 184.2 369.6 l S
+52.5 356.4 m 89.5 356.4 l S
+89.5 356.4 m 125.8 356.4 l S
+125.8 356.4 m 162.2 356.4 l S
+8.2 343.2 m 43.4 343.2 l S
+43.4 343.2 m 93.8 343.2 l S
+52.5 330.0 m 110.2 330.0 l S
+52.5 316.8 m 81.5 316.8 l S
+81.5 316.8 m 130.7 316.8 l S
+96.8 303.6 m 144.4 303.6 l S
+144.4 303.6 m 192.1 303.6 l S
+192.1 303.6 m 237.0 303.6 l S
+96.8 290.4 m 116.6 290.4 l S
+116.6 290.4 m 147.5 290.4 l S
+147.5 290.4 m 163.0 290.4 l S
+163.0 290.4 m 209.8 290.4 l S
+96.8 277.2 m 122.1 277.2 l S
+122.1 277.2 m 171.3 277.2 l S
+171.3 277.2 m 185.0 277.2 l S
+185.0 277.2 m 208.6 277.2 l S
+208.6 277.2 m 229.7 277.2 l S
+229.7 277.2 m 248.9 277.2 l S
+96.8 264.0 m 141.7 264.0 l S
+141.7 264.0 m 165.2 264.0 l S
+165.2 264.0 m 198.5 264.0 l S
+198.5 264.0 m 219.0 264.0 l S
+96.8 250.8 m 141.7 250.8 l S
+141.7 250.8 m 157.2 250.8 l S
+157.2 250.8 m 204.0 250.8 l S
+204.0 250.8 m 258.1 250.8 l S
+96.8 237.6 m 141.7 237.6 l S
+141.7 237.6 m 153.0 237.6 l S
+153.0 237.6 m 169.2 237.6 l S
+169.2 237.6 m 187.8 237.6 l S
+187.8 237.6 m 199.1 237.6 l S
+199.1 237.6 m 231.2 237.6 l S
+231.2 237.6 m 240.0 237.6 l S
+240.0 237.6 m 256.2 237.6 l S
+256.2 237.6 m 291.4 237.6 l S
+291.4 237.6 m 301.5 237.6 l S
+301.5 237.6 m 326.8 237.6 l S
+326.8 237.6 m 349.1 237.6 l S
+349.1 237.6 m 367.8 237.6 l S
+367.8 237.6 m 399.2 237.6 l S
+399.2 237.6 m 429.5 237.6 l S
+52.5 224.4 m 90.1 224.4 l S
+90.1 224.4 m 147.8 224.4 l S
+96.8 211.2 m 138.0 211.2 l S
+138.0 211.2 m 170.7 211.2 l S
+96.8 198.0 m 139.2 198.0 l S
+139.2 198.0 m 171.9 198.0 l S
+96.8 184.8 m 132.5 184.8 l S
+132.5 184.8 m 149.3 184.8 l S
+149.3 184.8 m 198.5 184.8 l S
+96.8 171.6 m 164.0 171.6 l S
+164.0 171.6 m 183.2 171.6 l S
+183.2 171.6 m 222.6 171.6 l S
+96.8 158.4 m 143.5 158.4 l S
+52.5 145.2 m 81.5 145.2 l S
+81.5 145.2 m 110.5 145.2 l S
+96.8 132.0 m 114.8 132.0 l S
+114.8 132.0 m 146.9 132.0 l S
+146.9 132.0 m 160.6 132.0 l S
+160.6 132.0 m 168.9 132.0 l S
+168.9 132.0 m 188.1 132.0 l S
+188.1 132.0 m 201.2 132.0 l S
+201.2 132.0 m 254.4 132.0 l S
+96.8 118.8 m 118.5 118.8 l S
+118.5 118.8 m 153.0 118.8 l S
+153.0 118.8 m 202.2 118.8 l S
+202.2 118.8 m 234.3 118.8 l S
+234.3 118.8 m 257.8 118.8 l S
+257.8 118.8 m 266.0 118.8 l S
+266.0 118.8 m 292.6 118.8 l S
+96.8 105.6 m 112.9 105.6 l S
+112.9 105.6 m 129.8 105.6 l S
+129.8 105.6 m 209.6 105.6 l S
+209.6 105.6 m 247.8 105.6 l S
+247.8 105.6 m 301.9 105.6 l S
+96.8 92.4 m 116.6 92.4 l S
+116.6 92.4 m 143.2 92.4 l S
+143.2 92.4 m 171.0 92.4 l S
+171.0 92.4 m 198.8 92.4 l S
+198.8 92.4 m 237.0 92.4 l S
+237.0 92.4 m 245.8 92.4 l S
+245.8 92.4 m 255.9 92.4 l S
+255.9 92.4 m 275.8 92.4 l S
+96.8 79.2 m 123.9 79.2 l S
+123.9 79.2 m 141.3 79.2 l S
+141.3 79.2 m 167.9 79.2 l S
+167.9 79.2 m 195.7 79.2 l S
+195.7 79.2 m 230.2 79.2 l S
+230.2 79.2 m 272.7 79.2 l S
+272.7 79.2 m 318.2 79.2 l S
+96.8 66.0 m 123.9 66.0 l S
+123.9 66.0 m 140.1 66.0 l S
+140.1 66.0 m 158.8 66.0 l S
+158.8 66.0 m 186.6 66.0 l S
+186.6 66.0 m 197.9 66.0 l S
+197.9 66.0 m 206.1 66.0 l S
+206.1 66.0 m 244.9 66.0 l S
+244.9 66.0 m 271.5 66.0 l S
+271.5 66.0 m 288.3 66.0 l S
+96.8 52.8 m 116.6 52.8 l S
+116.6 52.8 m 124.9 52.8 l S
+124.9 52.8 m 170.4 52.8 l S
+170.4 52.8 m 219.0 52.8 l S
+52.5 39.6 m 103.5 39.6 l S
+96.8 26.4 m 138.6 26.4 l S
+138.6 26.4 m 153.0 26.4 l S
+153.0 26.4 m 196.7 26.4 l S
+BT
+/F9 20 Tf 0 678 Td 0.000 Tc(Privoxy Developer Manual)Tj
+0.00 0.00 1.00 rg /F4 8 Tf 0 -29.7 Td(Copyright)Tj
+0.00 0.00 0.00 rg ( \251 2001, 2002 by)Tj
+0.00 0.00 1.00 rg ( Privoxy Developers)Tj
+0.00 0.00 0.00 rg /F4 11 Tf 0 -24.9 Td($Id: developer-manual.sgml,v 1.46.2.4 2002/05/29 00:30:59 mal0rd Exp $)Tj
+0 -39.6 Td(The developer manual provides guidance on coding, testing, packaging, documentation and other issues of importance to)Tj
+0 -13.2 Td(those involved with Privoxy development. It is mandatory \(and helpful!\) reading for anyone who wants to join the team.)Tj
+0 -26.4 Td(You can find the latest version of the this manual at)Tj
+0.00 0.00 1.00 rg ( http://www.privoxy.org/developer-manual/)Tj
+0.00 0.00 0.00 rg (. Please see)Tj
+0.00 0.00 1.00 rg ( the Contact)Tj
+0 -13.2 Td(section)Tj
+0.00 0.00 0.00 rg ( on how to contact the developers.)Tj
+/F7 11 Tf 0 -41.6 Td(Table of Contents)Tj
+/F6 11 Tf 0 -13.2 Td(1.)Tj
+0.00 0.00 1.00 rg ( Introduction)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(1.1.)Tj
+0.00 0.00 1.00 rg ( Quickstart to Privoxy Development)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(2.)Tj
+0.00 0.00 1.00 rg ( The CVS Repository)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(2.1.)Tj
+0.00 0.00 1.00 rg ( Access to CVS)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(2.2.)Tj
+0.00 0.00 1.00 rg ( CVS Commit Guideline)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(2.3.)Tj
+0.00 0.00 1.00 rg ( Discussing Changes First)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(3.)Tj
+0.00 0.00 1.00 rg ( Documentation Guidelines)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(3.1.)Tj
+0.00 0.00 1.00 rg ( Quickstart to Docbook and SGML)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.2.)Tj
+0.00 0.00 1.00 rg ( Privoxy Documentation Style)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(3.3.)Tj
+0.00 0.00 1.00 rg ( Privoxy Custom Entities)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(4.)Tj
+0.00 0.00 1.00 rg ( Coding Guidelines)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(4.1.)Tj
+0.00 0.00 1.00 rg ( Introduction)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.2.)Tj
+0.00 0.00 1.00 rg ( Using Comments)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(4.2.1.)Tj
+0.00 0.00 1.00 rg ( Comment, Comment, Comment)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.2.2.)Tj
+0.00 0.00 1.00 rg ( Use blocks for comments)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.2.3.)Tj
+0.00 0.00 1.00 rg ( Keep Comments on their own line)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.2.4.)Tj
+0.00 0.00 1.00 rg ( Comment each logical step)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.2.5.)Tj
+0.00 0.00 1.00 rg ( Comment All Functions Thoroughly)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.2.6.)Tj
+0.00 0.00 1.00 rg ( Comment at the end of braces if the content is more than one screen length)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(4.3.)Tj
+0.00 0.00 1.00 rg ( Naming Conventions)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(4.3.1.)Tj
+0.00 0.00 1.00 rg ( Variable Names)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.3.2.)Tj
+0.00 0.00 1.00 rg ( Function Names)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.3.3.)Tj
+0.00 0.00 1.00 rg ( Header file prototypes)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.3.4.)Tj
+0.00 0.00 1.00 rg ( Enumerations, and #defines)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.3.5.)Tj
+0.00 0.00 1.00 rg ( Constants)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(4.4.)Tj
+0.00 0.00 1.00 rg ( Using Space)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(4.4.1.)Tj
+0.00 0.00 1.00 rg ( Put braces on a line by themselves.)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.4.2.)Tj
+0.00 0.00 1.00 rg ( ALL control statements should have a block)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.4.3.)Tj
+0.00 0.00 1.00 rg ( Do not belabor/blow-up boolean expressions)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.4.4.)Tj
+0.00 0.00 1.00 rg ( Use white space freely because it is free)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.4.5.)Tj
+0.00 0.00 1.00 rg ( Don't use white space around structure operators)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.4.6.)Tj
+0.00 0.00 1.00 rg ( Make the last brace of a function stand out)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.4.7.)Tj
+0.00 0.00 1.00 rg ( Use 3 character indentions)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(4.5.)Tj
+0.00 0.00 1.00 rg ( Initializing)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(4.5.1.)Tj
+0.00 0.00 1.00 rg ( Initialize all variables)Tj
+0.00 0.00 0.00 rg /F8 11 Tf -72 692.6 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-172.463 -720 Td(1/36)Tj
+ET
+Q
+endstream
+endobj
+334 0 obj<</Type/Page/Parent 331 0 R/Contents 335 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F6 7 0 R/F8 9 0 R>>/XObject<<>>>>/Annots 106 0 R>>endobj
+335 0 obj<</Length 11591     >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+52.5 686.0 m 99.3 686.0 l S
+96.8 672.8 m 125.2 672.8 l S
+125.2 672.8 m 168.3 672.8 l S
+168.2 672.8 m 188.1 672.8 l S
+188.1 672.8 m 218.4 672.8 l S
+218.4 672.8 m 226.6 672.8 l S
+226.6 672.8 m 264.8 672.8 l S
+264.8 672.8 m 277.3 672.8 l S
+277.3 672.8 m 285.6 672.8 l S
+285.6 672.8 m 328.4 672.8 l S
+96.8 659.6 m 131.3 659.6 l S
+131.3 659.6 m 164.6 659.6 l S
+164.6 659.6 m 172.8 659.6 l S
+172.8 659.6 m 203.1 659.6 l S
+203.1 659.6 m 224.2 659.6 l S
+224.2 659.6 m 239.7 659.6 l S
+239.7 659.6 m 248.0 659.6 l S
+248.0 659.6 m 289.5 659.6 l S
+96.8 646.4 m 140.4 646.4 l S
+140.4 646.4 m 179.3 646.4 l S
+179.2 646.4 m 202.8 646.4 l S
+202.8 646.4 m 228.7 646.4 l S
+228.8 646.4 m 269.4 646.4 l S
+269.4 646.4 m 282.5 646.4 l S
+282.5 646.4 m 309.1 646.4 l S
+309.1 646.4 m 352.8 646.4 l S
+96.8 633.2 m 120.3 633.2 l S
+120.3 633.2 m 139.5 633.2 l S
+139.5 633.2 m 172.2 633.2 l S
+172.2 633.2 m 185.4 633.2 l S
+185.4 633.2 m 213.8 633.2 l S
+213.8 633.2 m 260.5 633.2 l S
+96.8 620.0 m 120.3 620.0 l S
+120.3 620.0 m 139.5 620.0 l S
+139.5 620.0 m 172.2 620.0 l S
+172.2 620.0 m 185.4 620.0 l S
+185.4 620.0 m 213.8 620.0 l S
+96.8 606.8 m 129.4 606.8 l S
+129.4 606.8 m 140.8 606.8 l S
+140.8 606.8 m 175.9 606.8 l S
+175.9 606.8 m 197.0 606.8 l S
+96.8 593.6 m 134.3 593.6 l S
+134.3 593.6 m 173.1 593.6 l S
+173.1 593.6 m 216.2 593.6 l S
+216.2 593.6 m 264.2 593.6 l S
+96.8 580.4 m 116.6 580.4 l S
+116.6 580.4 m 150.5 580.4 l S
+150.5 580.4 m 173.5 580.4 l S
+173.5 580.4 m 199.5 580.4 l S
+199.5 580.4 m 254.8 580.4 l S
+96.8 567.2 m 128.2 567.2 l S
+128.2 567.2 m 171.0 567.2 l S
+171.0 567.2 m 190.8 567.2 l S
+190.8 567.2 m 232.7 567.2 l S
+232.7 567.2 m 261.7 567.2 l S
+261.7 567.2 m 317.7 567.2 l S
+317.7 567.2 m 352.8 567.2 l S
+352.8 567.2 m 364.1 567.2 l S
+364.1 567.2 m 404.1 567.2 l S
+52.5 554.0 m 91.3 554.0 l S
+91.3 554.0 m 126.4 554.0 l S
+126.4 554.0 m 170.7 554.0 l S
+96.8 540.8 m 120.9 540.8 l S
+120.9 540.8 m 134.6 540.8 l S
+134.6 540.8 m 178.3 540.8 l S
+96.8 527.6 m 134.3 527.6 l S
+134.3 527.6 m 142.6 527.6 l S
+142.6 527.6 m 175.9 527.6 l S
+175.9 527.6 m 198.2 527.6 l S
+198.2 527.6 m 213.8 527.6 l S
+213.8 527.6 m 228.1 527.6 l S
+228.1 527.6 m 259.0 527.6 l S
+259.0 527.6 m 308.2 527.6 l S
+96.8 514.4 m 114.8 514.4 l S
+114.8 514.4 m 126.1 514.4 l S
+126.1 514.4 m 153.3 514.4 l S
+153.3 514.4 m 184.8 514.4 l S
+184.8 514.4 m 222.3 514.4 l S
+222.3 514.4 m 248.9 514.4 l S
+248.9 514.4 m 260.2 514.4 l S
+260.2 514.4 m 268.5 514.4 l S
+268.5 514.4 m 299.3 514.4 l S
+299.3 514.4 m 347.0 514.4 l S
+96.8 501.2 m 116.6 501.2 l S
+116.6 501.2 m 143.6 501.2 l S
+143.6 501.2 m 156.2 501.2 l S
+156.2 501.2 m 186.2 501.2 l S
+186.2 501.2 m 221.4 501.2 l S
+221.4 501.2 m 232.7 501.2 l S
+232.7 501.2 m 251.7 501.2 l S
+96.8 488.0 m 123.9 488.0 l S
+123.9 488.0 m 142.5 488.0 l S
+142.5 488.0 m 170.3 488.0 l S
+170.3 488.0 m 189.5 488.0 l S
+189.5 488.0 m 215.5 488.0 l S
+215.5 488.0 m 240.9 488.0 l S
+96.8 474.8 m 134.9 474.8 l S
+134.9 474.8 m 158.4 474.8 l S
+158.4 474.8 m 197.9 474.8 l S
+197.9 474.8 m 217.1 474.8 l S
+217.1 474.8 m 244.9 474.8 l S
+244.9 474.8 m 258.7 474.8 l S
+258.7 474.8 m 271.8 474.8 l S
+271.8 474.8 m 292.9 474.8 l S
+292.9 474.8 m 314.9 474.8 l S
+96.8 461.6 m 116.6 461.6 l S
+116.6 461.6 m 178.6 461.6 l S
+178.6 461.6 m 222.9 461.6 l S
+96.8 448.4 m 116.0 448.4 l S
+116.0 448.4 m 175.6 448.4 l S
+175.6 448.4 m 198.5 448.4 l S
+198.5 448.4 m 222.6 448.4 l S
+222.6 448.4 m 260.0 448.4 l S
+260.0 448.4 m 270.1 448.4 l S
+270.1 448.4 m 326.0 448.4 l S
+326.0 448.4 m 341.6 448.4 l S
+341.6 448.4 m 384.7 448.4 l S
+384.7 448.4 m 409.3 448.4 l S
+96.8 435.2 m 117.2 435.2 l S
+117.2 435.2 m 153.0 435.2 l S
+153.0 435.2 m 164.3 435.2 l S
+164.3 435.2 m 180.5 435.2 l S
+180.5 435.2 m 222.2 435.2 l S
+222.2 435.2 m 264.7 435.2 l S
+264.7 435.2 m 284.0 435.2 l S
+284.0 435.2 m 295.3 435.2 l S
+295.3 435.2 m 322.5 435.2 l S
+102.2 422.0 m 158.8 422.0 l S
+158.8 422.0 m 179.3 422.0 l S
+179.3 422.0 m 202.8 422.0 l S
+202.8 422.0 m 234.9 422.0 l S
+234.9 422.0 m 273.7 422.0 l S
+273.7 422.0 m 285.0 422.0 l S
+285.0 422.0 m 322.0 422.0 l S
+322.0 422.0 m 348.3 422.0 l S
+348.3 422.0 m 365.7 422.0 l S
+365.7 422.0 m 401.4 422.0 l S
+52.5 408.8 m 106.0 408.8 l S
+106.0 408.8 m 149.7 408.8 l S
+149.7 408.8 m 165.2 408.8 l S
+165.2 408.8 m 186.3 408.8 l S
+186.3 408.8 m 205.6 408.8 l S
+205.6 408.8 m 244.4 408.8 l S
+244.4 408.8 m 286.8 408.8 l S
+286.8 408.8 m 321.4 408.8 l S
+8.2 395.6 m 43.4 395.6 l S
+43.4 395.6 m 93.8 395.6 l S
+52.5 382.4 m 93.1 382.4 l S
+93.1 382.4 m 108.7 382.4 l S
+108.7 382.4 m 147.5 382.4 l S
+52.5 369.2 m 73.6 369.2 l S
+73.6 369.2 m 108.1 369.2 l S
+8.2 356.0 m 54.4 356.0 l S
+54.4 356.0 m 62.6 356.0 l S
+62.6 356.0 m 84.9 356.0 l S
+84.9 356.0 m 121.9 356.0 l S
+52.5 342.8 m 89.5 342.8 l S
+89.5 342.8 m 130.1 342.8 l S
+52.5 329.6 m 84.6 329.6 l S
+84.6 329.6 m 100.8 329.6 l S
+100.8 329.6 m 141.4 329.6 l S
+141.4 329.6 m 174.1 329.6 l S
+52.5 316.4 m 93.1 316.4 l S
+93.1 316.4 m 112.4 316.4 l S
+112.4 316.4 m 158.5 316.4 l S
+158.5 316.4 m 174.7 316.4 l S
+174.7 316.4 m 219.6 316.4 l S
+96.8 303.2 m 120.3 303.2 l S
+120.3 303.2 m 134.0 303.2 l S
+134.0 303.2 m 171.0 303.2 l S
+171.0 303.2 m 220.8 303.2 l S
+96.8 290.0 m 130.0 290.0 l S
+130.0 290.0 m 165.8 290.0 l S
+96.8 276.8 m 125.5 276.8 l S
+125.5 276.8 m 172.8 276.8 l S
+172.8 276.8 m 185.4 276.8 l S
+185.4 276.8 m 205.2 276.8 l S
+205.2 276.8 m 224.5 276.8 l S
+224.5 276.8 m 249.8 276.8 l S
+96.8 263.6 m 121.5 263.6 l S
+96.8 250.4 m 130.7 250.4 l S
+96.8 237.2 m 139.8 237.2 l S
+96.8 224.0 m 131.9 224.0 l S
+96.8 210.8 m 119.0 210.8 l S
+119.0 210.8 m 142.0 210.8 l S
+96.8 197.6 m 140.4 197.6 l S
+102.2 184.4 m 141.8 184.4 l S
+141.8 184.4 m 155.5 184.4 l S
+102.2 171.2 m 133.7 171.2 l S
+133.7 171.2 m 149.9 171.2 l S
+102.2 158.0 m 122.1 158.0 l S
+52.5 144.8 m 102.3 144.8 l S
+102.3 144.8 m 121.6 144.8 l S
+121.6 144.8 m 167.7 144.8 l S
+167.7 144.8 m 191.8 144.8 l S
+191.8 144.8 m 232.5 144.8 l S
+52.5 131.6 m 77.2 131.6 l S
+77.2 131.6 m 93.4 131.6 l S
+93.4 131.6 m 130.4 131.6 l S
+8.2 118.4 m 43.4 118.4 l S
+43.4 118.4 m 59.6 118.4 l S
+59.6 118.4 m 109.4 118.4 l S
+8.2 105.2 m 59.9 105.2 l S
+59.9 105.2 m 76.1 105.2 l S
+76.1 105.2 m 129.2 105.2 l S
+129.2 105.2 m 149.7 105.2 l S
+149.7 105.2 m 196.5 105.2 l S
+196.5 105.2 m 215.7 105.2 l S
+215.7 105.2 m 253.3 105.2 l S
+253.3 105.2 m 295.1 105.2 l S
+52.5 92.0 m 71.1 92.0 l S
+71.1 92.0 m 108.7 92.0 l S
+52.5 78.8 m 85.2 78.8 l S
+85.2 78.8 m 109.9 78.8 l S
+52.5 65.6 m 90.1 65.6 l S
+90.1 65.6 m 112.4 65.6 l S
+112.4 65.6 m 154.2 65.6 l S
+52.5 52.4 m 85.2 52.4 l S
+85.2 52.4 m 104.4 52.4 l S
+104.4 52.4 m 117.0 52.4 l S
+117.0 52.4 m 145.4 52.4 l S
+145.4 52.4 m 222.2 52.4 l S
+222.2 52.4 m 267.1 52.4 l S
+52.5 39.2 m 80.9 39.2 l S
+8.2 26.0 m 45.2 26.0 l S
+45.2 26.0 m 95.3 26.0 l S
+95.3 26.0 m 131.7 26.0 l S
+131.7 26.0 m 150.9 26.0 l S
+150.9 26.0 m 186.7 26.0 l S
+BT
+0.00 0.00 0.00 rg /F6 11 Tf 36 687 Td 0.000 Tc(4.6.)Tj
+0.00 0.00 1.00 rg ( Functions)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(4.6.1.)Tj
+0.00 0.00 1.00 rg ( Name functions that return a boolean as a question.)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.6.2.)Tj
+0.00 0.00 1.00 rg ( Always specify a return type for a function.)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.6.3.)Tj
+0.00 0.00 1.00 rg ( Minimize function calls when iterating by using variables)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.6.4.)Tj
+0.00 0.00 1.00 rg ( Pass and Return by Const Reference)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.6.5.)Tj
+0.00 0.00 1.00 rg ( Pass and Return by Value)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.6.6.)Tj
+0.00 0.00 1.00 rg ( Names of include files)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.6.7.)Tj
+0.00 0.00 1.00 rg ( Provide multiple inclusion protection)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.6.8.)Tj
+0.00 0.00 1.00 rg ( Use `extern "C"` when appropriate)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.6.9.)Tj
+0.00 0.00 1.00 rg ( Where Possible, Use Forward Struct Declaration Instead of Includes)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(4.7.)Tj
+0.00 0.00 1.00 rg ( General Coding Practices)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(4.7.1.)Tj
+0.00 0.00 1.00 rg ( Turn on warnings)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.7.2.)Tj
+0.00 0.00 1.00 rg ( Provide a default case for all switch statements)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.7.3.)Tj
+0.00 0.00 1.00 rg ( Try to avoid falling through cases in a switch statement.)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.7.4.)Tj
+0.00 0.00 1.00 rg ( Use 'long' or 'short' Instead of 'int')Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.7.5.)Tj
+0.00 0.00 1.00 rg ( Don't mix size_t and other types)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.7.6.)Tj
+0.00 0.00 1.00 rg ( Declare each variable and struct on its own line.)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.7.7.)Tj
+0.00 0.00 1.00 rg ( Use malloc/zalloc sparingly)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.7.8.)Tj
+0.00 0.00 1.00 rg ( The Programmer Who Uses 'malloc' is Responsible for Ensuring 'free')Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.7.9.)Tj
+0.00 0.00 1.00 rg ( Add loaders to the `file_list' structure and in order)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(4.7.10.)Tj
+0.00 0.00 1.00 rg ( "Uncertain" new code and/or changes to existing code, use FIXME)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(4.8.)Tj
+0.00 0.00 1.00 rg ( Addendum: Template for files and function comment blocks:)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(5.)Tj
+0.00 0.00 1.00 rg ( Testing Guidelines)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(5.1.)Tj
+0.00 0.00 1.00 rg ( Testplan for releases)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(5.2.)Tj
+0.00 0.00 1.00 rg ( Test reports)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(6.)Tj
+0.00 0.00 1.00 rg ( Releasing a New Version)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(6.1.)Tj
+0.00 0.00 1.00 rg ( Version numbers)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.2.)Tj
+0.00 0.00 1.00 rg ( Before the Release: Freeze)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.3.)Tj
+0.00 0.00 1.00 rg ( Building and Releasing the Packages)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(6.3.1.)Tj
+0.00 0.00 1.00 rg ( Note on Privoxy Packaging)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.3.2.)Tj
+0.00 0.00 1.00 rg ( Source Tarball)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.3.3.)Tj
+0.00 0.00 1.00 rg ( SuSE, Conectiva or Red Hat RPM)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.3.4.)Tj
+0.00 0.00 1.00 rg ( OS/2)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.3.5.)Tj
+0.00 0.00 1.00 rg ( Solaris)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.3.6.)Tj
+0.00 0.00 1.00 rg ( Windows)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.3.7.)Tj
+0.00 0.00 1.00 rg ( Debian)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.3.8.)Tj
+0.00 0.00 1.00 rg ( Mac OSX)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.3.9.)Tj
+0.00 0.00 1.00 rg ( FreeBSD)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.3.10.)Tj
+0.00 0.00 1.00 rg ( HP-UX 11)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.3.11.)Tj
+0.00 0.00 1.00 rg ( Amiga OS)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.3.12.)Tj
+0.00 0.00 1.00 rg ( AIX)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(6.4.)Tj
+0.00 0.00 1.00 rg ( Uploading and Releasing Your Package)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(6.5.)Tj
+0.00 0.00 1.00 rg ( After the Release)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(7.)Tj
+0.00 0.00 1.00 rg ( Update the Webserver)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(8.)Tj
+0.00 0.00 1.00 rg ( Contacting the developers, Bug Reporting and Feature Requests)Tj
+0.00 0.00 0.00 rg 36 -13.2 Td(8.1.)Tj
+0.00 0.00 1.00 rg ( Get Support)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(8.2.)Tj
+0.00 0.00 1.00 rg ( Report Bugs)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(8.3.)Tj
+0.00 0.00 1.00 rg ( Request New Features)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(8.4.)Tj
+0.00 0.00 1.00 rg ( Report Ads or Other Actions-Related Problems)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(8.5.)Tj
+0.00 0.00 1.00 rg ( Other)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(9.)Tj
+0.00 0.00 1.00 rg ( Privoxy Copyright, License and History)Tj
+0.00 0.00 0.00 rg /F8 11 Tf 0 693 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-172.463 -720 Td(2/36)Tj
+ET
+Q
+endstream
+endobj
+336 0 obj<</Type/Page/Parent 331 0 R/Contents 337 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R/Fc 11 0 R>>/XObject<<>>>>/Annots 118 0 R>>endobj
+337 0 obj<</Length 4444      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+52.5 686.0 m 88.9 686.0 l S
+52.5 672.8 m 88.3 672.8 l S
+13.8 659.6 m 31.8 659.6 l S
+31.8 659.6 m 52.9 659.6 l S
+0.00 0.00 0.00 rg 0.0 537.0 540.0 2.0 re f
+114.4 488.4 m 170.9 488.4 l S
+369.8 488.4 m 386.0 488.4 l S
+386.0 488.4 m 402.2 488.4 l S
+0.0 439.0 540.0 2.0 re f
+0.0 363.8 540.0 2.0 re f
+183.5 315.2 m 245.2 315.2 l S
+412.9 315.2 m 434.1 315.2 l S
+434.1 315.2 m 452.2 315.2 l S
+452.2 315.2 m 520.3 315.2 l S
+0.0 279.0 540.0 2.0 re f
+0.0 62.2 540.0 2.0 re f
+BT
+/F6 11 Tf 36 687 Td 0.000 Tc(9.1.)Tj
+0.00 0.00 1.00 rg ( License)Tj
+0.00 0.00 0.00 rg 0 -13.2 Td(9.2.)Tj
+0.00 0.00 1.00 rg ( History)Tj
+0.00 0.00 0.00 rg -36 -13.2 Td(10.)Tj
+0.00 0.00 1.00 rg ( See also)Tj
+0.00 0.00 0.00 rg /F9 17 Tf 0 -32.4 Td(1. Introduction)Tj
+/F4 11 Tf 0 -27.6 Td(Privoxy, as an heir to Junkbuster, is an Open Source project and licensed under the GPL. As such, Privoxy development is)Tj
+0 -13.2 Td(potentially open to anyone who has the time, knowledge, and desire to contribute in any capacity. Our goals are simply to)Tj
+0 -13.2 Td(continue the mission, to improve Privoxy, and to make it available to as wide an audience as possible.)Tj
+0 -26.4 Td(One does not have to be a programmer to contribute. Packaging, testing, and porting, are all important jobs as well.)Tj
+/F9 14 Tf 0 -31.4 Td(1.1. Quickstart to Privoxy Development)Tj
+/F4 11 Tf 0 -27 Td(You'll need an account on)Tj
+0.00 0.00 1.00 rg ( Sourceforge)Tj
+0.00 0.00 0.00 rg ( to support our development. Mail your ID to)Tj
+0.00 0.00 1.00 rg ( the list)Tj
+0.00 0.00 0.00 rg ( and wait until a project)Tj
+0 -13.2 Td(manager has added you.)Tj
+0 -26.4 Td(For the time being \(read, this section is under construction\), please refer to the extensive comments in the source code.)Tj
+/F9 17 Tf 0 -34.4 Td(2. The CVS Repository)Tj
+/F4 11 Tf 0 -27.6 Td(If you intend to help us with programming, documentation or packaging you will need write access to our holy grail, the)Tj
+0 -13.2 Td(CVS repository. Please read this chapter completely before accessing via CVS.)Tj
+/F9 14 Tf 0 -31.4 Td(2.1. Access to CVS)Tj
+/F4 11 Tf 0 -27 Td(The project's CVS repository is hosted on)Tj
+0.00 0.00 1.00 rg ( SourceForge.)Tj
+0.00 0.00 0.00 rg ( Please refer to the chapters 6 and 7 in)Tj
+0.00 0.00 1.00 rg ( SF's site documentation)Tj
+0.00 0.00 0.00 rg ( for)Tj
+0 -13.2 Td(the technical access details for your operating system. For historical reasons, the CVS server is called)Tj
+/F0 11 Tf 0 -13.2 Td(cvs.ijbswa.sourceforge.net)Tj
+/F4 11 Tf (, the repository is called )Tj
+/F0 11 Tf (ijbswa)Tj
+/F4 11 Tf (, and the source tree module is called )Tj
+/F0 11 Tf (current)Tj
+/F4 11 Tf (.)Tj
+/F9 14 Tf 0 -31.4 Td(2.2. CVS Commit Guideline)Tj
+/F4 11 Tf 0 -27 Td(The source tree is the heart of every software project. Every effort must be made to ensure that it is readable, compilable)Tj
+0 -13.2 Td(and consistent at all times. We therefore ask anyone with CVS access to strictly adhere to the following guidelines:)Tj
+36 -26.4 Td(Never \(read:)Tj
+/F6 11 Tf ( never, ever)Tj
+/F4 11 Tf (\) be tempted to commit that small change without testing it thoroughly first. When we're)Tj
+0 -13.2 Td(close to a public release, ask a fellow developer to review your changes.)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(Your commit message should give a concise overview of)Tj
+/F6 11 Tf ( what you changed)Tj
+/F4 11 Tf ( \(no big details\) and)Tj
+/F6 11 Tf ( why you changed)Tj
+0 -13.2 Td(it)Tj
+/F4 11 Tf ( Just check previous messages for good examples.)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(Don't use the same message on multiple files, unless it equally applies to all those files.)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(If your changes span multiple files, and the code won't recompile unless all changes are committed \(e.g. when)Tj
+-0 -13.2 Td(changing the signature of a function\), then commit all files one after another, without long delays in between. If)Tj
+0 -13.2 Td(necessary, prepare the commit messages in advance.)Tj
+/Fc 11 Tf -7.81 26.4 Td(\267 )Tj
+/F4 11 Tf 7.81 -39.6 Td(Before changing things on CVS, make sure that your changes are in line with the team's general consensus on)Tj
+-0 -13.2 Td(what should be done \(see below\).)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F8 11 Tf -28.19 633.8 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-172.463 -720 Td(3/36)Tj
+ET
+Q
+endstream
+endobj
+338 0 obj<</Type/Page/Parent 331 0 R/Contents 339 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>/Annots 131 0 R>>endobj
+339 0 obj<</Length 5765      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+115.1 590.0 m 132.5 590.0 l S
+132.5 590.0 m 148.7 590.0 l S
+148.7 590.0 m 164.9 590.0 l S
+227.2 576.8 m 244.6 576.8 l S
+244.6 576.8 m 260.8 576.8 l S
+260.8 576.8 m 277.0 576.8 l S
+151.6 537.2 m 187.3 537.2 l S
+187.3 537.2 m 220.6 537.2 l S
+0.00 0.00 0.00 rg 0.0 527.4 540.0 2.0 re f
+0.0 462.0 m 40.3 462.0 l S
+387.1 448.8 m 449.2 448.8 l S
+451.9 448.8 m 476.1 448.8 l S
+BT
+/F9 14 Tf 0 684 Td 0.000 Tc(2.3. Discussing Changes First)Tj
+/F4 11 Tf 0 -27 Td(We don't have a too formal policy on this, just use common sense. Hints: If it is..)Tj
+36 -26.4 Td(..a bug-fix / clean-up / cosmetic thing: shoot)Tj
+-11 0 Td(1. )Tj
+11 -13.2 Td(..a new feature that can be turned off: shoot)Tj
+-11 0 Td(2. )Tj
+11 -13.2 Td(..a clear improvement w/o side effects on other parts of the code: shoot)Tj
+-11 0 Td(3. )Tj
+11 -13.2 Td(..a matter of taste:)Tj
+0.00 0.00 1.00 rg ( ask the list)Tj
+0.00 0.00 0.00 rg -11 0 Td(4. )Tj
+11 -13.2 Td(..a major redesign of some part of the code:)Tj
+0.00 0.00 1.00 rg ( ask the list)Tj
+0.00 0.00 0.00 rg -11 0 Td(5. )Tj
+-25 -26.4 Td(Note that near a major public release, we get a bit more cautious - if unsure, it doesn't hurt to ask first. There is always the)Tj
+0 -13.2 Td(possibility to submit a patch to the)Tj
+0.00 0.00 1.00 rg ( patches tracker)Tj
+0.00 0.00 0.00 rg ( instead.)Tj
+/F9 17 Tf 0 -34.4 Td(3. Documentation Guidelines)Tj
+/F4 11 Tf 0 -27.6 Td(All formal documents are maintained in Docbook SGML and located in the )Tj
+/F0 11 Tf (doc/source/*)Tj
+/F4 11 Tf ( directory. You will need)Tj
+0.00 0.00 1.00 rg 0 -13.2 Td(Docbook)Tj
+0.00 0.00 0.00 rg (, the Docbook DTD's and the Docbook modular stylesheets \(or comparable alternatives\), and either jade or)Tj
+0 -13.2 Td(openjade \(recommended\) installed in order to build docs from source. Currently there is)Tj
+0.00 0.00 1.00 rg /F6 11 Tf ( user-manual)Tj
+0.00 0.00 0.00 rg /F4 11 Tf (,)Tj
+0.00 0.00 1.00 rg /F6 11 Tf ( FAQ)Tj
+0.00 0.00 0.00 rg /F4 11 Tf (, and, of)Tj
+0 -13.2 Td(course this, the)Tj
+/F6 11 Tf ( developer-manual)Tj
+/F4 11 Tf ( in this format. The)Tj
+/F6 11 Tf ( README)Tj
+/F4 11 Tf (,)Tj
+/F6 11 Tf ( AUTHORS privoxy.1)Tj
+/F4 11 Tf ( \(man page\), and)Tj
+/F6 11 Tf ( config)Tj
+/F4 11 Tf ( files are)Tj
+0 -13.2 Td(also now maintained as Docbook SGML. These files, when built, in the top-level source directory are generated files!)Tj
+0 -13.2 Td(Also, the Privoxy )Tj
+/F0 11 Tf (index.html)Tj
+/F4 11 Tf ( \(and a variation on this file, )Tj
+/F0 11 Tf (privoxy-index.html)Tj
+/F4 11 Tf (, meant for inclusion with doc)Tj
+0 -13.2 Td(packages\), are maintained as SGML as well.)Tj
+/F6 11 Tf ( DO NOT edit these directly)Tj
+/F4 11 Tf (. Edit the SGML source, or contact someone)Tj
+0 -13.2 Td(involved in the documentation \(at present Stefan and Hal\).)Tj
+/F0 11 Tf 0 -26.4 Td(config)Tj
+/F4 11 Tf ( requires some special handling. The reason it is maintained this way is so that the extensive comments in the file)Tj
+0 -13.2 Td(mirror those in)Tj
+/F6 11 Tf ( user-manual)Tj
+/F4 11 Tf (. But the conversion process requires going from SGML to HTML to text to special)Tj
+0 -13.2 Td(formatting required for the embedded comments. Some of this does not survive so well. Especially some of the examples)Tj
+0 -13.2 Td(that are longer than 80 characters. The build process for this file outputs to )Tj
+/F0 11 Tf (config.new)Tj
+/F4 11 Tf (, which should be reviewed for)Tj
+0 -13.2 Td(errors and mis-formatting. Once satisfied that it is correct, then it should be hand copied to )Tj
+/F0 11 Tf (config)Tj
+/F4 11 Tf (.)Tj
+0 -26.4 Td(Other, less formal documents \(e.g. )Tj
+/F0 11 Tf (LICENSE)Tj
+/F4 11 Tf (, )Tj
+/F0 11 Tf (INSTALL)Tj
+/F4 11 Tf (\) are maintained as plain text files in the top-level source)Tj
+0 -13.2 Td(directory. At least for the time being.)Tj
+0 -26.4 Td(Packagers are encouraged to include this documentation. For those without the ability to build the docs locally, text)Tj
+0 -13.2 Td(versions of each are kept in CVS. HTML versions are also now being kept in CVS under )Tj
+/F0 11 Tf (doc/webserver/*)Tj
+/F4 11 Tf (.)Tj
+0 -26.4 Td(Formal documents are built with the Makefile targets of )Tj
+/F0 11 Tf (make dok)Tj
+/F4 11 Tf (, or alternately )Tj
+/F0 11 Tf (make redhat-dok)Tj
+/F4 11 Tf (. If you have)Tj
+0 -13.2 Td(problems, try both. The build process uses the document SGML sources in )Tj
+/F0 11 Tf (doc/source/*/*)Tj
+/F4 11 Tf ( to update all text files in)Tj
+/F0 11 Tf 0 -13.2 Td(doc/text/)Tj
+/F4 11 Tf ( and to update all HTML documents in )Tj
+/F0 11 Tf (doc/webserver/)Tj
+/F4 11 Tf (.)Tj
+0 -26.4 Td(Documentation writers should please make sure documents build successfully before committing to CVS, if possible.)Tj
+0 -26.4 Td(How do you update the webserver \(i.e. the pages on privoxy.org\)?)Tj
+36 -26.4 Td(First, build the docs by running )Tj
+/F0 11 Tf (make dok)Tj
+/F4 11 Tf ( \(or alternately )Tj
+/F0 11 Tf (make redhat-dok)Tj
+/F4 11 Tf (\).)Tj
+-11 0 Td(1. )Tj
+11 -13.2 Td(Run )Tj
+/F0 11 Tf (make webserver)Tj
+/F4 11 Tf ( which copies all files from )Tj
+/F0 11 Tf (doc/webserver)Tj
+/F4 11 Tf ( to the sourceforge webserver via scp.)Tj
+-11 0 Td(2. )Tj
+-25 -26.4 Td(Finished docs should be occasionally submitted to CVS \()Tj
+/F0 11 Tf (doc/webserver/*/*.html)Tj
+/F4 11 Tf (\) so that those without the)Tj
+0 -13.2 Td(ability to build them locally, have access to them if needed. This is especially important just prior to a new release! Please)Tj
+0 -13.2 Td(do this)Tj
+/F6 11 Tf ( after)Tj
+/F4 11 Tf ( the )Tj
+/F0 11 Tf ($VERSION)Tj
+/F4 11 Tf ( and other release specific data in )Tj
+/F0 11 Tf (configure.in)Tj
+/F4 11 Tf ( has been updated \(this is done just prior)Tj
+/F8 11 Tf 0 692.6 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-172.463 -720 Td(4/36)Tj
+ET
+Q
+endstream
+endobj
+340 0 obj<</Type/Page/Parent 331 0 R/Contents 341 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R/Fc 11 0 R>>/XObject<<>>>>/Annots 134 0 R>>endobj
+341 0 obj<</Length 4396      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 676.2 540.0 2.0 re f
+0.00 0.00 1.00 RG
+95.5 173.4 m 129.8 173.4 l S
+129.8 173.4 m 200.3 173.4 l S
+200.3 173.4 m 229.4 173.4 l S
+229.4 173.4 m 274.3 173.4 l S
+274.3 173.4 m 283.2 173.4 l S
+283.2 173.4 m 293.9 173.4 l S
+293.9 173.4 m 322.3 173.4 l S
+322.3 173.4 m 356.3 173.4 l S
+0.0 163.6 540.0 2.0 re f
+BT
+/F4 11 Tf 0 687 Td 0.000 Tc(to a new release\).)Tj
+/F9 14 Tf 0 -31.4 Td(3.1. Quickstart to Docbook and SGML)Tj
+/F4 11 Tf 0 -27 Td(If you are not familiar with SGML, it is a markup language similar to HTML. Actually, not a mark up language per se, but)Tj
+0 -13.2 Td(a language used to define markup languages. In fact, HTML is an SGML application. Both will use "tags" to format text)Tj
+0 -13.2 Td(and other content. SGML tags can be much more varied, and flexible, but do much of the same kinds of things. The tags,)Tj
+0 -13.2 Td(or "elements", are definable in SGML. There is no set "standards". Since we are using Docbook, our tags are those that)Tj
+0 -13.2 Td(are defined by Docbook. Much of how the finish document is rendered is determined by the "stylesheets". The stylesheets)Tj
+0 -13.2 Td(determine how each tag gets translated to HTML, or other formats.)Tj
+0 -26.4 Td(Tags in Docbook SGML need to be always "closed". If not, you will likely generate errors. Example: )Tj
+/F0 11 Tf (<title>My)Tj
+0 -13.2 Td(Title</title>)Tj
+/F4 11 Tf (. They are also case-insensitive, but we strongly suggest using all lower case. This keeps compatibility)Tj
+0 -13.2 Td(with [Docbook] XML.)Tj
+0 -26.4 Td(Our documents use "sections" for the most part. Sections will be processed into HTML headers \(e.g. )Tj
+/F0 11 Tf (h1)Tj
+/F4 11 Tf ( for )Tj
+/F0 11 Tf (sect1)Tj
+/F4 11 Tf (\). The)Tj
+0 -13.2 Td(Docbook stylesheets will use these to also generate the Table of Contents for each doc. Our TOC's are set to a depth of)Tj
+0 -13.2 Td(three. Meaning )Tj
+/F0 11 Tf (sect1)Tj
+/F4 11 Tf (, )Tj
+/F0 11 Tf (sect2)Tj
+/F4 11 Tf (, and )Tj
+/F0 11 Tf (sect3)Tj
+/F4 11 Tf ( will have TOC entries, but )Tj
+/F0 11 Tf (sect4)Tj
+/F4 11 Tf ( will not. Each section requires a)Tj
+/F0 11 Tf 0 -13.2 Td(<title>)Tj
+/F4 11 Tf ( element, and at least one )Tj
+/F0 11 Tf (<para>)Tj
+/F4 11 Tf (. There is a limit of five section levels in Docbook, but generally three)Tj
+0 -13.2 Td(should be sufficient for our purposes.)Tj
+0 -26.4 Td(Some common elements that you likely will use:)Tj
+/F6 11 Tf 1.588 -27.988 Td(<para></para>)Tj
+/F4 11 Tf (, paragraph delimiter. Most text needs to be within paragraph elements \(there are some exceptions\).)Tj
+/F6 11 Tf 0 -16.376 Td(<emphasis></emphasis>)Tj
+/F4 11 Tf (, the stylesheets make this italics.)Tj
+/F6 11 Tf 0 -16.376 Td(<filename></filename>)Tj
+/F4 11 Tf (, files and directories.)Tj
+/F6 11 Tf 0 -16.376 Td(<command></command>)Tj
+/F4 11 Tf (, command examples.)Tj
+/F6 11 Tf 0 -16.376 Td(<literallayout></literallayout>)Tj
+/F4 11 Tf (, like )Tj
+/F0 11 Tf (<pre>)Tj
+/F4 11 Tf (, more or less.)Tj
+/F6 11 Tf 0 -16.376 Td(<itemizedlist></itemizedlist>)Tj
+/F4 11 Tf (, list with bullets.)Tj
+/F6 11 Tf -0 -16.376 Td(<listitem></listitem>)Tj
+/F4 11 Tf (, member of the above.)Tj
+/F6 11 Tf 0 -16.376 Td(<screen></screen>)Tj
+/F4 11 Tf (, screen output, implies )Tj
+/F0 11 Tf (<literallayout>)Tj
+/F4 11 Tf (.)Tj
+/F6 11 Tf -0 -16.376 Td(<ulink url="example.com"></ulink>)Tj
+/F4 11 Tf (, like HTML )Tj
+/F0 11 Tf (<a>)Tj
+/F4 11 Tf ( tag.)Tj
+/F6 11 Tf 0 -16.376 Td(<quote></quote>)Tj
+/F4 11 Tf (, for, doh, quoting text.)Tj
+-1.588 -27.988 Td(Look at any of the existing docs for examples of all these and more.)Tj
+0 -26.4 Td(You might also find ")Tj
+0.00 0.00 1.00 rg (Writing Documentation Using DocBook - A Crash Course)Tj
+0.00 0.00 0.00 rg (" useful.)Tj
+/F9 14 Tf 0 -31.4 Td(3.2. Privoxy Documentation Style)Tj
+/F4 11 Tf 0 -27 Td(It will be easier if everyone follows a similar writing style. This just makes it easier to read what someone else has written)Tj
+0 -13.2 Td(if it is all done in a similar fashion.)Tj
+0 -26.4 Td(Here it is:)Tj
+36 -26.4 Td(All tags should be lower case.)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(Tags delimiting a)Tj
+/F6 11 Tf ( block)Tj
+/F4 11 Tf ( of text \(even small blocks\) should be on their own line. Like:)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F8 11 Tf -28.19 683.165 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-172.463 -720 Td(5/36)Tj
+ET
+Q
+endstream
+endobj
+342 0 obj<</Type/Page/Parent 331 0 R/Contents 343 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R/Fc 11 0 R>>/XObject<<>>>>>>endobj
+343 0 obj<</Length 3351      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 148.2 540.0 2.0 re f
+BT
+/F4 11 Tf 36 687 Td 0.000 Tc( <para>)Tj
+-0 -13.2 Td(  Some text goes here.)Tj
+0 -13.2 Td( </para>)Tj
+-0 -39.6 Td(Tags marking individual words, or few words, should be in-line:)Tj
+0 -26.4 Td(  Just to <emphasis>emphasize</emphasis>, some text goes here.)Tj
+0 -26.4 Td(Tags should be nested and step indented for block text like: \(except in-line tags\))Tj
+0 -26.4 Td( <para>)Tj
+-0 -13.2 Td(  <itemizedlist>)Tj
+0 -13.2 Td(   <para>)Tj
+-0 -13.2 Td(    <listitem>)Tj
+0 -13.2 Td(      Some text goes here in our list example.)Tj
+0 -13.2 Td(     </listitem>)Tj
+0 -13.2 Td(   </para>)Tj
+-0 -13.2 Td(  </itemizedlist>)Tj
+0 -13.2 Td( </para>)Tj
+-0 -39.6 Td(This makes it easier to find the text amongst the tags ;-\))Tj
+/Fc 11 Tf -7.81 171.6 Td(\267 )Tj
+/F4 11 Tf 7.81 -184.8 Td(Use white space to separate logical divisions within a document, like between sections. Running everything)Tj
+-0 -13.2 Td(together consistently makes it harder to read and work on.)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(Do not hesitate to make comments. Comments can either use the <comment> element, or the <!-- --> style)Tj
+-0 -13.2 Td(comment familiar from HTML. \(Note in Docbook v4.x <comment> is replaced by <remark>.\))Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(We have an international audience. Refrain from slang, or English idiosyncrasies \(too many to list :\). Humor also)Tj
+0 -13.2 Td(does not translate well sometimes.)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(Try to keep overall line lengths in source files to 80 characters or less for obvious reasons. This is not always)Tj
+-0 -13.2 Td(possible, with lengthy URLs for instance.)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(Our documents are available in differing formats. Right now, they are just plain text, and HTML, but PDF, and)Tj
+0 -13.2 Td(others is always a future possibility. Be careful with URLs \(<ulink>\), and avoid this mistake:)Tj
+-0 -26.4 Td(My favorite site is <ulink url="http://example.com">here</ulink>.)Tj
+0 -26.4 Td(This will render as "My favorite site is here", which is not real helpful in a text doc. Better like this:)Tj
+-0 -26.4 Td(My favorite site is <ulink url="http://example.com">example.com</ulink>.)Tj
+/Fc 11 Tf -7.81 92.4 Td(\267 )Tj
+/F4 11 Tf 7.81 -105.6 Td(All documents should be spell checked occasionally. aspell can check SGML with the )Tj
+/F0 11 Tf (-H)Tj
+/F4 11 Tf ( option. \(ispell I think)Tj
+0 -13.2 Td(too.\))Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F9 14 Tf -28.19 -44.6 Td(3.3. Privoxy Custom Entities)Tj
+/F4 11 Tf 0 -27 Td(Privoxy documentation is using a number of customized "entities" to facilitate documentation maintenance.)Tj
+0 -26.4 Td(We are using a set of "boilerplate" files with generic text, that is used by multiple docs. This way we can write something)Tj
+0 -13.2 Td(once, and use it repeatedly without having to re-write the same content over and over again. If editing such a file, keep in)Tj
+0 -13.2 Td(mind that it should be)Tj
+/F6 11 Tf ( generic)Tj
+/F4 11 Tf (. That is the purpose; so it can be used in varying contexts without additional modifications.)Tj
+/F8 11 Tf 0 672.2 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-172.463 -720 Td(6/36)Tj
+ET
+Q
+endstream
+endobj
+344 0 obj<</Type/Page/Parent 331 0 R/Contents 345 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R/Fc 11 0 R>>/XObject<<>>>>>>endobj
+345 0 obj<</Length 3629      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 396.3 540.0 2.0 re f
+0.0 238.3 540.0 2.0 re f
+BT
+/F4 11 Tf 0 687 Td 0.000 Tc(We are also using what Docbook calls "internal entities". These are like variables in programming. Well, sort of. For)Tj
+0 -13.2 Td(instance, we have the )Tj
+/F0 11 Tf (p-version)Tj
+/F4 11 Tf ( entity that contains the current Privoxy version string. You are strongly encouraged to)Tj
+0 -13.2 Td(use these where possible. Some of these obviously require re-setting with each release \(done by the Makefile\). A)Tj
+0 -13.2 Td(sampling of custom entities are listed below. See any of the main docs for examples.)Tj
+36 -26.4 Td(Re- "boilerplate" text entities are defined like:)Tj
+/F0 11 Tf 0 -26.4 Td(<!entity supported SYSTEM "supported.sgml">)Tj
+/F4 11 Tf -0 -26.4 Td(In this example, the contents of the file, )Tj
+/F0 11 Tf (supported.sgml)Tj
+/F4 11 Tf ( is available for inclusion anywhere in the doc. To)Tj
+0 -13.2 Td(make this happen, just reference the now defined entity: )Tj
+/F0 11 Tf (&supported;)Tj
+/F4 11 Tf ( \(starts with an ampersand and ends with)Tj
+-0 -13.2 Td(a semi-colon\), and the contents will be dumped into the finished doc at that point.)Tj
+/Fc 11 Tf -7.81 79.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -92.4 Td(Commonly used "internal entities":)Tj
+/F6 11 Tf 1.588 -27.988 Td(p-version)Tj
+/F4 11 Tf (: the Privoxy version string, e.g. "2.9.18".)Tj
+/F6 11 Tf 0 -16.376 Td(p-status)Tj
+/F4 11 Tf (: the project status, either "alpha", "beta", or "stable".)Tj
+/F6 11 Tf 0 -16.376 Td(p-not-stable)Tj
+/F4 11 Tf (: use to conditionally include text in "not stable" releases \(e.g. "beta"\).)Tj
+/F6 11 Tf 0 -16.376 Td(p-stable)Tj
+/F4 11 Tf (: just the opposite.)Tj
+/F6 11 Tf -0 -16.376 Td(p-text)Tj
+/F4 11 Tf (: this doc is only generated as text.)Tj
+/Fc 11 Tf -9.398 93.494 Td(\267 )Tj
+/F4 11 Tf -28.19 -121.482 Td(There are others in various places that are defined for a specific purpose. Read the source!)Tj
+/F9 17 Tf 0 -34.4 Td(4. Coding Guidelines)Tj
+/F9 14 Tf 0 -30.6 Td(4.1. Introduction)Tj
+/F4 11 Tf 0 -27 Td(This set of standards is designed to make our lives easier. It is developed with the simple goal of helping us keep the "new)Tj
+0 -13.2 Td(and improved Privoxy" consistent and reliable. Thus making maintenance easier and increasing chances of success of the)Tj
+0 -13.2 Td(project.)Tj
+0 -26.4 Td(And that of course comes back to us as individuals. If we can increase our development and product efficiencies then we)Tj
+0 -13.2 Td(can solve more of the request for changes/improvements and in general feel good about ourselves. ;->)Tj
+/F9 14 Tf 0 -31.4 Td(4.2. Using Comments)Tj
+/F9 11 Tf 0 -27 Td(4.2.1. Comment, Comment, Comment)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Comment as much as possible without commenting the obvious. For example do not comment "aVariable is equal to)Tj
+0 -13.2 Td(bVariable". Instead explain why aVariable should be equal to the bVariable. Just because a person can read code does not)Tj
+0 -13.2 Td(mean they will understand why or what is being done. A reader may spend a lot more time figuring out what is going on)Tj
+0 -13.2 Td(when a simple comment or explanation would have prevented the extra research. Please help your brother IJB'ers out!)Tj
+0 -26.4 Td(The comments will also help justify the intent of the code. If the comment describes something different than what the)Tj
+0 -13.2 Td(code is doing then maybe a programming error is occurring.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F8 11 Tf 0 687.683 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-172.463 -720 Td(7/36)Tj
+ET
+Q
+endstream
+endobj
+346 0 obj<</Type/Page/Parent 331 0 R/Contents 347 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+347 0 obj<</Length 2351      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 532.8 540.0 165.2 re f
+0.00 0.00 0.00 rg 0.0 524.2 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 166.4 540.0 219.2 re f
+0.00 0.00 0.00 rg 0.0 91.8 540.0 2.0 re f
+BT
+/F0 9 Tf 1.588 687.412 Td 0.000 Tc(/* if page size greater than 1k ... */)Tj
+0 -10.8 Td(if \( PageLength\(\) > 1024 \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(    ... "block" the page up ...)Tj
+0 -10.8 Td(})Tj
+0 -21.6 Td(/* if page size is small, send it in blocks */)Tj
+0 -10.8 Td(if \( PageLength\(\) > 1024 \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(    ... "block" the page up ...)Tj
+0 -10.8 Td(})Tj
+0 -21.6 Td(This demonstrates 2 cases of "what not to do".  The first is a)Tj
+0 -10.8 Td("syntax comment".  The second is a comment that does not fit what)Tj
+0 -10.8 Td(is actually being done.)Tj
+/F9 11 Tf -1.588 -29.588 Td(4.2.2. Use blocks for comments)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Comments can help or they can clutter. They help when they are differentiated from the code they describe. One line)Tj
+0 -13.2 Td(comments do not offer effective separation between the comment and the code. Block identifiers do, by surrounding the)Tj
+0 -13.2 Td(code with a clear, definable pattern.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(/*********************************************************************)Tj
+0 -10.8 Td( * This will stand out clearly in your code!)Tj
+0 -10.8 Td( *********************************************************************/)Tj
+0 -10.8 Td(if \( thisVariable == thatVariable \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   DoSomethingVeryImportant\(\);)Tj
+0 -10.8 Td(})Tj
+0 -32.4 Td(/* unfortunately, this may not */)Tj
+0 -10.8 Td(if \( thisVariable == thatVariable \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   DoSomethingVeryImportant\(\);)Tj
+0 -10.8 Td(})Tj
+0 -32.4 Td(if \( thisVariable == thatVariable \) /* this may not either */)Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   DoSomethingVeryImportant\(\);)Tj
+0 -10.8 Td(})Tj
+/F6 11 Tf -1.588 -27.588 Td(Exception:)Tj
+/F4 11 Tf 0 -26.4 Td(If you are trying to add a small logic comment and do not wish to "disrupt" the flow of the code, feel free to use a 1 line)Tj
+0 -13.2 Td(comment which is NOT on the same line as the code.)Tj
+/F8 11 Tf 0 617.353 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-172.463 -720 Td(8/36)Tj
+ET
+Q
+endstream
+endobj
+348 0 obj<</Type/Page/Parent 331 0 R/Contents 349 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+349 0 obj<</Length 2696      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 169.2 540.0 370.4 re f
+0.00 0.00 0.00 rg 0.0 160.6 540.0 2.0 re f
+BT
+/F9 11 Tf 0 687 Td 0.000 Tc(4.2.3. Keep Comments on their own line)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(It goes back to the question of readability. If the comment is on the same line as the code it will be harder to read than the)Tj
+0 -13.2 Td(comment that is on its own line.)Tj
+0 -26.4 Td(There are three exceptions to this rule, which should be violated freely and often: during the definition of variables, at the)Tj
+0 -13.2 Td(end of closing braces, when used to comment parameters.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(/*********************************************************************)Tj
+0 -10.8 Td( * This will stand out clearly in your code,)Tj
+0 -10.8 Td( * But the second example won't.)Tj
+0 -10.8 Td( *********************************************************************/)Tj
+0 -10.8 Td(if \( thisVariable == thatVariable \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   DoSomethingVeryImportant\(\);)Tj
+0 -10.8 Td(})Tj
+0 -21.6 Td(if \( thisVariable == thatVariable \) /*can you see me?*/)Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   DoSomethingVeryImportant\(\); /*not easily*/)Tj
+0 -10.8 Td(})Tj
+0 -32.4 Td(/*********************************************************************)Tj
+0 -10.8 Td( * But, the encouraged exceptions:)Tj
+0 -10.8 Td( *********************************************************************/)Tj
+0 -10.8 Td(int urls_read     = 0;     /* # of urls read + rejected */)Tj
+0 -10.8 Td(int urls_rejected = 0;     /* # of urls rejected */)Tj
+0 -21.6 Td(if \( 1 == X \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   DoSomethingVeryImportant\(\);)Tj
+0 -10.8 Td(})Tj
+0 -32.4 Td(short DoSomethingVeryImportant\()Tj
+0 -10.8 Td(   short firstparam,   /* represents something */)Tj
+0 -10.8 Td(   short nextparam     /* represents something else */ \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   ...code here...)Tj
+0 -21.6 Td(}   /* -END- DoSomethingVeryImportant */)Tj
+/F9 11 Tf -1.588 -29.588 Td(4.2.4. Comment each logical step)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Logical steps should be commented to help others follow the intent of the written code and comments will make the code)Tj
+0 -13.2 Td(more readable.)Tj
+0 -26.4 Td(If you have 25 lines of code without a comment, you should probably go back into it to see where you forgot to put one.)Tj
+0 -26.4 Td(Most "for", "while", "do", etc... loops _probably_ need a comment. After all, these are usually major logic containers.)Tj
+/F8 11 Tf 0 695.776 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-172.463 -720 Td(9/36)Tj
+ET
+Q
+endstream
+endobj
+350 0 obj<</Type/Page/Parent 331 0 R/Contents 351 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+351 0 obj<</Length 2890      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 689.4 540.0 2.0 re f
+0.0 542.2 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 207.2 540.0 143.6 re f
+0.00 0.00 0.00 rg 0.0 198.6 540.0 2.0 re f
+BT
+/F9 11 Tf 0 671.8 Td 0.000 Tc(4.2.5. Comment All Functions Thoroughly)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(A reader of the code should be able to look at the comments just prior to the beginning of a function and discern the)Tj
+0 -13.2 Td(reason for its existence and the consequences of using it. The reader should not have to read through the code to determine)Tj
+0 -13.2 Td(if a given function is safe for a desired use. The proper information thoroughly presented at the introduction of a function)Tj
+0 -13.2 Td(not only saves time for subsequent maintenance or debugging, it more importantly aids in code reuse by allowing a user to)Tj
+0 -13.2 Td(determine the safety and applicability of any function for the problem at hand. As a result of such benefits, all functions)Tj
+0 -13.2 Td(should contain the information presented in the addendum section of this document.)Tj
+/F9 11 Tf 0 -28.4 Td(4.2.6. Comment at the end of braces if the content is more than one screen length)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Each closing brace should be followed on the same line by a comment that describes the origination of the brace if the)Tj
+0 -13.2 Td(original brace is off of the screen, or otherwise far away from the closing brace. This will simplify the debugging,)Tj
+0 -13.2 Td(maintenance, and readability of the code.)Tj
+0 -26.4 Td(As a suggestion , use the following flags to make the comment and its brace more readable:)Tj
+0 -26.4 Td(use following a closing brace: } /* -END- if\(\) or while \(\) or etc... */)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(if \( 1 == X \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   DoSomethingVeryImportant\(\);)Tj
+0 -10.8 Td(   ...some long list of commands...)Tj
+0 -10.8 Td(} /* -END- if x is 1 */)Tj
+0 -21.6 Td(or:)Tj
+0 -21.6 Td(if \( 1 == X \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   DoSomethingVeryImportant\(\);)Tj
+0 -10.8 Td(   ...some long list of commands...)Tj
+0 -10.8 Td(} /* -END- if \( 1 == X \) */)Tj
+/F9 14 Tf -1.588 -32.588 Td(4.3. Naming Conventions)Tj
+/F9 11 Tf 0 -27 Td(4.3.1. Variable Names)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Use all lowercase, and separate words via an underscore \('_'\). Do not start an identifier with an underscore. \(ANSI C)Tj
+0 -13.2 Td(reserves these for use by the compiler and system headers.\) Do not use identifiers which are reserved in ANSI C++. \(E.g.)Tj
+0 -13.2 Td(template, class, true, false, ...\). This is in case we ever decide to port Privoxy to C++.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F8 11 Tf 0 674.577 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(10/36)Tj
+ET
+Q
+endstream
+endobj
+352 0 obj<</Type/Page/Parent 331 0 R/Contents 353 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+353 0 obj<</Length 2535      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 684.0 540.0 14.0 re f
+0.0 630.4 540.0 14.0 re f
+0.00 0.00 0.00 rg 0.0 621.8 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 469.3 540.0 14.0 re f
+0.0 404.9 540.0 24.8 re f
+0.00 0.00 0.00 rg 0.0 396.3 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 246.1 540.0 24.8 re f
+0.0 170.9 540.0 35.6 re f
+0.00 0.00 0.00 rg 0.0 162.3 540.0 2.0 re f
+BT
+/F0 9 Tf 1.588 687.412 Td 0.000 Tc(int ms_iis5_hack = 0;)Tj
+/F6 11 Tf -1.588 -27.588 Td(Instead of:)Tj
+/F0 9 Tf 1.588 -25.988 Td(int msiis5hack = 0; int msIis5Hack = 0;)Tj
+/F9 11 Tf -1.588 -29.588 Td(4.3.2. Function Names)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Use all lowercase, and separate words via an underscore \('_'\). Do not start an identifier with an underscore. \(ANSI C)Tj
+0 -13.2 Td(reserves these for use by the compiler and system headers.\) Do not use identifiers which are reserved in ANSI C++. \(E.g.)Tj
+0 -13.2 Td(template, class, true, false, ...\). This is in case we ever decide to port Privoxy to C++.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(int load_some_file\( struct client_state *csp \))Tj
+/F6 11 Tf -1.588 -27.588 Td(Instead of:)Tj
+/F0 9 Tf 1.588 -25.988 Td(int loadsomefile\( struct client_state *csp \))Tj
+0 -10.8 Td(int loadSomeFile\( struct client_state *csp \))Tj
+/F9 11 Tf -1.588 -29.588 Td(4.3.3. Header file prototypes)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Use a descriptive parameter name in the function prototype in header files. Use the same parameter name in the header)Tj
+0 -13.2 Td(file that you use in the c file.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(\(.h\) extern int load_aclfile\( struct client_state *csp \);)Tj
+0 -10.8 Td(\(.c\) int load_aclfile\( struct client_state *csp \))Tj
+/F6 11 Tf -1.588 -27.588 Td(Instead of:)Tj
+/F0 9 Tf 1.588 -25.988 Td(\(.h\) extern int load_aclfile\( struct client_state * \); or )Tj
+0 -10.8 Td(\(.h\) extern int load_aclfile\(\); )Tj
+0 -10.8 Td(\(.c\) int load_aclfile\( struct client_state *csp \))Tj
+/F9 11 Tf -1.588 -29.588 Td(4.3.4. Enumerations, and #defines)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Use all capital letters, with underscores between words. Do not start an identifier with an underscore. \(ANSI C reserves)Tj
+0 -13.2 Td(these for use by the compiler and system headers.\))Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F8 11 Tf 0 667.659 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(11/36)Tj
+ET
+Q
+endstream
+endobj
+354 0 obj<</Type/Page/Parent 331 0 R/Contents 355 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+355 0 obj<</Length 2360      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 673.2 540.0 24.8 re f
+0.0 536.8 540.0 57.2 re f
+0.00 0.00 0.00 rg 0.0 528.2 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 349.3 540.0 14.0 re f
+0.0 252.5 540.0 57.2 re f
+0.00 0.00 0.00 rg 0.0 243.9 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 42.1 540.0 46.4 re f
+BT
+0.00 0.00 0.00 rg /F0 9 Tf 1.588 687.412 Td 0.000 Tc(\(enumeration\) : enum Boolean { FALSE, TRUE };)Tj
+0 -10.8 Td(\(#define\) : #define DEFAULT_SIZE 100;)Tj
+/F6 11 Tf -1.588 -27.588 Td(Note:)Tj
+/F4 11 Tf ( We have a standard naming scheme for #defines that toggle a feature in the preprocessor: FEATURE_>, where > is)Tj
+0 -13.2 Td(a short \(preferably 1 or 2 word\) description.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(#define FEATURE_FORCE 1)Tj
+0 -21.6 Td(#ifdef FEATURE_FORCE)Tj
+0 -10.8 Td(#define FORCE_PREFIX blah)Tj
+0 -10.8 Td(#endif /* def FEATURE_FORCE */)Tj
+/F9 11 Tf -1.588 -29.588 Td(4.3.5. Constants)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Spell common words out entirely \(do not remove vowels\).)Tj
+0 -26.4 Td(Use only widely-known domain acronyms and abbreviations. Capitalize all letters of an acronym.)Tj
+0 -26.4 Td(Use underscore \(_\) to separate adjacent acronyms and abbreviations. Never terminate a name with an underscore.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(#define USE_IMAGE_LIST 1)Tj
+/F6 11 Tf -1.588 -27.588 Td(Instead of:)Tj
+/F0 9 Tf 1.588 -25.988 Td(#define USE_IMG_LST 1 or )Tj
+0 -10.8 Td(#define _USE_IMAGE_LIST 1 or)Tj
+0 -10.8 Td(#define USE_IMAGE_LIST_ 1 or )Tj
+0 -10.8 Td(#define use_image_list 1 or)Tj
+0 -10.8 Td(#define UseImageList 1)Tj
+/F9 14 Tf -1.588 -32.588 Td(4.4. Using Space)Tj
+/F9 11 Tf 0 -27 Td(4.4.1. Put braces on a line by themselves.)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(The brace needs to be on a line all by itself, not at the end of the statement. Curly braces should line up with the construct)Tj
+0 -13.2 Td(that they're associated with. This practice makes it easier to identify the opening and closing braces for a block.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(if \( this == that \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   ...)Tj
+0 -10.8 Td(})Tj
+/F8 11 Tf -1.588 674.494 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(12/36)Tj
+ET
+Q
+endstream
+endobj
+356 0 obj<</Type/Page/Parent 331 0 R/Contents 357 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+357 0 obj<</Length 2184      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 421.2 540.0 78.8 re f
+0.00 0.00 0.00 rg 0.0 412.6 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 230.0 540.0 57.2 re f
+0.00 0.00 0.00 rg 0.0 63.0 540.0 2.0 re f
+BT
+/F6 11 Tf 0 687 Td 0.000 Tc(Instead of:)Tj
+/F4 11 Tf 0 -26.4 Td(if \( this == that \) { ... })Tj
+0 -26.4 Td(or)Tj
+0 -26.4 Td(if \( this == that \) { ... })Tj
+/F6 11 Tf 0 -26.4 Td(Note:)Tj
+/F4 11 Tf ( In the special case that the if-statement is inside a loop, and it is trivial, i.e. it tests for a condition that is obvious)Tj
+0 -13.2 Td(from the purpose of the block, one-liners as above may optically preserve the loop structure and make it easier to read.)Tj
+/F6 11 Tf 0 -26.4 Td(Status:)Tj
+/F4 11 Tf ( developer-discretion.)Tj
+/F6 11 Tf 0 -26.4 Td(Example exception:)Tj
+/F0 9 Tf 1.588 -25.988 Td(while \( more lines are read \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   /* Please document what is/is not a comment line here */)Tj
+0 -10.8 Td(   if \( it's a comment \) continue;)Tj
+0 -21.6 Td(   do_something\( line \);)Tj
+0 -10.8 Td(})Tj
+/F9 11 Tf -1.588 -29.588 Td(4.4.2. ALL control statements should have a block)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Using braces to make a block will make your code more readable and less prone to error. All control statements should)Tj
+0 -13.2 Td(have a block defined.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(if \( this == that \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   DoSomething\(\);)Tj
+0 -10.8 Td(   DoSomethingElse\(\);)Tj
+0 -10.8 Td(})Tj
+/F6 11 Tf -1.588 -27.588 Td(Instead of:)Tj
+/F4 11 Tf 0 -26.4 Td(if \( this == that \) DoSomething\(\); DoSomethingElse\(\);)Tj
+0 -26.4 Td(or)Tj
+0 -26.4 Td(if \( this == that \) DoSomething\(\);)Tj
+/F6 11 Tf 0 -26.4 Td(Note:)Tj
+/F4 11 Tf ( The first example in "Instead of" will execute in a manner other than that which the developer desired \(per)Tj
+0 -13.2 Td(indentation\). Using code braces would have prevented this "feature". The "explanation" and "exception" from the point)Tj
+0 -13.2 Td(above also applies.)Tj
+/F8 11 Tf 0 646.153 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(13/36)Tj
+ET
+Q
+endstream
+endobj
+358 0 obj<</Type/Page/Parent 331 0 R/Contents 359 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+359 0 obj<</Length 2427      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 631.2 540.0 14.0 re f
+0.00 0.00 0.00 rg 0.0 530.2 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 328.4 540.0 89.6 re f
+0.00 0.00 0.00 rg 0.0 319.8 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 132.5 540.0 35.6 re f
+0.00 0.00 0.00 rg 0.0 97.5 540.0 2.0 re f
+BT
+/F9 11 Tf 0 687 Td 0.000 Tc(4.4.3. Do not belabor/blow-up boolean expressions)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(structure->flag = \( condition \);)Tj
+/F6 11 Tf -1.588 -27.588 Td(Instead of:)Tj
+/F4 11 Tf 0 -26.4 Td(if \( condition \) { structure->flag = 1; } else { structure->flag = 0; })Tj
+/F6 11 Tf 0 -26.4 Td(Note:)Tj
+/F4 11 Tf ( The former is readable and concise. The later is wordy and inefficient. Please assume that any developer new to the)Tj
+0 -13.2 Td(project has at least a "good" knowledge of C/C++. \(Hope I do not offend by that last comment ... 8-\))Tj
+/F9 11 Tf 0 -28.4 Td(4.4.4. Use white space freely because it is free)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Make it readable. The notable exception to using white space freely is listed in the next guideline.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(int firstValue   = 0;)Tj
+0 -10.8 Td(int someValue    = 0;)Tj
+0 -10.8 Td(int anotherValue = 0;)Tj
+0 -10.8 Td(int thisVariable = 0;)Tj
+0 -21.6 Td(if \( thisVariable == thatVariable \))Tj
+0 -21.6 Td(firstValue = oldValue + \( \( someValue - anotherValue \) - whatever \))Tj
+/F9 11 Tf -1.588 -29.588 Td(4.4.5. Don't use white space around structure operators)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(- structure pointer operator \( "->" \) - member operator \( "." \) - functions and parentheses)Tj
+0 -26.4 Td(It is a general coding practice to put pointers, references, and function parentheses next to names. With spaces, the)Tj
+0 -13.2 Td(connection between the object and variable/function name is not as clear.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(aStruct->aMember;)Tj
+0 -10.8 Td(aStruct.aMember;)Tj
+0 -10.8 Td(FunctionName\(\);)Tj
+/F6 11 Tf -1.588 -27.588 Td(Instead of:)Tj
+/F4 11 Tf ( aStruct -> aMember; aStruct . aMember; FunctionName \(\);)Tj
+/F9 11 Tf 0 -28.4 Td(4.4.6. Make the last brace of a function stand out)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F8 11 Tf 0 666.53 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(14/36)Tj
+ET
+Q
+endstream
+endobj
+360 0 obj<</Type/Page/Parent 331 0 R/Contents 361 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+361 0 obj<</Length 2250      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 576.0 540.0 122.0 re f
+0.00 0.00 0.00 rg 0.0 435.4 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 77.6 540.0 219.2 re f
+0.00 0.00 0.00 rg 0.0 69.0 540.0 2.0 re f
+BT
+/F0 9 Tf 1.588 687.412 Td 0.000 Tc(int function1\( ... \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   ...code...)Tj
+0 -10.8 Td(   return\( retCode \);)Tj
+0 -21.6 Td(}   /* -END- function1 */)Tj
+0 -32.4 Td(int function2\( ... \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(}   /* -END- function2 */)Tj
+/F6 11 Tf -1.588 -27.588 Td(Instead of:)Tj
+/F4 11 Tf 0 -26.4 Td(int function1\( ... \) { ...code... return\( retCode \); } int function2\( ... \) { })Tj
+/F6 11 Tf 0 -26.4 Td(Note:)Tj
+/F4 11 Tf ( Use 1 blank line before the closing brace and 2 lines afterward. This makes the end of function standout to the most)Tj
+0 -13.2 Td(casual viewer. Although function comments help separate functions, this is still a good coding practice. In fact, I follow)Tj
+0 -13.2 Td(these rules when using blocks in "for", "while", "do" loops, and long if {} statements too. After all whitespace is free!)Tj
+/F6 11 Tf 0 -26.4 Td(Status:)Tj
+/F4 11 Tf ( developer-discretion on the number of blank lines. Enforced is the end of function comments.)Tj
+/F9 11 Tf 0 -28.4 Td(4.4.7. Use 3 character indentions)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(If some use 8 character TABs and some use 3 character TABs, the code can look *very* ragged. So use 3 character)Tj
+0 -13.2 Td(indentions only. If you like to use TABs, pass your code through a filter such as "expand -t3" before checking in your)Tj
+0 -13.2 Td(code.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(static const char * const url_code_map[256] =)Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   NULL, ...)Tj
+0 -10.8 Td(};)Tj
+0 -32.4 Td(int function1\( ... \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   if \( 1 \))Tj
+0 -10.8 Td(   {)Tj
+0 -10.8 Td(      return\( ALWAYS_TRUE \);)Tj
+0 -10.8 Td(   })Tj
+0 -10.8 Td(   else)Tj
+0 -10.8 Td(   {)Tj
+0 -10.8 Td(      return\( HOW_DID_YOU_GET_HERE \);)Tj
+0 -10.8 Td(   })Tj
+0 -21.6 Td(   return\( NEVER_GETS_HERE \);)Tj
+0 -21.6 Td(})Tj
+/F8 11 Tf -1.588 638.965 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(15/36)Tj
+ET
+Q
+endstream
+endobj
+362 0 obj<</Type/Page/Parent 331 0 R/Contents 363 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+363 0 obj<</Length 2543      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 513.6 540.0 35.6 re f
+0.00 0.00 0.00 rg 0.0 439.0 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 261.2 540.0 35.6 re f
+0.00 0.00 0.00 rg 0.0 252.6 540.0 2.0 re f
+0.0 158.2 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 22.0 540.0 24.0 re f
+BT
+0.00 0.00 0.00 rg /F9 14 Tf 0 684 Td 0.000 Tc(4.5. Initializing)Tj
+/F9 11 Tf 0 -27 Td(4.5.1. Initialize all variables)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Do not assume that the variables declared will not be used until after they have been assigned a value somewhere else in)Tj
+0 -13.2 Td(the code. Remove the chance of accidentally using an unassigned variable.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(short anShort = 0;)Tj
+0 -10.8 Td(float aFloat  = 0;)Tj
+0 -10.8 Td(struct *ptr = NULL;)Tj
+/F6 11 Tf -1.588 -27.588 Td(Note:)Tj
+/F4 11 Tf ( It is much easier to debug a SIGSEGV if the message says you are trying to access memory address 00000000 and)Tj
+0 -13.2 Td(not 129FA012; or arrayPtr[20] causes a SIGSEV vs. arrayPtr[0].)Tj
+/F6 11 Tf 0 -26.4 Td(Status:)Tj
+/F4 11 Tf ( developer-discretion if and only if the variable is assigned a value "shortly after" declaration.)Tj
+/F9 14 Tf 0 -31.4 Td(4.6. Functions)Tj
+/F9 11 Tf 0 -27 Td(4.6.1. Name functions that return a boolean as a question.)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Value should be phrased as a question that would logically be answered as a true or false statement)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(ShouldWeBlockThis\(\);)Tj
+0 -10.8 Td(ContainsAnImage\(\);)Tj
+0 -10.8 Td(IsWebPageBlank\(\);)Tj
+/F9 11 Tf -1.588 -29.588 Td(4.6.2. Always specify a return type for a function.)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(The default return for a function is an int. To avoid ambiguity, create a return for a function when the return has a)Tj
+0 -13.2 Td(purpose, and create a void return type if the function does not need to return anything.)Tj
+/F9 11 Tf 0 -28.4 Td(4.6.3. Minimize function calls when iterating by using variables)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(It is easy to write the following code, and a clear argument can be made that the code is easy to understand:)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(for \( size_t cnt = 0; cnt < blockListLength\(\); cnt ++ \))Tj
+0 -10.8 Td({)Tj
+/F8 11 Tf -1.588 695.341 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(16/36)Tj
+ET
+Q
+endstream
+endobj
+364 0 obj<</Type/Page/Parent 331 0 R/Contents 365 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+365 0 obj<</Length 3160      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 673.2 540.0 24.8 re f
+0.0 460.0 540.0 68.0 re f
+0.00 0.00 0.00 rg 0.0 411.8 540.0 2.0 re f
+0.0 264.6 540.0 2.0 re f
+0.0 130.6 540.0 2.0 re f
+BT
+/F0 9 Tf 1.588 687.412 Td 0.000 Tc(   ....)Tj
+0 -10.8 Td(})Tj
+/F6 11 Tf -1.588 -27.588 Td(Note:)Tj
+/F4 11 Tf ( Unfortunately, this makes a function call for each and every iteration. This increases the overhead in the program,)Tj
+0 -13.2 Td(because the compiler has to look up the function each time, call it, and return a value. Depending on what occurs in the)Tj
+0 -13.2 Td(blockListLength\(\) call, it might even be creating and destroying structures with each iteration, even though in each case it)Tj
+0 -13.2 Td(is comparing "cnt" to the same value, over and over. Remember too - even a call to blockListLength\(\) is a function call,)Tj
+0 -13.2 Td(with the same overhead.)Tj
+0 -26.4 Td(Instead of using a function call during the iterations, assign the value to a variable, and evaluate using the variable.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(size_t len = blockListLength\(\);)Tj
+0 -21.6 Td(for \( size_t cnt = 0; cnt < len; cnt ++ \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   ....)Tj
+0 -10.8 Td(})Tj
+/F6 11 Tf -1.588 -27.588 Td(Exceptions:)Tj
+/F4 11 Tf ( if the value of blockListLength\(\) *may* change or could *potentially* change, then you must code the)Tj
+0 -13.2 Td(function call in the for/while loop.)Tj
+/F9 11 Tf 0 -28.4 Td(4.6.4. Pass and Return by Const Reference)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(This allows a developer to define a const pointer and call your function. If your function does not have the const keyword,)Tj
+0 -13.2 Td(we may not be able to use your function. Consider strcmp, if it were defined as: extern int strcmp\( char *s1, char *s2 \);)Tj
+0 -26.4 Td(I could then not use it to compare argv's in main: int main\( int argc, const char *argv[] \) { strcmp\( argv[0], "privoxy" \); })Tj
+0 -26.4 Td(Both these pointers are *const*! If the c runtime library maintainers do it, we should too.)Tj
+/F9 11 Tf 0 -28.4 Td(4.6.5. Pass and Return by Value)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Most structures cannot fit onto a normal stack entry \(i.e. they are not 4 bytes or less\). Aka, a function declaration like: int)Tj
+0 -13.2 Td(load_aclfile\( struct client_state csp \))Tj
+0 -26.4 Td(would not work. So, to be consistent, we should declare all prototypes with "pass by value": int load_aclfile\( struct)Tj
+0 -13.2 Td(client_state *csp \))Tj
+/F9 11 Tf 0 -28.4 Td(4.6.6. Names of include files)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Your include statements should contain the file name without a path. The path should be listed in the Makefile, using -I as)Tj
+0 -13.2 Td(processor directive to search the indicated paths. An exception to this would be for some proprietary software that utilizes)Tj
+0 -13.2 Td(a partial path to distinguish their header files from system or other header files.)Tj
+/F8 11 Tf 0 686.153 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(17/36)Tj
+ET
+Q
+endstream
+endobj
+366 0 obj<</Type/Page/Parent 331 0 R/Contents 367 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+367 0 obj<</Length 2264      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 646.8 540.0 24.8 re f
+0.0 582.4 540.0 24.8 re f
+0.00 0.00 0.00 rg 0.0 534.2 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 336.1 540.0 46.4 re f
+0.00 0.00 0.00 rg 0.0 327.5 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 90.9 540.0 111.2 re f
+0.00 0.00 0.00 rg 0.0 82.3 540.0 2.0 re f
+BT
+/F6 11 Tf 0 687 Td 0.000 Tc(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(#include <iostream.h>     /* This is not a local include */)Tj
+0 -10.8 Td(#include "config.h"       /* This IS a local include */)Tj
+/F6 11 Tf -1.588 -27.588 Td(Exception:)Tj
+/F0 9 Tf 1.588 -25.988 Td(/* This is not a local include, but requires a path element. */ )Tj
+0 -10.8 Td(#include <sys/fileName.h>)Tj
+/F6 11 Tf -1.588 -27.588 Td(Note:)Tj
+/F4 11 Tf ( Please! do not add "-I." to the Makefile without a _very_ good reason. This duplicates the #include "file.h")Tj
+0 -13.2 Td(behavior.)Tj
+/F9 11 Tf 0 -28.4 Td(4.6.7. Provide multiple inclusion protection)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Prevents compiler and linker errors resulting from redefinition of items.)Tj
+0 -26.4 Td(Wrap each header file with the following syntax to prevent multiple inclusions of the file. Of course, replace)Tj
+0 -13.2 Td(PROJECT_H with your file name, with "." Changed to "_", and make it uppercase.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(#ifndef PROJECT_H_INCLUDED)Tj
+0 -10.8 Td(#define PROJECT_H_INCLUDED)Tj
+0 -10.8 Td( ...)Tj
+0 -10.8 Td(#endif /* ndef PROJECT_H_INCLUDED */)Tj
+/F9 11 Tf -1.588 -29.588 Td(4.6.8. Use `extern "C"` when appropriate)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(If our headers are included from C++, they must declare our functions as `extern "C"`. This has no cost in C, but increases)Tj
+0 -13.2 Td(the potential re-usability of our code.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(#ifdef __cplusplus)Tj
+0 -10.8 Td(extern "C")Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(#endif /* def __cplusplus */)Tj
+0 -21.6 Td(... function definitions here ...)Tj
+0 -21.6 Td(#ifdef __cplusplus)Tj
+0 -10.8 Td(})Tj
+0 -10.8 Td(#endif /* def __cplusplus */)Tj
+/F8 11 Tf -1.588 625.718 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(18/36)Tj
+ET
+Q
+endstream
+endobj
+368 0 obj<</Type/Page/Parent 331 0 R/Contents 369 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+369 0 obj<</Length 2601      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 535.2 540.0 57.2 re f
+0.00 0.00 0.00 rg 0.0 460.6 540.0 2.0 re f
+0.0 336.2 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 34.8 540.0 176.0 re f
+BT
+0.00 0.00 0.00 rg /F9 11 Tf 0 687 Td 0.000 Tc(4.6.9. Where Possible, Use Forward Struct Declaration Instead of Includes)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Useful in headers that include pointers to other struct's. Modifications to excess header files may cause needless compiles.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(/*********************************************************************)Tj
+0 -10.8 Td( * We're avoiding an include statement here!)Tj
+0 -10.8 Td( *********************************************************************/)Tj
+0 -10.8 Td(struct file_list;)Tj
+0 -10.8 Td(extern file_list *xyz;)Tj
+/F6 11 Tf -1.588 -27.588 Td(Note:)Tj
+/F4 11 Tf ( If you declare "file_list xyz;" \(without the pointer\), then including the proper header file is necessary. If you only)Tj
+0 -13.2 Td(want to prototype a pointer, however, the header file is unnecessary.)Tj
+/F6 11 Tf 0 -26.4 Td(Status:)Tj
+/F4 11 Tf ( Use with discretion.)Tj
+/F9 14 Tf 0 -31.4 Td(4.7. General Coding Practices)Tj
+/F9 11 Tf 0 -27 Td(4.7.1. Turn on warnings)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation)Tj
+/F4 11 Tf 0 -26.4 Td(Compiler warnings are meant to help you find bugs. You should turn on as many as possible. With GCC, the switch is)Tj
+0 -13.2 Td("-Wall". Try and fix as many warnings as possible.)Tj
+/F9 11 Tf 0 -28.4 Td(4.7.2. Provide a default case for all switch statements)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(What you think is guaranteed is never really guaranteed. The value that you don't think you need to check is the one that)Tj
+0 -13.2 Td(someday will be passed. So, to protect yourself from the unknown, always have a default step in a switch statement.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(switch\( hash_string\( cmd \) \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   case hash_actions_file :)Tj
+0 -10.8 Td(      ... code ...)Tj
+0 -10.8 Td(      break;)Tj
+0 -21.6 Td(   case hash_confdir :)Tj
+0 -10.8 Td(      ... code ...)Tj
+0 -10.8 Td(      break;)Tj
+0 -21.6 Td(   default :)Tj
+0 -10.8 Td(      log_error\( ... \);)Tj
+0 -10.8 Td(      ... anomaly code goes here ...)Tj
+0 -10.8 Td(      continue; / break; / exit\( 1 \); / etc ...)Tj
+0 -21.6 Td(} /* end switch\( hash_string\( cmd \) \) */)Tj
+/F8 11 Tf -1.588 681.765 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(19/36)Tj
+ET
+Q
+endstream
+endobj
+370 0 obj<</Type/Page/Parent 331 0 R/Contents 371 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+371 0 obj<</Length 3242      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 597.0 540.0 2.0 re f
+0.0 397.0 540.0 2.0 re f
+0.0 263.0 540.0 2.0 re f
+0.0 155.4 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 22.0 540.0 21.2 re f
+BT
+0.00 0.00 0.00 rg /F6 11 Tf 0 687 Td 0.000 Tc(Note:)Tj
+/F4 11 Tf ( If you already have a default condition, you are obviously exempt from this point. Of note, most of the WIN32 code)Tj
+0 -13.2 Td(calls `DefWindowProc' after the switch statement. This API call *should* be included in a default statement.)Tj
+/F6 11 Tf 0 -26.4 Td(Another Note:)Tj
+/F4 11 Tf ( This is not so much a readability issue as a robust programming issue. The "anomaly code goes here" may)Tj
+0 -13.2 Td(be no more than a print to the STDERR stream \(as in load_config\). Or it may really be an ABEND condition.)Tj
+/F6 11 Tf 0 -26.4 Td(Status:)Tj
+/F4 11 Tf ( Programmer discretion is advised.)Tj
+/F9 11 Tf 0 -28.4 Td(4.7.3. Try to avoid falling through cases in a switch statement.)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(In general, you will want to have a 'break' statement within each 'case' of a switch statement. This allows for the code to)Tj
+0 -13.2 Td(be more readable and understandable, and furthermore can prevent unwanted surprises if someone else later gets creative)Tj
+0 -13.2 Td(and moves the code around.)Tj
+0 -26.4 Td(The language allows you to plan the fall through from one case statement to another simply by omitting the break)Tj
+0 -13.2 Td(statement within the case statement. This feature does have benefits, but should only be used in rare cases. In general, use)Tj
+0 -13.2 Td(a break statement for each case statement.)Tj
+0 -26.4 Td(If you choose to allow fall through, you should comment both the fact of the fall through and reason why you felt it was)Tj
+0 -13.2 Td(necessary.)Tj
+/F9 11 Tf 0 -28.4 Td(4.7.4. Use 'long' or 'short' Instead of 'int')Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(On 32-bit platforms, int usually has the range of long. On 16-bit platforms, int has the range of short.)Tj
+/F6 11 Tf 0 -26.4 Td(Status:)Tj
+/F4 11 Tf ( open-to-debate. In the case of most FSF projects \(including X/GNU-Emacs\), there are typedefs to int4, int8,)Tj
+0 -13.2 Td(int16, \(or equivalence ... I forget the exact typedefs now\). Should we add these to IJB now that we have a "configure")Tj
+0 -13.2 Td(script?)Tj
+/F9 11 Tf 0 -28.4 Td(4.7.5. Don't mix size_t and other types)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(The type of size_t varies across platforms. Do not make assumptions about whether it is signed or unsigned, or about how)Tj
+0 -13.2 Td(long it is. Do not compare a size_t against another variable of a different type \(or even against a constant\) without casting)Tj
+0 -13.2 Td(one of the values. Try to avoid using size_t if you can.)Tj
+/F9 11 Tf 0 -28.4 Td(4.7.6. Declare each variable and struct on its own line.)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(It can be tempting to declare a series of variables all on one line. Don't.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(long a = 0;)Tj
+/F8 11 Tf -1.588 687.389 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(20/36)Tj
+ET
+Q
+endstream
+endobj
+372 0 obj<</Type/Page/Parent 331 0 R/Contents 373 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+373 0 obj<</Length 2944      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 673.2 540.0 24.8 re f
+0.00 0.00 0.00 rg 0.0 506.2 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 342.8 540.0 24.8 re f
+0.00 0.00 0.00 rg 0.0 334.2 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 157.7 540.0 24.8 re f
+0.00 0.00 0.00 rg 0.0 56.7 540.0 2.0 re f
+BT
+/F0 9 Tf 1.588 687.412 Td 0.000 Tc(long b = 0;)Tj
+0 -10.8 Td(long c = 0;)Tj
+/F6 11 Tf -1.588 -27.588 Td(Instead of:)Tj
+/F4 11 Tf 0 -26.4 Td(long a, b, c;)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf ( - there is more room for comments on the individual variables - easier to add new variables without)Tj
+0 -13.2 Td(messing up the original ones - when searching on a variable to find its type, there is less clutter to "visually" eliminate)Tj
+/F6 11 Tf 0 -26.4 Td(Exceptions:)Tj
+/F4 11 Tf ( when you want to declare a bunch of loop variables or other trivial variables; feel free to declare them on 1)Tj
+0 -13.2 Td(line. You should, although, provide a good comment on their functions.)Tj
+/F6 11 Tf 0 -26.4 Td(Status:)Tj
+/F4 11 Tf ( developer-discretion.)Tj
+/F9 11 Tf 0 -28.4 Td(4.7.7. Use malloc/zalloc sparingly)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(Create a local struct \(on the stack\) if the variable will live and die within the context of one function call.)Tj
+0 -26.4 Td(Only "malloc" a struct \(on the heap\) if the variable's life will extend beyond the context of one function call.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(If a function creates a struct and stores a pointer to it in a)Tj
+0 -10.8 Td(list, then it should definitely be allocated via `malloc'.)Tj
+/F9 11 Tf -1.588 -29.588 Td(4.7.8. The Programmer Who Uses 'malloc' is Responsible for Ensuring 'free')Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(If you have to "malloc" an instance, you are responsible for insuring that the instance is `free'd, even if the deallocation)Tj
+0 -13.2 Td(event falls within some other programmer's code. You are also responsible for ensuring that deletion is timely \(i.e. not too)Tj
+0 -13.2 Td(soon, not too late\). This is known as "low-coupling" and is a "good thing \(tm\)". You may need to offer a)Tj
+0 -13.2 Td(free/unload/destructor type function to accommodate this.)Tj
+/F6 11 Tf 0 -26.4 Td(Example:)Tj
+/F0 9 Tf 1.588 -25.988 Td(int load_re_filterfile\( struct client_state *csp \) { ... })Tj
+0 -10.8 Td(static void unload_re_filterfile\( void *f \) { ... })Tj
+/F6 11 Tf -1.588 -27.588 Td(Exceptions:)Tj
+/F4 11 Tf 0 -26.4 Td(The developer cannot be expected to provide `free'ing functions for C run-time library functions ... such as `strdup'.)Tj
+/F6 11 Tf 0 -26.4 Td(Status:)Tj
+/F4 11 Tf ( developer-discretion. The "main" use of this standard is for allocating and freeing data structures \(complex or)Tj
+0 -13.2 Td(nested\).)Tj
+/F8 11 Tf 0 652.53 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(21/36)Tj
+ET
+Q
+endstream
+endobj
+374 0 obj<</Type/Page/Parent 331 0 R/Contents 375 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+375 0 obj<</Length 3070      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 570.6 540.0 2.0 re f
+0.0 291.4 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 22.0 549.6 206.4 re f
+BT
+0.00 0.00 0.00 rg /F9 11 Tf 0 687 Td 0.000 Tc(4.7.9. Add loaders to the `file_list' structure and in order)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(I have ordered all of the "blocker" file code to be in alpha order. It is easier to add/read new blockers when you expect a)Tj
+0 -13.2 Td(certain order.)Tj
+/F6 11 Tf 0 -26.4 Td(Note:)Tj
+/F4 11 Tf ( It may appear that the alpha order is broken in places by POPUP tests coming before PCRS tests. But since)Tj
+0 -13.2 Td(POPUPs can also be referred to as KILLPOPUPs, it is clear that it should come first.)Tj
+/F9 11 Tf 0 -28.4 Td(4.7.10. "Uncertain" new code and/or changes to existing code, use FIXME)Tj
+/F6 11 Tf 0 -26.4 Td(Explanation:)Tj
+/F4 11 Tf 0 -26.4 Td(If you have enough confidence in new code or confidence in your changes, but are not *quite* sure of the repercussions,)Tj
+0 -13.2 Td(add this:)Tj
+0 -26.4 Td(/* FIXME: this code has a logic error on platform XYZ, * attempting to fix */ #ifdef PLATFORM ...changed code here...)Tj
+0 -13.2 Td(#endif)Tj
+0 -26.4 Td(or:)Tj
+0 -26.4 Td(/* FIXME: I think the original author really meant this... */ ...changed code here...)Tj
+0 -26.4 Td(or:)Tj
+0 -26.4 Td(/* FIXME: new code that *may* break something else... */ ...new code here...)Tj
+/F6 11 Tf 0 -26.4 Td(Note:)Tj
+/F4 11 Tf ( If you make it clear that this may or may not be a "good thing \(tm\)", it will be easier to identify and include in the)Tj
+0 -13.2 Td(project \(or conversely exclude from the project\).)Tj
+/F9 14 Tf 0 -31.4 Td(4.8. Addendum: Template for files and function comment blocks:)Tj
+/F6 11 Tf 0 -27 Td(Example for file comments:)Tj
+/F0 9 Tf 1.588 -25.988 Td(const char FILENAME_rcs[] = "$Id: developer-manual.sgml,v 1.46.2.4 2002/05/29 00:30:59 mal0rd Exp $";)Tj
+0 -10.8 Td(/*********************************************************************)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( * File        :  $Source$)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( * Purpose     :  \(Fill me in with a good description!\))Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( * Copyright   :  Written by and Copyright \(C\) 2001 the SourceForge)Tj
+0 -10.8 Td( *                Privoxy team. http://www.privoxy.org/)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( *                Based on the Internet Junkbuster originally written)Tj
+0 -10.8 Td( *                by and Copyright \(C\) 1997 Anonymous Coders and)Tj
+0 -10.8 Td( *                Junkbusters Corporation.  http://www.junkbusters.com)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( *                This program is free software; you can redistribute it)Tj
+0 -10.8 Td( *                and/or modify it under the terms of the GNU General)Tj
+0 -10.8 Td( *                Public License as published by the Free Software)Tj
+0 -10.8 Td( *                Foundation; either version 2 of the License, or \(at)Tj
+/F8 11 Tf -1.588 685.789 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(22/36)Tj
+ET
+Q
+endstream
+endobj
+376 0 obj<</Type/Page/Parent 331 0 R/Contents 377 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R>>/XObject<<>>>>>>endobj
+377 0 obj<</Length 3802      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 424.8 549.6 273.2 re f
+0.0 22.0 540.0 284.0 re f
+BT
+0.00 0.00 0.00 rg /F0 9 Tf 1.588 687.412 Td 0.000 Tc( *                your option\) any later version.)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( *                This program is distributed in the hope that it will)Tj
+0 -10.8 Td( *                be useful, but WITHOUT ANY WARRANTY; without even the)Tj
+0 -10.8 Td( *                implied warranty of MERCHANTABILITY or FITNESS FOR A)Tj
+0 -10.8 Td( *                PARTICULAR PURPOSE.  See the GNU General Public)Tj
+0 -10.8 Td( *                License for more details.)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( *                The GNU General Public License should be included with)Tj
+0 -10.8 Td( *                this file.  If not, you can view it at)Tj
+0 -10.8 Td( *                http://www.gnu.org/copyleft/gpl.html)Tj
+0 -10.8 Td( *                or write to the Free Software Foundation, Inc., 59)Tj
+0 -10.8 Td( *                Temple Place - Suite 330, Boston, MA  02111-1307, USA.)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( * Revisions   :)Tj
+0 -10.8 Td( *    $Log$)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( *********************************************************************/)Tj
+0 -32.4 Td(#include "config.h")Tj
+0 -21.6 Td(   ...necessary include files for us to do our work...)Tj
+0 -21.6 Td(const char FILENAME_h_rcs[] = FILENAME_H_VERSION;)Tj
+/F6 11 Tf -1.588 -27.588 Td(Note:)Tj
+/F4 11 Tf ( This declares the rcs variables that should be added to the "show-proxy-args" page. If this is a brand new creation)Tj
+0 -13.2 Td(by you, you are free to change the "Copyright" section to represent the rights you wish to maintain.)Tj
+/F6 11 Tf 0 -26.4 Td(Note:)Tj
+/F4 11 Tf ( The formfeed character that is present right after the comment flower box is handy for \(X|GNU\)Emacs users to skip)Tj
+0 -13.2 Td(the verbiage and get to the heart of the code \(via `forward-page' and `backward-page'\). Please include it if you can.)Tj
+/F6 11 Tf 0 -26.4 Td(Example for file header comments:)Tj
+/F0 9 Tf 1.588 -25.988 Td(#ifndef _FILENAME_H)Tj
+0 -10.8 Td(#define _FILENAME_H)Tj
+0 -10.8 Td(#define FILENAME_H_VERSION "$Id: developer-manual.sgml,v 1.46.2.4 2002/05/29 00:30:59 mal0rd Exp $")Tj
+0 -10.8 Td(/*********************************************************************)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( * File        :  $Source$)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( * Purpose     :  \(Fill me in with a good description!\))Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( * Copyright   :  Written by and Copyright \(C\) 2001 the SourceForge)Tj
+0 -10.8 Td( *                Privoxy team. http://www.privoxy.org/)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( *                Based on the Internet Junkbuster originally written)Tj
+0 -10.8 Td( *                by and Copyright \(C\) 1997 Anonymous Coders and)Tj
+0 -10.8 Td( *                Junkbusters Corporation.  http://www.junkbusters.com)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( *                This program is free software; you can redistribute it)Tj
+0 -10.8 Td( *                and/or modify it under the terms of the GNU General)Tj
+0 -10.8 Td( *                Public License as published by the Free Software)Tj
+0 -10.8 Td( *                Foundation; either version 2 of the License, or \(at)Tj
+0 -10.8 Td( *                your option\) any later version.)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( *                This program is distributed in the hope that it will)Tj
+0 -10.8 Td( *                be useful, but WITHOUT ANY WARRANTY; without even the)Tj
+0 -10.8 Td( *                implied warranty of MERCHANTABILITY or FITNESS FOR A)Tj
+0 -10.8 Td( *                PARTICULAR PURPOSE.  See the GNU General Public)Tj
+/F8 11 Tf -1.588 694.565 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(23/36)Tj
+ET
+Q
+endstream
+endobj
+378 0 obj<</Type/Page/Parent 331 0 R/Contents 379 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F6 7 0 R/F8 9 0 R>>/XObject<<>>>>>>endobj
+379 0 obj<</Length 2376      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 273.6 540.0 424.4 re f
+0.0 25.6 540.0 208.4 re f
+BT
+0.00 0.00 0.00 rg /F0 9 Tf 1.588 687.412 Td 0.000 Tc( *                License for more details.)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( *                The GNU General Public License should be included with)Tj
+0 -10.8 Td( *                this file.  If not, you can view it at)Tj
+0 -10.8 Td( *                http://www.gnu.org/copyleft/gpl.html)Tj
+0 -10.8 Td( *                or write to the Free Software Foundation, Inc., 59)Tj
+0 -10.8 Td( *                Temple Place - Suite 330, Boston, MA  02111-1307, USA.)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( * Revisions   :)Tj
+0 -10.8 Td( *    $Log$)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( *********************************************************************/)Tj
+0 -32.4 Td(#include "project.h")Tj
+0 -21.6 Td(#ifdef __cplusplus)Tj
+0 -10.8 Td(extern "C" {)Tj
+0 -10.8 Td(#endif)Tj
+0 -21.6 Td(   ... function headers here ...)Tj
+0 -32.4 Td(/* Revision control strings from this header and associated .c file */)Tj
+0 -10.8 Td(extern const char FILENAME_rcs[];)Tj
+0 -10.8 Td(extern const char FILENAME_h_rcs[];)Tj
+0 -32.4 Td(#ifdef __cplusplus)Tj
+0 -10.8 Td(} /* extern "C" */)Tj
+0 -10.8 Td(#endif)Tj
+0 -21.6 Td(#endif /* ndef _FILENAME_H */)Tj
+0 -21.6 Td(/*)Tj
+0 -10.8 Td(  Local Variables:)Tj
+0 -10.8 Td(  tab-width: 3)Tj
+0 -10.8 Td(  end:)Tj
+0 -10.8 Td(*/)Tj
+/F6 11 Tf -1.588 -27.588 Td(Example for function comments:)Tj
+/F0 9 Tf 1.588 -25.988 Td(/*********************************************************************)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( * Function    :  FUNCTION_NAME)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( * Description :  \(Fill me in with a good description!\))Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( * parameters  :)Tj
+0 -10.8 Td( *          1  :  param1 = pointer to an important thing)Tj
+0 -10.8 Td( *          2  :  x      = pointer to something else)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( * Returns     :  0 => Ok, everything else is an error.)Tj
+0 -10.8 Td( *)Tj
+0 -10.8 Td( *********************************************************************/)Tj
+0 -10.8 Td(int FUNCTION_NAME\( void *param1, const char *x \))Tj
+0 -10.8 Td({)Tj
+0 -10.8 Td(   ...)Tj
+0 -10.8 Td(   return\( 0 \);)Tj
+0 -21.6 Td(})Tj
+/F8 11 Tf -1.588 690.964 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(24/36)Tj
+ET
+Q
+endstream
+endobj
+380 0 obj<</Type/Page/Parent 331 0 R/Contents 381 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R/Fc 11 0 R>>/XObject<<>>>>/Annots 137 0 R>>endobj
+381 0 obj<</Length 3224      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 676.2 540.0 2.0 re f
+0.0 614.2 540.0 2.0 re f
+0.0 371.0 540.0 2.0 re f
+0.00 0.00 1.00 RG
+172.9 322.4 m 191.0 322.4 l S
+191.0 322.4 m 215.1 322.4 l S
+0.0 233.4 540.0 2.0 re f
+0.0 79.0 540.0 2.0 re f
+BT
+/F6 11 Tf 0 687 Td 0.000 Tc(Note:)Tj
+/F4 11 Tf ( If we all follow this practice, we should be able to parse our code to create a "self-documenting" web page.)Tj
+/F9 17 Tf 0 -34.4 Td(5. Testing Guidelines)Tj
+/F4 11 Tf 0 -27.6 Td(To be filled.)Tj
+/F9 14 Tf 0 -31.4 Td(5.1. Testplan for releases)Tj
+/F4 11 Tf 0 -27 Td(Explain release numbers. major, minor. developer releases. etc.)Tj
+36 -26.4 Td(Remove any existing rpm with rpm -e)Tj
+-11 0 Td(1. )Tj
+11 -13.2 Td(Remove any file that was left over. This includes \(but is not limited to\))Tj
+36 -26.4 Td(/var/log/privoxy)Tj
+/Fc 11 Tf -11.033 0 Td(\250 )Tj
+/F4 11 Tf 11.033 -13.2 Td(/etc/privoxy)Tj
+/Fc 11 Tf -11.033 0 Td(\250 )Tj
+/F4 11 Tf 11.033 -13.2 Td(/usr/sbin/privoxy)Tj
+/Fc 11 Tf -11.033 0 Td(\250 )Tj
+/F4 11 Tf 11.033 -13.2 Td(/etc/init.d/privoxy)Tj
+/Fc 11 Tf -11.033 0 Td(\250 )Tj
+/F4 11 Tf 11.033 -13.2 Td(/usr/doc/privoxy*)Tj
+/Fc 11 Tf -11.033 0 Td(\250 )Tj
+/F4 11 Tf -35.967 79.2 Td(2. )Tj
+11 -92.4 Td(Install the rpm. Any error messages?)Tj
+-11 0 Td(3. )Tj
+11 -13.2 Td(start,stop,status Privoxy with the specific script \(e.g. /etc/rc.d/init/privoxy stop\). Reboot your machine. Does)Tj
+0 -13.2 Td(autostart work?)Tj
+-11 13.2 Td(4. )Tj
+11 -26.4 Td(Start browsing. Does Privoxy work? Logfile written?)Tj
+-11 0 Td(5. )Tj
+11 -13.2 Td(Remove the rpm. Any error messages? All files removed?)Tj
+-11 0 Td(6. )Tj
+/F9 14 Tf -25 -31.4 Td(5.2. Test reports)Tj
+/F4 11 Tf 0 -27 Td(Please submit test reports only with the)Tj
+0.00 0.00 1.00 rg ( test form)Tj
+0.00 0.00 0.00 rg ( at sourceforge. Three simple steps:)Tj
+36 -26.4 Td(Select category: the distribution you test on.)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(Select group: the version of Privoxy that we are about to release.)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(Fill the Summary and Detailed Description with something intelligent \(keep it short and precise\).)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf -28.19 -26.4 Td(Do not mail to the mailing list \(we cannot keep track on issues there\).)Tj
+/F9 17 Tf 0 -34.4 Td(6. Releasing a New Version)Tj
+/F4 11 Tf 0 -27.6 Td(When we release versions of Privoxy, our work leaves our cozy secret lab and has to work in the cold RealWorld[tm].)Tj
+0 -13.2 Td(Once it is released, there is no way to call it back, so it is very important that great care is taken to ensure that everything)Tj
+0 -13.2 Td(runs fine, and not to introduce problems in the very last minute.)Tj
+0 -26.4 Td(So when releasing a new version, please adhere exactly to the procedure outlined in this chapter.)Tj
+0 -26.4 Td(The following programs are required to follow this process: )Tj
+/F0 11 Tf (ncftpput)Tj
+/F4 11 Tf ( \(ncftp\), )Tj
+/F0 11 Tf (scp, ssh)Tj
+/F4 11 Tf ( \(ssh\), )Tj
+/F0 11 Tf (gmake)Tj
+/F4 11 Tf ( \(GNU's)Tj
+0 -13.2 Td(version of make\), autoconf, cvs.)Tj
+/F8 11 Tf 0 630.2 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(25/36)Tj
+ET
+Q
+endstream
+endobj
+382 0 obj<</Type/Page/Parent 331 0 R/Contents 383 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F5 6 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R/Fc 11 0 R>>/XObject<<>>>>>>endobj
+383 0 obj<</Length 5355      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 382.2 540.0 2.0 re f
+0.88 0.88 0.88 rg 36.0 212.8 453.6 14.0 re f
+0.00 0.00 0.00 rg 0.0 45.8 540.0 2.0 re f
+BT
+/F9 14 Tf 0 684 Td 0.000 Tc(6.1. Version numbers)Tj
+/F4 11 Tf 0 -27 Td(First you need to determine which version number the release will have. Privoxy version numbers consist of three)Tj
+0 -13.2 Td(numbers, separated by dots, like in X.Y.Z, where:)Tj
+36 -26.4 Td(X, the version major, is rarely ever changed. It is increased by one if turning a development branch into stable)Tj
+0 -13.2 Td(substantially changes the functionality, user interface or configuration syntax. Majors 1 and 2 were Junkbuster,)Tj
+-0 -13.2 Td(and 3 will be the first stable Privoxy release.)Tj
+/Fc 11 Tf -7.81 26.4 Td(\267 )Tj
+/F4 11 Tf 7.81 -39.6 Td(Y, the version minor, represents the branch within the major version. At any point in time, there are two branches)Tj
+-0 -13.2 Td(being maintained: The stable branch, with an even minor, say, 2N, in which no functionality is being added and)Tj
+0 -13.2 Td(only bug-fixes are made, and 2N+1, the development branch, in which the further development of Privoxy takes)Tj
+0 -13.2 Td(place. This enables us to turn the code upside down and inside out, while at the same time providing and)Tj
+0 -13.2 Td(maintaining a stable version. The minor is reset to zero \(and one\) when the major is incremented. When a)Tj
+0 -13.2 Td(development branch has matured to the point where it can be turned into stable, the old stable branch 2N is given)Tj
+-0 -13.2 Td(up \(i.e. no longer maintained\), the former development branch 2N+1 becomes the new stable branch 2N+2, and a)Tj
+0 -13.2 Td(new development branch 2N+3 is opened.)Tj
+/Fc 11 Tf -7.81 92.4 Td(\267 )Tj
+/F4 11 Tf 7.81 -105.6 Td(Z, the point or sub version, represents a release of the software within a branch. It is therefore incremented)Tj
+-0 -13.2 Td(immediately before each code freeze. In development branches, only the even point versions correspond to actual)Tj
+0 -13.2 Td(releases, while the odd ones denote the evolving state of the sources on CVS in between. It follows that Z is odd)Tj
+0 -13.2 Td(on CVS in development branches most of the time. There, it gets increased to an even number immediately before)Tj
+0 -13.2 Td(a code freeze, and is increased to an odd number again immediately thereafter. This ensures that builds from CVS)Tj
+-0 -13.2 Td(snapshots are easily distinguished from released versions. The point version is reset to zero when the minor)Tj
+0 -13.2 Td(changes.)Tj
+/Fc 11 Tf -7.81 79.2 Td(\267 )Tj
+/F9 14 Tf -28.19 -110.6 Td(6.2. Before the Release: Freeze)Tj
+/F4 11 Tf 0 -27 Td(The following)Tj
+/F6 11 Tf ( must be done by one of the developers)Tj
+/F4 11 Tf ( prior to each new release.)Tj
+36 -26.4 Td(Make sure that everybody who has worked on the code in the last couple of days has had a chance to yell "no!" in)Tj
+0 -13.2 Td(case they have pending changes/fixes in their pipelines. Announce the freeze so that nobody will interfere with)Tj
+0 -13.2 Td(last minute changes.)Tj
+/Fc 11 Tf -7.81 26.4 Td(\267 )Tj
+/F4 11 Tf 7.81 -39.6 Td(Increment the version number \(point from odd to even in development branches!\) in )Tj
+/F0 11 Tf (configure.in)Tj
+/F4 11 Tf (.)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(If )Tj
+/F0 11 Tf (default.action)Tj
+/F4 11 Tf ( has changed since last release \(i.e. software release or standalone actions file release\),)Tj
+0 -13.2 Td(bump up its version info to A.B in this line:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  {+add-header{X-Actions-File-Version: A.B} -filter -no-popups})Tj
+/F4 11 Tf -1.588 -27.588 Td(Then change the version info in doc/webserver/actions/index.php, line: '$required_actions_file_version = "A.B";')Tj
+/Fc 11 Tf -7.81 66.776 Td(\267 )Tj
+/F4 11 Tf 7.81 -79.976 Td(If the HTML documentation is not in sync with the SGML sources you need to regenerate and upload it to the)Tj
+0 -13.2 Td(webserver. \(If in doubt, just do it.\) See the Section "Updating the webserver" in this manual for details.)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F6 11 Tf 7.81 -26.4 Td(Commit all files that were changed in the above steps!)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(Tag all files in CVS with the version number with ")Tj
+/F5 11 Tf (cvs tag v_X_Y_Z)Tj
+/F4 11 Tf (". Don't use vX_Y_Z, ver_X_Y_Z,)Tj
+-0 -13.2 Td(v_X.Y.Z \(won't work\) etc.)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(If the release was in a development branch, increase the point version from even to odd \(X.Y.\(Z+1\)\) again in)Tj
+/F0 11 Tf 0 -13.2 Td(configure.in)Tj
+/F4 11 Tf ( and commit your change.)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(On the webserver, copy the user manual to a new top-level directory called )Tj
+/F0 11 Tf (X.Y.Z)Tj
+/F4 11 Tf (. This ensures that help links)Tj
+-0 -13.2 Td(from the CGI pages, which have the version as a prefix, will go into the right version of the manual. If this is a)Tj
+0 -13.2 Td(development branch release, also symlink )Tj
+/F0 11 Tf (X.Y.\(Z-1\))Tj
+/F4 11 Tf ( to )Tj
+/F0 11 Tf (X.Y.Z)Tj
+/F4 11 Tf ( and )Tj
+/F0 11 Tf (X.Y.\(Z+1\))Tj
+/F4 11 Tf ( to )Tj
+/F0 11 Tf (.)Tj
+/F4 11 Tf ( \(i.e. dot\).)Tj
+/Fc 11 Tf -7.81 26.4 Td(\267 )Tj
+/F8 11 Tf -28.19 636.977 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(26/36)Tj
+ET
+Q
+endstream
+endobj
+384 0 obj<</Type/Page/Parent 331 0 R/Contents 385 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R/Fc 11 0 R>>/XObject<<>>>>>>endobj
+385 0 obj<</Length 3985      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 542.4 540.0 46.4 re f
+0.00 0.00 0.00 rg 0.0 454.6 540.0 2.0 re f
+BT
+/F9 14 Tf 0 684 Td 0.000 Tc(6.3. Building and Releasing the Packages)Tj
+/F4 11 Tf 0 -27 Td(Now the individual packages can be built and released. Note that for GPL reasons the first package to be released is)Tj
+0 -13.2 Td(always the source tarball.)Tj
+0 -26.4 Td(For)Tj
+/F6 11 Tf ( all)Tj
+/F4 11 Tf ( types of packages, including the source tarball,)Tj
+/F6 11 Tf ( you must make sure that you build from clean sources by exporting)Tj
+0 -13.2 Td(the right version from CVS into an empty directory:)Tj
+/F4 11 Tf (.)Tj
+/F0 9 Tf 1.588 -25.988 Td(  mkdir dist # delete or choose different name if it already exists)Tj
+0 -10.8 Td(  cd dist)Tj
+0 -10.8 Td(  cvs -d:pserver:anonymous@cvs.ijbswa.sourceforge.net:/cvsroot/ijbswa login)Tj
+0 -10.8 Td(  cvs -z3 -d:pserver:anonymous@cvs.ijbswa.sourceforge.net:/cvsroot/ijbswa export -r v_X_Y_Z current)Tj
+/F6 11 Tf -1.588 -27.588 Td(Do NOT change)Tj
+/F4 11 Tf ( a single bit, including, but not limited to version information after export from CVS. This is to make sure)Tj
+0 -13.2 Td(that all release packages, and with them, all future bug reports, are based on exactly the same code.)Tj
+0 -26.4 Td(Please find additional instructions for the source tarball and the individual platform dependent binary packages below.)Tj
+0 -13.2 Td(And details on the Sourceforge release process below that.)Tj
+/F9 11 Tf 0 -28.4 Td(6.3.1. Note on Privoxy Packaging)Tj
+/F4 11 Tf 0 -26.4 Td(Please keep these general guidelines in mind when putting together your package. These apply to)Tj
+/F6 11 Tf ( all)Tj
+/F4 11 Tf ( platforms!)Tj
+36 -26.4 Td(Privoxy)Tj
+/F6 11 Tf ( requires)Tj
+/F4 11 Tf ( write access to: all )Tj
+/F0 11 Tf (*.action)Tj
+/F4 11 Tf ( files, all logfiles, and the )Tj
+/F0 11 Tf (trust)Tj
+/F4 11 Tf ( file. You will need to)Tj
+-0 -13.2 Td(determine the best way to do this for your platform.)Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(Please include up to date documentation. At a bare minimum:)Tj
+/F0 11 Tf 1.588 -27.988 Td(LICENSE)Tj
+/F4 11 Tf ( \(top-level directory\))Tj
+/F0 11 Tf 0 -29.576 Td(README)Tj
+/F4 11 Tf ( \(top-level directory\))Tj
+/F0 11 Tf 0 -29.576 Td(AUTHORS)Tj
+/F4 11 Tf ( \(top-level directory\))Tj
+/F0 11 Tf 0 -29.576 Td(man page)Tj
+/F4 11 Tf ( \(top-level directory, Unix-like platforms only\))Tj
+/F0 11 Tf -0 -29.576 Td(The User Manual)Tj
+/F4 11 Tf ( \(doc/webserver/user-manual/\))Tj
+/F0 11 Tf 0 -29.576 Td(FAQ)Tj
+/F4 11 Tf ( \(doc/webserver/faq/\))Tj
+-1.588 -27.988 Td(Also suggested: )Tj
+/F0 11 Tf (Developer Manual)Tj
+/F4 11 Tf ( \(doc/webserver/developer-manual\) and )Tj
+/F0 11 Tf (ChangeLog)Tj
+/F4 11 Tf ( \(top-level)Tj
+-0 -13.2 Td(directory\). )Tj
+/F0 11 Tf (FAQ)Tj
+/F4 11 Tf ( and the manuals are HTML docs. There are also text versions in )Tj
+/F0 11 Tf (doc/text/)Tj
+/F4 11 Tf ( which could)Tj
+-0 -13.2 Td(conceivably also be included.)Tj
+-0 -26.4 Td(The documentation has been designed such that the manuals are linked to each other from parallel directories, and)Tj
+0 -13.2 Td(should be packaged that way. )Tj
+/F0 11 Tf (privoxy-index.html)Tj
+/F4 11 Tf ( can also be included and can serve as a focal point for)Tj
+0 -13.2 Td(docs and other links of interest \(and possibly renamed to )Tj
+/F0 11 Tf (index.html)Tj
+/F4 11 Tf (\). This should be one level up from the)Tj
+-0 -13.2 Td(manuals. There is a link also on this page to an HTMLized version of the man page. To avoid 404 for this, it is in)Tj
+0 -13.2 Td(CVS as )Tj
+/F0 11 Tf (doc/webserver/man-page/privoxy-man-page.html)Tj
+/F4 11 Tf (, and should be included along with the)Tj
+-0 -13.2 Td(manuals. There is also a css stylesheets that can be included for better presentation: )Tj
+/F0 11 Tf (p_doc.css)Tj
+/F4 11 Tf (. This should be)Tj
+/Fc 11 Tf -7.81 322.659 Td(\267 )Tj
+/F8 11 Tf -28.19 362.177 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(27/36)Tj
+ET
+Q
+endstream
+endobj
+386 0 obj<</Type/Page/Parent 331 0 R/Contents 387 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F2 4 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R/Fc 11 0 R>>/XObject<<>>>>/Annots 140 0 R>>endobj
+387 0 obj<</Length 3650      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 597.0 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 499.6 540.0 24.8 re f
+0.0 446.0 540.0 14.0 re f
+0.0 392.5 540.0 14.0 re f
+0.00 0.00 0.00 rg 0.0 344.3 540.0 2.0 re f
+0.00 0.00 1.00 RG
+44.3 193.7 m 61.7 193.7 l S
+61.7 193.7 m 77.9 193.7 l S
+0.88 0.88 0.88 rg 0.0 114.9 540.0 24.8 re f
+0.0 61.3 540.0 14.0 re f
+BT
+0.00 0.00 0.00 rg /F4 11 Tf 36 687 Td 0.000 Tc(in the same directory with )Tj
+/F0 11 Tf (privoxy-index.html)Tj
+/F4 11 Tf (, \(i.e. one level up from the manual directories\).)Tj
+/F0 11 Tf 0 -13.2 Td(user.action)Tj
+/F4 11 Tf ( is designed for local preferences. Make sure this does not get overwritten!)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(Other configuration files should be installed as the new defaults, but all previously installed configuration files)Tj
+0 -13.2 Td(should be preserved as backups. This is just good manners :-\))Tj
+/Fc 11 Tf -7.81 13.2 Td(\267 )Tj
+/F4 11 Tf 7.81 -26.4 Td(Please check platform specific notes in this doc, if you haven't done "Privoxy" packaging before for other)Tj
+0 -13.2 Td(platform specific issues. Conversely, please add any notes that you know are important for your platform \(or)Tj
+-0 -13.2 Td(contact one of the doc maintainers to do this if you can't\).)Tj
+/Fc 11 Tf -7.81 26.4 Td(\267 )Tj
+/F9 11 Tf -28.19 -54.8 Td(6.3.2. Source Tarball)Tj
+/F4 11 Tf 0 -26.4 Td(First,)Tj
+/F6 11 Tf ( make sure that you have freshly exported the right version into an empty directory)Tj
+/F4 11 Tf (. \(See "Building and releasing)Tj
+0 -13.2 Td(packages" above\). Then run:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  cd current)Tj
+0 -10.8 Td(  autoheader && autoconf && ./configure)Tj
+/F4 11 Tf -1.588 -27.588 Td(Then do:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  make tarball-dist)Tj
+/F4 11 Tf -1.588 -27.588 Td(To upload the package to Sourceforge, simply issue)Tj
+/F0 9 Tf 1.588 -25.988 Td(  make tarball-upload)Tj
+/F4 11 Tf -1.588 -27.588 Td(Go to the displayed URL and release the file publicly on Sourceforge. For the change log field, use the relevant section of)Tj
+0 -13.2 Td(the )Tj
+/F0 11 Tf (ChangeLog)Tj
+/F4 11 Tf ( file.)Tj
+/F9 11 Tf 0 -28.4 Td(6.3.3. SuSE, Conectiva or Red Hat RPM)Tj
+/F4 11 Tf 0 -26.4 Td(In following text, replace )Tj
+/F2 11 Tf (dist)Tj
+/F4 11 Tf ( with either "rh" for Red Hat or "suse" for SuSE.)Tj
+0 -26.4 Td(First,)Tj
+/F6 11 Tf ( make sure that you have freshly exported the right version into an empty directory)Tj
+/F4 11 Tf (. \(See "Building and releasing)Tj
+0 -13.2 Td(packages" above\).)Tj
+0 -26.4 Td(As the only exception to not changing anything after export from CVS, now examine the file )Tj
+/F0 11 Tf (privoxy-)Tj
+/F2 11 Tf (dist)Tj
+/F0 11 Tf (.spec)Tj
+/F4 11 Tf 0 -13.2 Td(and make sure that the version information and the RPM release number are correct. The RPM release numbers for each)Tj
+0 -13.2 Td(version start at one. Hence it must be reset to one if this is the first RPM for )Tj
+/F2 11 Tf (dist)Tj
+/F4 11 Tf ( which is built from version X.Y.Z.)Tj
+0 -13.2 Td(Check the)Tj
+0.00 0.00 1.00 rg ( file list)Tj
+0.00 0.00 0.00 rg ( if unsure. Else, it must be set to the highest already available RPM release number for that version plus)Tj
+0 -13.2 Td(one.)Tj
+0 -26.4 Td(Then run:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  cd current)Tj
+0 -10.8 Td(  autoheader && autoconf && ./configure)Tj
+/F4 11 Tf -1.588 -27.588 Td(Then do)Tj
+/F0 9 Tf 1.588 -25.988 Td(  make )Tj
+/F2 9 Tf (dist)Tj
+/F0 9 Tf (-dist)Tj
+/F4 11 Tf -1.588 -27.588 Td(To upload the package to Sourceforge, simply issue)Tj
+/F8 11 Tf 0 682.883 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(28/36)Tj
+ET
+Q
+endstream
+endobj
+388 0 obj<</Type/Page/Parent 331 0 R/Contents 389 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F2 4 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>/Annots 143 0 R>>endobj
+389 0 obj<</Length 3581      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 684.0 540.0 14.0 re f
+0.00 0.00 0.00 rg 0.0 635.8 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 549.2 540.0 14.0 re f
+0.00 0.00 1.00 RG
+108.5 484.4 m 162.5 484.4 l S
+0.0 416.5 540.0 14.0 re f
+0.0 362.9 540.0 14.0 re f
+0.0 309.3 540.0 14.0 re f
+0.00 0.00 0.00 rg 0.0 247.9 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 174.5 540.0 14.0 re f
+0.0 97.0 540.0 24.8 re f
+0.0 43.4 540.0 14.0 re f
+BT
+0.00 0.00 0.00 rg /F0 9 Tf 1.588 687.412 Td 0.000 Tc(  make )Tj
+/F2 9 Tf (dist)Tj
+/F0 9 Tf (-upload )Tj
+/F2 9 Tf (rpm_packagerev)Tj
+/F4 11 Tf -1.588 -27.588 Td(where )Tj
+/F2 11 Tf (rpm_packagerev)Tj
+/F4 11 Tf ( is the RPM release number as determined above. Go to the displayed URL and release the file)Tj
+0 -13.2 Td(publicly on Sourceforge. Use the release notes and change log from the source tarball package.)Tj
+/F9 11 Tf 0 -28.4 Td(6.3.4. OS/2)Tj
+/F4 11 Tf 0 -26.4 Td(First,)Tj
+/F6 11 Tf ( make sure that you have freshly exported the right version into an empty directory)Tj
+/F4 11 Tf (. \(See "Building and releasing)Tj
+0 -13.2 Td(packages" above\). Then get the OS/2 Setup module:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  cvs -z3 -d:pserver:anonymous@cvs.ijbswa.sourceforge.net:/cvsroot/ijbswa co os2setup)Tj
+/F4 11 Tf -1.588 -27.588 Td(You will need a mix of development tools. The main compilation takes place with IBM Visual Age C++. Some ancillary)Tj
+0 -13.2 Td(work takes place with GNU tools, available from various sources like hobbes.nmsu.edu. Specificially, you will need)Tj
+/F0 11 Tf 0 -13.2 Td(autoheader)Tj
+/F4 11 Tf (, )Tj
+/F0 11 Tf (autoconf)Tj
+/F4 11 Tf ( and )Tj
+/F0 11 Tf (sh)Tj
+/F4 11 Tf ( tools. The packaging takes place with WarpIN, available from various sources,)Tj
+0 -13.2 Td(including its home page:)Tj
+0.00 0.00 1.00 rg ( xworkplace)Tj
+0.00 0.00 0.00 rg (.)Tj
+0 -26.4 Td(Change directory to the )Tj
+/F0 11 Tf (os2setup)Tj
+/F4 11 Tf ( directory. Edit the os2build.cmd file to set the final executable filename. For)Tj
+0 -13.2 Td(example,)Tj
+/F0 9 Tf 1.588 -25.988 Td(  installExeName='privoxyos2_setup_X.Y.Z.exe')Tj
+/F4 11 Tf -1.588 -27.588 Td(Next, edit the )Tj
+/F0 11 Tf (IJB.wis)Tj
+/F4 11 Tf ( file so the release number matches in the )Tj
+/F0 11 Tf (PACKAGEID)Tj
+/F4 11 Tf ( section:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  PACKAGEID="Privoxy Team\\Privoxy\\Privoxy Package\\X\\Y\\Z")Tj
+/F4 11 Tf -1.588 -27.588 Td(You're now ready to build. Run:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  os2build)Tj
+/F4 11 Tf -1.588 -27.588 Td(You will find the WarpIN-installable executable in the )Tj
+/F0 11 Tf (./files)Tj
+/F4 11 Tf ( directory. Upload this anonymously to)Tj
+/F0 11 Tf 0 -13.2 Td(uploads.sourceforge.net/incoming)Tj
+/F4 11 Tf (, create a release for it, and you're done. Use the release notes and Change)Tj
+0 -13.2 Td(Log from the source tarball package.)Tj
+/F9 11 Tf 0 -28.4 Td(6.3.5. Solaris)Tj
+/F4 11 Tf 0 -26.4 Td(Login to Sourceforge's compilefarm via ssh:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  ssh cf.sourceforge.net)Tj
+/F4 11 Tf -1.588 -27.588 Td(Choose the right operating system \(not the Debian one\). When logged in,)Tj
+/F6 11 Tf ( make sure that you have freshly exported the)Tj
+0 -13.2 Td(right version into an empty directory)Tj
+/F4 11 Tf (. \(See "Building and releasing packages" above\). Then run:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  cd current)Tj
+0 -10.8 Td(  autoheader && autoconf && ./configure)Tj
+/F4 11 Tf -1.588 -27.588 Td(Then run)Tj
+/F0 9 Tf 1.588 -25.988 Td(  gmake solaris-dist)Tj
+/F8 11 Tf -1.588 673.224 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(29/36)Tj
+ET
+Q
+endstream
+endobj
+390 0 obj<</Type/Page/Parent 331 0 R/Contents 391 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F5 6 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>/Annots 146 0 R>>endobj
+391 0 obj<</Length 3515      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 0.00 rg 0.0 649.8 540.0 2.0 re f
+0.00 0.00 1.00 RG
+279.9 604.8 m 392.6 604.8 l S
+0.88 0.88 0.88 rg 0.0 523.6 540.0 14.0 re f
+0.0 446.0 540.0 24.8 re f
+0.00 0.00 0.00 rg 0.0 384.6 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 298.1 540.0 14.0 re f
+0.0 244.5 540.0 14.0 re f
+0.0 177.7 540.0 14.0 re f
+0.00 0.00 0.00 rg 0.0 169.1 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 82.5 540.0 14.0 re f
+0.0 22.0 540.0 20.9 re f
+BT
+0.00 0.00 0.00 rg /F4 11 Tf 0 687 Td 0.000 Tc(which creates a gzip'ed tar archive. Sadly, you cannot use)Tj
+/F5 11 Tf ( make solaris-upload)Tj
+/F4 11 Tf ( on the Sourceforge machine \(no)Tj
+0 -13.2 Td(ncftpput\). You now have to manually upload the archive to Sourceforge's ftp server and release the file publicly. Use the)Tj
+0 -13.2 Td(release notes and Change Log from the source tarball package.)Tj
+/F9 11 Tf 0 -28.4 Td(6.3.6. Windows)Tj
+/F4 11 Tf 0 -26.4 Td(You should ensure you have the latest version of Cygwin \(from)Tj
+0.00 0.00 1.00 rg ( http://www.cygwin.com/)Tj
+0.00 0.00 0.00 rg (\). Run the following commands)Tj
+0 -13.2 Td(from within a Cygwin bash shell.)Tj
+0 -26.4 Td(First,)Tj
+/F6 11 Tf ( make sure that you have freshly exported the right version into an empty directory)Tj
+/F4 11 Tf (. \(See "Building and releasing)Tj
+0 -13.2 Td(packages" above\). Then get the Windows setup module:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  cvs -z3  -d:pserver:anonymous@cvs.ijbswa.sourceforge.net:/cvsroot/ijbswa co winsetup)Tj
+/F4 11 Tf -1.588 -27.588 Td(Then you can build the package. This is fully automated, and is controlled by )Tj
+/F0 11 Tf (winsetup/GNUmakefile)Tj
+/F4 11 Tf (. All you need)Tj
+0 -13.2 Td(to do is:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  cd winsetup)Tj
+0 -10.8 Td(  make)Tj
+/F4 11 Tf -1.588 -27.588 Td(Now you can manually rename )Tj
+/F0 11 Tf (privoxy_setup.exe)Tj
+/F4 11 Tf ( to )Tj
+/F0 11 Tf (privoxy_setup_X_Y_Z.exe)Tj
+/F4 11 Tf (, and upload it to)Tj
+0 -13.2 Td(SourceForge. When releasing the package on SourceForge, use the release notes and Change Log from the source tarball)Tj
+0 -13.2 Td(package.)Tj
+/F9 11 Tf 0 -28.4 Td(6.3.7. Debian)Tj
+/F4 11 Tf 0 -26.4 Td(First,)Tj
+/F6 11 Tf ( make sure that you have freshly exported the right version into an empty directory)Tj
+/F4 11 Tf (. \(See "Building and releasing)Tj
+0 -13.2 Td(packages" above\). Then add a log entry to )Tj
+/F0 11 Tf (debian/changelog)Tj
+/F4 11 Tf (, if it is not already there, for example by running:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  debchange -v 2.9.18-beta-1 "New upstream version")Tj
+/F4 11 Tf -1.588 -27.588 Td(Then, run:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  dpkg-buildpackage -rfakeroot -us -uc -b)Tj
+/F4 11 Tf -1.588 -27.588 Td(This will create )Tj
+/F0 11 Tf (../privoxy_2.9.18-beta-1_i386.deb)Tj
+/F4 11 Tf ( which can be uploaded. To upload the package to)Tj
+0 -13.2 Td(Sourceforge, simply issue)Tj
+/F0 9 Tf 1.588 -25.988 Td(  make debian-upload)Tj
+/F9 11 Tf -1.588 -29.588 Td(6.3.8. Mac OSX)Tj
+/F4 11 Tf 0 -26.4 Td(First,)Tj
+/F6 11 Tf ( make sure that you have freshly exported the right version into an empty directory)Tj
+/F4 11 Tf (. \(See "Building and releasing)Tj
+0 -13.2 Td(packages" above\). Then get the Mac OSX setup module:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  cvs -z3 -d:pserver:anonymous@cvs.ijbswa.sourceforge.net:/cvsroot/ijbswa co osxsetup)Tj
+/F4 11 Tf -1.588 -27.588 Td(Then run:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  cd osxsetup)Tj
+/F8 11 Tf -1.588 687.647 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(30/36)Tj
+ET
+Q
+endstream
+endobj
+392 0 obj<</Type/Page/Parent 331 0 R/Contents 393 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F5 6 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>>>endobj
+393 0 obj<</Length 3319      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 684.0 540.0 14.0 re f
+0.0 564.4 540.0 14.0 re f
+0.00 0.00 0.00 rg 0.0 503.0 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 429.7 540.0 14.0 re f
+0.0 352.1 540.0 24.8 re f
+0.0 298.5 540.0 14.0 re f
+0.00 0.00 0.00 rg 0.0 237.1 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 139.7 540.0 24.8 re f
+0.00 0.00 0.00 rg 0.0 104.7 540.0 2.0 re f
+BT
+/F0 9 Tf 1.588 687.412 Td 0.000 Tc(  build)Tj
+/F4 11 Tf -1.588 -27.588 Td(This will run )Tj
+/F0 11 Tf (autoheader)Tj
+/F4 11 Tf (, )Tj
+/F0 11 Tf (autoconf)Tj
+/F4 11 Tf ( and )Tj
+/F0 11 Tf (configure)Tj
+/F4 11 Tf ( as well as )Tj
+/F0 11 Tf (make)Tj
+/F4 11 Tf (. Finally, it will copy over the necessary files)Tj
+0 -13.2 Td(to the ./osxsetup/files directory for further processing by )Tj
+/F0 11 Tf (PackageMaker)Tj
+/F4 11 Tf (.)Tj
+0 -26.4 Td(Bring up PackageMaker with the PrivoxyPackage.pmsp definition file, modify the package name to match the release, and)Tj
+0 -13.2 Td(hit the "Create package" button. If you specify ./Privoxy.pkg as the output package name, you can then create the)Tj
+0 -13.2 Td(distributable zip file with the command:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  zip -r privoxyosx_setup_x.y.z.zip Privoxy.pkg)Tj
+/F4 11 Tf -1.588 -27.588 Td(You can then upload )Tj
+/F0 11 Tf (privoxyosx_setup_x.y.z.zip)Tj
+/F4 11 Tf ( anonymously to)Tj
+/F0 11 Tf 0 -13.2 Td(uploads.sourceforge.net/incoming)Tj
+/F4 11 Tf (, create a release for it, and you're done. Use the release notes and Change)Tj
+0 -13.2 Td(Log from the source tarball package.)Tj
+/F9 11 Tf 0 -28.4 Td(6.3.9. FreeBSD)Tj
+/F4 11 Tf 0 -26.4 Td(Login to Sourceforge's compile-farm via ssh:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  ssh cf.sourceforge.net)Tj
+/F4 11 Tf -1.588 -27.588 Td(Choose the right operating system. When logged in,)Tj
+/F6 11 Tf ( make sure that you have freshly exported the right version into an)Tj
+0 -13.2 Td(empty directory)Tj
+/F4 11 Tf (. \(See "Building and releasing packages" above\). Then run:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  cd current)Tj
+0 -10.8 Td(  autoheader && autoconf && ./configure)Tj
+/F4 11 Tf -1.588 -27.588 Td(Then run:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  gmake freebsd-dist)Tj
+/F4 11 Tf -1.588 -27.588 Td(which creates a gzip'ed tar archive. Sadly, you cannot use)Tj
+/F5 11 Tf ( make freebsd-upload)Tj
+/F4 11 Tf ( on the Sourceforge machine \(no)Tj
+0 -13.2 Td(ncftpput\). You now have to manually upload the archive to Sourceforge's ftp server and release the file publicly. Use the)Tj
+0 -13.2 Td(release notes and Change Log from the source tarball package.)Tj
+/F9 11 Tf 0 -28.4 Td(6.3.10. HP-UX 11)Tj
+/F4 11 Tf 0 -26.4 Td(First,)Tj
+/F6 11 Tf ( make sure that you have freshly exported the right version into an empty directory)Tj
+/F4 11 Tf (. \(See "Building and releasing)Tj
+0 -13.2 Td(packages" above\). Then run:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  cd current)Tj
+0 -10.8 Td(  autoheader && autoconf && ./configure)Tj
+/F4 11 Tf -1.588 -27.588 Td(Then do FIXME.)Tj
+/F9 11 Tf 0 -28.4 Td(6.3.11. Amiga OS)Tj
+/F4 11 Tf 0 -26.4 Td(First,)Tj
+/F6 11 Tf ( make sure that you have freshly exported the right version into an empty directory)Tj
+/F4 11 Tf (. \(See "Building and releasing)Tj
+0 -13.2 Td(packages" above\). Then run:)Tj
+/F8 11 Tf 0 672.459 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(31/36)Tj
+ET
+Q
+endstream
+endobj
+394 0 obj<</Type/Page/Parent 331 0 R/Contents 395 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F5 6 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R/Fc 11 0 R>>/XObject<<>>>>/Annots 151 0 R>>endobj
+395 0 obj<</Length 3679      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.88 0.88 0.88 rg 0.0 673.2 540.0 24.8 re f
+0.00 0.00 0.00 rg 0.0 638.2 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 564.8 540.0 14.0 re f
+0.0 487.3 540.0 24.8 re f
+0.0 433.7 540.0 14.0 re f
+0.00 0.00 0.00 rg 0.0 372.3 540.0 2.0 re f
+0.00 0.00 1.00 RG
+82.8 284.1 m 252.3 284.1 l S
+91.0 204.9 m 409.8 204.9 l S
+0.0 49.9 540.0 2.0 re f
+BT
+/F0 9 Tf 1.588 687.412 Td 0.000 Tc(  cd current)Tj
+0 -10.8 Td(  autoheader && autoconf && ./configure)Tj
+/F4 11 Tf -1.588 -27.588 Td(Then do FIXME.)Tj
+/F9 11 Tf 0 -28.4 Td(6.3.12. AIX)Tj
+/F4 11 Tf 0 -26.4 Td(Login to Sourceforge's compilefarm via ssh:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  ssh cf.sourceforge.net)Tj
+/F4 11 Tf -1.588 -27.588 Td(Choose the right operating system. When logged in,)Tj
+/F6 11 Tf ( make sure that you have freshly exported the right version into an)Tj
+0 -13.2 Td(empty directory)Tj
+/F4 11 Tf (. \(See "Building and releasing packages" above\). Then run:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  cd current)Tj
+0 -10.8 Td(  autoheader && autoconf && ./configure)Tj
+/F4 11 Tf -1.588 -27.588 Td(Then run:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  make aix-dist)Tj
+/F4 11 Tf -1.588 -27.588 Td(which creates a gzip'ed tar archive. Sadly, you cannot use)Tj
+/F5 11 Tf ( make aix-upload)Tj
+/F4 11 Tf ( on the Sourceforge machine \(no ncftpput\).)Tj
+0 -13.2 Td(You now have to manually upload the archive to Sourceforge's ftp server and release the file publicly. Use the release)Tj
+0 -13.2 Td(notes and Change Log from the source tarball package.)Tj
+/F9 14 Tf 0 -31.4 Td(6.4. Uploading and Releasing Your Package)Tj
+/F4 11 Tf 0 -27 Td(After the package is ready, it is time to upload it to SourceForge, and go through the release steps. The upload is done via)Tj
+0 -13.2 Td(FTP:)Tj
+36 -26.4 Td(Upload to:)Tj
+0.00 0.00 1.00 rg ( ftp://upload.sourceforge.net/incoming)Tj
+0.00 0.00 0.00 rg /Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(user: )Tj
+/F0 11 Tf (anonymous)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf 7.81 -13.2 Td(password: )Tj
+/F0 11 Tf (ijbswa-developers@lists.sourceforge.net)Tj
+/Fc 11 Tf -7.81 0 Td(\267 )Tj
+/F4 11 Tf -28.19 -26.4 Td(Or use the)Tj
+/F5 11 Tf ( make)Tj
+/F4 11 Tf ( targets as described above.)Tj
+0 -26.4 Td(Once this done go to)Tj
+0.00 0.00 1.00 rg ( http://sourceforge.net/project/admin/editpackages.php?group_id=11118)Tj
+0.00 0.00 0.00 rg (, making sure you are logged)Tj
+0 -13.2 Td(in. Find your target platform in the second column, and click )Tj
+/F0 11 Tf (Add Release)Tj
+/F4 11 Tf (. You will then need to create a new release)Tj
+0 -13.2 Td(for your package, using the format of )Tj
+/F0 11 Tf ($VERSION \($CODE_STATUS\))Tj
+/F4 11 Tf (, e.g.)Tj
+/F6 11 Tf ( 2.9.18 \(beta\))Tj
+/F4 11 Tf (.)Tj
+0 -26.4 Td(Now just follow the prompts. Be sure to add any appropriate Release notes. You should see your freshly uploaded)Tj
+0 -13.2 Td(packages in "Step 2. Add Files To This Release". Check the appropriate box\(es\). Remember at each step to hit the)Tj
+0 -13.2 Td("Refresh/Submit" buttons! You should now see your file\(s\) listed in Step 3. Fill out the forms with the appropriate)Tj
+0 -13.2 Td(information for your platform, being sure to hit "Update" for each file. If anyone is monitoring your platform, check the)Tj
+0 -13.2 Td("email" box at the very bottom to notify them of the new package. This should do it!)Tj
+0 -26.4 Td(If you have made errors, or need to make changes, you can go through essentially the same steps, but select )Tj
+/F0 11 Tf (Edit)Tj
+0 -13.2 Td(Release)Tj
+/F4 11 Tf (, instead of )Tj
+/F0 11 Tf (Add Release)Tj
+/F4 11 Tf (.)Tj
+/F8 11 Tf 0 659.306 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(32/36)Tj
+ET
+Q
+endstream
+endobj
+396 0 obj<</Type/Page/Parent 331 0 R/Contents 397 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F5 6 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>/Annots 164 0 R>>endobj
+397 0 obj<</Length 3775      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+428.9 656.0 m 473.8 656.0 l S
+473.8 656.0 m 510.2 656.0 l S
+510.2 656.0 m 526.4 656.0 l S
+319.1 642.8 m 365.2 642.8 l S
+365.2 642.8 m 403.4 642.8 l S
+0.00 0.00 0.00 rg 0.0 619.8 540.0 2.0 re f
+0.88 0.88 0.88 rg 0.0 499.6 540.0 14.0 re f
+0.0 314.0 540.0 14.0 re f
+113.4 288.8 m 129.6 288.8 l S
+129.6 288.8 m 177.5 288.8 l S
+0.00 0.00 0.00 rg 0.0 252.6 540.0 2.0 re f
+0.0 157.0 540.0 2.0 re f
+167.1 108.4 m 226.1 108.4 l S
+0.0 95.2 m 273.6 95.2 l S
+269.1 68.8 m 294.5 68.8 l S
+294.5 68.8 m 330.9 68.8 l S
+330.9 68.8 m 347.1 68.8 l S
+0.0 59.0 540.0 2.0 re f
+BT
+/F9 14 Tf 0 684 Td 0.000 Tc(6.5. After the Release)Tj
+/F4 11 Tf 0 -27 Td(When all \(or: most of the\) packages have been uploaded and made available, send an email to the)Tj
+0.00 0.00 1.00 rg ( announce mailing list)Tj
+0.00 0.00 0.00 rg (,)Tj
+0 -13.2 Td(Subject: "Version X.Y.Z available for download". Be sure to include the)Tj
+0.00 0.00 1.00 rg ( download location)Tj
+0.00 0.00 0.00 rg (, the release notes and the)Tj
+0 -13.2 Td(change log.)Tj
+/F9 17 Tf 0 -34.4 Td(7. Update the Webserver)Tj
+/F4 11 Tf 0 -27.6 Td(When updating the webserver, please follow these steps to make sure that no broken links, inconsistent contents or)Tj
+0 -13.2 Td(permission problems will occur:)Tj
+0 -26.4 Td(If you have changed anything in the documentation source SGML files, do:)Tj
+/F0 9 Tf 1.588 -25.988 Td(  make dok # \(or make redhat-dok if make dok doesn't work for you\))Tj
+/F4 11 Tf -1.588 -27.588 Td(That will generate )Tj
+/F0 11 Tf (doc/webserver/user-manual)Tj
+/F4 11 Tf (, )Tj
+/F0 11 Tf (doc/webserver/developer-manual)Tj
+/F4 11 Tf (,)Tj
+/F0 11 Tf 0 -13.2 Td(doc/webserver/faq)Tj
+/F4 11 Tf ( and )Tj
+/F0 11 Tf (doc/webserver/index.html)Tj
+/F4 11 Tf ( automatically.)Tj
+0 -26.4 Td(If you changed the manual page source, generate )Tj
+/F0 11 Tf (doc/webserver/man-page/privoxy-man-page.html)Tj
+/F4 11 Tf ( by)Tj
+0 -13.2 Td(running ")Tj
+/F5 11 Tf (make man)Tj
+/F4 11 Tf (". \(This is a separate target due to dependencies on some obscure perl scripts. See comments in)Tj
+/F0 11 Tf 0 -13.2 Td(GNUmakefile)Tj
+/F4 11 Tf (.\))Tj
+0 -26.4 Td(If you want to add new files to the webserver, create them locally in the )Tj
+/F0 11 Tf (doc/webserver/*)Tj
+/F4 11 Tf ( directory \(or create new)Tj
+0 -13.2 Td(directories under )Tj
+/F0 11 Tf (doc/webserver)Tj
+/F4 11 Tf (\).)Tj
+0 -26.4 Td(Next, commit any changes from the above steps to CVS. All set? Then do)Tj
+/F0 9 Tf 1.588 -25.988 Td(  make webserver)Tj
+/F4 11 Tf -1.588 -27.588 Td(This will do the upload to)Tj
+0.00 0.00 1.00 rg ( the webserver)Tj
+0.00 0.00 0.00 rg ( \(www.privoxy.org\) and ensure all files and directories there are group writable.)Tj
+0 -26.4 Td(Please do)Tj
+/F6 11 Tf ( NOT)Tj
+/F4 11 Tf ( use any other means of transferring files to the webserver to avoid permission problems.)Tj
+/F9 17 Tf 0 -34.4 Td(8. Contacting the developers, Bug Reporting and Feature)Tj
+0 -20.4 Td(Requests)Tj
+/F4 11 Tf 0 -27.6 Td(We value your feedback. In fact, we rely on it to improve Privoxy and its configuration. However, please note the)Tj
+0 -13.2 Td(following hints, so we can provide you with the best support:)Tj
+/F9 14 Tf 0 -31.4 Td(8.1. Get Support)Tj
+/F4 11 Tf 0 -27 Td(For casual users, our support forum at)Tj
+0.00 0.00 1.00 rg ( SourceForge)Tj
+0.00 0.00 0.00 rg ( is probably best suited:)Tj
+0.00 0.00 1.00 rg 0 -13.2 Td(http://sourceforge.net/tracker/?group_id=11118&atid=211118)Tj
+0.00 0.00 0.00 rg 0 -26.4 Td(All users are of course welcome to discuss their issues on the)Tj
+0.00 0.00 1.00 rg ( users mailing list)Tj
+0.00 0.00 0.00 rg (, where the developers also hang around.)Tj
+/F8 11 Tf 0 650.153 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(33/36)Tj
+ET
+Q
+endstream
+endobj
+398 0 obj<</Type/Page/Parent 331 0 R/Contents 399 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>/Annots 189 0 R>>endobj
+399 0 obj<</Length 4811      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+226.1 656.0 m 502.4 656.0 l S
+25.4 616.4 m 58.1 616.4 l S
+58.1 616.4 m 82.2 616.4 l S
+402.4 590.0 m 441.8 590.0 l S
+441.8 590.0 m 457.4 590.0 l S
+120.7 576.8 m 163.8 576.8 l S
+163.8 576.8 m 175.7 576.8 l S
+175.7 576.8 m 191.9 576.8 l S
+191.9 576.8 m 212.9 576.8 l S
+212.9 576.8 m 248.1 576.8 l S
+114.6 524.0 m 152.8 524.0 l S
+152.8 524.0 m 164.1 524.0 l S
+164.1 524.0 m 180.3 524.0 l S
+180.3 524.0 m 206.2 524.0 l S
+206.2 524.0 m 241.4 524.0 l S
+0.00 0.00 0.00 rg 0.0 501.0 540.0 2.0 re f
+7.9 439.2 m 284.3 439.2 l S
+0.0 429.4 540.0 2.0 re f
+354.8 367.6 m 499.3 367.6 l S
+77.6 314.8 m 157.4 314.8 l S
+292.5 314.8 m 314.1 314.8 l S
+314.1 314.8 m 348.1 314.8 l S
+377.4 314.8 m 410.7 314.8 l S
+410.7 314.8 m 434.2 314.8 l S
+0.0 305.0 540.0 2.0 re f
+113.7 230.0 m 314.8 230.0 l S
+0.0 220.2 540.0 2.0 re f
+221.5 168.0 m 366.7 168.0 l S
+0.0 118.6 540.0 2.0 re f
+BT
+/F9 14 Tf 0 684 Td 0.000 Tc(8.2. Report Bugs)Tj
+/F4 11 Tf 0 -27 Td(Please report all bugs)Tj
+/F6 11 Tf ( only)Tj
+/F4 11 Tf ( through our bug tracker:)Tj
+0.00 0.00 1.00 rg ( http://sourceforge.net/tracker/?group_id=11118&atid=111118)Tj
+0.00 0.00 0.00 rg (.)Tj
+0 -26.4 Td(Before doing so, please make sure that the bug has not already been submitted and observe the additional hints at the top)Tj
+0 -13.2 Td(of the)Tj
+0.00 0.00 1.00 rg ( submit form)Tj
+0.00 0.00 0.00 rg (.)Tj
+0 -26.4 Td(Please try to verify that it is a Privoxy bug, and not a browser or site bug first. If unsure, try)Tj
+0.00 0.00 1.00 rg ( toggling off)Tj
+0.00 0.00 0.00 rg ( Privoxy, and see)Tj
+0 -13.2 Td(if the problem persists. The)Tj
+0.00 0.00 1.00 rg ( appendix of the user manual)Tj
+0.00 0.00 0.00 rg ( also has helpful information on action debugging. If you are)Tj
+0 -13.2 Td(using your own custom configuration, please try the stock configs to see if the problem is configuration related.)Tj
+0 -26.4 Td(If not using the latest version, chances are that the bug has been found and fixed in the meantime. We would appreciate if)Tj
+0 -13.2 Td(you could take the time to)Tj
+0.00 0.00 1.00 rg ( upgrade to the latest version)Tj
+0.00 0.00 0.00 rg ( \(or even the latest CVS snapshot\) and verify your bug, but this is)Tj
+0 -13.2 Td(not required for reporting.)Tj
+/F9 14 Tf 0 -31.4 Td(8.3. Request New Features)Tj
+/F4 11 Tf 0 -27 Td(You are welcome to submit ideas on new features or other proposals for improvement through our feature request tracker)Tj
+0 -13.2 Td(at)Tj
+0.00 0.00 1.00 rg ( http://sourceforge.net/tracker/?atid=361118&group_id=11118)Tj
+0.00 0.00 0.00 rg (.)Tj
+/F9 14 Tf 0 -31.4 Td(8.4. Report Ads or Other Actions-Related Problems)Tj
+/F4 11 Tf 0 -27 Td(Please send feedback on ads that slipped through, innocent images that were blocked, and any other problems relating to)Tj
+0 -13.2 Td(the )Tj
+/F0 11 Tf (default.action)Tj
+/F4 11 Tf ( file through our actions feedback mechanism located at)Tj
+0.00 0.00 1.00 rg ( http://www.privoxy.org/actions/)Tj
+0.00 0.00 0.00 rg (. On this)Tj
+0 -13.2 Td(page, you will also find a bookmark which will take you back there from any troubled site and even pre-fill the form!)Tj
+0 -26.4 Td(New, improved )Tj
+/F0 11 Tf (default.action)Tj
+/F4 11 Tf ( files will occasionally be made available based on your feedback. These will be)Tj
+0 -13.2 Td(announced on the)Tj
+0.00 0.00 1.00 rg ( ijbswa-announce)Tj
+0.00 0.00 0.00 rg ( list and available from our the)Tj
+0.00 0.00 1.00 rg ( files section)Tj
+0.00 0.00 0.00 rg ( of our)Tj
+0.00 0.00 1.00 rg ( project page)Tj
+0.00 0.00 0.00 rg (.)Tj
+/F9 14 Tf 0 -31.4 Td(8.5. Other)Tj
+/F4 11 Tf 0 -27 Td(For any other issues, feel free to use the mailing lists. Technically interested users and people who wish to contribute to)Tj
+0 -13.2 Td(the project are also welcome on the developers list! You can find an overview of all Privoxy-related mailing lists,)Tj
+0 -13.2 Td(including list archives, at:)Tj
+0.00 0.00 1.00 rg ( http://sourceforge.net/mail/?group_id=11118)Tj
+0.00 0.00 0.00 rg (.)Tj
+/F9 17 Tf 0 -34.4 Td(9. Privoxy Copyright, License and History)Tj
+/F4 11 Tf 0 -27.6 Td(Copyright \251 2001, 2002 by Privoxy Developers )Tj
+/F0 11 Tf (<)Tj
+0.00 0.00 1.00 rg (developers@privoxy.org)Tj
+0.00 0.00 0.00 rg (>)Tj
+/F4 11 Tf 0 -26.4 Td(Some source code is based on code Copyright \251 1997 by Anonymous Coders and Junkbusters, Inc. and licensed under the)Tj
+/F6 11 Tf 0 -13.2 Td(GNU General Public License)Tj
+/F4 11 Tf (.)Tj
+/F9 14 Tf 0 -31.4 Td(9.1. License)Tj
+/F4 11 Tf 0 -27 Td(Privoxy is free software; you can redistribute it and/or modify it under the terms of the)Tj
+/F6 11 Tf ( GNU General Public License)Tj
+/F4 11 Tf (,)Tj
+0 -13.2 Td(version 2, as published by the Free Software Foundation.)Tj
+/F8 11 Tf 0 662.2 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(34/36)Tj
+ET
+Q
+endstream
+endobj
+400 0 obj<</Type/Page/Parent 331 0 R/Contents 401 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F6 7 0 R/F8 9 0 R/F9 10 0 R>>/XObject<<>>>>/Annots 224 0 R>>endobj
+401 0 obj<</Length 4858      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+174.4 620.0 m 200.4 620.0 l S
+200.4 620.0 m 239.2 620.0 l S
+239.2 620.0 m 270.7 620.0 l S
+270.7 620.0 m 307.0 620.0 l S
+0.00 0.00 0.00 rg 0.0 544.2 540.0 2.0 re f
+135.6 495.6 m 172.6 495.6 l S
+172.6 495.6 m 223.0 495.6 l S
+348.6 495.6 m 403.3 495.6 l S
+403.3 495.6 m 459.2 495.6 l S
+206.2 429.6 m 239.5 429.6 l S
+306.1 429.6 m 360.8 429.6 l S
+360.8 429.6 m 416.7 429.6 l S
+106.6 416.4 m 130.1 416.4 l S
+187.3 390.0 m 232.2 390.0 l S
+232.2 390.0 m 267.3 390.0 l S
+267.3 390.0 m 279.2 390.0 l S
+279.2 390.0 m 295.4 390.0 l S
+295.4 390.0 m 336.1 390.0 l S
+51.3 324.0 m 101.7 324.0 l S
+125.9 310.8 m 146.9 310.8 l S
+146.9 310.8 m 184.5 310.8 l S
+0.0 274.6 540.0 2.0 re f
+1.6 194.4 m 109.1 194.4 l S
+1.6 164.8 m 126.3 164.8 l S
+1.6 135.3 m 168.7 135.3 l S
+312.6 135.3 m 371.6 135.3 l S
+1.6 105.7 m 113.4 105.7 l S
+478.3 105.7 m 524.2 105.7 l S
+1.6 76.1 m 143.4 76.1 l S
+1.6 46.5 m 211.5 46.5 l S
+BT
+/F4 11 Tf 0 687 Td 0.000 Tc(This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the)Tj
+0 -13.2 Td(implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the)Tj
+/F6 11 Tf ( GNU General)Tj
+0 -13.2 Td(Public License)Tj
+/F4 11 Tf ( for more details, which is available from the Free Software Foundation, Inc, 59 Temple Place - Suite 330,)Tj
+0 -13.2 Td(Boston, MA 02111-1307, USA.)Tj
+0 -26.4 Td(You should have received a copy of the)Tj
+0.00 0.00 1.00 rg /F6 11 Tf ( GNU General Public License)Tj
+0.00 0.00 0.00 rg /F4 11 Tf ( along with this program; if not, write to the)Tj
+0 -26.4 Td( Free Software)Tj
+0 -13.2 Td( Foundation, Inc. 59 Temple Place - Suite 330)Tj
+0 -13.2 Td( Boston, MA 02111-1307)Tj
+0 -13.2 Td( USA )Tj
+/F9 14 Tf 0 -31.4 Td(9.2. History)Tj
+/F4 11 Tf 0 -27 Td(In the beginning, there was the)Tj
+0.00 0.00 1.00 rg ( Internet Junkbuster)Tj
+0.00 0.00 0.00 rg (, by Anonymous Coders and)Tj
+0.00 0.00 1.00 rg ( Junkbusters Corporation)Tj
+0.00 0.00 0.00 rg (. It saved many)Tj
+0 -13.2 Td(users a lot of pain in the early days of web advertising and user tracking.)Tj
+0 -26.4 Td(But the web, its protocols and standards, and with it, the techniques for forcing users to consume ads, give up autonomy)Tj
+0 -13.2 Td(over their browsing, and for spying on them, kept evolving. Unfortunately, the Internet Junkbuster did not. Version 2.0.2,)Tj
+0 -13.2 Td(published in 1998, was \(and is\) the last official)Tj
+0.00 0.00 1.00 rg ( release)Tj
+0.00 0.00 0.00 rg ( available from)Tj
+0.00 0.00 1.00 rg ( Junkbusters Corporation)Tj
+0.00 0.00 0.00 rg (. Fortunately, it had been)Tj
+0 -13.2 Td(released under the GNU)Tj
+0.00 0.00 1.00 rg ( GPL)Tj
+0.00 0.00 0.00 rg (, which allowed further development by others.)Tj
+0 -26.4 Td(So Stefan Waldherr started maintaining an)Tj
+0.00 0.00 1.00 rg ( improved version of the software)Tj
+0.00 0.00 0.00 rg (, to which eventually a number of people)Tj
+0 -13.2 Td(contributed patches. It could already replace banners with a transparent image, and had a first version of pop-up killing,)Tj
+0 -13.2 Td(but it was still very closely based on the original, with all its limitations, such as the lack of HTTP/1.1 support, flexible)Tj
+0 -13.2 Td(per-site configuration, or content modification. The last release from this effort was version 2.0.2-10, published in 2000.)Tj
+0 -26.4 Td(Then, some)Tj
+0.00 0.00 1.00 rg ( developers)Tj
+0.00 0.00 0.00 rg ( picked up the thread, and started turning the software inside out, upside down, and then)Tj
+0 -13.2 Td(reassembled it, adding many)Tj
+0.00 0.00 1.00 rg ( new features)Tj
+0.00 0.00 0.00 rg ( along the way.)Tj
+0 -26.4 Td(The result of this is Privoxy, whose first stable release, 3.0, is due late summer or early fall 2002.)Tj
+/F9 17 Tf 0 -34.4 Td(10. See also)Tj
+/F4 11 Tf 0 -27.6 Td(Other references and sites of interest to Privoxy users:)Tj
+0.00 0.00 1.00 rg 1.588 -27.988 Td(http://www.privoxy.org/)Tj
+0.00 0.00 0.00 rg (, the Privoxy Home page.)Tj
+0.00 0.00 1.00 rg 0 -29.576 Td(http://www.privoxy.org/faq/)Tj
+0.00 0.00 0.00 rg (, the Privoxy FAQ.)Tj
+0.00 0.00 1.00 rg 0 -29.576 Td(http://sourceforge.net/projects/ijbswa/)Tj
+0.00 0.00 0.00 rg (, the Project Page for Privoxy on)Tj
+0.00 0.00 1.00 rg ( SourceForge)Tj
+0.00 0.00 0.00 rg (.)Tj
+0.00 0.00 1.00 rg -0 -29.576 Td(http://config.privoxy.org/)Tj
+0.00 0.00 0.00 rg (, the web-based user interface. Privoxy must be running for this to work. Shortcut:)Tj
+0.00 0.00 1.00 rg ( http://p.p/)Tj
+0 -29.576 Td(http://www.privoxy.org/actions/)Tj
+0.00 0.00 0.00 rg (, to submit "misses" to the developers.)Tj
+0.00 0.00 1.00 rg 0 -29.576 Td(http://www.junkbusters.com/ht/en/cookies.html)Tj
+0.00 0.00 0.00 rg (, an explanation how cookies are used to track web users.)Tj
+/F8 11 Tf -1.588 672.471 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(35/36)Tj
+ET
+Q
+endstream
+endobj
+402 0 obj<</Type/Page/Parent 331 0 R/Contents 403 0 R/MediaBox[0 0 612 792]/Resources<</ProcSet[/PDF/Text]/Font<</F0 3 0 R/F4 5 0 R/F8 9 0 R>>/XObject<<>>>>/Annots 235 0 R>>endobj
+403 0 obj<</Length 1117      >>stream
+q
+0.93 0.93 0.93 rg 0 0 612 792 re f
+1 0 0 1 36 36 cm
+0.00 0.00 1.00 RG
+1.6 684.4 m 164.5 684.4 l S
+1.6 654.8 m 163.5 654.8 l S
+1.6 625.3 m 116.8 625.3 l S
+1.6 595.7 m 130.0 595.7 l S
+1.6 566.1 m 194.2 566.1 l S
+BT
+0.00 0.00 1.00 rg /F4 11 Tf 1.588 685.412 Td 0.000 Tc(http://www.junkbusters.com/ijb.html)Tj
+0.00 0.00 0.00 rg (, the original Internet Junkbuster.)Tj
+0.00 0.00 1.00 rg 0 -29.577 Td(http://www.waldherr.org/junkbuster/)Tj
+0.00 0.00 0.00 rg (, Stefan Waldherr's version of Junkbuster, from which Privoxy was derived.)Tj
+0.00 0.00 1.00 rg -0 -29.577 Td(http://privacy.net/analyze/)Tj
+0.00 0.00 0.00 rg (, a useful site to check what information about you is leaked while you browse the web.)Tj
+0.00 0.00 1.00 rg 0 -29.577 Td(http://www.squid-cache.org/)Tj
+0.00 0.00 0.00 rg (, a very popular caching proxy, which is often used together with Privoxy.)Tj
+0.00 0.00 1.00 rg 0 -29.577 Td(http://www.privoxy.org/developer-manual/)Tj
+0.00 0.00 0.00 rg (, the Privoxy developer manual.)Tj
+/F8 11 Tf -1.588 152.894 Td(Privoxy Developer Manual)Tj
+431.76 0 Td(08/06/02 10:11:29 PM)Tj
+-175.521 -720 Td(36/36)Tj
+ET
+Q
+endstream
+endobj
+404 0 obj<</Type/Catalog/Pages 331 0 R/PageLayout/SinglePage/PageMode/UseNone/PageLabels<</Nums[0<</S/D/St 1/P()>>0<</S/D/St 1/P()>>]>>>>endobj
+xref
+0 405 
+0000000000 65535 f 
+0000000015 00000 n 
+0000000247 00000 n 
+0000001813 00000 n 
+0000001887 00000 n 
+0000001969 00000 n 
+0000002047 00000 n 
+0000002124 00000 n 
+0000002203 00000 n 
+0000002286 00000 n 
+0000002362 00000 n 
+0000002444 00000 n 
+0000002503 00000 n 
+0000002603 00000 n 
+0000002656 00000 n 
+0000002741 00000 n 
+0000002812 00000 n 
+0000002897 00000 n 
+0000002999 00000 n 
+0000003099 00000 n 
+0000003200 00000 n 
+0000003301 00000 n 
+0000003402 00000 n 
+0000003503 00000 n 
+0000003604 00000 n 
+0000003705 00000 n 
+0000003806 00000 n 
+0000003907 00000 n 
+0000004008 00000 n 
+0000004109 00000 n 
+0000004210 00000 n 
+0000004311 00000 n 
+0000004412 00000 n 
+0000004514 00000 n 
+0000004616 00000 n 
+0000004718 00000 n 
+0000004820 00000 n 
+0000004922 00000 n 
+0000005024 00000 n 
+0000005125 00000 n 
+0000005227 00000 n 
+0000005329 00000 n 
+0000005431 00000 n 
+0000005533 00000 n 
+0000005635 00000 n 
+0000005736 00000 n 
+0000005838 00000 n 
+0000005940 00000 n 
+0000006042 00000 n 
+0000006144 00000 n 
+0000006246 00000 n 
+0000006348 00000 n 
+0000006449 00000 n 
+0000006548 00000 n 
+0000006648 00000 n 
+0000006944 00000 n 
+0000007045 00000 n 
+0000007147 00000 n 
+0000007249 00000 n 
+0000007351 00000 n 
+0000007453 00000 n 
+0000007555 00000 n 
+0000007657 00000 n 
+0000007759 00000 n 
+0000007861 00000 n 
+0000007963 00000 n 
+0000008064 00000 n 
+0000008166 00000 n 
+0000008268 00000 n 
+0000008370 00000 n 
+0000008472 00000 n 
+0000008574 00000 n 
+0000008676 00000 n 
+0000008778 00000 n 
+0000008880 00000 n 
+0000008982 00000 n 
+0000009084 00000 n 
+0000009185 00000 n 
+0000009286 00000 n 
+0000009387 00000 n 
+0000009488 00000 n 
+0000009589 00000 n 
+0000009690 00000 n 
+0000009791 00000 n 
+0000009892 00000 n 
+0000009994 00000 n 
+0000010096 00000 n 
+0000010198 00000 n 
+0000010300 00000 n 
+0000010402 00000 n 
+0000010504 00000 n 
+0000010606 00000 n 
+0000010708 00000 n 
+0000010810 00000 n 
+0000010912 00000 n 
+0000011014 00000 n 
+0000011116 00000 n 
+0000011217 00000 n 
+0000011318 00000 n 
+0000011419 00000 n 
+0000011520 00000 n 
+0000011622 00000 n 
+0000011724 00000 n 
+0000011826 00000 n 
+0000011927 00000 n 
+0000012027 00000 n 
+0000012127 00000 n 
+0000012507 00000 n 
+0000012609 00000 n 
+0000012711 00000 n 
+0000012812 00000 n 
+0000012867 00000 n 
+0000012954 00000 n 
+0000013015 00000 n 
+0000013102 00000 n 
+0000013157 00000 n 
+0000013244 00000 n 
+0000013317 00000 n 
+0000013404 00000 n 
+0000013477 00000 n 
+0000013538 00000 n 
+0000013625 00000 n 
+0000013686 00000 n 
+0000013773 00000 n 
+0000013875 00000 n 
+0000013962 00000 n 
+0000014016 00000 n 
+0000014101 00000 n 
+0000014144 00000 n 
+0000014231 00000 n 
+0000014274 00000 n 
+0000014361 00000 n 
+0000014426 00000 n 
+0000014513 00000 n 
+0000014600 00000 n 
+0000014625 00000 n 
+0000014724 00000 n 
+0000014811 00000 n 
+0000014836 00000 n 
+0000014927 00000 n 
+0000015013 00000 n 
+0000015038 00000 n 
+0000015096 00000 n 
+0000015183 00000 n 
+0000015208 00000 n 
+0000015262 00000 n 
+0000015349 00000 n 
+0000015374 00000 n 
+0000015443 00000 n 
+0000015530 00000 n 
+0000015630 00000 n 
+0000015717 00000 n 
+0000015750 00000 n 
+0000015826 00000 n 
+0000015913 00000 n 
+0000016004 00000 n 
+0000016091 00000 n 
+0000016146 00000 n 
+0000016233 00000 n 
+0000016288 00000 n 
+0000016375 00000 n 
+0000016465 00000 n 
+0000016551 00000 n 
+0000016639 00000 n 
+0000016726 00000 n 
+0000016791 00000 n 
+0000016881 00000 n 
+0000016968 00000 n 
+0000017067 00000 n 
+0000017153 00000 n 
+0000017365 00000 n 
+0000017452 00000 n 
+0000017544 00000 n 
+0000017631 00000 n 
+0000017715 00000 n 
+0000017802 00000 n 
+0000017892 00000 n 
+0000017978 00000 n 
+0000018175 00000 n 
+0000018262 00000 n 
+0000018353 00000 n 
+0000018440 00000 n 
+0000018531 00000 n 
+0000018618 00000 n 
+0000018680 00000 n 
+0000018767 00000 n 
+0000018842 00000 n 
+0000018929 00000 n 
+0000018990 00000 n 
+0000019077 00000 n 
+0000019190 00000 n 
+0000019258 00000 n 
+0000019345 00000 n 
+0000019412 00000 n 
+0000019499 00000 n 
+0000019558 00000 n 
+0000019645 00000 n 
+0000019724 00000 n 
+0000019811 00000 n 
+0000019869 00000 n 
+0000019956 00000 n 
+0000020024 00000 n 
+0000020111 00000 n 
+0000020178 00000 n 
+0000020265 00000 n 
+0000020354 00000 n 
+0000020440 00000 n 
+0000020533 00000 n 
+0000020620 00000 n 
+0000020675 00000 n 
+0000020761 00000 n 
+0000020820 00000 n 
+0000020906 00000 n 
+0000020977 00000 n 
+0000021063 00000 n 
+0000021117 00000 n 
+0000021204 00000 n 
+0000021262 00000 n 
+0000021348 00000 n 
+0000021391 00000 n 
+0000021478 00000 n 
+0000021675 00000 n 
+0000021761 00000 n 
+0000021838 00000 n 
+0000021922 00000 n 
+0000022075 00000 n 
+0000022142 00000 n 
+0000022228 00000 n 
+0000022295 00000 n 
+0000022381 00000 n 
+0000022440 00000 n 
+0000022526 00000 n 
+0000022585 00000 n 
+0000022671 00000 n 
+0000022743 00000 n 
+0000022829 00000 n 
+0000022886 00000 n 
+0000022920 00000 n 
+0000022954 00000 n 
+0000024516 00000 n 
+0000024559 00000 n 
+0000024602 00000 n 
+0000024650 00000 n 
+0000024693 00000 n 
+0000024741 00000 n 
+0000024784 00000 n 
+0000024827 00000 n 
+0000024870 00000 n 
+0000024913 00000 n 
+0000024956 00000 n 
+0000024999 00000 n 
+0000025042 00000 n 
+0000025085 00000 n 
+0000025128 00000 n 
+0000025171 00000 n 
+0000025214 00000 n 
+0000025257 00000 n 
+0000025300 00000 n 
+0000025343 00000 n 
+0000025386 00000 n 
+0000025429 00000 n 
+0000025472 00000 n 
+0000025515 00000 n 
+0000025558 00000 n 
+0000025601 00000 n 
+0000025644 00000 n 
+0000025687 00000 n 
+0000025730 00000 n 
+0000025773 00000 n 
+0000025816 00000 n 
+0000025859 00000 n 
+0000025902 00000 n 
+0000025945 00000 n 
+0000025988 00000 n 
+0000026031 00000 n 
+0000026079 00000 n 
+0000026122 00000 n 
+0000026165 00000 n 
+0000026208 00000 n 
+0000026251 00000 n 
+0000026294 00000 n 
+0000026337 00000 n 
+0000026380 00000 n 
+0000026423 00000 n 
+0000026466 00000 n 
+0000026509 00000 n 
+0000026552 00000 n 
+0000026595 00000 n 
+0000026638 00000 n 
+0000026681 00000 n 
+0000026724 00000 n 
+0000026767 00000 n 
+0000026810 00000 n 
+0000026853 00000 n 
+0000026896 00000 n 
+0000026939 00000 n 
+0000026982 00000 n 
+0000027025 00000 n 
+0000027068 00000 n 
+0000027111 00000 n 
+0000027154 00000 n 
+0000027197 00000 n 
+0000027240 00000 n 
+0000027283 00000 n 
+0000027326 00000 n 
+0000027369 00000 n 
+0000027412 00000 n 
+0000027455 00000 n 
+0000027498 00000 n 
+0000027541 00000 n 
+0000027584 00000 n 
+0000027627 00000 n 
+0000027670 00000 n 
+0000027713 00000 n 
+0000027756 00000 n 
+0000027799 00000 n 
+0000027842 00000 n 
+0000027885 00000 n 
+0000027928 00000 n 
+0000027971 00000 n 
+0000028014 00000 n 
+0000028057 00000 n 
+0000028100 00000 n 
+0000028143 00000 n 
+0000028186 00000 n 
+0000028229 00000 n 
+0000028272 00000 n 
+0000028315 00000 n 
+0000028358 00000 n 
+0000028401 00000 n 
+0000028444 00000 n 
+0000028487 00000 n 
+0000028822 00000 n 
+0000029020 00000 n 
+0000037487 00000 n 
+0000037658 00000 n 
+0000049304 00000 n 
+0000049513 00000 n 
+0000054012 00000 n 
+0000054211 00000 n 
+0000060031 00000 n 
+0000060240 00000 n 
+0000064691 00000 n 
+0000064885 00000 n 
+0000068291 00000 n 
+0000068485 00000 n 
+0000072169 00000 n 
+0000072353 00000 n 
+0000074759 00000 n 
+0000074943 00000 n 
+0000077694 00000 n 
+0000077878 00000 n 
+0000080823 00000 n 
+0000081007 00000 n 
+0000083597 00000 n 
+0000083781 00000 n 
+0000086196 00000 n 
+0000086380 00000 n 
+0000088619 00000 n 
+0000088803 00000 n 
+0000091285 00000 n 
+0000091469 00000 n 
+0000093774 00000 n 
+0000093958 00000 n 
+0000096556 00000 n 
+0000096740 00000 n 
+0000099955 00000 n 
+0000100139 00000 n 
+0000102458 00000 n 
+0000102642 00000 n 
+0000105298 00000 n 
+0000105482 00000 n 
+0000108779 00000 n 
+0000108963 00000 n 
+0000111962 00000 n 
+0000112146 00000 n 
+0000115271 00000 n 
+0000115445 00000 n 
+0000119302 00000 n 
+0000119467 00000 n 
+0000121898 00000 n 
+0000122107 00000 n 
+0000125386 00000 n 
+0000125589 00000 n 
+0000130999 00000 n 
+0000131193 00000 n 
+0000135233 00000 n 
+0000135451 00000 n 
+0000139156 00000 n 
+0000139364 00000 n 
+0000143000 00000 n 
+0000143208 00000 n 
+0000146778 00000 n 
+0000146971 00000 n 
+0000150345 00000 n 
+0000150563 00000 n 
+0000154297 00000 n 
+0000154505 00000 n 
+0000158335 00000 n 
+0000158534 00000 n 
+0000163400 00000 n 
+0000163599 00000 n 
+0000168512 00000 n 
+0000168692 00000 n 
+0000169864 00000 n 
+trailer
+<</Size 405/Root 404 0 R/Info 1 0 R/ID[<bf115c7ece6049cb05422452ef2ab6e1><bf115c7ece6049cb05422452ef2ab6e1>]>>
+startxref
+170008
+%%EOF
