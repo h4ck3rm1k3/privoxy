@@ -24,9 +24,9 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.38 2003/12/10 03:39:45 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.39 2004/01/29 22:53:08 hal9 Exp $
 
- Copyright (C) 2001-2003 Privoxy Developers <developers@privoxy.org>
+ Copyright (C) 2001-2004 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
 
  Based partially on the Internet Junkbuster FAQ originally written by and
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.38 2003/12/10 03:39:45 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.39 2004/01/29 22:53:08 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1544,6 +1544,11 @@ from a webserver? FTP server?</title>
  altered by filtering, will be saved too, for these (probably rare) cases.
 </para>
 <para>
+ Note that versions later than 3.0.2 do NOT filter document types of
+ <quote>text/plain</quote>. Prior to this, <application>Privoxy</application>
+ did filter this document type.
+</para>
+<para>
  In short, filtering is <quote>ON</quote> if a) the Document Type as reported
  by the webserver is appropriate <emphasis>and</emphasis> b) the configuration
  allows it (or at least does not disallow it). That's it. There is no magic
@@ -1555,10 +1560,10 @@ from a webserver? FTP server?</title>
  particularly if the content is source code, or other critical content. Source
  code sometimes might be mistaken for Javascript (i.e. the kind that might
  open a pop-up window). It is recommended to turn off filtering for download
- sites (particularly if the content may be plain text files) in your
- <filename>user.action</filename> file. And also, for any site or page where
- making <emphasis>any</emphasis> changes at all to the content is to be
- avoided.
+ sites (particularly if the content may be plain text files and you are using
+ version 3.0.2 or earlier) in your <filename>user.action</filename> file. And
+ also, for any site or page where making <emphasis>any</emphasis> changes at
+ all to the content is to be avoided.
 </para>
 <para>
  <application>Privoxy</application> does not do FTP at all, only HTTP 
@@ -1570,7 +1575,7 @@ from a webserver? FTP server?</title>
 <title>I just downloaded a Perl script, and <application>Privoxy</application>
 altered it! Yikes, what is wrong!</title>
 <para>
- Your present configuration! Please read above.
+ Please read above.
 </para>
 </sect2>
 
@@ -1878,7 +1883,7 @@ Why?</title>
 <para>
  Typically, this would be considered a system configuration error. It is not a
  fatal error to <application>Privoxy</application> however, but may result in 
- a slower response from <application>Privoxy</application> due to DNS
+ a much slower response from <application>Privoxy</application> due to DNS
  timeouts.
 </para>
 </sect2>
@@ -1888,7 +1893,7 @@ Why?</title>
 error message <quote>port 8118 is already in use</quote> (or similar wording).
 Why?</title>
 <para>
- Port 8118 is <application>Privoxy's</application> default
+ Port 8118 is <application>Privoxy's</application> default TCP 
  <quote>listening</quote> port. Typically this message would mean that there
  is already one instance of <application>Privoxy</application> running, and
  you are actually trying to start a second <application>Privoxy</application> 
@@ -2059,6 +2064,9 @@ Why?</title>
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.39  2004/01/29 22:53:08  hal9
+Minor changes for exempting docs of text/plain. Change copyright date.
+
 Revision 1.61.2.38  2003/12/10 03:39:45  hal9
 Added FAQs for: demoronizer, related problems and why its included. Also,
 port 8118 already in use questions, and PrivoxyWindowOpen() questions. All in
