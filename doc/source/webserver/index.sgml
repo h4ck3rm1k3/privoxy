@@ -6,9 +6,9 @@
 <!entity copyright SYSTEM "copyright.sgml">
 <!entity license SYSTEM "license.sgml">
 <!entity p-version "3.0.2">
-<!entity p-status "stable">
-<!entity % p-not-stable "IGNORE">
-<!entity % p-stable "INCLUDE">
+<!entity p-status "STABLE">
+<!entity % p-not-stable "INCLUDE">
+<!entity % p-stable "IGNORE">
 <!entity  my-copy "&copy;">        <!-- kludge for docbook2man            -->
 <!entity % p-homepage "IGNORE">    <!-- toggle for webserver index.html   -->
 <!entity % p-index "IGNORE">       <!-- toggle for local doc index        -->
@@ -20,7 +20,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: index.sgml,v 1.16.2.10 2003/03/28 03:33:09 hal9 Exp $
+ $Id: index.sgml,v 1.16.2.11 2003/08/16 12:16:30 hal9 Exp $
 
  Copyright (C) 2001 - 2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -95,7 +95,7 @@
   </listitem>
   <listitem>
    <para>
-    <ulink url="http://cvs.sourceforge.net/cvstarballs/ijbswa-cvsroot.tar.gz">Download the latest CVS snapshot (source tarball)</ulink>
+    <ulink url="http://cvs.sourceforge.net/cvstarballs/ijbswa-cvsroot.tar.bz2">Download the latest CVS snapshot (source tarball)</ulink>
    </para>
   </listitem>
   <listitem>
@@ -253,6 +253,9 @@
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: index.sgml,v $
+ Revision 1.16.2.11  2003/08/16 12:16:30  hal9
+ Update cvs tarball URL (to bz2)
+
  Revision 1.16.2.10  2003/03/28 03:33:09  hal9
  Include link for announce.txt, and change handling of &copy;.
 
