@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.35.2.3 2003/12/17 16:34:15 oes Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.35.2.4 2005/04/04 02:21:24 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,11 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.35.2.3 2003/12/17 16:34:15 oe
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.35.2.4  2005/04/04 02:21:24  david__schmidt
+ *    Another instance of:
+ *    Don't show "Edit" buttons #ifndef FEATURE_CGI_EDIT_ACTIONS
+ *    Thanks to Magnus Holmgren for the patch
+ *
  *    Revision 1.35.2.3  2003/12/17 16:34:15  oes
  *     - Prevent line wrap beween "View/Edit" link buttons on status page
  *     - Some (mostly irrelevant) fixes for Out-of-mem-case handling
@@ -1139,9 +1144,13 @@ jb_err cgi_show_url_info(struct client_state *csp,
                string_join  (&matches, html_encode(csp->config->actions_file_short[i]));
                snprintf(buf, 150, ".action <a class=\"cmd\" href=\"/show-status?file=actions&index=%d\">", i);
                string_append(&matches, buf);
-               string_append(&matches, "View</a> <a class=\"cmd\" href=\"/edit-actions-list?f=");
+               string_append(&matches, "View</a>");
+#ifdef FEATURE_CGI_EDIT_ACTIONS
+               string_append(&matches, " <a class=\"cmd\" href=\"/edit-actions-list?f=");
                string_join  (&matches, html_encode(csp->config->actions_file_short[i]));
-               string_append(&matches, "\">Edit</a></th></tr>\n");
+               string_append(&matches, "\">Edit</a>");
+#endif
+               string_append(&matches, "</th></tr>\n");
 
                hits = 0;
                b = b->next;
