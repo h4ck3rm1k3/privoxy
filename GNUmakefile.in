@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.3 2002/05/29 02:05:48 hal9 Exp $
+# $Id: GNUmakefile.in,v 1.104.2.4 2002/05/29 02:12:17 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -706,12 +706,13 @@ announce: dok-release
 config-file: dok-release
 	cd doc/source && $(DB)-notoc -iconfig-file -V nochunks config.sgml > __tmp.html &&\
 	$(WDUMP) -dump __tmp.html |fmt -w 70 > ../../config.new && $(RM) -r __tmp.*
-	$(PERL) -pi -e '/^\d\.\d\.\s+/ && tr/[a-z]/[A-Z]/;\
+	$(PERL) -pi.bak -e '/^\d\.\d\.\s+/ && tr/[a-z]/[A-Z]/;\
                      s/^/#  /;\
                      /Sample Configuration file/i && s/\s1\.\s/      /;\
                      /^#  #{12,}/ && s/^#  #/####/;\
 				 s/^#\s+@@//;\
                      s/^#\s*-{20,}//'   config.new
+	$(RM) *.bak
 	@$(ECHO)  "****************************************************"
 	@$(ECHO)  "The output file is config.new."
 	@$(ECHO)  "NOW -- hand edit the results!!!!!!!!!!!!!!!!!"
@@ -882,6 +883,10 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.4  2002/05/29 02:12:17  hal9
+# Ooops...forgot about perl -pi cygwin problem. Add -pi.bak. Also, the
+# new target is 'make config-file', _not_ make config.
+#
 # Revision 1.104.2.3  2002/05/29 02:05:48  hal9
 # 'make config' target added (WIP) for future generation of config file from
 # text in u-m so the two are in sync. New generated config, which requires
