@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.15 2003/03/19 13:19:06 oes Exp $
+#  $Id: default.action.master,v 1.1.2.16 2003/03/19 13:47:52 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -443,6 +443,7 @@ allow-ads   = -block -filter{banners-by-size} -filter{banners-by-link}
 -filter{fun} \
 -filter{crude-parental} \
 +filter{ie-exploits} \
+-filter{site-specifics} \
 -handle-as-image \
 +hide-forwarded-for-headers \
 +hide-from-header{block} \

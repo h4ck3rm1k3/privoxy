@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/Attic/standard.action,v $
 # 
-#  $Id: standard.action,v 1.2.2.7 2003/03/18 19:37:11 oes Exp $
+#  $Id: standard.action,v 1.2.2.8 2003/03/19 13:47:52 oes Exp $
 #
 #  Purpose     :  Provide prefedined sets of actions, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -54,6 +54,7 @@
 -filter{fun} \
 -filter{crude-parental} \
 -filter{ie-exploits} \
+-filter{site-specifics} \
 -handle-as-image \
 +hide-forwarded-for-headers \
 +hide-from-header{block} \
@@ -101,6 +102,7 @@ standard.Cautious
 -filter{fun} \
 -filter{crude-parental} \
 +filter{ie-exploits} \
+-filter{site-specifics} \
 -handle-as-image \
 +hide-forwarded-for-headers \
 +hide-from-header{block} \
@@ -148,6 +150,7 @@ standard.Medium
 +filter{fun} \
 -filter{crude-parental} \
 -filter{ie-exploits} \
+-filter{site-specifics} \
 -handle-as-image \
 +hide-forwarded-for-headers \
 +hide-from-header{block} \
