@@ -7,5 +7,11 @@ privoxy for Debian
   want to use these features, you can enable them in
   /etc/privoxy/config and do a "/etc/init.d/privoxy restart".
 
+- A patch was applied to access the local copy of the user manual
+  (/usr/share/doc/privoxy/user-manual/*) was applied.  With the option
+   user-manual /usr/share/doc/privoxy/user-manual
+  in /etc/privoxy/config this is activated and the manual can be
+  accessed as http://config.privoxy.org/user-manual
+
 Roland Rosenfeld <roland@debian.org>
-$Id: README.Debian,v 1.1.2.1 2003/02/28 17:42:30 roro Exp $
+$Id: README.Debian,v 1.1.2.2 2003/12/06 22:22:43 roro Exp $
