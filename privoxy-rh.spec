@@ -1,4 +1,4 @@
-# $Id: privoxy-rh.spec,v 1.33.2.13 2002/07/27 21:39:41 kick_ Exp $
+# $Id: privoxy-rh.spec,v 1.33.2.14 2002/07/27 21:58:16 kick_ Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -69,7 +69,7 @@ Privoxy is based on the Internet Junkbuster.
 # We check to see if versions match
 VERSION_MAJOR=2
 VERSION_MINOR=9
-VERSION_POINT=15
+VERSION_POINT=16
 
 CONFIG_VERSION=`cat configure.in | sed -n -e 's/^VERSION_MAJOR=\([0-9]*\)/\1./p' -e 's/^VERSION_MINOR=\([0-9]*\)/\1./p' -e 's/^VERSION_POINT=\([0-9]*\)/\1/p' | awk '{printf $1}'`
 if [ "%{version}" != "${CONFIG_VERSION}" ]; then
@@ -719,6 +719,9 @@ fi
 	additional "-r @" flag.
 
 # $Log: privoxy-rh.spec,v $
+# Revision 1.33.2.14  2002/07/27 21:58:16  kick_
+# bump version
+#
 # Revision 1.33.2.13  2002/07/27 21:39:41  kick_
 # condrestart raised an error during an fresh install when privoxy wasn't already running
 #
