@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.32 2003/06/26 02:52:04 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.33 2003/06/26 02:57:05 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.32 2003/06/26 02:52:04 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.33 2003/06/26 02:57:05 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1472,17 +1472,18 @@ from a webserver? FTP server?</title>
  to the <quote>Document Type</quote> as reported by the webserver. If this is
  reported accurately (e.g. <quote>application/zip</quote> for a zip archive),
  then <application>Privoxy</application> knows to ignore these where
- appropriate. Privoxy filters html as well as plain text documents. Also,
- documents that are of an unknown type (generally assumed to be
- <quote>text/plain</quote>) will be filtered, as will those that might be
- incorrectly reported by the webserver. If such a file is a downloaded file
- that is intended to be saved to disk, then any content that might have been
- altered by filtering, will be saved too, for these (probably rare) cases.
+ appropriate. <application>Privoxy</application> filters html as well as plain
+ text documents. Also, documents that are of an unknown type (generally
+ assumed to be <quote>text/plain</quote>) will be filtered, as will those that
+ might be incorrectly reported by the webserver. If such a file is a
+ downloaded file that is intended to be saved to disk, then any content that
+ might have been altered by filtering, will be saved too, for these (probably
+ rare) cases.
 </para>
 <para>
  If you download text files, you probably do not want these to be filtered,
- particularly if the content is source code, or other critcal content. Source
- code sometimes might be mistaken for javascript. It is recommended to turn
+ particularly if the content is source code, or other critical content. Source
+ code sometimes might be mistaken for Javascript. It is recommended to turn
  off filtering for download sites (particularly if the content may be plain
  text files) in your <filename>user.action</filename> file.
 
@@ -1497,7 +1498,7 @@ from a webserver? FTP server?</title>
 <title>I just downloaded a Perl script, and <application>Privoxy</application>
 altered it! What is wrong!</title>
 <para>
- Read above very carefully.
+ Please read above.
 </para>
 </sect2>
 
@@ -1791,8 +1792,9 @@ Why?</title>
 </para>
 <para>
  Typically, this would be considered a system configuration error. It is not a
- fatal error to <application>Privoxy</application> however, and you may choose
- to ignore it if you want.
+ fatal error to <application>Privoxy</application> however, but may result in 
+ a slower response from <application>Privoxy</application> due to DNS
+ timeouts.
 </para>
 </sect2>
 
@@ -1890,6 +1892,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.33  2003/06/26 02:57:05  hal9
+Fix typo (finally!) and very minor modifications.
+
 Revision 1.61.2.32  2003/06/26 02:52:04  hal9
 Test, no changes.
 
