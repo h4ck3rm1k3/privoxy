@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.2 2002/05/28 02:32:55 hal9 Exp $
+# $Id: GNUmakefile.in,v 1.104.2.3 2002/05/29 02:05:48 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -548,8 +548,8 @@ dok-user:
 	$(RM) doc/webserver/user-manual/*.html
 	$(RM) -r doc/source/user-manual/
 	mkdir -p doc/text doc/source/user-manual
-	cd doc/source/user-manual && $(DB) ../user-manual.sgml && cd .. && cp user-manual/*.html ../webserver/user-manual/
-	cd doc/source && $(DB) -V nochunks user-manual.sgml > tmp.html && $(WDUMP) tmp.html > ../text/user-manual.txt && $(RM) -r tmp.html user-manual
+	cd doc/source/user-manual && $(DB) -iuser-man ../user-manual.sgml && cd .. && cp user-manual/*.html ../webserver/user-manual/
+	cd doc/source && $(DB) -iuser-man -V nochunks user-manual.sgml > tmp.html && $(WDUMP) tmp.html > ../text/user-manual.txt && $(RM) -r tmp.html user-manual
 
 # faq
 dok-faq: 
@@ -697,6 +697,36 @@ announce: dok-release
 	mv -f index.html announce-mini.html && $(WDUMP) announce-mini.html > announce-mini.txt &&\
 	mv -f *html *txt ../../.. 
 	rm -fr $(DOC_TMP)
+
+# The main Privoxy config file, generated from sgml sources. 
+# NOTE: This will require some hand editing. The new file is outputted 
+# as config.new so that problem sections can be compared to previous
+# version. This needs someone better at perl to finish it up. This uses 
+# the shell command 'fmt' too, to shorten line length.
+config-file: dok-release
+	cd doc/source && $(DB)-notoc -iconfig-file -V nochunks config.sgml > __tmp.html &&\
+	$(WDUMP) -dump __tmp.html |fmt -w 70 > ../../config.new && $(RM) -r __tmp.*
+	$(PERL) -pi -e '/^\d\.\d\.\s+/ && tr/[a-z]/[A-Z]/;\
+                     s/^/#  /;\
+                     /Sample Configuration file/i && s/\s1\.\s/      /;\
+                     /^#  #{12,}/ && s/^#  #/####/;\
+				 s/^#\s+@@//;\
+                     s/^#\s*-{20,}//'   config.new
+	@$(ECHO)  "****************************************************"
+	@$(ECHO)  "The output file is config.new."
+	@$(ECHO)  "NOW -- hand edit the results!!!!!!!!!!!!!!!!!"
+	@$(ECHO)  "In particular, check the Debug levels, and the"
+	@$(ECHO)  "permit-access, forward & socks examples"
+	@$(ECHO)  "****************************************************"
+
+# config file, alternate verison using lynx (perl stuff unfinished). Lynx
+# does not do so good a job.
+config-file-alt: 
+	cd doc/source && $(ECHO) -e ".h2 JUSTIFY\\nJUSTIFY:FALSE" > __tmp.lynx_cfg &&\
+	$(DB)-notoc -iconfig-file -V nochunks config.sgml > __tmp.html &&\
+	lynx -cfg=__tmp.lynx_cfg -width=78 -dump __tmp.html > ../../config.new && $(RM) -r __tmp.*
+	$(PERL) -pi -e 's/^(   )//;\
+	                s/:$\/:\n/' config.new
 
 #############################################################################
 #
@@ -852,6 +882,11 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.3  2002/05/29 02:05:48  hal9
+# 'make config' target added (WIP) for future generation of config file from
+# text in u-m so the two are in sync. New generated config, which requires
+# some hand editing for the time being.
+#
 # Revision 1.104.2.2  2002/05/28 02:32:55  hal9
 # New target 'make dok-index' for privoxy-index.html. Also, fixed *.bak files
 # not being cleaned up in doc/webserver.
