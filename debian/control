@@ -3,11 +3,11 @@ Section: web
 Priority: optional
 Maintainer: Roland Rosenfeld <roland@debian.org>
 Build-Depends: debhelper (>= 4.0.0), autoconf, libpcre3-dev
-Standards-Version: 3.5.8
+Standards-Version: 3.5.9
 
 Package: privoxy
 Architecture: any
-Depends: ${shlibs:Depends}, logrotate, adduser
+Depends: ${shlibs:Depends}, ${misc:Depends}, logrotate, adduser
 Description: Privacy enhancing HTTP Proxy
  Privoxy is a web proxy with advanced filtering capabilities for
  protecting privacy, filtering web page content, managing cookies,
