@@ -2,10 +2,10 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/Attic/standard.action,v $
 # 
-#  $Id: standard.action,v 1.2.2.3 2002/09/25 15:19:25 oes Exp $
+#  $Id: standard.action,v 1.2.2.4 2002/10/20 19:32:10 hal9 Exp $
 #
 #  Purpose     :  Provide prefedined sets of actions, see
-#                 http://www.privoxy.org/faq/questions.html#CONFIGFILES
+#                 http://www.privoxy.org/user-manual/actions-file.html
 #
 #  Copyright   :  Written by and Copyright
 #                 Privoxy team. http://www.privoxy.org/
