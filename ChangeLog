@@ -11,10 +11,9 @@ ChangeLog for Privoxy
   web servers labelling content of unknown type as text/plain.
 - Assorted fixes for POSIX compliance, signal handling, graceful
   termination, compiler warnings, OSX support, Win32 systray,
-  error logging, correct detection of NetBSD.
-- Workarounds for client (iTunes) and server (PHP < 4.2.3) bugs
+  error logging, hostname wildcards, correct detection of NetBSD.
+- Workarounds for client (iTunes etc) and server (PHP < 4.2.3) bugs
 - Slighly updated the actions file.
-
 	
 *** Version 3.0.2 ***
 
