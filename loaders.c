@@ -1,4 +1,4 @@
-const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.3 2002/11/20 17:12:30 oes Exp $";
+const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.4 2003/05/06 15:57:12 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loaders.c,v $
@@ -35,6 +35,10 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.3 2002/11/20 17:12:30 oes Ex
  *
  * Revisions   :
  *    $Log: loaders.c,v $
+ *    Revision 1.50.2.4  2003/05/06 15:57:12  oes
+ *    Bugfix: Update last_active pointer in sweep() before
+ *    leaving an active client. Closes bugs #724395, #727882
+ *
  *    Revision 1.50.2.3  2002/11/20 17:12:30  oes
  *    Ooops, forgot one change.
  *
@@ -404,6 +408,7 @@ void sweep(void)
          }
 #endif /* def FEATURE_TRUST */
          
+         last_active = csp;
          csp = csp->next;
 
       }
