@@ -9,6 +9,9 @@ ChangeLog for Privoxy
 - Content cookie filter now part of default (Medium) profile
 - Add a demoronizer filter, which fixes MS's abuse of std charsets
   (common cases anyway).
+- Rewrite make install target. Add uninstall and install-strip
+  targets.
+- Add Slackware support to Makefile.
 
 *** Version 3.0  ***
 
