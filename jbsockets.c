@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.5 2003/04/29 11:32:54 oes Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.6 2003/12/17 16:34:40 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -35,6 +35,9 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.5 2003/04/29 11:32:54 oe
  *
  * Revisions   :
  *    $Log: jbsockets.c,v $
+ *    Revision 1.35.2.6  2003/12/17 16:34:40  oes
+ *    Cosmetics
+ *
  *    Revision 1.35.2.5  2003/04/29 11:32:54  oes
  *    Don't rely on h_addr being non-NULL after gethostbyname.
  *    Works around an oddness in Max OSX and closes bug #724796
@@ -343,7 +346,7 @@ jb_socket connect_to(const char *host, int portnum, struct client_state *csp)
 #ifdef TCP_NODELAY
    {  /* turn off TCP coalescence */
       int mi = 1;
-      setsockopt (fd, IPPROTO_TCP, TCP_NODELAY, (char *) &mi, sizeof (int));
+      setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, (char *) &mi, sizeof (int));
    }
 #endif /* def TCP_NODELAY */
 

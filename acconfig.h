@@ -37,6 +37,9 @@
  *
  * Revisions   :
  *    $Log: acconfig.h,v $
+ *    Revision 1.27.2.4  2003/12/17 16:34:40  oes
+ *    Cosmetics
+ *
  *    Revision 1.27.2.3  2003/03/27 16:03:19  oes
  *    Another shot at Bug #707467
  *
@@ -392,7 +395,7 @@
 #undef HAVE_GETHOSTBYADDR_R_7_ARGS
 #undef HAVE_GETHOSTBYADDR_R_5_ARGS
 
-/* Define if you have gmtime_r and localtime_r with a signature
+/* Defined if you have gmtime_r and localtime_r with a signature
  * of (struct time *, struct tm *)
  */
 #undef HAVE_GMTIME_R
