@@ -1741,8 +1741,9 @@ CLASS="VARIABLELIST"
 >Effect:</DT
 ><DD
 ><P
->    Text documents, including HTML and JavaScript, to which this action applies, are filtered on-the-fly
-    through the specified regular expression based substitutions.    
+>    Text documents, including HTML and JavaScript, to which this action
+    applies, are filtered on-the-fly through the specified regular expression
+    based substitutions.
    </P
 ></DD
 ><DT
@@ -1773,15 +1774,35 @@ HREF="config.html#FILTERFILE"
     option in the <A
 HREF="config.html"
 >config file</A
->)
+>). Filtering 
+    can be completely disabled without the use of parameters. Example:
+   </P
+><P
+>    <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="90%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>  { -filter }
+     .example.com</PRE
+></TD
+></TR
+></TABLE
+>
+   </P
+><P
+>    Disables filters for that site.
    </P
 ></DD
 ><DT
 >Notes:</DT
 ><DD
 ><P
->    For your convenience, there are a bunch of pre-defined filters available 
-    in the distribution filter file that you can use. See the example below for
+>    For your convenience, there are a number of pre-defined filters available 
+    in the distribution filter file that you can use. See the examples below for
     a list.
    </P
 ><P
@@ -1797,6 +1818,22 @@ CLASS="QUOTE"
     passed the filters. (It does not really take longer, but seems that way
     since the page is not incrementally displayed.) This effect will be more
     noticeable on slower connections.
+   </P
+><P
+>    The amount of data that can be filtered is limited to the 
+    <TT
+CLASS="LITERAL"
+><A
+HREF="config.html#BUFFER-LIMIT"
+>buffer-limit</A
+></TT
+>
+    option in the main <A
+HREF="config.html"
+>config file</A
+>. The 
+    default is 4096 KB (4 Megs). Once this limit is exceeded, the buffered
+    data, and all pending data, is passed through unfiltered.
    </P
 ><P
 >    At this time, <SPAN
@@ -1818,7 +1855,7 @@ CLASS="LITERAL"
 >.
    </P
 ><P
->    Filtering can achieve some of the effects as the 
+>    Filtering can achieve some of the same effects as the 
     <TT
 CLASS="LITERAL"
 ><A
@@ -1826,14 +1863,17 @@ HREF="actions-file.html#BLOCK"
 >block</A
 ></TT
 >
-    action, i.e. it can be used to block ads and banners. 
+    action, i.e. it can be used to block ads and banners. But the mechanism 
+    works quite differently. One effective use, is to block ad banners 
+    based on their size (see below), since many of these seem to be somewhat 
+    standardized.
    </P
 ><P
 >    <A
 HREF="contact.html"
 >Feedback</A
-> with suggestions for new or improved filters is particularly
-    welcome!
+> with suggestions for new or
+    improved filters is particularly welcome!
    </P
 ></DD
 ><DT
@@ -1893,7 +1933,7 @@ WIDTH="90%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->+filter{banners-by-size}     # Kill banners by size (<SPAN
+>+filter{banners-by-size}     # Kill banners based on their size for this page (<SPAN
 CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
@@ -3613,7 +3653,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN2631">8.5.21. Summary</H3
+NAME="AEN2638">8.5.21. Summary</H3
 ><P
 > Note that many of these actions have the potential to cause a page to
  misbehave, possibly even not to display at all. There are many ways 
@@ -3872,7 +3912,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN2683">8.7.1. default.action</H3
+NAME="AEN2690">8.7.1. default.action</H3
 ><P
 >Every config file should start with a short comment stating its purpose:</P
 ><P
@@ -4692,7 +4732,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN2837">8.7.2. user.action</H3
+NAME="AEN2844">8.7.2. user.action</H3
 ><P
 > So far we are painting with a broad brush by setting general policies,
  which would be a reasonable starting point for many people. Now, 

@@ -740,7 +740,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN3384">14.2. <SPAN
+NAME="AEN3391">14.2. <SPAN
 CLASS="APPLICATION"
 >Privoxy</SPAN
 >'s Internal Pages</H2
@@ -787,7 +787,7 @@ CLASS="APPLICATION"
    Privoxy main page: 
   </P
 ><A
-NAME="AEN3399"><BLOCKQUOTE
+NAME="AEN3406"><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -818,7 +818,7 @@ CLASS="APPLICATION"
     editing of actions files:
   </P
 ><A
-NAME="AEN3407"><BLOCKQUOTE
+NAME="AEN3414"><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -836,7 +836,7 @@ TARGET="_top"
     Show the source code version numbers:
   </P
 ><A
-NAME="AEN3412"><BLOCKQUOTE
+NAME="AEN3419"><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -854,7 +854,7 @@ TARGET="_top"
    Show the browser's request headers:
   </P
 ><A
-NAME="AEN3417"><BLOCKQUOTE
+NAME="AEN3424"><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -872,7 +872,7 @@ TARGET="_top"
    Show which actions apply to a URL and why:
   </P
 ><A
-NAME="AEN3422"><BLOCKQUOTE
+NAME="AEN3429"><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -894,7 +894,7 @@ CLASS="QUOTE"
    to run, but only as a pass-through proxy, with no actions taking place:
   </P
 ><A
-NAME="AEN3428"><BLOCKQUOTE
+NAME="AEN3435"><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -909,7 +909,7 @@ TARGET="_top"
 >   Short cuts. Turn off, then on: 
   </P
 ><A
-NAME="AEN3432"><BLOCKQUOTE
+NAME="AEN3439"><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -921,7 +921,7 @@ TARGET="_top"
    </P
 ></BLOCKQUOTE
 ><A
-NAME="AEN3435"><BLOCKQUOTE
+NAME="AEN3442"><BLOCKQUOTE
 CLASS="BLOCKQUOTE"
 ><P
 > 
@@ -1326,7 +1326,8 @@ CLASS="APPLICATION"
 HREF="appendix.html#BOOKMARKLETS"
 >the Bookmarklets</A
 > section on a quick 
- and easy way to do this (be sure to flush caches afterward!).</P
+ and easy way to do this (be sure to flush caches afterward!). Looking at the 
+ logs is a good idea too.</P
 ><P
 > <SPAN
 CLASS="APPLICATION"
@@ -1820,8 +1821,9 @@ CLASS="SCREEN"
  One likely cause would be one of the <SPAN
 CLASS="QUOTE"
 >"{+filter}"</SPAN
-> actions. Try 
- adding the URL for the site to one of aliases that turn off <SPAN
+> actions. These 
+ tend to be harder to troubleshoot. Try adding the URL for the site to one of
+ aliases that turn off <SPAN
 CLASS="QUOTE"
 >"+filter"</SPAN
 >:</P
@@ -1873,11 +1875,20 @@ CLASS="SCREEN"
 ></TABLE
 ></P
 ><P
-> This would probably be most appropriately put in <TT
+> This would turn off all filtering for that site. This would probably be most
+ appropriately put in <TT
 CLASS="FILENAME"
 >user.action</TT
->, 
- for local site exceptions.</P
+>, for local site
+ exceptions.</P
+><P
+> Images that are inexplicably being blocked, may well be hitting the 
+ <SPAN
+CLASS="QUOTE"
+>"+filter{banners-by-size}"</SPAN
+> rule, which assumes 
+ that images of certain sizes are ad banners (works well most of the time 
+ since these tend to be standardized).</P
 ><P
 > <SPAN
 CLASS="QUOTE"
