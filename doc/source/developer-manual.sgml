@@ -8,7 +8,7 @@
 <!entity contacting SYSTEM "contacting.sgml">
 <!entity copyright SYSTEM "copyright.sgml">
 <!entity license SYSTEM "license.sgml">
-<!entity p-version "2.9.18">
+<!entity p-version "2.9.20">
 <!entity p-status "beta">
 <!entity % p-not-stable "INCLUDE">
 <!entity % p-stable "IGNORE">
@@ -23,7 +23,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: developer-manual.sgml,v 1.46.2.5 2002/08/09 01:15:12 hal9 Exp $
+ $Id: developer-manual.sgml,v 1.46.2.6 2002/08/10 11:40:25 oes Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -50,7 +50,7 @@
     </pubdate>
 
 
-    <pubdate>$Id: developer-manual.sgml,v 1.46.2.5 2002/08/09 01:15:12 hal9 Exp $</pubdate>
+    <pubdate>$Id: developer-manual.sgml,v 1.46.2.6 2002/08/10 11:40:25 oes Exp $</pubdate>
 
 <!--
 
@@ -95,6 +95,8 @@ Hal.
 <!-- end boilerplate -->
 
 <para>
+ Please note that this document is constantly evolving. This copy represents
+ the state at the release of version &p-version;.
  You can find the latest version of the this manual at <ulink
  url="http://www.privoxy.org/developer-manual/">http://www.privoxy.org/developer-manual/</ulink>.
  Please see <link linkend="contact">the Contact section</link> 
@@ -198,6 +200,13 @@ Hal.
           <listitem><para>
             Before changing things on CVS, make sure that your changes are in line
             with the team's general consensus on what should be done (see below).
+          </para></listitem>
+          <listitem><para>
+            Don't commit into the stable branch, unless immediately before a new
+            release. (See <link linkend="versionnumbers">Version Numbers</link> below
+            for details.) Collect your changes on the <ulink
+            url="http://sourceforge.net/tracker/?atid=311118&amp;group_id=11118&amp;func=browse">patches
+            tracker</ulink> instead.
           </para></listitem>
         </itemizedlist>
       </para>
@@ -1742,7 +1751,7 @@ static void unload_re_filterfile( void *f ) { ... }</programlisting>
 
     <para><emphasis>Example for file comments:</emphasis></para>
 <programlisting>
-const char FILENAME_rcs[] = "$Id: developer-manual.sgml,v 1.46.2.5 2002/08/09 01:15:12 hal9 Exp $";
+const char FILENAME_rcs[] = "$Id: developer-manual.sgml,v 1.46.2.6 2002/08/10 11:40:25 oes Exp $";
 /*********************************************************************
  *
  * File        :  $S<!-- Break CVS Substitution -->ource$
@@ -1802,7 +1811,7 @@ const char FILENAME_h_rcs[] = FILENAME_H_VERSION;
 <programlisting>
 #ifndef _FILENAME_H
 #define _FILENAME_H
-#define FILENAME_H_VERSION "$Id: developer-manual.sgml,v 1.46.2.5 2002/08/09 01:15:12 hal9 Exp $"
+#define FILENAME_H_VERSION "$Id: developer-manual.sgml,v 1.46.2.6 2002/08/10 11:40:25 oes Exp $"
 /*********************************************************************
  *
  * File        :  $S<!-- Break CVS Substitution -->ource$
@@ -2126,7 +2135,8 @@ at sourceforge. Three simple steps:
      <para>
       For <emphasis>all</emphasis> types of packages, including the source tarball,
       <emphasis>you must make sure that you build from clean sources by exporting
-      the right version from CVS into an empty directory:</emphasis>.
+      the right version from CVS into an empty directory</emphasis> (just press return when
+      asked for a password):
      </para>
       
      <para>
@@ -2858,6 +2868,9 @@ at sourceforge. Three simple steps:
   Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
   $Log: developer-manual.sgml,v $
+  Revision 1.46.2.6  2002/08/10 11:40:25  oes
+  Added disclaimer about probably being out-of-date and two small hints
+
   Revision 1.46.2.5  2002/08/09 01:15:12  hal9
   Added some notes on pre-release steps (test builds first, update ChangeLog).
 
