@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.28 2003/07/12 03:02:16 hal9 Exp $
+#  $Id: default.action.master,v 1.1.2.29 2003/07/13 03:17:28 hal9 Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -1006,8 +1006,7 @@ www.squarefree.com/bookmarklets/
 #MASTER# REMARKS: Used by Mac OSX's automatic software update feature
 swquery.apple.com
 swscan.apple.com
-#MASTER# REMARKS: These are various US DSL speed tests sites, where MIME is
-wrong
+#MASTER# REMARKS: These are various US DSL speed tests sites, where MIME is wrong
 #MASTER# PROBLEM-URL: http://atl.speakeasy.net/300k
 .speakeasy.net/\d+k
 #MASTER# DONT-VERIFY
