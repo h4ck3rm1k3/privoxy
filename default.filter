@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.11.2.20 2004/01/06 16:46:14 oes Exp $
+#  $Id: default.filter,v 1.11.2.21 2004/01/20 15:15:01 oes Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -190,7 +190,7 @@ s+([^'"]\s*)(?=</html>(\s*[^'"]|$))+$1<script>function PrivoxyWindowOpen(a, b, c
 FILTER: all-popups Kill all popups in JavaScript and HTML
 
 s/((\W\s*)(window|this|parent)\.)open\s*\\?\(/$1concat(/ig  # JavaScript
-s/ target\s*=\s*(['"]?)(_blank|_new)\1?/ notarget/ig        # HTML
+s/\starget\s*=\s*(['"]?)_?(blank|new)\1?/ notarget/ig        # HTML
 
 
 ##################################################################################
@@ -490,6 +490,9 @@ s|(<img [^>]*)onload|$1never|sig
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.11.2.21  2004/01/20 15:15:01  oes
+#     Detail enhancement in all-popups
+#
 #     Revision 1.11.2.20  2004/01/06 16:46:14  oes
 #     Fixed a JS syntax problem in jumping-windows
 #
