@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.8 2002/07/12 10:04:32 kick_ Exp $
+# $Id: GNUmakefile.in,v 1.104.2.9 2002/07/26 15:17:02 oes Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -74,6 +74,7 @@ LD         = @CC@
 RM         = rm -f
 STRIP_PROG = strip
 SED	   = sed
+GREP       = grep
 CAT        = cat
 RPM        = rpm
 RPMBUILD   = rpmbuild
@@ -207,7 +208,7 @@ LDFLAGS = $(DEBUG_CFLAGS) $(SPECIAL_CFLAGS)
 #
 # There should NOT be any targets above this line.
 #############################################################################
-all: $(PROGRAM)
+all: $(PROGRAM) default.action
 
 
 #############################################################################
@@ -224,6 +225,12 @@ install conectiva-spec conectiva-dist conectiva-upload
 %.o: %.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
+
+#############################################################################
+# Strip master copy comments from default.action:
+#############################################################################
+default.action: default.action.master
+	$(GREP) -v '^#MASTER#' $< > $@
 
 #############################################################################
 # Win32 config files
@@ -245,10 +252,6 @@ config.txt: config
 
 trust.txt: trust
 	$(DOSFILTER) < $< > $@ 
-
-re_filterfile.txt: re_filterfile
-	$(DOSFILTER) < $< > $@ 
-
 
 #############################################################################
 # Pre-dist check:
@@ -416,6 +419,7 @@ redhat-srpm:
 	make create-archive
 	$(MV) $(PROGRAM)-rh-$(VERSION).tar.gz $(PROGRAM)-$(VERSION).tar.gz
 	$(RPMBUILD) -ts --nodeps $(PROGRAM)-$(VERSION).tar.gz
+
 
 #############################################################################
 # suse distribution. works fine. no need to be root. 
@@ -916,7 +920,7 @@ $(PROGRAM): $(OBJS) $(W32_FILES)
 	$(LD) $(LDFLAGS) -o $(PROGRAM) $(OBJS) $(LIBS)
 
 clean:
-	$(RM) a.out $(OBJS) $(W32_FILES) $(W32_INIS) $(PROGRAM) `find . -name TAGS -o -name tags` 
+	$(RM) a.out $(OBJS) $(W32_FILES) $(W32_INIS) $(PROGRAM) default.action `find . -name TAGS -o -name tags` 
 
 tidy:
 	$(RM) `find . -name "*~"`
@@ -970,6 +974,10 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.9  2002/07/26 15:17:02  oes
+# - Added generation of default.action from defaul.action.master
+# - Deleted obsolete re_filterfile.txt generation
+#
 # Revision 1.104.2.8  2002/07/12 10:04:32  kick_
 # added helper targets to the makefile. They shouldn't break anything, but
 # make my life a lot easier.
