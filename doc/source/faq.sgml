@@ -8,8 +8,8 @@
 <!entity history SYSTEM "history.sgml">
 <!entity copyright SYSTEM "copyright.sgml">
 <!entity license SYSTEM "license.sgml">
-<!entity p-version "0.0.0">
-<!entity p-status "UNRELEASED">
+<!entity p-version "3.0.2">
+<!entity p-status "STABLE">
 <!entity % p-not-stable "INCLUDE">
 <!entity % p-stable "IGNORE">
 <!entity % p-text "IGNORE">        <!-- define we are not a text only doc -->
@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.34 2003/06/26 03:00:03 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.35 2003/06/26 13:38:08 hal9 Exp $
 
  Copyright (C) 2001-2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.34 2003/06/26 03:00:03 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.35 2003/06/26 13:38:08 hal9 Exp $</pubdate>
 
 <!--
 
@@ -276,8 +276,8 @@ an ad, and what is not?</title>
 This does not sound very scientific.</title>
 <para>
  Actually, it's a black art ;-) And yes, it is always possible to have a broad
- rule accidentally block or change something by mistake. There is a good chance
- you may run into such a situation at some point. It is tricky writing rules to
+ rule accidentally block or change something by mistake. You will almost surely
+ run into such situations at some point. It is tricky writing rules to
  cover every conceivable possibility, and not occasionally get false positives.
 </para>
 
@@ -291,6 +291,24 @@ This does not sound very scientific.</title>
 
 </sect2>
 
+
+<sect2 renderas="sect3">
+<title id="configornot">Will I have to configure <application>Privoxy</application>
+ before I can use it?</title>
+<para>
+ No, not really. The default installation should give you a good starting
+ point, and block <emphasis>most</emphasis> unwanted content.
+</para>
+<para>
+ But you will certainly run into situations where there are false positives,
+ or ads not being blocked that you may not want to see. In these cases, you
+ would certainly benefit by customizing <application>Privoxy's</application>
+ configuration to more closely match your individual situation. And we would
+ encourage you to do this. This is where the real power of
+ <application>Privoxy</application> lies!
+</para>
+
+</sect2>
 
 <sect2 renderas="sect3" id="browsers2"><title>My browser does the same things as
 <application>Privoxy</application>. Why should I use
@@ -1890,6 +1908,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.35  2003/06/26 13:38:08  hal9
+Add FAQ on whether configuring Privoxy is necessary or not.
+
 Revision 1.61.2.34  2003/06/26 03:00:03  hal9
 Sorry, found another copyright date.
 
