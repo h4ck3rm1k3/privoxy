@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.20 2003/04/02 15:11:40 oes Exp $
+#  $Id: default.action.master,v 1.1.2.21 2003/04/12 16:12:00 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -469,7 +469,7 @@ allow-ads   = -block -filter{banners-by-size} -filter{banners-by-link}
 #############################################################################
 # These extensions belong to images:
 #############################################################################
-{+handle-as-image}
+{+handle-as-image -filter}
 #############################################################################
 /.*\.(gif|jpe?g|png|bmp|ico)($|\?)
 
@@ -549,8 +549,6 @@ cobolreport.com/images/Acucorp1.gif
 cobolreport.com/images/netcobol.jpg
 cobolreport.com/images/NetCOBOL-banner.gif
 objectz.com/images/Landmark%20120x240.gif
-#MASTER# BLOCK-REFERRER: http://www.theregister.co.uk/
-www.theregister.co.uk/media
 #MASTER# BLOCK-REFERRER: http://www.dpreview.com/reviews/canons40/
 tribalfusion.speedera.net
 .tribalfusion.com/media/
