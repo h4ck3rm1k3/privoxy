@@ -1,6 +1,14 @@
 --------------------------------------------------------------------
 ChangeLog for Privoxy
 --------------------------------------------------------------------
+*** Version 3.0.1 ***
+- Added basic support for the OPTIONS and TRACE http methods
+- Improved cookie logging
+- Fixed filter bug: Now preserves original quoting style in <img>
+  tags wherever possible.
+- Content cookie filter now part of default (Medium) profile
+- 
+
 *** Version 3.0  ***
 
 - Fixed Windows startmenu items, log window and tray icon menus.
