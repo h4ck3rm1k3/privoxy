@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.12 2002/08/06 11:29:36 oes Exp $
+# $Id: GNUmakefile.in,v 1.104.2.13 2002/08/07 15:13:54 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -763,10 +763,14 @@ dok-pdf: dok-release
 	cd doc/pdf && db2pdf --pdf -s ldp.dsl faq.sgml && mv faq.pdf privoxy-faq.pdf > /dev/null 2>&1
 	$(RM) doc/pdf/*.sgml doc/pdf/*.dsl doc/pdf/*.out doc/pdf/*.tex doc/pdf/*.log doc/pdf/*.aux
 
-# the layout and style with db2pdf sucks, here is an alternative
-dok-pdf2: dok-release 
+# Generate single page html. Used only for creating pdf docs (ATM).
+# Currently using: See http://www.easysw.com/htmldoc/pdf-o-matic.php.
+# If using this generator, remember U-M has a couple of graphics in 
+# a parallel directory.
+#
+dok-shtml: dok-release 
 	mkdir -p doc/source/temp # this directory not in cvs
-	cd doc/source && $(DB) -V nochunks user-manual.sgml > temp/privoxy-user-manual.html
+	cd doc/source && $(DB) -iuser-man -V nochunks user-manual.sgml > temp/privoxy-user-manual.html
 	cd doc/source && $(DB) -V nochunks developer-manual.sgml > temp/privoxy-developer-manual.html
 	cd doc/source && $(DB) -V nochunks faq.sgml > temp/privoxy-faq.html
 # one could use html2ps and ps2pdf. well, that does not work. htmlps produces incorrect output.
@@ -978,6 +982,10 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.13  2002/08/07 15:13:54  hal9
+# Remove pdf2 target, and make it dok-shtml (single page html for pdf
+# conversion).
+#
 # Revision 1.104.2.12  2002/08/06 11:29:36  oes
 # Fixed detection/inclusion of pcre.h, which is in a pcre subdir on RH
 #
