@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.13 2002/08/07 15:13:54 hal9 Exp $
+# $Id: GNUmakefile.in,v 1.104.2.14 2002/08/10 11:19:37 oes Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -197,7 +197,8 @@ SPECIAL_CFLAGS = @SPECIAL_CFLAGS@
 # Add your flags here 
 OTHER_CFLAGS =   
 
-CFLAGS = @CFLAGS@ @CPPFLAGS@ $(OTHER_CFLAGS) $(SPECIAL_CFLAGS) -Wall -Ipcre 
+CFLAGS = @CFLAGS@ @CPPFLAGS@ $(OTHER_CFLAGS) $(SPECIAL_CFLAGS) -Wall \
+         @STATIC_PCRE_ONLY@ -Ipcre 
 
 LDFLAGS = $(DEBUG_CFLAGS) $(SPECIAL_CFLAGS)
 
@@ -440,7 +441,7 @@ suse-dist: rpm-stuff
 # 	fi
 
 	$(TAR) --exclude ".cvsignore" --exclude "CVS" --exclude "privoxy-rh.spec" --exclude "privoxy-cl.spec" --exclude "PACKAGERS" -czf $(TAR_ARCH) .
-	$(RPMBUILD) --clean -ta  $(TAR_ARCH)
+	$(RPM) --clean -ta  $(TAR_ARCH)
 	if [ -f $(TAR_ARCH) ]; then  $(RM) $(TAR_ARCH); fi
 
 # anonymously ncftps the rpms to sourceforge
@@ -891,7 +892,7 @@ urlmatch.@OBJEXT@:  urlmatch.c  urlmatch.h  config.h $(PROJECT_H_DEPS) errlog.h 
 gnu_regex.@OBJEXT@: gnu_regex.c gnu_regex.h config.h
 
 # PCRS
-pcrs.@OBJEXT@: pcrs.c pcre/pcre.h pcrs.h
+pcrs.@OBJEXT@: pcrs.c pcrs.h config.h pcre/pcre.h 
 
 # PCRE
 pcre/get.@OBJEXT@:        pcre/get.c        pcre/config.h pcre/internal.h pcre/pcre.h
@@ -982,6 +983,11 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.14  2002/08/10 11:19:37  oes
+# - Make -Ipcre (again) conditional on STATIC_PCRE
+# - $(RPMBUILD) -> $(RPM) for SuSE
+# - Add dependency: pcrs.o deps on config.h
+#
 # Revision 1.104.2.13  2002/08/07 15:13:54  hal9
 # Remove pdf2 target, and make it dok-shtml (single page html for pdf
 # conversion).
