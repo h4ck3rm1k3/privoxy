@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.4 2002/05/29 02:12:17 hal9 Exp $
+# $Id: GNUmakefile.in,v 1.104.2.5 2002/05/30 15:35:01 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -701,23 +701,34 @@ announce: dok-release
 # The main Privoxy config file, generated from sgml sources. 
 # NOTE: This will require some hand editing. The new file is outputted 
 # as config.new so that problem sections can be compared to previous
-# version. This needs someone better at perl to finish it up. This uses 
-# the shell command 'fmt' too, to shorten line length.
+# version. This is hardcored to w3m for html/text conversion. Also, 
+# requires the shell util 'fmt'.
 config-file: dok-release
 	cd doc/source && $(DB)-notoc -iconfig-file -V nochunks config.sgml > __tmp.html &&\
-	$(WDUMP) -dump __tmp.html |fmt -w 70 > ../../config.new && $(RM) -r __tmp.*
-	$(PERL) -pi.bak -e '/^\d\.\d\.\s+/ && tr/[a-z]/[A-Z]/;\
-                     s/^/#  /;\
-                     /Sample Configuration file/i && s/\s1\.\s/      /;\
-                     /^#  #{12,}/ && s/^#  #/####/;\
-				 s/^#\s+@@//;\
-                     s/^#\s*-{20,}//'   config.new
+	w3m -dump __tmp.html |fmt -w 70 > ../../config.new && $(RM) -r __tmp.*
+	$(PERL) -pi.bak -e 's/^1\. \@\@TITLE\@\@/     /i;\
+                     /^\d\.\d\.\s+/ && tr/[a-z]/[A-Z]/;\
+                     $$header_len=0 unless $$hit_header;\
+                     if ($$hit_header) {\
+                        print "#  ";\
+                        for ($$i=1; $$i < $$header_len; $$i++) {print "=";}\
+                        print "\n";\
+                     };\
+                     $$hit_header=0;\
+                     $$hit_header=1 if m/^(\d\.)(\d\.)(\d\.)?\s/ && s/^(\d\.)//;\
+                     $$header_len = length($$_);\
+				 s/^/#  /;  /^#  #{12,}/ && s/^#  #/####/;\
+                     s/^.*$$// if $$hit_option;\
+                     $$hit_option=0;\
+                     s/^\n//;  s/^#\s*-{20,}//;\
+                     $$hit_option=1 if s/^#\s+@@//;'   config.new
 	$(RM) *.bak
 	@$(ECHO)  "****************************************************"
 	@$(ECHO)  "The output file is config.new."
-	@$(ECHO)  "NOW -- hand edit the results!!!!!!!!!!!!!!!!!"
+	@$(ECHO)  "Now -- you need to hand edit the results!!!"
 	@$(ECHO)  "In particular, check the Debug levels, and the"
-	@$(ECHO)  "permit-access, forward & socks examples"
+	@$(ECHO)  "permit-access, forward & socks examples. They"
+	@$(ECHO)  "probably got hammered."
 	@$(ECHO)  "****************************************************"
 
 # config file, alternate verison using lynx (perl stuff unfinished). Lynx
@@ -883,6 +894,11 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.5  2002/05/30 15:35:01  hal9
+# This is more cleanup on the make config-file target. Most issues for
+# automatic generation are taken care of. There are still some problems
+# that require hand editing. Namely, some of the examples that are > 80 chars.
+#
 # Revision 1.104.2.4  2002/05/29 02:12:17  hal9
 # Ooops...forgot about perl -pi cygwin problem. Add -pi.bak. Also, the
 # new target is 'make config-file', _not_ make config.
