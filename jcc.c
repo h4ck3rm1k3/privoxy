@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.6 2003/03/11 11:55:00 oes Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.7 2003/03/17 16:48:59 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.6 2003/03/11 11:55:00 oes Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.92.2.7  2003/03/17 16:48:59  oes
+ *    Added chroot ability, thanks to patch by Sviatoslav Sviridov
+ *
  *    Revision 1.92.2.6  2003/03/11 11:55:00  oes
  *    Clean-up and extension of improvements for forked mode:
  *     - Child's return code now consists of flags RC_FLAG_*
@@ -1769,6 +1772,7 @@ int main(int argc, const char *argv[])
    struct passwd *pw = NULL;
    struct group *grp = NULL;
    char *p;
+   int do_chroot = 0;
 #endif
 
    Argc = argc;
@@ -1830,6 +1834,11 @@ int main(int argc, const char *argv[])
          }
 
          if (p != NULL) *--p = '\0';
+      }
+
+      else if (strcmp(argv[argc_pos], "--chroot" ) == 0)
+      {
+         do_chroot = 1;
       }
 #endif /* defined(unix) */
       else
@@ -2008,10 +2017,40 @@ int main(int argc, const char *argv[])
       {
          log_error(LOG_LEVEL_FATAL, "Cannot setgid(): Insufficient permissions.");
       }
+      if (do_chroot)
+      {
+         if (!pw->pw_dir)
+         {
+            log_error(LOG_LEVEL_FATAL, "Home directory for %s undefined", pw->pw_name);
+         }
+         if (chroot(pw->pw_dir) < 0)
+         {
+            log_error(LOG_LEVEL_FATAL, "Cannot chroot to %s", pw->pw_dir);
+         }
+         if (chdir ("/"))
+         {
+            log_error(LOG_LEVEL_FATAL, "Cannot chdir /");
+         }
+      }
       if (setuid(pw->pw_uid))
       {
          log_error(LOG_LEVEL_FATAL, "Cannot setuid(): Insufficient permissions.");
       }
+      if (do_chroot)
+      {
+         if (setenv ("HOME", "/", 1) < 0)
+         {
+            log_error(LOG_LEVEL_FATAL, "Cannot setenv(): HOME");
+         }
+         if (setenv ("USER", pw->pw_name, 1) < 0)
+         {
+            log_error(LOG_LEVEL_FATAL, "Cannot setenv(): USER");
+         }
+      }
+   }
+   else if (do_chroot)
+   {
+      log_error(LOG_LEVEL_FATAL, "Cannot chroot without --user argument.");
    }
 }
 #endif /* defined unix */
