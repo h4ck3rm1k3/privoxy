@@ -8,7 +8,7 @@
 <!entity history SYSTEM "history.sgml">
 <!entity copyright SYSTEM "copyright.sgml">
 <!entity license SYSTEM "license.sgml">
-<!entity p-version "2.9.15">
+<!entity p-version "2.9.16">
 <!entity p-status "beta">
 <!entity % p-not-stable "INCLUDE">
 <!entity % p-stable "IGNORE">
@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.4 2002/07/25 21:42:29 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.5 2002/07/26 15:22:58 oes Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -72,7 +72,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.4 2002/07/25 21:42:29 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.5 2002/07/26 15:22:58 oes Exp $</pubdate>
 
 <!--
 
@@ -489,6 +489,23 @@ All the ads are there. What's wrong?</title>
 
 <sect1 id="configuration"><title>Configuration</title>
 
+<sect2 renderas="sect3" id="getupdates"><title>Where can I get updated Actions Files?</title>
+ <para>
+   Based on your feedback and the continuing development, updated actions files will be
+   made available on the <ulink
+  url="http://sourceforge.net/project/showfiles.php?group_id=11118">files section</ulink> of
+  our <ulink url="http://sf.net/projects/ijbswa/">project page</ulink>.
+ </para>
+
+ <para>
+  If you wish to receive an email notification whenever we release updates of
+  <application>Privoxy</application> or the actions file, <ulink
+  url="http://lists.sourceforge.net/lists/listinfo/ijbswa-announce/">subscribe
+  to our announce  mailing list</ulink>, ijbswa-announce@lists.sourceforge.net.
+ </para>
+
+</sect2>
+
 <sect2 renderas="sect3" id="newconfig"><title>Can I use my old config files?</title>
  <para>
    The syntax, number, and purpose of configuration files has substantially
@@ -675,7 +692,7 @@ the differences?</title>
 <row>
   <entry>Pop-up killing</entry>
   <entry>no</entry>
-  <entry>no</entry>
+  <entry>yes</entry>
   <entry>yes</entry>
 </row>
 
@@ -713,6 +730,21 @@ the differences?</title>
   <entry>no</entry>
   <entry>yes</entry>
 </row>
+
+<row>
+  <entry>Image tag reordering</entry>
+  <entry>no</entry>
+  <entry>no</entry>
+  <entry>yes</entry>
+</row>
+
+<row>
+  <entry>Ad-filtering by link</entry>
+  <entry>no</entry>
+  <entry>no</entry>
+  <entry>yes</entry>
+</row>
+
 
 </tbody>
 </tgroup>
@@ -1662,6 +1694,10 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.5  2002/07/26 15:22:58  oes
+- Updated to reflect changes in standard.action
+- Added info on where to get updated actions files
+
 Revision 1.61.2.4  2002/07/25 21:42:29  hal9
 Add brief notes on not proxying non-HTTP protocols.
 
