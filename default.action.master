@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.17 2003/03/29 16:42:56 oes Exp $
+#  $Id: default.action.master,v 1.1.2.18 2003/04/01 09:50:41 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -437,7 +437,7 @@ allow-ads   = -block -filter{banners-by-size} -filter{banners-by-link}
 -filter{tiny-textforms} \
 +filter{jumping-windows} \
 -filter{frameset-borders} \
-+filter{demoronizer} \
+-filter{demoronizer} \
 -filter{shockwave-flash} \
 -filter{quicktime-kioskmode} \
 -filter{fun} \
@@ -1141,6 +1141,7 @@ www.quelle-bausparkasse.de/$
 .jp
 .cn
 .tw
+.ru
 
 #----------------------------------------------------------------------------
 # Misc special rules:
