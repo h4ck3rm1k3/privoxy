@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.25 2003/07/07 20:33:01 david__schmidt Exp $
+#  $Id: default.action.master,v 1.1.2.26 2003/07/11 03:20:34 hal9 Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -862,7 +862,8 @@ www.motel6.com/maps/detailmap_tracker.asp
 adzapper.
 #MASTER# UNBLOCK-REFERRER: http://de.altavista.com/web/adv
 .altavista.com/web/adv
-
+#MASTER# UNBLOCK-REFERRER: http://rads.mcafee.com/rads/scripts/RADS.dll?QueryProduct2
+rads.mcafee.com/rads/
 
 #############################################################################
 # Site-specific special rules:
@@ -1005,6 +1006,21 @@ www.squarefree.com/bookmarklets/
 #MASTER# REMARKS: Used by Mac OSX's automatic software update feature
 swquery.apple.com
 swscan.apple.com
+#MASTER# REMARKS: These are various US DSL speed tests sites, where MIME is
+wrong
+#MASTER# PROBLEM-URL: http://atl.speakeasy.net/300k
+.speakeasy.net/\d+k
+#MASTER# DONT-VERIFY
+#MASTER# REMARKS: These are exceptions to prevent text file corruption. Work-around!!!
+ /(.*/)?.*\.(PL|(s|p)?h|c(c|xx|pp)?|p?y|tcl|in|m4|diff|am|init?|cfg?|conf(ig)?|sgml?|css|txt|rc|bat|spec|log|patch|vb[es])$
+/(.*/)?(rc\.|README|Makefile|INSTALL|CPAN|txt|src)
+bugzilla.
+.dl.sourceforge.net
+.dl.sf.net
+.cpan.org
+cpan.
+.tldp.org
+
 
 #----------------------------------------------------------------------------
 # These sites suffer from a bug in PHP < 4.2.3 (ob_gzhandler broken;
@@ -1102,6 +1118,9 @@ www.ameritrade.com
 #MASTER# PROBLEM-URL: http://www.myrealbox.com/a?B.KL.U6wQ.d
 #MASTER# REMARKS: Bogus web server doesn't close connection -> deanimation doesn't terminate
 www.myrealbox.com
+#MASTER# PROBLEM-URL: http://weather.chicagotribune.com/radar/station.asp?ID=LOT19&type=loop
+#MASTER# REMARKS: These are weather radar images.
+.wunderground.com
 
 #----------------------------------------------------------------------------
 # These sites are so abusive that we need to kill all JS event bindings (and
@@ -1178,6 +1197,8 @@ www.dn.se
 #MASTER# PROBLEM-URL: http://www.munichre.com/
 #MASTER# REMARKS: Endless reload loop if referrer info supressed
 www.munichre.com
+#MASTER# PROBLEM-URL: http://www.sfgate.com
+.sfgate.com
 
 {-filter{unsolicited-popups}}
 #MASTER# DONT-VERIFY
@@ -1193,3 +1214,8 @@ www.munichre.com
 
 {+filter{tiny-textforms}}
 .sourceforge.net/tracker
+
+{+downgrade-http-version}
+#MASTER# REMARKS: This is work-around for CUPS http configuration.
+:631
+
