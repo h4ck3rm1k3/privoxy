@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.11.2.13 2003/03/18 19:28:59 oes Exp $
+#  $Id: default.filter,v 1.11.2.14 2003/03/19 13:17:50 oes Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -438,10 +438,39 @@ s%f\("javascript:location.replace\('mk:@MSITStore:C:'\)"\);%alert\("This page lo
 s%<script language="JavaScript">(window\.open|1;''\.concat)\("readme\.eml", null, "resizable=no,top=6000,left=6000"\)</script>%<br><font size="7"> WARNING: This Server is infected with <a href="http://www.cert.org/advisories/CA-2001-26.html">Nimda</a>!</font>%g
 
 
+#################################################################################
+#
+#
+# site-specifics: Cure for site-specific problems. Don't apply generally!
+#
+#   Note: The fixes contained here are so specific to the problems of the
+#         particular web sites they are designed for that they would be a
+#         waste of CPU cycles (or even destructive!) on 99.9% of the web
+#         sites where they don't apply.
+#
+#################################################################################
+FILTER: site-specifics Cure for site-specific problems. Don't apply generally!
+
+# www.spiegel.de excludes X11 users from viewing Flash5 objects - shame.
+# Apply to: www.spiegel.de/static/js/flash-plugin.js 
+#
+s/indexOf\("x11"\)/indexOf("x13")/
+
+# www.quelle-bausparkasse.de uses a very stupid redirect mechanism that
+# relies on a webbug being present. Can we tolerate that? No!
+# Apply to: www.quelle-bausparkasse.de/$
+#
+s/mylogfunc()//g
+
+
 ############################################################################## 
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.11.2.14  2003/03/19 13:17:50  oes
+#     - Added filter "site-specifics" to address site specific problems
+#     - Fixed a small problem in the img-reorder filter
+#
 #     Revision 1.11.2.13  2003/03/18 19:28:59  oes
 #     Fixed a minor problem in the img-reorder filter
 #
