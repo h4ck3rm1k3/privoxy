@@ -2,8 +2,8 @@ Source: privoxy
 Section: web
 Priority: optional
 Maintainer: Roland Rosenfeld <roland@debian.org>
-Build-Depends: debhelper (>> 3.0.0), autoconf, libpcre3-dev
-Standards-Version: 3.5.6
+Build-Depends: debhelper (>= 4.0.0), autoconf, libpcre3-dev
+Standards-Version: 3.5.8
 
 Package: privoxy
 Architecture: any
@@ -16,4 +16,4 @@ Description: Privacy enhancing HTTP Proxy
  and can be customized to suit individual needs and tastes. Privoxy
  has application for both stand-alone systems and multi-user networks.
  .
- Privoxy is based on Internet Junkbuster. Junkbuster (tm).
+ Privoxy is based on Internet Junkbuster (tm).
