@@ -2,18 +2,14 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.10 2002/09/25 15:15:06 oes Exp $
+#  $Id: default.action.master,v 1.1.2.11 2002/09/25 17:56:20 oes Exp $
 #
 #  Purpose     :  Default actions file, see
-#                 http://www.privoxy.org/faq/questions.html#CONFIGFILES
+#                 http://www.privoxy.org/user-manual/actions-file.html
 #
 #  Copyright   :  Written by and Copyright
 #                 Privoxy team. http://www.privoxy.org/
 #
-#                 Based on the Internet Junkbuster originally written
-#                 by and Copyright (C) 1997 Anonymous Coders and
-#                 Junkbusters Corporation.  http://www.junkbusters.com
-# 
 # Note: Updated versions of this file will be made available from time
 #       to time. Check http://sourceforge.net/project/showfiles.php?group_id=11118
 #       for updates and/or subscribe to the announce mailing list
@@ -50,10 +46,13 @@
 # Syntax
 #############################################################################
 # 
+# A much better explanation can be found in the user manual which is
+# part of the distribution and can be found at http://www.privoxy.org/user-manual
+#
 # To determine which actions apply to a request, the URL of the request is
 # compared to all patterns in this file. Every time it matches, the list of
 # applicable actions for this URL is incrementally updated. You can trace
-# this process by visiting http://i.j.b/show-url-info
+# this process by visiting http://config.privoxy.org/show-url-info
 #
 # There are 4 types of lines in this file: comments (like this line),
 # actions, aliases and patterns, all of which are explained below.
