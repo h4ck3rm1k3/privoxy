@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/Attic/standard.action,v $
 # 
-#  $Id: standard.action,v 1.2.2.1 2002/07/26 15:19:57 oes Exp $
+#  $Id: standard.action,v 1.2.2.2 2002/07/27 18:13:36 oes Exp $
 #
 #  Purpose     :  Provide prefedined sets of actions, see
 #                 http://www.privoxy.org/faq/questions.html#CONFIGFILES
@@ -48,7 +48,7 @@
 +filter{nimda} \
 -filter{shockwave-flash} \
 -filter{js-events} \
--filter{crude-prental} \
+-filter{crude-parental} \
 -handle-as-image \
 +hide-forwarded-for-headers \
 +hide-from-header{block} \
@@ -89,7 +89,7 @@ standard.Cautious
 +filter{nimda} \
 -filter{shockwave-flash} \
 -filter{js-events} \
--filter{crude-prental} \
+-filter{crude-parental} \
 -handle-as-image \
 +hide-forwarded-for-headers \
 +hide-from-header{block} \
@@ -130,7 +130,7 @@ standard.Medium
 +filter{nimda} \
 -filter{shockwave-flash} \
 -filter{js-events} \
--filter{crude-prental} \
+-filter{crude-parental} \
 -handle-as-image \
 +hide-forwarded-for-headers \
 +hide-from-header{block} \
