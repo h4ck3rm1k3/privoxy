@@ -23,7 +23,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: developer-manual.sgml,v 1.46.2.7 2002/08/14 17:29:25 hal9 Exp $
+ $Id: developer-manual.sgml,v 1.46.2.8 2002/08/17 00:16:10 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -50,7 +50,7 @@
     </pubdate>
 
 
-    <pubdate>$Id: developer-manual.sgml,v 1.46.2.7 2002/08/14 17:29:25 hal9 Exp $</pubdate>
+    <pubdate>$Id: developer-manual.sgml,v 1.46.2.8 2002/08/17 00:16:10 hal9 Exp $</pubdate>
 
 <!--
 
@@ -265,8 +265,7 @@ Hal.
     variation on this file, <filename>privoxy-index.html</filename>, 
     meant for inclusion with doc packages), are maintained as SGML as well.
     <emphasis>DO NOT edit these directly</emphasis>. Edit the SGML source, or
-    contact someone involved in the documentation (at present Stefan and
-    Hal).
+    contact someone involved in the documentation (at present Hal).
     </para> 
     <para>
      <filename>config</filename> requires some special handling. The reason it
@@ -279,7 +278,6 @@ Hal.
      which should be reviewed for errors and mis-formatting. Once satisfied
      that it is correct, then it should be hand copied to
      <filename>config</filename>.
-
     </para>
     <para>
      Other, less formal documents (e.g. <filename>LICENSE</filename>,
@@ -312,7 +310,8 @@ Hal.
       <listitem><para>
         First, build the docs by running <computeroutput>make
         dok</computeroutput> (or alternately <computeroutput>make
-        redhat-dok</computeroutput>).                 
+        redhat-dok</computeroutput>). For PDF docs, do <computeroutput>make
+        dok-pdf</computeroutput>.
       </para></listitem>
       <listitem><para>
         Run <computeroutput>make webserver</computeroutput> which copies all
@@ -510,7 +509,7 @@ Hal.
   <listitem>
    <para>
     Our documents are available in differing formats. Right now, they 
-    are just plain text, and HTML, but PDF, and others is always a 
+    are just plain text, TML, and PDF, but others are always a 
     future possibility. Be careful with URLs (&lt;ulink&gt;), and avoid 
     this mistake:
    </para>
@@ -1751,7 +1750,7 @@ static void unload_re_filterfile( void *f ) { ... }</programlisting>
 
     <para><emphasis>Example for file comments:</emphasis></para>
 <programlisting>
-const char FILENAME_rcs[] = "$Id: developer-manual.sgml,v 1.46.2.7 2002/08/14 17:29:25 hal9 Exp $";
+const char FILENAME_rcs[] = "$Id: developer-manual.sgml,v 1.46.2.8 2002/08/17 00:16:10 hal9 Exp $";
 /*********************************************************************
  *
  * File        :  $S<!-- Break CVS Substitution -->ource$
@@ -1811,7 +1810,7 @@ const char FILENAME_h_rcs[] = FILENAME_H_VERSION;
 <programlisting>
 #ifndef _FILENAME_H
 #define _FILENAME_H
-#define FILENAME_H_VERSION "$Id: developer-manual.sgml,v 1.46.2.7 2002/08/14 17:29:25 hal9 Exp $"
+#define FILENAME_H_VERSION "$Id: developer-manual.sgml,v 1.46.2.8 2002/08/17 00:16:10 hal9 Exp $"
 /*********************************************************************
  *
  * File        :  $S<!-- Break CVS Substitution -->ource$
@@ -2081,9 +2080,23 @@ at sourceforge. Three simple steps:
         rather obscure processing tools. <filename>config</filename>,
         the man page (and the html version of the man page), and the PDF docs
         fall in this category. REAMDE, the man page, AUTHORS, and config
-        should all also be committed to CVS for other packageers. The 
+        should all also be committed to CVS for other packagers. The 
         formal docs should be uploaded to the webserver. See the
         Section "Updating the webserver" in this manual for details.
+       </para>
+      </listitem> 
+      <listitem>
+       <para>
+         The <citetitle>User Manual</citetitle> is also used for context 
+         sensitive help for the CGI editor. This is version sensitive, so that
+         the user will get appropriate help for his/her release. So with 
+         each release a fresh version should be uploaded to the webserver
+         (this is in addition to the main <citetitle>User Manual</citetitle>
+         link from the main page since we need to keep manuals for various 
+         versions available). The CGI pages will link to something like 
+         <literal>http://privoxy.org/$(VERSION)/user-manual/</literal>. This
+         will need to be updated for each new release. There is no Makefile
+         target for this at this time!!! It needs to be done manually.
        </para>
       </listitem> 
       <listitem>
@@ -2759,9 +2772,10 @@ at sourceforge. Three simple steps:
   <!--   ~~~~~       New section      ~~~~~     -->
   <sect1 id="webserver-update"><title>Update the Webserver</title>
    <para>
-    When updating the webserver, please follow these steps to make
-    sure that no broken links, inconsistent contents or permission
-    problems will occur:
+    The webserver should be updated at least with each stable release. When
+    updating, please follow these steps to make sure that no broken links,
+    inconsistent contents or permission problems will occur (as it has many 
+    times in the past!):
    </para>
    <para>
     If you have changed anything in the stable-branch documentation source
@@ -2874,6 +2888,10 @@ at sourceforge. Three simple steps:
   Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
   $Log: developer-manual.sgml,v $
+  Revision 1.46.2.8  2002/08/17 00:16:10  hal9
+  Add note on updating webserver for User-manual/CGI editor, which is version
+  dependent (and different from main UM link).
+
   Revision 1.46.2.7  2002/08/14 17:29:25  hal9
   Add small notes on post-release steps, and uploading docs to webserver.
 
