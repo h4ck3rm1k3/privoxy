@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.17 2002/08/16 03:19:34 hal9 Exp $
+# $Id: GNUmakefile.in,v 1.104.2.18 2002/08/23 12:22:40 oes Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -854,7 +854,7 @@ webserver: tidy
 	@cd doc/webserver; \
           upload=`find . -type f -a -not \( -path "*/CVS*" -o -path "*/results*" \)`; \
           $(TAR) c $$upload | ssh ijbswa.sourceforge.net 'cd /home/groups/i/ij/ijbswa/htdocs/; tar xvm 2>&1 | grep -v timestamp'
-	
+
 	@$(ECHO) Uploading pdf
 	@cd doc/pdf;\
           zip privoxy-pdf-docs *.pdf  ;\
@@ -963,11 +963,23 @@ tags: $(SRCS) $(HDRS)
 	etags $(SRCS) $(HDRS)
 
 install: all
-	#
-	# FIXME: This is a dirty hack to have an install target
-	#        that works at least for some setups. This needs
-	#        to be fixed!
-	#
+	@$(ECHO) "***************************************************"; \
+        $(ECHO) "***                                             ***"; \
+        $(ECHO) "***                  WARNING                    ***"; \
+        $(ECHO) "***                                             ***"; \
+        $(ECHO) "*** The install target is very broken and       ***"; \
+        $(ECHO) "*** should not be used. For the time being,     ***"; \
+        $(ECHO) "*** run from the build dir, install manually,   ***"; \
+        $(ECHO) "*** or use a binary package. Sorry.             ***"; \
+        $(ECHO) "***                                             ***"; \
+        $(ECHO) "***************************************************"; \
+        $(ECHO) "Type \"yes i am sure\" if you are sure that you"; \
+        $(ECHO) -n "really want to proceed with the broken install: "; \
+        read answer; \
+        if [ "$$answer" != "yes i am sure" ]; then exit 1; fi
+
+	# FIXME!
+
 	$(STRIP_PROG) $(PROGRAM)
 	$(INSTALL) $(INSTALL_D) $(SBIN_DEST)
 	$(INSTALL) $(INSTALL_D) $(DEST)/user-manual
@@ -995,6 +1007,9 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.18  2002/08/23 12:22:40  oes
+# Added warning to broken install target
+#
 # Revision 1.104.2.17  2002/08/16 03:19:34  hal9
 # More (minor) cleanup of html before pdf processing to make some relative
 # links work as pdf -> pdf. Upload pdf as zip archive now.
