@@ -1,3 +1,53 @@
+privoxy (3.0.2-5) unstable; urgency=low
+
+  * Merge corrections from upstream default.action 1.7.
+    - demoronizer filter (which caused trouble on non latin1 charsets) is
+      now switched off by default (Closes: #202234).
+
+ -- Roland Rosenfeld <roland@debian.org>  Tue,  9 Sep 2003 21:31:51 +0200
+
+privoxy (3.0.2-4) unstable; urgency=low
+
+  * Add a versioned build dependency on htmldoc (>= 1.8.20), because there
+    seem to be some options mission in the old 1.8.17 (Closes: #192457).
+  * Merge rotation of logfile and jarfile in logrotate script.
+  * Test whether /var/run/privoxy.pid is existing and don't bother when no
+    privoxy is running in logrotate script (Closes: #191838).
+  * Remove /var/run/privoxy.pid on privoxy stop in init.d script.
+  * Mention apt-get instead of dpkg in user-manual (Closes: #189239).
+  * Remove trailing whitespace from text versions of user-manual,
+    developer-manual and faq (Closes: #192566).
+
+ -- Roland Rosenfeld <roland@debian.org>  Fri,  9 May 2003 08:21:30 +0200
+
+privoxy (3.0.2-3) unstable; urgency=low
+
+  * Stop filtering favicon.ico, which may cause trouble (Closes: #188947).
+  * Send SIGHUP to privoxy instead of touching /etc/provoxy/config in
+    logrotate script to tell privoxy that the logfiles were rotated
+    (Closes: #189240).
+  * Remove trailing spaces from config file (Closes: #189240).
+  * Install man page as privoxy(8) instead of privoxy(1), because this is
+    a system binary.
+  * Build HTML, text, and PDF versions of the documentation from source.
+  * Fix setting of dodk in configure.in.
+  * Add option "--linkcolor #0000ff" to htmldoc call in ldp_print to be
+    independent of ~/.htmldocrc color setting.
+  * Mention PDF and text version of the documentation in doc-base files.
+  * Install PDF version of the documentation, too.
+  * Install HTML version of the man page, too.
+
+ -- Roland Rosenfeld <roland@debian.org>  Mon, 21 Apr 2003 11:11:31 +0200
+
+privoxy (3.0.2-2) unstable; urgency=low
+
+  * Don't apply any filters to {bugs|lists}.debian.org (Closes: #186537).
+  * Prepend "http://config.privoxy.org" before "/user-manual/" to always
+    get a correct URL for the local user-manual (also on 404 error pages).
+    (Closes SF-719724).
+
+ -- Roland Rosenfeld <roland@debian.org>  Sun, 13 Apr 2003 12:49:15 +0200
+
 privoxy (3.0.2-1) unstable; urgency=low
 
   * New upstream version 3.0.2.
