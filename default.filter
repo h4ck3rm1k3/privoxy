@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.11.2.14 2003/03/19 13:17:50 oes Exp $
+#  $Id: default.filter,v 1.11.2.15 2003/03/30 13:57:08 oes Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -177,9 +177,9 @@ s/<meta\s+http-equiv\s*=\s*(['"]?)refresh\1\s+content\s*=\s*(['"]?)\d{2,}\s*(;\s
 #################################################################################
 FILTER: unsolicited-popups Disable only unsolicited pop-up windows
 
-s+<body.*>+$0<script><!--\nfunction PrivoxyWindowOpen(){return(null);}\n//--></script>+isU
+s+<body.*>+$0<script>function PrivoxyWindowOpen(){return(null);}</script>+isU
 s+([^\w\s.]\s*)((window|this|parent)\.)?open\s*\(+$1PrivoxyWindowOpen(+ig
-s+</body>+<script><!--\nfunction PrivoxyWindowOpen(a, b, c){return(window.open(a, b, c));}\n//--></script>$0+iU     
+s+</body>+<script>function PrivoxyWindowOpen(a, b, c){return(window.open(a, b, c));}</script>$0+iU     
 
 
 ##################################################################################
@@ -467,6 +467,9 @@ s/mylogfunc()//g
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.11.2.15  2003/03/30 13:57:08  oes
+#     Making unsolicited-popups safe for use on <html> tags enclosed in JS strings
+#
 #     Revision 1.11.2.14  2003/03/19 13:17:50  oes
 #     - Added filter "site-specifics" to address site specific problems
 #     - Fixed a small problem in the img-reorder filter
