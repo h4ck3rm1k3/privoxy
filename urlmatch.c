@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.10.2.2 2002/09/25 14:53:15 oes Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.10.2.3 2002/11/12 16:50:40 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -33,6 +33,9 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.10.2.2 2002/09/25 14:53:15 oes 
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.10.2.3  2002/11/12 16:50:40  oes
+ *    Fixed memory leak in parse_http_request() reported by Oliver Stoeneberg. Fixes bug #637073
+ *
  *    Revision 1.10.2.2  2002/09/25 14:53:15  oes
  *    Added basic support for OPTIONS and TRACE HTTP methods:
  *    parse_http_url now recognizes the "*" URI as well as
@@ -493,7 +496,9 @@ jb_err parse_http_request(const char *req,
       return JB_ERR_MEMORY;
    }
 
+   free(buf);
    return JB_ERR_OK;
+
 }
 
 
