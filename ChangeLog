@@ -1,7 +1,11 @@
 --------------------------------------------------------------------
 ChangeLog for Privoxy
 --------------------------------------------------------------------
-*** Since 3.0.2 (to become Version 3.0.3 soon) ***
+*** Since 3.0.3 ***
+- Added jpeg filtering to defend against MS jpeg vulnerability MS04-028
+- Removed the "arbitrary" 1000 filter limit - addresses tracker #911950
+
+*** Version 3.0.3 ***
 
 - Fixed yet another two memory leaks. Process growth seems stopped now.
 - Further tightened security against malicious toggle-off links.
