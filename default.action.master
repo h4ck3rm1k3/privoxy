@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.4 2002/08/06 08:31:58 oes Exp $
+#  $Id: default.action.master,v 1.1.2.5 2002/08/11 13:50:16 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/faq/questions.html#CONFIGFILES
@@ -336,7 +336,7 @@
 #
 # +kill-popups
 #    Filter the website through a built-in filter to disable
-#    1;''.concat() etc.  The two alternative spellings are
+#    window.open() etc.  The two alternative spellings are
 #    equivalent.
 #
 # +send-vanilla-wafer
