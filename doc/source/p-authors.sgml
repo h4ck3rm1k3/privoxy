@@ -3,7 +3,7 @@
 
  Purpose     :  Entity included in other project documents.
                 
- $Id: p-authors.sgml,v 1.8.2.10 2003/03/17 16:47:42 oes Exp $
+ $Id: p-authors.sgml,v 1.8.2.11 2003/03/20 01:04:36 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -24,23 +24,22 @@
 -->
 <![%p-authors-formal;[
 <para>
- Current Project Developers:
+ Current Developement Team:
 </para>
 ]]>
 
 <literallayout>
- Jon Foster
- Andreas Oesterhelt
- Stefan Waldherr
+ Andreas Oesterhelt (lead developer)
+ Hal Burgiss (docs)
+ David Schmidt (OS/2, Mac OSX ports)
 <![%p-authors-formal;[
  ]]>
- Thomas Steudten
- Rodney Stromlund
+
 <![%p-authors-formal;[
 </literallayout>
 
 <para>
- Current Project Contributors:
+ Current and Former Project Contributors:
 </para>
 
 <literallayout>
@@ -48,8 +47,8 @@
  Johny Agotnes 
  Rodrigo Barbosa (RPM specfiles)
  Moritz Barsnick
- Hal Burgiss (docs)
  Mattes Dolak 
+ Jon Foster
  Karsten Hopp (Red Hat)
  Alexander Lazic
  Daniel Leite
@@ -59,10 +58,12 @@
  Haroon Rafique
  Roland Rosenfeld (Debian)
  Georg Sauthoff (Gentoo)
- David Schmidt (OS/2, Mac OSX ports)
+ Thomas Steudten
  Joerg Strohmayer (Amiga)
+ Rodney Stromlund
  Sviatoslav Sviridov
  Sarantis Paskalis
+ Stefan Waldherr
 </literallayout>
 
 <![%p-authors-formal;[
