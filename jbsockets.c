@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.1 2002/05/26 23:41:27 joergs Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.2 2002/11/20 14:37:24 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -35,6 +35,10 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.1 2002/05/26 23:41:27 jo
  *
  * Revisions   :
  *    $Log: jbsockets.c,v $
+ *    Revision 1.35.2.2  2002/11/20 14:37:24  oes
+ *    Fixed Win32 error logging in bind_port.
+ *    Thanks to Oliver Stoeneberg for the hint.
+ *
  *    Revision 1.35.2.1  2002/05/26 23:41:27  joergs
  *    AmigaOS: Fixed wrong type of len in write_socket()
  *
@@ -599,6 +603,7 @@ int bind_port(const char *hostnam, int portnum, jb_socket *pfd)
    {
       close_socket (fd);
 #ifdef _WIN32
+      errno = WSAGetLastError();
       if (errno == WSAEADDRINUSE)
 #else
       if (errno == EADDRINUSE)
