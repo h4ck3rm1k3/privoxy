@@ -1,4 +1,4 @@
-const char miscutil_rcs[] = "$Id: miscutil.c,v 1.37.2.2 2002/11/12 14:28:18 oes Exp $";
+const char miscutil_rcs[] = "$Id: miscutil.c,v 1.37.2.3 2003/11/20 11:39:24 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/miscutil.c,v $
@@ -36,6 +36,9 @@ const char miscutil_rcs[] = "$Id: miscutil.c,v 1.37.2.2 2002/11/12 14:28:18 oes 
  *
  * Revisions   :
  *    $Log: miscutil.c,v $
+ *    Revision 1.37.2.3  2003/11/20 11:39:24  oes
+ *    Bugfix: The "?" wildcard for domain names had never been implemented. Ooops\!
+ *
  *    Revision 1.37.2.2  2002/11/12 14:28:18  oes
  *    Proper backtracking in simplematch; fixes bug #632888
  *
@@ -822,8 +825,9 @@ int simplematch(char *pattern, char *text)
       /* 
        * Char match, or char range match? 
        */
-      if ((*pat == *txt)  
-      || ((*pat == ']') && (charmap[*txt / 8] & (1 << (*txt % 8)))) )
+      if ( (*pat == *txt)
+      ||   (*pat == '?')
+      ||   ((*pat == ']') && (charmap[*txt / 8] & (1 << (*txt % 8)))) )
       {
          /* 
           * Sucess: Go ahead
