@@ -3,8 +3,9 @@
 
 Current Developement Team:
 
- Andreas Oesterhelt (lead developer)
  Hal Burgiss (docs)
+ Jon Foster
+ Andreas Oesterhelt
  David Schmidt (OS/2, Mac OSX ports)
  
  
@@ -15,12 +16,11 @@ Current and Former Project Contributors:
  Rodrigo Barbosa (RPM specfiles)
  Moritz Barsnick
  Mattes Dolak 
- Jon Foster
  Karsten Hopp (Red Hat)
  Alexander Lazic
  Daniel Leite
  Gábor Lipták
- Andrew Lock (Win32)
+ Adam Lock (Win32)
  Guy Laroche
  Haroon Rafique
  Roland Rosenfeld (Debian)
