@@ -11,11 +11,11 @@
 <!entity license SYSTEM "license.sgml">
 <!entity p-authors SYSTEM "p-authors.sgml">
 <!entity config SYSTEM "p-config.sgml">
-<!entity p-version "0.0.0">
-<!entity p-status "UNRELEASED">
+<!entity p-version "3.0.1">
+<!entity p-status "stable">
 <!entity % p-authors-formal "INCLUDE"> <!-- include additional text, etc  -->
-<!entity % p-not-stable "INCLUDE">
-<!entity % p-stable "IGNORE">
+<!entity % p-not-stable "IGNORE">
+<!entity % p-stable "INCLUDE">
 <!entity % p-text "IGNORE">        <!-- define we are not a text only doc -->
 <!entity % p-doc "INCLUDE">        <!-- and we are a formal doc           -->
 <!entity % p-readme "IGNORE">
@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.27 2003/03/18 19:37:14 oes Exp $
+ $Id: user-manual.sgml,v 1.123.2.28 2003/03/19 00:35:24 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.27 2003/03/18 19:37:14 oes Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.28 2003/03/19 00:35:24 hal9 Exp $</pubdate>
 
 <!--
 
@@ -5941,11 +5941,16 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.28  2003/03/19 00:35:24  hal9
+ Manual edit of revision log because '--chroot' (even inside a comment) was
+ causing Docbook to hang here (due to double hyphen and the processor thinking
+ it was a comment).
+
  Revision 1.123.2.27  2003/03/18 19:37:14  oes
  s/Advanced|Radical/Adventuresome/g to avoid complaints re fun filter
 
  Revision 1.123.2.26  2003/03/17 16:50:53  oes
- Added documentation for new --chroot option
+ Added documentation for new chroot option
 
  Revision 1.123.2.25  2003/03/15 18:36:55  oes
  Adapted to the new filters
