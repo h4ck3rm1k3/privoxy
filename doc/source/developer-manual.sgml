@@ -8,8 +8,8 @@
 <!entity contacting SYSTEM "contacting.sgml">
 <!entity copyright SYSTEM "copyright.sgml">
 <!entity license SYSTEM "license.sgml">
-<!entity p-version "3.1.1">
-<!entity p-status "alpha">
+<!entity p-version "2.9.15">
+<!entity p-status "beta">
 <!entity % p-not-stable "INCLUDE">
 <!entity % p-stable "IGNORE">
 <!entity % p-text "IGNORE">        <!-- define we are not a text only doc -->
@@ -23,7 +23,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: developer-manual.sgml,v 1.46.2.2 2002/05/26 17:04:24 hal9 Exp $
+ $Id: developer-manual.sgml,v 1.46.2.3 2002/05/28 04:32:45 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -50,7 +50,7 @@
     </pubdate>
 
 
-    <pubdate>$Id: developer-manual.sgml,v 1.46.2.2 2002/05/26 17:04:24 hal9 Exp $</pubdate>
+    <pubdate>$Id: developer-manual.sgml,v 1.46.2.3 2002/05/28 04:32:45 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1727,7 +1727,7 @@ static void unload_re_filterfile( void *f ) { ... }</programlisting>
 
     <para><emphasis>Example for file comments:</emphasis></para>
 <programlisting>
-const char FILENAME_rcs[] = "$Id: developer-manual.sgml,v 1.46.2.2 2002/05/26 17:04:24 hal9 Exp $";
+const char FILENAME_rcs[] = "$Id: developer-manual.sgml,v 1.46.2.3 2002/05/28 04:32:45 hal9 Exp $";
 /*********************************************************************
  *
  * File        :  $S<!-- Break CVS Substitution -->ource$
@@ -1787,7 +1787,7 @@ const char FILENAME_h_rcs[] = FILENAME_H_VERSION;
 <programlisting>
 #ifndef _FILENAME_H
 #define _FILENAME_H
-#define FILENAME_H_VERSION "$Id: developer-manual.sgml,v 1.46.2.2 2002/05/26 17:04:24 hal9 Exp $"
+#define FILENAME_H_VERSION "$Id: developer-manual.sgml,v 1.46.2.3 2002/05/28 04:32:45 hal9 Exp $"
 /*********************************************************************
  *
  * File        :  $S<!-- Break CVS Substitution -->ource$
@@ -2186,14 +2186,18 @@ at sourceforge. Three simple steps:
         <para>
          The documentation has been designed such that the manuals are linked
          to each other from parallel directories, and should be packaged 
-         that way. <filename>index.html</filename> can also be included and 
-         can serve as a focal point for docs and other links of interest.
-         This should be one level up from the manuals. There are two 
+         that way. <filename>privoxy-index.html</filename> can also be
+         included and can serve as a focal point for docs and other links of
+         interest (and possibly renamed to <filename>index.html</filename>).
+         This should be one level up from the manuals. There is a link also 
+         on this page to an HTMLized version of the man page. To avoid 404 for
+         this, it is in CVS as
+         <filename>doc/webserver/man-page/privoxy-man-page.html</filename>,
+         and should be included along with the manuals. There is also a
          css stylesheets that can be included for better presentation:
-         <filename>p_doc.css</filename> and <filename>p_web.css</filename>.
-         These should be in the same directory with
-         <filename>index.html</filename>, (i.e. one level up from the manual 
-         directories).
+         <filename>p_doc.css</filename>. This should be in the same directory
+         with <filename>privoxy-index.html</filename>, (i.e. one level up from
+         the manual directories).
         </para>
       </listitem> 
       <listitem>
@@ -2828,6 +2832,9 @@ zip -r privoxyosx_setup_x.y.z.zip Privoxy.pkg
   Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
   $Log: developer-manual.sgml,v $
+  Revision 1.46.2.3  2002/05/28 04:32:45  hal9
+  Change hints on bundling index.html to privoxy-index.html
+
   Revision 1.46.2.2  2002/05/26 17:04:24  hal9
   -Spellcheck, very minor edits, and sync across branches
 
