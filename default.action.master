@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.18 2003/04/01 09:50:41 oes Exp $
+#  $Id: default.action.master,v 1.1.2.19 2003/04/01 10:27:43 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -989,7 +989,7 @@ web.archive.org
 www.guenstiger.de
 
 #----------------------------------------------------------------------------
-# No filtering for sourcecode
+# No filtering for sourcecode or other automatically parsed content
 #----------------------------------------------------------------------------
 {-filter}
 #MASTER# PROBLEM-URL: http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/ijbswa/current/
@@ -1000,6 +1000,10 @@ liveupdate.symantec.com
 www.bookmarklets.com
 #MASTER# PROBLEM-URL: http://www.squarefree.com/bookmarklets/
 www.squarefree.com/bookmarklets/
+#MASTER# DONT-VERIFY
+#MASTER# REMARKS: Used by Mac OSX's automatic software update feature
+swquery.apple.com
+swscan.apple.com
 
 #----------------------------------------------------------------------------
 # These sites suffer from a bug in PHP < 4.2.3 (ob_gzhandler broken;
