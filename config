@@ -1,8 +1,8 @@
-#        Sample Configuration File for Privoxy v3.0.0
+#        Sample Configuration File for Privoxy v3.0.1
 #  
 #  Copyright (C) 2001, 2002 Privoxy Developers http://privoxy.org
 #  
-#  $Id: config,v 1.39.2.6 2002/08/25 23:50:21 hal9 Exp $
+#  $Id: config,v 1.39.2.7 2002/09/29 05:39:13 hal9 Exp $
 #  
 ####################################################################
 #                                                                  #
@@ -370,11 +370,20 @@ jarfile jarfile
 #  
 #      Unix, in local filesystem:
 #  
-#      user-manual  file:///usr/share/doc/privoxy-2.9.18/user-manual/
+#       user-manual file:///usr/share/doc/privoxy-3.0.1/user-manual/index.html
+#  
+#      Windows, in local filesystem, must use forward slash notation,
+#      and %20 to denote spaces in path names:
+#  
+#       user-manual file:///c:/some%20dir/privoxy/user-manual/index.html
+#  
+#      Windows, UNC notation (forward slashes required again):
+#  
+#       user-manual file://///some-server/some-path/privoxy/user-manual/index.html
 #  
 #      Any platform, on local webserver (called "local-webserver"):
 #  
-#      user-manual  http://local-webserver/privoxy-user-manual/
+#       user-manual  http://local-webserver/privoxy-user-manual/
 #  
 #      WARNING!!!
 #  
