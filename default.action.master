@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.23 2003/05/08 12:13:20 oes Exp $
+#  $Id: default.action.master,v 1.1.2.24 2003/06/29 18:54:04 david__schmidt Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -875,6 +875,7 @@ adzapper.
 {fragile}
 .office.microsoft.com
 .windowsupdate.microsoft.com
+.apple.com
 
 #----------------------------------------------------------------------------
 # Shopping and banking sites - allow cookies and pop-ups
@@ -893,6 +894,7 @@ adzapper.
 .mobile.de
 www.fondationlejeu.com
 www.techtv.com
+.mywebgrocer.com
 
 #----------------------------------------------------------------------------
 # Subscription sites (with credible privacy policy) - allow permanent cookies
