@@ -1,8 +1,8 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.24 2003/12/03 10:30:02 oes Exp $
+# $Id: GNUmakefile.in,v 1.104.2.25 2004/01/31 01:15:33 oes Exp $
 #
-# Written by and Copyright (C) 2001 the SourceForge
+# Written by and Copyright (C) 2001 - 2004 the SourceForge
 # Privoxy team. http://www.privoxy.org/
 #
 # Based on the Internet Junkbuster originally written
@@ -633,7 +633,7 @@ tarball-dist: dist-check clean clobber
 
 	for i in `find . -type f -a -not \( -path "*/CVS*" -o -name ".*" \
 	-o -path "*/debian/*" -o -path "*/actions/*" -o -name "*.php" -o \
-	-name "PACKAGERS" -o path "*/pdf/*" \)`; do \
+	-name "PACKAGERS" -o -path "*/pdf/*" \)`; do \
 	   files="$$files privoxy-$(VERSION)-$(CODE_STATUS)/$$i"; \
 	done &&  \
 	cd .. && $(TAR) -cvhf privoxy-$(VERSION)-$(CODE_STATUS)-src.tar $$files ; \
@@ -1341,6 +1341,9 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.25  2004/01/31 01:15:33  oes
+# Fixed a typo; updated copyright notice
+#
 # Revision 1.104.2.24  2003/12/03 10:30:02  oes
 # - Added new dependency: actions.c -> ssplit.h
 # - Excluded PDF docs from src tarball
