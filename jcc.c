@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.12 2003/07/11 11:34:19 oes Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.13 2003/11/27 19:20:27 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.12 2003/07/11 11:34:19 oes Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.92.2.13  2003/11/27 19:20:27  oes
+ *    Diagnostics: Now preserve the returncode of pthread_create
+ *    in errno. Closes BR #775721. Thanks to Geoffrey Hausheer.
+ *
  *    Revision 1.92.2.12  2003/07/11 11:34:19  oes
  *    No longer ignore SIGCHLD. Fixes bug #769381
  *
@@ -2318,8 +2322,9 @@ static void listen_loop(void)
 
             pthread_attr_init(&attrs);
             pthread_attr_setdetachstate(&attrs, PTHREAD_CREATE_DETACHED);
-            child_id = (pthread_create(&the_thread, &attrs,
-               (void*)serve, csp) ? -1 : 0);
+            errno = pthread_create(&the_thread, &attrs,
+               (void*)serve, csp);
+            child_id = errno ? -1 : 0;
             pthread_attr_destroy(&attrs);
          }
 #endif
