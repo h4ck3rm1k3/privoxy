@@ -1,7 +1,7 @@
 --------------------------------------------------------------------
 ChangeLog for Privoxy
 --------------------------------------------------------------------
-*** Version 3.0.1 ***
+*** Version 3.0.2 ***
 
 - Fixed two memory leaks, one serious
 - Fixed bug in pcrs which could cause crashes with user-defined filters
