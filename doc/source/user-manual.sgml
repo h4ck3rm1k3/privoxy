@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.38 2004/01/30 16:47:51 oes Exp $
+ $Id: user-manual.sgml,v 1.123.2.39 2004/01/30 22:31:40 oes Exp $
 
  Copyright (C) 2001- 2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.38 2004/01/30 16:47:51 oes Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.39 2004/01/30 22:31:40 oes Exp $</pubdate>
 
 <!--
 
@@ -553,6 +553,14 @@ automatically start Privoxy in the boot process.
     Appendix <quote><link linkend="actionsanat">Anatomy of an
     Action</link></quote> has hints how to debug actions that
     <quote>misbehave</quote>.
+  </para>
+ </listitem> 
+
+ <listitem>
+  <para>
+   For easy access to Privoxy's most important controls, drag the provided
+   <link linkend="bookmarklets">Bookmarklets</link> into your browser's
+   personal toolbar.
   </para>
  </listitem> 
 
@@ -6287,6 +6295,9 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.39  2004/01/30 22:31:40  oes
+ Added a hint re bookmarklets to Quickstart section
+
  Revision 1.123.2.38  2004/01/30 16:47:51  oes
  Some minor clarifications
 
