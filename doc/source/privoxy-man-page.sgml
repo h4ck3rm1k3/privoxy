@@ -5,7 +5,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: privoxy-man-page.sgml,v 1.13.2.4 2002/08/26 16:26:58 hal9 Exp $
+ $Id: privoxy-man-page.sgml,v 1.13.2.5 2003/03/17 16:50:58 oes Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -42,10 +42,10 @@
 <!entity copyright SYSTEM "copyright.sgml">
 <!entity license SYSTEM "license.sgml">
 <!entity authors SYSTEM "p-authors.sgml">
-<!entity p-version "3.0.0">
-<!entity p-status "stable">
-<!entity % p-not-stable "IGNORE">
-<!entity % p-stable "INCLUDE">
+<!entity p-version "0.0.0">
+<!entity p-status "UNRELEASED">
+<!entity % p-not-stable "INCLUDE">
+<!entity % p-stable "IGNORE">
 <!entity % p-text "IGNORE">           <!-- define we are not a text only doc -->
 <!entity % p-authors-formal "IGNORE"> <!-- exclude additional formating      -->
 <!entity my-copy "(C)">               <!-- db2man barfs on copyright symbol  -->
@@ -151,8 +151,22 @@
      </para>
     </listitem>
   </varlistentry>
+  <varlistentry>
+    <term>--chroot</term>
+     <listitem>
+      <para>
+       Before changing to the user ID given in the --user option, chroot to that user's home
+       directory, i.e. make the kernel pretend to the Privoxy process that the directory tree
+       starts there. If set up carefully, this can limit the impact of possible vulnerabilities
+       in Privoxy to the files contained in that hierarchy.
+     </para>
+    </listitem>
+  </varlistentry>
  </variablelist>
  
+
+
+
  <para>
   If the <filename>configfile</filename> is not specified on  the  command  line,
   <command>Privoxy</command>  will  look for a file named
