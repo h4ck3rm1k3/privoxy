@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.13 2003/03/15 14:09:05 oes Exp $
+#  $Id: default.action.master,v 1.1.2.14 2003/03/15 17:14:58 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -338,7 +338,7 @@
 # +crunch-incoming-cookies
 #    Prevent the website from setting cookies
 #
-# +kill-popups
+# +kill-popups (deprecated)
 #    Filter the website through a built-in filter to disable
 #    window.open() etc.  The two alternative spellings are
 #    equivalent.
@@ -391,7 +391,7 @@ for-privoxy-version=3.0
 +crunch-all-cookies = +crunch-incoming-cookies +crunch-outgoing-cookies
 -crunch-all-cookies = -crunch-incoming-cookies -crunch-outgoing-cookies
  allow-all-cookies  = -crunch-all-cookies -session-cookies-only
- allow-popups       = -filter{popups} -kill-popups
+ allow-popups       = -filter{all-popups} -kill-popups
 +block-as-image     = +block +handle-as-image
 -block-as-image     = -block
 
@@ -403,7 +403,7 @@ shop        = -crunch-all-cookies allow-popups
 
 # Your favourite blend of filters:
 #
-myfilters   = +filter{html-annoyances} +filter{js-annoyances} +filter{popups}\
+myfilters   = +filter{html-annoyances} +filter{js-annoyances} +filter{all-popups}\
               +filter{webbugs} +filter{nimda} +filter{banners-by-size} #+filter{fun}
 
 # Allow ads for selected useful free sites:
@@ -1128,7 +1128,7 @@ www.ameritrade.com
 #MASTER# REMARKS: Needs content-cookies for cookie test on index page; needs webbugs for storing profile(!)
 www.friendscout24.de
 
-{-deanimate-gifs -filter{popups} -kill-popups}
+{-deanimate-gifs -filter{all-popups} -kill-popups}
 #MASTER# PROBLEM-URL: http://www.valueclick.com/html/
 #MASTER# REMARKS: Know your enemy ;-)
 www.valueclick.com
