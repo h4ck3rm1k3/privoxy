@@ -357,71 +357,29 @@ NAME="OSXUNINSTALL"
  empty the trash.</A
 ></H2
 ><P
->  <SPAN
+>  Just dragging the <SPAN
 CLASS="APPLICATION"
 >Privoxy</SPAN
-> is installed with root permissions.  
-  When you drag the Privoxy folder to the trash, the general user does not
-  have (as the Finder says) sufficient privileges to delete it.  Unfortunately,
-  the finder does not offer a way to enter the administrator password in order
-  to prove you do in fact own this computer.  To fix this situation, open the
-  Terminal application and carefully enter the following commands:
- </P
-><P
->  <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="SCREEN"
->   cd ~
-   cd .Trash
-   sudo rm -rf Privoxy</PRE
-></TD
-></TR
-></TABLE
+> folder to the trash is
+  not enough to delete it.  <SPAN
+CLASS="APPLICATION"
+>Privoxy</SPAN
+> supplies an
+  <SPAN
+CLASS="APPLICATION"
+>uninstall.command</SPAN
+> file that takes care of
+  these details.  Open the trash, drag the <SPAN
+CLASS="APPLICATION"
+>uninstall.command</SPAN
 >
+  file out of the trash and double-click on it.  You will be prompted for
+  confirmation and the administration password.
  </P
 ><P
 >  The trash may still appear full after this command; emptying the trash 
   from the desktop should make it appear empty again.
  </P
-><DIV
-CLASS="WARNING"
-><P
-></P
-><TABLE
-CLASS="WARNING"
-BORDER="1"
-WIDTH="100%"
-><TR
-><TD
-ALIGN="CENTER"
-><B
->Warning</B
-></TD
-></TR
-><TR
-><TD
-ALIGN="LEFT"
-><P
->   Be extra-sure to enter the commands <I
-CLASS="EMPHASIS"
->EXACTLY</I
-> as shown
-   above. Removing files recusively with administrator priviledges (as happens
-   with <TT
-CLASS="LITERAL"
->sudo rm -rf</TT
-> is serious business and even small
-   typos can have devasting effects!
-  </P
-></TD
-></TR
-></TABLE
-></DIV
 ></DIV
 ></DIV
 ><DIV
