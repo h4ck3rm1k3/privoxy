@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.8 2003/04/29 13:33:51 oes Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.9 2003/05/08 15:11:31 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,9 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.8 2003/04/29 13:33:51 oes Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.70.2.9  2003/05/08 15:11:31  oes
+ *    Nit
+ *
  *    Revision 1.70.2.8  2003/04/29 13:33:51  oes
  *    Killed a compiler warning on OSX
  *
@@ -585,7 +588,7 @@ static const struct cgi_dispatcher cgi_dispatchers[] = {
 
 
 /*
- * Bulit-in images for ad replacement
+ * Built-in images for ad replacement
  *
  * Hint: You can encode your own images like this:
  * cat your-image | perl -e 'while (read STDIN, $c, 1) { printf("\\%.3o", unpack("C", $c)); }'
