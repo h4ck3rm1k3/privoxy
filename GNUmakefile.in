@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.21 2002/11/04 07:04:03 hal9 Exp $
+# $Id: GNUmakefile.in,v 1.104.2.22 2003/03/28 03:32:01 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -745,7 +745,8 @@ dok-webserver:
 	$(PERL) -pi.bak -e 's/..\/p_doc.css/p_doc.css/;\
      s/<\/HEAD/\n<meta name=\"description\" content=\"Privoxy helps consumers reduce unwanted junk email and protect their privacy from direct marketing companies.\"><\/HEAD/;\
 	s/<\/HEAD/\n<meta name="MSSmartTagsPreventParsing" content="TRUE"><\/HEAD/;\
-	s/\.\d\. //'\
+	s/\.\d\. //;\
+	s/__copy/&copy;/'\
      doc/webserver/index.html && $(RM) doc/webserver/*.bak
 
 # privoxy-index.html for local documentation:
@@ -754,9 +755,9 @@ dok-index:
 	$(PERL) -pi.bak -e 's/..\/p_doc.css/p_doc.css/;\
      s/<\/HEAD/\n<meta name=\"description\" content=\"Privoxy helps consumers reduce unwanted junk email and protect their privacy from direct marketing companies.\"><\/HEAD/;\
 	s/<\/HEAD/\n<meta name="MSSmartTagsPreventParsing" content="TRUE"><\/HEAD/;\
-	s/\.\d\. //'\
+	s/\.\d\. //;\
+	s/__copy/&copy;/' \
      doc/webserver/privoxy-index.html && $(RM) doc/webserver/*.bak
-
 
 # Main documentation target.
 dok: dok-release dok-devel dok-user dok-faq dok-readme dok-webserver dok-authors dok-index
@@ -833,14 +834,14 @@ dok-pdf: dok-shtml
 
 # Create release announcement in text and html, with short and long versions.
 # This is a standalone target, and must be invoked directly.
-announce: dok-release
-	mkdir -p $(DOC_TMP)
-	cd $(DOC_TMP) && cp -f ../announce.sgml . && $(DB) -iannounce-big announce.sgml &&\
-	mv -f index.html announce.html && $(WDUMP) announce.html > announce.txt
-	cd $(DOC_TMP) && $(DB) announce.sgml &&\
-	mv -f index.html announce-mini.html && $(WDUMP) announce-mini.html > announce-mini.txt &&\
-	mv -f *html *txt ../../.. 
-	rm -fr $(DOC_TMP)
+# announce: dok-release
+# 	mkdir -p $(DOC_TMP)
+# 	cd $(DOC_TMP) && cp -f ../announce.sgml . && $(DB) -iannounce-big announce.sgml &&\
+# 	mv -f index.html announce.html && $(WDUMP) announce.html > announce.txt
+# 	cd $(DOC_TMP) && $(DB) announce.sgml &&\
+# 	mv -f index.html announce-mini.html && $(WDUMP) announce-mini.html > announce-mini.txt &&\
+# 	mv -f *html *txt ../../.. 
+# 	rm -fr $(DOC_TMP)
 
 # The main Privoxy config file, generated from sgml sources. 
 # NOTE: This will require some hand editing. The new file is outputted 
@@ -1322,6 +1323,12 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.22  2003/03/28 03:32:01  hal9
+# Minor changes for Privoxy home page:
+#  - Handle &copy; more sanely
+#  - include link to announce.txt
+# Also, disable 'make announce' target.
+#
 # Revision 1.104.2.21  2002/11/04 07:04:03  hal9
 # Catch up with main trunk install/uninstall. Quiet output, etc.
 #
