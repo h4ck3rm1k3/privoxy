@@ -42,8 +42,7 @@
 #  default-cgi:
 #    The URL for the "main menu" builtin CGI of this proxy
 #  menu:
-#    List of 
-         <li> elements linking to the other available CGIs
+#    List of <li> elements linking to the other available CGIs
 #  version:
 #    The version number of the proxy software
 #  code-status:
@@ -196,9 +195,7 @@
     <tr> \
       <td class="box" colspan="2"> \
         <h2>More Privoxy:</h2> \
-        <ul>@menu@
-         <li><a href="@user-manual@">Documentation</a></li>
-        </ul> \
+        <ul>@menu@<li><a href="@user-manual@">Documentation</a></li></ul> \
       </td> \
     </tr> \
  \
@@ -210,28 +207,23 @@
           we ask that you: \
         </p> \
         <ul> \
-          
-         <li> \
+          <li> \
             use the <a href="http://sourceforge.net/tracker/?group_id=11118&amp;atid=211118">support forum</a> or (better) the \
             <a href="http://sourceforge.net/mail/?group_id=11118">mailing lists</a> to get help. \
           </li> \
-          
-         <li> \
+          <li> \
             submit banners and all problems with the actions file only through the \
             <a href="javascript:void(window.open(\'http://www.privoxy.org/actions\',\'Feedback\',\'width=600,scrollbars=yes,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no\').focus());">actions \
             file feedback system</a>. \
           </li> \
-          
-         <li> \
+          <li> \
             submit bugs only through our <a href="http://sourceforge.net/tracker/?group_id=11118&amp;atid=111118">bug tracker</a>. \
             Make sure that the bug has not yet been submitted. \
           </li> \
-          
-         <li> \
+          <li> \
             submit feature requests only through our <a href="http://sourceforge.net/tracker/?atid=361118&amp;group_id=11118&amp;func=browse">feature \
             request tracker</a>. \
           </li> \
-        
         </ul> \
       </td> \
     </tr> \

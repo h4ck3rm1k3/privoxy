@@ -37,8 +37,7 @@
 #  default-cgi:
 #    The URL for the "main menu" builtin CGI of this proxy
 #  menu:
-#    List of 
-         <li> elements linking to the other available CGIs
+#    List of <li> elements linking to the other available CGIs
 #  version:
 #    The version number of the proxy software
 #  code-status:
@@ -121,9 +120,7 @@
     <tr>
       <td class="box" colspan="2">
         <h2>More Privoxy:</h2>
-        <ul>@menu@
-         <li><a href="@user-manual@">Documentation</a></li>
-        </ul>
+        <ul>@menu@<li><a href="@user-manual@">Documentation</a></li></ul>
       </td>
     </tr>
 
