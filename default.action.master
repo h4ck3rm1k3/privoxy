@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.24 2003/06/29 18:54:04 david__schmidt Exp $
+#  $Id: default.action.master,v 1.1.2.25 2003/07/07 20:33:01 david__schmidt Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -1034,7 +1034,8 @@ www.ubernet.org
 www.ooodocs.org
 #MASTER# PROBLEM-URL: http://www.ntcompatible.com/
 www.ntcompatible.com
-
+#MASTER# PROBLEM-URL: http://www.winehq.com/
+.winehq.com
 
 #----------------------------------------------------------------------------
 # The first frame of the gif animation is more useful here:
