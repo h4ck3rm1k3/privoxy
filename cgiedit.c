@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.5 2003/12/17 16:33:47 oes Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.6 2003/12/18 08:13:48 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,9 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.5 2003/12/17 16:33:47 oes Ex
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.41.2.6  2003/12/18 08:13:48  oes
+ *    One line lost in last commit
+ *
  *    Revision 1.41.2.5  2003/12/17 16:33:47  oes
  *     - All edit functions that redirect back to the list page
  *       now use cgi_redirect
@@ -4088,7 +4091,7 @@ jb_err cgi_edit_actions_section_swap(struct client_state *csp,
    struct file_line * line_end_section2;
    struct file_line * line_after_section2;
    unsigned line_number;
-   char * target;
+   char target[1024];
    jb_err err;
 
    if (0 == (csp->config->feature_flags & RUNTIME_FEATURE_CGI_EDIT_ACTIONS))
