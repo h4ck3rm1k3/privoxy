@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.1 2002/06/05 23:10:43 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.2 2002/06/06 02:51:34 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -72,7 +72,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.1 2002/06/05 23:10:43 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.2 2002/06/06 02:51:34 hal9 Exp $</pubdate>
 
 <!--
 
@@ -466,7 +466,7 @@ All the ads are there. What's wrong?</title>
  the browser's caches to force a full re-reading of pages. You can verify 
  that <application>Privoxy</application> is running, and your browser 
  is correctly configured by entering the special URL: 
- <ulink url="http:/config.privoxy.org/">http://config.privoxy.org/</ulink>.
+ <ulink url="http://config.privoxy.org/">http://config.privoxy.org/</ulink>.
  This should take you to a page titled <quote>This is Privoxy..</quote> with
  access to <application>Privoxy's</application> internal configuration.
  If you see this, then you are good to go. If you receive a page saying 
@@ -1627,6 +1627,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.2  2002/06/06 02:51:34  hal9
+Fix typo in URL http:/config.privoxy.org
+
 Revision 1.61.2.1  2002/06/05 23:10:43  hal9
 Add new FAQ re: DUN/IE. Change release date from May to June :)
 
