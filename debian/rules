@@ -36,7 +36,8 @@ configure-stamp:
 	autoconf
 	env CFLAGS=$(CFLAGS)
 		./configure --prefix=/usr --sysconfdir=/etc \
-		--mandir=/usr/share/man	$(WITHDEBUG) $(WITHOUTPTHREAD)
+		--mandir=/usr/share/man	$(WITHDEBUG) $(WITHOUTPTHREAD) \
+		--with-docbook=no
 
 	touch configure-stamp
 
