@@ -1,4 +1,4 @@
-# $Id: privoxy-rh.spec,v 1.33.2.1 2002/05/26 17:20:23 hal9 Exp $
+# $Id: privoxy-rh.spec,v 1.33.2.2 2002/05/28 02:39:38 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -242,7 +242,7 @@ fi
 %doc doc/webserver/developer-manual
 %doc doc/webserver/user-manual
 %doc doc/webserver/faq
-%doc doc/webserver/p_doc.css doc/webserver/p_web.css doc/webserver/index.html
+%doc doc/webserver/p_doc.css doc/webserver/p_web.css doc/webserver/privoxy-index.html
 %doc doc/webserver/images
 %doc doc/webserver/man-page
 
@@ -312,6 +312,10 @@ fi
 %{_mandir}/man1/%{name}.*
 
 %changelog
+* Mon May 27 2002 Hal Burgiss <hal@foobox.net>
++ privoxy-2.9.15-1
+- Index.html is now privoxy-index.html for doc usage.
+
 * Sat May 25 2002 Hal Burgiss <hal@foobox.net>
 + privoxy-2.9.15-1
 - Add html man page so index.html does not 404.
@@ -663,6 +667,9 @@ fi
 	additional "-r @" flag.
 
 # $Log: privoxy-rh.spec,v $
+# Revision 1.33.2.2  2002/05/28 02:39:38  hal9
+# Replace index.html with privoxy-index.html for docs.
+#
 # Revision 1.33.2.1  2002/05/26 17:20:23  hal9
 # Add images to doc dirs.
 #
