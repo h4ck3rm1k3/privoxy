@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.30 2003/07/20 16:18:30 hal9 Exp $
+#  $Id: default.action.master,v 1.1.2.31 2003/07/26 11:45:14 hal9 Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -1150,6 +1150,7 @@ www.quelle-bausparkasse.de/$
 .cn
 .tw
 .ru
+.kr
 
 #----------------------------------------------------------------------------
 # Misc special rules:
