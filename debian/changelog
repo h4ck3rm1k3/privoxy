@@ -7,8 +7,11 @@ privoxy (2.9.15-beta-0) unstable; urgency=low
   * Do no longer build html and txt versions of documentation using
     docbook, but use the converted versions which come with the upstream
     package.
+  * default.action fixed upstream: "downloads" no longer blocked 
+    (Closes: #148290).
+  * default.filter fixed upstream: Made WeBugs job ungreedy (Closes: #149450).
 
- -- Roland Rosenfeld <roland@debian.org>  Thu, 30 May 2002 14:21:10 +0200
+ -- Roland Rosenfeld <roland@debian.org>  Sun, 30 Jun 2002 21:16:46 +0200
 
 privoxy (2.9.14-beta-4) unstable; urgency=low
 
