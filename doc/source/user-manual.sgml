@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.36 2003/12/10 02:26:26 hal9 Exp $
+ $Id: user-manual.sgml,v 1.123.2.37 2004/01/29 22:36:11 hal9 Exp $
 
  Copyright (C) 2001- 2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -53,12 +53,12 @@
  <subscript>
 <!-- Completely the wrong markup, but very little is allowed  -->
 <!-- in this part of an article. FIXME -->
- <link linkend="copyright">Copyright</link> &my-copy; 2001 - 2003 by 
+ <link linkend="copyright">Copyright</link> &my-copy; 2001 - 2004 by 
  <ulink url="http://www.privoxy.org/">Privoxy Developers</ulink>
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.36 2003/12/10 02:26:26 hal9 Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.37 2004/01/29 22:36:11 hal9 Exp $</pubdate>
 
 <!--
 
@@ -69,17 +69,6 @@ copyright/license declarations will be in their own sgml.
 
 Hal.
 
-<copyright>
-  <year>2001</year>
-  <year>2002</year>
-  <holder>Privoxy Developers</holder>
-</copyright>
-
-<legalnotice id="legalnotice"> 
- <para>
-  text goes here ........
- </para>
-</legalnotice>
 
 -->
 
@@ -1616,7 +1605,7 @@ must find a better place for this paragraph
     <row>
       <entry>Demoronizer</entry>
       <entry>no</entry>
-      <entry>yes</entry>
+      <entry>no</entry>
       <entry>yes</entry>
     </row>
 
@@ -2597,9 +2586,10 @@ problem-host.example.com</screen>
   <term>Effect:</term>
   <listitem>
    <para>
-    Text documents, including HTML and JavaScript, to which this action
+    HTML and JavaScript pages, to which this action
     applies, are filtered on-the-fly through the specified regular expression
-    based substitutions.
+    based substitutions. (Note: as of version 3.0.3 plain text documents 
+    are exempted from filtering.)
    </para>
   </listitem>
  </varlistentry>
@@ -4021,7 +4011,7 @@ that also explains why and how aliases are used:
  -<link linkend="FILTER-TINY-TEXTFORMS">filter{tiny-textforms}</link> \
  +<link linkend="FILTER-JUMPING-WINDOWS">filter{jumping-windows}</link> \
  -<link linkend="FILTER-FRAMESET-BORDERS">filter{frameset-borders}</link> \
- +<link linkend="FILTER-DEMORONIZER">filter{demoronizer}</link> \
+ -<link linkend="FILTER-DEMORONIZER">filter{demoronizer}</link> \
  -<link linkend="FILTER-SHOCKWAVE-FLASH">filter{shockwave-flash}</link> \
  -<link linkend="FILTER-QUICKTIME-KIOSKMODE">filter{quicktime-kioskmode}</link> \
  -<link linkend="FILTER-FUN">filter{fun}</link> \
@@ -4405,16 +4395,12 @@ slashdot.org
 <para>
  Some file types you may not want to filter.
  <application>Privoxy</application> makes no distinctions between regular web
- pages and downloads done via your web browser if it is an html or text type
+ pages and downloads done via your web browser if it is an html type
  document.
 </para>
 
 <para>
  <screen>
-# A list of common file extensions that are likely to indicate raw text, and best
-# if unfiltered.
-/(.*/)?.*\.(pl|(s|p)?h|c(c|xx|pp)?|tcl|am|init?|cfg?|conf(ig)?|txt|rc|bat)$
-
 # Documentation should not need filtering (at least on some sites).
 .tldp.org</screen>
 </para>
@@ -4570,11 +4556,11 @@ adremote.</screen>
 </para>
 
 <para>
- Filtering works on any text-based document type, including plain
- text, HTML, JavaScript, CSS etc. (all <literal>text/*</literal>
- MIME types). Substitutions are made at the source level, so if
- you want to <quote>roll your own</quote> filters, you should be
- familiar with HTML syntax.
+ Filtering works on any text-based document type, including 
+ HTML, JavaScript, CSS etc. (all <literal>text/*</literal>
+ MIME types, <emphasis>except</emphasis> <literal>text/plain</literal>).
+ Substitutions are made at the source level, so if you want to <quote>roll
+ your own</quote> filters, you should be familiar with HTML syntax.
 </para>
 
 <para>
@@ -6296,6 +6282,10 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.37  2004/01/29 22:36:11  hal9
+ Updates for no longer filtering text/plain, and demoronizer default settings,
+ and copyright notice dates.
+
  Revision 1.123.2.36  2003/12/10 02:26:26  hal9
  Changed the demoronizer filter description.
 
