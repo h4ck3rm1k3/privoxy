@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.39 2004/01/30 22:31:40 oes Exp $
+ $Id: user-manual.sgml,v 1.123.2.40 2004/02/27 12:48:49 hal9 Exp $
 
  Copyright (C) 2001- 2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.39 2004/01/30 22:31:40 oes Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.40 2004/02/27 12:48:49 hal9 Exp $</pubdate>
 
 <!--
 
@@ -3714,7 +3714,8 @@ my-internal-testing-server.void</screen>
      <para>
       <quote><replaceable class="parameter">target-url</replaceable></quote> to
       send a redirect to <replaceable class="parameter">target-url</replaceable>. You can redirect
-      to any image anywhere, even in your local filesystem (via <quote>file:///</quote> URL).
+      to any image anywhere, even in your local filesystem via <quote>file:///</quote> URL. 
+      (But note that not all browsers support redirecting to a local file system).
      </para>
      <para>
       A good application of redirects is to use special <application>Privoxy</application>-built-in
@@ -6295,6 +6296,10 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.40  2004/02/27 12:48:49  hal9
+ Add comment re: redirecting to local file system for set-image-blocker may
+ is dependent on browser.
+
  Revision 1.123.2.39  2004/01/30 22:31:40  oes
  Added a hint re bookmarklets to Quickstart section
 
