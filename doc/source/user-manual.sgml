@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.35 2003/11/06 13:36:37 oes Exp $
+ $Id: user-manual.sgml,v 1.123.2.36 2003/12/10 02:26:26 hal9 Exp $
 
  Copyright (C) 2001- 2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.35 2003/11/06 13:36:37 oes Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.36 2003/12/10 02:26:26 hal9 Exp $</pubdate>
 
 <!--
 
@@ -5107,8 +5107,10 @@ pre-defined filters for your convenience:
     HTML documents to display with errors on standard-compliant platforms. 
    </para>
    <para>
-    This filter translates the MS-only characters into Latin-1 equivalents. It is
-    safe for general use, and recommended for non-MS platforms.
+    This filter translates the MS-only characters into Latin-1 equivalents. 
+    It is not necessary when using MS products, and will cause corruption of  
+    UTF-8 (non-Latin-1) pages. It might be worthwhile for non-MS platforms, 
+    if wierd fonts sometimes appear on some pages.
    </para>
   </listitem>
  </varlistentry>
@@ -6294,6 +6296,9 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.36  2003/12/10 02:26:26  hal9
+ Changed the demoronizer filter description.
+
  Revision 1.123.2.35  2003/11/06 13:36:37  oes
  Updated link to nightly CVS tarball
 
