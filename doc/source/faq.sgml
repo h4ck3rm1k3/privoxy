@@ -24,9 +24,9 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.33 2003/06/26 02:57:05 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.34 2003/06/26 03:00:03 hal9 Exp $
 
- Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
+ Copyright (C) 2001-2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
 
  Based partially on the Internet Junkbuster FAQ originally written by and
@@ -50,7 +50,7 @@
 
  ========================================================================
  NOTE: Please read developer-manual/documentation.html before touching 
- to live a peaceful existence!
+ this file!
 
  Please we keep the info in this file as version independent as possible 
  so we only have to maintain one FAQ. Where significant changes are 
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.33 2003/06/26 02:57:05 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.34 2003/06/26 03:00:03 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1871,8 +1871,6 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  <!--
  Tue 09/11/01 06:38:14 PM EST: Test SGML doc by Hal Burgiss.
  
- Last modified: Mon Sep 10 19:22:09 CEST 2001
- 
  This program is free software; you can redistribute it 
  and/or modify it under the terms of the GNU General
  Public License as published by the Free Software
@@ -1892,6 +1890,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.34  2003/06/26 03:00:03  hal9
+Sorry, found another copyright date.
+
 Revision 1.61.2.33  2003/06/26 02:57:05  hal9
 Fix typo (finally!) and very minor modifications.
 
