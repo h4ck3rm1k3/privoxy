@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.2 2002/11/12 16:28:20 oes Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.3 2003/03/11 11:53:59 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.2 2002/11/12 16:28:20 oes Ex
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.48.2.3  2003/03/11 11:53:59  oes
+ *    Cosmetic: Renamed cryptic variable
+ *
  *    Revision 1.48.2.2  2002/11/12 16:28:20  oes
  *    Move unrelated variable declaration out of #ifdef FEATURE_ACL; fixes bug #636655
  *
@@ -375,8 +378,8 @@ const char loadcfg_h_rcs[] = LOADCFG_H_VERSION;
 #define ijb_tolower(__X) tolower((int)(unsigned char)(__X))
 
 #ifdef FEATURE_TOGGLE
-/* by haroon - indicates if ijb is enabled */
-int g_bToggleIJB        = 1;   /* Privoxy is enabled by default. */
+/* Privoxy is enabled by default. */
+int global_toggle_state = 1;
 #endif /* def FEATURE_TOGGLE */
 
 /* The filename of the configfile */
@@ -578,7 +581,7 @@ struct configuration_spec * load_config(void)
    log_error(LOG_LEVEL_INFO, "loading configuration file '%s':", configfile);
 
 #ifdef FEATURE_TOGGLE
-   g_bToggleIJB      = 1;
+   global_toggle_state      = 1;
 #endif /* def FEATURE_TOGGLE */
 
    fs->f = config = (struct configuration_spec *)zalloc(sizeof(*config));
@@ -1202,7 +1205,7 @@ struct configuration_spec * load_config(void)
  * *************************************************************************/
 #ifdef FEATURE_TOGGLE
          case hash_toggle :
-            g_bToggleIJB = atoi(arg);
+            global_toggle_state = atoi(arg);
             continue;
 #endif /* def FEATURE_TOGGLE */
 

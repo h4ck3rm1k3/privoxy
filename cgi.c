@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.4 2003/03/07 03:41:03 david__schmidt Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.5 2003/03/11 11:53:58 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,9 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.4 2003/03/07 03:41:03 david__schmidt
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.70.2.5  2003/03/11 11:53:58  oes
+ *    Cosmetic: Renamed cryptic variable
+ *
  *    Revision 1.70.2.4  2003/03/07 03:41:03  david__schmidt
  *    Wrapping all *_r functions (the non-_r versions of them) with mutex semaphores for OSX.  Hopefully this will take care of all of those pesky crash reports.
  *
@@ -437,7 +440,7 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.4 2003/03/07 03:41:03 david__schmidt
 #include "cgiedit.h"
 #endif /* def FEATURE_CGI_EDIT_ACTIONS */
 #include "loadcfg.h"
-/* loadcfg.h is for g_bToggleIJB only */
+/* loadcfg.h is for global_toggle_state only */
 #ifdef FEATURE_PTHREAD
 #include <pthread.h>
 #include "jcc.h"
@@ -2046,7 +2049,7 @@ struct map *default_exports(const struct client_state *csp, const char *caller)
    if (!err) err = map(exports, "user-manual",   1, csp->config->usermanual ,1);
    if (!err) err = map(exports, "actions-help-prefix", 1, ACTIONS_HELP_PREFIX ,1);
 #ifdef FEATURE_TOGGLE
-   if (!err) err = map_conditional(exports, "enabled-display", g_bToggleIJB);
+   if (!err) err = map_conditional(exports, "enabled-display", global_toggle_state);
 #endif
 
    snprintf(buf, 20, "%d", csp->config->hport);
