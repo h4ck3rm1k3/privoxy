@@ -5,7 +5,7 @@
 <!entity history SYSTEM "history.sgml">
 <!entity copyright SYSTEM "copyright.sgml">
 <!entity license SYSTEM "license.sgml">
-<!entity p-version "2.9.15">
+<!entity p-version "2.9.16">
 <!entity p-status "beta">
 <!entity % p-not-stable "INCLUDE">
 <!entity % p-stable "IGNORE">
@@ -20,7 +20,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: index.sgml,v 1.16.2.5 2002/06/09 18:59:16 hal9 Exp $
+ $Id: index.sgml,v 1.16.2.6 2002/07/26 15:22:15 oes Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,8 +75,7 @@
 
 <![%p-homepage;[
   <para>
-  <!-- FIXME: Temporarily hard coding this. HB.  -->
-   The most recent release is 2.9.14 (&p-status;). 
+   The most recent release is &p-version; (&p-status;). 
   </para>
 ]]>
 
@@ -245,6 +244,9 @@
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: index.sgml,v $
+ Revision 1.16.2.6  2002/07/26 15:22:15  oes
+ Most recent release now inserted automatically (again)
+
  Revision 1.16.2.5  2002/06/09 18:59:16  hal9
  Correct typo.
 
