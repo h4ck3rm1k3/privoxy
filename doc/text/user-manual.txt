@@ -1,8 +1,8 @@
-Privoxy 3.0.1 User Manual
+Privoxy 3.0.2 User Manual
 
-Copyright © 2001, 2002 by Privoxy Developers
+Copyright © 2001 - 2003 by Privoxy Developers
 
-$Id: user-manual.txt,v 1.60.2.5 2003/03/19 02:06:10 hal9 Exp $
+$Id: user-manual.txt,v 1.60.2.6 2003/03/26 02:58:03 hal9 Exp $
 
 The User Manual gives users information on how to install, configure and use 
 Privoxy.
@@ -149,6 +149,7 @@ Table of Contents
 9. The Filter File
    
     9.1. Filter File Tutorial
+    9.2. The Pre-defined Filters
    
 10. Templates
 11. Contacting the Developers, Bug Reporting and Feature Requests
@@ -179,7 +180,7 @@ Table of Contents
 1. Introduction
 
 This documentation is included with the current stable version of Privoxy,
-v.3.0.1.
+v.3.0.2.
 
 -------------------------------------------------------------------------------
 
@@ -250,7 +251,7 @@ How to install the binary packages depends on your operating system:
 
 2.1.1. Red Hat, SuSE and Conectiva RPMs
 
-RPMs can be installed with rpm -Uvh privoxy-3.0.1-1.rpm, and will use /etc/
+RPMs can be installed with rpm -Uvh privoxy-3.0.2-1.rpm, and will use /etc/
 privoxy for the location of configuration files.
 
 Note that on Red Hat, Privoxy will not be automatically started on system boot.
@@ -258,7 +259,7 @@ You will need to enable that using chkconfig, ntsysv, or similar methods. Note
 that SuSE will automatically start Privoxy in the boot process.
 
 If you have problems with failed dependencies, try rebuilding the SRC RPM: rpm
---rebuild privoxy-3.0.1-1.src.rpm. This will use your locally installed
+--rebuild privoxy-3.0.2-1.src.rpm. This will use your locally installed
 libraries and RPM version.
 
 Also note that if you have a Junkbuster RPM installed on your system, you need
@@ -269,7 +270,7 @@ remove Junkbuster automatically, before installing Privoxy.
 
 2.1.2. Debian
 
-DEBs can be installed with dpkg -i privoxy_3.0.1-1.deb, and will use /etc/
+DEBs can be installed with dpkg -i privoxy_3.0.2-1.deb, and will use /etc/
 privoxy for the location of configuration files.
 
 -------------------------------------------------------------------------------
@@ -343,7 +344,7 @@ latest changes from the Portage tree. With emerge privoxy you install the
 latest version.
 
 Configuration files are in /etc/privoxy, the documentation is in /usr/share/doc
-/privoxy-3.0.1 and the Log directory is in /var/log/privoxy.
+/privoxy-3.0.2 and the Log directory is in /var/log/privoxy.
 
 -------------------------------------------------------------------------------
 
@@ -362,8 +363,8 @@ compiler like gcc are required.
 When building from a source tarball (either release version or nightly CVS
 tarball), first unpack the source:
 
- tar xzvf privoxy-3.0.1-src* [.tgz or .tar.gz]                                 
- cd privoxy-3.0.1                                                              
+ tar xzvf privoxy-3.0.2-src* [.tgz or .tar.gz]                                 
+ cd privoxy-3.0.2                                                              
 
 For retrieving the current CVS sources, you'll need CVS installed. Note that
 sources from CVS are development quality, and may not be stable, or well
@@ -1286,15 +1287,15 @@ Notes:
    
     Unix, in local filesystem:
    
-      user-manual  file:///usr/share/doc/privoxy-3.0.1/user-manual/    
+      user-manual  file:///usr/share/doc/privoxy-3.0.2/user-manual/    
    
     Windows, in local filesystem, must use forward slash notation:
    
-      user-manual  file:/c:/some-dir/privoxy-3.0.1/user-manual/        
+      user-manual  file:/c:/some-dir/privoxy-3.0.2/user-manual/        
    
     Windows, UNC notation (with forward slashes):
    
-      user-manual  file://///some-server/some-path/privoxy-3.0.1/user-manual/
+      user-manual  file://///some-server/some-path/privoxy-3.0.2/user-manual/
    
     Any platform, on local webserver (called "local-webserver"):
    
@@ -2598,8 +2599,9 @@ Type:
 Parameter:
    
     The name of a filter, as defined in the filter file (typically
-    default.filter, set by the filterfile option in the config file). Filtering
-    can be completely disabled without the use of parameters.
+    default.filter, set by the filterfile option in the config file). When used
+    in its negative form, and without parameters, filtering is completely
+    disabled.
    
 Notes:
    
@@ -2607,14 +2609,14 @@ Notes:
     in the distribution filter file that you can use. See the examples below
     for a list.
    
-    This is potentially a very powerful feature! But "rolling your own" filters
-    requires a knowledge of regular expressions and HTML.
-   
     Filtering requires buffering the page content, which may appear to slow
     down page rendering since nothing is displayed until all content has passed
     the filters. (It does not really take longer, but seems that way since the
     page is not incrementally displayed.) This effect will be more noticeable
     on slower connections.
+   
+    This is very powerful feature, but "rolling your own" filters requires a
+    knowledge of regular expressions and HTML.
    
     The amount of data that can be filtered is limited to the buffer-limit
     option in the main config file. The default is 4096 KB (4 Megs). Once this
@@ -2638,7 +2640,12 @@ Notes:
     Feedback with suggestions for new or improved filters is particularly
     welcome!
    
-Example usage (with filters from the distribution default.filter file):
+    The below list has only the names and a one-line description of each
+    predefined filter. There are more verbose explanations of what these
+    filters do in the filter file chapter.
+   
+Example usage (with filters from the distribution default.filter file). See the
+    Predefined Filters section for more explanation on each:
    
     +filter{js-annoyances}       # Get rid of particularly annoying JavaScript abuse
    
@@ -3959,6 +3966,191 @@ You get the idea?
 
 -------------------------------------------------------------------------------
 
+9.2. The Pre-defined Filters
+
+The distribution default.filter file contains a selection of pre-defined
+filters for your convenience:
+
+js-annoyances
+   
+    The purpose of this filter is to get rid of particularly annoying
+    JavaScript abuse. To that end, it
+   
+      + replaces JavaScript references to the browser's referrer information
+        with the string "Not Your Business!". This compliments the 
+        hide-referrer action on the content level.
+       
+      + removes the bindings to the DOM's unload event which we feel has no
+        right to exist and is responsible for most "exit consoles", i.e. nasty
+        windows that pop up when you close another one.
+       
+      + removes code that causes new windows to be opened with undesired
+        properties, such as being full-screen, non-resizable, without location,
+        status or menu bar etc.
+       
+js-events
+   
+    This is a very radical measure. It removes virtually all JavaScript event
+    bindings, which means that scripts can not react to user actions such as
+    mouse movements or clicks, window resizing etc, anymore.
+   
+    We strongly discourage using this filter as a default since it breaks many
+    legitimate scripts. It is meant for use only on extra-nasty sites (should
+    you really need to go there).
+   
+html-annoyances
+   
+    This filter will undo many common instances of HTML based abuse.
+   
+    The BLINK and MARQUEE tags are neutralized (yeah baby!), and browser
+    windows will be created as resizable (as of course they should be!), and
+    will have location, scroll and menu bars -- even if specified otherwise.
+   
+content-cookies
+   
+    Most cookies are set in the HTTP dialogue, where they can be intercepted by
+    the crunch-incoming-cookies and crunch-outgoing-cookies actions. But web
+    sites increasingly make use of HTML meta tags and JavaScript to sneak
+    cookies to the browser on the content level.
+   
+    This filter disables HTML and JavaScript code that reads or sets cookies.
+    Use it wherever you would also use the cookie crunch actions.
+   
+refresh tags
+   
+    Disable any refresh tags if the interval is greater than nine seconds (so
+    that redirections done via refresh tags are not destroyed). This is useful
+    for dial-on-demand setups, or for those who find this HTML feature
+    annoying.
+   
+unsolicited-popups
+   
+    This filter attempts to prevent only "unsolicited" pop-up windows from
+    opening, yet still allow pop-up windows that the user has explicitly chosen
+    to open. It was added in version 3.0.1, as an improvement over earlier such
+    filters.
+   
+    Technical note: The filter works by redefining the window.open JavaScript
+    function to a dummy function during the loading and rendering phase of each
+    HTML page access, and restoring the function afterwards.
+   
+all-popups
+   
+    Attempt to prevent all pop-up windows from opening. Note this should be
+    used with more discretion than the above, since it is more likely to break
+    some sites that require pop-ups for normal usage. Use with caution.
+   
+img-reorder
+   
+    This is a helper filter that has no value if used alone. It makes the
+    banners-by-size and banners-by-link (see below) filters more effective and
+    should be enabled together with them.
+   
+banners-by-size
+   
+    This filter removes image tags purely based on what size they are.
+    Fortunately for us, many ads and banner images tend to conform to certain
+    standardized sizes, which makes this filter quite effective for ad
+    stripping purposes.
+   
+    Occasionally this filter will cause false positives on images that are not
+    ads, but just happen to be of one of the standard banner sizes.
+   
+banners-by-link
+   
+    This is an experimental filter that attempts to kill any banners if their
+    URLs seem to point to known or suspected click trackers. It is currently
+    not of much value and is not recommended for use by default.
+   
+webbugs
+   
+    Webbugs are small, invisible images (technically 1X1 GIF images), that are
+    used to track users across websites, and collect information on them. As an
+    HTML page is loaded by the browser, an embedded image tag causes the
+    browser to contact a third-party site, disclosing the tracking information
+    through the requested URL and/or cookies for that third-party domain,
+    without the use ever becoming aware of the interaction with the third-party
+    site. HTML-ized spam also uses a similar technique to verify email
+    addresses.
+   
+    This filter removes the HTML code that loads such "webbugs".
+   
+tiny-textforms
+   
+    A rather special-purpose filter that can be used to enlarge textareas
+    (those multi-line text boxes in web forms) and turn off hard word wrap in
+    them. It was written for the sourceforge.net tracker system where such
+    boxes are a nuisance, but it can be handy on other sites, too.
+   
+    It is not recommended to use this filter as a default.
+   
+jumping-windows
+   
+    Many consider windows that move, or resize themselves to be abusive. This
+    filter neutralizes the related JavaScript code. Note that some sites might
+    not display or behave as intended when using this filter.
+   
+frameset-borders
+   
+    Some web designers seem to assume that everyone in the world will view
+    their web sites using the same browser brand and version, screen resolution
+    etc, because only that assumption could explain why they'd use static frame
+    sizes, yet prevent their frames from being resized by the user, should they
+    be too small to show their whole content.
+   
+    This filter removes the related HTML code. It should only be applied to
+    sites which need it.
+   
+demoronizer
+   
+    Many Microsoft products that generate HTML use non-standard extensions
+    (read: violations) of the ISO 8859-1 aka Latin-1 character set. This causes
+    those HTML documents to display with errors on standard-compliant
+    platforms.
+   
+    This filter translates the MS-only characters into Latin-1 equivalents. It
+    is safe for general use, and recommended for non-MS platforms.
+   
+shockwave-flash
+   
+    A filter for shockwave haters. As the name suggests, this filter strips
+    code out of web pages that is used to embed shockwave flash objects.
+   
+quicktime-kioskmode
+   
+    Change HTML code that embeds Quicktime objects so that kioskmode, which
+    prevents saving, is disabled.
+   
+fun
+   
+    Text replacements for subversive browsing fun. Make fun of your favorite
+    Monopolist or play buzzword bingo.
+   
+crude-parental
+   
+    A demonstration-only filter that shows how Privoxy can be used to delete
+    web content on a keyword basis.
+   
+ie-exploits
+   
+    A collection of text replacements to disable malicious HTML and JavaScript
+    code that exploits known security holes in Internet Explorer.
+   
+    Presently, it only protects against Nimda and a cross-site scripting bug,
+    and would need active maintenance to provide more substantial protection.
+   
+site-specifics
+   
+    Some web sites have very specific problems, the cure for which doesn't
+    apply anywhere else, or could even cause damage on other sites.
+   
+    This is a collection of such site-specific cures which should only be
+    applied to the sites they were intended for, which is what the supplied
+    default.action file does. Users shouldn't need to change anything regarding
+    this filter.
+   
+-------------------------------------------------------------------------------
+
 10. Templates
 
 All Privoxy built-in pages, i.e. error pages such as the "404 - No Such Domain"
@@ -4081,7 +4273,7 @@ group_id=11118.
 
 12. Privoxy Copyright, License and History
 
-Copyright © 2001, 2002 by Privoxy Developers <developers@privoxy.org>
+Copyright © 2001 - 2003 by Privoxy Developers <developers@privoxy.org>
 
 Some source code is based on code Copyright © 1997 by Anonymous Coders and
 Junkbusters, Inc. and licensed under the GNU General Public License.
@@ -4135,42 +4327,43 @@ Then, some developers picked up the thread, and started turning the software
 inside out, upside down, and then reassembled it, adding many new features
 along the way.
 
-The result of this is Privoxy, whose first stable release, 3.0, was released
+The result of this is Privoxy, whose first stable version, 3.0, was released
 August, 2002.
 
 -------------------------------------------------------------------------------
 
 12.3. Authors
 
-Current Project Developers:
+Current Developement Team:
 
+ Hal Burgiss (docs)
  Jon Foster
  Andreas Oesterhelt
- Stefan Waldherr
+ David Schmidt (OS/2, Mac OSX ports)
  
- Thomas Steudten
- Rodney Stromlund
+ 
 
-Current Project Contributors:
+Current and Former Project Contributors:
 
  Johny Agotnes 
  Rodrigo Barbosa (RPM specfiles)
  Moritz Barsnick
- Hal Burgiss (docs)
  Mattes Dolak 
  Karsten Hopp (Red Hat)
  Alexander Lazic
  Daniel Leite
  Gábor Lipták
- Andrew Lock (Win32)
+ Adam Lock (Win32)
  Guy Laroche
  Haroon Rafique
  Roland Rosenfeld (Debian)
  Georg Sauthoff (Gentoo)
- David Schmidt (OS/2, Mac OSX ports)
+ Thomas Steudten
  Joerg Strohmayer (Amiga)
+ Rodney Stromlund
  Sviatoslav Sviridov
  Sarantis Paskalis
+ Stefan Waldherr
 
 Based in part on code originally developed by:
 

@@ -7,7 +7,7 @@ NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
 REL="HOME"
-TITLE="Privoxy 3.0.1 User Manual"
+TITLE="Privoxy 3.0.2 User Manual"
 HREF="index.html"><LINK
 REL="PREVIOUS"
 TITLE="The Main Configuration File"
@@ -37,7 +37,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Privoxy 3.0.1 User Manual</TH
+>Privoxy 3.0.2 User Manual</TH
 ></TR
 ><TR
 ><TD
@@ -2224,8 +2224,8 @@ HREF="config.html#FILTERFILE"
     option in the <A
 HREF="config.html"
 >config file</A
->). Filtering 
-    can be completely disabled without the use of parameters.
+>). When used in its negative form,
+    and without parameters, filtering is completely disabled.
    </P
 ></DD
 ><DT
@@ -2237,18 +2237,18 @@ HREF="config.html"
     a list.
    </P
 ><P
->    This is potentially a very powerful feature!  But <SPAN
-CLASS="QUOTE"
->"rolling your own"</SPAN
->
-    filters requires a knowledge of regular expressions and HTML.
-   </P
-><P
 >    Filtering requires buffering the page content, which may appear to
     slow down page rendering since nothing is displayed until all content has
     passed the filters. (It does not really take longer, but seems that way
     since the page is not incrementally displayed.) This effect will be more
     noticeable on slower connections.
+   </P
+><P
+>    This is very powerful feature, but <SPAN
+CLASS="QUOTE"
+>"rolling your own"</SPAN
+>
+    filters requires a knowledge of regular expressions and HTML.
    </P
 ><P
 >    The amount of data that can be filtered is limited to the 
@@ -2311,12 +2311,28 @@ HREF="contact.html"
 > with suggestions for new or
     improved filters is particularly welcome!
    </P
+><P
+>    The below list has only the names and a one-line description of each
+    predefined filter. There are <A
+HREF="filter-file.html#PREDEFINED-FILTERS"
+>more
+    verbose explanations</A
+> of what these filters do in the <A
+HREF="filter-file.html"
+>filter file chapter</A
+>.
+   </P
 ></DD
 ><DT
 >Example usage (with filters from the distribution <TT
 CLASS="FILENAME"
 >default.filter</TT
-> file):</DT
+> file).
+  See <A
+HREF="filter-file.html#PREDEFINED-FILTERS"
+>the Predefined Filters section</A
+> for 
+  more explanation on each:</DT
 ><DD
 ><P
 >    <A
@@ -4300,7 +4316,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN2914"
+NAME="AEN2918"
 ></A
 >8.5.21. Summary</H3
 ><P
@@ -4604,7 +4620,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN2979"
+NAME="AEN2983"
 ></A
 >8.7.1. default.action</H3
 ><P
@@ -5447,7 +5463,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN3145"
+NAME="AEN3149"
 ></A
 >8.7.2. user.action</H3
 ><P

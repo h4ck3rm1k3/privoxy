@@ -2,7 +2,7 @@ Privoxy Frequently Asked Questions
 
 Copyright © 2001, 2002 by Privoxy Developers
 
-$Id: faq.txt,v 1.42.2.5 2003/03/19 02:06:10 hal9 Exp $
+$Id: faq.txt,v 1.42.2.6 2003/03/26 02:58:03 hal9 Exp $
 
 This FAQ gives quick answers to frequently asked questions about Privoxy. It
 can't and doesn't replace the User Manual.
@@ -17,7 +17,7 @@ networks.
 Privoxy is based on Internet Junkbuster (tm).
 
 Please note that this document is constantly evolving. This copy represents the
-state at the release of version 0.0.0. You can find the latest version of the
+state at the release of version 3.0.2. You can find the latest version of the
 document at http://www.privoxy.org/faq/. Please see the Contact section if you
 want to contact the developers.
 
@@ -62,8 +62,8 @@ Table of Contents
     3.5. How are actions files configured? What is the easiest way to do this?
     3.6. There are several different "actions" files. What are the differences?
     3.7. How can I make my Yahoo/Hotmail/GMX account work?
-    3.8. What's the difference between the "Cautious", "Medium" and "Radical"
-        defaults?
+    3.8. What's the difference between the "Cautious", "Medium" and
+        "Adventuresome" defaults?
     3.9. Why can I change the configuration with a browser? Does that not raise
         security issues?
     3.10. What is the default.filter file? What is a "filter"?
@@ -171,7 +171,7 @@ Then, some developers picked up the thread, and started turning the software
 inside out, upside down, and then reassembled it, adding many new features
 along the way.
 
-The result of this is Privoxy, whose first stable release, 3.0, was released
+The result of this is Privoxy, whose first stable version, 3.0, was released
 August, 2002.
 
 -------------------------------------------------------------------------------
@@ -192,7 +192,7 @@ project itself, and they, in fact, still share our ideals and goals.
 
 The developers also believed that there are so many changes from the original
 code, that it was time to make a clean break from the past and make a name in
-their own right, especially now with the pending release of version 3.0.
+their own right.
 
 -------------------------------------------------------------------------------
 
@@ -561,7 +561,7 @@ yahoo might look like:
 
 -------------------------------------------------------------------------------
 
-3.8. What's the difference between the "Cautious", "Medium" and "Radical"
+3.8. What's the difference between the "Cautious", "Medium" and "Adventuresome"
 defaults?
 
 Configuring Privoxy is not entirely trivial. To help you get started, we
@@ -574,9 +574,9 @@ Where the defaults are likely to break some sites, exceptions for known popular
 settings are, the more exceptions you will have to make later. See the User
 Manual for a more deatiled discussion.
 
-It should be noted that the "Radical" profile (formerly known as the "Advanced"
-profile) is not only more aggressive, but also includes fun and, extreme usage
-of most of Privoxy's features. Use at your own risk!
+It should be noted that the "Adventuresome" profile (formerly known as the
+"Advanced" profile) is not only more aggressive, but also includes fun and,
+extreme usage of most of Privoxy's features. Use at your own risk!
 
 -------------------------------------------------------------------------------
 
@@ -842,7 +842,7 @@ built-in editor for the actions files.
 Note that the built-in URLs from earlier versions of Junkbuster / Privoxy,
 http://example.com/show-proxy-args and http://i.j.b/, are no longer supported.
 If you still use such an old version, you should really consider upgrading to
-0.0.0.
+3.0.2.
 
 -------------------------------------------------------------------------------
 
@@ -1116,8 +1116,8 @@ manipulating my browsing?
 We're not. The text substitutions that you are seeing are disabled in the
 default configuration as shipped. You have either manually activated the "fun"
 filter which is clearly labeled "Text replacements for subversive browsing fun!
-" or you have implicitly activated it by choosing the "Radical" profile in the
-web-based editor (formerly known as the Advanced profile).
+" or you have implicitly activated it by choosing the "Adventuresome" profile
+in the web-based editor (formerly known as the Advanced profile).
 
 -------------------------------------------------------------------------------
 
@@ -1363,7 +1363,7 @@ group_id=11118.
 
 7. Privoxy Copyright, License and History
 
-Copyright © 2001, 2002 by Privoxy Developers <developers@privoxy.org>
+Copyright © 2001 - 2003 by Privoxy Developers <developers@privoxy.org>
 
 Some source code is based on code Copyright © 1997 by Anonymous Coders and
 Junkbusters, Inc. and licensed under the GNU General Public License.
@@ -1420,6 +1420,6 @@ Then, some developers picked up the thread, and started turning the software
 inside out, upside down, and then reassembled it, adding many new features
 along the way.
 
-The result of this is Privoxy, whose first stable release, 3.0, was released
+The result of this is Privoxy, whose first stable version, 3.0, was released
 August, 2002.
 
