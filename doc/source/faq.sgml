@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.3 2002/06/09 16:36:33 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.4 2002/07/25 21:42:29 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -72,7 +72,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.3 2002/06/09 16:36:33 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.4 2002/07/25 21:42:29 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1557,6 +1557,19 @@ every time I start IE. What gives?</title>
 [Thanks to Ray Griffith for this submission.]
 </para>
 </sect2>
+
+
+<!--   ~~~~~       New section      ~~~~~     -->
+<sect2 id="ftp">
+<title>I cannot connect to any FTP sites. <application>Privoxy</application>
+ seems to be blocking me.</title>
+ <para>
+  <application>Privoxy</application> cannot act as a proxy for FTP traffic, 
+  so do not configure your browser to use <application>Privoxy</application>
+  as an FTP proxy. The same is true for any protocol other than HTTP or HTTPS.
+ </para>
+</sect2>
+
 </sect1>
 <!--
 </sect1>
@@ -1649,6 +1662,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.4  2002/07/25 21:42:29  hal9
+Add brief notes on not proxying non-HTTP protocols.
+
 Revision 1.61.2.3  2002/06/09 16:36:33  hal9
 Clarifications on filtering and MIME. Hardcode 'latest release' in index.html.
 
