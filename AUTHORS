@@ -12,13 +12,17 @@ Current Project Developers:
 
 Current Project Contributors:
 
+ Johny Agotnes 
  Rodrigo Barbosa (RPM specfiles)
  Moritz Barsnick
  Hal Burgiss (docs)
+ Mattes Dolak 
  Karsten Hopp (Red Hat)
  Alexander Lazic
+ Daniel Leite
  Gábor Lipták
- Guy
+ Andrew Lock (Win32)
+ Guy Laroche
  Haroon Rafique
  Roland Rosenfeld (Debian)
  Georg Sauthoff (Gentoo)
@@ -40,16 +44,19 @@ suggestions. These include (in alphabetical order):
  Andrew J. Caines
  Clifford Caoile
  Michael T. Davis
+ Brian Dessent
  Peter E
  Aaron Hamid
  Magnus Holmgren
- Daniel Leite
+ Don Libes  
  Paul Lieverse
+ David Mediavilla 
+ Oliver Stoeneberg
  Roberto Ragusa
  Maynard Riley
  Bart Schelstraete
  Darren Wiebe
- jwz
+ Jamie Zawinski
 
 If we've missed you off this list, please let us know!
 
