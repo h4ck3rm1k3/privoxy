@@ -2,7 +2,7 @@
 #  
 #  Copyright (C) 2001, 2002 Privoxy Developers http://privoxy.org
 #  
-#  $Id: config,v 1.39.2.2 2002/05/30 13:35:53 roro Exp $
+#  $Id: config,v 1.39.2.3 2002/08/05 18:07:48 oes Exp $
 #  
 ##################################################################
 #                                                                #
@@ -511,6 +511,7 @@ trust-info-url  http://www.example.com/what_we_allow.html
 #        debug       256 # debug GIF de-animation 
 #        debug       512 # Common Log Format
 #        debug      1024 # debug kill pop-ups 
+#        debug      2048 # CGI user interface
 #        debug      4096 # Startup banner and warnings.  
 #        debug      8192 # Non-fatal errors
 #  
@@ -531,7 +532,7 @@ trust-info-url  http://www.example.com/what_we_allow.html
 #  
 debug   1    # show each GET/POST/CONNECT request
 debug   4096 # Startup banner and warnings
-debug   8192 # Errors - *we highly recommended enabling this
+debug   8192 # Errors - *we highly recommended enabling this*
 
 #  3.2. single-threaded
 #  ====================
