@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.5 2002/08/11 13:50:16 oes Exp $
+#  $Id: default.action.master,v 1.1.2.6 2002/08/13 07:57:39 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/faq/questions.html#CONFIGFILES
@@ -780,6 +780,8 @@ www.dhd24.com
 www.planetspiele.de/wbboard/
 #MASTER# PROBLEM-URL: http://www.digitalspy.co.uk/
 www.digitalspy.co.uk
+#MASTER# PROBLEM-URL: http://www.dealnews.com/
+.dealnews.com   
 
 #----------------------------------------------------------------------------
 # The first frame of the gif animation is more useful here:
