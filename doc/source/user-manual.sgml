@@ -11,7 +11,7 @@
 <!entity license SYSTEM "license.sgml">
 <!entity p-authors SYSTEM "p-authors.sgml">
 <!entity config SYSTEM "p-config.sgml">
-<!entity p-version "2.9.15">
+<!entity p-version "2.9.16">
 <!entity p-status "beta">
 <!entity % p-authors-formal "INCLUDE"> <!-- include additional text, etc  -->
 <!entity % p-not-stable "INCLUDE">
@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.10 2002/07/25 21:42:29 hal9 Exp $
+ $Id: user-manual.sgml,v 1.123.2.11 2002/07/26 15:20:31 oes Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -47,18 +47,18 @@
 <article id="index">
 <artheader>
 
-<title>Privoxy User Manual</title>
+<title>Privoxy &p-version; User Manual</title>
 
 <pubdate>
  <subscript>
 <!-- Completely the wrong markup, but very little is allowed  -->
 <!-- in this part of an article. FIXME -->
  <link linkend="copyright">Copyright</link> &my-copy; 2001, 2002 by 
- <ulink url="http://www.privoxy.org">Privoxy Developers</ulink>
+ <ulink url="http://www.privoxy.org/">Privoxy Developers</ulink>
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.10 2002/07/25 21:42:29 hal9 Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.11 2002/07/26 15:20:31 oes Exp $</pubdate>
 
 <!--
 
@@ -332,6 +332,37 @@ automatically start Privoxy in the boot process.
 <!-- end boilerplate -->
 
 </sect2>
+<!--   ~~~~~       New section      ~~~~~     --> 
+<sect2 id="installation-keepupdated"><title>Keeping your Installation Up-to-Date</title>
+<para>
+ As user feedback comes in and development continues, we will make updated versions
+ of both the software and the main <link linkend="actions-file">actions file</link>
+ (<literal>default.action</literal>) available for download.
+</para>
+
+<para>
+ If you wish to receive an email notification whenever we release updates of
+ <application>Privoxy</application> or the actions file, <ulink
+ url="http://lists.sourceforge.net/lists/listinfo/ijbswa-announce/">subscribe
+ to our announce  mailing list</ulink>, ijbswa-announce@lists.sourceforge.net.
+</para>
+
+<para>
+ Both can be downloaded from the <ulink
+ url="http://sourceforge.net/project/showfiles.php?group_id=11118">files
+ section</ulink> on <ulink url="http://sourceforge.net/">SourceForge</ulink>.
+</para>
+
+<para>
+ In order not to loose your personal changes and adjustments when updating
+ to the latest <literal>default.action</literal> file we <emphasis>strongly
+ recommend</emphasis> that you use <literal>user.action</literal> for your
+ customization of <application>Privoxy</application>. See the <link
+ linkend="actions-file">Chapter on actions files</link> for details.
+</para>
+
+</sect2>
+
 
 </sect1>
 
@@ -1376,8 +1407,8 @@ must find a better place for this paragraph
      provide a base level of functionality for
      <application>Privoxy's</application> array of features. So it is 
      a set of broad rules that should work reasonably well for users everywhere.
-     This is the file that the developers are keeping updated, and making 
-     available to users.
+     This is the file that the developers are keeping updated, and <link
+     linkend="installation-keepupdated">making available to users</link>.
     </para>
    </listitem> 
    <listitem>
@@ -2442,6 +2473,14 @@ problem-host.example.com</screen>
     <screen>+filter{banners-by-size}     # Kill banners based on their size for this page (<emphasis>very</emphasis> efficient!)</screen>
    </para>
    <para>
+    <anchor id="filter-banners-by-link">
+    <screen>+filter{banners-by-link}     # Kill banners based on the link they are contained in (experimental)</screen>
+   </para>
+   <para>
+    <anchor id="filter-img-reorder">
+    <screen>+filter{img-reorder}         # Reorder attributes in &lt;img&gt; tags to make the banners-by-* filters more effective</screen>
+   </para>
+   <para>
     <anchor id="filter-content-cookies">
     <screen>+filter{content-cookies}     # Kill cookies that come sneaking in the HTML or JS content</screen>
    </para>
@@ -2476,6 +2515,10 @@ problem-host.example.com</screen>
    <para>
     <anchor id="filter-crude-parental">
     <screen>+filter{crude-parental}      # Kill all web pages that contain the words "sex" or "warez"</screen>
+   </para>
+   <para>
+    <anchor id="filter-js-events">
+    <screen>+filter{js-events}           # Kill all JS event bindings (<emphasis>Radically destructive!</emphasis> Only for extra nasty sites) </screen>
    </para>
   </listitem>
  </varlistentry>
@@ -3702,8 +3745,11 @@ shop        = mercy-for-cookies -filter{popups} -kill-popups</screen>
  -<link linkend="FILTER-FUN">filter{fun}</link> \
  +<link linkend="FILTER-NIMDA">filter{nimda}</link> \
  +<link linkend="FILTER-BANNERS-BY-SIZE">filter{banners-by-size}</link> \
+ -<link linkend="FILTER-BANNERS-BY-LINK">filter{banners-by-link}</link> \
+ -<link linkend="FILTER-IMG-REORDER">filter{img-reorder}</link> \
  -<link linkend="FILTER-SHOCKWAVE-FLASH">filter{shockwave-flash}</link> \
  -<link linkend="FILTER-CRUDE-PARENTAL">filter{crude-parental}</link> \
+ -<link linkend="FILTER-JS-EVENTS">filter{js-events}</link> \
  -<link linkend="HANDLE-AS-IMAGE">handle-as-image</link> \
  +<link linkend="HIDE-FORWARDED-FOR-HEADERS">hide-forwarded-for-headers</link> \
  +<link linkend="HIDE-FROM-HEADER">hide-from-header{block}</link> \
@@ -4368,7 +4414,7 @@ s|(&lt;script.*)document\.referrer(.*&lt;/script&gt;)|$1"Not Your Business!"$2|U
  <screen>
 # The status bar is for displaying link targets, not pointless blahblah
 #
-s/window\.status\s*=\s*['"].*?['"]/dUmMy=1/ig</screen>
+s/window\.status\s*=\s*(['"]).*?\1/dUmMy=1/ig</screen>
 </para>
 
 <para>
@@ -4377,7 +4423,10 @@ s/window\.status\s*=\s*['"].*?['"]/dUmMy=1/ig</screen>
  or more whitespace</quote>. The <literal>?</literal> in <literal>.*?</literal>
  makes this matching of arbitrary text ungreedy. (Note that the <literal>U</literal>
  option is not set). The <literal>['"]</literal> construct means: <quote>a single
- <emphasis>or</emphasis> a double quote</quote>.
+ <emphasis>or</emphasis> a double quote</quote>. Finally, <literal>\1</literal> is
+ a backreference to the first parenthesis just like <literal>$1</literal> above,
+ with the difference that in the <emphasis>pattern</emphasis>, a backslash indicates
+ a backreference, whereas in the <emphasis>substitute</emphasis>, it's the dollar.
 </para>
 
 <para>
@@ -4393,7 +4442,7 @@ s/window\.status\s*=\s*['"].*?['"]/dUmMy=1/ig</screen>
  <screen>
 # Kill OnUnload popups. Yummy. Test: http://www.zdnet.com/zdsubs/yahoo/tree/yfs.html
 #
-s/(&lt;body .*)onunload(.*&gt;)/$1never$2/iU</screen>
+s/(&lt;body [^&gt;]*)onunload(.*&gt;)/$1never$2/iU</screen>
 </para>
 
 <para>
@@ -4404,7 +4453,11 @@ s/(&lt;body .*)onunload(.*&gt;)/$1never$2/iU</screen>
  This job replaces the <quote>onunload</quote> attribute in
  <quote>&lt;body&gt</quote> tags with the dummy word <literal>never</literal>.
  Note that the <literal>i</literal> option makes the pattern matching
- case-insensitive.
+ case-insensitive. Also note that ungreedy matching alone doesn't always guarantee
+ a minimal match: In the first parenthesis, we had to use <literal>[^&gt;]*</literal>
+ instead of <literal>.*</literal> to prevent the match from exceeding the 
+ &lt;body&gt tag if it doesn't contain <quote>OnUnload</quote>, but the page's
+ content does.
 </para>
 
 <para>
@@ -4434,6 +4487,8 @@ s/microsoft(?!\.com)/MicroSuck/ig</screen>
 #
 s* industry[ -]leading \
 |  cutting[ -]edge \
+|  customer[ -]focused \
+|  market[ -]driven \
 |  award[ -]winning # Comments are OK, too! \
 |  high[ -]performance \
 |  solutions[ -]based \
@@ -4446,7 +4501,7 @@ s* industry[ -]leading \
 
 <para>
  The <literal>x</literal> option in this job turns on extended syntax, and allows for
- e.g. the liberal use of (non-interpreted!) whitespace for nicer formatting.
+ e.g. the liberal use of (non-interpreted!) whitespace for nicer formatting. 
 </para>
 
 <para>
@@ -5548,6 +5603,12 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.11  2002/07/26 15:20:31  oes
+ - Added version info to title
+ - Added info on new filters
+ - Revised parts of the filter file tutorial
+ - Added info on where to get updated actions files
+
  Revision 1.123.2.10  2002/07/25 21:42:29  hal9
  Add brief notes on not proxying non-HTTP protocols.
 
