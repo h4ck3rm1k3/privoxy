@@ -1,4 +1,4 @@
-# $Id: privoxy-rh.spec,v 1.33.2.9 2002/07/05 17:16:19 morcego Exp $
+# $Id: privoxy-rh.spec,v 1.33.2.10 2002/07/12 09:14:26 kick_ Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -149,17 +149,6 @@ perl -pe 's/{-no-cookies}/{-no-cookies}\n\.redhat.com/' default.action >\
     %{buildroot}%{privoxyconf}/default.action
 
 
-# Creating ghost init files
-mkdir -p %{buildroot}/%{_sysconfdir}/rc.d/rc{0,1,2,3,4,5,6}.d
-for i in 0 1 4 6
-do
-ln -sf ../init.d/%{name} %{buildroot}/%{_sysconfdir}/rc.d/rc${i}.d/K09%{name}
-done
-for i in 2 3 5
-do
-ln -sf ../init.d/%{name} %{buildroot}/%{_sysconfdir}/rc.d/rc${i}.d/S84%{name}
-done
-
 ## Macros are expanded even on commentaries. So, we have to use %%
 ## -- morcego
 #%%makeinstall
@@ -223,6 +212,7 @@ fi
  mv -f %{_localstatedir}/log/%{name}/%{name} %{_localstatedir}/log/%{name}/logfile || /bin/true
 chown -R %{name}:%{name} %{_localstatedir}/log/%{name} 2>/dev/null
 chown -R %{name}:%{name} %{_sysconfdir}/%{name} 2>/dev/null
+/sbin/chkconfig --add privoxy
 if [ "$1" = "1" ]; then
 	/sbin/service %{name} condrestart > /dev/null 2>&1
 fi
@@ -233,7 +223,7 @@ fi
 
 if [ "$1" = "0" ]; then
 	/sbin/service %{name} stop > /dev/null 2>&1 ||:
-	# No need to use chkconfig. The %%ghost files will handle it
+	/sbin/chkconfig --del privoxy
 fi
 
 %postun
@@ -321,17 +311,14 @@ fi
 
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
 %config(noreplace) %attr(0744,root,root) %{_sysconfdir}/rc.d/init.d/%{name}
-%ghost %attr(-,root,root) %{_sysconfdir}/rc.d/rc0.d/K09%{name}
-%ghost %attr(-,root,root) %{_sysconfdir}/rc.d/rc1.d/K09%{name}
-%ghost %attr(-,root,root) %{_sysconfdir}/rc.d/rc2.d/S84%{name}
-%ghost %attr(-,root,root) %{_sysconfdir}/rc.d/rc3.d/S84%{name}
-%ghost %attr(-,root,root) %{_sysconfdir}/rc.d/rc4.d/K09%{name}
-%ghost %attr(-,root,root) %{_sysconfdir}/rc.d/rc5.d/S84%{name}
-%ghost %attr(-,root,root) %{_sysconfdir}/rc.d/rc6.d/K09%{name}
 
 %{_mandir}/man1/%{name}.*
 
 %changelog
+* Fri Jul 12 2002 Karsten Hopp <karsten@redhat.de>
+- don't use ghost files for rcX.d/*, using chkconfig is the 
+  correct way to do this job (#68619)
+
 * Fri Jul 05 2002 Rodrigo Barbosa <rodrigob@tisbrasil.com.br>
 + privoxy-2.9.15-8
 - Changing delete order for groups and users (users should be first)
@@ -727,6 +714,9 @@ fi
 	additional "-r @" flag.
 
 # $Log: privoxy-rh.spec,v $
+# Revision 1.33.2.10  2002/07/12 09:14:26  kick_
+# don't use ghost files for rcX.d/*, chkconfig is available to do this job. Enable translation of error messge
+#
 # Revision 1.33.2.9  2002/07/05 17:16:19  morcego
 # - Changing delete order for groups and users (users should be first)
 #
