@@ -37,6 +37,9 @@
  *
  * Revisions   :
  *    $Log: acconfig.h,v $
+ *    Revision 1.27.2.3  2003/03/27 16:03:19  oes
+ *    Another shot at Bug #707467
+ *
  *    Revision 1.27.2.2  2003/03/21 14:39:12  oes
  *    Presumably fixed Bug #707467 by defining unix ifdef __unix__
  *
@@ -437,9 +440,9 @@
 
 /*
  * On OpenBSD and maybe also FreeBSD, gcc doesn't define the cpp
- * symbol unix; it defines __unix__
+ * symbol unix; it defines __unix__ and sometimes not even that:
  */
-#if defined(__unix__) && !defined(unix)
+#if ( defined(__unix__) || defined(__NetBSD__) ) && !defined(unix)
 #define unix 1
 #endif
 
