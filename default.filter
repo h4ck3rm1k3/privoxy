@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.11.2.5 2002/08/22 15:05:20 oes Exp $
+#  $Id: default.filter,v 1.11.2.6 2002/08/23 14:12:26 oes Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -173,7 +173,8 @@ s/ target\s*=\s*(['"]?)(_blank|_new)\1?/ notarget/ig # HTML
 FILTER: frameset-borders Give frames a border and make them resizable
 
 s/(<frameset\s+[^>]*)framespacing=(['"]?)(no|0)\2/$1/igU
-s/(<frameset\s+[^>]*)(?:frame)?border=(['"]?)(no|0)\2/$1/igU
+s/(<frameset\s+[^>]*)frameborder=(['"]?)(no|0)\2/$1/igU
+s/(<frameset\s+[^>]*)border=(['"]?)(no|0)\2/$1/igU
 s/(<frame\s+[^>]*)noresize/$1/igU
 s/(<frame\s+[^>]*)frameborder=(['"]?)(no|0)\2/$1/igU 
 s/(<frame\s+[^>]*)scrolling=(['"]?)(no|0)\2/$1/igU
@@ -357,6 +358,9 @@ s+^.*warez.*$+<html><head><title>No Warez</title></head><body><h3>You're not sea
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.11.2.6  2002/08/23 14:12:26  oes
+#     Proofed frameset-borders against "fremaborder=0 border=0"
+#
 #     Revision 1.11.2.5  2002/08/22 15:05:20  oes
 #     Added Filter to make Quicktime movies saveable (thanks to aaron@linville.org for the idea)
 #
