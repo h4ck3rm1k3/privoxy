@@ -1,4 +1,4 @@
-const char list_rcs[] = "$Id: list.c,v 1.15.2.1 2002/11/28 18:14:54 oes Exp $";
+const char list_rcs[] = "$Id: list.c,v 1.15.2.2 2004/05/25 02:04:23 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/list.c,v $
@@ -34,6 +34,9 @@ const char list_rcs[] = "$Id: list.c,v 1.15.2.1 2002/11/28 18:14:54 oes Exp $";
  *
  * Revisions   :
  *    $Log: list.c,v $
+ *    Revision 1.15.2.2  2004/05/25 02:04:23  david__schmidt
+ *    Removed the "arbitrary" 1000 filter limit in file.c.  See tracker #911950.
+ *
  *    Revision 1.15.2.1  2002/11/28 18:14:54  oes
  *    Added unmap function that removes all items with a given
  *    name from a map.
@@ -263,11 +266,16 @@ static int list_is_valid (const struct list *the_list)
 
       /*
        * Arbitrarily limit length to prevent infinite loops.
-       */
+       * Note that the 1000 limit was hit by a real user in tracker 911950;
+       * removing it for now.  Symptoms of a real circular reference will
+       * include 100% CPU usage, I'd imagine.  It'll be obvious, anyway.
+       */         
+      /*
       if (++length > 1000)
-      {
+      {           
          return 0;
-      }
+      }           
+      */          
 
       /*
        * Check this isn't marked as the last entry, unless of course it's
