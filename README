@@ -31,7 +31,7 @@
  *
  *********************************************************************/
 
-This README is included with Privoxy 3.0.1. See http://www.privoxy.org/ for
+This README is included with Privoxy 3.0.2. See http://www.privoxy.org/ for
 more information. The current code level is stable.
 
 -------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ Privoxy is based on Internet Junkbuster (tm).
 
 1. IMPORTANT CHANGES
 
-NEWS! March 2003, Privoxy 3.0.1 is released. This is the first maintenance
+NEWS! March 2003, Privoxy 3.0.2 is released. This is the first maintenance
 release of Privoxy. There are no significant new features in this release. Some
 bugs are fixed, and some existing features have been enhanced. See ChangeLog
 for details. Upgrading from 3.0.0 is recommended.
