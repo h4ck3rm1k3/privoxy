@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.31 2003/07/26 11:45:14 hal9 Exp $
+#  $Id: default.action.master,v 1.1.2.32 2003/11/13 16:25:50 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -491,6 +491,7 @@ ad*.
 .*ads.
 *banner*.
 count*.
+*counter.
 
 # By path:
 #
@@ -500,9 +501,35 @@ count*.
 /.*promo.gif
 
 #############################################################################
+# Generic unblockers to narrow the side effects of the generic blockers:
+#############################################################################
+{-block}
+#MASTER# DONT-VERIFY (generic)
+
+# By host:
+#
+adsl.
+ad[udmw]*.
+adv[ia].
+.*road*.
+.olympiad*.
+.*load*.
+.*head*.
+.*squad*.
+.edu
+.ac.uk
+.uni-*.de
+
+# By path:
+#
+/.*ad(sl|v(i[cs]|ocacy|an|ertencia|ent|search)) # advice/advisories/advan*/advertencia (spanish)
+/.*((up|down)lo|p?thre|he|d|gr|l|ro|bre|spre|squ)ads
+/.*account
+
+#############################################################################
 # Site-specific block patterns;
 #############################################################################
-
+{+block}
 #MASTER# BLOCK-REFERRER: http://www.brooksbrothers.com/
 #MASTER# BLOCK-REFERRER: http://www.autodesk.com/
 .hitbox.com 
@@ -600,7 +627,6 @@ www.crazypopups.com
 #MASTER# DONT-VERIFY: Opera's list of banners to load (XML)
 /scripts/cms/xcms.asp
 
-
 #############################################################################
 # Generic block-as-image patterns:
 #############################################################################
@@ -695,6 +721,18 @@ imp*.tradedoubler.com
 www.spanishbanner.com/cgi/bserve.cgi
 #MASTER# BLOCK-REFERRER: http://www.macgamer.com/
 .qksrv.net
+#MASTER# BLOCK-REFERRER: http://www.drudgereport.com/
+.instacontent.net/fastclick/
+
+#----------------------------------------------------------------------------
+# Specific counters (see above for generic patterns)
+#----------------------------------------------------------------------------
+#MASTER# BLOCK-REFERRER: http://www.distrowatch.com/table.php?distribution=linex
+s*.sitemeter.com/meter\.asp
+#MASTER# BLOCK-REFERRER: http://personales.mundivia.es/lbouza/
+fastcounter.bcentral.com/
+#MASTER# BLOCK-REFERRER: http://osnews.com/
+bilbo.counted.com/
 
 #----------------------------------------------------------------------------
 # On-site ads and other single sources:
@@ -757,36 +795,14 @@ img.thebugs.ws
 www.kinghost.com/ban/
 #MASTER# BLOCK-REFERRER: http://www.infoempleo.com/
 www.infoempleo.com/(pop-up|images(/Nueva/banner_|/motor))
-
-#############################################################################
-# Generic unblockers to narrow the side effects of the generic blockers:
-#############################################################################
-{-block}
-#MASTER# DONT-VERIFY (generic)
-
-# By host:
-#
-adsl.
-ad[udm]*.
-advice.
-advan*.
-.*road*.
-.olympiad*.
-.*load*.
-.*head*.
-.edu
-.ac.uk
-.uni-*.de
-
-# By path:
-#
-/.*ad(sl|v(i[cs]|an|ertencia|ent|search)) # advice/advisories/advan*/advertencia (spanish)
-/.*((up|down)lo|p?thre|he|d|gr|l|ro|bre|spre)ads
-/.*account
+#MASTER# BLOCK-REFERRER: http://www.hardocp.com/
+hera.hardocp.com/
 
 #############################################################################
 # Site-specific unblockers:
 #############################################################################
+{-block}
+
 #MASTER# UNBLOCK-REFERRER: http://www.faqs.org/
 www.faqs.org/banner\.html
 #MASTER# UNBLOCK-REFERRER: http://bannerblind.mozdev.org/
@@ -864,6 +880,12 @@ adzapper.
 .altavista.com/web/adv
 #MASTER# UNBLOCK-REFERRER: http://rads.mcafee.com/rads/scripts/RADS.dll?QueryProduct2
 rads.mcafee.com/rads/
+#MASTER# UNBLOCK-REFERRER: http://linuxfromscratch.org/cgi-bin/lfscounter.cgi
+linuxfromscratch.org/cgi-bin/lfscounter.cgi
+#MASTER# UNBLOCK-REFERRER: http://www.wholetomato.com/
+www.wholetomato.com/images/banner.jpg
+#MASTER# UNBLOCK-REFERRER: http://dv411.com/advc50.html
+dv411.com/advc50.html
 
 #############################################################################
 # Site-specific special rules:
@@ -988,6 +1010,10 @@ web.archive.org
 .archive.org
 #MASTER# PROBLEM-URL: http://www.guenstiger.de/gt/link.asp?url=http://www.edv-supermarkt.de&source=produkt=238284&USID=00086443917155&hnr=2199&pnr=238284&ppr=158,00
 www.guenstiger.de
+#MASTER# PROBLEM-URL: http://anon.free.anonymizer.com/http://www.privoxy.org/
+.anonymizer.com
+#MASTER# PROBLEM-URL: http://www.mailtothefuture.com/public/logon?http://www.mailtothefuture.com/
+www.mailtothefuture.com
 
 #----------------------------------------------------------------------------
 # No filtering for sourcecode or other automatically parsed content
@@ -998,6 +1024,7 @@ cvs.
 /.*(cvs(view|web)|viewcvs)
 #MASTER# PROBLEM-URL: http://liveupdate.symantec.com/ennlu.x86
 liveupdate.symantec.com
+liveupdate.liveupdatesymantec.com
 #MASTER# PROBLEM-URL: http://www.bookmarklets.com/
 www.bookmarklets.com
 #MASTER# PROBLEM-URL: http://www.squarefree.com/bookmarklets/
@@ -1051,6 +1078,8 @@ www.ooodocs.org
 www.ntcompatible.com
 #MASTER# PROBLEM-URL: http://www.winehq.com/
 .winehq.com
+#MASTER# PROBLEM-URL: http://www.dotcomtod.de/
+.dotcomtod.de/
 
 #----------------------------------------------------------------------------
 # The first frame of the gif animation is more useful here:
@@ -1087,6 +1116,8 @@ www.connected-media.com/riven/
 www.wral.com
 #MASTER# PROBLEM-URL: http://www.canada.com/calgary/
 www.canada.com
+#MASTER# PROBLEM-URL: http://www.theonionavclub.com
+www.theonionavclub.com
 
 #----------------------------------------------------------------------------
 # These don't work without the referrer information:
@@ -1140,6 +1171,8 @@ www.myrealbox.com
 www.spiegel.de/static/js/flash-plugin\.js
 #MASTER# PROBLEM-URL: http://www.quelle-bausparkasse.de/
 www.quelle-bausparkasse.de/$
+#MASTER# PROBLEM-URL: http://de.groups.yahoo.com/group/die-spinner/interrupt?st=2&ln=die-spinner&m=1&done=%2Fgroup%2Fdie-spinner%2Fmessage%2F416
+.groups.yahoo.com/group/
 
 #----------------------------------------------------------------------------
 # Content under these TLDs is most probably in character sets which the
@@ -1208,6 +1241,8 @@ www.munichre.com
 /.*mt.cgi$
 #MASTER# PROBLEM-URL: http://www.discovery.de/
 .discovery.de
+#MASTER# PROBLEM-URL: http://www.bankrate.com/yclc/calc/mortgage-calculator/mortgage-calculator.asp?
+www.bankrate.com/brm/
 
 {+block}
 #MASTER# PROBLEM-URL: http://www.anti-leech.com/theft_example.html
