@@ -20,7 +20,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: index.sgml,v 1.16.2.7 2002/08/14 16:40:00 hal9 Exp $
+ $Id: index.sgml,v 1.16.2.8 2002/08/16 03:05:42 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -112,25 +112,29 @@
  <itemizedlist>
   <listitem>
    <para>
-    <ulink url="user-manual/index.html">User manual (HTML)</ulink>
-    <ulink url="pdf/privoxy-user-manual.pdf"> (PDF)</ulink>
+    <ulink url="user-manual/index.html">User manual</ulink>
    </para>
   </listitem>
   <listitem>
    <para>
-    <ulink url="faq/index.html">Frequently Asked Questions (HTML)</ulink>
-    <ulink url="pdf/privoxy-faq.pdf"> (PDF)</ulink>
+    <ulink url="faq/index.html">Frequently Asked Questions</ulink>
    </para>
   </listitem>
   <listitem>
    <para>
-    <ulink url="developer-manual/index.html">Developer Manual (HTML)</ulink>
-    <ulink url="pdf/privoxy-developer-manual.pdf"> (PDF)</ulink>
+    <ulink url="developer-manual/index.html">Developer Manual</ulink>
    </para>
   </listitem>
+<![%p-homepage;[
+<!-- not included for local index page -->
   <listitem>
    <para>
-    <ulink url="man-page/privoxy-man-page.html">Classic Man Page (HTML)</ulink>
+    <ulink url="pdf/privoxy-pdf-docs.zip">The above docs as PDF in Zip archive</ulink>
+   </para>
+  </listitem> ]]>
+  <listitem>
+   <para>
+    <ulink url="man-page/privoxy-man-page.html">Classic Man Page</ulink>
    </para>
   </listitem>
  </itemizedlist>
@@ -247,6 +251,9 @@
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: index.sgml,v $
+ Revision 1.16.2.8  2002/08/16 03:05:42  hal9
+ Put all pdf docs in a zip archive now.
+
  Revision 1.16.2.7  2002/08/14 16:40:00  hal9
  Add links to pdf docs.
 
