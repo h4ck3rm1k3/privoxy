@@ -24,6 +24,7 @@ case "$1" in
 	echo -n "Stopping $DESC: "
 	start-stop-daemon --oknodo --stop --quiet --pidfile $PIDFILE \
 		--exec $DAEMON
+	rm -f $PIDFILE
 	echo "$NAME."
 	;;
   #reload)
