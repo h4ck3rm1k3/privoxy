@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.2 2002/08/05 20:02:59 oes Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.3 2002/11/12 15:01:41 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,9 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.2 2002/08/05 20:02:59 oes Ex
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.41.2.3  2002/11/12 15:01:41  oes
+ *    Fix: Don't free uninitialized struct editable_file
+ *
  *    Revision 1.41.2.2  2002/08/05 20:02:59  oes
  *    Bugfix: "Insert new section at top" did not work properly if first non-comment line in file was of type FILE_LINE_ACTION
  *
@@ -2521,7 +2524,6 @@ jb_err cgi_edit_actions_list(struct client_state *csp,
 
    if (NULL == (exports = default_exports(csp, NULL)))
    {
-      edit_free_file(file);
       return JB_ERR_MEMORY;
    }
 
