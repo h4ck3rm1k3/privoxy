@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.5 2003/03/11 11:53:58 oes Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.6 2003/03/12 01:26:25 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,10 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.5 2003/03/11 11:53:58 oes Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.70.2.6  2003/03/12 01:26:25  david__schmidt
+ *    Move declaration of struct tm dummy outside of a control block so it is
+ *    accessible later on during snprintf in get_http_time.
+ *
  *    Revision 1.70.2.5  2003/03/11 11:53:58  oes
  *    Cosmetic: Renamed cryptic variable
  *
@@ -1518,6 +1522,15 @@ void get_http_time(int time_offset, char *buf)
 
    struct tm *t;
    time_t current_time;
+#ifdef HAVE_GMTIME_R
+   /*
+    * Declare dummy up here (instead of inside get/set gmt block) so it
+    * doesn't go out of scope before it's potentially used in snprintf later.
+    * Wrapping declaration inside HAVE_GMTIME_R keeps the compiler quiet when
+    * !defined HAVE_GMTIME_R.
+    */
+   struct tm dummy; 
+#endif
 
    assert(buf);
 
@@ -1532,7 +1545,6 @@ void get_http_time(int time_offset, char *buf)
       t = gmtime(&current_time);
       pthread_mutex_unlock(&gmtime_mutex);
 #elif HAVE_GMTIME_R
-      struct tm dummy;
       t = gmtime_r(&current_time, &dummy);
 #else
       t = gmtime(&current_time);
