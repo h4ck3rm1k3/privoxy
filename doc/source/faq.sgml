@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.11 2002/08/06 08:54:03 oes Exp $
+ $Id: faq.sgml,v 1.61.2.12 2002/08/06 11:43:46 david__schmidt Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -72,7 +72,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.11 2002/08/06 08:54:03 oes Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.12 2002/08/06 11:43:46 david__schmidt Exp $</pubdate>
 
 <!--
 
@@ -486,31 +486,17 @@ All the ads are there. What's wrong?</title>
  uninstall it.  Now the finder tells me I don't have sufficient privileges to
  empty the trash.</title>
  <para>
-  <application>Privoxy</application> is installed with root permissions.  
-  When you drag the Privoxy folder to the trash, the general user does not
-  have (as the Finder says) sufficient privileges to delete it.  Unfortunately,
-  the finder does not offer a way to enter the administrator password in order
-  to prove you do in fact own this computer.  To fix this situation, open the
-  Terminal application and carefully enter the following commands:
- </para>
- <para>
-  <screen>
-   cd ~
-   cd .Trash
-   sudo rm -rf Privoxy</screen>
- </para>
+  Just dragging the <application>Privoxy</application> folder to the trash is
+  not enough to delete it.  <application>Privoxy</application> supplies an
+  <application>uninstall.command</application> file that takes care of
+  these details.  Open the trash, drag the <application>uninstall.command>
+  file out of the trash and double-click on it.  You will be prompted for
+  confirmation and the administration password.
+ </para> 
  <para>
   The trash may still appear full after this command; emptying the trash 
   from the desktop should make it appear empty again.
  </para>
- <warning> 
-  <para>
-   Be extra-sure to enter the commands <emphasis>EXACTLY</emphasis> as shown
-   above. Removing files recusively with administrator priviledges (as happens
-   with <literal>sudo rm -rf</literal> is serious business and even small
-   typos can have devasting effects!
-  </para>
- </warning>
 </sect2>
 
 </sect1>
@@ -1740,6 +1726,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.12  2002/08/06 11:43:46  david__schmidt
+Updated OSX uninstall FAQ... we have an uninstall script now.
+
 Revision 1.61.2.11  2002/08/06 08:54:03  oes
 Style police: Fixed formatting details
 
