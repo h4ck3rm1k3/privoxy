@@ -3,7 +3,7 @@
 .\" <http://shell.ipoline.com/~elmert/comp/docbook2X/> 
 .\" Please send any bug reports, improvements, comments, patches, 
 .\" etc. to Steve Cheng <steve@ggi-project.org>.
-.TH "PRIVOXY" "1" "26 August 2002" "Privoxy 3.0.0" ""
+.TH "PRIVOXY" "1" "17 March 2003" "Privoxy 3.0.1" ""
 .SH NAME
 privoxy \- Privacy Enhancing Proxy
 .SH SYNOPSIS
@@ -41,6 +41,12 @@ After (optionally) writing the PID file, assume the user ID of
 \fIgroup\fR was not given, the default group of
 \fIuser\fR. Exit if the privileges are not
 sufficient to do so.
+.TP
+\fB--chroot\fR
+Before changing to the user ID given in the --user option, chroot to that user's home
+directory, i.e. make the kernel pretend to the Privoxy process that the directory tree
+starts there. If set up carefully, this can limit the impact of possible vulnerabilities
+in Privoxy to the files contained in that hierarchy.
 .PP
 If the \fIconfigfile\fR is not specified on  the  command  line,
 \fBPrivoxy\fR  will  look for a file named
@@ -93,7 +99,8 @@ these files are in the same directory as the \fBPrivoxy\fR
 executable.
 .PP
 The name and number of configuration files has changed from previous
-versions. In fact, the configuration itself is changed  and  much more
+versions, and is subject to change as development
+progresses. In fact, the configuration itself is changed  and  much more
 sophisticated. See the user-manual for a complete
 explanation of all configuration options and general usage, and notes for 
 upgrading from \fBJunkbuster\fR and earlier \fBPrivoxy\fR
@@ -280,18 +287,23 @@ the \fBPrivoxy\fR developer manual.
  Stefan Waldherr
  Thomas Steudten
  Rodney Stromlund
+ Johny Agotnes 
  Rodrigo Barbosa (RPM specfiles)
  Moritz Barsnick
  Hal Burgiss (docs)
+ Mattes Dolak 
  Karsten Hopp (Red Hat)
  Alexander Lazic
+ Daniel Leite
  Gábor Lipták
- Guy
+ Andrew Lock (Win32)
+ Guy Laroche
  Haroon Rafique
  Roland Rosenfeld (Debian)
  Georg Sauthoff (Gentoo)
  David Schmidt (OS/2, Mac OSX ports)
  Joerg Strohmayer (Amiga)
+ Sviatoslav Sviridov
  Sarantis Paskalis
 .fi
 .SH "COPYRIGHT AND LICENSE"
