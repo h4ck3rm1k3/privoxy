@@ -1,4 +1,4 @@
-# $Id: privoxy-rh.spec,v 1.33.2.2 2002/05/28 02:39:38 hal9 Exp $
+# $Id: privoxy-rh.spec,v 1.33.2.3 2002/06/24 12:13:34 kick_ Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -41,10 +41,9 @@ Version: 2.9.15
 Release: 1
 Summary: Privoxy - privacy enhancing proxy
 License: GPL
-Vendor: Privoxy.Org
 Source0: http://www.waldherr.org/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
-Group: Networking/Utilities
+Group: System Environment/Daemons
 URL: http://www.privoxy.org/
 Obsoletes: junkbuster-raw junkbuster-blank junkbuster
 # Prereq: /usr/sbin/useradd , /sbin/chkconfig , /sbin/service 
@@ -248,7 +247,7 @@ fi
 
 %dir %{privoxyconf}
 %dir %{privoxyconf}/templates
-%attr(0744,%{name},%{name}) %dir %{_localstatedir}/log/%{name}
+%attr(0755,%{name},%{name}) %dir %{_localstatedir}/log/%{name}
 
 %attr(0744,%{name},%{name})%{_sbindir}/%{name}
 
@@ -299,8 +298,8 @@ fi
 %config %{privoxyconf}/templates/toggle-mini
 %config %{privoxyconf}/templates/untrusted
 
-%config %{_sysconfdir}/logrotate.d/%{name}
-%config %attr(0744,root,root) %{_sysconfdir}/rc.d/init.d/%{name}
+%config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
+%config(noreplace) %attr(0744,root,root) %{_sysconfdir}/rc.d/init.d/%{name}
 %ghost %attr(-,root,root) %{_sysconfdir}/rc.d/rc0.d/K09%{name}
 %ghost %attr(-,root,root) %{_sysconfdir}/rc.d/rc1.d/K09%{name}
 %ghost %attr(-,root,root) %{_sysconfdir}/rc.d/rc2.d/S84%{name}
@@ -312,6 +311,14 @@ fi
 %{_mandir}/man1/%{name}.*
 
 %changelog
+* Thu Jun 20 2002 Karsten Hopp <karsten@redhat.de>
+- fix several .spec file issues to shut up rpmlint
+  - non-standard-dir-perm /var/log/privoxy 0744
+  - invalid-vendor Privoxy.Org (This is ok for binaries compiled by privoxy
+    members, but not for packages from Red Hat)
+  - non-standard-group Networking/Utilities
+  - logrotate and init scripts should be noreplace
+
 * Mon May 27 2002 Hal Burgiss <hal@foobox.net>
 + privoxy-2.9.15-1
 - Index.html is now privoxy-index.html for doc usage.
@@ -667,6 +674,9 @@ fi
 	additional "-r @" flag.
 
 # $Log: privoxy-rh.spec,v $
+# Revision 1.33.2.3  2002/06/24 12:13:34  kick_
+# shut up rpmlint. btw: The vendor tag should be set in you .rpmmacros file, not in the spec file!
+#
 # Revision 1.33.2.2  2002/05/28 02:39:38  hal9
 # Replace index.html with privoxy-index.html for docs.
 #
