@@ -2,7 +2,7 @@
 <HTML><HEAD><TITLE>Manpage of PRIVOXY</TITLE>
 <LINK REL="STYLESHEET" TYPE="text/css" HREF="../p_doc.css"></HEAD><BODY>
 <H1>PRIVOXY</H1>
-Section:  (1)<BR>Updated: 26 August 2002<BR><A HREF="#index">Index</A>
+Section:  (1)<BR>Updated: 18 March 2003<BR><A HREF="#index">Index</A>
 <HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -45,6 +45,13 @@ After (optionally) writing the PID file, assume the user ID of
 <I>group</I> was not given, the default group of
 <I>user</I>. Exit if the privileges are not
 sufficient to do so.
+<DT><B>--chroot</B><DD>
+Before changing to the user ID given in the --user option, chroot to
+that user's home directory, i.e. make the kernel pretend to the
+<B>Privoxy</B> process that the directory tree starts
+there. If set up carefully, this can limit the impact of possible
+vulnerabilities in <B>Privoxy</B> to the files contained in
+that hierarchy. 
 </DL>
 <P>
 
@@ -324,18 +331,23 @@ the <B>Privoxy</B> developer manual.
  Stefan Waldherr
  Thomas Steudten
  Rodney Stromlund
+ Johny Agotnes 
  Rodrigo Barbosa (RPM specfiles)
  Moritz Barsnick
  Hal Burgiss (docs)
+ Mattes Dolak 
  Karsten Hopp (Red Hat)
  Alexander Lazic
+ Daniel Leite
  G&#225;bor Lipt&#225;k
- Guy
+ Andrew Lock (Win32)
+ Guy Laroche
  Haroon Rafique
  Roland Rosenfeld (Debian)
  Georg Sauthoff (Gentoo)
  David Schmidt (OS/2, Mac OSX ports)
  Joerg Strohmayer (Amiga)
+ Sviatoslav Sviridov
  Sarantis Paskalis
 </PRE>
 
@@ -404,6 +416,6 @@ USA
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 16:17:37 GMT, August 26, 2002
+Time: 00:37:30 GMT, March 19, 2003
 </BODY>
 </HTML>
