@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.26 2003/07/11 03:20:34 hal9 Exp $
+#  $Id: default.action.master,v 1.1.2.27 2003/07/12 02:58:48 hal9 Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -1103,6 +1103,8 @@ printerfriendly.abcnews.com
 www.amazon.de/exec/obidos/clipserve/
 #MASTER# PROBLEM-URL: http://www.lufthansa.de/  http://www.lufthansa.com/  http://cms.lufthansa.com/ 
 .lufthansa.
+#MASTER# REMARKS: These are movie clips, linked from http://us.imdb.com
+.totaleclips.com
 
 #----------------------------------------------------------------------------
 # These animated gifs are either useful or nice:
