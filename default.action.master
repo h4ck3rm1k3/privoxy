@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.11 2002/09/25 17:56:20 oes Exp $
+#  $Id: default.action.master,v 1.1.2.12 2003/02/20 14:00:09 hal9 Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -891,7 +891,7 @@ www.ameritrade.com
 # These sites are so abusive that we need to kill all JS event bindings (and
 # probably a break a lot along the way)
 #----------------------------------------------------------------------------
-{+filter{js-radical}}
+{+filter{js-events}}
 #MASTER# PROBLEM-URL: http://www..planetspiele.de/
 .planetspiele.de
 216.12.219.40
