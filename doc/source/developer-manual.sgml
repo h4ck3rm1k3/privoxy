@@ -23,7 +23,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: developer-manual.sgml,v 1.46.2.6 2002/08/10 11:40:25 oes Exp $
+ $Id: developer-manual.sgml,v 1.46.2.7 2002/08/14 17:29:25 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -50,7 +50,7 @@
     </pubdate>
 
 
-    <pubdate>$Id: developer-manual.sgml,v 1.46.2.6 2002/08/10 11:40:25 oes Exp $</pubdate>
+    <pubdate>$Id: developer-manual.sgml,v 1.46.2.7 2002/08/14 17:29:25 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1751,7 +1751,7 @@ static void unload_re_filterfile( void *f ) { ... }</programlisting>
 
     <para><emphasis>Example for file comments:</emphasis></para>
 <programlisting>
-const char FILENAME_rcs[] = "$Id: developer-manual.sgml,v 1.46.2.6 2002/08/10 11:40:25 oes Exp $";
+const char FILENAME_rcs[] = "$Id: developer-manual.sgml,v 1.46.2.7 2002/08/14 17:29:25 hal9 Exp $";
 /*********************************************************************
  *
  * File        :  $S<!-- Break CVS Substitution -->ource$
@@ -1811,7 +1811,7 @@ const char FILENAME_h_rcs[] = FILENAME_H_VERSION;
 <programlisting>
 #ifndef _FILENAME_H
 #define _FILENAME_H
-#define FILENAME_H_VERSION "$Id: developer-manual.sgml,v 1.46.2.6 2002/08/10 11:40:25 oes Exp $"
+#define FILENAME_H_VERSION "$Id: developer-manual.sgml,v 1.46.2.7 2002/08/14 17:29:25 hal9 Exp $"
 /*********************************************************************
  *
  * File        :  $S<!-- Break CVS Substitution -->ource$
@@ -2748,7 +2748,9 @@ at sourceforge. Three simple steps:
       mailing list</ulink>, Subject: "Version X.Y.Z available for download". Be sure to
       include the
       <ulink url="http://sourceforge.net/project/showfiles.php?group_id=11118">download
-      location</ulink>, the release notes and the change log.
+      location</ulink>, the release notes and the Changelog. Also, post an
+      updated News item on the project page Sourceforge, and update the Home 
+      page and docs linked from the Home page (see below).
      </para>
    </sect2>
 
@@ -2762,26 +2764,27 @@ at sourceforge. Three simple steps:
     problems will occur:
    </para>
    <para>
-    If you have changed anything in the documentation source SGML files,
-    do:
+    If you have changed anything in the stable-branch documentation source
+    SGML files, do:
    </para>
    <para>
     <programlisting>
-  make dok # (or make redhat-dok if make dok doesn't work for you)
+  make dok dok-pdf # (or 'make redhat-dok dok-pdf' if 'make dok' doesn't work for you)
 </programlisting>
    </para>
    <para>
     That will generate <filename>doc/webserver/user-manual</filename>,
     <filename>doc/webserver/developer-manual</filename>,
-    <filename>doc/webserver/faq</filename> and
+    <filename>doc/webserver/faq</filename>, 
+    <filename>doc/pdf/*.pdf</filename> and
     <filename>doc/webserver/index.html</filename> automatically.
    </para>
    <para>
-    If you changed the manual page source, generate
+    If you changed the manual page sources, generate
     <filename>doc/webserver/man-page/privoxy-man-page.html</filename>
     by running <quote><command>make man</command></quote>. (This is
-    a separate target due to dependencies on some obscure perl scripts. 
-    See comments in <filename>GNUmakefile</filename>.)
+    a separate target due to dependencies on some obscure perl scripts
+    [now in CVS, but not well tested]. See comments in <filename>GNUmakefile</filename>.)
    </para>
    <para>
     If you want to add new files to the webserver, create them locally in
@@ -2789,7 +2792,8 @@ at sourceforge. Three simple steps:
     create new directories under <filename>doc/webserver</filename>).
    </para>
    <para>
-    Next, commit any changes from the above steps to CVS. All set? Then do
+    Next, commit any changes from the above steps to CVS. All set? 
+    If these are docs in the stable branch, then do:
    </para>
    <para>
     <programlisting>
@@ -2803,7 +2807,9 @@ at sourceforge. Three simple steps:
    </para>
    <para>
     Please do <emphasis>NOT</emphasis> use any other means of transferring
-    files to the webserver to avoid permission problems.
+    files to the webserver to avoid permission problems. Also, please do not
+    upload docs from development branches or versions. The publicly posted
+    docs should be in sync with the last official release.
    </para>
   </sect1>
 
@@ -2868,6 +2874,9 @@ at sourceforge. Three simple steps:
   Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
   $Log: developer-manual.sgml,v $
+  Revision 1.46.2.7  2002/08/14 17:29:25  hal9
+  Add small notes on post-release steps, and uploading docs to webserver.
+
   Revision 1.46.2.6  2002/08/10 11:40:25  oes
   Added disclaimer about probably being out-of-date and two small hints
 
