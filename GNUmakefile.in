@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.23 2003/04/20 17:28:52 hal9 Exp $
+# $Id: GNUmakefile.in,v 1.104.2.24 2003/12/03 10:30:02 oes Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -632,7 +632,8 @@ tarball-dist: dist-check clean clobber
 	$(LN) -s current ../privoxy-$(VERSION)-$(CODE_STATUS)
 
 	for i in `find . -type f -a -not \( -path "*/CVS*" -o -name ".*" \
-	-o -path "*/debian/*" -o -path "*/actions/*" -o -name "*.php" -o -name "PACKAGERS" \)`; do \
+	-o -path "*/debian/*" -o -path "*/actions/*" -o -name "*.php" -o \
+	-name "PACKAGERS" -o path "*/pdf/*" \)`; do \
 	   files="$$files privoxy-$(VERSION)-$(CODE_STATUS)/$$i"; \
 	done &&  \
 	cd .. && $(TAR) -cvhf privoxy-$(VERSION)-$(CODE_STATUS)-src.tar $$files ; \
@@ -947,7 +948,7 @@ dok-get:
 # Source file dependencies
 #############################################################################
 
-actions.@OBJEXT@:   actions.c   actions.h   config.h $(PROJECT_H_DEPS) errlog.h jcc.h list.h loaders.h miscutil.h actionlist.h
+actions.@OBJEXT@:   actions.c   actions.h   config.h $(PROJECT_H_DEPS) errlog.h jcc.h list.h loaders.h miscutil.h actionlist.h ssplit.h
 cgi.@OBJEXT@:       cgi.c       cgi.h       config.h $(PROJECT_H_DEPS) cgiedit.h cgisimple.h list.h pcrs.h encode.h ssplit.h jcc.h filters.h actions.h errlog.h miscutil.h
 cgiedit.@OBJEXT@:   cgiedit.c   cgiedit.h   config.h $(PROJECT_H_DEPS) cgi.h list.h pcrs.h encode.h ssplit.h jcc.h filters.h actions.h errlog.h miscutil.h
 cgisimple.@OBJEXT@: cgisimple.c cgisimple.h config.h $(PROJECT_H_DEPS) cgi.h list.h pcrs.h encode.h ssplit.h jcc.h filters.h actions.h errlog.h miscutil.h
@@ -1080,7 +1081,7 @@ install: CONF_DEST LOG_DEST PID_DEST check_doc GROUP_T
 # 	if [ -n "$(GROUP_T)" ] && [ -n "$(USER)" ] && ! $(GROUPS) $(USER) | $(GREP) "\<$(GROUP_T)\>" >/dev/null; then \
 # 		$(ECHO) Group $(GROUP_T) for User $(USER) is invalid && exit 1 ;\
 # 	fi
-	
+
 	@$(ECHO) "Creating directories, and preparing $(PROGRAM_V) installation"
 	$(CHMOD) $(DIR_MODE) $(MKDIR)
 	@$(MKDIR) $(SBIN_DEST) $(prefix) $(CONF_DEST) $(CONF_DEST)/templates $(SHARE_DEST) \
@@ -1266,7 +1267,7 @@ uninstall: CONF_DEST LOG_DEST PID_DEST check_doc
 	done
 	-@test -d $(CONF_DEST)/templates && $(RM) -r $(CONF_DEST)/templates &&\
 	$(ECHO) "Removing $(CONF_DEST)/templates/*"
-	
+
 	@# man page and docs
 	@$(ECHO) Removing $(PROGRAM) docs
 	-$(RM) $(MAN_DEST)/privoxy.1*
@@ -1340,6 +1341,10 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.24  2003/12/03 10:30:02  oes
+# - Added new dependency: actions.c -> ssplit.h
+# - Excluded PDF docs from src tarball
+#
 # Revision 1.104.2.23  2003/04/20 17:28:52  hal9
 # Strip trailing spaces from config-file generation, bug #724596.
 #
