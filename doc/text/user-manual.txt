@@ -1,8 +1,8 @@
-Privoxy 2.9.16 User Manual
+Privoxy 2.9.18 User Manual
 
 Copyright © 2001, 2002 by Privoxy Developers
 
-$Id: user-manual.txt,v 1.60.2.1 2002/07/27 18:45:42 oes Exp $
+$Id: user-manual.txt,v 1.60.2.2 2002/08/06 09:19:51 oes Exp $
 
 
 The User Manual gives users information on how to install, configure and use 
@@ -35,6 +35,7 @@ Table of Contents
         2.1.5. OS/2
         2.1.6. Mac OSX
         2.1.7. AmigaOS
+        2.1.8. Gentoo
        
        
     2.2. Building from Source
@@ -55,7 +56,8 @@ Table of Contents
     5.6. OS/2
     5.7. Mac OSX
     5.8. AmigaOS
-    5.9. Command Line Options
+    5.9. Gentoo
+    5.10. Command Line Options
    
    
 6. Privoxy Configuration
@@ -180,7 +182,7 @@ Table of Contents
 1. Introduction
 
 This documentation is included with the current beta version of Privoxy,
-v.2.9.16, and is mostly complete at this point. The most up to date reference
+v.2.9.18, and is mostly complete at this point. The most up to date reference
 for the time being is still the comments in the source files and in the
 individual configuration files. Development of version 3.0 is currently nearing
 completion, and includes many significant changes and enhancements over earlier
@@ -257,7 +259,7 @@ How to install the binary packages depends on your operating system:
 
 2.1.1. Red Hat, SuSE and Conectiva RPMs
 
-RPMs can be installed with rpm -Uvh privoxy-2.9.16-1.rpm, and will use /etc/
+RPMs can be installed with rpm -Uvh privoxy-2.9.18-1.rpm, and will use /etc/
 privoxy for the location of configuration files.
 
 Note that on Red Hat, Privoxy will not be automatically started on system boot.
@@ -265,7 +267,7 @@ You will need to enable that using chkconfig, ntsysv, or similar methods. Note
 that SuSE will automatically start Privoxy in the boot process.
 
 If you have problems with failed dependencies, try rebuilding the SRC RPM: rpm
---rebuild privoxy-2.9.16-1.src.rpm. This will use your locally installed
+--rebuild privoxy-2.9.18-1.src.rpm. This will use your locally installed
 libraries and RPM version.
 
 Also note that if you have a Junkbuster RPM installed on your system, you need
@@ -275,7 +277,7 @@ remove Junkbuster automatically, before installing Privoxy.
 
 2.1.2. Debian
 
-DEBs can be installed with dpkg -i privoxy_2.9.16-1.deb, and will use /etc/
+DEBs can be installed with dpkg -i privoxy_2.9.18-1.deb, and will use /etc/
 privoxy for the location of configuration files.
 -------------------------------------------------------------------------------
 
@@ -328,6 +330,20 @@ files will be installed into Privoxy directory, including all configuration and
 log files. To uninstall, just remove this directory.
 -------------------------------------------------------------------------------
 
+2.1.8. Gentoo
+
+Gentoo source packages (Ebuilds) for Privoxy are contained in the Gentoo
+Portage Tree (they are not on the download page, but there is a Gentoo section,
+where you can see when a new Privoxy Version is added to the Portage Tree).
+
+Before installing Privoxy under Gentoo just do first emerge rsync to get the
+latest changes from the Portage tree. With emerge privoxy you install the
+latest version.
+
+Configuration files are in /etc/privoxy, the documentation is in /usr/share/doc
+/privoxy-2.9.18 and the Log directory is in /var/log/privoxy.
+-------------------------------------------------------------------------------
+
 2.2. Building from Source
 
 The most convenient way to obtain the Privoxy sources is to download the source
@@ -343,8 +359,8 @@ compiler like gcc are required.
 When building from a source tarball (either release version or nightly CVS
 tarball), first unpack the source:
 
- tar xzvf privoxy-2.9.16-beta-src* [.tgz or .tar.gz]                           
- cd privoxy-2.9.16-beta                                                        
+ tar xzvf privoxy-2.9.18-beta-src* [.tgz or .tar.gz]                           
+ cd privoxy-2.9.18-beta                                                        
 
 For retrieving the current CVS sources, you'll need CVS installed. Note that
 sources from CVS are development quality, and may not be stable, or well
@@ -382,14 +398,12 @@ etc, please consult the developer manual.
 2.3. Keeping your Installation Up-to-Date
 
 As user feedback comes in and development continues, we will make updated
-versions of both the software and the main actions file (default.action)
-available for download.
+versions of both the main actions file (as a separate package) and the software
+itself (including the actions file) available for download.
 
 If you wish to receive an email notification whenever we release updates of 
 Privoxy or the actions file, subscribe to our announce mailing list,
 ijbswa-announce@lists.sourceforge.net.
-
-Both can be downloaded from the files section on SourceForge.
 
 In order not to loose your personal changes and adjustments when updating to
 the latest default.action file we strongly recommend that you use user.action
@@ -728,7 +742,22 @@ you quit your TCP/IP stack (just ignore the harmless warning your TCP/IP stack
 may display that Privoxy is still running).
 -------------------------------------------------------------------------------
 
-5.9. Command Line Options
+5.9. Gentoo
+
+A script is again used. It will use the file /etc/privoxy/config as its main
+configuration file.
+
+ /etc/init.d/privoxy start                                                     
+                                                                               
+
+Note that Privoxy is not automatically started at boot time by default. You can
+change this with the rc-update command.
+
+ rc-update add privoxy default                                                 
+                                                                               
+-------------------------------------------------------------------------------
+
+5.10. Command Line Options
 
 Privoxy may be invoked with the following command-line options:
 
@@ -1116,7 +1145,7 @@ Notes:
    
     Unix, in local filesystem:
    
-    user-manual  file:///usr/share/doc/privoxy-2.9.16/user-manual/     
+    user-manual  file:///usr/share/doc/privoxy-2.9.18/user-manual/     
    
     Any platform, on local webserver (called "local-webserver"):
    
@@ -1239,6 +1268,7 @@ Notes:
       debug       256 # debug GIF de-animation                         
       debug       512 # Common Log Format                              
       debug      1024 # debug kill pop-ups                             
+      debug      2048 # CGI user interface                             
       debug      4096 # Startup banner and warnings.                   
       debug      8192 # Non-fatal errors                               
    
@@ -1529,13 +1559,14 @@ Specifies:
     To which parent HTTP proxy specific requests should be routed.
    
 Type of value:
-    target_domain[:port] http_parent[/port]
+    target_pattern http_parent[:port]
    
-    Where target_domain is a domain name pattern (see the chapter on domain
-    matching in the default.action file), http_parent is the address of the
-    parent HTTP proxy as an IP addresses in dotted decimal notation or as a
-    valid DNS name (or "." to denote "no forwarding", and the optional port
-    parameters are TCP ports, i.e. integer values from 1 to 64535
+    where target_pattern is a URL pattern that specifies to which requests
+    (i.e. URLs) this forward rule shall apply. Use / to denote "all URLs".
+    http_parent[:port] is the DNS name or IP address of the parent HTTP proxy
+    through which the requests should be forwarded, optionally followed by its
+    listening port (default: 8080). Use a single dot (.) to denote "no
+    forwarding".
    
 Default value:
     Unset
@@ -1554,13 +1585,13 @@ Examples:
     Everything goes to an example anonymizing proxy, except SSL on port 443
     (which it doesn't handle):
    
-      forward   .*     anon-proxy.example.org:8080                     
+      forward   /      anon-proxy.example.org:8080                     
       forward   :443   .                                               
    
     Everything goes to our example ISP's caching proxy, except for requests to
     that ISP's sites:
    
-      forward   .*.                caching-proxy.example-isp.net:8000  
+      forward   /                  caching-proxy.example-isp.net:8000  
       forward   .example-isp.net   .                                   
    
 
@@ -1572,13 +1603,14 @@ Specifies:
     requests should be routed.
    
 Type of value:
-    target_domain[:port] socks_proxy[/port] http_parent[/port]
+    target_pattern socks_proxy[:port] http_parent[:port]
    
-    Where target_domain is a domain name pattern (see the chapter on domain
-    matching in the default.action file), http_parent and socks_proxy are IP
-    addresses in dotted decimal notation or valid DNS names (http_parent may be
-    "." to denote "no HTTP forwarding"), and the optional port parameters are
-    TCP ports, i.e. integer values from 1 to 64535
+    where target_pattern is a URL pattern that specifies to which requests
+    (i.e. URLs) this forward rule shall apply. Use / to denote "all URLs".
+    http_parent and socks_proxy are IP addresses in dotted decimal notation or
+    valid DNS names (http_parent may be "." to denote "no HTTP forwarding"),
+    and the optional port parameters are TCP ports, i.e. integer values from 1
+    to 64535
    
 Default value:
     Unset
@@ -1603,13 +1635,13 @@ Examples:
     domains, but everything outbound goes through their ISP's proxy by way of
     example.com's corporate SOCKS 4A gateway to the Internet.
    
-      forward-socks4a   .*.            socks-gw.example.com:1080  www-cache.example-isp.net:8080 
+      forward-socks4a   /              socks-gw.example.com:1080  www-cache.example-isp.net:8080 
       forward           .example.com   .                                                         
    
     A rule that uses a SOCKS 4 gateway for all destinations but no HTTP parent
     looks like this:
    
-      forward-socks4   .*.            socks-gw.example.com:1080  .     
+      forward-socks4   /               socks-gw.example.com:1080  .    
    
 
 -------------------------------------------------------------------------------
@@ -1626,12 +1658,12 @@ look like this:
 
 host-a:
 
-  forward    .*.         .                                                     
+  forward    /           .                                                     
   forward    .isp-b.net  host-b:8118                                           
 
 host-b:
 
-  forward    .*.         .                                                     
+  forward    /           .                                                     
   forward    .isp-a.net  host-a:8118                                           
 
 Now, your users can set their browser's proxy to use either host-a or host-b
@@ -1658,6 +1690,12 @@ could then look like this:
 You would then need to change your browser's proxy settings to squid's address
 and port. Squid normally uses port 3128. If unsure consult http_port in
 squid.conf.
+
+You could just as well decide to only forward requests for Windows executables
+through a virus-scanning parent proxy, say, on antivir.example.com, port 8010:
+
+  forward   /                          .                                       
+  forward   /.*\.(exe|com|dll|zip)$    antivir.example.com:8010                
 -------------------------------------------------------------------------------
 
 7.6. Windows GUI Options
@@ -3612,8 +3650,8 @@ Then, some developers picked up the thread, and started turning the software
 inside out, upside down, and then reassembled it, adding many new features
 along the way.
 
-The result of this is Privoxy, whose first stable release, 3.0, is due in June
-2002.
+The result of this is Privoxy, whose first stable release, 3.0, is due late
+summer or early fall 2002.
 -------------------------------------------------------------------------------
 
 12.3. Authors
@@ -3630,12 +3668,14 @@ Current Project Developers:
 Current Project Contributors:
 
  Rodrigo Barbosa (RPM specfiles)
+ Moritz Barsnick
  Hal Burgiss (docs)
  Alexander Lazic
  Gábor Lipták
  Guy
  Haroon Rafique
  Roland Rosenfeld
+ Georg Sauthoff
  David Schmidt (OS/2, Mac OSX ports)
  Joerg Strohmayer
  Sarantis Paskalis
