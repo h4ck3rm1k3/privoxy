@@ -6,7 +6,7 @@
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.60"><LINK
 REL="HOME"
-TITLE="Privoxy 2.9.16 User Manual"
+TITLE="Privoxy 2.9.18 User Manual"
 HREF="index.html"><LINK
 REL="PREVIOUS"
 TITLE="Quickstart to Using Privoxy"
@@ -35,7 +35,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Privoxy 2.9.16 User Manual</TH
+>Privoxy 2.9.18 User Manual</TH
 ></TR
 ><TR
 ><TD
@@ -97,7 +97,7 @@ CLASS="APPLICATION"
 >  <DIV
 CLASS="FIGURE"
 ><A
-NAME="AEN425"
+NAME="AEN435"
 ></A
 ><P
 ><B
@@ -452,8 +452,64 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
+NAME="START-GENTOO"
+>5.9. Gentoo</A
+></H2
+><P
+> A script is again used. It will use the file <TT
+CLASS="FILENAME"
+>/etc/privoxy/config 
+ </TT
+> as its main configuration file.</P
+><P
+> <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+> /etc/init.d/privoxy start
+ </PRE
+></TD
+></TR
+></TABLE
+></P
+><P
+> Note that <SPAN
+CLASS="APPLICATION"
+>Privoxy</SPAN
+> is not automatically started at 
+ boot time by default. You can change this with the <TT
+CLASS="LITERAL"
+>rc-update</TT
+> 
+ command.</P
+><P
+> 
+ <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+> rc-update add privoxy default
+ </PRE
+></TD
+></TR
+></TABLE
+></P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
 NAME="CMDOPTIONS"
->5.9. Command Line Options</A
+>5.10. Command Line Options</A
 ></H2
 ><P
 > <SPAN

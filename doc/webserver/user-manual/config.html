@@ -6,7 +6,7 @@
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.60"><LINK
 REL="HOME"
-TITLE="Privoxy 2.9.16 User Manual"
+TITLE="Privoxy 2.9.18 User Manual"
 HREF="index.html"><LINK
 REL="PREVIOUS"
 TITLE="Privoxy Configuration"
@@ -35,7 +35,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Privoxy 2.9.16 User Manual</TH
+>Privoxy 2.9.18 User Manual</TH
 ></TR
 ><TR
 ><TD
@@ -902,7 +902,7 @@ WIDTH="90%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->user-manual  file:///usr/share/doc/privoxy-2.9.16/user-manual/</PRE
+>user-manual  file:///usr/share/doc/privoxy-2.9.18/user-manual/</PRE
 ></TD
 ></TR
 ></TABLE
@@ -1247,6 +1247,7 @@ CLASS="PROGRAMLISTING"
   debug       256 # debug GIF de-animation
   debug       512 # Common Log Format
   debug      1024 # debug kill pop-ups
+  debug      2048 # CGI user interface
   debug      4096 # Startup banner and warnings.
   debug      8192 # Non-fatal errors</PRE
 ></TD
@@ -2169,7 +2170,13 @@ CLASS="VARIABLELIST"
 >    <TT
 CLASS="REPLACEABLE"
 ><I
->target_domain</I
+>target_pattern</I
+></TT
+>
+    <TT
+CLASS="REPLACEABLE"
+><I
+>http_parent</I
 ></TT
 >[:<TT
 CLASS="REPLACEABLE"
@@ -2177,50 +2184,45 @@ CLASS="REPLACEABLE"
 >port</I
 ></TT
 >]
+   </P
+><P
+>    where <TT
+CLASS="REPLACEABLE"
+><I
+>target_pattern</I
+></TT
+> is a <A
+HREF="actions-file.html#AF-PATTERNS"
+>URL pattern</A
+> 
+    that specifies to which requests (i.e. URLs) this forward rule shall apply. Use <TT
+CLASS="LITERAL"
+>/</TT
+> to
+    denote <SPAN
+CLASS="QUOTE"
+>"all URLs"</SPAN
+>.
     <TT
 CLASS="REPLACEABLE"
 ><I
 >http_parent</I
 ></TT
->[/<TT
+>[:<TT
 CLASS="REPLACEABLE"
 ><I
 >port</I
 ></TT
 >]
-   </P
-><P
->    Where <TT
-CLASS="REPLACEABLE"
-><I
->target_domain</I
-></TT
-> is a domain name pattern (see the
-    chapter on domain matching in the <TT
-CLASS="FILENAME"
->default.action</TT
-> file),
-    <TT
-CLASS="REPLACEABLE"
-><I
->http_parent</I
-></TT
-> is the address of the parent HTTP proxy
-    as an IP addresses in dotted decimal notation or as a valid DNS name (or <SPAN
-CLASS="QUOTE"
->"."</SPAN
-> to denote
-    <SPAN
+    is the DNS name or IP address of the parent HTTP proxy through which the requests should be forwarded,
+    optionally followed by its listening port (default: 8080).
+    Use a single dot (<TT
+CLASS="LITERAL"
+>.</TT
+>) to denote <SPAN
 CLASS="QUOTE"
 >"no forwarding"</SPAN
->, and the optional 
-    <TT
-CLASS="REPLACEABLE"
-><I
->port</I
-></TT
-> parameters are TCP ports, i.e. integer
-    values from 1 to 64535
+>.
    </P
 ></DD
 ><DT
@@ -2273,7 +2275,7 @@ WIDTH="90%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->  forward   .*     anon-proxy.example.org:8080
+>  forward   /      anon-proxy.example.org:8080
   forward   :443   .</PRE
 ></TD
 ></TR
@@ -2293,7 +2295,7 @@ WIDTH="90%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->  forward   .*.                caching-proxy.example-isp.net:8000
+>  forward   /                  caching-proxy.example-isp.net:8000
   forward   .example-isp.net   .</PRE
 ></TD
 ></TR
@@ -2337,7 +2339,13 @@ CLASS="VARIABLELIST"
 >    <TT
 CLASS="REPLACEABLE"
 ><I
->target_domain</I
+>target_pattern</I
+></TT
+>
+    <TT
+CLASS="REPLACEABLE"
+><I
+>socks_proxy</I
 ></TT
 >[:<TT
 CLASS="REPLACEABLE"
@@ -2348,20 +2356,9 @@ CLASS="REPLACEABLE"
     <TT
 CLASS="REPLACEABLE"
 ><I
->socks_proxy</I
-></TT
->[/<TT
-CLASS="REPLACEABLE"
-><I
->port</I
-></TT
->]
-    <TT
-CLASS="REPLACEABLE"
-><I
 >http_parent</I
 ></TT
->[/<TT
+>[:<TT
 CLASS="REPLACEABLE"
 ><I
 >port</I
@@ -2369,16 +2366,23 @@ CLASS="REPLACEABLE"
 >]
    </P
 ><P
->    Where <TT
+>    where <TT
 CLASS="REPLACEABLE"
 ><I
->target_domain</I
+>target_pattern</I
 ></TT
-> is a domain name pattern (see the
-    chapter on domain matching in the <TT
-CLASS="FILENAME"
->default.action</TT
-> file),
+> is a <A
+HREF="actions-file.html#AF-PATTERNS"
+>URL pattern</A
+> 
+    that specifies to which requests (i.e. URLs) this forward rule shall apply. Use <TT
+CLASS="LITERAL"
+>/</TT
+> to
+    denote <SPAN
+CLASS="QUOTE"
+>"all URLs"</SPAN
+>.
     <TT
 CLASS="REPLACEABLE"
 ><I
@@ -2479,7 +2483,7 @@ WIDTH="90%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->  forward-socks4a   .*.            socks-gw.example.com:1080  www-cache.example-isp.net:8080
+>  forward-socks4a   /              socks-gw.example.com:1080  www-cache.example-isp.net:8080
   forward           .example.com   .</PRE
 ></TD
 ></TR
@@ -2498,7 +2502,7 @@ WIDTH="90%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->  forward-socks4   .*.            socks-gw.example.com:1080  .</PRE
+>  forward-socks4   /               socks-gw.example.com:1080  .</PRE
 ></TD
 ></TR
 ></TABLE
@@ -2545,7 +2549,7 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->  forward    .*.         .
+>  forward    /           .
   forward    .isp-b.net  host-b:8118</PRE
 ></TD
 ></TR
@@ -2562,7 +2566,7 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->  forward    .*.         .
+>  forward    /           .
   forward    .isp-a.net  host-a:8118</PRE
 ></TD
 ></TR
@@ -2633,6 +2637,27 @@ CLASS="LITERAL"
 CLASS="FILENAME"
 >squid.conf</TT
 >.</P
+><P
+> You could just as well decide to only forward requests for Windows executables through
+ a virus-scanning parent proxy, say, on <TT
+CLASS="LITERAL"
+>antivir.example.com</TT
+>, port 8010:</P
+><P
+> <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>  forward   /                          .
+  forward   /.*\.(exe|com|dll|zip)$    antivir.example.com:8010</PRE
+></TD
+></TR
+></TABLE
+> </P
 ></DIV
 ></DIV
 ><DIV

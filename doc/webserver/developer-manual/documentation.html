@@ -4,8 +4,7 @@
 >Documentation Guidelines</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.60"><LINK
 REL="HOME"
 TITLE="Privoxy Developer Manual"
 HREF="index.html"><LINK
@@ -28,7 +27,6 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
-SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -46,7 +44,6 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="cvs.html"
-ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -60,7 +57,6 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="coding.html"
-ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -73,7 +69,9 @@ CLASS="SECT1"
 ><H1
 CLASS="SECT1"
 ><A
-NAME="DOCUMENTATION">3. Documentation Guidelines</H1
+NAME="DOCUMENTATION"
+>3. Documentation Guidelines</A
+></H1
 ><P
 >    All formal documents are maintained in Docbook SGML and located in the
     <TT
@@ -124,58 +122,22 @@ CLASS="CITETITLE"
     <I
 CLASS="CITETITLE"
 >privoxy.1</I
-> (man page), and
-    <I
-CLASS="CITETITLE"
->config</I
-> files are also now maintained as Docbook
-    SGML. These files, when built, in the top-level source directory are
-    generated files! Also, the <SPAN
-CLASS="APPLICATION"
->Privoxy</SPAN
-> <TT
+> (man page) files are also now maintained
+    as Docbook SGML. The finished files are all in the top-level source
+    directory are generated files! Also, <TT
 CLASS="FILENAME"
 >index.html</TT
-> (and a 
-    variation on this file, <TT
-CLASS="FILENAME"
->privoxy-index.html</TT
->, 
-    meant for inclusion with doc packages), are maintained as SGML as well.
+>, the
     <SPAN
-CLASS="emphasis"
-><I
+CLASS="APPLICATION"
+>Privoxy</SPAN
+> home page, is maintained as SGML.
+    <I
 CLASS="EMPHASIS"
 >DO NOT edit these directly</I
-></SPAN
 >. Edit the SGML source, or
     contact someone involved in the documentation (at present Stefan and
     Hal).
-    </P
-><P
->     <TT
-CLASS="FILENAME"
->config</TT
-> requires some special handling. The reason it
-     is maintained this way is so that the extensive comments in the file
-     mirror those in <I
-CLASS="CITETITLE"
->user-manual</I
->. But the conversion 
-     process requires going from SGML to HTML to text to special formatting 
-     required for the embedded comments. Some of this does not survive so
-     well. Especially some of the examples that are longer than 80 characters.
-     The build process for this file outputs to <TT
-CLASS="FILENAME"
->config.new</TT
->, 
-     which should be reviewed for errors and mis-formatting. Once satisfied
-     that it is correct, then it should be hand copied to
-     <TT
-CLASS="FILENAME"
->config</TT
->.
-
     </P
 ><P
 >     Other, less formal documents (e.g. <TT
@@ -269,12 +231,9 @@ CLASS="FILENAME"
 >) so that those without 
    the ability to build them locally, have access to them if needed.
    This is especially important just prior to a new release! Please
-   do this <SPAN
-CLASS="emphasis"
-><I
+   do this <I
 CLASS="EMPHASIS"
 >after</I
-></SPAN
 > the <TT
 CLASS="LITERAL"
 >$VERSION</TT
@@ -290,7 +249,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="SGML">3.1. Quickstart to Docbook and SGML</H2
+NAME="SGML"
+>3.1. Quickstart to Docbook and SGML</A
+></H2
 ><P
 > If you are not familiar with SGML, it is a markup language similar to HTML. 
  Actually, not a mark up language per se, but a language used to define 
@@ -389,58 +350,43 @@ BORDER="0"
 ><TBODY
 ><TR
 ><TD
->      <SPAN
-CLASS="emphasis"
-><I
+>      <I
 CLASS="EMPHASIS"
 >&#60;para&#62;&#60;/para&#62;</I
-></SPAN
 >, paragraph delimiter. Most 
       text needs to be within paragraph elements (there are some exceptions).
     </TD
 ></TR
 ><TR
 ><TD
->      <SPAN
-CLASS="emphasis"
-><I
+>      <I
 CLASS="EMPHASIS"
 >&#60;emphasis&#62;&#60;/emphasis&#62;</I
-></SPAN
 >, the stylesheets
       make this italics.
     </TD
 ></TR
 ><TR
 ><TD
->      <SPAN
-CLASS="emphasis"
-><I
+>      <I
 CLASS="EMPHASIS"
 >&#60;filename&#62;&#60;/filename&#62;</I
-></SPAN
 >, files and directories.
     </TD
 ></TR
 ><TR
 ><TD
->      <SPAN
-CLASS="emphasis"
-><I
+>      <I
 CLASS="EMPHASIS"
 >&#60;command&#62;&#60;/command&#62;</I
-></SPAN
 >, command examples.
     </TD
 ></TR
 ><TR
 ><TD
->      <SPAN
-CLASS="emphasis"
-><I
+>      <I
 CLASS="EMPHASIS"
 >&#60;literallayout&#62;&#60;/literallayout&#62;</I
-></SPAN
 >, like 
       <TT
 CLASS="LITERAL"
@@ -450,34 +396,25 @@ CLASS="LITERAL"
 ></TR
 ><TR
 ><TD
->      <SPAN
-CLASS="emphasis"
-><I
+>      <I
 CLASS="EMPHASIS"
 >&#60;itemizedlist&#62;&#60;/itemizedlist&#62;</I
-></SPAN
 >, list with bullets.
     </TD
 ></TR
 ><TR
 ><TD
->      <SPAN
-CLASS="emphasis"
-><I
+>      <I
 CLASS="EMPHASIS"
 >&#60;listitem&#62;&#60;/listitem&#62;</I
-></SPAN
 >, member of the above.
     </TD
 ></TR
 ><TR
 ><TD
->      <SPAN
-CLASS="emphasis"
-><I
+>      <I
 CLASS="EMPHASIS"
 >&#60;screen&#62;&#60;/screen&#62;</I
-></SPAN
 >, screen output, implies 
       <TT
 CLASS="LITERAL"
@@ -487,12 +424,9 @@ CLASS="LITERAL"
 ></TR
 ><TR
 ><TD
->      <SPAN
-CLASS="emphasis"
-><I
+>      <I
 CLASS="EMPHASIS"
 >&#60;ulink url="example.com"&#62;&#60;/ulink&#62;</I
-></SPAN
 >, like 
       HTML <TT
 CLASS="LITERAL"
@@ -502,12 +436,9 @@ CLASS="LITERAL"
 ></TR
 ><TR
 ><TD
->      <SPAN
-CLASS="emphasis"
-><I
+>      <I
 CLASS="EMPHASIS"
 >&#60;quote&#62;&#60;/quote&#62;</I
-></SPAN
 >, for, doh, quoting text. 
     </TD
 ></TR
@@ -534,10 +465,12 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="DOCSTYLE">3.2. <SPAN
+NAME="DOCSTYLE"
+>3.2. <SPAN
 CLASS="APPLICATION"
 >Privoxy</SPAN
-> Documentation Style</H2
+> Documentation Style</A
+></H2
 ><P
 >    It will be easier if everyone follows a similar writing style. This 
     just makes it easier to read what someone else has written if it 
@@ -557,12 +490,9 @@ CLASS="APPLICATION"
 ></LI
 ><LI
 ><P
->       Tags delimiting a <SPAN
-CLASS="emphasis"
-><I
+>       Tags delimiting a <I
 CLASS="EMPHASIS"
 >block</I
-></SPAN
 > of text (even small
        blocks) should be on their own line. Like:
        <P
@@ -676,7 +606,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN217">3.3. Privoxy Custom Entities</H2
+NAME="AEN210"
+>3.3. Privoxy Custom Entities</A
+></H2
 ><P
 >  <SPAN
 CLASS="APPLICATION"
@@ -696,12 +628,9 @@ CLASS="QUOTE"
   that is used by multiple docs. This way we can write something once, and use
   it repeatedly without having to re-write the same content over and over again.
   If editing such a file, keep in mind that it should be
-  <SPAN
-CLASS="emphasis"
-><I
+  <I
 CLASS="EMPHASIS"
 >generic</I
-></SPAN
 >. That is the purpose; so it can be used in varying 
   contexts without additional modifications.
  </P
@@ -773,30 +702,24 @@ BORDER="0"
 ><TBODY
 ><TR
 ><TD
->    <SPAN
-CLASS="emphasis"
-><I
+>    <I
 CLASS="EMPHASIS"
 >p-version</I
-></SPAN
 >: the <SPAN
 CLASS="APPLICATION"
 >Privoxy</SPAN
 > 
     version string, e.g. <SPAN
 CLASS="QUOTE"
->"2.9.15"</SPAN
+>"2.9.18"</SPAN
 >.
    </TD
 ></TR
 ><TR
 ><TD
->    <SPAN
-CLASS="emphasis"
-><I
+>    <I
 CLASS="EMPHASIS"
 >p-status</I
-></SPAN
 >: the project status, either 
     <SPAN
 CLASS="QUOTE"
@@ -812,12 +735,9 @@ CLASS="QUOTE"
 ></TR
 ><TR
 ><TD
->    <SPAN
-CLASS="emphasis"
-><I
+>    <I
 CLASS="EMPHASIS"
 >p-not-stable</I
-></SPAN
 >: use to conditionally include 
     text in <SPAN
 CLASS="QUOTE"
@@ -830,23 +750,17 @@ CLASS="QUOTE"
 ></TR
 ><TR
 ><TD
->    <SPAN
-CLASS="emphasis"
-><I
+>    <I
 CLASS="EMPHASIS"
 >p-stable</I
-></SPAN
 >: just the opposite.
    </TD
 ></TR
 ><TR
 ><TD
->    <SPAN
-CLASS="emphasis"
-><I
+>    <I
 CLASS="EMPHASIS"
 >p-text</I
-></SPAN
 >: this doc is only generated as text.
    </TD
 ></TR
@@ -869,7 +783,6 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -881,7 +794,6 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="cvs.html"
-ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -890,7 +802,6 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="index.html"
-ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -899,7 +810,6 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="coding.html"
-ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR

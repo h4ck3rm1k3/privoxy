@@ -6,7 +6,7 @@
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.60"><LINK
 REL="HOME"
-TITLE="Privoxy 2.9.16 User Manual"
+TITLE="Privoxy 2.9.18 User Manual"
 HREF="index.html"><LINK
 REL="PREVIOUS"
 TITLE="Introduction"
@@ -35,7 +35,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Privoxy 2.9.16 User Manual</TH
+>Privoxy 2.9.18 User Manual</TH
 ></TR
 ><TR
 ><TD
@@ -126,7 +126,7 @@ NAME="INSTALLATION-PACK-RPM"
 ><P
 > RPMs can be installed with <TT
 CLASS="LITERAL"
->rpm -Uvh privoxy-2.9.16-1.rpm</TT
+>rpm -Uvh privoxy-2.9.18-1.rpm</TT
 >,
  and will use <TT
 CLASS="FILENAME"
@@ -155,7 +155,7 @@ automatically start Privoxy in the boot process.</P
 > If you have problems with failed dependencies, try rebuilding the SRC RPM: 
  <TT
 CLASS="LITERAL"
->rpm --rebuild privoxy-2.9.16-1.src.rpm</TT
+>rpm --rebuild privoxy-2.9.18-1.src.rpm</TT
 >. This 
  will use your locally installed libraries and RPM version. </P
 ><P
@@ -185,7 +185,7 @@ NAME="INSTALLATION-DEB"
 > DEBs can be installed with <TT
 CLASS="LITERAL"
 >dpkg -i
- privoxy_2.9.16-1.deb</TT
+ privoxy_2.9.18-1.deb</TT
 >, and will use
  <TT
 CLASS="FILENAME"
@@ -325,6 +325,53 @@ CLASS="APPLICATION"
  directory, including all configuration and log files. To uninstall, just 
  remove this directory.</P
 ></DIV
+><DIV
+CLASS="SECT3"
+><H3
+CLASS="SECT3"
+><A
+NAME="INSTALLATTION-GENTOO"
+>2.1.8. Gentoo</A
+></H3
+><P
+> Gentoo source packages (Ebuilds) for <SPAN
+CLASS="APPLICATION"
+>Privoxy</SPAN
+> are 
+ contained in the Gentoo  Portage Tree (they are not on the download page, 
+ but there is a Gentoo section, where you can see when a new 
+ <SPAN
+CLASS="APPLICATION"
+>Privoxy</SPAN
+> Version is added to the  Portage Tree).</P
+><P
+> Before installing <SPAN
+CLASS="APPLICATION"
+>Privoxy</SPAN
+> under Gentoo just do 
+ first <TT
+CLASS="LITERAL"
+>emerge rsync</TT
+> to get the latest changes from the 
+ Portage tree. With <TT
+CLASS="LITERAL"
+>emerge privoxy</TT
+> you install the latest 
+ version.</P
+><P
+> Configuration files are in <TT
+CLASS="FILENAME"
+>/etc/privoxy</TT
+>, the 
+ documentation is in <TT
+CLASS="FILENAME"
+>/usr/share/doc/privoxy-2.9.18</TT
+>
+ and the Log directory is in <TT
+CLASS="FILENAME"
+>/var/log/privoxy</TT
+>.</P
+></DIV
 ></DIV
 ><DIV
 CLASS="SECT2"
@@ -396,8 +443,8 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
-> tar xzvf privoxy-2.9.16-beta-src* [.tgz or .tar.gz]
- cd privoxy-2.9.16-beta</PRE
+> tar xzvf privoxy-2.9.18-beta-src* [.tgz or .tar.gz]
+ cd privoxy-2.9.18-beta</PRE
 ></TD
 ></TR
 ></TABLE
@@ -488,14 +535,16 @@ NAME="INSTALLATION-KEEPUPDATED"
 ></H2
 ><P
 > As user feedback comes in and development continues, we will make updated versions
- of both the software and the main <A
+ of both the main <A
 HREF="actions-file.html"
 >actions file</A
->
- (<TT
-CLASS="LITERAL"
->default.action</TT
->) available for download.</P
+> (as a <A
+HREF="http://sourceforge.net/project/showfiles.php?group_id=11118&release_id=103670"
+TARGET="_top"
+>separate
+ package</A
+>) and the software itself (including the actions file) available for
+ download.</P
 ><P
 > If you wish to receive an email notification whenever we release updates of
  <SPAN
@@ -507,17 +556,6 @@ TARGET="_top"
 >subscribe
  to our announce  mailing list</A
 >, ijbswa-announce@lists.sourceforge.net.</P
-><P
-> Both can be downloaded from the <A
-HREF="http://sourceforge.net/project/showfiles.php?group_id=11118"
-TARGET="_top"
->files
- section</A
-> on <A
-HREF="http://sourceforge.net/"
-TARGET="_top"
->SourceForge</A
->.</P
 ><P
 > In order not to loose your personal changes and adjustments when updating
  to the latest <TT
