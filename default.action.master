@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.34 2003/12/02 11:26:44 oes Exp $
+#  $Id: default.action.master,v 1.1.2.35 2003/12/03 10:31:05 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -362,7 +362,7 @@
 #############################################################################
 {{settings}}
 #############################################################################
-for-privoxy-version=3.0
+for-privoxy-version=3.0.3
 
 #############################################################################
 # Aliases
