@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.13 2002/08/06 11:55:32 oes Exp $
+ $Id: faq.sgml,v 1.61.2.14 2002/08/07 02:53:43 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -72,7 +72,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.13 2002/08/06 11:55:32 oes Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.14 2002/08/07 02:53:43 hal9 Exp $</pubdate>
 
 <!--
 
@@ -456,8 +456,8 @@ special I have to do now?</title>
  </para>
 </sect2>
 
-<sect2 renderas="sect3">
-<title id="nothing">I just installed <application>Privoxy</application>, and nothing is happening.
+<sect2 renderas="sect3" id="nothing">
+<title>I just installed <application>Privoxy</application>, and nothing is happening.
 All the ads are there. What's wrong?</title>
 
 <para>
@@ -478,25 +478,6 @@ All the ads are there. What's wrong?</title>
  url="../user-manual/config.html#LOGFILE">log file</ulink>.
 </para>
 
-</sect2>
-
-<!--   ~~~~~       New section      ~~~~~     -->
-<sect2 id="osxuninstall">
-<title>In Mac OSX, I dragged the Privoxy folder to the trash in order to 
- uninstall it.  Now the finder tells me I don't have sufficient privileges to
- empty the trash.</title>
- <para>
-  Just dragging the <application>Privoxy</application> folder to the trash is
-  not enough to delete it.  <application>Privoxy</application> supplies an
-  <application>uninstall.command</application> file that takes care of
-  these details.  Open the trash, drag the <application>uninstall.command</application>
-  file out of the trash and double-click on it.  You will be prompted for
-  confirmation and the administration password.
- </para> 
- <para>
-  The trash may still appear full after this command; emptying the trash 
-  from the desktop should make it appear empty again.
- </para>
 </sect2>
 
 </sect1>
@@ -1508,8 +1489,8 @@ still getting through. How?</title>
 
 </sect2>
 
-<sect2 renderas="sect3">
-<title id="badsite">One of my favorite sites does not work with <application>Privoxy</application>.
+<sect2 id="badsite" renderas="sect3">
+<title >One of my favorite sites does not work with <application>Privoxy</application>.
 What can I do?</title>
 
 <para>
@@ -1559,7 +1540,7 @@ What can I do?</title>
 
 
 <!--   ~~~~~       New section      ~~~~~     -->
-<sect2 id="dun">
+<sect2 id="dun" renderas="sect3">
 <title>After installing <application>Privoxy</application>, I have to log in
 every time I start IE. What gives?</title>
 
@@ -1609,7 +1590,7 @@ every time I start IE. What gives?</title>
 
 
 <!--   ~~~~~       New section      ~~~~~     -->
-<sect2 id="ftp">
+<sect2 id="ftp" renderas="sect3">
 <title>I cannot connect to any FTP sites. <application>Privoxy</application>
  seems to be blocking me.</title>
  <para>
@@ -1620,7 +1601,7 @@ every time I start IE. What gives?</title>
 </sect2>
 
 <!--   ~~~~~       New section      ~~~~~     -->
-<sect2 id="osxie">
+<sect2 id="osxie" renderas="sect3">
 <title>In Mac OSX, I can't configure Microsoft Internet Explorer to use 
  <application>Privoxy</application> as the HTTP proxy.</title>
  <para>
@@ -1633,6 +1614,26 @@ every time I start IE. What gives?</title>
   IE, it should reflect these values.
  </para>
 </sect2>
+
+<!--   ~~~~~       New section      ~~~~~     -->
+<sect2 renderas="sect3" id="osxuninstall">
+<title>In Mac OSX, I dragged the Privoxy folder to the trash in order to 
+ uninstall it.  Now the finder tells me I don't have sufficient privileges to
+ empty the trash.</title>
+ <para>
+  Just dragging the <application>Privoxy</application> folder to the trash is
+  not enough to delete it.  <application>Privoxy</application> supplies an
+  <application>uninstall.command</application> file that takes care of
+  these details.  Open the trash, drag the <application>uninstall.command</application>
+  file out of the trash and double-click on it.  You will be prompted for
+  confirmation and the administration password.
+ </para> 
+ <para>
+  The trash may still appear full after this command; emptying the trash 
+  from the desktop should make it appear empty again.
+ </para>
+</sect2>
+
 
 </sect1>
 <!--
@@ -1726,6 +1727,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.14  2002/08/07 02:53:43  hal9
+Fix some minor markup errors, and move one OSX Q/A to troubleshooting section.
+
 Revision 1.61.2.13  2002/08/06 11:55:32  oes
 Added missing close tag
 
