@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.7 2003/04/03 13:50:58 oes Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.8 2003/04/29 13:33:51 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,9 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.7 2003/04/03 13:50:58 oes Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.70.2.8  2003/04/29 13:33:51  oes
+ *    Killed a compiler warning on OSX
+ *
  *    Revision 1.70.2.7  2003/04/03 13:50:58  oes
  *    - Don't call cgi_error_disabled ifndef FEATURE_CGI_EDIT_ACTIONS
  *      (fixes bug #710056)
@@ -1531,7 +1534,7 @@ void get_http_time(int time_offset, char *buf)
 
    struct tm *t;
    time_t current_time;
-#ifdef HAVE_GMTIME_R
+#if defined(HAVE_GMTIME_R) && !defined(OSX_DARWIN)
    /*
     * Declare dummy up here (instead of inside get/set gmt block) so it
     * doesn't go out of scope before it's potentially used in snprintf later.
