@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.34 2003/06/26 23:50:16 hal9 Exp $
+ $Id: user-manual.sgml,v 1.123.2.35 2003/11/06 13:36:37 oes Exp $
 
  Copyright (C) 2001- 2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.34 2003/06/26 23:50:16 hal9 Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.35 2003/11/06 13:36:37 oes Exp $</pubdate>
 
 <!--
 
@@ -352,7 +352,7 @@ automatically start Privoxy in the boot process.
  possibly unstable development versions, you can check out the up-to-the-minute
  version directly from <ulink url="http://sourceforge.net/cvs/?group_id=11118">the
  CVS repository</ulink> or simply download <ulink
- url="http://cvs.sourceforge.net/cvstarballs/ijbswa-cvsroot.tar.gz">the nightly CVS
+ url="http://cvs.sourceforge.net/cvstarballs/ijbswa-cvsroot.tar.bz2">the nightly CVS
  tarball.</ulink>
 </para>
 
@@ -6294,6 +6294,9 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.35  2003/11/06 13:36:37  oes
+ Updated link to nightly CVS tarball
+
  Revision 1.123.2.34  2003/06/26 23:50:16  hal9
  Add a small bit on filtering and problems re: source code being corrupted.
 
