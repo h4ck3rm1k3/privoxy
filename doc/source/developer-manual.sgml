@@ -8,8 +8,8 @@
 <!entity contacting SYSTEM "contacting.sgml">
 <!entity copyright SYSTEM "copyright.sgml">
 <!entity license SYSTEM "license.sgml">
-<!entity p-version "2.9.15">
-<!entity p-status "beta">
+<!entity p-version "3.1.1">
+<!entity p-status "alpha">
 <!entity % p-not-stable "INCLUDE">
 <!entity % p-stable "IGNORE">
 <!entity % p-text "IGNORE">        <!-- define we are not a text only doc -->
@@ -23,7 +23,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: developer-manual.sgml,v 1.46.2.1 2002/05/26 12:44:57 roro Exp $
+ $Id: developer-manual.sgml,v 1.46.2.2 2002/05/26 17:04:24 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -50,7 +50,7 @@
     </pubdate>
 
 
-    <pubdate>$Id: developer-manual.sgml,v 1.46.2.1 2002/05/26 12:44:57 roro Exp $</pubdate>
+    <pubdate>$Id: developer-manual.sgml,v 1.46.2.2 2002/05/26 17:04:24 hal9 Exp $</pubdate>
 
 <!--
 
@@ -191,8 +191,8 @@ Hal.
           </para></listitem>
           <listitem><para>
             If your changes span multiple files, and the code won't recompile unless
-            all changes are commited (e.g. when changing the signature of a function),
-            then commit all files one after another, without long delays in beween.
+            all changes are committed (e.g. when changing the signature of a function),
+            then commit all files one after another, without long delays in between.
             If necessary, prepare the commit messages in advance.
           </para></listitem>
           <listitem><para>
@@ -208,7 +208,7 @@ Hal.
         We don't have a too formal policy on this, just use common sense. Hints: If it is..
         <orderedlist numeration="arabic">
           <listitem><para>
-            ..a bugfix / clean-up / cosmetic thing: shoot
+            ..a bug-fix / clean-up / cosmetic thing: shoot
           </para></listitem>
           <listitem><para>
             ..a new feature that can be turned off: shoot
@@ -1650,7 +1650,7 @@ list, then it should definitely be allocated via `malloc'.
     responsible for ensuring that deletion is timely (i.e. not too
     soon, not too late). This is known as "low-coupling" and is a
     "good thing (tm)". You may need to offer a
-    free/unload/destuctor type function to accommodate this.</para>
+    free/unload/destructor type function to accommodate this.</para>
 
     <para><emphasis>Example:</emphasis></para>
 <programlisting>
@@ -1727,7 +1727,7 @@ static void unload_re_filterfile( void *f ) { ... }</programlisting>
 
     <para><emphasis>Example for file comments:</emphasis></para>
 <programlisting>
-const char FILENAME_rcs[] = "$Id: developer-manual.sgml,v 1.46.2.1 2002/05/26 12:44:57 roro Exp $";
+const char FILENAME_rcs[] = "$Id: developer-manual.sgml,v 1.46.2.2 2002/05/26 17:04:24 hal9 Exp $";
 /*********************************************************************
  *
  * File        :  $S<!-- Break CVS Substitution -->ource$
@@ -1787,7 +1787,7 @@ const char FILENAME_h_rcs[] = FILENAME_H_VERSION;
 <programlisting>
 #ifndef _FILENAME_H
 #define _FILENAME_H
-#define FILENAME_H_VERSION "$Id: developer-manual.sgml,v 1.46.2.1 2002/05/26 12:44:57 roro Exp $"
+#define FILENAME_H_VERSION "$Id: developer-manual.sgml,v 1.46.2.2 2002/05/26 17:04:24 hal9 Exp $"
 /*********************************************************************
  *
  * File        :  $S<!-- Break CVS Substitution -->ource$
@@ -1932,7 +1932,7 @@ at sourceforge. Three simple steps:
               intelligent (keep it short and precise).</para>
           </listitem>
         </itemizedlist>
-        Do not mail to the mailinglist (we cannot keep track on issues there).
+        Do not mail to the mailing list (we cannot keep track on issues there).
       </para>
     </sect2>
     
@@ -1981,12 +1981,12 @@ at sourceforge. Three simple steps:
               Y, the version minor, represents the branch within the major version.
               At any point in time, there are two branches being maintained:
               The stable branch, with an even minor, say, 2N, in which no functionality is
-              being added and only bugfixes are made, and 2N+1, the development branch, in
+              being added and only bug-fixes are made, and 2N+1, the development branch, in
               which the further development of <application>Privoxy</application> takes
               place.
               This enables us to turn the code upside down and inside out, while at the same time
               providing and maintaining a stable version.
-              The minor is reset to zero (and one) when the major is inrcemented. When a development
+              The minor is reset to zero (and one) when the major is incremented. When a development
               branch has matured to the point where it can be turned into stable, the old stable branch
               2N is given up (i.e. no longer maintained), the former development branch 2N+1 becomes the
               new stable branch 2N+2, and a new development branch 2N+3 is opened.
@@ -2146,22 +2146,22 @@ at sourceforge. Three simple steps:
         </para>
         <simplelist>
          <member>
-          <filename>LICENSE</filename> (toplevel directory)
+          <filename>LICENSE</filename> (top-level directory)
          </member>
         </simplelist>
         <simplelist>
          <member>
-          <filename>README</filename> (toplevel directory)
+          <filename>README</filename> (top-level directory)
          </member>
         </simplelist>
         <simplelist>
          <member>
-          <filename>AUTHORS</filename> (toplevel directory)
+          <filename>AUTHORS</filename> (top-level directory)
          </member>
         </simplelist>
         <simplelist>
          <member>
-          <filename>man page</filename> (toplevel directory, Unix-like
+          <filename>man page</filename> (top-level directory, Unix-like
           platforms only)
          </member>
         </simplelist>
@@ -2177,8 +2177,8 @@ at sourceforge. Three simple steps:
         </simplelist>
         <para>
           Also suggested: <filename>Developer Manual</filename>
-          (doc/webserver/devel-manual) and <filename>ChangeLog</filename>
-          (toplevel directory). <filename>FAQ</filename> and the manuals are
+          (doc/webserver/developer-manual) and <filename>ChangeLog</filename>
+          (top-level directory). <filename>FAQ</filename> and the manuals are
           HTML docs. There are also text versions in
           <filename>doc/text/</filename> which could conceivably also be
           included.
@@ -2446,30 +2446,46 @@ at sourceforge. Three simple steps:
 
     <sect3 id="newrelease-debian"><title>Debian</title>
       <para>
-	First, <emphasis>make sure that you have freshly exported the
+        First, <emphasis>make sure that you have freshly exported the
         right version into an empty directory</emphasis>. (See
         "Building and releasing packages" above).  Then add a log
         entry to <filename>debian/changelog</filename>, if it is not
         already there, for example by running:
-	</para>
-	<para>
-	  <programlisting>
-          debchange -v &p-version;-&p-status;-1 "New upstream version"
-	  </programlisting>
-        </para>
-	<para>
-	  After this simply run 
-	</para>
-	<para>
-	  <programlisting>
-          dpkg-buildpackage -rfakeroot -us -uc -b
-	  </programlisting>
-        </para>
-	<para>
-	  This will create
-	  <filename>../privoxy_&p-version;-&p-status;-1_i386.deb</filename>
-	  which can be uploaded.
-	</para>
+      </para>
+      <para>
+        <programlisting>
+        debchange -v &p-version;-&p-status;-1 "New upstream version"
+        </programlisting>
+      </para>
+      <para>
+        After this simply run 
+      </para>
+      <para>
+        <programlisting>
+        dpkg-buildpackage -rfakeroot -us -uc -b
+        </programlisting>
+      </para>
+      <para>
+        This will create
+        <filename>../privoxy_&p-version;-&p-status;-1_i386.deb</filename>
+        which can be uploaded.
+      </para>
+      <para>
+        Then, run:
+      </para>
+      <para>
+	<programlisting>
+  make debian-dist
+</programlisting>
+      </para>
+      <para>
+        To upload the package to Sourceforge, simply issue
+      </para>
+      <para>
+        <programlisting>
+  make debian-upload
+</programlisting>
+      </para>
     </sect3>
 
     <sect3 id="newrelease-macosx"><title>Mac OSX</title>
@@ -2519,7 +2535,7 @@ zip -r privoxyosx_setup_x.y.z.zip Privoxy.pkg
 
     <sect3 id="newrelease-freebsd"><title>FreeBSD</title>
       <para>
-	Login to Sourceforge's compilefarm via ssh:
+	Login to Sourceforge's compile-farm via ssh:
 	</para>
 	<para>
 	<programlisting>
@@ -2702,7 +2718,7 @@ zip -r privoxyosx_setup_x.y.z.zip Privoxy.pkg
   <sect1 id="webserver-update"><title>Update the Webserver</title>
    <para>
     When updating the webserver, please follow these steps to make
-    sure that no broken links, incosistent contents or permission
+    sure that no broken links, inconsistent contents or permission
     problems will occur:
    </para>
    <para>
@@ -2711,7 +2727,7 @@ zip -r privoxyosx_setup_x.y.z.zip Privoxy.pkg
    </para>
    <para>
     <programlisting>
-  make dok # (or make redkat-dok if make dok doesn't work for you)
+  make dok # (or make redhat-dok if make dok doesn't work for you)
 </programlisting>
    </para>
    <para>
@@ -2812,8 +2828,14 @@ zip -r privoxyosx_setup_x.y.z.zip Privoxy.pkg
   Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
   $Log: developer-manual.sgml,v $
-  Revision 1.46.2.1  2002/05/26 12:44:57  roro
+  Revision 1.46.2.2  2002/05/26 17:04:24  hal9
+  -Spellcheck, very minor edits, and sync across branches
+
+  Revision 1.48  2002/05/26 12:48:31  roro
   Add releasing information about Debian.
+
+  Revision 1.47  2002/05/26 04:55:11  mal0rd
+  Added debian-dist and debian-upload targets.  Also documented usage.
 
   Revision 1.46  2002/05/22 17:15:00  oes
   Updated intro

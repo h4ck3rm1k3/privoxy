@@ -1,0 +1,89 @@
+<!--
+ File        :  $Source: /cvsroot/ijbswa/current/doc/source/p-authors.sgml,v $
+
+ Purpose     :  Entity included in other project documents.
+                
+ $Id: p-authors.sgml,v 1.8.2.1 2002/05/26 17:04:24 hal9 Exp $
+
+ Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
+ See LICENSE.
+
+ ======================================================================
+  This file used for inclusion with other documents only.
+ ======================================================================
+
+ If you make changes to this file, please verify the finished 
+ docs all display as intended.
+
+ This file is included into:
+
+  privoxy-man-page
+  AUTHORS
+
+-->
+<![%p-authors-formal;[
+<para>
+ Current Project Developers:
+</para>
+]]>
+
+<literallayout>
+ Jon Foster
+ Andreas Oesterhelt
+ Stefan Waldherr
+<![%p-authors-formal;[
+ ]]>
+ Thomas Steudten
+ Rodney Stromlund
+<![%p-authors-formal;[
+</literallayout>
+
+<para>
+ Current Project Contributors:
+</para>
+
+<literallayout>
+]]>
+ Rodrigo Barbosa (RPM specfiles)
+ Hal Burgiss (docs)
+ Alexander Lazic
+ Gábor Lipták
+ Guy
+ Haroon Rafique
+ Roland Rosenfeld
+ David Schmidt (OS/2, Mac OSX ports)
+ Joerg Strohmayer
+ Sarantis Paskalis
+</literallayout>
+
+<![%p-authors-formal;[
+<para>
+ Originally developed by:
+</para>
+
+<literallayout>
+ Junkbusters Corp.
+ Anonymous Coders
+</literallayout>
+
+<para>
+ Thanks to the many people who have tested Privoxy, reported bugs, or made
+ suggestions. These include (in alphabetical order):
+</para>
+
+<literallayout>
+ Ken Arromdee
+ Reiner Buehl
+ Andrew J. Caines
+ Clifford Caoile
+ Peter E
+ Aaron Hamid
+ Magnus Holmgren
+ Paul Lieverse
+ Roberto Ragusa
+ Bart Schelstraete
+ Darren Wiebe
+ jwz
+ Michael T. Davis
+</literallayout>
+]]>
