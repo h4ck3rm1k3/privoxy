@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.28 2003/03/18 19:37:21 oes Exp $
+ $Id: faq.sgml,v 1.61.2.29 2003/06/15 21:32:58 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.28 2003/03/18 19:37:21 oes Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.29 2003/06/15 21:32:58 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1458,19 +1458,29 @@ from a webserver? FTP server?</title>
  <application>Privoxy</application>. If there is a match for a <literal><ulink
  url="../user-manual/actions-file.html#BLOCK">block</ulink></literal> pattern,
  it will still be blocked, and of course this is obvious. Filtering is
- potentially more of a concern since the results are not always so obvious.
+ potentially more of a concern since the results are not always so obvious,
+ and the effects of filtering are there whether the file is simply viewed, or
+ downloaded.
 </para>
 <para>
  <application>Privoxy</application> knows the differences in files according
  to the <quote>Document Type</quote> as reported by the webserver. If this is
  reported accurately (e.g. <quote>application/zip</quote> for a zip archive),
  then <application>Privoxy</application> knows to ignore these where
- appropriate. It is possible, however, that documents that are of an unknown
- type (generally assumed to be <quote>text/plain</quote>) will be filtered, as
- will those that might be incorrectly reported by the webserver. If such a
- file is a downloaded file that is intended to be saved to disk, then any
- content that might have been altered by filtering, will be saved too, for
- these (probably very rare) cases.
+ appropriate. Privoxy filters html as well as plain text documents. Also,
+ documents that are of an unknown type (generally assumed to be
+ <quote>text/plain</quote>) will be filtered, as will those that might be
+ incorrectly reported by the webserver. If such a file is a downloaded file
+ that is intended to be saved to disk, then any content that might have been
+ altered by filtering, will be saved too, for these (probably very rare)
+ cases.
+</para>
+<para>
+ If you download text files, you probably do not want these to be filtered,
+ particularly if the content is source code since source code sometimes might
+ be mistaken for javascript. It is recommend to turn off filtering for
+ download sites (particularly if the content may be plain text files).
+
 </para>
 <para>
  <application>Privoxy</application> does not do FTP at all, only HTTP 
@@ -1848,6 +1858,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.29  2003/06/15 21:32:58  hal9
+Add to the 4.17 (filtering effects on downloaded files).
+
 Revision 1.61.2.28  2003/03/18 19:37:21  oes
 s/Advanced|Radical/Adventuresome/g to avoid complaints re fun filter
 
