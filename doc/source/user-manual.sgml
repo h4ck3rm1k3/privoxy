@@ -11,11 +11,11 @@
 <!entity license SYSTEM "license.sgml">
 <!entity p-authors SYSTEM "p-authors.sgml">
 <!entity config SYSTEM "p-config.sgml">
-<!entity p-version "3.0.2">
-<!entity p-status "STABLE">
+<!entity p-version "3.0.3">
+<!entity p-status "stable">
 <!entity % p-authors-formal "INCLUDE"> <!-- include additional text, etc  -->
-<!entity % p-not-stable "INCLUDE">
-<!entity % p-stable "IGNORE">
+<!entity % p-not-stable "IGNORE">
+<!entity % p-stable "INCLUDE">
 <!entity % p-text "IGNORE">        <!-- define we are not a text only doc -->
 <!entity % p-doc "INCLUDE">        <!-- and we are a formal doc           -->
 <!entity % p-readme "IGNORE">
@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.37 2004/01/29 22:36:11 hal9 Exp $
+ $Id: user-manual.sgml,v 1.123.2.38 2004/01/30 16:47:51 oes Exp $
 
  Copyright (C) 2001- 2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.37 2004/01/29 22:36:11 hal9 Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.38 2004/01/30 16:47:51 oes Exp $</pubdate>
 
 <!--
 
@@ -2586,10 +2586,12 @@ problem-host.example.com</screen>
   <term>Effect:</term>
   <listitem>
    <para>
-    HTML and JavaScript pages, to which this action
-    applies, are filtered on-the-fly through the specified regular expression
+    All files of text-based type, most notably HTML and JavaScript, to which this
+    action applies, are filtered on-the-fly through the specified regular expression
     based substitutions. (Note: as of version 3.0.3 plain text documents 
-    are exempted from filtering.)
+    are exempted from filtering, because web servers often use the
+    <literal>text/plain</literal> MIME type for all files whose type they
+    don't know.)
    </para>
   </listitem>
  </varlistentry>
@@ -2642,13 +2644,12 @@ problem-host.example.com</screen>
     data, and all pending data, is passed through unfiltered. 
    </para>
    <para>
-    Inappropriate MIME types, such as zipped files, are not filtered at all.
-    Encrypted SSL data (from HTTPS servers) cannot be filtered either since
-    this would violate the integrity of the secure transaction. Otherwise, 
-    <emphasis>any</emphasis> content is subject to filtering, and limited 
-    only by configuration. So, for instance, source code might be filtered 
-    in some situations - if the configuration <emphasis>does not disallow
-    it</emphasis>.
+    Inadequate MIME types, such as zipped files, are not filtered at all.
+    (Again, only text-based types except plain text). Encrypted SSL data
+    (from HTTPS servers) cannot be filtered either, since this would violate
+    the integrity of the secure transaction. In some situations it might
+    be necessary to protect certain text, like source code, from filtering
+    by defining appropriate <literal>-filter</literal> sections.
    </para>
    <para>
     At this time, <application>Privoxy</application> cannot (yet!) uncompress compressed
@@ -4353,7 +4354,7 @@ www.ugu.com/sui/ugu/adv</screen>
 # These aliases define combinations of actions that are useful for
 # certain types of sites:
 #
-fragile     = -block -crunch-all-cookies -filter -fast-redirects -hide-referer -kill-popups
+fragile     = -block -crunch-all-cookies -filter -fast-redirects -hide-referrer -kill-popups
 shop        = -crunch-all-cookies allow-popups
 
 # Allow ads for selected useful free sites:
@@ -4375,8 +4376,9 @@ allow-ads   = -block -filter{banners-by-size} -filter{banners-by-link}</screen>
 <para>
  <screen>
 { allow-all-cookies }
+sourceforge.net
 sunsolve.sun.com
-slashdot.org
+.slashdot.org
 .yahoo.com
 .msdn.microsoft.com
 .redhat.com</screen>
@@ -4393,16 +4395,21 @@ slashdot.org
 </para>
 
 <para>
- Some file types you may not want to filter.
- <application>Privoxy</application> makes no distinctions between regular web
- pages and downloads done via your web browser if it is an html type
- document.
+ Some file types you may not want to filter for various reasons:
 </para>
 
 <para>
  <screen>
-# Documentation should not need filtering (at least on some sites).
-.tldp.org</screen>
+# Technical documentation is likely to contain strings that might
+# erroneously get altered by the JavaScript-oriented filters:
+#
+.tldp.org
+/(.*/)?selfhtml/
+
+# And this stupid host sends streaming video with a wrong MIME type,
+# so that Privoxy thinks it is getting HTML and starts filtering:
+#
+stupid-server.example.com/</screen>
 </para>
 
 <para>
@@ -4420,30 +4427,27 @@ slashdot.org
  <screen>
 { +<link linkend="BLOCK">block</link> }
 www.example.com/nasty-ads/sponsor.gif
-another.popular.site.net/more/junk/here/
-
-#  Here we found one that is not in <application>Privoxy's</application> default blocked list:
-.adfactory.net</screen>
+another.popular.site.net/more/junk/here/</screen>
 </para>
 
 <para>
- To force URLs that tend to have ad images, but it is difficult for
- <application>Privoxy</application> to know this since the ultimate returned
- object is obscured for one reason or another, we can try to force these to be
- treated as images (and thus avoid <application>Privoxy's</application>
- <quote>BLOCKED</quote> banner page). Note that if what is returned by the
- server turns out NOT to be an image, then your browser typically will display
- a broken icon image. Use cautiously.
+ The URLs of dynamically generated banners, especially from large banner
+ farms, often don't use the well-known image file name extensions, which
+ makes it impossible for <application>Privoxy</application> to guess
+ the file type just by looking at the URL. 
+ You can use the <literal>+block-as-image</literal> alias defined above for
+ these cases.
+ Note that objects which match this rule but then turn out NOT to be an
+ image are typically rendered as a <quote>broken image</quote> icon by the
+ browser. Use cautiously.
 </para>
 
 <para>
  <screen>
 { +block-as-image }
-# A shockwave ad, very annoying.
-.trip.com/.*\.swf
 .doubleclick.net
 /Realmedia/ads/
-adremote.</screen>
+ar.atwola.com/</screen>
 </para>
 
 <para>
@@ -5095,8 +5099,9 @@ pre-defined filters for your convenience:
    <para>
     This filter translates the MS-only characters into Latin-1 equivalents. 
     It is not necessary when using MS products, and will cause corruption of  
-    UTF-8 (non-Latin-1) pages. It might be worthwhile for non-MS platforms, 
-    if wierd fonts sometimes appear on some pages.
+    all documents that use 8-bit character sets other than Latin-1. It's mostly
+    worthwhile for Europeans on non-MS platforms, if wierd garbage characters
+    sometimes appear on some pages.
    </para>
   </listitem>
  </varlistentry>
@@ -6282,6 +6287,9 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.38  2004/01/30 16:47:51  oes
+ Some minor clarifications
+
  Revision 1.123.2.37  2004/01/29 22:36:11  hal9
  Updates for no longer filtering text/plain, and demoronizer default settings,
  and copyright notice dates.
