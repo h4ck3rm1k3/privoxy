@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.16 2003/03/19 13:47:52 oes Exp $
+#  $Id: default.action.master,v 1.1.2.17 2003/03/29 16:42:56 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -862,6 +862,9 @@ www.acm.org
 www.motel6.com/maps/detailmap_tracker.asp
 #MASTER# UNBLOCK-REFERRER: http://adzapper.sourceforge.net/
 adzapper.
+#MASTER# UNBLOCK-REFERRER: http://de.altavista.com/web/adv
+.altavista.com/web/adv
+
 
 #############################################################################
 # Site-specific special rules:
@@ -1130,6 +1133,14 @@ www.spiegel.de/static/js/flash-plugin\.js
 #MASTER# PROBLEM-URL: http://www.quelle-bausparkasse.de/
 www.quelle-bausparkasse.de/$
 
+#----------------------------------------------------------------------------
+# Content under these TLDs is most probably in character sets which the
+# demoronizer filter would mess up
+#----------------------------------------------------------------------------
+{-filter{demoronizer}}
+.jp
+.cn
+.tw
 
 #----------------------------------------------------------------------------
 # Misc special rules:
