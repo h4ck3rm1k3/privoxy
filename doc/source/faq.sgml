@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.40 2004/01/30 17:00:33 oes Exp $
+ $Id: faq.sgml,v 1.61.2.41 2004/04/05 13:44:05 oes Exp $
 
  Copyright (C) 2001-2004 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.40 2004/01/30 17:00:33 oes Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.41 2004/04/05 13:44:05 oes Exp $</pubdate>
 
 <!--
 
@@ -1107,7 +1107,7 @@ and thus avoid individual browser configuration?</title>
  be off by default anyway, so this might be redundant, but there is no harm
  being explicit in what you want to happen. <filename>user.action</filename>
  includes an alias for this situation, called
- <literal>allow-cookies</literal>.
+ <literal>allow-all-cookies</literal>.
 </para>
 </sect2>
 
@@ -2077,6 +2077,9 @@ Why?</title>
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.41  2004/04/05 13:44:05  oes
+Fixed allow-all-cookies alias name; closes SR #929746
+
 Revision 1.61.2.40  2004/01/30 17:00:33  oes
 Added OSX Panther problem
 
