@@ -1,4 +1,4 @@
-const char actions_rcs[] = "$Id: actions.c,v 1.32.2.1 2002/05/26 12:13:16 roro Exp $";
+const char actions_rcs[] = "$Id: actions.c,v 1.32.2.2 2002/11/20 14:36:55 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/actions.c,v $
@@ -33,6 +33,10 @@ const char actions_rcs[] = "$Id: actions.c,v 1.32.2.1 2002/05/26 12:13:16 roro E
  *
  * Revisions   :
  *    $Log: actions.c,v $
+ *    Revision 1.32.2.2  2002/11/20 14:36:55  oes
+ *    Extended unload_current_actions_file() to multiple AFs.
+ *    Thanks to Oliver Stoeneberg for the hint.
+ *
  *    Revision 1.32.2.1  2002/05/26 12:13:16  roro
  *    Change unsigned to unsigned long in actions_name struct.  This closes
  *    SourceForge Bug #539284.
@@ -878,10 +882,15 @@ static struct file_list *current_actions_file[MAX_ACTION_FILES]  = {
  *********************************************************************/
 void unload_current_actions_file(void)
 {
-   if (current_actions_file)
+   int i;
+
+   for (i = 0; i < MAX_ACTION_FILES; i++)
    {
-      current_actions_file->unloader = unload_actions_file;
-      current_actions_file = NULL;
+      if (current_actions_file[i])
+      {
+         current_actions_file[i]->unloader = unload_actions_file;
+         current_actions_file[i] = NULL;
+      }
    }
 }
 #endif /* FEATURE_GRACEFUL_TERMINATION */
