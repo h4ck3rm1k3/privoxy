@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.3 2002/11/10 04:20:02 hal9 Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.4 2003/03/07 03:41:05 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -40,6 +40,9 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.3 2002/11/10 04:20:02 hal9 E
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.56.2.4  2003/03/07 03:41:05  david__schmidt
+ *    Wrapping all *_r functions (the non-_r versions of them) with mutex semaphores for OSX.  Hopefully this will take care of all of those pesky crash reports.
+ *
  *    Revision 1.56.2.3  2002/11/10 04:20:02  hal9
  *    Fix typo: supressed -> suppressed
  *
@@ -419,6 +422,11 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.3 2002/11/10 04:20:02 hal9 E
 #include <unistd.h>
 #endif
 
+#ifdef OSX_DARWIN
+#include <pthread.h>
+#include "jcc.h"
+/* jcc.h is for mutex semapores only */
+#endif /* def OSX_DARWIN */
 #include "project.h"
 #include "list.h"
 #include "parsers.h"
@@ -1778,6 +1786,10 @@ jb_err server_set_cookie(struct client_state *csp, char **header)
       time (&now); 
 #ifdef HAVE_LOCALTIME_R
       tm_now = *localtime_r(&now, &tm_now);
+#elif OSX_DARWIN
+      pthread_mutex_lock(&localtime_mutex);
+      tm_now = *localtime (&now); 
+      pthread_mutex_unlock(&localtime_mutex);
 #else
       tm_now = *localtime (&now); 
 #endif

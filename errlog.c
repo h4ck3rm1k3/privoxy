@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.40.2.2 2002/09/28 00:30:57 david__schmidt Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.40.2.3 2003/03/07 03:41:04 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,9 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.40.2.2 2002/09/28 00:30:57 david__s
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.40.2.3  2003/03/07 03:41:04  david__schmidt
+ *    Wrapping all *_r functions (the non-_r versions of them) with mutex semaphores for OSX.  Hopefully this will take care of all of those pesky crash reports.
+ *
  *    Revision 1.40.2.2  2002/09/28 00:30:57  david__schmidt
  *    Update error logging to give sane values for thread IDs on Mach kernels.
  *    It's still a hack, but at least it looks farily normal.  We print the
@@ -464,6 +467,10 @@ void log_error(int loglevel, char *fmt, ...)
        time (&now);
 #ifdef HAVE_LOCALTIME_R
        tm_now = *localtime_r(&now, &tm_now);
+#elif OSX_DARWIN
+       pthread_mutex_lock(&localtime_mutex);
+       tm_now = *localtime (&now); 
+       pthread_mutex_unlock(&localtime_mutex);
 #else
        tm_now = *localtime (&now); 
 #endif
@@ -727,11 +734,19 @@ void log_error(int loglevel, char *fmt, ...)
                time (&now); 
 #ifdef HAVE_GMTIME_R
                gmt = *gmtime_r(&now, &gmt);
+#elif OSX_DARWIN
+               pthread_mutex_lock(&gmtime_mutex);
+               gmt = *gmtime(&now);
+               pthread_mutex_unlock(&gmtime_mutex);
 #else
                gmt = *gmtime(&now);
 #endif
 #ifdef HAVE_LOCALTIME_R
                tm_now = localtime_r(&now, &dummy);
+#elif OSX_DARWIN
+               pthread_mutex_lock(&localtime_mutex);
+               tm_now = localtime (&now); 
+               pthread_mutex_unlock(&localtime_mutex);
 #else
                tm_now = localtime (&now); 
 #endif

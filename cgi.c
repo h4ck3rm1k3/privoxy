@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.3 2002/11/28 18:14:32 oes Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.4 2003/03/07 03:41:03 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,9 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.3 2002/11/28 18:14:32 oes Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.70.2.4  2003/03/07 03:41:03  david__schmidt
+ *    Wrapping all *_r functions (the non-_r versions of them) with mutex semaphores for OSX.  Hopefully this will take care of all of those pesky crash reports.
+ *
  *    Revision 1.70.2.3  2002/11/28 18:14:32  oes
  *    Disable access to critical CGIs via untrusted referrers.
  *    This prevents users from being tricked by malicious websites
@@ -435,7 +438,11 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.3 2002/11/28 18:14:32 oes Exp $";
 #endif /* def FEATURE_CGI_EDIT_ACTIONS */
 #include "loadcfg.h"
 /* loadcfg.h is for g_bToggleIJB only */
-
+#ifdef FEATURE_PTHREAD
+#include <pthread.h>
+#include "jcc.h"
+/* jcc.h is for mutex semaphore globals only */
+#endif /* def FEATURE_PTHREAD */
 const char cgi_h_rcs[] = CGI_H_VERSION;
 
 /*
@@ -1517,7 +1524,11 @@ void get_http_time(int time_offset, char *buf)
 
    /* get and save the gmt */
    {
-#ifdef HAVE_GMTIME_R
+#ifdef OSX_DARWIN
+      pthread_mutex_lock(&gmtime_mutex);
+      t = gmtime(&current_time);
+      pthread_mutex_unlock(&gmtime_mutex);
+#elif HAVE_GMTIME_R
       struct tm dummy;
       t = gmtime_r(&current_time, &dummy);
 #else

@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.3 2003/02/28 12:53:06 oes Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.4 2003/03/07 03:41:04 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.3 2003/02/28 12:53:06 oes Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.92.2.4  2003/03/07 03:41:04  david__schmidt
+ *    Wrapping all *_r functions (the non-_r versions of them) with mutex semaphores for OSX.  Hopefully this will take care of all of those pesky crash reports.
+ *
  *    Revision 1.92.2.3  2003/02/28 12:53:06  oes
  *    Fixed two mostly harmless mem leaks
  *
@@ -669,6 +672,16 @@ static int32 server_thread(void *data);
 #ifdef __OS2__
 #define sleep(N)  DosSleep(((N) * 100))
 #endif
+
+#ifdef OSX_DARWIN
+/*
+ * Hit OSX over the head with a hammer.  Protect all *_r functions.
+ */
+pthread_mutex_t gmtime_mutex;
+pthread_mutex_t localtime_mutex;
+pthread_mutex_t gethostbyaddr_mutex;
+pthread_mutex_t gethostbyname_mutex;
+#endif /* def OSX_DARWIN */
 
 #if defined(unix) || defined(__EMX__)
 const char *basedir;
@@ -1848,6 +1861,16 @@ int main(int argc, const char *argv[])
 #elif defined(_WIN32)
    InitWin32();
 #endif
+
+#ifdef OSX_DARWIN
+   /*
+    * Prepare global mutex semaphores
+    */
+   pthread_mutex_init(&gmtime_mutex,0);
+   pthread_mutex_init(&localtime_mutex,0);
+   pthread_mutex_init(&gethostbyaddr_mutex,0);
+   pthread_mutex_init(&gethostbyname_mutex,0);
+#endif /* def OSX_DARWIN */
 
    /*
     * Unix signal handling
