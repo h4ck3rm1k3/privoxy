@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.11.2.3 2002/08/05 11:43:56 oes Exp $
+#  $Id: default.filter,v 1.11.2.4 2002/08/10 11:32:29 oes Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -226,27 +226,27 @@ s|<img (src="[^"]*") ([^>]*)width\s*=\s*?(["']?)(\d+?)\3(.*)>|<img $1 width="$4"
 FILTER: banners-by-size Kill banners by size
 
 # 88*31
-s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)88\3)[^>]*(height=(['"]?)31\5)[^>]*>@<img src="http://config.privoxy.org/send-banner?type=auto" alt="Killed $1 by size" $2 $4>@sigU
+s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)88\3)[^>]*(height=(['"]?)31\5)[^>]*>@<img src=http://config.privoxy.org/send-banner?type=auto alt=Killed-$1-by-size $2 $4>@sigU
 # 120*60, 120*90, 120*240, 120*600
-s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)120\3)[^>]*(height=(['"]?)(?:600?|90|240)\5)[^>]*>@<img src="http://config.privoxy.org/send-banner?type=auto" alt="Killed $1 by size" $2 $4>@sigU
+s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)120\3)[^>]*(height=(['"]?)(?:600?|90|240)\5)[^>]*>@<img src=http://config.privoxy.org/send-banner?type=auto alt=Killed-$1-by-size $2 $4>@sigU
 # 125*125
-s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)125\3)[^>]*(height=(['"]?)125\5)[^>]*>@<img src="http://config.privoxy.org/send-banner?type=auto" alt="Killed $1 by size" $2 $4>@sigU
+s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)125\3)[^>]*(height=(['"]?)125\5)[^>]*>@<img src=http://config.privoxy.org/send-banner?type=auto alt=Killed-$1-by-size $2 $4>@sigU
 # 160*600
-s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)160\3)[^>]*(height=(['"]?)600\5)[^>]*>@<img src="http://config.privoxy.org/send-banner?type=auto" alt="Killed $1 by size" $2 $4>@sigU
+s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)160\3)[^>]*(height=(['"]?)600\5)[^>]*>@<img src=http://config.privoxy.org/send-banner?type=auto alt=Killed-$1-by-size $2 $4>@sigU
 # 180*150
-s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)180\3)[^>]*(height=(['"]?)150\5)[^>]*>@<img src="http://config.privoxy.org/send-banner?type=auto" alt="Killed $1 by size" $2 $4>@sigU
+s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)180\3)[^>]*(height=(['"]?)150\5)[^>]*>@<img src=http://config.privoxy.org/send-banner?type=auto alt=Killed-$1-by-size $2 $4>@sigU
 # 234*60, 468*60 (Most Banners!)
-s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)(?:234|468)\3)[^>]*(height=(['"]?)60\5)[^>]*>@<img src="http://config.privoxy.org/send-banner?type=auto" alt="Killed $1 by size" $2 $4>@sigU
+s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)(?:234|468)\3)[^>]*(height=(['"]?)60\5)[^>]*>@<img src=http://config.privoxy.org/send-banner?type=auto alt=Killed-$1-by-size $2 $4>@sigU
 # 240*400
-s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)240\3)[^>]*(height=(['"]?)400\5)[^>]*>@<img src="http://config.privoxy.org/send-banner?type=auto" alt="Killed $1 by size" $2 $4>@sigU
+s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)240\3)[^>]*(height=(['"]?)400\5)[^>]*>@<img src=http://config.privoxy.org/send-banner?type=auto alt=Killed-$1-by-size $2 $4>@sigU
 # 250*250, 300*250
-s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)(?:250|300)\3)[^>]*(height=(['"]?)250\5)[^>]*>@<img src="http://config.privoxy.org/send-banner?type=auto" alt="Killed $1 by size" $2 $4>@sigU
+s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)(?:250|300)\3)[^>]*(height=(['"]?)250\5)[^>]*>@<img src=http://config.privoxy.org/send-banner?type=auto alt=Killed-$1-by-size $2 $4>@sigU
 # 336*280
-s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)336\3)[^>]*(height=(['"]?)280\5)[^>]*>@<img src="http://config.privoxy.org/send-banner?type=auto" alt="Killed $1 by size" $2 $4>@sigU
+s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)336\3)[^>]*(height=(['"]?)280\5)[^>]*>@<img src=http://config.privoxy.org/send-banner?type=auto alt=Killed-$1-by-size $2 $4>@sigU
 
 # Note: 200*50 was also proposed, but it probably causes too much collateral damage:
 #
-#s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)200\3)[^>]*(height=(['"]?)50\5)[^>]*>@<img src="http://config.privoxy.org/send-banner?type=auto" alt="Killed $1 by size" $2 $4>@sigU
+#s@<img(?: src="([^"]*)")??[^>]*(width=(['"]?)200\3)[^>]*(height=(['"]?)50\5)[^>]*>@<img src=http://config.privoxy.org/send-banner?type=auto alt=Killed-$1-by-size $2 $4>@sigU
 
 
 #################################################################################
@@ -347,6 +347,9 @@ s+^.*warez.*$+<html><head><title>No Warez</title></head><body><h3>You're not sea
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.11.2.4  2002/08/10 11:32:29  oes
+#     Attribute values in replacement tags of banners-by-size filter now undelimited. (Fixes bug #592493)
+#
 #     Revision 1.11.2.3  2002/08/05 11:43:56  oes
 #     Fixed a bug in the popups filter that was introduced with the last fix :-(
 #
