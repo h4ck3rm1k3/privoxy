@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.37 2003/10/17 11:01:50 oes Exp $
+ $Id: faq.sgml,v 1.61.2.38 2003/12/10 03:39:45 hal9 Exp $
 
  Copyright (C) 2001-2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.37 2003/10/17 11:01:50 oes Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.38 2003/12/10 03:39:45 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1883,21 +1883,105 @@ Why?</title>
 </para>
 </sect2>
 
-
-</sect1>
-<!--
-</sect1>
--->
-
-<!--   ~~~~~       New section      ~~~~~     -->
-<!--
-FIXME: Commented out until we have something to put here. HB 03/18/02.
-<sect1 id="knownissues"><title>Known Issues</title>
+<sect2 renderas="sect3" id="inuse">
+<title>When I try to launch <application>Privoxy</application>, I get an 
+error message <quote>port 8118 is already in use</quote> (or similar wording).
+Why?</title>
 <para>
-   Fill me.
+ Port 8118 is <application>Privoxy's</application> default
+ <quote>listening</quote> port. Typically this message would mean that there
+ is already one instance of <application>Privoxy</application> running, and
+ you are actually trying to start a second <application>Privoxy</application> 
+ on the same port, which will not work. How and why this might happen varies
+ from platform to platform, but you need to check your installation and
+ start-up procedures.
 </para>
+</sect2>
+
+<sect2 renderas="sect3" id="demoronizer">
+<title>
+ Pages with UTF-8 fonts are garbled.
+</title>
+<para>
+ This is caused by the <quote>demoronizer</quote> filter, which was introduced 
+ in version 3.0.2, and was inappropriately turned on by default. You should 
+ either upgrade <application>Privoxy</application>, or at least upgrade to the most 
+ recent <filename>default.action</filename> file available from 
+ <ulink url="http://sourceforge.net/project/showfiles.php?group_id=11118">SourceForge</ulink>.
+ Or you can simply disable the demoronizer filter.
+</para>
+</sect2>
+
+<sect2 renderas="sect3" id="demoronizer2">
+<title>
+ Why are binary files (such as images) corrupted when <application>Privoxy</application>
+ is used?
+</title>
+<para>
+ This may also be caused by the <quote>demoronizer</quote> filter, 
+ in conjunction with a web server that is misreporting a file type. Binary 
+ files are exempted from <application>Privoxy's</application> filtering
+ (unless the web server by mistake says the file is a plain text file). Either
+ upgrade <application>Privoxy</application>, or go to the most recent
+ <filename>default.action</filename> file available from <ulink
+ url="http://sourceforge.net/project/showfiles.php?group_id=11118">SourceForge</ulink>.
+</para>
+</sect2>
+
+<sect2 renderas="sect3" id="demoronizer3">
+<title>
+ What is the <quote>demoronizer</quote> and why is it there?
+</title>
+<para>
+ The original demoronizer was a Perl script that cleaned up HTML pages which 
+ were created with certain Microsoft products. MS has used proprietary extensions 
+ to standardized font encodings (ISO 8859-1), which has caused problems for pages
+ that are viewed with non-Microsoft products (and are expecting to see a
+ standard set of fonts). The demoronizer corrected these errors so the pages
+ displayed correctly. <application>Privoxy</application> borrowed from this
+ script, introducing a filter based on the original demoronizer, which in turn could
+ correct these errors on the fly. 
+</para>
+<para>
+ But this is only needed in some situations, and will cause serious problems in some 
+ other situations.
+</para>
+<para>
+ If you are using Microsoft products, you do not need it. If you need to view 
+ pages with UTF-8 characters (such as Cyrillic or Chinese), then it will 
+ cause corruption of the fonts, and thus <emphasis>should not be on</emphasis>.
+</para>
+<para>
+ On the other hand, if you use non-Microsoft products, and you occasionally 
+ notice wierd characters on pages, you might want to try it.
+</para>
+<para>
+ This filter was introduced with version 3.0.2 of <application>Privoxy</application>,
+ and was on by default in that version. It is off in all subsequent versions 
+ (unless turned on by the user).
+</para>
+</sect2>
+
+<sect2 renderas="sect3" id="windowopen">
+<title>
+ Why do I keep seeing <quote>PrivoxyWindowOpen()</quote> in raw source code?
+</title>
+<para>
+ <application>Privoxy</application> is attempting to disable malicious 
+ Javascript in this case, with the <literal>unsolicited-popups</literal>
+ filter. <application>Privoxy</application> cannot tell very well 
+ <quote>good</quote> code snippets from <quote>bad</quote> code snippets.
+</para>
+<para>
+ If you see this in HTML source, and the page displays without problems, then 
+ this is good, and likely some pop-up window was disabled. If you see this 
+ where it is causing a problem, such as a downloaded program source code file, 
+ then you should set an exception for this site or page such that the
+ integrity of the page stays in tact by disabling all filtering.
+</para>
+</sect2>
+
 </sect1>
--->
 
   <!--   ~~~~~       New section      ~~~~~     -->
   <sect1 id="contact"><title>Contacting the developers, Bug Reporting and Feature Requests</title>
@@ -1975,6 +2059,11 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.38  2003/12/10 03:39:45  hal9
+Added FAQs for: demoronizer, related problems and why its included. Also,
+port 8118 already in use questions, and PrivoxyWindowOpen() questions. All in
+troubleshooting section.
+
 Revision 1.61.2.37  2003/10/17 11:01:50  oes
 Added Q&A for "not being used" page problem
 
