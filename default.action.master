@@ -2,12 +2,12 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.36 2004/01/25 18:54:51 david__schmidt Exp $
+#  $Id: default.action.master,v 1.1.2.37 2004/01/30 15:28:45 oes Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
 #
-#  Copyright   :  Written by and Copyright
+#  Copyright   :  Written by and Copyright (C) 2001 - 2004 the
 #                 Privoxy team. http://www.privoxy.org/
 #
 # Note: Updated versions of this file will be made available from time
@@ -537,6 +537,8 @@ countr*.
 .uni-*.de
 .tu-*.de
 
+.gov
+
 #############################################################################
 # Site-specific block patterns;
 #############################################################################
@@ -654,6 +656,8 @@ www.searchking.com:443
 www.dshield.org/.*anner.gif
 #MASTER# REMARKS: #MASTER# BLOCK-REFERRER: http://www.msnbc.com/news/880835.asp?cp1=1
 #MASTER# REMARKS: di.image.eshop.msn.com
+#MASTER# BLOCK-REFERRER: http://www.nytimes.com/2003/12/18/politics/campaigns/18BRAU.html?hp
+xlonhcld.xlontech.net/
 
 #----------------------------------------------------------------------------
 # JavaScripts for ad and popup generation
@@ -821,6 +825,11 @@ www.allosponsor.com/images/ban
 .adtrix.com
 #MASTER# BLOCK-REFERRER: http://discussion.brighthand.com/forumdisplay.php?s=fee44a5b2a6fc2e9e79d6472bc8fbe94&forumid=197
 *[0-9].tribalfusion.com/
+#MASTER# BLOCK-REFERRER: http://www.sf.net/
+ads.osdn.com/?ad
+#MASTER# BLOCK-REFERRER: http://www.nytimes.com/
+kt*.kliptracker.com/
+gfx.dvlabs.com/klipmart/
 
 #----------------------------------------------------------------------------
 # Cross-site user tracking
@@ -978,6 +987,9 @@ rcm-images.amazon.com/
 #MASTER# BLOCK-REFERRER: http://millionaire.itv.com/millionaire/game/freegame/nq-anytime/anytimeset.html
 millionaire.itv.com/.*/assets/
 www.digitoday.fi/services/
+#MASTER# BLOCK-REFERRER: http://www.heise.de/
+#MASTER# BLOCK-REFERRER: http://www.spiegel.de/
+/RealMedia/ads/
 
 #############################################################################
 # Site-specific unblockers:
@@ -1479,6 +1491,8 @@ images.newsx.cc/news9albany_media/weather/
 66.28.250.180/data/
 #MASTER# PROBLEM-URL: http://www.stanford.edu/group/pandegroup/folding/
 www.stanford.edu/group/pandegroup/folding/villin/
+#MASTER# PROBLEM-URL: http://www.teamquest.com/html/gunther/laquiz.shtml
+www.teamquest.com/gifs/gunther/
 
 #----------------------------------------------------------------------------
 # These sites are so abusive that we need to kill all JS event bindings (and
@@ -1585,6 +1599,8 @@ www.metrolounge.de
 www.mcmaster.com/products.html
 #MASTER# PROBLEM-URL: http://www.nbc4.com/news/2672416/detail.html
 cf.nbc4.com/
+#MASTER# PROBLEM-URL: http://www.hh.schule.de/ak/nt/
+www.hh.schule.de/ak/nt/
 
 {+fast-redirects -block}
 #MASTER# PROBLEM-URL: http://isbn.nu/0596001088/price/2.html
