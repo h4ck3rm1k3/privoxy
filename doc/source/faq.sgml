@@ -8,10 +8,10 @@
 <!entity history SYSTEM "history.sgml">
 <!entity copyright SYSTEM "copyright.sgml">
 <!entity license SYSTEM "license.sgml">
-<!entity p-version "0.0.0">
-<!entity p-status "UNRELEASED">
-<!entity % p-not-stable "INCLUDE">
-<!entity % p-stable "IGNORE">
+<!entity p-version "3.0.0">
+<!entity p-status "stable">
+<!entity % p-not-stable "IGNORE">
+<!entity % p-stable "INCLUDE">
 <!entity % p-text "IGNORE">        <!-- define we are not a text only doc -->
 <!entity % p-doc "INCLUDE">        <!-- and we are a formal doc           -->
 <!entity % p-supp-userman "INCLUDE"> <!-- Include all from supported.sgml -->
@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.25 2002/10/29 03:21:50 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.26 2002/11/17 06:41:06 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -50,9 +50,12 @@
 
  ========================================================================
  NOTE: Please read developer-manual/documentation.html before touching 
- anything in this, or other Privoxy documentation. You have been warned!
- Failure to abide by this rule will result in the revocation of your license 
  to live a peaceful existence!
+
+ Please we keep the info in this file as version independent as possible 
+ so we only have to maintain one FAQ. Where significant changes are 
+ made to Privoxy configuration, please note the change in such a way that 
+ it makes sense to both users of older and newer versions.
  ========================================================================
 
 
@@ -72,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.25 2002/10/29 03:21:50 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.26 2002/11/17 06:41:06 hal9 Exp $</pubdate>
 
 <!--
 
@@ -648,148 +651,23 @@ the differences?</title>
   help you get started, we provide you with three different default action
   <quote>profiles</quote> in the web based actions file editor at <ulink
   url="http://config.privoxy.org/show-status">http://config.privoxy.org/show-status</ulink>.
-  The following table shows you, which of the most important features are
-  enabled in each configuration:
+  See the <ulink url="../user-manual/actions-file.html"><citetitle>User
+  Manual</citetitle></ulink> for a list of actions, and how the default 
+  profiles are set.
  </para>
- <para>
-<table frame=all><title>Default Configurations</title>
-<tgroup cols=4 align=left colsep=1 rowsep=1>
-<colspec colname=c1>
-<colspec colname=c2>
-<colspec colname=c3>
-<colspec colname=c4>
-<thead>
-<row>
-  <entry>Feature</entry>
-  <entry>Cautious</entry>
-  <entry>Intermadiate</entry>
-  <entry>Radical</entry>
-</row>
-</thead>
-<!--  <tfoot> -->
-<!--  <row> -->
-<!--    <entry>f1</entry> -->
-<!--    <entry>f2</entry> -->
-<!--    <entry>f3</entry> -->
-<!--    <entry>f4</entry> -->
-<!--  </row> -->
-<!--  </tfoot> -->
-<tbody>
 
-<row>
-  <entry>Ad-blocking by URL</entry>
-  <entry>yes</entry>
-  <entry>yes</entry>
-  <entry>yes</entry>
-</row>
-
-<row>
-  <entry>Ad-filtering by size</entry>
-  <entry>yes</entry>
-  <entry>yes</entry>
-  <entry>yes</entry>
-</row>
-
-<row>
-  <entry>GIF de-animation</entry>
-  <entry>no</entry>
-  <entry>yes</entry>
-  <entry>yes</entry>
-</row>
-
-<row>
-  <entry>Referer forging</entry>
-  <entry>no</entry>
-  <entry>yes</entry>
-  <entry>yes</entry>
-</row>
-
-<row>
-  <entry>Cookie handling</entry>
-  <entry>none</entry>
-  <entry>session-only</entry>
-  <entry>kill</entry>
-</row>
-
-<row>
-  <entry>Pop-up killing</entry>
-  <entry>no</entry>
-  <entry>yes</entry>
-  <entry>yes</entry>
-</row>
-
-<row>
-  <entry>Fast redirects</entry>
-  <entry>no</entry>
-  <entry>no</entry>
-  <entry>yes</entry>
-</row>
-
-<row>
-  <entry>HTML taming</entry>
-  <entry>yes</entry>
-  <entry>yes</entry>
-  <entry>yes</entry>
-</row>
-
-<row>
-  <entry>JavaScript taming</entry>
-  <entry>yes</entry>
-  <entry>yes</entry>
-  <entry>yes</entry>
-</row>
-
-<row>
-  <entry>Web-bug killing</entry>
-  <entry>yes</entry>
-  <entry>yes</entry>
-  <entry>yes</entry>
-</row>
-
-<row>
-  <entry>Fun text replacements</entry>
-  <entry>no</entry>
-  <entry>no</entry>
-  <entry>yes</entry>
-</row>
-
-<row>
-  <entry>Image tag reordering</entry>
-  <entry>no</entry>
-  <entry>no</entry>
-  <entry>yes</entry>
-</row>
-
-<row>
-  <entry>Ad-filtering by link</entry>
-  <entry>no</entry>
-  <entry>no</entry>
-  <entry>yes</entry>
-</row>
-
-<row>
-  <entry>Demoronizer</entry>
-  <entry>no</entry>
-  <entry>no</entry>
-  <entry>yes</entry>
-</row>
-
-
-</tbody>
-</tgroup>
-</table>
-</para>
 <para>
  Where the defaults are likely to break some sites, exceptions for
  known popular <quote>problem</quote> sites are included, but in
- general, the more aggressive your default settings are, the more
- exceptions you will have to make later. See the <ulink
- url="../user-manual/index.html">user manual</ulink> for a more
- deatiled discussion.
+ general, the more aggressive your default settings are, the more exceptions
+ you will have to make later. See the <ulink
+ url="../user-manual/index.html"><citetitle>User Manual</citetitle></ulink>
+ for a more deatiled discussion.
 </para>
 
 <para>
- It should be noted that the <quote>Radical</quote> profile is not only more
+ It should be noted that the <quote>Radical</quote> profile (formerly known 
+ as the <quote>Advanced</quote> profile) is not only more
  aggressive, but also includes fun and, extreme usage of most of
  <application>Privoxy's</application> features. Use at your own risk!
 </para>
@@ -1151,6 +1029,33 @@ and thus avoid individual browser configuration?</title>
 </para>
 </sect2>
 
+<sect2 renderas="sect3" id="allow-cookies">
+<title>How can I allow permanent cookies for my trusted sites?</title>
+
+<para>
+  There are several actions that relate to cookies. The default behavior is to 
+  allow only <quote>session cookies</quote>, which means the cookies only last
+  for the current browser session. This eliminates most kinds of abuse related 
+  to cookies. But there may be cases where we want cookies to last.
+</para>
+<para>
+  To disable all cookie actions, so that cookies are allowed unrestricted,
+  both in and out, for <literal>example.com</literal>: 
+</para>
+<para>
+ <screen>
+ { -crunch-incoming-cookies -crunch-outgoing-cookies -session-cookies-only -filter{content-cookies} }
+  .example.com</screen>
+</para>
+<para>
+ Place the above in <filename>user.action</filename>. Note some of these may
+ be off by default anyway, so this might be redundant, but there is no harm
+ being explicit in what you want to happen. <filename>user.action</filename>
+ includes an alias for this situation, called
+ <literal>allow-cookies</literal>.
+</para>
+</sect2>
+
 </sect1>
 
 <!--  ~  End section  ~  -->
@@ -1294,7 +1199,7 @@ how to do that. Please note that you (technically) need the latest
  url="http://www.multiproxy.org/anon_list.htm">multiproxy.org</ulink> and many
  more through Google. A particularly interesting project is the JAP service
  offered by the Technical University of Dresden (<ulink
- url="http://anon.inf.tu-dresden.de/index_en.html">http://anon.inf.tu-dresden.de/index_en.html</ulink>.
+ url="http://anon.inf.tu-dresden.de/index_en.html">http://anon.inf.tu-dresden.de/index_en.html</ulink>).
 </para>
 <para>
  There is, however, even in the single-machine case the possibility to make the
@@ -1600,7 +1505,8 @@ and related issues?</title>
  activated the <quote><literal>fun</literal></quote> filter which
  is clearly labeled <quote>Text replacements for subversive browsing
  fun!</quote> or you have implicitly activated it by choosing the
- <quote>Radical</quote> profile in the web-based editor.
+ <quote>Radical</quote> profile in the web-based editor (formerly known 
+ as the <application>Advanced</application> profile).
 </para>
 </sect2>
 
@@ -1931,6 +1837,10 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.26  2002/11/17 06:41:06  hal9
+Move default profiles table from FAQ to U-M, and other minor related changes.
+Add faq on cookies.
+
 Revision 1.61.2.25  2002/10/29 03:21:50  hal9
 Add 3 Q/A's relating to HTML in email. Other minor touchups.
 

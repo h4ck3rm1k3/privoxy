@@ -11,11 +11,11 @@
 <!entity license SYSTEM "license.sgml">
 <!entity p-authors SYSTEM "p-authors.sgml">
 <!entity config SYSTEM "p-config.sgml">
-<!entity p-version "0.0.0">
-<!entity p-status "UNRELEASED">
+<!entity p-version "3.0.0">
+<!entity p-status "stable">
 <!entity % p-authors-formal "INCLUDE"> <!-- include additional text, etc  -->
-<!entity % p-not-stable "INCLUDE">
-<!entity % p-stable "IGNORE">
+<!entity % p-not-stable "IGNORE">
+<!entity % p-stable "INCLUDE">
 <!entity % p-text "IGNORE">        <!-- define we are not a text only doc -->
 <!entity % p-doc "INCLUDE">        <!-- and we are a formal doc           -->
 <!entity % p-readme "IGNORE">
@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.23 2002/10/21 02:32:01 hal9 Exp $
+ $Id: user-manual.sgml,v 1.123.2.24 2002/11/17 06:41:06 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.23 2002/10/21 02:32:01 hal9 Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.24 2002/11/17 06:41:06 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1480,14 +1480,149 @@ must find a better place for this paragraph
      you select them explicitly in the editor</emphasis>. It is not recommend
      to edit this file.
     </para>
+    <para>
+     The default profiles, and their associated actions, as pre-defined in
+     <filename>standard.action</filename> are:
+    </para>
+    <para>
+    <table frame=all><title>Default Configurations</title>
+    <tgroup cols=4 align=left colsep=1 rowsep=1>
+    <colspec colname=c1>
+    <colspec colname=c2>
+    <colspec colname=c3>
+    <colspec colname=c4>
+    <thead>
+    <row>
+      <entry>Feature</entry>
+      <entry>Cautious</entry>
+      <entry>Intermadiate</entry>
+      <entry>Radical</entry>
+    </row>
+    </thead>
+    <!--  <tfoot> -->
+    <!--  <row> -->
+    <!--    <entry>f1</entry> -->
+    <!--    <entry>f2</entry> -->
+    <!--    <entry>f3</entry> -->
+    <!--    <entry>f4</entry> -->
+    <!--  </row> -->
+    <!--  </tfoot> -->
+    <tbody>
+
+    <row>
+      <entry>Ad-blocking by URL</entry>
+      <entry>yes</entry>
+      <entry>yes</entry>
+      <entry>yes</entry>
+    </row>
+
+    <row>
+      <entry>Ad-filtering by size</entry>
+      <entry>yes</entry>
+      <entry>yes</entry>
+      <entry>yes</entry>
+    </row>
+
+    <row>
+      <entry>GIF de-animation</entry>
+      <entry>no</entry>
+      <entry>yes</entry>
+      <entry>yes</entry>
+    </row>
+
+    <row>
+      <entry>Referer forging</entry>
+      <entry>no</entry>
+      <entry>yes</entry>
+      <entry>yes</entry>
+    </row>
+
+    <row>
+      <entry>Cookie handling</entry>
+      <entry>none</entry>
+      <entry>session-only</entry>
+      <entry>kill</entry>
+    </row>
+
+    <row>
+      <entry>Pop-up killing</entry>
+      <entry>no</entry>
+      <entry>yes</entry>
+      <entry>yes</entry>
+    </row>
+
+    <row>
+      <entry>Fast redirects</entry>
+      <entry>no</entry>
+      <entry>no</entry>
+      <entry>yes</entry>
+    </row>
+
+    <row>
+      <entry>HTML taming</entry>
+      <entry>yes</entry>
+      <entry>yes</entry>
+      <entry>yes</entry>
+    </row>
+
+    <row>
+      <entry>JavaScript taming</entry>
+      <entry>yes</entry>
+      <entry>yes</entry>
+      <entry>yes</entry>
+    </row>
+
+    <row>
+      <entry>Web-bug killing</entry>
+      <entry>yes</entry>
+      <entry>yes</entry>
+      <entry>yes</entry>
+    </row>
+
+    <row>
+      <entry>Fun text replacements</entry>
+      <entry>no</entry>
+      <entry>no</entry>
+      <entry>yes</entry>
+    </row>
+
+    <row>
+      <entry>Image tag reordering</entry>
+      <entry>no</entry>
+      <entry>no</entry>
+      <entry>yes</entry>
+    </row>
+
+    <row>
+      <entry>Ad-filtering by link</entry>
+      <entry>no</entry>
+      <entry>no</entry>
+      <entry>yes</entry>
+    </row>
+
+    <row>
+      <entry>Demoronizer</entry>
+      <entry>no</entry>
+      <entry>no</entry>
+      <entry>yes</entry>
+    </row>
+
+
+    </tbody>
+    </tgroup>
+    </table>
+    </para>
+
    </listitem> 
   </itemizedlist>
  </para> 
 
 <para>
  The list of actions files to be used are defined in the main configuration 
- file, and are processed in the order they are defined. The content of these
- can all be viewed and edited from <ulink
+ file, and are processed in the order they are defined (e.g.
+ <filename>default.action</filename> is typically process before
+ <filename>user.action</filename>). The content of these can all be viewed and
+ edited from <ulink
  url="http://config.privoxy.org/show-status">http://config.privoxy.org/show-status</ulink>.
 </para>
 
@@ -5769,6 +5904,10 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.24  2002/11/17 06:41:06  hal9
+ Move default profiles table from FAQ to U-M, and other minor related changes.
+ Add faq on cookies.
+
  Revision 1.123.2.23  2002/10/21 02:32:01  hal9
  Updates to the user.action examples section. A few new ones.
 
