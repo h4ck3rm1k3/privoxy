@@ -1,4 +1,4 @@
-# $Id: privoxy-rh.spec,v 1.33.2.12 2002/07/27 15:47:10 hal9 Exp $
+# $Id: privoxy-rh.spec,v 1.33.2.13 2002/07/27 21:39:41 kick_ Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -216,7 +216,7 @@ fi
 }
 /sbin/chkconfig --add privoxy
 if [ "$1" = "1" ]; then
-	/sbin/service %{name} condrestart > /dev/null 2>&1
+	/sbin/service %{name} condrestart > /dev/null 2>&1 ||:
 fi
 
 %preun
@@ -719,6 +719,9 @@ fi
 	additional "-r @" flag.
 
 # $Log: privoxy-rh.spec,v $
+# Revision 1.33.2.13  2002/07/27 21:39:41  kick_
+# condrestart raised an error during an fresh install when privoxy wasn't already running
+#
 # Revision 1.33.2.12  2002/07/27 15:47:10  hal9
 # Reset version and release for 2.9.16.
 #
