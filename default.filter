@@ -2,11 +2,11 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.11.2.21 2004/01/20 15:15:01 oes Exp $
+#  $Id: default.filter,v 1.11.2.22 2004/01/30 15:29:29 oes Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
-#  Copyright   :  Written by and Copyright
+#  Copyright   :  Written by and Copyright (C) 2001 - 2004 the
 #                 Privoxy team. http://www.privoxy.org/
 #
 # We value your feedback. However, to provide you with the best support,
@@ -490,6 +490,9 @@ s|(<img [^>]*)onload|$1never|sig
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.11.2.22  2004/01/30 15:29:29  oes
+#     Updated the copyright note
+#
 #     Revision 1.11.2.21  2004/01/20 15:15:01  oes
 #     Detail enhancement in all-popups
 #
