@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.16 2002/08/14 16:43:27 hal9 Exp $
+# $Id: GNUmakefile.in,v 1.104.2.17 2002/08/16 03:19:34 hal9 Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -766,19 +766,22 @@ dok-shtml: dok-release
 
 # Make pdf docs from single page html. Requires htmldoc, see
 # (http://www.easysw.com/htmldoc/). Note: 1.8.20 has a TOC bug.
-#		$(PERL) -pi.bak -e 's/(<\/?)SUB/$$1small/i' privoxy-$$i.html 
+# PDF docs are uploaded to webserver as zip archive.
 dok-pdf: dok-shtml
 	@$(ECHO) -n "starting htmldoc version: "; htmldoc --version
-	cd utils/ldp_print && $(RM) *html *bak *jpg *tmp *pdf
+	cd utils/ldp_print && $(RM) *html *bak *jpg *tmp *pdf *zip
 	cp -f doc/source/temp/*html doc/webserver/images/*jpg utils/ldp_print
 	cd utils/ldp_print ;\
-	$(PERL) -pi.bak -e 's/\.\.\/images\///; s/(<\/?)SUB/$$1small/i' *.html ;\
+	$(PERL) -pi.bak -e 's/\.\.\/images\///; s/(<\/?)SUB/$$1small/i;\
+	                    s/\.\.\/user-manual\/index\.html/privoxy-user-manual.pdf/;\
+					s/\.\.\/developer-manual\/index\.html/privoxy-developer-manual.pdf/;\
+					s/\.\.\/faq\/index\.html/privoxy-faq.pdf/' *.html ;\
 	for i in developer-manual user-manual faq; do \
 		./ldp_print privoxy-$$i.html ;\
 		$(ECHO) DONE: privoxy-$$i.pdf ;\
 	done ;\
-	$(MV) *.pdf ../../doc/pdf ;\
-	$(RM) -r *html *bak *jpg ../source/temp
+	$(MV) *.pdf  ../../doc/pdf ;\
+	$(RM) -r *html *bak *jpg *pdf *zip ../../doc/source/temp
 
 # Create release announcement in text and html, with short and long versions.
 # This is a standalone target, and must be invoked directly.
@@ -851,10 +854,11 @@ webserver: tidy
 	@cd doc/webserver; \
           upload=`find . -type f -a -not \( -path "*/CVS*" -o -path "*/results*" \)`; \
           $(TAR) c $$upload | ssh ijbswa.sourceforge.net 'cd /home/groups/i/ij/ijbswa/htdocs/; tar xvm 2>&1 | grep -v timestamp'
+	
 	@$(ECHO) Uploading pdf
-	@cd doc;\
-          upload="pdf/*pdf"; \
-          $(TAR) c $$upload | ssh ijbswa.sourceforge.net 'cd /home/groups/i/ij/ijbswa/htdocs/; tar xvm 2>&1 | grep -v timestamp'
+	@cd doc/pdf;\
+          zip privoxy-pdf-docs *.pdf  ;\
+		scp -q privoxy-pdf-docs.zip ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/pdf
 
 	@$(ECHO) Fixing permissions
 	@ssh ijbswa.sourceforge.net 'chmod -R 775 /home/groups/i/ij/ijbswa/htdocs 2>/dev/null; true'
@@ -991,6 +995,10 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.104.2.17  2002/08/16 03:19:34  hal9
+# More (minor) cleanup of html before pdf processing to make some relative
+# links work as pdf -> pdf. Upload pdf as zip archive now.
+#
 # Revision 1.104.2.16  2002/08/14 16:43:27  hal9
 # Added pdf docs to make webserver target.
 #
