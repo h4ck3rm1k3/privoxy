@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.5 2002/05/29 02:01:02 hal9 Exp $
+ $Id: user-manual.sgml,v 1.123.2.6 2002/06/06 23:11:03 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.5 2002/05/29 02:01:02 hal9 Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.6 2002/06/06 23:11:03 hal9 Exp $</pubdate>
 
 <!--
 
@@ -4186,7 +4186,7 @@ another.popular.site.net/more/junk/here/</screen>
  in a syntax that imitates <ulink url="http://www.perl.org/">Perl</ulink>'s
  <literal>s///</literal> operator. If you are familiar with Perl, you
  will find this to be quite intuitive, and may want to look at the
- <ulink url="http://www.oesterhelt.org/pcrs/pcrs.1.html">PCRS man page</ulink>
+ <ulink url="http://www.oesterhelt.org/pcrs/pcrs.3.html">PCRS man page</ulink>
  for the subtle differences to Perl behaviour. Most notably, the non-standard
  option letter <literal>U</literal> is supported, which turns the default
  to ungreedy matching.
@@ -5507,6 +5507,9 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.6  2002/06/06 23:11:03  hal9
+ Fix broken link. Linkchecked all docs.
+
  Revision 1.123.2.5  2002/05/29 02:01:02  hal9
  This is break out of the entire config section from u-m, so it can
  eventually be used to generate the comments, etc in the main config file
