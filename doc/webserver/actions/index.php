@@ -8,9 +8,12 @@
               This file belongs in
               ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
-  $Id: index.php,v 1.25.2.6 2003/11/30 11:39:52 oes Exp $
+  $Id: index.php,v 1.25.2.7 2004/01/30 17:16:44 oes Exp $
 
   $Log: index.php,v $
+  Revision 1.25.2.7  2004/01/30 17:16:44  oes
+  Require AF 1.8
+
   Revision 1.25.2.6  2003/11/30 11:39:52  oes
   Fixed typo
 
@@ -144,7 +147,7 @@
 /*
  * Config:
  */
-$required_actions_file_version = "1.7";
+$required_actions_file_version = "1.8";
 $required_privoxy_version = "3.0";
 $actions_file_download = "http://sourceforge.net/project/showfiles.php?group_id=11118&release_id=147447";
 $submit_target = "http://www.oesterhelt.org/actions/step2.php";
