@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.3 2003/03/07 03:41:04 david__schmidt Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.4 2003/04/04 12:40:20 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -35,6 +35,10 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.3 2003/03/07 03:41:04 da
  *
  * Revisions   :
  *    $Log: jbsockets.c,v $
+ *    Revision 1.35.2.4  2003/04/04 12:40:20  oes
+ *    Made sure the errno set by bind, not close[socket] is used in
+ *    bind_port. Probably fixes bugs #713777, #705562.
+ *
  *    Revision 1.35.2.3  2003/03/07 03:41:04  david__schmidt
  *    Wrapping all *_r functions (the non-_r versions of them) with mutex semaphores for OSX.  Hopefully this will take care of all of those pesky crash reports.
  *
@@ -595,11 +599,11 @@ int bind_port(const char *hostnam, int portnum, jb_socket *pfd)
 #ifndef _WIN32
    /*
     * This is not needed for Win32 - in fact, it stops
-    * duplicate instances of Junkbuster from being caught.
+    * duplicate instances of Privoxy from being caught.
     *
     * On UNIX, we assume the user is sensible enough not
     * to start Junkbuster multiple times on the same IP.
-    * Without this, stopping and restarting Junkbuster
+    * Without this, stopping and restarting Privoxy
     * from a script fails.
     * Note: SO_REUSEADDR is meant to only take over
     * sockets which are *not* in listen state in Linux,
@@ -608,9 +612,8 @@ int bind_port(const char *hostnam, int portnum, jb_socket *pfd)
    setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, (char *)&one, sizeof(one));
 #endif /* ndef _WIN32 */
 
-   if (bind (fd, (struct sockaddr *)&inaddr, sizeof(inaddr)) < 0)
+   if (bind(fd, (struct sockaddr *)&inaddr, sizeof(inaddr)) < 0)
    {
-      close_socket (fd);
 #ifdef _WIN32
       errno = WSAGetLastError();
       if (errno == WSAEADDRINUSE)
@@ -618,10 +621,12 @@ int bind_port(const char *hostnam, int portnum, jb_socket *pfd)
       if (errno == EADDRINUSE)
 #endif
       {
+         close_socket(fd);
          return(-3);
       }
       else
       {
+         close_socket(fd);
          return(-1);
       }
    }
