@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.action.master,v $
 # 
-#  $Id: default.action.master,v 1.1.2.29 2003/07/13 03:17:28 hal9 Exp $
+#  $Id: default.action.master,v 1.1.2.30 2003/07/20 16:18:30 hal9 Exp $
 #
 #  Purpose     :  Default actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -69,7 +69,7 @@
 # can be left out:
 # 
 # www.example.com 
-#   is a domain-only pattern and will match any request to www.yahoo.com
+#   is a domain-only pattern and will match any request to www.example.com
 # 
 # www.example.com/
 #   means exactly the same (but is slightly less efficient)
