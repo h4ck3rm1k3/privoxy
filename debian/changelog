@@ -1,3 +1,17 @@
+privoxy (3.0.0-2) unstable; urgency=low
+
+  * Recompile with libc6 from testing (instead of unstable).
+
+ -- Roland Rosenfeld <roland@debian.org>  Fri,  6 Sep 2002 17:32:35 +0200
+
+privoxy (3.0.0-1) unstable; urgency=low
+
+  * New upstream version (Closes: #158613).
+  * Remove version number from config file, to avoid changing it on every
+    new upstream version.  Sorry, this time you will still be bothered...
+
+ -- Roland Rosenfeld <roland@debian.org>  Sun,  1 Sep 2002 18:58:07 +0200
+
 privoxy (2.9.20-1) unstable; urgency=low
 
   * New upstream version.
