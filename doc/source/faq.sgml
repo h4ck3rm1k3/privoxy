@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.31 2003/06/25 01:27:51 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.32 2003/06/26 02:52:04 hal9 Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.31 2003/06/25 01:27:51 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.32 2003/06/26 02:52:04 hal9 Exp $</pubdate>
 
 <!--
 
@@ -1826,6 +1826,7 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
   &copyright;
  <!-- end -->
   
+
   <para>
    Portions of this document are <quote>borrowed</quote> from the original
    <application>Junkbuster</application> (tm) FAQ, and modified as 
@@ -1889,6 +1890,9 @@ FIXME: Commented out until we have something to put here. HB 03/18/02.
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.32  2003/06/26 02:52:04  hal9
+Test, no changes.
+
 Revision 1.61.2.31  2003/06/25 01:27:51  hal9
 Fix copyright, and a few nits.
 
