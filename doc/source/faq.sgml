@@ -8,7 +8,7 @@
 <!entity history SYSTEM "history.sgml">
 <!entity copyright SYSTEM "copyright.sgml">
 <!entity license SYSTEM "license.sgml">
-<!entity p-version "3.0.2">
+<!entity p-version "3.0.3">
 <!entity p-status "stable">
 <!entity % p-not-stable "IGNORE">
 <!entity % p-stable "INCLUDE">
@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.39 2004/01/29 22:53:08 hal9 Exp $
+ $Id: faq.sgml,v 1.61.2.40 2004/01/30 17:00:33 oes Exp $
 
  Copyright (C) 2001-2004 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -70,12 +70,12 @@
  <subscript>
 <!-- Completely the wrong markup, but very little is allowed  -->
 <!-- in this part of an article. FIXME -->
- <link linkend="copyright">Copyright</link> &my-copy; 2001-2003 by 
+ <link linkend="copyright">Copyright</link> &my-copy; 2001-2004 by 
  <ulink url="http://www.privoxy.org">Privoxy Developers</ulink>
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.39 2004/01/29 22:53:08 hal9 Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 1.61.2.40 2004/01/30 17:00:33 oes Exp $</pubdate>
 
 <!--
 
@@ -1829,6 +1829,19 @@ every time I start IE. What gives?</title>
 
 
 <!--   ~~~~~       New section      ~~~~~     -->
+<sect2 renderas="sect3" id="osximages">
+<title>In Mac OSX Panther (10.3), images often fail to load and/or I
+ experience random delays in page loading. I'm using
+ <literal>localhost</literal> as my browser's proxy setting.</title>
+ <para>
+  We believe this is due to an IPv6-related bug in OSX, but don't fully
+  understand the issue yet. In any case, changing the proxy setting to 
+  <literal>127.0.0.1</literal> instead of <literal>localhost</literal>
+  works around the problem.
+ </para>
+</sect2>
+
+<!--   ~~~~~       New section      ~~~~~     -->
 <sect2 renderas="sect3" id="blankpage">
 <title>I get a completely blank page at one site. <quote>View Source</quote>
  shows only: <markup><![CDATA[<html><body></body></html>]]></markup>. Without
@@ -2064,6 +2077,9 @@ Why?</title>
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 1.61.2.40  2004/01/30 17:00:33  oes
+Added OSX Panther problem
+
 Revision 1.61.2.39  2004/01/29 22:53:08  hal9
 Minor changes for exempting docs of text/plain. Change copyright date.
 
