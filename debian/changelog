@@ -1,4 +1,4 @@
-privoxy (2.9.15-beta-0) unstable; urgency=low
+privoxy (2.9.16-1) unstable; urgency=low
 
   * New upstream version.
   * Exclude CVS files from dh_installdocs (when compiling from CVS).
@@ -10,8 +10,10 @@ privoxy (2.9.15-beta-0) unstable; urgency=low
   * default.action fixed upstream: "downloads" no longer blocked 
     (Closes: #148290).
   * default.filter fixed upstream: Made WeBugs job ungreedy (Closes: #149450).
+  * Remove the "beta" from the version number (the final release will be
+    named 3.0, so it's superfluous).
 
- -- Roland Rosenfeld <roland@debian.org>  Sun, 30 Jun 2002 21:16:46 +0200
+ -- Roland Rosenfeld <roland@debian.org>  Sat, 27 Jul 2002 18:55:11 +0200
 
 privoxy (2.9.14-beta-4) unstable; urgency=low
 
