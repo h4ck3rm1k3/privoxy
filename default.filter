@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.11.2.18 2003/12/02 11:25:27 oes Exp $
+#  $Id: default.filter,v 1.11.2.19 2003/12/17 17:09:25 oes Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -435,6 +435,10 @@ FILTER: ie-exploits Disable some known Internet Explorer bug exploits
 #
 s%f\("javascript:location.replace\('mk:@MSITStore:C:'\)"\);%alert\("This page looks like it tries to use a vulnerability described here:\n http://online.securityfocus.com/archive/1/298748/2002-11-02/2002-11-08/2"\);%siU
 
+# Address bar spoofing (http://www.secunia.com/advisories/10395/):
+#
+s/(<a[^>]*href[^>]*)(\x01|\x02|\x03|%0[012])/$1MALICIOUS-LINK/ig
+
 # Nimda:
 #
 s%<script language="JavaScript">(window\.open|1;''\.concat)\("readme\.eml", null, "resizable=no,top=6000,left=6000"\)</script>%<br><font size="7"> WARNING: This Server is infected with <a href="http://www.cert.org/advisories/CA-2001-26.html">Nimda</a>!</font>%g
@@ -481,11 +485,13 @@ s|<IMG SRC="http://media.monster.com/mm/usen/my/no_thanks_211x40.gif".+?>|<meta 
 #
 s|(<img [^>]*)onload|$1never|sig
 
-
 ############################################################################## 
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.11.2.19  2003/12/17 17:09:25  oes
+#     Added remedy against IE address bar spoofing
+#
 #     Revision 1.11.2.18  2003/12/02 11:25:27  oes
 #     Fixed a line trashed in previous commit
 #
