@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.2 2002/11/20 14:37:47 oes Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.3 2003/02/28 12:53:06 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.2 2002/11/20 14:37:47 oes Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.92.2.3  2003/02/28 12:53:06  oes
+ *    Fixed two mostly harmless mem leaks
+ *
  *    Revision 1.92.2.2  2002/11/20 14:37:47  oes
  *    Fix: Head of global clients list now initialized to NULL
  *
@@ -860,6 +863,7 @@ static void chat(struct client_state *csp)
 
       log_error(LOG_LEVEL_CLF, "%s - - [%T] \" \" 400 0", csp->ip_addr_str);
 
+      free_http_request(http);
       return;
    }
 
@@ -1369,13 +1373,13 @@ static void chat(struct client_state *csp)
                    || write_socket(csp->cfd, p != NULL ? p : csp->iob->cur, csp->content_length))
                   {
                      log_error(LOG_LEVEL_ERROR, "write modified content to client failed: %E");
+                     freez(hdr);
+                     freez(p);
                      return;
                   }
 
                   freez(hdr);
-                  if (NULL != p) {
-                     freez(p);
-                  }
+                  freez(p);
                }
 
                break; /* "game over, man" */
