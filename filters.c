@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.58.2.3 2002/09/25 14:51:51 oes Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.58.2.4 2003/02/28 12:52:45 oes Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -38,6 +38,9 @@ const char filters_rcs[] = "$Id: filters.c,v 1.58.2.3 2002/09/25 14:51:51 oes Ex
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.58.2.4  2003/02/28 12:52:45  oes
+ *    Fixed a typo
+ *
  *    Revision 1.58.2.3  2002/09/25 14:51:51  oes
  *    Added basic support for OPTIONS and TRACE HTTP methods:
  *    New function direct_response which handles OPTIONS and
@@ -1258,7 +1261,7 @@ int is_untrusted_url(struct client_state *csp)
  *
  * Function    :  pcrs_filter_response
  *
- * Description :  Ecexute all text substitutions from all applying
+ * Description :  Execute all text substitutions from all applying
  *                +filter actions on the text buffer that's been accumulated
  *                in csp->iob->buf. If this changes the contents, set
  *                csp->content_length to the modified size and raise the
