@@ -8,7 +8,9 @@ ChangeLog for Privoxy
 - Added quicktime-kioskmode filter and improved frameset-borders
 - Updated default.action based on latest feedback
 - New PDF doc build process
-	
+- Add a user contrib module to cvs: 
+  http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/ijbswa/contrib/
+
 *** Version 2.9.18  ***
 
 - Added workaround for IE bug that broke CGI interface
@@ -244,4 +246,4 @@ Copyright   :  Written by and Copyright (C) 2001 the SourceForge
                or write to the Free Software Foundation, Inc., 59
                Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-
+set vi:tw=68
