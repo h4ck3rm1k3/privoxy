@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.8 2002/06/09 16:36:32 hal9 Exp $
+ $Id: user-manual.sgml,v 1.123.2.9 2002/07/11 03:40:28 david__schmidt Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.8 2002/06/09 16:36:32 hal9 Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 1.123.2.9 2002/07/11 03:40:28 david__schmidt Exp $</pubdate>
 
 <!--
 
@@ -277,17 +277,24 @@ automatically start Privoxy in the boot process.
 </sect3>
 
 <!--   ~~~~~       New section      ~~~~~     -->
-<sect3 id="installation-mac"><title>Max OSX</title>
+<sect3 id="installation-mac"><title>Mac OSX</title>
 <para>
  Unzip the downloaded package (you can either double-click on the file
- in the finder, or on the desktop if you downloaded it there).  Then,
- double-click on the package installer icon and follow the installation
- process.
- <application>Privoxy</application> will be installed in the subdirectory
- <literal>/Applications/Privoxy.app</literal>.
- <application>Privoxy</application> will set itself up to start 
- automatically on system bring-up via
- <literal>/System/Library/StartupItems/Privoxy</literal>.
+ in the finder, or on the desktop if you downloaded it there).  The
+ Privoxy.pkg package should appear after unzipping. Then,
+ double-click on that Privoxy.pkg package installer icon and follow
+ the installation process.
+ <application>Privoxy</application> will be installed in the folder
+ <literal>/Library/Privoxy</literal>.
+ It will run automatically whenever you start up.  To prevent it from
+ running automatically, remove or rename the folder
+ <literal>/Library/StartupItems/Privoxy</literal>. 
+</para>
+<para>
+ To run Privoxy by hand, double-click on 
+ <literal>RunPrivoxy.command</literal>.
+ To run Privoxy from Terminal, execute
+ <literal>/Library/Privoxy/RunPrivoxy.command</literal>. 
 </para>
 </sect3>
 
@@ -924,16 +931,23 @@ Example Unix startup command:
 </sect2>
 
 <sect2 id="start-macosx">
-<title>MAX OSX</title>
+<title>Mac OSX</title>
 <para>
  During installation, <application>Privoxy</application> is configured to
- start automatically when the system restarts. You can start it manually
- through the Terminal with these commands:
+ start automatically when the system restarts.  To run Privoxy by hand,
+ double-click on the <literal>RunPrivoxy.command</literal> icon in the
+ <literal>/Library/Privoxy</literal> folder.  Or, type this command
+ in the Terminal:
 </para>
 <para>
   <screen>
-  cd /Applications/Privoxy.app
-  ./privoxy</screen>
+  /Library/Privoxy/RunPrivoxy.command
+  </screen>
+</para>
+<para>
+ If you are not logged in as an administrator, you will be asked for the
+ administrator password when starting <application>Privoxy</application>
+ by hand.
 </para>
 </sect2>
 
@@ -5530,6 +5544,10 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 1.123.2.9  2002/07/11 03:40:28  david__schmidt
+
+ Updated Mac OSX sections due to installation location change
+
  Revision 1.123.2.8  2002/06/09 16:36:32  hal9
  Clarifications on filtering and MIME. Hardcode 'latest release' in index.html.
 
