@@ -8,9 +8,12 @@
               This file belongs in
               ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
-  $Id: step3.php,v 1.16.2.1 2002/08/23 12:25:31 oes Exp $
+  $Id: step3.php,v 1.16.2.2 2002/08/23 16:46:05 oes Exp $
 
   $Log: step3.php,v $
+  Revision 1.16.2.2  2002/08/23 16:46:05  oes
+  Adapt to master file format
+
   Revision 1.16.2.1  2002/08/23 12:25:31  oes
   Fixed Typo
 
@@ -225,7 +228,7 @@ if (isset($remarks))
    $lines = explode("\n", $remarks);
    foreach ($lines as $line)
    {
-      fwrite($fp, "#REMARKS: $line\n");
+      fwrite($fp, "#MASTER# REMARKS: $line\n");
    }
 }
 
@@ -240,21 +243,21 @@ switch ($problem)
     * Banner not blocked:
     */
    case "P1":
-      fwrite($fp, "#BLOCK-REFERRER: $referrer_url\n");
+      fwrite($fp, "#MASTER# BLOCK-REFERRER: $referrer_url\n");
       if (isset($num_images))
       {
          for($i=0; $i < $num_images; $i++)
          {
              if (isset($block_image[$i]))
              {
-                fwrite($fp, "#BLOCK-URL: $image_url[$i]\n");
+                fwrite($fp, "#MASTER# BLOCK-URL: $image_url[$i]\n");
                 $trackertext .= "Block image: $image_url[$i]\n\n";
              }
          }
       }
       if (isset($manual_image_url) && ($manual_image_url != ""))
       {
-         fwrite($fp, "#BLOCK-URL: $manual_image_url\n");
+         fwrite($fp, "#MASTER# BLOCK-URL: $manual_image_url\n");
          $trackertext .= "Block image: $manual_image_url\n\n";
       }
       break;
@@ -263,10 +266,10 @@ switch ($problem)
     * Innocent image blocked:
     */
    case "P2":
-      fwrite($fp, "#UNBLOCK-REFERRER: $referrer_url\n");
+      fwrite($fp, "#MASTER# UNBLOCK-REFERRER: $referrer_url\n");
       if (isset($image_url) && ($image_url != ""))
       {
-         fwrite($fp, "#UNBLOCK-URL: $image_url\n");
+         fwrite($fp, "#MASTER# UNBLOCK-URL: $image_url\n");
          $trackertext .= "Unblock image: $image_url\n\n";
       }
       break;
@@ -275,7 +278,7 @@ switch ($problem)
     * All other problems:
     */
    default:
-      fwrite($fp, "#PROBLEM-URL: $referrer_url\n");
+      fwrite($fp, "#MASTER# PROBLEM-URL: $referrer_url\n");
       break;
 }        
             
