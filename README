@@ -49,6 +49,11 @@ Privoxy is based on Internet Junkbuster (tm).
 
 1. IMPORTANT CHANGES
 
+NEWS! March 2003, Privoxy 3.0.1 is released. This is the first maintenance
+release of Privoxy. There are no significant new features in this release. Some
+bugs are fixed, and some existing features have been enhanced. See ChangeLog
+for details. Upgrading from 3.0.0 is recommended.
+
 REALLY BIG NEWS! August 2002: The long-awaited, oft-delayed stable version of
 Privoxy 3.0 is finally released! This is way behind schedule, but better late
 than never. The developers all hope the wait was worth it.
@@ -75,7 +80,7 @@ User Manual, for other installation types.
 3. RUN
 
 privoxy [--help] [--version] [--no-daemon] [--pidfile PIDFILE] [--user USER
-[.GROUP]] [config_file]
+[.GROUP]] [--chroot] [config_file]
 
 See the man page or User Manual for an explanation of each option, and other
 configuration and usage issues.
