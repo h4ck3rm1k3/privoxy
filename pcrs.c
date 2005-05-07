@@ -1,4 +1,4 @@
-const char pcrs_rcs[] = "$Id: pcrs.c,v 1.19.2.3 2003/12/04 12:32:45 oes Exp $";
+const char pcrs_rcs[] = "$Id: pcrs.c,v 1.19.2.4 2005/05/07 21:50:55 david__schmidt Exp $";
 
 /*********************************************************************
  *
@@ -33,6 +33,9 @@ const char pcrs_rcs[] = "$Id: pcrs.c,v 1.19.2.3 2003/12/04 12:32:45 oes Exp $";
  *
  * Revisions   :
  *    $Log: pcrs.c,v $
+ *    Revision 1.19.2.4  2005/05/07 21:50:55  david__schmidt
+ *    A few memory leaks plugged (mostly on error paths)
+ *
  *    Revision 1.19.2.3  2003/12/04 12:32:45  oes
  *    Append a trailing nullbyte to result to facilitate string processing
  *
@@ -744,7 +747,7 @@ pcrs_job *pcrs_compile(const char *pattern, const char *substitute, const char *
 int pcrs_execute_list(pcrs_job *joblist, char *subject, size_t subject_length, char **result, size_t *result_length)
 {
    pcrs_job *job;
-   char *old, *new;
+   char *old, *new = NULL;
    int hits, total_hits;
  
    old = subject;

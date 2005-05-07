@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.7 2004/02/17 13:30:23 oes Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.8 2005/05/07 21:50:54 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,9 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.7 2004/02/17 13:30:23 oes Ex
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.41.2.8  2005/05/07 21:50:54  david__schmidt
+ *    A few memory leaks plugged (mostly on error paths)
+ *
  *    Revision 1.41.2.7  2004/02/17 13:30:23  oes
  *    Moved cgi_error_disabled() from cgiedit.c to
  *    cgi.c to re-enable build with --disable-editor.
@@ -2919,12 +2922,14 @@ jb_err cgi_edit_actions_list(struct client_state *csp,
    err = map(exports, "sections", 1, sections, 0);
    if (err)
    {
+      free(sections);
       free_map(exports);
       return err;
    }
 
    /* Could also do global exports here, but it wouldn't be as fast */
 
+   free(sections);
    return template_fill_for_cgi(csp, "edit-actions-list", exports, rsp);
 }
 

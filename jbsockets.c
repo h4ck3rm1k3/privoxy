@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.6 2003/12/17 16:34:40 oes Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.7 2005/05/07 21:50:55 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -35,6 +35,9 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.6 2003/12/17 16:34:40 oe
  *
  * Revisions   :
  *    $Log: jbsockets.c,v $
+ *    Revision 1.35.2.7  2005/05/07 21:50:55  david__schmidt
+ *    A few memory leaks plugged (mostly on error paths)
+ *
  *    Revision 1.35.2.6  2003/12/17 16:34:40  oes
  *    Cosmetics
  *
@@ -434,7 +437,7 @@ int write_socket(jb_socket fd, const char *buf, size_t len)
       return 0;
    }
 
-   if (len < 0)
+   if (len < 0) /* constant condition - size_t isn't ever negative */ 
    {
       return 1;
    }
