@@ -1,4 +1,4 @@
-const char actions_rcs[] = "$Id: actions.c,v 1.32.2.4 2003/12/03 10:33:11 oes Exp $";
+const char actions_rcs[] = "$Id: actions.c,v 1.32.2.5 2005/06/09 01:18:41 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/actions.c,v $
@@ -33,6 +33,10 @@ const char actions_rcs[] = "$Id: actions.c,v 1.32.2.4 2003/12/03 10:33:11 oes Ex
  *
  * Revisions   :
  *    $Log: actions.c,v $
+ *    Revision 1.32.2.5  2005/06/09 01:18:41  david__schmidt
+ *    Tweaks to conditionally include pthread.h if FEATURE_PTHREAD is enabled -
+ *    this becomes important when jcc.h gets included later down the line.
+ *
  *    Revision 1.32.2.4  2003/12/03 10:33:11  oes
  *    - Implemented Privoxy version requirement through
  *      for-privoxy-version= statement in {{settings}}
@@ -200,6 +204,10 @@ const char actions_rcs[] = "$Id: actions.c,v 1.32.2.4 2003/12/03 10:33:11 oes Ex
 #include <string.h>
 #include <assert.h>
 #include <stdlib.h>
+
+#ifdef FEATURE_PTHREAD
+#include <pthread.h>
+#endif
 
 #include "project.h"
 #include "jcc.h"
