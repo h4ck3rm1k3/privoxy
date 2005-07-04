@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.9 2005/07/04 00:31:04 david__schmidt Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.10 2005/07/04 03:13:43 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,9 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.9 2005/07/04 00:31:04 david_
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.41.2.10  2005/07/04 03:13:43  david__schmidt
+ *    Undo some damaging memory leak patches
+ *
  *    Revision 1.41.2.9  2005/07/04 00:31:04  david__schmidt
  *    Removing a double free
  *
@@ -2925,7 +2928,6 @@ jb_err cgi_edit_actions_list(struct client_state *csp,
    err = map(exports, "sections", 1, sections, 0);
    if (err)
    {
-      free(sections);
       free_map(exports);
       return err;
    }

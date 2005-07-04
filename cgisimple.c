@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.35.2.5 2005/05/07 21:50:55 david__schmidt Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.35.2.6 2005/07/04 03:13:43 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,9 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.35.2.5 2005/05/07 21:50:55 da
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.35.2.6  2005/07/04 03:13:43  david__schmidt
+ *    Undo some damaging memory leak patches
+ *
  *    Revision 1.35.2.5  2005/05/07 21:50:55  david__schmidt
  *    A few memory leaks plugged (mostly on error paths)
  *
@@ -805,13 +808,12 @@ jb_err cgi_show_status(struct client_state *csp,
             string_join  (&s, html_encode(buf));
          }
          fclose(fp);
+
          if (map(exports, "contents", 1, s, 0))
          {
-            freez(s);
             free_map(exports);
             return JB_ERR_MEMORY;
          }
-         freez(s);
       }
 
       return template_fill_for_cgi(csp, "show-status-file", exports, rsp);
@@ -824,7 +826,7 @@ jb_err cgi_show_status(struct client_state *csp,
       if (!err) err = string_append(&s, " ");
    }
    if (!err) err = map(exports, "invocation", 1, s, 0);
-   freez(s);
+
    if (!err) err = map(exports, "options", 1, csp->config->proxy_args, 1);
    if (!err) err = show_defines(exports);
 
