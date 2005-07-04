@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.8 2005/05/07 21:50:54 david__schmidt Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.9 2005/07/04 00:31:04 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,9 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.8 2005/05/07 21:50:54 david_
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.41.2.9  2005/07/04 00:31:04  david__schmidt
+ *    Removing a double free
+ *
  *    Revision 1.41.2.8  2005/05/07 21:50:54  david__schmidt
  *    A few memory leaks plugged (mostly on error paths)
  *
@@ -2929,7 +2932,6 @@ jb_err cgi_edit_actions_list(struct client_state *csp,
 
    /* Could also do global exports here, but it wouldn't be as fast */
 
-   free(sections);
    return template_fill_for_cgi(csp, "edit-actions-list", exports, rsp);
 }
 
