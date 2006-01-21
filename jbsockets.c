@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.7 2005/05/07 21:50:55 david__schmidt Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.8 2006/01/21 16:16:08 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -35,6 +35,9 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.7 2005/05/07 21:50:55 da
  *
  * Revisions   :
  *    $Log: jbsockets.c,v $
+ *    Revision 1.35.2.8  2006/01/21 16:16:08  david__schmidt
+ *    Thanks to  Edward Carrel for his patch to modernize OSX'spthreads support.  See bug #1409623.
+ *
  *    Revision 1.35.2.7  2005/05/07 21:50:55  david__schmidt
  *    A few memory leaks plugged (mostly on error paths)
  *
@@ -251,13 +254,14 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.7 2005/05/07 21:50:55 da
 
 #endif
 
+#include "project.h"
+
 #ifdef OSX_DARWIN
 #include <pthread.h>
 #include "jcc.h"
 /* jcc.h is for mutex semaphores only */
 #endif /* def OSX_DARWIN */
 
-#include "project.h"
 #include "jbsockets.h"
 #include "filters.h"
 #include "errlog.h"

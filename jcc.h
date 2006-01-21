@@ -1,6 +1,6 @@
 #ifndef JCC_H_INCLUDED
 #define JCC_H_INCLUDED
-#define JCC_H_VERSION "$Id: jcc.h,v 1.12.2.2 2005/04/03 20:10:50 david__schmidt Exp $"
+#define JCC_H_VERSION "$Id: jcc.h,v 1.12.2.3 2006/01/21 16:16:08 david__schmidt Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.h,v $
@@ -35,6 +35,9 @@
  *
  * Revisions   :
  *    $Log: jcc.h,v $
+ *    Revision 1.12.2.3  2006/01/21 16:16:08  david__schmidt
+ *    Thanks to  Edward Carrel for his patch to modernize OSX'spthreads support.  See bug #1409623.
+ *
  *    Revision 1.12.2.2  2005/04/03 20:10:50  david__schmidt
  *    Thanks to Jindrich Makovicka for a race condition fix for the log
  *    file.  The race condition remains for non-pthread implementations.
@@ -116,8 +119,8 @@ extern int urls_read;
 extern int urls_rejected;
 #endif /*def FEATURE_STATISTICS*/
 
-extern struct client_state clients[];
-extern struct file_list    files[];
+extern struct client_state clients[1];
+extern struct file_list    files[1];
 
 #ifdef unix
 extern const char *pidfile;
@@ -129,6 +132,7 @@ extern int g_terminate;
 #endif
 
 #ifdef OSX_DARWIN
+#include <pthread.h>
 extern pthread_mutex_t gmtime_mutex;
 extern pthread_mutex_t localtime_mutex;
 extern pthread_mutex_t gethostbyaddr_mutex;

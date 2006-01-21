@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.9 2004/10/03 12:53:45 david__schmidt Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.10 2006/01/21 16:16:08 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -40,6 +40,9 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.9 2004/10/03 12:53:45 david_
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.56.2.10  2006/01/21 16:16:08  david__schmidt
+ *    Thanks to  Edward Carrel for his patch to modernize OSX'spthreads support.  See bug #1409623.
+ *
  *    Revision 1.56.2.9  2004/10/03 12:53:45  david__schmidt
  *    Add the ability to check jpeg images for invalid
  *    lengths of comment blocks.  Defensive strategy
@@ -446,12 +449,13 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.9 2004/10/03 12:53:45 david_
 #include <unistd.h>
 #endif
 
+#include "project.h"
+
 #ifdef OSX_DARWIN
 #include <pthread.h>
 #include "jcc.h"
 /* jcc.h is for mutex semapores only */
 #endif /* def OSX_DARWIN */
-#include "project.h"
 #include "list.h"
 #include "parsers.h"
 #include "encode.h"
