@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.35.2.6 2005/07/04 03:13:43 david__schmidt Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.35.2.7 2006/01/29 23:10:56 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,9 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.35.2.6 2005/07/04 03:13:43 da
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.35.2.7  2006/01/29 23:10:56  david__schmidt
+ *    Multiple filter file support
+ *
  *    Revision 1.35.2.6  2005/07/04 03:13:43  david__schmidt
  *    Undo some damaging memory leak patches
  *
@@ -757,7 +760,7 @@ jb_err cgi_show_status(struct client_state *csp,
    switch (*(lookup(parameters, "file")))
    {
    case 'a':
-      if (!get_number_param(csp, parameters, "index", &i) && i < MAX_ACTION_FILES && csp->actions_list[i])
+      if (!get_number_param(csp, parameters, "index", &i) && i < MAX_AF_FILES && csp->actions_list[i])
       {
          filename = csp->actions_list[i]->filename;
          file_description = "Actions File";
@@ -765,9 +768,9 @@ jb_err cgi_show_status(struct client_state *csp,
       break;
 
    case 'f':
-      if (csp->rlist)
+      if (!get_number_param(csp, parameters, "index", &i) && i < MAX_AF_FILES && csp->rlist[i])
       {
-         filename = csp->rlist->filename;
+         filename = csp->rlist[i]->filename;
          file_description = "Filter File";
       }
       break;
@@ -882,7 +885,7 @@ jb_err cgi_show_status(struct client_state *csp,
     * FIXME: Shouldn't include hardwired HTML here, use line template instead!
     */
    s = strdup("");
-   for (i = 0; i < MAX_ACTION_FILES; i++)
+   for (i = 0; i < MAX_AF_FILES; i++)
    {
       if (((fl = csp->actions_list[i]) != NULL) && ((b = fl->f) != NULL))
       {
@@ -911,13 +914,29 @@ jb_err cgi_show_status(struct client_state *csp,
       if (!err) err = map(exports, "actions-filenames", 1, "<tr><td>None specified</td></tr>", 1);
    }
 
-   if (csp->rlist)
+   /* 
+    * List all re_filterfiles in use, together with view options.
+    * FIXME: Shouldn't include hardwired HTML here, use line template instead!
+    */
+   s = strdup("");
+   for (i = 0; i < MAX_AF_FILES; i++)
    {
-      if (!err) err = map(exports, "re-filter-filename", 1, html_encode(csp->rlist->filename), 0);
+      if (((fl = csp->rlist[i]) != NULL) && ((b = fl->f) != NULL))
+      {
+         if (!err) err = string_append(&s, "<tr><td>");
+         if (!err) err = string_join(&s, html_encode(csp->rlist[i]->filename));
+         snprintf(buf, 100, "</td><td class=\"buttons\"><a href=\"/show-status?file=filter&index=%d\">View</a>", i);
+         if (!err) err = string_append(&s, buf);
+         if (!err) err = string_append(&s, "</td></tr>\n");
+      }
+   }
+   if (*s != '\0')   
+   {
+      if (!err) err = map(exports, "re-filter-filename", 1, s, 0);
    }
    else
    {
-      if (!err) err = map(exports, "re-filter-filename", 1, "None specified", 1);
+      if (!err) err = map(exports, "re-filter-filename", 1, "<tr><td>None specified</td></tr>", 1);
       if (!err) err = map_block_killer(exports, "have-filterfile");
    }
 
@@ -1134,7 +1153,7 @@ jb_err cgi_show_url_info(struct client_state *csp,
 
       matches = strdup("<table class=\"transparent\">");
 
-      for (i = 0; i < MAX_ACTION_FILES; i++)
+      for (i = 0; i < MAX_AF_FILES; i++)
       {
          if (NULL == csp->config->actions_file_short[i]
              || !strcmp(csp->config->actions_file_short[i], "standard")) continue;

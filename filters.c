@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.58.2.8 2005/05/07 21:50:55 david__schmidt Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.58.2.9 2006/01/29 23:10:56 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -39,6 +39,9 @@ const char filters_rcs[] = "$Id: filters.c,v 1.58.2.8 2005/05/07 21:50:55 david_
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.58.2.9  2006/01/29 23:10:56  david__schmidt
+ *    Multiple filter file support
+ *
  *    Revision 1.58.2.8  2005/05/07 21:50:55  david__schmidt
  *    A few memory leaks plugged (mostly on error paths)
  *
@@ -1307,6 +1310,8 @@ char *pcrs_filter_response(struct client_state *csp)
    struct re_filterfile_spec *b;
    struct list_entry *filtername;
 
+   int i, found_filters = 0;
+
    /* 
     * Sanity first
     */
@@ -1316,10 +1321,26 @@ char *pcrs_filter_response(struct client_state *csp)
    }
    size = csp->iob->eod - csp->iob->cur;
 
-   if ( ( NULL == (fl = csp->rlist) ) || ( NULL == fl->f) )
+   /*
+    * Need to check the set of re_filterfiles...
+    */
+   for (i = 0; i < MAX_AF_FILES; i++)
+   {
+      fl = csp->rlist[i];
+      if (NULL != fl)
+      {
+         if (NULL != fl->f)
+         {
+           found_filters = 1;
+           break;
+         }
+      }
+   }
+
+   if (0 == found_filters)
    {
       log_error(LOG_LEVEL_ERROR, "Unable to get current state of regexp filtering.");
-      return(NULL);
+         return(NULL);
    }
 
    /*
@@ -1337,6 +1358,11 @@ char *pcrs_filter_response(struct client_state *csp)
       csp->flags |= CSP_FLAG_MODIFIED;
    }
 
+   for (i = 0; i < MAX_AF_FILES; i++)
+   {
+     fl = csp->rlist[i];
+     if ((NULL == fl) || (NULL == fl->f))
+       break;
    /*
     * For all applying +filter actions, look if a filter by that
     * name exists and if yes, execute it's pcrs_joblist on the
@@ -1372,6 +1398,7 @@ char *pcrs_filter_response(struct client_state *csp)
             hits += current_hits;
          }
       }
+   }
    }
 
    /*
@@ -1627,7 +1654,7 @@ void url_actions(struct http_request *http,
 
    init_current_action(csp->action);
 
-   for (i = 0; i < MAX_ACTION_FILES; i++)
+   for (i = 0; i < MAX_AF_FILES; i++)
    {
       if (((fl = csp->actions_list[i]) == NULL) || ((b = fl->f) == NULL))
       {

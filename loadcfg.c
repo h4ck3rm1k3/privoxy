@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.5 2003/05/08 15:17:25 oes Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.6 2006/01/29 23:10:56 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.5 2003/05/08 15:17:25 oes Ex
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.48.2.6  2006/01/29 23:10:56  david__schmidt
+ *    Multiple filter file support
+ *
  *    Revision 1.48.2.5  2003/05/08 15:17:25  oes
  *    Closed two memory leaks; hopefully the last remaining ones
  *    (in the main execution paths, anyway).
@@ -65,7 +68,7 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.5 2003/05/08 15:17:25 oes Ex
  *     - savearg now embeds option names in help links
  *
  *    Revision 1.45  2002/04/24 02:11:54  oes
- *    Jon's multiple AF patch: Allow up to MAX_ACTION_FILES actionsfile options
+ *    Jon's multiple AF patch: Allow up to MAX_AF_FILES actionsfile options
  *
  *    Revision 1.44  2002/04/08 20:37:13  swa
  *    fixed JB spelling
@@ -510,7 +513,7 @@ void unload_configfile (void * data)
    freez(config->haddr);
    freez(config->logfile);
 
-   for (i = 0; i < MAX_ACTION_FILES; i++)
+   for (i = 0; i < MAX_AF_FILES; i++)
    {
       freez(config->actions_file_short[i]);
       freez(config->actions_file[i]);
@@ -530,7 +533,11 @@ void unload_configfile (void * data)
    list_remove_all(config->trust_info);
 #endif /* def FEATURE_TRUST */
 
-   freez(config->re_filterfile);
+   for (i = 0; i < MAX_AF_FILES; i++)
+   {
+      freez(config->re_filterfile[i]);
+   }
+
    freez(config);
 }
 
@@ -694,16 +701,16 @@ struct configuration_spec * load_config(void)
  * *************************************************************************/
          case hash_actions_file :
             i = 0;
-            while ((i < MAX_ACTION_FILES) && (NULL != config->actions_file[i]))
+            while ((i < MAX_AF_FILES) && (NULL != config->actions_file[i]))
             {
                i++;
             }
 
-            if (i >= MAX_ACTION_FILES)
+            if (i >= MAX_AF_FILES)
             {
                log_error(LOG_LEVEL_FATAL, "Too many 'actionsfile' directives in config file - limit is %d.\n"
-                  "(You can increase this limit by changing MAX_ACTION_FILES in project.h and recompiling).",
-                  MAX_ACTION_FILES);
+                  "(You can increase this limit by changing MAX_AF_FILES in project.h and recompiling).",
+                  MAX_AF_FILES);
             }
             config->actions_file_short[i] = strdup(arg);
             p = malloc(strlen(arg) + sizeof(".action"));
@@ -860,15 +867,27 @@ struct configuration_spec * load_config(void)
  * In confdir by default.
  * *************************************************************************/
          case hash_filterfile :
-            if(config->re_filterfile)
+            i = 0;
+            while ((i < MAX_AF_FILES) && (NULL != config->re_filterfile[i]))
             {
-               log_error(LOG_LEVEL_ERROR, "Ignoring extraneous directive 'filterfile %s' "
-                  "in line %lu in configuration file (%s).", arg, linenum, configfile);
-               string_append(&config->proxy_args, 
-                  " <b><font color=\"red\">WARNING: extraneous directive, ignored</font></b>");
-               continue;
+               i++;
             }
-            config->re_filterfile = make_path(config->confdir, arg);
+
+            if (i >= MAX_AF_FILES)
+            {
+               log_error(LOG_LEVEL_FATAL, "Too many 'filterfile' directives in config file - limit is %d.\n"
+                  "(You can increase this limit by changing MAX_AF_FILES in project.h and recompiling).",
+                  MAX_AF_FILES);
+            }
+            config->re_filterfile_short[i] = strdup(arg);
+            p = malloc(strlen(arg));
+            if (p == NULL)
+            {
+               log_error(LOG_LEVEL_FATAL, "Out of memory");
+            }
+            strcpy(p, arg);
+            config->re_filterfile[i] = make_path(config->confdir, p);
+            free(p);
             continue;
 
 /* *************************************************************************

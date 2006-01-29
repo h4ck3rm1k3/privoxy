@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.72.2.6 2004/10/03 12:53:46 david__schmidt Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.72.2.7 2006/01/29 23:10:56 david__schmidt Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,9 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.72.2.7  2006/01/29 23:10:56  david__schmidt
+ *    Multiple filter file support
+ *
  *    Revision 1.72.2.6  2004/10/03 12:53:46  david__schmidt
  *    Add the ability to check jpeg images for invalid
  *    lengths of comment blocks.  Defensive strategy
@@ -87,7 +90,7 @@
  *    Revision 1.67  2002/04/24 02:12:43  oes
  *     - Jon's multiple AF patch:
  *       - Make csp->actions_list an array
- *       - #define MAX_ACTION_FILES
+ *       - #define MAX_AF_FILES
  *     - Moved CGI_PARAM_LEN_MAX (500) here
  *
  *    Revision 1.66  2002/04/15 19:06:43  jongfoster
@@ -1023,10 +1026,10 @@ struct url_actions
 #define RC_FLAG_BLOCKED   0x20
 
 /**
- * Maximum number of actions files.  This limit is arbitrary - it's just used
+ * Maximum number of actions/filter files.  This limit is arbitrary - it's just used
  * to size an array.
  */
-#define MAX_ACTION_FILES 10
+#define MAX_AF_FILES 10
 
 /**
  * The state of a Privoxy processing thread.
@@ -1082,10 +1085,10 @@ struct client_state
    char   *x_forwarded;
 
    /** Actions files associated with this client */
-   struct file_list *actions_list[MAX_ACTION_FILES];
+   struct file_list *actions_list[MAX_AF_FILES];
 
-   /** pcrs job file. */
-   struct file_list *rlist;
+   /** pcrs job files. */
+   struct file_list *rlist[MAX_AF_FILES];
 
    /** Length after content modification. */
    size_t content_length;
@@ -1341,10 +1344,10 @@ struct configuration_spec
    const char *logdir;
 
    /** The full paths to the actions files. */
-   const char *actions_file[MAX_ACTION_FILES];
+   const char *actions_file[MAX_AF_FILES];
 
    /** The short names of the actions files. */
-   const char *actions_file_short[MAX_ACTION_FILES];
+   const char *actions_file_short[MAX_AF_FILES];
 
    /** The administrator's email address */
    char *admin_address;
@@ -1355,8 +1358,11 @@ struct configuration_spec
    /** URL to the user manual (on our website or local copy) */
    char *usermanual;
 
-   /** The file name of the pcre filter file */
-   const char *re_filterfile;
+   /** The file names of the pcre filter files. */
+   const char *re_filterfile[MAX_AF_FILES];
+
+   /** The short names of the pcre filter files. */
+   const char *re_filterfile_short[MAX_AF_FILES];
 
 #ifdef FEATURE_COOKIE_JAR
 

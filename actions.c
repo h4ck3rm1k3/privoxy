@@ -1,4 +1,4 @@
-const char actions_rcs[] = "$Id: actions.c,v 1.32.2.5 2005/06/09 01:18:41 david__schmidt Exp $";
+const char actions_rcs[] = "$Id: actions.c,v 1.32.2.6 2006/01/29 23:10:56 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/actions.c,v $
@@ -33,6 +33,9 @@ const char actions_rcs[] = "$Id: actions.c,v 1.32.2.5 2005/06/09 01:18:41 david_
  *
  * Revisions   :
  *    $Log: actions.c,v $
+ *    Revision 1.32.2.6  2006/01/29 23:10:56  david__schmidt
+ *    Multiple filter file support
+ *
  *    Revision 1.32.2.5  2005/06/09 01:18:41  david__schmidt
  *    Tweaks to conditionally include pthread.h if FEATURE_PTHREAD is enabled -
  *    this becomes important when jcc.h gets included later down the line.
@@ -879,7 +882,7 @@ void free_current_action (struct current_action_spec *src)
 }
 
 
-static struct file_list *current_actions_file[MAX_ACTION_FILES]  = {
+static struct file_list *current_actions_file[MAX_AF_FILES]  = {
    NULL, NULL, NULL, NULL, NULL,
    NULL, NULL, NULL, NULL, NULL
 };
@@ -902,7 +905,7 @@ void unload_current_actions_file(void)
 {
    int i;
 
-   for (i = 0; i < MAX_ACTION_FILES; i++)
+   for (i = 0; i < MAX_AF_FILES; i++)
    {
       if (current_actions_file[i])
       {
@@ -987,7 +990,7 @@ int load_actions_file(struct client_state *csp)
    int i;
    int result;
 
-   for (i = 0; i < MAX_ACTION_FILES; i++)
+   for (i = 0; i < MAX_AF_FILES; i++)
    {
       if (csp->config->actions_file[i])
       {

@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.10 2005/07/04 03:13:43 david__schmidt Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.11 2006/01/29 23:10:56 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,9 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.10 2005/07/04 03:13:43 david
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.41.2.11  2006/01/29 23:10:56  david__schmidt
+ *    Multiple filter file support
+ *
  *    Revision 1.41.2.10  2005/07/04 03:13:43  david__schmidt
  *    Undo some damaging memory leak patches
  *
@@ -2569,7 +2572,7 @@ jb_err cgi_edit_actions_list(struct client_state *csp,
       }
 
       buttons = strdup("");
-      for (i = 0; i < MAX_ACTION_FILES; i++)
+      for (i = 0; i < MAX_AF_FILES; i++)
       {
          if (((fl = csp->actions_list[i]) != NULL) && ((b = fl->f) != NULL))
          {
@@ -2967,8 +2970,8 @@ jb_err cgi_edit_actions_for_url(struct client_state *csp,
    struct file_line * cur_line;
    unsigned line_number;
    jb_err err;
-   struct file_list *filter_file;
    struct re_filterfile_spec *filter_group;
+   int i, have_filters = 0;
 
    if (0 == (csp->config->feature_flags & RUNTIME_FEATURE_CGI_EDIT_ACTIONS))
    {
@@ -3017,10 +3020,15 @@ jb_err cgi_edit_actions_for_url(struct client_state *csp,
 
    if (!err) err = actions_to_radio(exports, cur_line->data.action);
 
-   filter_file = csp->rlist;
-   filter_group = ((filter_file != NULL) ? filter_file->f : NULL);
-
-   if (!err) err = map_conditional(exports, "any-filters-defined", (filter_group != NULL));
+   for (i = 0; i < MAX_AF_FILES; i++)
+   {
+      if ((csp->rlist[i] != NULL) && (csp->rlist[i]->f != NULL))
+      {
+         if (!err) err = map_conditional(exports, "any-filters-defined", 1);
+         have_filters = 1;
+         break;
+      }
+   }
 
    if (err)
    {
@@ -3029,10 +3037,8 @@ jb_err cgi_edit_actions_for_url(struct client_state *csp,
       return err;
    }
 
-   if (filter_group == NULL)
-   {
+   if (0 == have_filters)
       err = map(exports, "filter-params", 1, "", 1);
-   }
    else
    {
       /* We have some entries in the filter list */
@@ -3056,69 +3062,76 @@ jb_err cgi_edit_actions_for_url(struct client_state *csp,
 
       result = strdup("");
 
-      for (;(!err) && (filter_group != NULL); filter_group = filter_group->next)
+      for (i = 0; i < MAX_AF_FILES; i++)
       {
-         char current_mode = 'x';
-         struct list_entry *filter_name;
-         char * this_line;
-         struct map *line_exports;
-         char number[20];
-
-         filter_name = cur_line->data.action->multi_add[ACTION_MULTI_FILTER]->first;
-         while ((filter_name != NULL)
-             && (0 != strcmp(filter_group->name, filter_name->str)))
+         if ((csp->rlist[i] != NULL) && (csp->rlist[i]->f != NULL))
          {
-              filter_name = filter_name->next;
-         }
-
-         if (filter_name != NULL)
-         {
-            current_mode = 'y';
-         }
-         else
-         {
-            filter_name = cur_line->data.action->multi_remove[ACTION_MULTI_FILTER]->first;
-            while ((filter_name != NULL)
-                && (0 != strcmp(filter_group->name, filter_name->str)))
+            filter_group = csp->rlist[i]->f;
+            for (;(!err) && (filter_group != NULL); filter_group = filter_group->next)
             {
-                 filter_name = filter_name->next;
+               char current_mode = 'x';
+               struct list_entry *filter_name;
+               char * this_line;
+               struct map *line_exports;
+               char number[20];
+
+               filter_name = cur_line->data.action->multi_add[ACTION_MULTI_FILTER]->first;
+               while ((filter_name != NULL)
+                   && (0 != strcmp(filter_group->name, filter_name->str)))
+               {
+                    filter_name = filter_name->next;
+               }
+
+               if (filter_name != NULL)
+               {
+                  current_mode = 'y';
+               }
+               else
+               {
+                  filter_name = cur_line->data.action->multi_remove[ACTION_MULTI_FILTER]->first;
+                  log_error(LOG_LEVEL_CGI, "cgiedit: filter_group->name: [%s]",filter_group->name);
+                  while ((filter_name != NULL)
+                      && (0 != strcmp(filter_group->name, filter_name->str)))
+                  {
+                       filter_name = filter_name->next;
+                  }
+                  if (filter_name != NULL)
+                  {
+                     current_mode = 'n';
+                  }
+               }
+
+               /* Generate a unique serial number */
+               snprintf(number, sizeof(number), "%x", index++);
+               number[sizeof(number) - 1] = '\0';
+
+               line_exports = new_map();
+               if (line_exports == NULL)
+               {
+                  err = JB_ERR_MEMORY;
+                  freez(result);
+               }
+               else
+               {
+                  if (!err) err = map(line_exports, "index", 1, number, 1);
+                  if (!err) err = map(line_exports, "name",  1, filter_group->name, 1);
+                  if (!err) err = map(line_exports, "description",  1, filter_group->description, 1);
+                  if (!err) err = map_radio(line_exports, "this-filter", "ynx", current_mode);
+
+                  this_line = NULL;
+                  if (!err)
+                  {
+                     this_line = strdup(filter_template);
+                     if (this_line == NULL) err = JB_ERR_MEMORY;
+                  }
+                  if (!err) err = template_fill(&this_line, line_exports);
+                  string_join(&result, this_line);
+
+                  free_map(line_exports);
+               }
             }
-            if (filter_name != NULL)
-            {
-               current_mode = 'n';
-            }
-         }
-
-         /* Generate a unique serial number */
-         snprintf(number, sizeof(number), "%x", index++);
-         number[sizeof(number) - 1] = '\0';
-
-         line_exports = new_map();
-         if (line_exports == NULL)
-         {
-            err = JB_ERR_MEMORY;
-            freez(result);
-         }
-         else
-         {
-            if (!err) err = map(line_exports, "index", 1, number, 1);
-            if (!err) err = map(line_exports, "name",  1, filter_group->name, 1);
-            if (!err) err = map(line_exports, "description",  1, filter_group->description, 1);
-            if (!err) err = map_radio(line_exports, "this-filter", "ynx", current_mode);
-
-            this_line = NULL;
-            if (!err)
-            {
-               this_line = strdup(filter_template);
-               if (this_line == NULL) err = JB_ERR_MEMORY;
-            }
-            if (!err) err = template_fill(&this_line, line_exports);
-            string_join(&result, this_line);
-
-            free_map(line_exports);
          }
       }
-
       freez(filter_template);
 
       if (!err)
@@ -3222,7 +3235,7 @@ jb_err cgi_edit_actions_submit(struct client_state *csp,
    get_string_param(parameters, "p", &action_set_name);
    if (action_set_name != NULL)
    {
-      for (index = 0; index < MAX_ACTION_FILES; index++)
+      for (index = 0; index < MAX_AF_FILES; index++)
       {
          if (((fl = csp->actions_list[index]) != NULL) && ((b = fl->f) != NULL))
          {

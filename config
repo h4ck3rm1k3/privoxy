@@ -2,7 +2,7 @@
 #  
 #  Copyright (C) 2001-2004 Privoxy Developers http://privoxy.org
 #  
-#  $Id: config,v 1.39.2.14 2005/05/07 21:50:55 david__schmidt Exp $
+#  $Id: config,v 1.39.2.15 2006/01/29 23:10:56 david__schmidt Exp $
 #  
 ####################################################################
 #                                                                  #
@@ -182,7 +182,7 @@ actionsfile user      # User customizations
 #  
 #  Specifies:
 #  
-#      The filter file to use
+#      The filter file(s) to use
 #  
 #  Type of value:
 #  
@@ -199,21 +199,23 @@ actionsfile user      # User customizations
 #  
 #  Notes:
 #  
-#      The filter file contains content modification rules that use
+#      The filter files contain content modification rules that use
 #      regular expressions. These rules permit powerful changes on the
 #      content of Web pages, e.g., you could disable your favorite
 #      JavaScript annoyances, re-write the actual displayed text,
-#      or just have some fun replacing "Microsoft" with "MicroSuck"
-#      wherever it appears on a Web page.
+#      or just have some fun playing buzzword bingo with a web page.
 #  
 #      The +filter{name} actions rely on the relevant filter (name)
-#      to be defined in the filter file!
+#      to be defined in a filter file!
 #  
 #      A pre-defined filter file called default.filter that contains
 #      a bunch of handy filters for common problems is included in the
 #      distribution. See the section on the filter action for a list.
-#  
+#      When adding your own, it is recommended you add them to the
+#      user.filter file.
+#
 filterfile default.filter
+#filterfile user.filter
 
 #  
 #  1.5. logfile

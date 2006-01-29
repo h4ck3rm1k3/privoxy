@@ -2,6 +2,7 @@
 ChangeLog for Privoxy
 --------------------------------------------------------------------
 *** Since 3.0.3 ***
+- Multiple filter files can now be specified in config.
 - Added jpeg filtering to defend against MS jpeg vulnerability MS04-028
 - Removed the "arbitrary" 1000 filter limit - addresses tracker #911950
 - Thanks to Jindrich Makovicka for a race condition fix for the log 
