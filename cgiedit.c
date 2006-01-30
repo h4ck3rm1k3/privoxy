@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.11 2006/01/29 23:10:56 david__schmidt Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.12 2006/01/30 15:16:25 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,9 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.11 2006/01/29 23:10:56 david
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.41.2.12  2006/01/30 15:16:25  david__schmidt
+ *    Remove a little residual debugging info
+ *
  *    Revision 1.41.2.11  2006/01/29 23:10:56  david__schmidt
  *    Multiple filter file support
  *
@@ -3089,7 +3092,6 @@ jb_err cgi_edit_actions_for_url(struct client_state *csp,
                else
                {
                   filter_name = cur_line->data.action->multi_remove[ACTION_MULTI_FILTER]->first;
-                  log_error(LOG_LEVEL_CGI, "cgiedit: filter_group->name: [%s]",filter_group->name);
                   while ((filter_name != NULL)
                       && (0 != strcmp(filter_group->name, filter_name->str)))
                   {
