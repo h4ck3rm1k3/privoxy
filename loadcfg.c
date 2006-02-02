@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.6 2006/01/29 23:10:56 david__schmidt Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.7 2006/02/02 17:29:16 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.6 2006/01/29 23:10:56 david_
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.48.2.7  2006/02/02 17:29:16  david__schmidt
+ *    Don't forget to malloc space for the null terminator...
+ *
  *    Revision 1.48.2.6  2006/01/29 23:10:56  david__schmidt
  *    Multiple filter file support
  *
@@ -880,7 +883,7 @@ struct configuration_spec * load_config(void)
                   MAX_AF_FILES);
             }
             config->re_filterfile_short[i] = strdup(arg);
-            p = malloc(strlen(arg));
+            p = malloc(strlen(arg) + 1);
             if (p == NULL)
             {
                log_error(LOG_LEVEL_FATAL, "Out of memory");
