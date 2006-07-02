@@ -1,3 +1,4 @@
+
 This package was debianized by Roland Rosenfeld <roland@debian.org> on
 Fri, 29 Mar 2002 11:52:03 +0100.
 
@@ -40,8 +41,8 @@ Copyright:     Written by and Copyright (C) 2001 the SourceForge
                The GNU General Public License should be included with
                this file.  If not, you can view it at
                http://www.gnu.org/copyleft/gpl.html
-               or write to the Free Software Foundation, Inc., 59
-               Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+               or write to the Free Software Foundation, Inc., 
+               51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
 The complete GNU General Public License can be found at
 /usr/share/common-licenses/GPL

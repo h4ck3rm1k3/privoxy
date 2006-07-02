@@ -13,5 +13,10 @@ privoxy for Debian
   in /etc/privoxy/config this is activated and the manual can be
   accessed as http://config.privoxy.org/user-manual
 
+- A patch was applied to use multiple filter files.  So you can leave
+  /etc/privoxy/default.filter untouched and use a local file like
+  /etc/privoxy/user.filter for your local changes (you have to enable
+  this file using a second filterfile directive in /etc/privoxy/config).
+
 Roland Rosenfeld <roland@debian.org>
-$Id: README.Debian,v 1.1.2.2 2003/12/06 22:22:43 roro Exp $
+$Id: README.Debian,v 1.1.2.3 2006/07/02 11:06:24 roro Exp $

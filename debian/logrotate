@@ -1,4 +1,4 @@
-/var/log/privoxy/logfile /var/log/privoxy/jarfile {
+/var/log/privoxy/logfile /var/log/privoxy/jarfile /var/log/privoxy/errorfile {
 	create 0640 privoxy adm
 	missingok
 	weekly
@@ -6,9 +6,12 @@
 	compress
 	sharedscripts
 	postrotate
-		if [ -f /var/run/privoxy.pid ]
-		then
-			kill -HUP `cat /var/run/privoxy.pid` > /dev/null
-		fi
+	        if [ -x /usr/sbin/invoke-rc.d ]; then
+        	        invoke-rc.d privoxy restart > /dev/null
+	        else
+			if [ -f /var/run/privoxy.pid ]; then
+	        	        /etc/init.d/privoxy restart > /dev/null
+			fi
+	        fi
 	endscript
 }

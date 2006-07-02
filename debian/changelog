@@ -1,3 +1,105 @@
+privoxy (3.0.3-2-1) unstable; urgency=low
+
+  * New upstream version 3.0.3-2.
+  * Add debian/watch file.
+  * Remove parts of 13_memory.dpatch, which seem to be free too much
+    memory (Closes: #353110, #354611).
+
+ -- Roland Rosenfeld <roland@debian.org>  Mon, 27 Feb 2006 23:28:52 +0100
+
+privoxy (3.0.3-6) unstable; urgency=low
+
+  * Now hopefully really redirect all output of logrotate to /dev/null
+    (Closes: #314868).
+  * Migrate all patches to dpatch mechanism.
+  * Upgrade to debhelper 5.
+  * Call htmldoc with parameter --no-embedfonts to keep PDF files small.
+  * Build-Depends on htmldoc (>= 1.8.25-1), because older versions caused
+    broken PDF documentation on 64bit systems.
+  * Fix some typos in user-manual.
+  * Add multiple filter file support (from CVS) (Closes: #201177).
+  * Fix some memory leaks, mallocs, double frees (from CVS).
+  * Remove CVS $-tags from config files to make it easier for users to
+    keep the configuration in a VCS (Closes: #350799).
+  * Remove trailing spaces from all config files now.
+  * Build man page (and HTML version of it) at build time.
+
+ -- Roland Rosenfeld <roland@debian.org>  Sat, 11 Feb 2006 21:27:14 +0100
+
+privoxy (3.0.3-5) unstable; urgency=low
+
+  * Redirect output of restart script in logrotate to /dev/null
+    (Closes: #314868).
+  * Upgrade to Standards-Version 3.6.2:
+    - Recommends: doc-base
+  * Build-Depends on autotools-dev and copy config.guess and config.sub
+    from there on every build (Closes: #332767).
+  * After dechunking remove the "chunked"-header instead of replacing it
+    by an d"identity" header. Thanks to Michael Shields for reporting this
+    (Closes: #318683).
+  * Update address of FSF in copyright file.
+
+ -- Roland Rosenfeld <roland@debian.org>  Sun,  9 Oct 2005 13:44:55 +0200
+
+privoxy (3.0.3-4) unstable; urgency=low
+
+  * Stop converting entities to 8bit chars in the documentation 
+    (Closes: #203697).
+  * Fix typos ('persistant' and 'Januar') in man page and man page sources
+    (Closes: #302145).
+  * Restart privoxy in logrotate script instead of sendig a kill -HUP, to
+    triggering reopen of log files (Closes: #285059).
+  * Apply patch by Jindrich Makovicka to fix race conditions in log
+    writing functions (Closes: #299662).
+  * Stop hiding referrer for www.petitiononline.com/mod_perl/signed.cgi,
+    because this site does not work otherwise (Closes: #250407).
+
+ -- Roland Rosenfeld <roland@debian.org>  Sun, 15 May 2005 15:28:56 +0200
+
+privoxy (3.0.3-3) unstable; urgency=low
+
+  * Now really remove multiproxy.org from all documentation, not only from
+    the config file (Closes: #198953). 
+
+ -- Roland Rosenfeld <roland@debian.org>  Sun, 15 Feb 2004 23:11:29 +0100
+
+privoxy (3.0.3-2) unstable; urgency=low
+
+  * no banners-by-side on "/valid-" images, because that's usually from
+    validator.w3.org (Closes: #221009).
+  * Upgrade to Standards-Version 3.6.1 (no changes).
+  * Add Homepage URL to the package description.
+  * If the privoxy user is already existing as a non-system user in
+    postinst, this no longer fails, but deletes the non-system user before
+    adding it again as a system user (Closes: #232724).
+  * Use deluser instead of userdel in postrm.
+  * Redirect stderr of privoxy to /var/log/privoxy/errfile to avoid
+    problems with kept open file descriptors (Closes: #200712).
+  * Remove comment from config file, which points to list of open proxies
+    at multiproxy.org (Closes: #198953).
+
+ -- Roland Rosenfeld <roland@debian.org>  Sun, 15 Feb 2004 15:13:27 +0100
+
+privoxy (3.0.3-1) unstable; urgency=low
+
+  * New upstream version 3.0.3.
+    - This introduces workarounds for server (PHP <4.2.3) bugs including
+      the "blank page" problem (Closes: #215231).
+    - Avoid the conversion of "open" in scripts to "PrivoxyWindowOpen"
+      (Closes: #197995). 
+    - "advocancy" is no longer blocked (Closes: #202042).
+    - Fixed yet another two memory leaks (Closes: #215911).
+  * Stop backup of pdf directory, because it is no longer contained in the
+    upstream package.
+  * Create doc/pdf, which is missing upstream.
+  * disable filter{unsolicited-popups} for www.perl.com/language/newdocs/pod/ 
+    to avoid problems with "PrivoxyWindowOpen" in Perl manuals
+    (Closes: #195311).
+  * Apply patch make privoxy compilable on woody where htmldoc --version
+    doesn't exist (Closes: #216524).
+
+ -- Roland Rosenfeld <roland@debian.org>  Sat, 31 Jan 2004 11:25:53 +0100
+
 privoxy (3.0.2-5) unstable; urgency=low
 
   * Merge corrections from upstream default.action 1.7.
