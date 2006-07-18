@@ -16,7 +16,7 @@
 
  Purpose     :  INSTALL file for Privoxy
                 
- $Id: install.sgml,v 2.1.2.1 2002/10/24 22:07:39 hal9 Exp $
+ $Id: install.sgml,v 2.2 2006/07/18 14:48:50 david__schmidt Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.

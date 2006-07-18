@@ -20,7 +20,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: index.sgml,v 1.16.2.12 2004/01/30 14:33:41 oes Exp $
+ $Id: index.sgml,v 2.3 2006/07/18 14:48:51 david__schmidt Exp $
 
  Copyright (C) 2001 - 2004 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -253,6 +253,10 @@
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: index.sgml,v $
+ Revision 2.3  2006/07/18 14:48:51  david__schmidt
+ Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ with what was really the latest development (the v_3_0_branch branch)
+
  Revision 1.16.2.12  2004/01/30 14:33:41  oes
  Vi(m) syntax voodoo now hidden; copyright updated
 

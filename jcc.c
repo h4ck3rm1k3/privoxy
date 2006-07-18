@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.16 2005/04/03 20:10:50 david__schmidt Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.94 2006/07/18 14:48:46 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.92.2.16 2005/04/03 20:10:50 david__schmid
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.94  2006/07/18 14:48:46  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.92.2.16  2005/04/03 20:10:50  david__schmidt
  *    Thanks to Jindrich Makovicka for a race condition fix for the log
  *    file.  The race condition remains for non-pthread implementations.

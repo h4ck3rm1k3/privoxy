@@ -1,4 +1,4 @@
-const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.8 2006/01/30 15:16:25 david__schmidt Exp $";
+const char loaders_rcs[] = "$Id: loaders.c,v 1.52 2006/07/18 14:48:46 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loaders.c,v $
@@ -35,6 +35,10 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.50.2.8 2006/01/30 15:16:25 david_
  *
  * Revisions   :
  *    $Log: loaders.c,v $
+ *    Revision 1.52  2006/07/18 14:48:46  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.50.2.8  2006/01/30 15:16:25  david__schmidt
  *    Remove a little residual debugging info
  *

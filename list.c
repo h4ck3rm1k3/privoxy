@@ -1,4 +1,4 @@
-const char list_rcs[] = "$Id: list.c,v 1.15.2.2 2004/05/25 02:04:23 david__schmidt Exp $";
+const char list_rcs[] = "$Id: list.c,v 1.17 2006/07/18 14:48:46 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/list.c,v $
@@ -34,6 +34,10 @@ const char list_rcs[] = "$Id: list.c,v 1.15.2.2 2004/05/25 02:04:23 david__schmi
  *
  * Revisions   :
  *    $Log: list.c,v $
+ *    Revision 1.17  2006/07/18 14:48:46  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.15.2.2  2004/05/25 02:04:23  david__schmidt
  *    Removed the "arbitrary" 1000 filter limit in file.c.  See tracker #911950.
  *

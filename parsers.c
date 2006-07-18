@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.10 2006/01/21 16:16:08 david__schmidt Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.58 2006/07/18 14:48:47 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -40,6 +40,10 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.56.2.10 2006/01/21 16:16:08 david
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.58  2006/07/18 14:48:47  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.56.2.10  2006/01/21 16:16:08  david__schmidt
  *    Thanks to  Edward Carrel for his patch to modernize OSX'spthreads support.  See bug #1409623.
  *

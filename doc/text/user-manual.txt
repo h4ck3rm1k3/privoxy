@@ -2,7 +2,7 @@ Privoxy 3.0.3 User Manual
 
 [ Copyright © 2001 - 2004 by Privoxy Developers ]
 
-$Id: user-manual.txt,v 1.60.2.7 2004/01/30 23:46:57 oes Exp $
+$Id: user-manual.txt,v 1.62 2006/07/18 14:48:51 david__schmidt Exp $
 
 The User Manual gives users information on how to install, configure and use
 Privoxy.

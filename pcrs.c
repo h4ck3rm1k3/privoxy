@@ -1,4 +1,4 @@
-const char pcrs_rcs[] = "$Id: pcrs.c,v 1.19.2.4 2005/05/07 21:50:55 david__schmidt Exp $";
+const char pcrs_rcs[] = "$Id: pcrs.c,v 1.21 2006/07/18 14:48:47 david__schmidt Exp $";
 
 /*********************************************************************
  *
@@ -33,6 +33,10 @@ const char pcrs_rcs[] = "$Id: pcrs.c,v 1.19.2.4 2005/05/07 21:50:55 david__schmi
  *
  * Revisions   :
  *    $Log: pcrs.c,v $
+ *    Revision 1.21  2006/07/18 14:48:47  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.19.2.4  2005/05/07 21:50:55  david__schmidt
  *    A few memory leaks plugged (mostly on error paths)
  *

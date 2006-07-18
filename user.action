@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/user.action,v $
 # 
-#  $Id: user.action,v 1.1.2.3 2004/01/30 16:48:26 oes Exp $
+#  $Id: user.action,v 1.4 2006/07/18 14:48:47 david__schmidt Exp $
 #
 #  Purpose     :  User-maintained actions file, see
 #                 http://www.privoxy.org/user-manual/actions-file.html

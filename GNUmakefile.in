@@ -1,6 +1,6 @@
 # Note:  Makefile is built automatically from Makefile.in
 #
-# $Id: GNUmakefile.in,v 1.104.2.28 2004/06/10 17:06:05 hal9 Exp $
+# $Id: GNUmakefile.in,v 1.140 2006/07/18 14:48:45 david__schmidt Exp $
 #
 # Written by and Copyright (C) 2001 - 2004 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -1345,6 +1345,10 @@ coffee:
 ## end:
 
 # $Log: GNUmakefile.in,v $
+# Revision 1.140  2006/07/18 14:48:45  david__schmidt
+# Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+# with what was really the latest development (the v_3_0_branch branch)
+#
 # Revision 1.104.2.28  2004/06/10 17:06:05  hal9
 # Fix bug #959617, by moving TMPDIR var to create-snapshot target, which is the
 # only place it is used.

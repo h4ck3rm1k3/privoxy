@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.12 2006/01/30 15:16:25 david__schmidt Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.43 2006/07/18 14:48:45 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,10 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.41.2.12 2006/01/30 15:16:25 david
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.43  2006/07/18 14:48:45  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.41.2.12  2006/01/30 15:16:25  david__schmidt
  *    Remove a little residual debugging info
  *

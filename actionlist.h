@@ -39,6 +39,10 @@
  *
  * Revisions   :
  *    $Log: actionlist.h,v $
+ *    Revision 1.19  2006/07/18 14:48:45  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.17.2.3  2004/10/03 12:53:32  david__schmidt
  *    Add the ability to check jpeg images for invalid
  *    lengths of comment blocks.  Defensive strategy

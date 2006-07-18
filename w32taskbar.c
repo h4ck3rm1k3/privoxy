@@ -1,4 +1,4 @@
-const char w32taskbar_rcs[] = "$Id: w32taskbar.c,v 1.7.2.2 2003/03/19 21:27:42 gliptak Exp $";
+const char w32taskbar_rcs[] = "$Id: w32taskbar.c,v 1.9 2006/07/18 14:48:48 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/w32taskbar.c,v $
@@ -32,6 +32,10 @@ const char w32taskbar_rcs[] = "$Id: w32taskbar.c,v 1.7.2.2 2003/03/19 21:27:42 g
  *
  * Revisions   :
  *    $Log: w32taskbar.c,v $
+ *    Revision 1.9  2006/07/18 14:48:48  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.7.2.2  2003/03/19 21:27:42  gliptak
  *    Corrected compilation error/typo
  *

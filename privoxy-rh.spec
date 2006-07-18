@@ -1,4 +1,4 @@
-# $Id: privoxy-rh.spec,v 1.33.2.22 2004/01/30 17:09:29 oes Exp $
+# $Id: privoxy-rh.spec,v 1.45 2006/07/18 14:48:47 david__schmidt Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -734,6 +734,10 @@ fi
 	additional "-r @" flag.
 
 # $Log: privoxy-rh.spec,v $
+# Revision 1.45  2006/07/18 14:48:47  david__schmidt
+# Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+# with what was really the latest development (the v_3_0_branch branch)
+#
 # Revision 1.33.2.22  2004/01/30 17:09:29  oes
 # Bumped version for 3.0.3
 #

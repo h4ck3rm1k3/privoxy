@@ -1,4 +1,4 @@
-# $Id: privoxy-suse.spec,v 1.20.2.10 2004/01/30 17:09:29 oes Exp $
+# $Id: privoxy-suse.spec,v 1.24 2006/07/18 14:48:47 david__schmidt Exp $
 #
 # Written by and Copyright (C) 2001 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -349,6 +349,10 @@ id privoxy > /dev/null 2>&1 && /usr/sbin/userdel privoxy || /bin/true
 - new package: version 2.0
 
 # $Log: privoxy-suse.spec,v $
+# Revision 1.24  2006/07/18 14:48:47  david__schmidt
+# Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+# with what was really the latest development (the v_3_0_branch branch)
+#
 # Revision 1.20.2.10  2004/01/30 17:09:29  oes
 # Bumped version for 3.0.3
 #

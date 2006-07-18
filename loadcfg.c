@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.7 2006/02/02 17:29:16 david__schmidt Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.50 2006/07/18 14:48:46 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,10 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.48.2.7 2006/02/02 17:29:16 david_
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.50  2006/07/18 14:48:46  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.48.2.7  2006/02/02 17:29:16  david__schmidt
  *    Don't forget to malloc space for the null terminator...
  *

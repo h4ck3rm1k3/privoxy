@@ -24,7 +24,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
                 
- $Id: faq.sgml,v 1.61.2.41 2004/04/05 13:44:05 oes Exp $
+ $Id: faq.sgml,v 2.11 2006/07/18 14:48:50 david__schmidt Exp $
 
  Copyright (C) 2001-2004 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -75,7 +75,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: faq.sgml,v 1.61.2.41 2004/04/05 13:44:05 oes Exp $</pubdate>
+<pubdate>$Id: faq.sgml,v 2.11 2006/07/18 14:48:50 david__schmidt Exp $</pubdate>
 
 <!--
 
@@ -2077,6 +2077,10 @@ Why?</title>
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 $Log: faq.sgml,v $
+Revision 2.11  2006/07/18 14:48:50  david__schmidt
+Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+with what was really the latest development (the v_3_0_branch branch)
+
 Revision 1.61.2.41  2004/04/05 13:44:05  oes
 Fixed allow-all-cookies alias name; closes SR #929746
 

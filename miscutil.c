@@ -1,4 +1,4 @@
-const char miscutil_rcs[] = "$Id: miscutil.c,v 1.37.2.4 2003/12/01 14:45:14 oes Exp $";
+const char miscutil_rcs[] = "$Id: miscutil.c,v 1.39 2006/07/18 14:48:46 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/miscutil.c,v $
@@ -36,6 +36,10 @@ const char miscutil_rcs[] = "$Id: miscutil.c,v 1.37.2.4 2003/12/01 14:45:14 oes 
  *
  * Revisions   :
  *    $Log: miscutil.c,v $
+ *    Revision 1.39  2006/07/18 14:48:46  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.37.2.4  2003/12/01 14:45:14  oes
  *    Fixed two more problems with wildcarding in simplematch()
  *

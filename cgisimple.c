@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.35.2.7 2006/01/29 23:10:56 david__schmidt Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.37 2006/07/18 14:48:45 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,10 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.35.2.7 2006/01/29 23:10:56 da
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.37  2006/07/18 14:48:45  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.35.2.7  2006/01/29 23:10:56  david__schmidt
  *    Multiple filter file support
  *

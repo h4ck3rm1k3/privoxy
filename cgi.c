@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.13 2004/02/17 13:30:23 oes Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.72 2006/07/18 14:48:45 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,10 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.70.2.13 2004/02/17 13:30:23 oes Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.72  2006/07/18 14:48:45  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.70.2.13  2004/02/17 13:30:23  oes
  *    Moved cgi_error_disabled() from cgiedit.c to
  *    cgi.c to re-enable build with --disable-editor.

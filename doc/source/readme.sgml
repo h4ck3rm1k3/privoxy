@@ -17,7 +17,7 @@
 
  Purpose     :  README for Privoxy
                 
- $Id: readme.sgml,v 1.16.2.9 2004/01/30 14:09:59 oes Exp $
+ $Id: readme.sgml,v 2.5 2006/07/18 14:48:51 david__schmidt Exp $
 
  Copyright (C) 2001 - 2004 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -264,7 +264,7 @@
 <!-- </LiteralLayout> -->
 <!-- </para> -->
 <!-- <para> -->
-<!--  $Id: readme.sgml,v 1.16.2.9 2004/01/30 14:09:59 oes Exp $ -->
+<!--  $Id: readme.sgml,v 2.5 2006/07/18 14:48:51 david__schmidt Exp $ -->
 <!-- </para> -->
 
 </article>

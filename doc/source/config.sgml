@@ -12,7 +12,7 @@
 
  Purpose     :  config file generation
                 
- $Id: config.sgml,v 1.1.2.1 2002/05/29 02:01:02 hal9 Exp $
+ $Id: config.sgml,v 2.3 2006/07/18 14:48:50 david__schmidt Exp $
 
  Copyright (C) 2001, 2002 Privoxy Developers <developers@privoxy.org>
  See LICENSE.

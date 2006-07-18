@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.58.2.9 2006/01/29 23:10:56 david__schmidt Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.60 2006/07/18 14:48:46 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -39,6 +39,10 @@ const char filters_rcs[] = "$Id: filters.c,v 1.58.2.9 2006/01/29 23:10:56 david_
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.60  2006/07/18 14:48:46  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.58.2.9  2006/01/29 23:10:56  david__schmidt
  *    Multiple filter file support
  *

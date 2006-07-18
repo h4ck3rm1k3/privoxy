@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.8 2006/01/21 16:16:08 david__schmidt Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.38 2006/07/18 14:48:46 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -35,6 +35,10 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.35.2.8 2006/01/21 16:16:08 da
  *
  * Revisions   :
  *    $Log: jbsockets.c,v $
+ *    Revision 1.38  2006/07/18 14:48:46  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.35.2.8  2006/01/21 16:16:08  david__schmidt
  *    Thanks to  Edward Carrel for his patch to modernize OSX'spthreads support.  See bug #1409623.
  *

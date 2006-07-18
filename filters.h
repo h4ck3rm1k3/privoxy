@@ -1,6 +1,6 @@
 #ifndef FILTERS_H_INCLUDED
 #define FILTERS_H_INCLUDED
-#define FILTERS_H_VERSION "$Id: filters.h,v 1.20.2.2 2004/10/03 12:53:32 david__schmidt Exp $"
+#define FILTERS_H_VERSION "$Id: filters.h,v 1.22 2006/07/18 14:48:46 david__schmidt Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.h,v $
@@ -39,6 +39,10 @@
  *
  * Revisions   :
  *    $Log: filters.h,v $
+ *    Revision 1.22  2006/07/18 14:48:46  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.20.2.2  2004/10/03 12:53:32  david__schmidt
  *    Add the ability to check jpeg images for invalid
  *    lengths of comment blocks.  Defensive strategy

@@ -37,6 +37,10 @@
  *
  * Revisions   :
  *    $Log: vc_config_winthreads.h,v $
+ *    Revision 1.5  2006/07/18 14:48:47  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.3.2.1  2006/04/08 21:57:26  david__schmidt
  *    Synchronize with a more modern copy of config.h.
  *

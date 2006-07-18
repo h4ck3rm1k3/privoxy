@@ -1,4 +1,4 @@
-const char deanimate_rcs[] = "$Id: deanimate.c,v 1.12.2.1 2004/10/03 12:53:32 david__schmidt Exp $";
+const char deanimate_rcs[] = "$Id: deanimate.c,v 1.14 2006/07/18 14:48:45 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/deanimate.c,v $
@@ -40,6 +40,10 @@ const char deanimate_rcs[] = "$Id: deanimate.c,v 1.12.2.1 2004/10/03 12:53:32 da
  *
  * Revisions   :
  *    $Log: deanimate.c,v $
+ *    Revision 1.14  2006/07/18 14:48:45  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.12.2.1  2004/10/03 12:53:32  david__schmidt
  *    Add the ability to check jpeg images for invalid
  *    lengths of comment blocks.  Defensive strategy

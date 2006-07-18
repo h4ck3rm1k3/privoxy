@@ -1,4 +1,4 @@
-const char win32_rcs[] = "$Id: win32.c,v 1.9.2.2 2002/08/27 18:03:40 oes Exp $";
+const char win32_rcs[] = "$Id: win32.c,v 1.11 2006/07/18 14:48:48 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/win32.c,v $
@@ -31,6 +31,10 @@ const char win32_rcs[] = "$Id: win32.c,v 1.9.2.2 2002/08/27 18:03:40 oes Exp $";
  *
  * Revisions   :
  *    $Log: win32.c,v $
+ *    Revision 1.11  2006/07/18 14:48:48  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.9.2.2  2002/08/27 18:03:40  oes
  *    Fixed stupid typo
  *

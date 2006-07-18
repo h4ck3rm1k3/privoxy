@@ -1,6 +1,6 @@
 #ifndef PARSERS_H_INCLUDED
 #define PARSERS_H_INCLUDED
-#define PARSERS_H_VERSION "$Id: parsers.h,v 1.26.2.1 2002/09/25 14:52:46 oes Exp $"
+#define PARSERS_H_VERSION "$Id: parsers.h,v 1.28 2006/07/18 14:48:47 david__schmidt Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.h,v $
@@ -43,6 +43,10 @@
  *
  * Revisions   :
  *    $Log: parsers.h,v $
+ *    Revision 1.28  2006/07/18 14:48:47  david__schmidt
+ *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ *    with what was really the latest development (the v_3_0_branch branch)
+ *
  *    Revision 1.26.2.1  2002/09/25 14:52:46  oes
  *    Added basic support for OPTIONS and TRACE HTTP methods:
  *     - New parser function client_max_forwards which decrements

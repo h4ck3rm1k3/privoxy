@@ -8,9 +8,13 @@
               This file belongs in
               ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
-  $Id: step3.php,v 1.16.2.2 2002/08/23 16:46:05 oes Exp $
+  $Id: step3.php,v 1.18 2006/07/18 14:48:52 david__schmidt Exp $
 
   $Log: step3.php,v $
+  Revision 1.18  2006/07/18 14:48:52  david__schmidt
+  Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+  with what was really the latest development (the v_3_0_branch branch)
+
   Revision 1.16.2.2  2002/08/23 16:46:05  oes
   Adapt to master file format
 

@@ -8,9 +8,13 @@
               This file belongs in
               ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
-  $Id: index.php,v 1.25.2.7 2004/01/30 17:16:44 oes Exp $
+  $Id: index.php,v 1.27 2006/07/18 14:48:52 david__schmidt Exp $
 
   $Log: index.php,v $
+  Revision 1.27  2006/07/18 14:48:52  david__schmidt
+  Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+  with what was really the latest development (the v_3_0_branch branch)
+
   Revision 1.25.2.7  2004/01/30 17:16:44  oes
   Require AF 1.8
 

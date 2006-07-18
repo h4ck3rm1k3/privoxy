@@ -32,7 +32,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 1.123.2.43 2005/05/23 09:59:10 hal9 Exp $
+ $Id: user-manual.sgml,v 2.11 2006/07/18 14:48:51 david__schmidt Exp $
 
  Copyright (C) 2001- 2003 Privoxy Developers <developers@privoxy.org>
  See LICENSE.
@@ -58,7 +58,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 1.123.2.43 2005/05/23 09:59:10 hal9 Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 2.11 2006/07/18 14:48:51 david__schmidt Exp $</pubdate>
 
 <!--
 
@@ -6295,6 +6295,10 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  $Log: user-manual.sgml,v $
+ Revision 2.11  2006/07/18 14:48:51  david__schmidt
+ Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
+ with what was really the latest development (the v_3_0_branch branch)
+
  Revision 1.123.2.43  2005/05/23 09:59:10  hal9
  Fix typo 'loose'
 
