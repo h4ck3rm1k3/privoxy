@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.60 2006/07/18 14:48:46 david__schmidt Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.61 2006/08/03 02:46:41 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -39,6 +39,9 @@ const char filters_rcs[] = "$Id: filters.c,v 1.60 2006/07/18 14:48:46 david__sch
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.61  2006/08/03 02:46:41  david__schmidt
+ *    Incorporate Fabian Keil's patch work:http://www.fabiankeil.de/sourcecode/privoxy/
+ *
  *    Revision 1.60  2006/07/18 14:48:46  david__schmidt
  *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
  *    with what was really the latest development (the v_3_0_branch branch)
@@ -725,6 +728,7 @@ int match_portlist(const char *portlist, int port)
 struct http_response *block_url(struct client_state *csp)
 {
    struct http_response *rsp;
+   const char *new_content_type = NULL;
 
    /*
     * If it's not blocked, don't block it ;-)
@@ -733,7 +737,10 @@ struct http_response *block_url(struct client_state *csp)
    {
       return NULL;
    }
-
+   if (csp->action->flags & ACTION_REDIRECT)
+   {
+      log_error(LOG_LEVEL_ERROR, "redirect{} overruled by block.");     
+   }
    /*
     * Else, prepare a response
     */
@@ -754,11 +761,21 @@ struct http_response *block_url(struct client_state *csp)
       /* determine HOW images should be blocked */
       p = csp->action->string[ACTION_STRING_IMAGE_BLOCKER];
 
+      if(csp->action->flags & ACTION_HANDLE_AS_EMPTY_DOCUMENT)
+      {
+         log_error(LOG_LEVEL_ERROR, "handle-as-empty-document overruled by handle-as-image.");
+      }
 #if 1 /* Two alternative strategies, use this one for now: */
 
       /* and handle accordingly: */
       if ((p == NULL) || (0 == strcmpic(p, "pattern")))
       {
+         rsp->status = strdup("403 Request blocked by Privoxy");
+         if (rsp->status == NULL)
+         {
+            free_http_response(rsp);
+            return cgi_error_memory();
+         }
          rsp->body = bindup(image_pattern_data, image_pattern_length);
          if (rsp->body == NULL)
          {
@@ -776,6 +793,12 @@ struct http_response *block_url(struct client_state *csp)
 
       else if (0 == strcmpic(p, "blank"))
       {
+         rsp->status = strdup("403 Request blocked by Privoxy");
+         if (rsp->status == NULL)
+         {
+            free_http_response(rsp);
+            return cgi_error_memory();
+         }
          rsp->body = bindup(image_blank_data, image_blank_length);
          if (rsp->body == NULL)
          {
@@ -831,6 +854,34 @@ struct http_response *block_url(struct client_state *csp)
          return cgi_error_memory();
       }
 #endif /* Preceeding code is disabled for now */
+   }
+   else if(csp->action->flags & ACTION_HANDLE_AS_EMPTY_DOCUMENT)
+   {
+     /*
+      *  Send empty document.               
+      */
+      new_content_type = csp->action->string[ACTION_STRING_CONTENT_TYPE];
+
+      freez(rsp->body);
+      rsp->body = strdup(" ");
+      rsp->content_length = 1;
+
+      rsp->status = strdup("403 Request blocked by Privoxy");
+      if (rsp->status == NULL)
+      {
+         free_http_response(rsp);
+         return cgi_error_memory();
+      }
+      if (new_content_type != 0)
+      {
+         log_error(LOG_LEVEL_HEADER, "Overwriting Content-Type with %s", new_content_type);
+         if (enlist_unique_header(rsp->headers, "Content-Type", new_content_type))
+         {
+            free_http_response(rsp);
+            return cgi_error_memory();
+         }
+      }
+
    }
    else
 #endif /* def FEATURE_IMAGE_BLOCKING */
@@ -1074,18 +1125,55 @@ struct http_response *redirect_url(struct client_state *csp)
 {
    char *p, *q;
    struct http_response *rsp;
+   char *redirect_mode = NULL;
+   int x, y;
 
-   p = q = csp->http->path;
-   log_error(LOG_LEVEL_REDIRECTS, "checking path for redirects: %s", p);
-
-   /*
-    * find the last URL encoded in the request
-    */
-   while ((p = strstr(p, "http://")) != NULL)
+   if ((csp->action->flags & ACTION_REDIRECT))
    {
-      q = p++;
+      q = csp->action->string[ACTION_STRING_REDIRECT];
    }
+   else
+   {
+      redirect_mode = csp->action->string[ACTION_STRING_FAST_REDIRECTS];
+      if (0 == strcmpic(redirect_mode, "check-decoded-url"))
+      {  
+         p = q = csp->http->path; 
+         log_error(LOG_LEVEL_REDIRECTS, "Decoding path: %s if necessary.", p);
+         while (*p)
+         {
+            if (*p == '%') /* Escape sequence? */
+            {
+               /* Yes, translate from hexadecimal to decimal */
+               p++;
+               /* First byte */
+               x=((int)*p++)-48;
+               if (x>9) x-=7;
+               x<<=4;
+               /* Second byte */
+               y=((int)*p++)-48;
+               if (y>9)y-=7;
+               /* Merge */
+               *q++=(char)(x|y);
+            }
+            else
+            {
+               /* No, forward character. */
+               *q++=*p++;
+            }
+         }
+         *q='\0';
+      }
+      p = q = csp->http->path;
+      log_error(LOG_LEVEL_REDIRECTS, "Checking path for redirects: %s", p);
 
+      /*
+       * find the last URL encoded in the request
+       */
+      while ((p = strstr(p, "http://")) != NULL)
+      {
+         q = p++;
+      }
+   }
    /*
     * if there was any, generate and return a HTTP redirect
     */

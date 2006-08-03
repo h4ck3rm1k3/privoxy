@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.94 2006/07/18 14:48:46 david__schmidt Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.95 2006/08/03 02:46:41 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.94 2006/07/18 14:48:46 david__schmidt Exp
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.95  2006/08/03 02:46:41  david__schmidt
+ *    Incorporate Fabian Keil's patch work:http://www.fabiankeil.de/sourcecode/privoxy/
+ *
  *    Revision 1.94  2006/07/18 14:48:46  david__schmidt
  *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
  *    with what was really the latest development (the v_3_0_branch branch)
@@ -864,6 +867,7 @@ static void chat(struct client_state *csp)
    int server_body;
    int ms_iis5_hack = 0;
    int byte_count = 0;
+   unsigned int socks_retries = 0;
    const struct forward_spec * fwd;
    struct http_request *http;
    int len; /* for buffer sizes */
@@ -1017,13 +1021,22 @@ static void chat(struct client_state *csp)
            || (csp->action->flags & ACTION_LIMIT_CONNECT
               && !match_portlist(csp->action->string[ACTION_STRING_LIMIT_CONNECT], csp->http->port)) )
       {
-         strcpy(buf, CFORBIDDEN);
-         write_socket(csp->cfd, buf, strlen(buf));
-
-         log_error(LOG_LEVEL_CONNECT, "Denying suspicious CONNECT request from %s", csp->ip_addr_str);
-         log_error(LOG_LEVEL_CLF, "%s - - [%T] \" \" 403 0", csp->ip_addr_str);
-
-         return;
+         if (csp->action->flags & ACTION_TREAT_FORBIDDEN_CONNECTS_LIKE_BLOCKS)
+         {
+            /* The response will violate the specs, but makes unblocking easier. */
+            log_error(LOG_LEVEL_ERROR, "Marking suspicious CONNECT request from %s for blocking.",
+               csp->ip_addr_str);
+            csp->action->flags |= ACTION_BLOCK;
+            http->ssl = 0;
+         }
+         else
+         {
+            strcpy(buf, CFORBIDDEN);
+            write_socket(csp->cfd, buf, strlen(buf));
+            log_error(LOG_LEVEL_CONNECT, "Denying suspicious CONNECT request from %s", csp->ip_addr_str);
+            log_error(LOG_LEVEL_CLF, "%s - - [%T] \" \" 403 0", csp->ip_addr_str);
+            return;
+         }
       }
    }
 
@@ -1181,7 +1194,7 @@ static void chat(struct client_state *csp)
       csp->flags |= CSP_FLAG_REJECTED;
 #endif /* def FEATURE_STATISTICS */
 
-      /* Log (FIXME: All intercept reasons apprear as "crunch" with Status 200) */
+      /* Log (FIXME: All intercept reasons appear as "crunch" with Status 200) */
       log_error(LOG_LEVEL_GPC, "%s%s crunch!", http->hostport, http->path);
       log_error(LOG_LEVEL_CLF, "%s - - [%T] \"%s\" 200 3", csp->ip_addr_str, http->ocmd);
 
@@ -1213,7 +1226,12 @@ static void chat(struct client_state *csp)
 
    /* here we connect to the server, gateway, or the forwarder */
 
-   csp->sfd = forwarded_connect(fwd, http, csp);
+   while ( (csp->sfd = forwarded_connect(fwd, http, csp))
+         && (errno == EINVAL) && (socks_retries++ < 3))
+   {
+		log_error(LOG_LEVEL_ERROR, "failed request #%u to connect to %s. Trying again.",
+                socks_retries, http->hostport);
+   }
 
    if (csp->sfd == JB_INVALID_SOCKET)
    {
@@ -1443,7 +1461,8 @@ static void chat(struct client_state *csp)
                      csp->content_length = csp->iob->eod - csp->iob->cur;
                   }
 
-                  hdr = sed(server_patterns, add_server_headers, csp);
+                  hdr = sed(server_patterns_light, NULL, csp);
+
                   if (hdr == NULL)
                   {
                      /* FIXME Should handle error properly */

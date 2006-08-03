@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.38 2006/07/18 14:48:46 david__schmidt Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.39 2006/08/03 02:46:41 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -35,6 +35,9 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.38 2006/07/18 14:48:46 david_
  *
  * Revisions   :
  *    $Log: jbsockets.c,v $
+ *    Revision 1.39  2006/08/03 02:46:41  david__schmidt
+ *    Incorporate Fabian Keil's patch work:http://www.fabiankeil.de/sourcecode/privoxy/
+ *
  *    Revision 1.38  2006/07/18 14:48:46  david__schmidt
  *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
  *    with what was really the latest development (the v_3_0_branch branch)
@@ -791,6 +794,7 @@ unsigned long resolve_hostname_to_ip(const char *host)
 {
    struct sockaddr_in inaddr;
    struct hostent *hostp;
+   unsigned int dns_retries = 0;
 #if defined(HAVE_GETHOSTBYNAME_R_6_ARGS) || defined(HAVE_GETHOSTBYNAME_R_5_ARGS) || defined(HAVE_GETHOSTBYNAME_R_3_ARGS)
    struct hostent result;
 #if defined(HAVE_GETHOSTBYNAME_R_6_ARGS) || defined(HAVE_GETHOSTBYNAME_R_5_ARGS)
@@ -811,8 +815,13 @@ unsigned long resolve_hostname_to_ip(const char *host)
    if ((inaddr.sin_addr.s_addr = inet_addr(host)) == -1)
    {
 #if defined(HAVE_GETHOSTBYNAME_R_6_ARGS)
-      gethostbyname_r(host, &result, hbuf,
-                      HOSTENT_BUFFER_SIZE, &hostp, &thd_err);
+       while ( gethostbyname_r(host, &result, hbuf,
+                      HOSTENT_BUFFER_SIZE, &hostp, &thd_err)
+               && (thd_err == TRY_AGAIN) && (dns_retries++ < 10) )
+      {   
+         log_error(LOG_LEVEL_ERROR, "Timeout #%u while trying to resolve %s. Trying again.",
+                                                dns_retries, host);
+      }
 #elif defined(HAVE_GETHOSTBYNAME_R_5_ARGS)
       hostp = gethostbyname_r(host, &result, hbuf,
                       HOSTENT_BUFFER_SIZE, &thd_err);
@@ -827,10 +836,20 @@ unsigned long resolve_hostname_to_ip(const char *host)
       }
 #elif OSX_DARWIN
       pthread_mutex_lock(&gethostbyname_mutex);
-      hostp = gethostbyname(host);
+      while ( NULL == (hostp = gethostbyname(host))
+            && (h_errno == TRY_AGAIN) && (dns_retries++ < 10) )
+      {   
+         log_error(LOG_LEVEL_ERROR, "Timeout #%u while trying to resolve %s. Trying again.",
+                                                dns_retries, host);
+      }
       pthread_mutex_unlock(&gethostbyname_mutex);
 #else
-      hostp = gethostbyname(host);
+      while ( NULL == (hostp = gethostbyname(host))
+            && (h_errno == TRY_AGAIN) && (dns_retries++ < 10) )
+      {
+         log_error(LOG_LEVEL_ERROR, "Timeout #%u while trying to resolve %s. Trying again.",
+                                                dns_retries, host);
+      }
 #endif /* def HAVE_GETHOSTBYNAME_R_(6|5|3)_ARGS */
       /*
        * On Mac OSX, if a domain exists but doesn't have a type A
