@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.59 2006/08/03 02:46:41 david__schmidt Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.60 2006/08/12 03:54:37 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -40,6 +40,9 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.59 2006/08/03 02:46:41 david__sch
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.60  2006/08/12 03:54:37  david__schmidt
+ *    Windows service integration
+ *
  *    Revision 1.59  2006/08/03 02:46:41  david__schmidt
  *    Incorporate Fabian Keil's patch work:http://www.fabiankeil.de/sourcecode/privoxy/
  *
@@ -1467,7 +1470,11 @@ jb_err server_last_modified(struct client_state *csp, char **header)
          rtime = difftime(now, last_modified);
          if (rtime)
          {
+#if !defined(_WIN32) && !defined(__OS2__)
             rtime = random() % rtime + 1; 
+#else
+            rtime = rand() % rtime + 1; 
+#endif /* (ifndef _WIN32 || __OS2__) */
             last_modified += rtime;
             timeptr = gmtime(&last_modified);
             strftime(newheader, sizeof(newheader), "%a, %d %b %Y %T GMT", timeptr);
@@ -2198,8 +2205,11 @@ jb_err client_if_modified_since(struct client_state *csp, char **header)
                *header, rtime, (rtime == 1 || rtime == -1) ? "r": "rs");
 
             rtime *= 3600;
+#if !defined(_WIN32) && !defined(__OS2__)
             rtime = random() % rtime; 
-
+#else
+            rtime = rand() % rtime; 
+#endif /* (_WIN32 || __OS2__) */
             if(newval[0] == '-')
             {
                rtime *= -1;      
