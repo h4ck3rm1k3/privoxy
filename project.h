@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.75 2006/08/03 02:46:41 david__schmidt Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.76 2006/08/14 08:25:19 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,12 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.76  2006/08/14 08:25:19  fabiankeil
+ *    Split filter-headers{} into filter-client-headers{}
+ *    and filter-server-headers{}.
+ *    Added parse_header_time() to share some code.
+ *    Replaced timegm() with mktime().
+ *
  *    Revision 1.75  2006/08/03 02:46:41  david__schmidt
  *    Incorporate Fabian Keil's patch work:http://www.fabiankeil.de/sourcecode/privoxy/
  *
@@ -948,8 +954,10 @@ struct iob
 #define  ACTION_REDIRECT                             0x10000000UL
 /** Action bitmap: Answer blocked Connects verbosely */
 #define ACTION_TREAT_FORBIDDEN_CONNECTS_LIKE_BLOCKS  0x20000000UL
-/** Action bitmap: Filter headers with pcre */
-#define ACTION_FILTER_HEADERS                        0x40000000UL
+/** Action bitmap: Filter server headers with pcre */
+#define ACTION_FILTER_SERVER_HEADERS                 0x40000000UL
+/** Action bitmap: Filter client headers with pcre */
+#define ACTION_FILTER_CLIENT_HEADERS                 0x80000000UL
 
 
 /*To make the ugly hack in sed easier to understand*/
