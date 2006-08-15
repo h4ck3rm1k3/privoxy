@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.95 2006/08/03 02:46:41 david__schmidt Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.96 2006/08/15 20:12:36 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.95 2006/08/03 02:46:41 david__schmidt Exp
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.96  2006/08/15 20:12:36  david__schmidt
+ *    Windows service integration
+ *
  *    Revision 1.95  2006/08/03 02:46:41  david__schmidt
  *    Incorporate Fabian Keil's patch work:http://www.fabiankeil.de/sourcecode/privoxy/
  *
@@ -2229,6 +2232,17 @@ static jb_socket bind_port_helper(struct configuration_spec * config)
 
    return bfd;
 }
+
+
+#ifdef _WIN32
+/* Without this simple workaround we get this compiler warning from _beginthread
+ *     warning C4028: formal parameter 1 different from declaration
+ */
+void w32_service_listen_loop(void *p)
+{
+   listen_loop();
+}
+#endif /* def _WIN32 */
 
 
 /*********************************************************************
