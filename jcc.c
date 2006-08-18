@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.96 2006/08/15 20:12:36 david__schmidt Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.97 2006/08/18 15:23:17 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,27 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.96 2006/08/15 20:12:36 david__schmidt Exp
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.97  2006/08/18 15:23:17  david__schmidt
+ *    Windows service (re-)integration
+ *
+ *    The new args are:
+ *
+ *    --install[:service_name]
+ *    --uninstall[:service_name]
+ *    --service
+ *
+ *    They work as follows:
+ *    --install will create a service for you and then terminate.
+ *    By default the service name will be "privoxy" (without the quotes).
+ *    However you can run multiple services if you wish, just by adding
+ *    a colon and then a name (no spaces).
+ *
+ *    --uninstall follows the exact same rules a --install.
+ *
+ *    --service is used when the program is executed by the service
+ *    control manager, and in normal circumstances would never be
+ *    used as a command line argument.
+ *
  *    Revision 1.96  2006/08/15 20:12:36  david__schmidt
  *    Windows service integration
  *
@@ -645,6 +666,7 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.96 2006/08/15 20:12:36 david__schmidt Exp
 # ifndef _WIN_CONSOLE
 #  include "w32log.h"
 # endif /* ndef _WIN_CONSOLE */
+# include "w32svrapi.h"
 
 #else /* ifndef _WIN32 */
 
@@ -1879,6 +1901,34 @@ int main(int argc, const char *argv[])
     */
    while (++argc_pos < argc)
    {
+#ifdef _WIN32
+      /* Check to see if the service must be installed or uninstalled */
+      if (strncmp(argv[argc_pos], "--install", 9) == 0)
+      {
+         const char *pName = argv[argc_pos] + 9;
+         if (*pName == ':')
+            pName++;
+         exit( (install_service(pName)) ? 0 : 1 );
+      }
+      else if (strncmp(argv[argc_pos], "--uninstall", + 11) == 0)
+      {
+         const char *pName = argv[argc_pos] + 11;
+         if (*pName == ':')
+            pName++;
+         exit((uninstall_service(pName)) ? 0 : 1);
+      }
+      else if (strcmp(argv[argc_pos], "--service" ) == 0)
+      {
+         bRunAsService = TRUE;
+         w32_set_service_cwd();
+         atexit(w32_service_exit_notify);
+      }
+      else
+#endif /* defined(_WIN32) */
+
+
+#if !defined(_WIN32) || defined(_WIN_CONSOLE)
+
       if (strcmp(argv[argc_pos], "--help") == 0)
       {
          usage(argv[0]);
@@ -1930,8 +1980,7 @@ int main(int argc, const char *argv[])
       }
 
 #endif /* defined(unix) */
-
-      else
+#endif /* defined(_WIN32) && !defined(_WIN_CONSOLE) */
       {
          configfile = argv[argc_pos];
       }
@@ -2153,6 +2202,37 @@ int main(int argc, const char *argv[])
    }
 }
 #endif /* defined unix */
+
+#ifdef _WIN32
+   /* This will be FALSE unless the command line specified --service
+    */
+   if (bRunAsService)
+   {
+      /* Yup, so now we must attempt to establish a connection 
+       * with the service dispatcher. This will only work if this
+       * process was launched by the service control manager to
+       * actually run as a service. If this isn't the case, i've
+       * known it take around 30 seconds or so for the call to return.
+       */
+
+      /* The StartServiceCtrlDispatcher won't return until the service is stopping */
+      if (w32_start_service_ctrl_dispatcher(w32ServiceDispatchTable))
+      {
+         /* Service has run, and at this point is now being stopped, so just return */
+         return 0;
+      }
+
+#ifdef _WIN_CONSOLE
+      printf("Warning: Failed to connect to Service Control Dispatcher\nwhen starting as a service!\n");
+#endif
+      /* An error occurred. Usually it's because --service was wrongly specified
+       * and we were unable to connect to the Service Control Dispatcher because
+       * it wasn't expecting us and is therefore not listening.
+       *
+       * For now, just continue below to call the listen_loop function.
+       */
+   }
+#endif /* def _WIN32 */
 
    listen_loop();
 

@@ -27,3 +27,5 @@ vc_release_winthr
 w32.aps
 w32.res
 .project
+autom4te.cache
+default.action
