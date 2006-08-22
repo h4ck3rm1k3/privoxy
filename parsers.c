@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.64 2006/08/17 17:15:10 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.65 2006/08/22 10:55:56 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -40,6 +40,11 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.64 2006/08/17 17:15:10 fabiankeil
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.65  2006/08/22 10:55:56  fabiankeil
+ *    Changed client_referrer to use the right type (size_t) for
+ *    hostlenght and to shorten the temporary referrer string with
+ *    '\0' instead of adding a useless line break.
+ *
  *    Revision 1.64  2006/08/17 17:15:10  fabiankeil
  *    - Back to timegm() using GnuPG's replacement if necessary.
  *      Using mktime() and localtime() could add a on hour offset if
@@ -1675,7 +1680,7 @@ jb_err client_referrer(struct client_state *csp, char **header)
    const char *newval;
    const char *host;
    char *referer;
-   int hostlenght;
+   size_t hostlenght;
  
 #ifdef FEATURE_FORCE_LOAD
    /* Since the referrer can include the prefix even
@@ -1733,7 +1738,7 @@ jb_err client_referrer(struct client_state *csp, char **header)
           *if www.example.org/www.example.com-shall-see-the-referer/
           *links to www.example.com/
           */
-         referer[hostlenght+17] = '\n';
+         referer[hostlenght+17] = '\0';
       }
       if ( 0 == strstr(referer, host)) /*Host has changed*/
       {
