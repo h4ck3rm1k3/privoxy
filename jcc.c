@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.97 2006/08/18 15:23:17 david__schmidt Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.98 2006/08/24 11:01:34 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.97 2006/08/18 15:23:17 david__schmidt Exp
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.98  2006/08/24 11:01:34  fabiankeil
+ *    --user fix. Only use the user as group if no group is specified.
+ *    Solves BR 1492612. Thanks to Spinor S. and David Laight.
+ *
  *    Revision 1.97  2006/08/18 15:23:17  david__schmidt
  *    Windows service (re-)integration
  *
@@ -2156,7 +2160,7 @@ int main(int argc, const char *argv[])
    
    if (NULL != pw)
    {
-      if (((NULL != grp) && setgid(grp->gr_gid)) || (setgid(pw->pw_gid)))
+      if (setgid((NULL != grp) ? grp->gr_gid : pw->pw_gid))
       {
          log_error(LOG_LEVEL_FATAL, "Cannot setgid(): Insufficient permissions.");
       }
