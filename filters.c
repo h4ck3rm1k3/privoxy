@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.63 2006/08/31 10:11:28 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.64 2006/08/31 10:55:49 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -39,6 +39,10 @@ const char filters_rcs[] = "$Id: filters.c,v 1.63 2006/08/31 10:11:28 fabiankeil
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.64  2006/08/31 10:55:49  fabiankeil
+ *    Block requests for untrusted URLs with status
+ *    code 403 instead of 200.
+ *
  *    Revision 1.63  2006/08/31 10:11:28  fabiankeil
  *    Don't free p which is still in use and will be later
  *    freed by free_map(). Don't claim the referrer is unknown
@@ -973,7 +977,7 @@ struct http_response *block_url(struct client_state *csp)
  * Function    :  trust_url FIXME: I should be called distrust_url
  *
  * Description :  Calls is_untrusted_url to determine if the URL is trusted
- *                and if not, returns a HTTP 304 response with a reject message.
+ *                and if not, returns a HTTP 403 response with a reject message.
  *
  * Parameters  :
  *          1  :  csp = Current client state (buffers, headers, etc...)
@@ -1007,8 +1011,9 @@ struct http_response *trust_url(struct client_state *csp)
       return cgi_error_memory();
    }
 
+   rsp->status = strdup("403 Request blocked by Privoxy");
    exports = default_exports(csp, NULL);
-   if (exports == NULL)
+   if (exports == NULL || rsp->status == NULL)
    {
       free_http_response(rsp);
       return cgi_error_memory();
