@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.39 2006/08/03 02:46:41 david__schmidt Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.40 2006/09/02 15:36:42 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -35,6 +35,10 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.39 2006/08/03 02:46:41 david_
  *
  * Revisions   :
  *    $Log: jbsockets.c,v $
+ *    Revision 1.40  2006/09/02 15:36:42  fabiankeil
+ *    Follow the OpenBSD port's lead and protect the resolve
+ *    functions on OpenBSD as well.
+ *
  *    Revision 1.39  2006/08/03 02:46:41  david__schmidt
  *    Incorporate Fabian Keil's patch work:http://www.fabiankeil.de/sourcecode/privoxy/
  *
@@ -263,11 +267,10 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.39 2006/08/03 02:46:41 david_
 
 #include "project.h"
 
-#ifdef OSX_DARWIN
-#include <pthread.h>
+#if defined(OSX_DARWIN) || defined(__OpenBSD__)
 #include "jcc.h"
 /* jcc.h is for mutex semaphores only */
-#endif /* def OSX_DARWIN */
+#endif /* defined(OSX_DARWIN) || defined(__OpenBSD__) */
 
 #include "jbsockets.h"
 #include "filters.h"
@@ -749,7 +752,7 @@ int accept_connection(struct client_state * csp, jb_socket fd)
       {
          host = NULL;
       }
-#elif defined(OSX_DARWIN)
+#elif defined(OSX_DARWIN) || defined(__OpenBSD__)
       pthread_mutex_lock(&gethostbyaddr_mutex);
       host = gethostbyaddr((const char *)&server.sin_addr, 
                            sizeof(server.sin_addr), AF_INET);
@@ -834,7 +837,7 @@ unsigned long resolve_hostname_to_ip(const char *host)
       {
          hostp = NULL;
       }
-#elif OSX_DARWIN
+#elif defined(OSX_DARWIN) || defined(__OpenBSD__)
       pthread_mutex_lock(&gethostbyname_mutex);
       while ( NULL == (hostp = gethostbyname(host))
             && (h_errno == TRY_AGAIN) && (dns_retries++ < 10) )

@@ -1,6 +1,6 @@
 #ifndef JCC_H_INCLUDED
 #define JCC_H_INCLUDED
-#define JCC_H_VERSION "$Id: jcc.h,v 1.15 2006/09/02 10:24:30 fabiankeil Exp $"
+#define JCC_H_VERSION "$Id: jcc.h,v 1.16 2006/09/02 15:36:42 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.h,v $
@@ -35,6 +35,10 @@
  *
  * Revisions   :
  *    $Log: jcc.h,v $
+ *    Revision 1.16  2006/09/02 15:36:42  fabiankeil
+ *    Follow the OpenBSD port's lead and protect the resolve
+ *    functions on OpenBSD as well.
+ *
  *    Revision 1.15  2006/09/02 10:24:30  fabiankeil
  *    Include pthread.h for OpenBSD to make Privoxy build again.
  *
@@ -145,14 +149,13 @@ extern int g_terminate;
 
 #if defined(OSX_DARWIN) || defined(__OpenBSD__)
 #include <pthread.h>
-#endif /* defined(OSX_DARWIN) || defined(__OpenBSD__) */
-
 #ifdef OSX_DARWIN
 extern pthread_mutex_t gmtime_mutex;
 extern pthread_mutex_t localtime_mutex;
+#endif /* def OSX_DARWIN */
 extern pthread_mutex_t gethostbyaddr_mutex;
 extern pthread_mutex_t gethostbyname_mutex;
-#endif /* def OSX_DARWIN */
+#endif /* defined(OSX_DARWIN) || defined(__OpenBSD__) */
 
 #ifdef FEATURE_PTHREAD
 extern pthread_mutex_t log_mutex;

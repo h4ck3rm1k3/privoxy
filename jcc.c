@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.98 2006/08/24 11:01:34 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.99 2006/09/02 15:36:42 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.98 2006/08/24 11:01:34 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.99  2006/09/02 15:36:42  fabiankeil
+ *    Follow the OpenBSD port's lead and protect the resolve
+ *    functions on OpenBSD as well.
+ *
  *    Revision 1.98  2006/08/24 11:01:34  fabiankeil
  *    --user fix. Only use the user as group if no group is specified.
  *    Solves BR 1492612. Thanks to Spinor S. and David Laight.
@@ -765,15 +769,20 @@ static int32 server_thread(void *data);
 #define sleep(N)  DosSleep(((N) * 100))
 #endif
 
+#if defined(OSX_DARWIN) || defined(__OpenBSD__)
 #ifdef OSX_DARWIN
 /*
  * Hit OSX over the head with a hammer.  Protect all *_r functions.
  */
 pthread_mutex_t gmtime_mutex;
 pthread_mutex_t localtime_mutex;
+#endif /* def OSX_DARWIN */
+/*
+ * Protect only the resolve functions for OpenBSD.
+ */ 
 pthread_mutex_t gethostbyaddr_mutex;
 pthread_mutex_t gethostbyname_mutex;
-#endif /* def OSX_DARWIN */
+#endif /* defined(OSX_DARWIN) || defined(__OpenBSD__) */
 
 #ifdef FEATURE_PTHREAD
 pthread_mutex_t log_mutex;
@@ -2026,15 +2035,17 @@ int main(int argc, const char *argv[])
    InitWin32();
 #endif
 
-#ifdef OSX_DARWIN
+#if defined(OSX_DARWIN) || defined(__OpenBSD__)
    /*
     * Prepare global mutex semaphores
     */
+#ifdef OSX_DARWIN
    pthread_mutex_init(&gmtime_mutex,0);
    pthread_mutex_init(&localtime_mutex,0);
+#endif /* def OSX_DARWIN */
    pthread_mutex_init(&gethostbyaddr_mutex,0);
    pthread_mutex_init(&gethostbyname_mutex,0);
-#endif /* def OSX_DARWIN */
+#endif /* defined(OSX_DARWIN) || defined(__OpenBSD__) */
 
 #ifdef FEATURE_PTHREAD
    pthread_mutex_init(&log_mutex,0);
