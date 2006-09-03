@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.65 2006/08/22 10:55:56 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.66 2006/09/03 19:38:28 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -40,6 +40,10 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.65 2006/08/22 10:55:56 fabiankeil
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.66  2006/09/03 19:38:28  fabiankeil
+ *    Use gmtime_r if available, fallback to gmtime with mutex
+ *    protection for MacOSX and use vanilla gmtime for the rest.
+ *
  *    Revision 1.65  2006/08/22 10:55:56  fabiankeil
  *    Changed client_referrer to use the right type (size_t) for
  *    hostlenght and to shorten the temporary referrer string with
@@ -1487,6 +1491,9 @@ jb_err server_last_modified(struct client_state *csp, char **header)
    char buf[BUFFER_SIZE];
 
    char newheader[50];
+#ifdef HAVE_GMTIME_R
+   struct tm gmt;
+#endif
    struct tm *timeptr = NULL;
    time_t now, last_modified;                  
    long int rtime;
@@ -1535,7 +1542,15 @@ jb_err server_last_modified(struct client_state *csp, char **header)
    {
       log_error(LOG_LEVEL_HEADER, "Randomizing: %s", *header);
       now = time(NULL);
+#ifdef HAVE_GMTIME_R
+      timeptr = gmtime_r(&now, &gmt);
+#elif OSX_DARWIN
+      pthread_mutex_lock(&gmtime_mutex);
       timeptr = gmtime(&now);
+      pthread_mutex_unlock(&gmtime_mutex);
+#else
+      timeptr = gmtime(&now);
+#endif
       if ((timeptr = parse_header_time(*header, &last_modified)) == NULL)
       {
          log_error(LOG_LEVEL_HEADER, "Couldn't parse: %s (crunching!)", *header);
@@ -1548,7 +1563,15 @@ jb_err server_last_modified(struct client_state *csp, char **header)
          {
             rtime = pick_from_range(rtime);
             last_modified += rtime;
+#ifdef HAVE_GMTIME_R
+            timeptr = gmtime_r(&last_modified, &gmt);
+#elif OSX_DARWIN
+            pthread_mutex_lock(&gmtime_mutex);
             timeptr = gmtime(&last_modified);
+            pthread_mutex_unlock(&gmtime_mutex);
+#else
+            timeptr = gmtime(&last_modified);
+#endif
             strftime(newheader, sizeof(newheader), "%a, %d %b %Y %H:%M:%S GMT", timeptr);
             freez(*header);
             *header = strdup("Last-Modified: ");
@@ -2229,6 +2252,9 @@ jb_err client_host(struct client_state *csp, char **header)
 jb_err client_if_modified_since(struct client_state *csp, char **header)
 {
    char newheader[50];
+#ifdef HAVE_GMTIME_R
+   struct tm gmt;
+#endif
    struct tm *timeptr = NULL;
    time_t tm = 0;                  
    const char *newval;
@@ -2286,7 +2312,15 @@ jb_err client_if_modified_since(struct client_state *csp, char **header)
                   *header);
             }
             tm += rtime;
+#ifdef HAVE_GMTIME_R
+            timeptr = gmtime_r(&tm, &gmt);
+#elif OSX_DARWIN
+            pthread_mutex_lock(&gmtime_mutex);
             timeptr = gmtime(&tm);
+            pthread_mutex_unlock(&gmtime_mutex);
+#else
+            timeptr = gmtime(&tm);
+#endif
             strftime(newheader, sizeof(newheader), "%a, %d %b %Y %H:%M:%S GMT", timeptr);
 
             freez(*header);
