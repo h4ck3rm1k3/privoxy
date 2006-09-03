@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.99 2006/09/02 15:36:42 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.100 2006/09/03 19:42:59 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.99 2006/09/02 15:36:42 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.100  2006/09/03 19:42:59  fabiankeil
+ *    Set random(3) seed.
+ *
  *    Revision 1.99  2006/09/02 15:36:42  fabiankeil
  *    Follow the OpenBSD port's lead and protect the resolve
  *    functions on OpenBSD as well.
@@ -1891,6 +1894,9 @@ int main(int argc, const char *argv[])
 #endif
 {
    int argc_pos = 0;
+#ifdef HAVE_RANDOM
+   unsigned int random_seed;
+#endif /* ifdef HAVE_RANDOM */
 #ifdef unix
    struct passwd *pw = NULL;
    struct group *grp = NULL;
@@ -2051,6 +2057,11 @@ int main(int argc, const char *argv[])
    pthread_mutex_init(&log_mutex,0);
    pthread_mutex_init(&log_init_mutex,0);
 #endif /* FEATURE_PTHREAD */
+
+#ifdef HAVE_RANDOM
+   random_seed = (unsigned int)time(NULL);
+   srandom(random_seed);
+#endif /* ifdef HAVE_RANDOM */
 
    /*
     * Unix signal handling
