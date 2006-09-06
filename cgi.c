@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.73 2006/08/03 02:46:41 david__schmidt Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.74 2006/09/06 18:45:03 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,15 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.73 2006/08/03 02:46:41 david__schmidt Exp
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.74  2006/09/06 18:45:03  fabiankeil
+ *    Incorporate modified version of Roland Rosenfeld's patch to
+ *    optionally access the user-manual via Privoxy. Closes patch 679075.
+ *
+ *    Formatting changed to Privoxy style, added call to
+ *    cgi_error_no_template if the requested file doesn't
+ *    exist and modified check whether or not Privoxy itself
+ *    should serve the manual. Should work cross-platform now.
+ *
  *    Revision 1.73  2006/08/03 02:46:41  david__schmidt
  *    Incorporate Fabian Keil's patch work:http://www.fabiankeil.de/sourcecode/privoxy/
  *
@@ -616,6 +625,9 @@ static const struct cgi_dispatcher cgi_dispatchers[] = {
    { "t",
          cgi_transparent_image, 
          NULL, TRUE /* Send a transparent image (short name) */ },
+   { "user-manual",
+          cgi_send_user_manual,
+          NULL /* Send user-manual */ },
    { NULL, /* NULL Indicates end of list and default page */
          cgi_error_404,
          NULL, TRUE /* Unknown CGI page */ }
@@ -828,21 +840,30 @@ static struct http_response *dispatch_known_cgi(struct client_state * csp,
    {
       return cgi_error_memory();
    }
-
    query_args_start = path_copy;
-   while (*query_args_start && *query_args_start != '?')
+   while (*query_args_start && *query_args_start != '?' && *query_args_start != '/')
    {
       query_args_start++;
    }
-   if (*query_args_start == '?')
+   if (*query_args_start == '/') 
    {
       *query_args_start++ = '\0';
+      if ((param_list = new_map()))
+      {
+         map(param_list, "file", 1, url_decode(query_args_start), 0);
+      }
    }
-
-   if (NULL == (param_list = parse_cgi_parameters(query_args_start)))
+   else
    {
-      free(path_copy);
-      return cgi_error_memory();
+      if (*query_args_start == '?')
+      {
+         *query_args_start++ = '\0';
+      }
+      if (NULL == (param_list = parse_cgi_parameters(query_args_start)))
+      {
+         free(path_copy);
+         return cgi_error_memory();
+      }
    }
 
    /*
@@ -1604,7 +1625,17 @@ char *add_help_link(const char *item,
    if (!item) return NULL;
 
    result = strdup("<a href=\"");
-   string_append(&result, config->usermanual);
+   if (!strncmpic(config->usermanual, "file://", 7) ||
+       !strncmpic(config->usermanual, "http", 4))
+   {
+      string_append(&result, config->usermanual);
+   }
+   else
+   {
+      string_append(&result, "http://");
+      string_append(&result, CGI_SITE_2_HOST);
+      string_append(&result, "/user-manual/");
+   }
    string_append(&result, ACTIONS_HELP_PREFIX);
    string_join  (&result, string_toupper(item));
    string_append(&result, "\">");
@@ -2193,7 +2224,15 @@ struct map *default_exports(const struct client_state *csp, const char *caller)
    if (!err) err = map(exports, "default-cgi",   1, html_encode(CGI_PREFIX), 0);
    if (!err) err = map(exports, "menu",          1, make_menu(caller), 0);
    if (!err) err = map(exports, "code-status",   1, CODE_STATUS, 1);
-   if (!err) err = map(exports, "user-manual",   1, csp->config->usermanual ,1);
+   if (!strncmpic(csp->config->usermanual, "file://", 7) ||
+       !strncmpic(csp->config->usermanual, "http", 4))
+   {
+      if (!err) err = map(exports, "user-manual", 1, csp->config->usermanual ,1);
+   }
+   else
+   {
+      if (!err) err = map(exports, "user-manual", 1, "http://"CGI_SITE_2_HOST"/user-manual/" ,1);
+   }
    if (!err) err = map(exports, "actions-help-prefix", 1, ACTIONS_HELP_PREFIX ,1);
 #ifdef FEATURE_TOGGLE
    if (!err) err = map_conditional(exports, "enabled-display", global_toggle_state);

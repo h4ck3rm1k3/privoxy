@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.52 2006/09/06 10:43:32 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.53 2006/09/06 18:45:03 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,15 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.52 2006/09/06 10:43:32 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.53  2006/09/06 18:45:03  fabiankeil
+ *    Incorporate modified version of Roland Rosenfeld's patch to
+ *    optionally access the user-manual via Privoxy. Closes patch 679075.
+ *
+ *    Formatting changed to Privoxy style, added call to
+ *    cgi_error_no_template if the requested file doesn't
+ *    exist and modified check whether or not Privoxy itself
+ *    should serve the manual. Should work cross-platform now.
+ *
  *    Revision 1.52  2006/09/06 10:43:32  fabiankeil
  *    Added config option enable-remote-http-toggle
  *    to specify if Privoxy should recognize special
@@ -1641,7 +1650,17 @@ static void savearg(char *command, char *argument, struct configuration_spec * c
     * link to it's section in the user-manual
     */
    buf = strdup("\n<br><a href=\"");
-   string_append(&buf, config->usermanual);
+   if (!strncmpic(config->usermanual, "file://", 7) ||
+       !strncmpic(config->usermanual, "http", 4))
+   {
+      string_append(&buf, config->usermanual);
+   }
+   else
+   {
+      string_append(&buf, "http://");
+      string_append(&buf, CGI_SITE_2_HOST);
+      string_append(&buf, "/user-manual/");
+   }
    string_append(&buf, CONFIG_HELP_PREFIX);
    string_join  (&buf, string_toupper(command));
    string_append(&buf, "\">");
