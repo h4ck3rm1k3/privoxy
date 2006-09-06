@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.79 2006/09/06 09:23:37 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.80 2006/09/06 10:43:32 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,12 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.80  2006/09/06 10:43:32  fabiankeil
+ *    Added config option enable-remote-http-toggle
+ *    to specify if Privoxy should recognize special
+ *    headers (currently only X-Filter) to change its
+ *    behaviour. Disabled by default.
+ *
  *    Revision 1.79  2006/09/06 09:23:37  fabiankeil
  *    Make number of retries in case of forwarded-connect problems
  *    a config file option (forwarded-connect-retries) and use 0 as
@@ -1396,6 +1402,8 @@ struct access_control_list
 /** configuration_spec::feature_flags: Web-based toggle. */
 #define RUNTIME_FEATURE_CGI_TOGGLE        2
 
+/** configuration_spec::feature_flags: HTTP-header-based toggle. */
+#define RUNTIME_FEATURE_HTTP_TOGGLE       4
 
 /**
  * Data loaded from the configuration file.
@@ -1410,15 +1418,13 @@ struct configuration_spec
    /** Nonzero to enable multithreading. */
    int multi_threaded;
 
-   /** Number of retries in case a forwarded connection attempt fails */
-   int         forwarded_connect_retries;
-
    /**
     * Bitmask of features that can be enabled/disabled through the config
     * file.  Currently defined bits:
     *
     * - RUNTIME_FEATURE_CGI_EDIT_ACTIONS
     * - RUNTIME_FEATURE_CGI_TOGGLE
+    * - RUNTIME_FEATURE_HTTP_TOGGLE
     */
    unsigned feature_flags;
 
@@ -1493,6 +1499,9 @@ struct configuration_spec
 
    /** Information about parent proxies (forwarding). */
    struct forward_spec *forward;
+
+   /** Number of retries in case a forwarded connection attempt fails */
+   int         forwarded_connect_retries;
 
    /** All options from the config file, HTML-formatted. */
    char *proxy_args;

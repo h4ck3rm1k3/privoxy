@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.51 2006/09/06 09:23:37 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.52 2006/09/06 10:43:32 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,12 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.51 2006/09/06 09:23:37 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.52  2006/09/06 10:43:32  fabiankeil
+ *    Added config option enable-remote-http-toggle
+ *    to specify if Privoxy should recognize special
+ *    headers (currently only X-Filter) to change its
+ *    behaviour. Disabled by default.
+ *
  *    Revision 1.51  2006/09/06 09:23:37  fabiankeil
  *    Make number of retries in case of forwarded-connect problems
  *    a config file option (forwarded-connect-retries) and use 0 as
@@ -439,6 +445,7 @@ static struct file_list *current_configfile = NULL;
 #define hash_deny_access               1227333715ul /* "deny-access" */
 #define hash_enable_edit_actions       2517097536ul /* "enable-edit-actions" */
 #define hash_enable_remote_toggle      2979744683ul /* "enable-remote-toggle" */
+#define hash_enable_remote_http_toggle 110543988ul  /* "enable-remote-http-toggle" */
 #define hash_filterfile                 250887266ul /* "filterfile" */
 #define hash_forward                      2029845ul /* "forward" */
 #define hash_forward_socks4            3963965521ul /* "forward-socks4" */
@@ -648,6 +655,7 @@ struct configuration_spec * load_config(void)
    config->usermanual                = strdup(USER_MANUAL_URL);
    config->proxy_args                = strdup("");
    config->forwarded_connect_retries = 0;
+   config->feature_flags            &= ~RUNTIME_FEATURE_CGI_TOGGLE;
 
    if ((configfp = fopen(configfile, "r")) == NULL)
    {
@@ -875,6 +883,20 @@ struct configuration_spec * load_config(void)
             }
             continue;
 #endif /* def FEATURE_CGI_EDIT_ACTIONS */
+
+/* *************************************************************************
+ * enable-remote-http-toggle 0|1
+ * *************************************************************************/
+         case hash_enable_remote_http_toggle:
+            if ((*arg != '\0') && (0 != atoi(arg)))
+            {
+               config->feature_flags |= RUNTIME_FEATURE_HTTP_TOGGLE;
+            }
+            else
+            {
+               config->feature_flags &= ~RUNTIME_FEATURE_HTTP_TOGGLE;
+            }
+            continue;
 
 /* *************************************************************************
  * filterfile file-name
