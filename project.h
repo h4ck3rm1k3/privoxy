@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.80 2006/09/06 10:43:32 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.81 2006/09/06 13:03:04 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,10 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.81  2006/09/06 13:03:04  fabiankeil
+ *    Respond with 400 and a short text message
+ *    if the client tries to use Privoxy as FTP proxy.
+ *
  *    Revision 1.80  2006/09/06 10:43:32  fabiankeil
  *    Added config option enable-remote-http-toggle
  *    to specify if Privoxy should recognize special
@@ -1582,6 +1586,10 @@ static const char CHEADER[] =
 
 static const char CFORBIDDEN[] =
    "HTTP/1.0 403 Connection not allowable\r\nX-Hint: If you read this message interactively, then you know why this happens ,-)\r\n\r\n";
+
+static const char FTP_RESPONSE[] =
+   "HTTP/1.0 400 Invalid header received from browser\r\n\r\nPrivoxy doesn't support FTP. Please fix your setup.";
+
 
 #ifdef __cplusplus
 } /* extern "C" */
