@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.68 2006/09/06 10:43:32 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.69 2006/09/06 16:25:51 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -40,6 +40,11 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.68 2006/09/06 10:43:32 fabiankeil
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.69  2006/09/06 16:25:51  fabiankeil
+ *    Always have parse_header_time return a pointer
+ *    that actual makes sense, even though we currently
+ *    only need it to detect problems.
+ *
  *    Revision 1.68  2006/09/06 10:43:32  fabiankeil
  *    Added config option enable-remote-http-toggle
  *    to specify if Privoxy should recognize special
@@ -2912,6 +2917,7 @@ struct tm *parse_header_time(char *header, time_t *tm) {
    else
    {
       *tm = timegm(&gmt);
+      timeptr=&gmt;
    }
    return(timeptr);
 }
