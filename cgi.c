@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.74 2006/09/06 18:45:03 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.75 2006/09/07 11:56:39 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,12 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.74 2006/09/06 18:45:03 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.75  2006/09/07 11:56:39  fabiankeil
+ *    Mark cgi_send_user_manual as harmless,
+ *    to fix the access denied problem Hal spotted.
+ *    The manual has no secret content, therefore we
+ *    don't have to care about "secure" referrers.
+ *
  *    Revision 1.74  2006/09/06 18:45:03  fabiankeil
  *    Incorporate modified version of Roland Rosenfeld's patch to
  *    optionally access the user-manual via Privoxy. Closes patch 679075.
@@ -627,7 +633,7 @@ static const struct cgi_dispatcher cgi_dispatchers[] = {
          NULL, TRUE /* Send a transparent image (short name) */ },
    { "user-manual",
           cgi_send_user_manual,
-          NULL /* Send user-manual */ },
+          NULL, TRUE /* Send user-manual */ },
    { NULL, /* NULL Indicates end of list and default page */
          cgi_error_404,
          NULL, TRUE /* Unknown CGI page */ }
