@@ -1,4 +1,4 @@
-const char loaders_rcs[] = "$Id: loaders.c,v 1.55 2006/09/07 10:25:39 fabiankeil Exp $";
+const char loaders_rcs[] = "$Id: loaders.c,v 1.56 2006/09/07 10:40:30 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loaders.c,v $
@@ -35,6 +35,11 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.55 2006/09/07 10:25:39 fabiankeil
  *
  * Revisions   :
  *    $Log: loaders.c,v $
+ *    Revision 1.56  2006/09/07 10:40:30  fabiankeil
+ *    Turns out trusted referrers above our arbitrary
+ *    limit are downgraded too ordinary trusted URLs.
+ *    Adjusted error message.
+ *
  *    Revision 1.55  2006/09/07 10:25:39  fabiankeil
  *    Fix typo.
  *
@@ -1207,16 +1212,10 @@ int load_trustfile(struct client_state *csp)
    if(trusted_referrers >= MAX_TRUSTED_REFERRERS) 
    {
       /*
-       * FIXME: csp->config->trust_list is only needed 
-       * to print the trusted referrers in Privoxy's blocking
-       * message. Not printing all of them is certainly better
-       * than writing them into memory that doesn't belong to us,
-       * but when Privoxy 3.0.4 is out, we should look for a real
-       * solution. 
+       * FIXME: ... after Privoxy 3.0.4 is out.
        */
-       log_error(LOG_LEVEL_ERROR, "Too many trusted referrers for Privoxy's webinterface to handle.\n"
-          "  Current limit is %d, you are using %d. Additional trusted referrers are recognized, "
-          "but will not show up in the blocking message.\n"
+       log_error(LOG_LEVEL_ERROR, "Too many trusted referrers. Current limit is %d, you are using %d.\n"
+          "  Additional trusted referrers are treated like ordinary trusted URLs.\n"
           "  (You can increase this limit by changing MAX_TRUSTED_REFERRERS in project.h and recompiling).",
           MAX_TRUSTED_REFERRERS, trusted_referrers);
    }
