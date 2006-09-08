@@ -32,6 +32,11 @@
 #
 # Revisions   :
 #    $Log: edit-actions-for-url,v $
+#    Revision 1.38  2006/09/08 12:06:35  fabiankeil
+#    Have hide-if-modified-since interpret the random
+#    range value as minutes instead of hours. Allows
+#    more fine-grained configuration.
+#
 #    Revision 1.37  2006/09/05 18:20:14  fabiankeil
 #    Sorted alphabetically, fixed spelling mistakes
 #    and shortened some descriptions.
@@ -884,7 +889,7 @@ function show_send_wafer_opts(tf)
         for="hide_if_modified_since_mode_set">Add random amount of seconds in the range of</label>
         <input type="text" name="hide_if_modified_since_param" 
         id="hide_if_modified_since_param" size="4"
-        value="@hide-if-modified-since-param@"> hour(s).
+        value="@hide-if-modified-since-param@"> minute(s).
         To appreciate this option a small amount of paranoia is required,
         but at least in theory the If-Modified-Since header could be used
 	to keep track of your visits.
