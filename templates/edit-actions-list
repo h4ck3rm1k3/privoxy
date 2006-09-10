@@ -31,6 +31,9 @@
 #
 # Revisions   :
 #    $Log: edit-actions-list,v $
+#    Revision 1.31  2006/09/10 14:39:24  hal9
+#    Fix typo + minor change.
+#
 #    Revision 1.30  2006/09/09 01:12:15  hal9
 #    Soften actions files update interval.
 #
@@ -299,8 +302,9 @@ function a_p(link,section)
          If you haven't already done so, it is <b>strongly recommended</b> that you at 
          least skim <a href="@user-manual@@actions-help-prefix@ACTIONS-FILE">the
          chapter on actions files</a> in the <a href="@user-manual@">User Manual</a>
-         before making any changes. You will also find a comprehensive list of all available actions
-         there.
+         before making any changes. You will also find a comprehensive list of
+         all available actions there, as well how the settings on this page
+         work.
         </p>
          <!-- @if-all-urls-present-then@ -->
         <p>
@@ -313,7 +317,7 @@ function a_p(link,section)
         <!-- @if-default-action-then@ -->
         <p>
          This is the default action file. Updates for it are available from
-         <a href="http://www.privoxy.org/">Privoxy.org</a>from time to time. 
+         <a href="http://www.privoxy.org/">Privoxy.org</a> from time to time. 
          It is therefore <b>not recommended</b> that you add your private
          rules here, since they will be lost if you install an update in the future.
          Put your rules in a separate actions file, like <tt>user.action</tt> instead.
