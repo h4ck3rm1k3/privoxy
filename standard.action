@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/Attic/standard.action,v $
 # 
-#  $Id: standard.action,v 1.13 2006/09/09 20:39:42 hal9 Exp $
+#  $Id: standard.action,v 1.14 2006/09/20 11:01:05 hal9 Exp $
 #
 #  Purpose     :  Provide prefedined sets of actions, see
 #                 http://www.privoxy.org/user-manual/actions-file.html
@@ -217,4 +217,4 @@ standard.Medium
 +set-image-blocker{pattern} \
 +treat-forbidden-connects-like-blocks \
 }
-standard.Adventuresome
+standard.Advanced
