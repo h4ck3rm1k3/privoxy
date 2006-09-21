@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.102 2006/09/06 13:03:04 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.103 2006/09/21 12:54:43 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.102 2006/09/06 13:03:04 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.103  2006/09/21 12:54:43  fabiankeil
+ *    Fix +redirect{}. Didn't work with -fast-redirects.
+ *
  *    Revision 1.102  2006/09/06 13:03:04  fabiankeil
  *    Respond with 400 and a short text message
  *    if the client tries to use Privoxy as FTP proxy.
@@ -1239,8 +1242,7 @@ static void chat(struct client_state *csp)
 
           /* ..or a fast redirect kicked in */
 #ifdef FEATURE_FAST_REDIRECTS
-          || (((csp->action->flags & ACTION_FAST_REDIRECTS) != 0) &&
-                (NULL != (rsp = redirect_url(csp))))
+          || ( NULL != (rsp = redirect_url(csp)))
 #endif /* def FEATURE_FAST_REDIRECTS */
           ))
       )

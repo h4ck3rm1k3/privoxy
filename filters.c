@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.64 2006/08/31 10:55:49 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.65 2006/09/21 12:54:43 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -39,6 +39,9 @@ const char filters_rcs[] = "$Id: filters.c,v 1.64 2006/08/31 10:55:49 fabiankeil
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.65  2006/09/21 12:54:43  fabiankeil
+ *    Fix +redirect{}. Didn't work with -fast-redirects.
+ *
  *    Revision 1.64  2006/08/31 10:55:49  fabiankeil
  *    Block requests for untrusted URLs with status
  *    code 403 instead of 200.
@@ -1143,7 +1146,7 @@ struct http_response *redirect_url(struct client_state *csp)
    {
       q = csp->action->string[ACTION_STRING_REDIRECT];
    }
-   else
+   else if ((csp->action->flags & ACTION_FAST_REDIRECTS))
    {
       redirect_mode = csp->action->string[ACTION_STRING_FAST_REDIRECTS];
       if (0 == strcmpic(redirect_mode, "check-decoded-url"))
@@ -1184,6 +1187,11 @@ struct http_response *redirect_url(struct client_state *csp)
       {
          q = p++;
       }
+   }
+   else
+   {
+      /* All redirection actions are disabled */
+      return NULL;
    }
    /*
     * if there was any, generate and return a HTTP redirect
