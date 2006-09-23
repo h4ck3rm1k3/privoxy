@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.72 2006/09/23 12:37:21 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.73 2006/09/23 13:26:38 roro Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -40,6 +40,9 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.72 2006/09/23 12:37:21 fabiankeil
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.73  2006/09/23 13:26:38  roro
+ *    Replace TABs by spaces in source code.
+ *
  *    Revision 1.72  2006/09/23 12:37:21  fabiankeil
  *    Don't print a log message every time filter_headers is
  *    entered or left. It only creates noise without any real
@@ -1118,7 +1121,7 @@ jb_err filter_header(struct client_state *csp, char **header)
 
    if ( 0 == size )
    {
-	   log_error(LOG_LEVEL_HEADER, "Removing empty header %s", *header);
+      log_error(LOG_LEVEL_HEADER, "Removing empty header %s", *header);
       freez(*header);
    }
 
@@ -2432,7 +2435,7 @@ jb_err client_x_filter(struct client_state *csp, char **header)
       {
          log_error(LOG_LEVEL_INFO, "Ignored the client's request to fetch without filtering.");
       }
-		else
+      else
       {
          if (csp->action->flags & ACTION_FORCE_TEXT_MODE)
          {

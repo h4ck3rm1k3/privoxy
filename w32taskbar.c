@@ -1,4 +1,4 @@
-const char w32taskbar_rcs[] = "$Id: w32taskbar.c,v 1.9 2006/07/18 14:48:48 david__schmidt Exp $";
+const char w32taskbar_rcs[] = "$Id: w32taskbar.c,v 1.10 2006/09/23 13:26:38 roro Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/w32taskbar.c,v $
@@ -32,6 +32,9 @@ const char w32taskbar_rcs[] = "$Id: w32taskbar.c,v 1.9 2006/07/18 14:48:48 david
  *
  * Revisions   :
  *    $Log: w32taskbar.c,v $
+ *    Revision 1.10  2006/09/23 13:26:38  roro
+ *    Replace TABs by spaces in source code.
+ *
  *    Revision 1.9  2006/07/18 14:48:48  david__schmidt
  *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
  *    with what was really the latest development (the v_3_0_branch branch)
@@ -126,7 +129,7 @@ HWND CreateTrayWindow(HINSTANCE hInstance)
    RegisterClass(&wc);
 
    /* TaskbarCreated is sent to a window when it should re-add its tray icons */
-   g_traycreatedmsg = RegisterWindowMessage("TaskbarCreated");	
+   g_traycreatedmsg = RegisterWindowMessage("TaskbarCreated");
 
    g_hwndTrayX = CreateWindow(szWndName, szWndName,
       WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,

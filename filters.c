@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.65 2006/09/21 12:54:43 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.66 2006/09/23 13:26:38 roro Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -39,6 +39,9 @@ const char filters_rcs[] = "$Id: filters.c,v 1.65 2006/09/21 12:54:43 fabiankeil
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.66  2006/09/23 13:26:38  roro
+ *    Replace TABs by spaces in source code.
+ *
  *    Revision 1.65  2006/09/21 12:54:43  fabiankeil
  *    Fix +redirect{}. Didn't work with -fast-redirects.
  *
@@ -772,7 +775,7 @@ struct http_response *block_url(struct client_state *csp)
    if (((csp->action->flags & ACTION_IMAGE_BLOCKER) != 0)
         && is_imageurl(csp))
    {
-	  char *p;
+      char *p;
       /* determine HOW images should be blocked */
       p = csp->action->string[ACTION_STRING_IMAGE_BLOCKER];
 

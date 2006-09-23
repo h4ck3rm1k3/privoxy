@@ -1,4 +1,4 @@
-const char miscutil_rcs[] = "$Id: miscutil.c,v 1.42 2006/09/09 14:01:45 fabiankeil Exp $";
+const char miscutil_rcs[] = "$Id: miscutil.c,v 1.43 2006/09/23 13:26:38 roro Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/miscutil.c,v $
@@ -36,6 +36,9 @@ const char miscutil_rcs[] = "$Id: miscutil.c,v 1.42 2006/09/09 14:01:45 fabianke
  *
  * Revisions   :
  *    $Log: miscutil.c,v $
+ *    Revision 1.43  2006/09/23 13:26:38  roro
+ *    Replace TABs by spaces in source code.
+ *
  *    Revision 1.42  2006/09/09 14:01:45  fabiankeil
  *    Integrated Oliver Yeoh's domain pattern fix
  *    to make sure *x matches xx. Closes Patch 1217393
@@ -1135,7 +1138,7 @@ time_t timegm(struct tm *tm)
       {
          strcpy(old_zone,"TZ=");
          strcat(old_zone,zone);
-         putenv(old_zone);	
+         putenv(old_zone);
       }
    }
    else
