@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.73 2006/09/23 13:26:38 roro Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.74 2006/10/02 16:59:12 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -40,6 +40,10 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.73 2006/09/23 13:26:38 roro Exp $
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.74  2006/10/02 16:59:12  fabiankeil
+ *    The special header "X-Filter: No" now disables
+ *    header filtering as well.
+ *
  *    Revision 1.73  2006/09/23 13:26:38  roro
  *    Replace TABs by spaces in source code.
  *
@@ -2444,6 +2448,8 @@ jb_err client_x_filter(struct client_state *csp, char **header)
          else
          {  
             csp->content_type = CT_TABOO;
+            csp->action->flags &= ~ACTION_FILTER_SERVER_HEADERS;
+            csp->action->flags &= ~ACTION_FILTER_CLIENT_HEADERS;
             log_error(LOG_LEVEL_HEADER, "Accepted the client's request to fetch without filtering.");
          }
          log_error(LOG_LEVEL_HEADER, "Crunching %s", *header);
