@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.23 2006/10/05 14:46:28 fabiankeil Exp $
+#  $Id: default.filter,v 1.24 2006/10/06 11:25:31 fabiankeil Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -205,10 +205,10 @@ FILTER: img-reorder Reorder attributes in &lt;img> tags to make the banners-by-*
 # This makes banners-by-size more effective and allows both banners-by-size
 # and banners-by-link to preserve the original image URL in the title attribute.
 
-s|<img\s+?([^>]*) src\s*=\s*(['"])([^>\\\2]+)\2|<img src=$2$3$2 $1|siUg
+s|<img\s+?([^>]*) src\s*=\s*(['"])([^>\\\2]+)\2|<img src=$2$3$2$1|siUg
 s|<img\s+?([^>]*) src\s*=\s*([^'">\\\s]+)|<img src=$2 $1|sig
 
-s|<img (src=(?:(['"])[^>\\\\2]+\2\|[^'">\\\s]+?))([^>]*)width\s*=\s*(["']?)(\d+?)\4|<img $1 width=$4$5$4$3|siUg
+s|<img (src=(?:(['"])[^>\\\\2]*\2\|[^'">\\\s]+?))([^>\\s]*)\s*width\s*=\s*(["']?)(\d+?)\4|<img $1 width=$4$5$4$3|siUg
 
 
 #################################################################################
@@ -590,6 +590,11 @@ s@^(Content-Type:) (?:application|text)/(?:xhtml\+)?xml(;.*)?$@$1 text/html$2@
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.24  2006/10/06 11:25:31  fabiankeil
+#     Taught img-reorder not to break img tags
+#     with empty src attributes. Fixes BR 1089474.
+#     Thanks to Raphael Moll for reporting.
+#
 #     Revision 1.23  2006/10/05 14:46:28  fabiankeil
 #     Replaced "<" in img-reorder's description with "&lt;".
 #
