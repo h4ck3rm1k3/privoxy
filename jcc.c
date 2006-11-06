@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.105 2006/11/06 14:26:02 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.106 2006/11/06 19:58:23 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.105 2006/11/06 14:26:02 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.106  2006/11/06 19:58:23  fabiankeil
+ *    Move pthread.h inclusion from jcc.c to jcc.h.
+ *    Fixes build on x86-freebsd1 (FreeBSD 5.4-RELEASE).
+ *
  *    Revision 1.105  2006/11/06 14:26:02  fabiankeil
  *    Don't exit after receiving the second SIGHUP on Solaris.
  *
@@ -681,10 +685,6 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.105 2006/11/06 14:26:02 fabiankeil Exp $"
 #include <signal.h>
 #include <fcntl.h>
 #include <errno.h>
-
-#ifdef FEATURE_PTHREAD
-#include <pthread.h>
-#endif /* def FEATURE_PTHREAD */
 
 #ifdef _WIN32
 # ifndef FEATURE_PTHREAD
