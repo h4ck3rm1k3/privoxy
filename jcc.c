@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.106 2006/11/06 19:58:23 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.107 2006/11/13 19:05:51 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,16 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.106 2006/11/06 19:58:23 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.107  2006/11/13 19:05:51  fabiankeil
+ *    Make pthread mutex locking more generic. Instead of
+ *    checking for OSX and OpenBSD, check for FEATURE_PTHREAD
+ *    and use mutex locking unless there is an _r function
+ *    available. Better safe than sorry.
+ *
+ *    Fixes "./configure --disable-pthread" and should result
+ *    in less threading-related problems on pthread-using platforms,
+ *    but it still doesn't fix BR#1122404.
+ *
  *    Revision 1.106  2006/11/06 19:58:23  fabiankeil
  *    Move pthread.h inclusion from jcc.c to jcc.h.
  *    Fixes build on x86-freebsd1 (FreeBSD 5.4-RELEASE).
@@ -794,24 +804,25 @@ static int32 server_thread(void *data);
 #define sleep(N)  DosSleep(((N) * 100))
 #endif
 
-#if defined(OSX_DARWIN) || defined(__OpenBSD__)
-#ifdef OSX_DARWIN
-/*
- * Hit OSX over the head with a hammer.  Protect all *_r functions.
- */
-pthread_mutex_t gmtime_mutex;
-pthread_mutex_t localtime_mutex;
-#endif /* def OSX_DARWIN */
-/*
- * Protect only the resolve functions for OpenBSD.
- */ 
-pthread_mutex_t gethostbyaddr_mutex;
-pthread_mutex_t gethostbyname_mutex;
-#endif /* defined(OSX_DARWIN) || defined(__OpenBSD__) */
-
 #ifdef FEATURE_PTHREAD
 pthread_mutex_t log_mutex;
 pthread_mutex_t log_init_mutex;
+
+#ifndef HAVE_GMTIME_R
+pthread_mutex_t gmtime_mutex;
+#endif /* ndef HAVE_GMTIME_R */
+
+#ifndef HAVE_LOCALTIME_R
+pthread_mutex_t localtime_mutex;
+#endif /* ndef HAVE_GMTIME_R */
+
+#ifndef HAVE_GETHOSTBYADDR_R
+pthread_mutex_t gethostbyaddr_mutex;
+#endif /* ndef HAVE_GETHOSTBYADDR_R */
+
+#ifndef HAVE_GETHOSTBYNAME_R
+pthread_mutex_t gethostbyname_mutex;
+#endif /* ndef HAVE_GETHOSTBYNAME_R */
 #endif /* FEATURE_PTHREAD */
 
 #if defined(unix) || defined(__EMX__)
@@ -2075,21 +2086,28 @@ int main(int argc, const char *argv[])
    InitWin32();
 #endif
 
-#if defined(OSX_DARWIN) || defined(__OpenBSD__)
+#ifdef FEATURE_PTHREAD
    /*
     * Prepare global mutex semaphores
     */
-#ifdef OSX_DARWIN
-   pthread_mutex_init(&gmtime_mutex,0);
-   pthread_mutex_init(&localtime_mutex,0);
-#endif /* def OSX_DARWIN */
-   pthread_mutex_init(&gethostbyaddr_mutex,0);
-   pthread_mutex_init(&gethostbyname_mutex,0);
-#endif /* defined(OSX_DARWIN) || defined(__OpenBSD__) */
-
-#ifdef FEATURE_PTHREAD
    pthread_mutex_init(&log_mutex,0);
    pthread_mutex_init(&log_init_mutex,0);
+
+#ifndef HAVE_GMTIME_R
+   pthread_mutex_init(&gmtime_mutex,0);
+#endif /* ndef HAVE_GMTIME_R */
+
+#ifndef HAVE_LOCALTIME_R
+   pthread_mutex_init(&localtime_mutex,0);
+#endif /* ndef HAVE_GMTIME_R */
+
+#ifndef HAVE_GETHOSTBYADDR_R
+   pthread_mutex_init(&gethostbyaddr_mutex,0);
+#endif /* ndef HAVE_GETHOSTBYADDR_R */
+
+#ifndef HAVE_GETHOSTBYNAME_R
+   pthread_mutex_init(&gethostbyname_mutex,0);
+#endif /* ndef HAVE_GETHOSTBYNAME_R */
 #endif /* FEATURE_PTHREAD */
 
 #ifdef HAVE_RANDOM
