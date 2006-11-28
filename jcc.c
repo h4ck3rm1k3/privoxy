@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.107 2006/11/13 19:05:51 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.108 2006/11/28 15:38:51 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,13 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.107 2006/11/13 19:05:51 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.108  2006/11/28 15:38:51  fabiankeil
+ *    Only unlink the pidfile if it's actually used.
+ *
+ *    Change order of interception checks to make
+ *    it possible to block or redirect requests for
+ *    the cgi pages.
+ *
  *    Revision 1.107  2006/11/13 19:05:51  fabiankeil
  *    Make pthread mutex locking more generic. Instead of
  *    checking for OSX and OpenBSD, check for FEATURE_PTHREAD
@@ -867,7 +874,10 @@ static void sig_handler(int the_signal)
       case SIGINT:
          log_error(LOG_LEVEL_INFO, "exiting by signal %d .. bye", the_signal);
 #if defined(unix)
-         unlink(pidfile);
+         if(pidfile)
+         {
+            unlink(pidfile);
+         }
 #endif /* unix */
          exit(the_signal);
          break;
@@ -1247,9 +1257,6 @@ static void chat(struct client_state *csp)
        /* We may not forward the request by rfc2616 sect 14.31 */
        (NULL != (rsp = direct_response(csp)))
 
-       /* or a CGI call was detected and answered */
-       || (NULL != (rsp = dispatch_cgi(csp)))
-
        /* or we are enabled and... */
        || (IS_ENABLED_AND (
 
@@ -1261,12 +1268,19 @@ static void chat(struct client_state *csp)
           || ( NULL != (rsp = trust_url(csp)))
 #endif /* def FEATURE_TRUST */
 
-          /* ..or a fast redirect kicked in */
-#ifdef FEATURE_FAST_REDIRECTS
+          /* ..or a redirect kicked in */
           || ( NULL != (rsp = redirect_url(csp)))
-#endif /* def FEATURE_FAST_REDIRECTS */
           ))
-      )
+
+       /*
+        * .. or a CGI call was detected and answered.
+        *
+        * This check comes last to give the user the power
+        * to deny acces to some (or all) of the cgi pages.
+        */
+       || (NULL != (rsp = dispatch_cgi(csp)))
+
+		 )
    {
       /* Write the answer to the client */
       if (write_socket(csp->cfd, rsp->head, rsp->head_length)
