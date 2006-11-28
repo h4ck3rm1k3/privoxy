@@ -1,6 +1,6 @@
 #ifndef ERRLOG_H_INCLUDED
 #define ERRLOG_H_INCLUDED
-#define ERRLOG_H_VERSION "$Id: errlog.h,v 1.15 2006/07/18 14:48:46 david__schmidt Exp $"
+#define ERRLOG_H_VERSION "$Id: errlog.h,v 1.16 2006/11/28 15:29:50 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.h,v $
@@ -35,6 +35,11 @@
  *
  * Revisions   :
  *    $Log: errlog.h,v $
+ *    Revision 1.16  2006/11/28 15:29:50  fabiankeil
+ *    Define LOG_LEVEL_REDIRECTS independently of
+ *    FEATURE_FAST_REDIRECTS. It is used by redirect{}
+ *    as well.
+ *
  *    Revision 1.15  2006/07/18 14:48:46  david__schmidt
  *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
  *    with what was really the latest development (the v_3_0_branch branch)
@@ -149,9 +154,7 @@ extern "C" {
 #define LOG_LEVEL_FORCE      0x0020
 #endif /* def FEATURE_FORCE_LOAD */
 #define LOG_LEVEL_RE_FILTER  0x0040
-#ifdef FEATURE_FAST_REDIRECTS
 #define LOG_LEVEL_REDIRECTS  0x0080
-#endif /* def FEATURE_FAST_REDIRECTS */
 #define LOG_LEVEL_DEANIMATE  0x0100
 
 #define LOG_LEVEL_CLF        0x0200 /* Common Log File format */
