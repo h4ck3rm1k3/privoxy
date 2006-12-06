@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.82 2006/09/20 15:50:31 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.83 2006/12/06 19:26:29 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,10 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.83  2006/12/06 19:26:29  fabiankeil
+ *    Moved HTTP snipplets into jcc.c. They aren't
+ *    used anywhere else.
+ *
  *    Revision 1.82  2006/09/20 15:50:31  fabiankeil
  *    Doubled size of HOSTENT_BUFFER_SIZE to mask
  *    problems with gethostbyname_r and some
@@ -1584,26 +1588,6 @@ struct configuration_spec
  * INCLUDES the trailing slash.
  */
 #define CGI_PREFIX  "http://" CGI_SITE_2_HOST CGI_SITE_2_PATH "/"
-
-
-/* HTTP snipplets.
- *
- * FIXME: This is very inefficient.  There could be one copy of these strings
- * for each .c file!!  They should be "extern", not "static".
- */
-static const char CSUCCEED[] =
-   "HTTP/1.0 200 Connection established\n"
-   "Proxy-Agent: Privoxy/" VERSION "\r\n\r\n";
-
-static const char CHEADER[] =
-   "HTTP/1.0 400 Invalid header received from browser\r\n\r\n";
-
-static const char CFORBIDDEN[] =
-   "HTTP/1.0 403 Connection not allowable\r\nX-Hint: If you read this message interactively, then you know why this happens ,-)\r\n\r\n";
-
-static const char FTP_RESPONSE[] =
-   "HTTP/1.0 400 Invalid header received from browser\r\n\r\nPrivoxy doesn't support FTP. Please fix your setup.";
-
 
 #ifdef __cplusplus
 } /* extern "C" */
