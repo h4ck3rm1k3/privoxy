@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.108 2006/11/28 15:38:51 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.109 2006/12/06 19:41:40 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,16 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.108 2006/11/28 15:38:51 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.109  2006/12/06 19:41:40  fabiankeil
+ *    Privoxy is now able to run as intercepting
+ *    proxy in combination with any packet filter
+ *    that does the port redirection. The destination
+ *    is extracted from the "Host:" header which
+ *    should be available for nearly all requests.
+ *
+ *    Moved HTTP snipplets into jcc.c.
+ *    Added error message for gopher proxy requests.
+ *
  *    Revision 1.108  2006/11/28 15:38:51  fabiankeil
  *    Only unlink the pidfile if it's actually used.
  *
@@ -848,6 +858,36 @@ static const char VANILLA_WAFER[] =
    "Take_notice_that_I_refuse_to_be_bound_by_any_license_condition_"
    "(copyright_or_otherwise)_applying_to_any_cookie._";
 
+/* HTTP snipplets. */
+static const char CSUCCEED[] =
+   "HTTP/1.0 200 Connection established\n"
+   "Proxy-Agent: Privoxy/" VERSION "\r\n\r\n";
+
+static const char CHEADER[] =
+   "HTTP/1.0 400 Invalid header received from browser\r\n"
+   "Connection: close\r\n\r\n"
+   "Invalid header received from browser.";
+
+static const char CFORBIDDEN[] =
+   "HTTP/1.0 403 Connection not allowable\r\n"
+   "X-Hint: If you read this message interactively, then you know why this happens ,-)\r\n"
+   "Connection: close\r\n\r\n";
+
+static const char FTP_RESPONSE[] =
+   "HTTP/1.0 400 Invalid request received from browser\r\n"
+   "Connection: close\r\n\r\n"
+   "Invalid request. Privoxy doesn't support FTP.\r\n";
+
+static const char GOPHER_RESPONSE[] =
+   "HTTP/1.0 400 Invalid request received from browser\r\n"
+   "Connection: close\r\n\r\n"
+   "Invalid request. Privoxy doesn't support gopher.\r\n";
+
+static const char MISSING_DESTINATION_RESPONSE[] =
+   "HTTP/1.0 400 Bad request received from browser\r\n"
+   "Connection: close\r\n\r\n"
+   "Bad request. Privoxy was unable to extract the destination.\r\n";
+
 
 #if !defined(_WIN32) && !defined(__OS2__) && !defined(AMIGA)
 /*********************************************************************
@@ -971,6 +1011,10 @@ static void chat(struct client_state *csp)
    /* Skeleton for HTTP response, if we should intercept the request */
    struct http_response *rsp;
 
+   /* Temporary copy of the client's headers before they get enlisted in csp->headers */
+   struct list header_list;
+   struct list *headers = &header_list;
+
    http = csp->http;
 
    /*
@@ -1005,6 +1049,38 @@ static void chat(struct client_state *csp)
          continue;   /* more to come! */
       }
 
+      /*
+       * If it's a FTP or gopher request, we don't support it.
+       *
+       * These checks are better than nothing, but they might
+       * not work in all configurations and some clients might
+       * have problems digesting the answer.
+       *
+       * They should, however, never cause more problems than
+       * Privoxy's old behaviour (returning the misleading HTML error message:
+       * "Could not resolve http://(ftp|gopher)://example.org").
+       */
+      if (!strncmpic(req, "GET ftp://", 10) || !strncmpic(req, "GET gopher://", 13))
+      {
+         if (!strncmpic(req, "GET ftp://", 10))
+         {
+            strcpy(buf, FTP_RESPONSE);
+            log_error(LOG_LEVEL_ERROR, "%s tried to use Privoxy as FTP proxy: %s",
+               csp->ip_addr_str, req);
+         }
+         else
+         {
+            strcpy(buf, GOPHER_RESPONSE);
+            log_error(LOG_LEVEL_ERROR, "%s tried to use Privoxy as gopher proxy: %s",
+               csp->ip_addr_str, req);
+         }
+         log_error(LOG_LEVEL_CLF, "%s - - [%T] \"%s\" 400 0", csp->ip_addr_str, req);
+         freez(req);
+         write_socket(csp->cfd, buf, strlen(buf));
+         free_http_request(http);
+         return;
+      }
+
 #ifdef FEATURE_FORCE_LOAD
       /* If this request contains the FORCE_PREFIX,
        * better get rid of it now and set the force flag --oes
@@ -1019,7 +1095,16 @@ static void chat(struct client_state *csp)
 
 #endif /* def FEATURE_FORCE_LOAD */
 
-      parse_http_request(req, http, csp);
+      switch( parse_http_request(req, http, csp) )
+      {
+         case JB_ERR_MEMORY:
+           log_error(LOG_LEVEL_ERROR, "Out of memory while parsing request.");
+           break;
+         case JB_ERR_PARSE:
+           log_error(LOG_LEVEL_ERROR, "Couldn't parse request: %s.", req);
+           break;
+      }
+
       freez(req);
       break;
    }
@@ -1035,16 +1120,71 @@ static void chat(struct client_state *csp)
       return;
    }
 
-   if (!strncmpic(http->cmd, "GET ftp://", 10))
+   /* grab the rest of the client's headers */
+   init_list(headers);
+   for (;;)
    {
-      strcpy(buf, FTP_RESPONSE);
-      write_socket(csp->cfd, buf, strlen(buf));
+      if ( ( ( p = get_header(csp) ) != NULL) && ( *p == '\0' ) )
+      {
+         len = read_socket(csp->cfd, buf, sizeof(buf));
+         if (len <= 0)
+         {
+            log_error(LOG_LEVEL_ERROR, "read from client failed: %E");
+            return;
+         }
+         
+         /*
+          * If there is no memory left for buffering the
+          * request, there is nothing we can do but hang up
+          */
+         if (add_to_iob(csp, buf, len))
+         {
+            return;
+         }
+         continue;
+      }
 
-      log_error(LOG_LEVEL_ERROR, "%s tried to use Privoxy as FTP proxy: %s",
-         csp->ip_addr_str, http->cmd);
+      if (p == NULL) break;
 
-      free_http_request(http);
-      return;
+      enlist(headers, p);
+      freez(p);
+
+   }
+
+   if (http->host == NULL)
+   {
+      /*
+       * Intercepted or invalid request without domain 
+       * inside the request line. Try to get it another way.
+       */
+      if (JB_ERR_OK == get_destination_from_headers(headers, http))
+      {
+         /* Split the domain we just got for pattern matching */
+         init_domain_components(http);
+      }
+      else
+      {
+         /* We can't work without destination. Go spread the news.*/
+
+         req = list_to_text(headers);
+         chomp(req);
+         log_error(LOG_LEVEL_CLF, "%s - - [%T] \"%s\" 400 0", csp->ip_addr_str, http->cmd);
+         log_error(LOG_LEVEL_ERROR,
+           "Privoxy was unable to get the destination for %s's request:\n%s\n%s",
+            csp->ip_addr_str, http->cmd, req);
+         freez(req);
+
+         strcpy(buf, MISSING_DESTINATION_RESPONSE);
+         write_socket(csp->cfd, buf, strlen(buf));
+         free_http_request(http);
+         destroy_list(headers);
+         return;
+      }
+      /*
+       * TODO: If available, use PF's ioctl DIOCNATLOOK as last resort
+       * to get the destination IP address, use it as host directly
+       * or do a reverse DNS lookup first.
+       */
    }
 
    /* decide how to route the HTTP request */
@@ -1195,6 +1335,9 @@ static void chat(struct client_state *csp)
    }
    enlist(csp->headers, http->cmd);
 
+   /* Append the previously read headers */
+   list_append_list_unique(csp->headers, headers);
+   destroy_list(headers);
 
    /*
     * If the user has not supplied any wafers, and the user has not
@@ -1217,36 +1360,6 @@ static void chat(struct client_state *csp)
    gif_deanimate              = ((csp->action->flags & ACTION_DEANIMATE) != 0);
 
    jpeg_inspect               = ((csp->action->flags & ACTION_JPEG_INSPECT) != 0);
-
-   /* grab the rest of the client's headers */
-
-   for (;;)
-   {
-      if ( ( ( p = get_header(csp) ) != NULL) && ( *p == '\0' ) )
-      {
-         len = read_socket(csp->cfd, buf, sizeof(buf));
-         if (len <= 0)
-         {
-            log_error(LOG_LEVEL_ERROR, "read from client failed: %E");
-            return;
-         }
-         
-         /*
-          * If there is no memory left for buffering the
-          * request, there is nothing we can do but hang up
-          */
-         if (add_to_iob(csp, buf, len))
-         {
-            return;
-         }
-         continue;
-      }
-
-      if (p == NULL) break;
-
-      enlist(csp->headers, p);
-      freez(p);
-   }
 
    /*
     * We have a request. Now, check to see if we need to
@@ -2020,7 +2133,7 @@ int main(int argc, const char *argv[])
 
 #if defined(unix)
 
-     else if (strcmp(argv[argc_pos], "--no-daemon" ) == 0)
+      else if (strcmp(argv[argc_pos], "--no-daemon" ) == 0)
       {
          no_daemon = 1;
       }
@@ -2249,7 +2362,7 @@ int main(int argc, const char *argv[])
     * to the user and group ID indicated by the --user option
     */
    write_pid_file();
-   
+
    if (NULL != pw)
    {
       if (setgid((NULL != grp) ? grp->gr_gid : pw->pw_gid))
