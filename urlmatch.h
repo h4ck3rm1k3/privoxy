@@ -1,6 +1,6 @@
 #ifndef URLMATCH_H_INCLUDED
 #define URLMATCH_H_INCLUDED
-#define URLMATCH_H_VERSION "$Id: urlmatch.h,v 1.5 2006/07/18 14:48:47 david__schmidt Exp $"
+#define URLMATCH_H_VERSION "$Id: urlmatch.h,v 1.6 2006/12/06 19:12:43 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.h,v $
@@ -8,7 +8,7 @@
  * Purpose     :  Declares functions to match URLs against URL
  *                patterns.
  *
- * Copyright   :  Written by and Copyright (C) 2001 the SourceForge
+ * Copyright   :  Written by and Copyright (C) 2001-2002, 2006 the SourceForge
  *                Privoxy team. http://www.privoxy.org/
  *
  *                Based on the Internet Junkbuster originally written
@@ -35,6 +35,9 @@
  *
  * Revisions   :
  *    $Log: urlmatch.h,v $
+ *    Revision 1.6  2006/12/06 19:12:43  fabiankeil
+ *    Added prototype for init_domain_components().
+ *
  *    Revision 1.5  2006/07/18 14:48:47  david__schmidt
  *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
  *    with what was really the latest development (the v_3_0_branch branch)
@@ -73,6 +76,7 @@ extern "C" {
 #endif
 
 extern void free_http_request(struct http_request *http);
+extern jb_err init_domain_components(struct http_request *http);
 extern jb_err parse_http_request(const char *req,
                                  struct http_request *http,
                                  struct client_state *csp);
