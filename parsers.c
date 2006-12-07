@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.76 2006/12/06 19:52:25 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.77 2006/12/07 18:44:26 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -45,6 +45,11 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.76 2006/12/06 19:52:25 fabiankeil
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.77  2006/12/07 18:44:26  fabiankeil
+ *    Rebuild request URL in get_destination_from_headers()
+ *    to make sure redirect{pcrs command} works as expected
+ *    for intercepted requests.
+ *
  *    Revision 1.76  2006/12/06 19:52:25  fabiankeil
  *    Added get_destination_from_headers().
  *
@@ -3024,8 +3029,18 @@ jb_err get_destination_from_headers(const struct list *headers, struct http_requ
       http->port = http->ssl ? 443 : 80;
    }
 
-   log_error(LOG_LEVEL_HEADER, "Destination extracted from \"Host:\" header: %s = %s:%d",
-      http->hostport, http->host, http->port);
+   /* Rebuild request URL */
+   freez(http->url);
+   http->url = strdup(http->ssl ? "https://" : "http://");
+   string_append(&http->url, http->hostport);
+   string_append(&http->url, http->path);
+   if (http->url == NULL)
+   {
+      return JB_ERR_MEMORY;
+   }
+
+   log_error(LOG_LEVEL_HEADER, "Destination extracted from \"Host:\" header. New request URL: %s",
+      http->url);
 
    return JB_ERR_OK;
 
