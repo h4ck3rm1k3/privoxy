@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.68 2006/12/05 14:45:48 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.69 2006/12/08 12:39:13 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -40,6 +40,9 @@ const char filters_rcs[] = "$Id: filters.c,v 1.68 2006/12/05 14:45:48 fabiankeil
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.69  2006/12/08 12:39:13  fabiankeil
+ *    Let get_last_url() catch https URLs as well.
+ *
  *    Revision 1.68  2006/12/05 14:45:48  fabiankeil
  *    Make sure get_last_url() behaves like advertised
  *    and fast-redirects{} can be combined with redirect{}.
@@ -1274,7 +1277,7 @@ char *get_last_url(char *subject, const char *redirect_mode)
       subject = new_url;
    }
 
-   log_error(LOG_LEVEL_REDIRECTS, "Checking \"%s\" for redirects", subject);
+   log_error(LOG_LEVEL_REDIRECTS, "Checking \"%s\" for redirects.", subject);
 
    /*
     * Find the last URL encoded in the request
@@ -1284,8 +1287,15 @@ char *get_last_url(char *subject, const char *redirect_mode)
    {
       new_url = tmp++;
    }
+   tmp = new_url;
+   while ((tmp = strstr(tmp, "https://")) != NULL)
+   {
+      new_url = tmp++;
+   }
 
-   if (new_url != subject || (0 == strncmpic(subject, "http://", 7)))
+   if ((new_url != subject)
+      || (0 == strncmpic(subject, "http://", 7))
+      || (0 == strncmpic(subject, "https://", 8)))
    {
       /*
        * Return new URL if we found a redirect 
