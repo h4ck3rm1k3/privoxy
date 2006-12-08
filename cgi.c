@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.79 2006/11/13 19:05:50 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.80 2006/12/08 14:45:32 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,10 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.79 2006/11/13 19:05:50 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.80  2006/12/08 14:45:32  fabiankeil
+ *    Don't lose the FORCE_PREFIX in case of
+ *    connection problems. Fixes #612235.
+ *
  *    Revision 1.79  2006/11/13 19:05:50  fabiankeil
  *    Make pthread mutex locking more generic. Instead of
  *    checking for OSX and OpenBSD, check for FEATURE_PTHREAD
@@ -1238,7 +1242,9 @@ struct http_response *error_response(struct client_state *csp,
 {
    jb_err err;
    struct http_response *rsp;
-   struct map * exports = default_exports(csp, NULL);
+   struct map *exports = default_exports(csp, NULL);
+   char *path = NULL;
+
    if (exports == NULL)
    {
       return cgi_error_memory();
@@ -1250,9 +1256,19 @@ struct http_response *error_response(struct client_state *csp,
       return cgi_error_memory();
    }
 
-   err = map(exports, "host", 1, html_encode(csp->http->host), 0);
+   if (csp->flags & CSP_FLAG_FORCED)
+   {
+      path = strdup(FORCE_PREFIX);
+   }
+   else
+   {
+      path = strdup("");
+   }
+   err = string_append(&path, csp->http->path);
+
+   if (!err) err = map(exports, "host", 1, html_encode(csp->http->host), 0);
    if (!err) err = map(exports, "hostport", 1, html_encode(csp->http->hostport), 0);
-   if (!err) err = map(exports, "path", 1, html_encode(csp->http->path), 0);
+   if (!err) err = map(exports, "path", 1, html_encode_and_free_original(path), 0);
    if (!err) err = map(exports, "error", 1, html_encode_and_free_original(safe_strerror(sys_err)), 0);
    if (!err) err = map(exports, "protocol", 1, csp->http->ssl ? "https://" : "http://", 1); 
    if (!err)
