@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.80 2006/12/08 14:45:32 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.81 2006/12/09 13:49:16 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,10 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.80 2006/12/08 14:45:32 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.81  2006/12/09 13:49:16  fabiankeil
+ *    Fix configure option --disable-toggle.
+ *    Thanks to Peter Thoenen for reporting this.
+ *
  *    Revision 1.80  2006/12/08 14:45:32  fabiankeil
  *    Don't lose the FORCE_PREFIX in case of
  *    connection problems. Fixes #612235.
@@ -575,10 +579,12 @@ static const struct cgi_dispatcher cgi_dispatchers[] = {
          "Look up which actions apply to a URL and why",
          TRUE },
 #ifdef FEATURE_CGI_EDIT_ACTIONS
+#ifdef FEATURE_TOGGLE
    { "toggle",
          cgi_toggle, 
          "Toggle Privoxy on or off",
          FALSE },
+#endif /* def FEATURE_TOGGLE */
    { "edit-actions", /* Edit the actions list */
          cgi_edit_actions, 
          NULL, FALSE },

@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.43 2006/07/18 14:48:45 david__schmidt Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.44 2006/12/09 13:49:16 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,10 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.43 2006/07/18 14:48:45 david__sch
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.44  2006/12/09 13:49:16  fabiankeil
+ *    Fix configure option --disable-toggle.
+ *    Thanks to Peter Thoenen for reporting this.
+ *
  *    Revision 1.43  2006/07/18 14:48:45  david__schmidt
  *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
  *    with what was really the latest development (the v_3_0_branch branch)
@@ -333,8 +337,10 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.43 2006/07/18 14:48:45 david__sch
 #include "miscutil.h"
 #include "errlog.h"
 #include "loaders.h"
-#include "loadcfg.h"
+#ifdef FEATURE_TOGGLE
 /* loadcfg.h is for global_toggle_state only */
+#include "loadcfg.h"
+#endif /* def FEATURE_TOGGLE */
 #include "urlmatch.h"
 
 const char cgiedit_h_rcs[] = CGIEDIT_H_VERSION;
@@ -4232,7 +4238,7 @@ jb_err cgi_edit_actions_section_swap(struct client_state *csp,
    return cgi_redirect(rsp, target);
 }
 
-
+#ifdef FEATURE_TOGGLE
 /*********************************************************************
  *
  * Function    :  cgi_toggle
@@ -4300,7 +4306,7 @@ jb_err cgi_toggle(struct client_state *csp,
 
    return template_fill_for_cgi(csp, template_name, exports, rsp);
 }
-
+#endif /* def FEATURE_TOGGLE */
 
 /*********************************************************************
  *
