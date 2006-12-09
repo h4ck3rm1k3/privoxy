@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.69 2006/12/08 12:39:13 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.70 2006/12/09 13:33:15 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -40,6 +40,10 @@ const char filters_rcs[] = "$Id: filters.c,v 1.69 2006/12/08 12:39:13 fabiankeil
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.70  2006/12/09 13:33:15  fabiankeil
+ *    Added some sanity checks for get_last_url().
+ *    Fixed possible segfault caused by my last commit.
+ *
  *    Revision 1.69  2006/12/08 12:39:13  fabiankeil
  *    Let get_last_url() catch https URLs as well.
  *
@@ -1261,20 +1265,32 @@ char *rewrite_url(char *old_url, const char *pcrs_command)
  *********************************************************************/
 char *get_last_url(char *subject, const char *redirect_mode)
 {
-   char *new_url;
+   char *new_url = NULL;
    char *tmp;
 
    assert(subject);
    assert(redirect_mode);
 
    subject = strdup(subject);
+   if (subject == NULL)
+   {
+      log_error(LOG_LEVEL_ERROR, "Out of memory while searching for redirects.");
+      return NULL;
+   }
 
    if (0 == strcmpic(redirect_mode, "check-decoded-url"))
    {  
       log_error(LOG_LEVEL_REDIRECTS, "Decoding \"%s\" if necessary.", subject);
       new_url = url_decode(subject);
-      freez(subject);
-      subject = new_url;
+      if (new_url != NULL)
+      {
+         freez(subject);
+         subject = new_url;
+      }
+      else
+      {
+         log_error(LOG_LEVEL_ERROR, "Unable to decode \"%s\".", subject);
+      }
    }
 
    log_error(LOG_LEVEL_REDIRECTS, "Checking \"%s\" for redirects.", subject);
@@ -1287,15 +1303,17 @@ char *get_last_url(char *subject, const char *redirect_mode)
    {
       new_url = tmp++;
    }
-   tmp = new_url;
+   tmp = (new_url != NULL) ? new_url : subject;
    while ((tmp = strstr(tmp, "https://")) != NULL)
    {
       new_url = tmp++;
    }
 
-   if ((new_url != subject)
-      || (0 == strncmpic(subject, "http://", 7))
-      || (0 == strncmpic(subject, "https://", 8)))
+   if ((new_url != NULL)
+      && (  (new_url != subject)
+         || (0 == strncmpic(subject, "http://", 7))
+         || (0 == strncmpic(subject, "https://", 8))
+         ))
    {
       /*
        * Return new URL if we found a redirect 
