@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.55 2006/11/28 15:31:52 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.56 2006/12/17 17:04:51 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,11 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.55 2006/11/28 15:31:52 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.56  2006/12/17 17:04:51  fabiankeil
+ *    Move the <br> in the generated HTML for the config
+ *    options from the beginning of the string to its end.
+ *    Keeps the white space in balance.
+ *
  *    Revision 1.55  2006/11/28 15:31:52  fabiankeil
  *    Fix memory leak in case of config file reloads.
  *
@@ -1660,7 +1665,7 @@ static void savearg(char *command, char *argument, struct configuration_spec * c
     * Add config option name embedded in
     * link to it's section in the user-manual
     */
-   buf = strdup("\n<br><a href=\"");
+   buf = strdup("\n<a href=\"");
    if (!strncmpic(config->usermanual, "file://", 7) ||
        !strncmpic(config->usermanual, "http", 4))
    {
@@ -1708,6 +1713,7 @@ static void savearg(char *command, char *argument, struct configuration_spec * c
       }
    }
 
+   string_append(&buf, "<br>");
    string_join(&config->proxy_args, buf);
 }
 
