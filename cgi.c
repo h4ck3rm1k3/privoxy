@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.82 2006/12/17 17:53:39 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.83 2006/12/17 19:35:19 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,9 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.82 2006/12/17 17:53:39 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.83  2006/12/17 19:35:19  fabiankeil
+ *    Escape ampersand in Privoxy menu.
+ *
  *    Revision 1.82  2006/12/17 17:53:39  fabiankeil
  *    Suppress the toggle link if remote toggling is disabled.
  *
@@ -564,7 +567,7 @@ static const struct cgi_dispatcher cgi_dispatchers[] = {
    { "show-status", 
          cgi_show_status,  
 #ifdef FEATURE_CGI_EDIT_ACTIONS
-        "View & change the current configuration",
+        "View &amp; change the current configuration",
 #else
         "View the current configuration",
 #endif
