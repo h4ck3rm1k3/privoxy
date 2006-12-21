@@ -1,4 +1,4 @@
-const char loaders_rcs[] = "$Id: loaders.c,v 1.56 2006/09/07 10:40:30 fabiankeil Exp $";
+const char loaders_rcs[] = "$Id: loaders.c,v 1.57 2006/12/21 12:22:22 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loaders.c,v $
@@ -35,6 +35,12 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.56 2006/09/07 10:40:30 fabiankeil
  *
  * Revisions   :
  *    $Log: loaders.c,v $
+ *    Revision 1.57  2006/12/21 12:22:22  fabiankeil
+ *    html_encode filter descriptions.
+ *
+ *    Have "Ignoring job ..." error messages
+ *    print the filter file name correctly.
+ *
  *    Revision 1.56  2006/09/07 10:40:30  fabiankeil
  *    Turns out trusted referrers above our arbitrary
  *    limit are downgraded too ordinary trusted URLs.
@@ -347,6 +353,7 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.56 2006/09/07 10:40:30 fabiankeil
 #include "errlog.h"
 #include "actions.h"
 #include "urlmatch.h"
+#include "encode.h"
 
 const char loaders_h_rcs[] = LOADERS_H_VERSION;
 
@@ -1423,10 +1430,18 @@ int load_one_re_filterfile(struct client_state *csp, int fileid)
 
          new_bl->name = chomp(buf + 7);
 
+         /*
+          * If a filter description is available,
+          * encode it to HTML and save it.
+          */
          if (NULL != (new_bl->description = strpbrk(new_bl->name, " \t")))
          {
             *new_bl->description++ = '\0';
-            new_bl->description = strdup(chomp(new_bl->description));
+            new_bl->description = html_encode(chomp(new_bl->description));
+            if (NULL == new_bl->description)
+            {
+               new_bl->description = strdup("Out of memory while encoding this filter's description to HTML");
+            }
          }
          else
          {
@@ -1485,7 +1500,8 @@ int load_one_re_filterfile(struct client_state *csp, int fileid)
       }
       else
       {
-         log_error(LOG_LEVEL_ERROR, "Ignoring job %s outside filter block in %s, line %d", buf, csp->config->re_filterfile, linenum);
+         log_error(LOG_LEVEL_ERROR, "Ignoring job %s outside filter block in %s, line %d",
+            buf, csp->config->re_filterfile[fileid], linenum);
       }
    }
 
