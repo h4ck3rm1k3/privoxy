@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.70 2006/12/09 13:33:15 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.71 2006/12/22 14:24:52 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -40,6 +40,11 @@ const char filters_rcs[] = "$Id: filters.c,v 1.70 2006/12/09 13:33:15 fabiankeil
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.71  2006/12/22 14:24:52  fabiankeil
+ *    Skip empty filter files in pcrs_filter_response,
+ *    but don't ignore the ones that come afterwards.
+ *    Fixes parts of BR 1619208.
+ *
  *    Revision 1.70  2006/12/09 13:33:15  fabiankeil
  *    Added some sanity checks for get_last_url().
  *    Fixed possible segfault caused by my last commit.
@@ -1698,7 +1703,18 @@ char *pcrs_filter_response(struct client_state *csp)
    {
      fl = csp->rlist[i];
      if ((NULL == fl) || (NULL == fl->f))
-       break;
+     {
+        /*
+         * Either there are no filter files
+         * left, or this filter file just
+         * contains no valid filters.
+         *
+         * Continue to be sure we don't miss
+         * valid filter files that are chained
+         * after empty or invalid ones.
+         */
+        continue;
+     }
    /*
     * For all applying +filter actions, look if a filter by that
     * name exists and if yes, execute it's pcrs_joblist on the
