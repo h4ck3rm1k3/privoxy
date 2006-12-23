@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.110 2006/12/13 14:52:53 etresoft Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.111 2006/12/23 16:15:06 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.110 2006/12/13 14:52:53 etresoft Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.111  2006/12/23 16:15:06  fabiankeil
+ *    Don't prevent core dumps by catching SIGABRT.
+ *    It's rude and makes debugging unreasonable painful.
+ *
  *    Revision 1.110  2006/12/13 14:52:53  etresoft
  *    Fix build failure on MacOS X. Global symbols can be either static or extern, but not both.
  *
@@ -913,7 +917,6 @@ static void sig_handler(int the_signal)
 {
    switch(the_signal)
    {
-      case SIGABRT:
       case SIGTERM:
       case SIGINT:
          log_error(LOG_LEVEL_INFO, "exiting by signal %d .. bye", the_signal);
@@ -2256,7 +2259,7 @@ int main(int argc, const char *argv[])
 #if !defined(_WIN32) && !defined(__OS2__) && !defined(AMIGA)
 {
    int idx;
-   const int catched_signals[] = { SIGABRT, SIGTERM, SIGINT, SIGHUP, 0 };
+   const int catched_signals[] = { SIGTERM, SIGINT, SIGHUP, 0 };
    const int ignored_signals[] = { SIGPIPE, 0 };
 
    for (idx = 0; catched_signals[idx] != 0; idx++)
