@@ -1,4 +1,4 @@
-const char pcrs_rcs[] = "$Id: pcrs.c,v 1.21 2006/07/18 14:48:47 david__schmidt Exp $";
+const char pcrs_rcs[] = "$Id: pcrs.c,v 1.22 2006/12/24 17:34:20 fabiankeil Exp $";
 
 /*********************************************************************
  *
@@ -33,6 +33,12 @@ const char pcrs_rcs[] = "$Id: pcrs.c,v 1.21 2006/07/18 14:48:47 david__schmidt E
  *
  * Revisions   :
  *    $Log: pcrs.c,v $
+ *    Revision 1.22  2006/12/24 17:34:20  fabiankeil
+ *    Add pcrs_strerror() message for PCRE_ERROR_MATCHLIMIT
+ *    and give a hint why an error code might be unknown.
+ *
+ *    Catch NULL subjects early in pcrs_execute().
+ *
  *    Revision 1.21  2006/07/18 14:48:47  david__schmidt
  *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
  *    with what was really the latest development (the v_3_0_branch branch)
@@ -200,6 +206,13 @@ const char *pcrs_strerror(const int error)
          case PCRE_ERROR_NOSUBSTRING:  return "(pcre:) Fire in power supply"; 
          case PCRE_ERROR_NOMATCH:      return "(pcre:) Water in power supply";
 
+#ifdef PCRE_ERROR_MATCHLIMIT
+         /*
+          * Only reported by PCRE versions newer than our own.
+          */
+         case PCRE_ERROR_MATCHLIMIT:   return "(pcre:) Match limit reached";
+#endif /* def PCRE_ERROR_MATCHLIMIT */
+
          /* PCRS errors: */
          case PCRS_ERR_NOMEM:          return "(pcrs:) No memory";
          case PCRS_ERR_CMDSYNTAX:      return "(pcrs:) Syntax error while parsing command";
@@ -207,8 +220,13 @@ const char *pcrs_strerror(const int error)
          case PCRS_ERR_BADJOB:         return "(pcrs:) Bad job - NULL job, pattern or substitute";
          case PCRS_WARN_BADREF:        return "(pcrs:) Backreference out of range";
 
-         /* What's that? */
-         default:  return "Unknown error";
+         /* 
+          * XXX: With the exception of PCRE_ERROR_MATCHLIMIT we
+          * only catch PCRE errors that can happen with our internal
+          * version. If Privoxy is linked against a newer
+          * PCRE version all bets are off ...
+          */
+         default:  return "Unknown error. Privoxy out of sync with PCRE?";
       }
    }
    /* error >= 0: No error */
@@ -744,8 +762,8 @@ pcrs_job *pcrs_compile(const char *pattern, const char *substitute, const char *
  *
  * Returns     :  On success, the number of substitutions that were made.
  *                 May be > 1 if job->flags contained PCRS_GLOBAL
- *                On failiure, the (negative) pcre error code describing the
- *                 failiure, which may be translated to text using pcrs_strerror().
+ *                On failure, the (negative) pcre error code describing the
+ *                 failure, which may be translated to text using pcrs_strerror().
  *
  *********************************************************************/
 int pcrs_execute_list(pcrs_job *joblist, char *subject, size_t subject_length, char **result, size_t *result_length)
@@ -804,8 +822,8 @@ int pcrs_execute_list(pcrs_job *joblist, char *subject, size_t subject_length, c
  *
  * Returns     :  On success, the number of substitutions that were made.
  *                 May be > 1 if job->flags contained PCRS_GLOBAL
- *                On failiure, the (negative) pcre error code describing the
- *                 failiure, which may be translated to text using pcrs_strerror().
+ *                On failure, the (negative) pcre error code describing the
+ *                 failure, which may be translated to text using pcrs_strerror().
  *
  *********************************************************************/
 int pcrs_execute(pcrs_job *job, char *subject, size_t subject_length, char **result, size_t *result_length)
@@ -825,7 +843,7 @@ int pcrs_execute(pcrs_job *job, char *subject, size_t subject_length, char **res
    /* 
     * Sanity check & memory allocation
     */
-   if (job == NULL || job->pattern == NULL || job->substitute == NULL)
+   if (job == NULL || job->pattern == NULL || job->substitute == NULL || NULL == subject)
    {
       *result = NULL;
       return(PCRS_ERR_BADJOB);
