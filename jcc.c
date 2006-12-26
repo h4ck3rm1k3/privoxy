@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.111 2006/12/23 16:15:06 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.112 2006/12/26 17:31:41 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,12 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.111 2006/12/23 16:15:06 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.112  2006/12/26 17:31:41  fabiankeil
+ *    Mutex protect rand() if POSIX threading
+ *    is used, warn the user if that's not possible
+ *    and stop using it on _WIN32 where it could
+ *    cause crashes.
+ *
  *    Revision 1.111  2006/12/23 16:15:06  fabiankeil
  *    Don't prevent core dumps by catching SIGABRT.
  *    It's rude and makes debugging unreasonable painful.
@@ -848,6 +854,11 @@ pthread_mutex_t gethostbyaddr_mutex;
 #ifndef HAVE_GETHOSTBYNAME_R
 pthread_mutex_t gethostbyname_mutex;
 #endif /* ndef HAVE_GETHOSTBYNAME_R */
+
+#ifndef HAVE_RANDOM
+pthread_mutex_t rand_mutex;
+#endif /* ndef HAVE_RANDOM */
+
 #endif /* FEATURE_PTHREAD */
 
 #if defined(unix) || defined(__EMX__)
@@ -903,7 +914,7 @@ const char MISSING_DESTINATION_RESPONSE[] =
  * Function    :  sig_handler 
  *
  * Description :  Signal handler for different signals.
- *                Exit gracefully on ABRT, TERM and  INT
+ *                Exit gracefully on TERM and INT
  *                or set a flag that will cause the errlog
  *                to be reopened by the main thread on HUP.
  *
@@ -2073,9 +2084,7 @@ int main(int argc, const char *argv[])
 #endif
 {
    int argc_pos = 0;
-#ifdef HAVE_RANDOM
-   unsigned int random_seed;
-#endif /* ifdef HAVE_RANDOM */
+   int random_seed;
 #ifdef unix
    struct passwd *pw = NULL;
    struct group *grp = NULL;
@@ -2242,11 +2251,18 @@ int main(int argc, const char *argv[])
 #ifndef HAVE_GETHOSTBYNAME_R
    pthread_mutex_init(&gethostbyname_mutex,0);
 #endif /* ndef HAVE_GETHOSTBYNAME_R */
+
+#ifndef HAVE_RANDOM
+   pthread_mutex_init(&rand_mutex,0);
+#endif /* ndef HAVE_RANDOM */
+
 #endif /* FEATURE_PTHREAD */
 
+   random_seed = (int)time(NULL);
 #ifdef HAVE_RANDOM
-   random_seed = (unsigned int)time(NULL);
    srandom(random_seed);
+#else
+   srand(random_seed);
 #endif /* ifdef HAVE_RANDOM */
 
    /*
