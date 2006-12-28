@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.44 2006/12/22 14:19:27 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.45 2006/12/28 18:16:41 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,10 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.44 2006/12/22 14:19:27 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.45  2006/12/28 18:16:41  fabiankeil
+ *    Fixed gcc43 compiler warnings, zero out cgi_send_user_manual's
+ *    body memory before using it, replaced sprintf calls with snprintf.
+ *
  *    Revision 1.44  2006/12/22 14:19:27  fabiankeil
  *    Removed checks whether or not AF_FILES have
  *    data structures associated with them in cgi_show_status.
@@ -780,7 +784,7 @@ jb_err cgi_send_user_manual(struct client_state *csp,
 
    /* Get file length */
    fseek(fp, 0, SEEK_END);
-   length = ftell(fp);
+   length = (size_t)ftell(fp);
    fseek(fp, 0, SEEK_SET);
 
    /* Allocate memory and load the file directly into the body */
@@ -791,19 +795,19 @@ jb_err cgi_send_user_manual(struct client_state *csp,
       free(full_path);
       return JB_ERR_MEMORY;
    }
+   memset(rsp->body, '\0', length+1);
    if (!fread(rsp->body, length, 1, fp))
    {
       /*
        * This happens if we didn't fopen in binary mode.
-       * If it does, we just log it and serve what we got,
-       * most likely padded with garbage.
+       * If it does, we just log it and serve what we got.
        */
       log_error(LOG_LEVEL_ERROR, "Couldn't completely read user-manual file %s.", full_path);
    }
    fclose(fp);
    free(full_path);
 
-   rsp->content_length = (int)length;
+   rsp->content_length = length;
 
    /* Guess correct Content-Type based on the filename's ending */
    if (filename)
@@ -1035,13 +1039,13 @@ jb_err cgi_show_status(struct client_state *csp,
       perc_rej = (float)local_urls_rejected * 100.0F /
             (float)local_urls_read;
 
-      sprintf(buf, "%d", local_urls_read);
+      snprintf(buf, sizeof(buf), "%d", local_urls_read);
       if (!err) err = map(exports, "requests-received", 1, buf, 1);
 
-      sprintf(buf, "%d", local_urls_rejected);
+      snprintf(buf, sizeof(buf), "%d", local_urls_rejected);
       if (!err) err = map(exports, "requests-blocked", 1, buf, 1);
 
-      sprintf(buf, "%6.2f", perc_rej);
+      snprintf(buf, sizeof(buf), "%6.2f", perc_rej);
       if (!err) err = map(exports, "percent-blocked", 1, buf, 1);
    }
 
@@ -1606,7 +1610,7 @@ static char *show_rcs(void)
 #define SHOW_RCS(__x)              \
    {                               \
       extern const char __x[];     \
-      sprintf(buf, "%s\n", __x);   \
+      snprintf(buf, sizeof(buf), " %s\n", __x);   \
       string_append(&result, buf); \
    }
 
