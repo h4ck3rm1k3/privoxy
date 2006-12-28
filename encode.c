@@ -1,4 +1,4 @@
-const char encode_rcs[] = "$Id: encode.c,v 1.10 2006/07/18 14:48:45 david__schmidt Exp $";
+const char encode_rcs[] = "$Id: encode.c,v 1.11 2006/12/28 18:25:53 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/encode.c,v $
@@ -33,6 +33,9 @@ const char encode_rcs[] = "$Id: encode.c,v 1.10 2006/07/18 14:48:45 david__schmi
  *
  * Revisions   :
  *    $Log: encode.c,v $
+ *    Revision 1.11  2006/12/28 18:25:53  fabiankeil
+ *    Fixed gcc43 compiler warning.
+ *
  *    Revision 1.10  2006/07/18 14:48:45  david__schmidt
  *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
  *    with what was really the latest development (the v_3_0_branch branch)
@@ -458,7 +461,7 @@ char *url_decode(const char * s)
                break;
 
             case '%':
-               if ((*q = xtoi(s + 1)) != '\0')
+               if ((*q = (char)xtoi(s + 1)) != '\0')
                {
                   s += 3;
                   q++;
