@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.46 2006/12/27 18:44:52 fabiankeil Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.47 2006/12/28 18:04:25 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,9 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.46 2006/12/27 18:44:52 fabiankeil
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.47  2006/12/28 18:04:25  fabiankeil
+ *    Fixed gcc43 conversion warnings.
+ *
  *    Revision 1.46  2006/12/27 18:44:52  fabiankeil
  *    Stop shadowing string.h's index().
  *
@@ -998,7 +1001,7 @@ jb_err edit_write_file(struct editable_file * file)
             {
                /* Must quote '#' characters */
                int numhash = 0;
-               int len;
+               size_t len;
                char * src;
                char * dest;
                char * str;
@@ -1014,7 +1017,7 @@ jb_err edit_write_file(struct editable_file * file)
 
                /* Allocate new memory for string */
                len = strlen(cur_line->unprocessed);
-               if (NULL == (str = malloc((size_t) len + 1 + numhash)))
+               if (NULL == (str = malloc(len + 1 + (size_t)numhash)))
                {
                   /* Uh oh, just trashed file! */
                   fclose(fp);
@@ -1296,7 +1299,7 @@ static jb_err split_line_on_equals(const char * line, char ** pname, char ** pva
       name_end--;
    }
 
-   name_len = name_end - line + 1; /* Length excluding \0 */
+   name_len = (size_t)(name_end - line) + 1; /* Length excluding \0 */
    if (NULL == (*pname = (char *) malloc(name_len + 1)))
    {
       return JB_ERR_MEMORY;
@@ -1992,7 +1995,7 @@ static jb_err get_file_name_param(struct client_state *csp,
    char *name;
    char *fullpath;
    char ch;
-   int len;
+   size_t len;
 
    assert(csp);
    assert(parameters);
@@ -2249,7 +2252,7 @@ static jb_err map_radio(struct map * exports,
       }
    }
 
-   *p = value;
+   *p = (char)value;
    return map(exports, buf, 0, "checked", 1);
 }
 
