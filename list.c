@@ -1,4 +1,4 @@
-const char list_rcs[] = "$Id: list.c,v 1.17 2006/07/18 14:48:46 david__schmidt Exp $";
+const char list_rcs[] = "$Id: list.c,v 1.18 2006/12/28 19:21:23 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/list.c,v $
@@ -34,6 +34,11 @@ const char list_rcs[] = "$Id: list.c,v 1.17 2006/07/18 14:48:46 david__schmidt E
  *
  * Revisions   :
  *    $Log: list.c,v $
+ *    Revision 1.18  2006/12/28 19:21:23  fabiankeil
+ *    Fixed gcc43 warning and enabled list_is_valid()'s loop
+ *    detection again. It was ineffective since the removal of
+ *    the arbitrary list length limit two years ago.
+ *
  *    Revision 1.17  2006/07/18 14:48:46  david__schmidt
  *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
  *    with what was really the latest development (the v_3_0_branch branch)
@@ -154,7 +159,7 @@ static int list_is_valid (const struct list *the_list);
 
 /*********************************************************************
  *
- * Function    :  list_init
+ * Function    :  init_list
  *
  * Description :  Create a new, empty list in user-allocated memory.
  *                Caller should allocate a "struct list" variable,
@@ -243,7 +248,7 @@ static int list_is_valid (const struct list *the_list)
 #if 1
    const struct list_entry *cur_entry;
    const struct list_entry *last_entry = NULL;
-   int length = 0;
+   int entry = 0;
 
    assert(the_list);
 
@@ -257,25 +262,25 @@ static int list_is_valid (const struct list *the_list)
           * Just check that this string can be accessed - i.e. it's a valid
           * pointer.
           */
-         strlen(cur_entry->str);
+         (void)strlen(cur_entry->str);
       }
 
       /*
        * Check for looping back to first
        */
-      if ((length != 0) && (cur_entry == the_list->first))
+      if ((entry++ != 0) && (cur_entry == the_list->first))
       {
          return 0;
       }
 
       /*
-       * Arbitrarily limit length to prevent infinite loops.
+       * Arbitrarily limit list length to prevent infinite loops.
        * Note that the 1000 limit was hit by a real user in tracker 911950;
-       * removing it for now.  Symptoms of a real circular reference will
-       * include 100% CPU usage, I'd imagine.  It'll be obvious, anyway.
+       * removing it for now.  Real circular references should eventually
+       * be caught by the check above, anyway.
        */         
       /*
-      if (++length > 1000)
+      if (entry > 1000)
       {           
          return 0;
       }           
