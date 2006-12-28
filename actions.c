@@ -1,4 +1,4 @@
-const char actions_rcs[] = "$Id: actions.c,v 1.35 2006/07/18 14:48:45 david__schmidt Exp $";
+const char actions_rcs[] = "$Id: actions.c,v 1.36 2006/12/28 17:15:42 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/actions.c,v $
@@ -33,6 +33,9 @@ const char actions_rcs[] = "$Id: actions.c,v 1.35 2006/07/18 14:48:45 david__sch
  *
  * Revisions   :
  *    $Log: actions.c,v $
+ *    Revision 1.36  2006/12/28 17:15:42  fabiankeil
+ *    Fix gcc43 conversion warning.
+ *
  *    Revision 1.35  2006/07/18 14:48:45  david__schmidt
  *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
  *    with what was really the latest development (the v_3_0_branch branch)
@@ -1090,7 +1093,7 @@ static int load_one_actions_file(struct client_state *csp, int fileid)
          if (buf[1] == '{')
          {
             /* It's {{settings}} or {{alias}} */
-            int len = strlen(buf);
+            size_t len = strlen(buf);
             char * start = buf + 2;
             char * end = buf + len - 1;
             if ((len < 5) || (*end-- != '}') || (*end-- != '}'))
