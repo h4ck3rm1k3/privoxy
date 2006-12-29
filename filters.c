@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.74 2006/12/24 17:37:38 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.75 2006/12/29 18:30:46 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -40,6 +40,10 @@ const char filters_rcs[] = "$Id: filters.c,v 1.74 2006/12/24 17:37:38 fabiankeil
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.75  2006/12/29 18:30:46  fabiankeil
+ *    Fixed gcc43 conversion warnings,
+ *    changed sprintf calls to snprintf.
+ *
  *    Revision 1.74  2006/12/24 17:37:38  fabiankeil
  *    Adjust comment in pcrs_filter_response()
  *    to recent pcrs changes. Hohoho.
@@ -1089,7 +1093,7 @@ struct http_response *trust_url(struct client_state *csp)
    p = strdup("");
    for (tl = csp->config->trust_list; (t = *tl) != NULL ; tl++)
    {
-      sprintf(buf, "<li>%s</li>\n", t->spec);
+      snprintf(buf, sizeof(buf), "<li>%s</li>\n", t->spec);
       string_append(&p, buf);
    }
    err = map(exports, "trusted-referrers", 1, p, 0);
@@ -1111,7 +1115,7 @@ struct http_response *trust_url(struct client_state *csp)
       p = strdup("");
       for (l = csp->config->trust_info->first; l ; l = l->next)
       {
-         sprintf(buf, "<li> <a href=\"%s\">%s</a><br>\n",l->str, l->str);
+         snprintf(buf, sizeof(buf), "<li> <a href=\"%s\">%s</a><br>\n", l->str, l->str);
          string_append(&p, buf);
       }
       err = map(exports, "trust-info", 1, p, 0);
@@ -1688,7 +1692,7 @@ char *pcrs_filter_response(struct client_state *csp)
    {
       return(NULL);
    }
-   size = csp->iob->eod - csp->iob->cur;
+   size = (size_t)(csp->iob->eod - csp->iob->cur);
 
    /*
     * Need to check the set of re_filterfiles...
@@ -1858,7 +1862,9 @@ char *gif_deanimate_response(struct client_state *csp)
 {
    struct binbuffer *in, *out;
    char *p;
-   size_t size = csp->iob->eod - csp->iob->cur;
+   size_t size;
+
+   size = (size_t)(csp->iob->eod - csp->iob->cur);
 
    /*
     * If the body has a "chunked" transfer-encoding,
@@ -1928,9 +1934,12 @@ char *gif_deanimate_response(struct client_state *csp)
  *********************************************************************/
 char *jpeg_inspect_response(struct client_state *csp)
 {
-   struct binbuffer *in = NULL, *out = NULL;
+   struct binbuffer  *in = NULL;
+   struct binbuffer *out = NULL;
    char *p = NULL;
-   size_t size = csp->iob->eod - csp->iob->cur;
+   size_t size;
+
+   size = (size_t)(csp->iob->eod - csp->iob->cur);
 
    /*
     * If the body has a "chunked" transfer-encoding,
@@ -2003,7 +2012,7 @@ char *jpeg_inspect_response(struct client_state *csp)
  *                went wrong
  *
  *********************************************************************/
-int remove_chunked_transfer_coding(char *buffer, const size_t size)
+size_t remove_chunked_transfer_coding(char *buffer, const size_t size)
 {
    size_t newsize = 0;
    unsigned int chunksize = 0;

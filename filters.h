@@ -1,6 +1,6 @@
 #ifndef FILTERS_H_INCLUDED
 #define FILTERS_H_INCLUDED
-#define FILTERS_H_VERSION "$Id: filters.h,v 1.23 2006/11/28 15:19:43 fabiankeil Exp $"
+#define FILTERS_H_VERSION "$Id: filters.h,v 1.24 2006/12/29 18:30:46 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.h,v $
@@ -39,6 +39,10 @@
  *
  * Revisions   :
  *    $Log: filters.h,v $
+ *    Revision 1.24  2006/12/29 18:30:46  fabiankeil
+ *    Fixed gcc43 conversion warnings,
+ *    changed sprintf calls to snprintf.
+ *
  *    Revision 1.23  2006/11/28 15:19:43  fabiankeil
  *    Implemented +redirect{s@foo@bar@} to generate
  *    a redirect based on a rewritten version of the
@@ -281,7 +285,7 @@ extern const struct forward_spec *forward_url(struct http_request *http, struct 
 extern char *pcrs_filter_response(struct client_state *csp);
 extern char *gif_deanimate_response(struct client_state *csp);
 extern char *jpeg_inspect_response(struct client_state *csp);
-extern int remove_chunked_transfer_coding(char *buffer, const size_t size);
+extern size_t remove_chunked_transfer_coding(char *buffer, const size_t size);
 extern char *execute_single_pcrs_command(char *subject, const char *pcrs_command, int *hits);
 extern char *rewrite_url(char *old_url, const char *pcrs_command);
 extern char *get_last_url(char *subject, const char *redirect_mode);
