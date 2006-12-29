@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.114 2006/12/27 18:52:02 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.115 2006/12/29 17:38:57 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.114 2006/12/27 18:52:02 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.115  2006/12/29 17:38:57  fabiankeil
+ *    Fixed gcc43 conversion warnings.
+ *
  *    Revision 1.114  2006/12/27 18:52:02  fabiankeil
  *    Fix -pedantic ISO C warning about converting
  *    from function pointer to object pointer.
@@ -1015,12 +1018,12 @@ static void chat(struct client_state *csp)
    jb_socket maxfd;
    int server_body;
    int ms_iis5_hack = 0;
-   int byte_count = 0;
-   unsigned int forwarded_connect_retries = 0;
-   unsigned int max_forwarded_connect_retries = csp->config->forwarded_connect_retries;
+   size_t byte_count = 0;
+   int forwarded_connect_retries = 0;
+   int max_forwarded_connect_retries = csp->config->forwarded_connect_retries;
    const struct forward_spec * fwd;
    struct http_request *http;
-   int len; /* for buffer sizes */
+   size_t len; /* for buffer sizes */
 #ifdef FEATURE_KILL_POPUPS
    int block_popups;         /* bool, 1==will block popups */
    int block_popups_now = 0; /* bool, 1==currently blocking popups */
@@ -1696,7 +1699,7 @@ static void chat(struct client_state *csp)
                    */
                   if (NULL == (p = (*content_filter)(csp)))
                   {
-                     csp->content_length = csp->iob->eod - csp->iob->cur;
+                     csp->content_length = (size_t)(csp->iob->eod - csp->iob->cur);
                   }
 
                   hdr = sed(server_patterns_light, NULL, csp);
@@ -1727,7 +1730,8 @@ static void chat(struct client_state *csp)
              * This is NOT the body, so
              * Let's pretend the server just sent us a blank line.
              */
-            len = sprintf(buf, "\r\n");
+            snprintf(buf, sizeof(buf), "\r\n");
+            len = strlen(buf);
 
             /*
              * Now, let the normal header parsing algorithm below do its
@@ -1781,7 +1785,7 @@ static void chat(struct client_state *csp)
 
                   if (write_socket(csp->cfd, hdr, hdrlen)
                    || ((flushed = flush_socket(csp->cfd, csp)) < 0)
-                   || (write_socket(csp->cfd, buf, (size_t) len)))
+                   || (write_socket(csp->cfd, buf, len)))
                   {
                      log_error(LOG_LEVEL_CONNECT, "Flush header and buffers to client failed: %E");
 
@@ -1789,7 +1793,7 @@ static void chat(struct client_state *csp)
                      return;
                   }
 
-                  byte_count += hdrlen + flushed + len;
+                  byte_count += hdrlen + (size_t)flushed + len;
                   freez(hdr);
                   content_filter = NULL;
                   server_body = 1;
@@ -1798,7 +1802,7 @@ static void chat(struct client_state *csp)
             }
             else
             {
-               if (write_socket(csp->cfd, buf, (size_t)len))
+               if (write_socket(csp->cfd, buf, len))
                {
                   log_error(LOG_LEVEL_ERROR, "write to client failed: %E");
                   return;
@@ -1940,7 +1944,7 @@ static void chat(struct client_state *csp)
                 */
 
                if (write_socket(csp->cfd, hdr, strlen(hdr))
-                || ((len = flush_socket(csp->cfd, csp)) < 0))
+                || ((len = (size_t)flush_socket(csp->cfd, csp)) < 0))
                {
                   log_error(LOG_LEVEL_CONNECT, "write header to client failed: %E");
 
@@ -2265,7 +2269,7 @@ int main(int argc, const char *argv[])
 
 #endif /* FEATURE_PTHREAD */
 
-   random_seed = (int)time(NULL);
+   random_seed = (unsigned int)time(NULL);
 #ifdef HAVE_RANDOM
    srandom(random_seed);
 #else
@@ -2312,7 +2316,7 @@ int main(int argc, const char *argv[])
     * We *are* in a windows console app.
     * Print a verbose messages about FAQ's and such
     */
-   printf(win32_blurb);
+   printf("%s", win32_blurb);
 # endif /* def _WIN_CONSOLE */
 #endif /* def _WIN32 */
 
@@ -2868,7 +2872,7 @@ static void listen_loop(void)
 
             log_error(LOG_LEVEL_ERROR, "can't fork: %E");
 
-            sprintf(buf , "Privoxy: can't fork: errno = %d", errno);
+            snprintf(buf , sizeof(buf), "Privoxy: can't fork: errno = %d", errno);
 
             write_socket(csp->cfd, buf, strlen(buf));
             close_socket(csp->cfd);
