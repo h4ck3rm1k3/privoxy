@@ -1,4 +1,4 @@
-const char loaders_rcs[] = "$Id: loaders.c,v 1.57 2006/12/21 12:22:22 fabiankeil Exp $";
+const char loaders_rcs[] = "$Id: loaders.c,v 1.58 2006/12/31 14:25:20 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loaders.c,v $
@@ -35,6 +35,9 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.57 2006/12/21 12:22:22 fabiankeil
  *
  * Revisions   :
  *    $Log: loaders.c,v $
+ *    Revision 1.58  2006/12/31 14:25:20  fabiankeil
+ *    Fix gcc43 compiler warnings.
+ *
  *    Revision 1.57  2006/12/21 12:22:22  fabiankeil
  *    html_encode filter descriptions.
  *
@@ -708,7 +711,7 @@ jb_err simple_read_line(FILE *fp, char **dest, int *newline)
          return JB_ERR_OK;
       }
 
-      *p++ = ch;
+      *p++ = (char)ch;
 
       if (++len >= buflen)
       {

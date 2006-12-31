@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.57 2006/12/21 12:57:48 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.58 2006/12/31 14:24:29 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.57 2006/12/21 12:57:48 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.58  2006/12/31 14:24:29  fabiankeil
+ *    Fix gcc43 compiler warnings.
+ *
  *    Revision 1.57  2006/12/21 12:57:48  fabiankeil
  *    Add config option "split-large-forms"
  *    to work around the browser bug reported
@@ -739,7 +742,7 @@ struct configuration_spec * load_config(void)
       {
          if (ijb_isupper(*p))
          {
-            *p = ijb_tolower(*p);
+            *p = (char)ijb_tolower(*p);
          }
       }
 
@@ -790,7 +793,7 @@ struct configuration_spec * load_config(void)
  * buffer-limit n
  * *************************************************************************/
          case hash_buffer_limit :
-            config->buffer_limit = (size_t) 1024 * atoi(arg);
+            config->buffer_limit = (size_t)(1024 * atoi(arg));
             continue;
 
 /* *************************************************************************
