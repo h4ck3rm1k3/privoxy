@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.45 2006/12/28 18:16:41 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.46 2007/01/02 12:49:46 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -9,7 +9,7 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.45 2006/12/28 18:16:41 fabian
  *                Functions declared include:
  * 
  *
- * Copyright   :  Written by and Copyright (C) 2001 the SourceForge
+ * Copyright   :  Written by and Copyright (C) 2001-2006 the SourceForge
  *                Privoxy team. http://www.privoxy.org/
  *
  *                Based on the Internet Junkbuster originally written
@@ -36,6 +36,10 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.45 2006/12/28 18:16:41 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.46  2007/01/02 12:49:46  fabiankeil
+ *    Add FEATURE_ZLIB to the list of conditional
+ *    defines at the show-status page.
+ *
  *    Revision 1.45  2006/12/28 18:16:41  fabiankeil
  *    Fixed gcc43 compiler warnings, zero out cgi_send_user_manual's
  *    body memory before using it, replaced sprintf calls with snprintf.
@@ -1569,6 +1573,12 @@ static jb_err show_defines(struct map *exports)
 #else /* ifndef FEATURE_TRUST */
    if (!err) err = map_conditional(exports, "FEATURE_TRUST", 0);
 #endif /* ndef FEATURE_TRUST */
+
+#ifdef FEATURE_ZLIB
+   if (!err) err = map_conditional(exports, "FEATURE_ZLIB", 1);
+#else /* ifndef FEATURE_ZLIB */
+   if (!err) err = map_conditional(exports, "FEATURE_ZLIB", 0);
+#endif /* ndef FEATURE_ZLIB */
 
 #ifdef STATIC_PCRE
    if (!err) err = map_conditional(exports, "STATIC_PCRE", 1);
