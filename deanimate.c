@@ -1,4 +1,4 @@
-const char deanimate_rcs[] = "$Id: deanimate.c,v 1.14 2006/07/18 14:48:45 david__schmidt Exp $";
+const char deanimate_rcs[] = "$Id: deanimate.c,v 1.15 2007/01/03 14:39:19 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/deanimate.c,v $
@@ -12,7 +12,7 @@ const char deanimate_rcs[] = "$Id: deanimate.c,v 1.14 2006/07/18 14:48:45 david_
  *                buf_copy,  buf_getbyte, gif_skip_data_block,
  *                gif_extract_image and jpeg_inspect
  *
- * Copyright   :  Written by and Copyright (C) 2001 - 2004 by the the
+ * Copyright   :  Written by and Copyright (C) 2001 - 2004, 2006 by the
  *                SourceForge Privoxy team. http://www.privoxy.org/
  *
  *                Based on the GIF file format specification (see
@@ -40,6 +40,10 @@ const char deanimate_rcs[] = "$Id: deanimate.c,v 1.14 2006/07/18 14:48:45 david_
  *
  * Revisions   :
  *    $Log: deanimate.c,v $
+ *    Revision 1.15  2007/01/03 14:39:19  fabiankeil
+ *    Fix a gcc43 warning and mark the binbuffer
+ *    as immutable for buf_getbyte().
+ *
  *    Revision 1.14  2006/07/18 14:48:45  david__schmidt
  *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
  *    with what was really the latest development (the v_3_0_branch branch)
@@ -236,7 +240,7 @@ int buf_copy(struct binbuffer *src, struct binbuffer *dst, size_t length)
  * Returns     :  The byte on success, or 0 on failiure
  *
  *********************************************************************/
-unsigned char buf_getbyte(struct binbuffer *src, size_t offset)
+unsigned char buf_getbyte(const struct binbuffer *src, size_t offset)
 {
    if (src->offset + offset < src->size)
    {
@@ -276,7 +280,8 @@ int gif_skip_data_block(struct binbuffer *buf)
     */
    while((c = buf_getbyte(buf, 0)) != '\0')
    {
-      if ((buf->offset += c + 1) >= buf->size - 1)
+      buf->offset += (size_t)c + 1;
+      if (buf->offset >= buf->size - 1)
       {
          return 1;
       }
