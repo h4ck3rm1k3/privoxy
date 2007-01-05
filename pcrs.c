@@ -1,4 +1,4 @@
-const char pcrs_rcs[] = "$Id: pcrs.c,v 1.23 2006/12/29 17:53:05 fabiankeil Exp $";
+const char pcrs_rcs[] = "$Id: pcrs.c,v 1.24 2007/01/05 15:46:12 fabiankeil Exp $";
 
 /*********************************************************************
  *
@@ -33,6 +33,15 @@ const char pcrs_rcs[] = "$Id: pcrs.c,v 1.23 2006/12/29 17:53:05 fabiankeil Exp $
  *
  * Revisions   :
  *    $Log: pcrs.c,v $
+ *    Revision 1.24  2007/01/05 15:46:12  fabiankeil
+ *    Don't use strlen() to calculate the length of
+ *    the pcrs substitutes. They don't have to be valid C
+ *    strings and getting their length wrong can result in
+ *    user-controlled memory corruption.
+ *
+ *    Thanks to Felix Gröbert for reporting the problem
+ *    and providing the fix [#1627140].
+ *
  *    Revision 1.23  2006/12/29 17:53:05  fabiankeil
  *    Fixed gcc43 conversion warnings.
  *
@@ -480,6 +489,7 @@ plainchar:
     */
    r->text = text;
    r->backrefs = l;
+   r->length = (size_t)k;
    r->block_length[l] = (size_t)(k - r->block_offset[l]);
 
    return r;
@@ -882,7 +892,7 @@ int pcrs_execute(pcrs_job *job, char *subject, size_t subject_length, char **res
          newsize += matches[i].submatch_length[k] * (size_t)job->substitute->backref_count[k];
       }
       /* plus replacement text size minus match text size */
-      newsize += strlen(job->substitute->text) - matches[i].submatch_length[0]; 
+      newsize += job->substitute->length - matches[i].submatch_length[0]; 
 
       /* chunk before match */
       matches[i].submatch_offset[PCRS_MAX_SUBMATCHES] = 0;
