@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.117 2006/12/31 17:56:37 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.118 2007/01/07 07:43:43 joergs Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.117 2006/12/31 17:56:37 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.118  2007/01/07 07:43:43  joergs
+ *    AmigaOS4 support added.
+ *
  *    Revision 1.117  2006/12/31 17:56:37  fabiankeil
  *    Added config option accept-intercepted-requests
  *    and disabled it by default.
@@ -2796,13 +2799,22 @@ static void listen_loop(void)
 #define SELECTED_ONE_OPTION
          csp->cfd = ReleaseSocket(csp->cfd, -1);
          
-         if((child_id = (int)CreateNewProcTags(
-            NP_Entry, (ULONG)server_thread,
-            NP_Output, Output(),
-            NP_CloseOutput, FALSE,
-            NP_Name, (ULONG)"privoxy child",
-            NP_StackSize, 200*1024,
-            TAG_DONE)))
+#ifdef __amigaos4__
+         child_id = (int)CreateNewProcTags(NP_Entry, (ULONG)server_thread,
+                                           NP_Output, Output(),
+                                           NP_CloseOutput, FALSE,
+                                           NP_Name, (ULONG)"privoxy child",
+                                           NP_Child, TRUE,
+                                           TAG_DONE);
+#else
+         child_id = (int)CreateNewProcTags(NP_Entry, (ULONG)server_thread,
+                                           NP_Output, Output(),
+                                           NP_CloseOutput, FALSE,
+                                           NP_Name, (ULONG)"privoxy child",
+                                           NP_StackSize, 200*1024,
+                                           TAG_DONE);
+#endif
+         if(0 != child_id)
          {
             childs++;
             ((struct Task *)child_id)->tc_UserData = csp;
