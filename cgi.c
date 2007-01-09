@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.85 2007/01/05 14:19:02 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.86 2007/01/09 11:54:26 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,10 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.85 2007/01/05 14:19:02 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.86  2007/01/09 11:54:26  fabiankeil
+ *    Fix strdup() error handling in cgi_error_unknown()
+ *    and cgi_error_no_template(). Reported by Markus Elfring.
+ *
  *    Revision 1.85  2007/01/05 14:19:02  fabiankeil
  *    Handle pcrs_execute() errors in template_fill() properly.
  *
@@ -1504,7 +1508,7 @@ jb_err cgi_error_no_template(struct client_state *csp,
    strcat(rsp->body, body_suffix);
 
    rsp->status = strdup(status);
-   if (rsp->body == NULL)
+   if (rsp->status == NULL)
    {
       return JB_ERR_MEMORY;
    }
@@ -1581,7 +1585,7 @@ jb_err cgi_error_unknown(struct client_state *csp,
    strcat(rsp->body, body_suffix);
 
    rsp->status = strdup(status);
-   if (rsp->body == NULL)
+   if (rsp->status == NULL)
    {
       return JB_ERR_MEMORY;
    }
