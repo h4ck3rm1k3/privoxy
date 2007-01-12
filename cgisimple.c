@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.46 2007/01/02 12:49:46 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.47 2007/01/12 15:07:10 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,9 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.46 2007/01/02 12:49:46 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.47  2007/01/12 15:07:10  fabiankeil
+ *    Use zalloc in cgi_send_user_manual.
+ *
  *    Revision 1.46  2007/01/02 12:49:46  fabiankeil
  *    Add FEATURE_ZLIB to the list of conditional
  *    defines at the show-status page.
@@ -792,14 +795,13 @@ jb_err cgi_send_user_manual(struct client_state *csp,
    fseek(fp, 0, SEEK_SET);
 
    /* Allocate memory and load the file directly into the body */
-   rsp->body = (char *)malloc(length+1);
+   rsp->body = (char *)zalloc(length+1);
    if (!rsp->body)
    {
       fclose(fp);
       free(full_path);
       return JB_ERR_MEMORY;
    }
-   memset(rsp->body, '\0', length+1);
    if (!fread(rsp->body, length, 1, fp))
    {
       /*
