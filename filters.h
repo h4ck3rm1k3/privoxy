@@ -1,6 +1,6 @@
 #ifndef FILTERS_H_INCLUDED
 #define FILTERS_H_INCLUDED
-#define FILTERS_H_VERSION "$Id: filters.h,v 1.24 2006/12/29 18:30:46 fabiankeil Exp $"
+#define FILTERS_H_VERSION "$Id: filters.h,v 1.25 2007/01/12 15:36:44 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.h,v $
@@ -39,6 +39,10 @@
  *
  * Revisions   :
  *    $Log: filters.h,v $
+ *    Revision 1.25  2007/01/12 15:36:44  fabiankeil
+ *    Mark *csp as immutable for is_untrusted_url()
+ *    and is_imageurl(). Closes FR 1237736.
+ *
  *    Revision 1.24  2006/12/29 18:30:46  fabiankeil
  *    Fixed gcc43 conversion warnings,
  *    changed sprintf calls to snprintf.
@@ -260,10 +264,10 @@ extern struct http_response *trust_url(struct client_state *csp);
  * Request inspectors
  */
 #ifdef FEATURE_TRUST
-extern int is_untrusted_url(struct client_state *csp);
+extern int is_untrusted_url(const struct client_state *csp);
 #endif /* def FEATURE_TRUST */
 #ifdef FEATURE_IMAGE_BLOCKING
-extern int is_imageurl(struct client_state *csp);
+extern int is_imageurl(const struct client_state *csp);
 #endif /* def FEATURE_IMAGE_BLOCKING */
 
 /*
