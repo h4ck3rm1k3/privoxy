@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.86 2007/01/09 11:54:26 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.87 2007/01/22 15:34:13 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -11,7 +11,7 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.86 2007/01/09 11:54:26 fabiankeil Exp $";
  *                Functions declared include:
  * 
  *
- * Copyright   :  Written by and Copyright (C) 2001-2004, 2006
+ * Copyright   :  Written by and Copyright (C) 2001-2004, 2006-2007
  *                the SourceForge Privoxy team. http://www.privoxy.org/
  *
  *                Based on the Internet Junkbuster originally written
@@ -38,6 +38,16 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.86 2007/01/09 11:54:26 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.87  2007/01/22 15:34:13  fabiankeil
+ *    - "Protect" against a rather lame JavaScript-based
+ *      Privoxy detection "attack" and check the referrer
+ *      before delivering the CGI style sheet.
+ *    - Move referrer check for unsafe CGI pages into
+ *      referrer_is_safe() and log the result.
+ *    - Map @url@ in cgi-error-disabled page.
+ *      It's required for the "go there anyway" link.
+ *    - Mark *csp as immutable for grep_cgi_referrer().
+ *
  *    Revision 1.86  2007/01/09 11:54:26  fabiankeil
  *    Fix strdup() error handling in cgi_error_unknown()
  *    and cgi_error_no_template(). Reported by Markus Elfring.
@@ -678,7 +688,7 @@ static const struct cgi_dispatcher cgi_dispatchers[] = {
          NULL, TRUE /* Send a built-in image */ },
    { "send-stylesheet",
          cgi_send_stylesheet, 
-         NULL, TRUE /* Send templates/cgi-style.css */ },
+         NULL, FALSE /* Send templates/cgi-style.css */ },
    { "t",
          cgi_transparent_image, 
          NULL, TRUE /* Send a transparent image (short name) */ },
@@ -845,7 +855,7 @@ struct http_response *dispatch_cgi(struct client_state *csp)
  * Returns     :  pointer to value (no copy!), or NULL if none found.
  *
  *********************************************************************/
-char *grep_cgi_referrer(struct client_state *csp)
+char *grep_cgi_referrer(const struct client_state *csp)
 {
    struct list_entry *p;
 
@@ -861,6 +871,54 @@ char *grep_cgi_referrer(struct client_state *csp)
 
 }
 
+
+/*********************************************************************
+ * 
+ * Function    :  referrer_is_safe
+ *
+ * Description :  Decides whether we trust the Referer for
+ *                CGI pages which are only meant to be reachable
+ *                through Privoxy's web interface directly.
+ *
+ * Parameters  :
+ *          1  :  csp = Current client state (buffers, headers, etc...)
+ *
+ * Returns     :  TRUE  if the referrer is safe, or
+ *                FALSE if the referrer is unsafe or not set.
+ *
+ *********************************************************************/
+int referrer_is_safe (const struct client_state *csp)
+{
+   char *referrer;
+   const char alternative_prefix[] = "http://" CGI_SITE_1_HOST "/";
+
+   referrer = grep_cgi_referrer(csp);
+
+   if (NULL == referrer)
+   {
+      /* No referrer, no access  */
+      log_error(LOG_LEVEL_ERROR, "Denying access to %s. No referrer found.",
+         csp->http->url);
+   }
+   else if ((0 == strncmp(referrer, CGI_PREFIX, sizeof(CGI_PREFIX)-1)
+         || (0 == strncmp(referrer, alternative_prefix, strlen(alternative_prefix)))))
+   {
+      /* Trustworthy referrer */
+      log_error(LOG_LEVEL_CGI, "Granting access to %s, referrer %s is trustworthy.",
+         csp->http->url, referrer);
+
+      return TRUE;
+   }
+   else
+   {
+      /* Untrustworthy referrer */
+      log_error(LOG_LEVEL_ERROR, "Denying access to %s, referrer %s isn't trustworthy.",
+         csp->http->url, referrer);
+   }
+
+   return FALSE;
+
+}
 
 /*********************************************************************
  * 
@@ -890,7 +948,6 @@ static struct http_response *dispatch_known_cgi(struct client_state * csp,
    struct http_response *rsp;
    char *query_args_start;
    char *path_copy;
-   char *referrer;
    jb_err err;
 
    if (NULL == (path_copy = strdup(path)))
@@ -953,10 +1010,7 @@ static struct http_response *dispatch_known_cgi(struct client_state * csp,
           * If the called CGI is either harmless, or referred
           * from a trusted source, start it.
           */
-         if (d->harmless
-             || ((NULL != (referrer = grep_cgi_referrer(csp)))
-                 && (0 == strncmp(referrer, CGI_PREFIX, sizeof(CGI_PREFIX)-1)))
-             )
+         if (d->harmless || referrer_is_safe(csp))
          {
             err = (d->handler)(csp, rsp, param_list);
          }
@@ -1352,7 +1406,9 @@ struct http_response *error_response(struct client_state *csp,
  * Description :  CGI function that is called to generate an error
  *                response if the actions editor or toggle CGI are
  *                accessed despite having being disabled at compile-
- *                or run-time.
+ *                or run-time, or if the user followed an untrusted link
+ *                to access a unsafe CGI feature that is only reachable
+ *                through Privoxy directly.
  *
  * Parameters  :
  *          1  :  csp = Current client state (buffers, headers, etc...)
@@ -1372,9 +1428,14 @@ jb_err cgi_error_disabled(struct client_state *csp,
    assert(csp);
    assert(rsp);
 
-   if (NULL == (exports = default_exports(csp, NULL)))
+   if (NULL == (exports = default_exports(csp, "cgi-error-disabled")))
    {
       return JB_ERR_MEMORY;
+   }
+   if (map(exports, "url", 1, csp->http->url, 1))
+   {
+      /* Not important enough to do anything */
+      log_error(LOG_LEVEL_ERROR, "Failed to fill in url.");
    }
 
    return template_fill_for_cgi(csp, "cgi-error-disabled", exports, rsp);
