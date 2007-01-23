@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.88 2007/01/23 13:14:32 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.89 2007/01/23 15:51:16 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,9 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.88 2007/01/23 13:14:32 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.89  2007/01/23 15:51:16  fabiankeil
+ *    Add favicon delivery functions.
+ *
  *    Revision 1.88  2007/01/23 13:14:32  fabiankeil
  *    - Map variables that aren't guaranteed to be
  *      pure ASCII html_encoded.
@@ -686,6 +689,12 @@ static const struct cgi_dispatcher cgi_dispatchers[] = {
          cgi_edit_actions_section_swap, 
          NULL, FALSE /* Swap two sections in the actionsfile */ },
 #endif /* def FEATURE_CGI_EDIT_ACTIONS */
+   { "error-favicon.ico", 
+         cgi_send_error_favicon,  
+         NULL, TRUE /* Sends the favicon image for error pages. */ },
+   { "favicon.ico", 
+         cgi_send_default_favicon,  
+         NULL, TRUE /* Sends the default favicon image. */ },
    { "robots.txt", 
          cgi_robots_txt,  
          NULL, TRUE /* Sends a robots.txt file to tell robots to go away. */ }, 
