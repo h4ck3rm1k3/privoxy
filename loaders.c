@@ -1,4 +1,4 @@
-const char loaders_rcs[] = "$Id: loaders.c,v 1.58 2006/12/31 14:25:20 fabiankeil Exp $";
+const char loaders_rcs[] = "$Id: loaders.c,v 1.59 2007/01/25 13:38:20 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loaders.c,v $
@@ -8,7 +8,7 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.58 2006/12/31 14:25:20 fabiankeil
  *                the list of active loaders, and to automatically
  *                unload files that are no longer in use.
  *
- * Copyright   :  Written by and Copyright (C) 2001 the SourceForge
+ * Copyright   :  Written by and Copyright (C) 2001-2007 the SourceForge
  *                Privoxy team. http://www.privoxy.org/
  *
  *                Based on the Internet Junkbuster originally written
@@ -35,6 +35,9 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.58 2006/12/31 14:25:20 fabiankeil
  *
  * Revisions   :
  *    $Log: loaders.c,v $
+ *    Revision 1.59  2007/01/25 13:38:20  fabiankeil
+ *    Freez csp->error_message in sweep().
+ *
  *    Revision 1.58  2006/12/31 14:25:20  fabiankeil
  *    Fix gcc43 compiler warnings.
  *
@@ -478,6 +481,7 @@ void sweep(void)
          freez(csp->my_hostname);
          freez(csp->x_forwarded);
          freez(csp->iob->buf);
+         freez(csp->error_message);
 
          free_http_request(csp->http);
 
