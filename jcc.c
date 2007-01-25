@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.118 2007/01/07 07:43:43 joergs Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.119 2007/01/25 14:02:30 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -6,7 +6,7 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.118 2007/01/07 07:43:43 joergs Exp $";
  * Purpose     :  Main file.  Contains main() method, main loop, and
  *                the main connection-handling function.
  *
- * Copyright   :  Written by and Copyright (C) 2001 the SourceForge
+ * Copyright   :  Written by and Copyright (C) 2001-2007 the SourceForge
  *                Privoxy team. http://www.privoxy.org/
  *
  *                Based on the Internet Junkbuster originally written
@@ -33,6 +33,14 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.118 2007/01/07 07:43:43 joergs Exp $";
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.119  2007/01/25 14:02:30  fabiankeil
+ *    - Add Proxy-Agent header to HTTP snippets that are
+ *      supposed to reach HTTP clients only.
+ *    - Made a few CONNECT log messages more descriptive.
+ *    - Catch completely empty server responses (as seen
+ *      with Tor's fake ".noconnect" top level domain).
+ *    - Use shiny new "forwarding-failed" template for socks errors.
+ *
  *    Revision 1.118  2007/01/07 07:43:43  joergs
  *    AmigaOS4 support added.
  *
@@ -910,6 +918,7 @@ const char CHEADER[] =
 
 const char CFORBIDDEN[] =
    "HTTP/1.0 403 Connection not allowable\r\n"
+   "Proxy-Agent: Privoxy " VERSION "\r\n"
    "X-Hint: If you read this message interactively, then you know why this happens ,-)\r\n"
    "Connection: close\r\n\r\n";
 
@@ -923,11 +932,20 @@ const char GOPHER_RESPONSE[] =
    "Connection: close\r\n\r\n"
    "Invalid request. Privoxy doesn't support gopher.\r\n";
 
+/* XXX: should be a template */
 const char MISSING_DESTINATION_RESPONSE[] =
    "HTTP/1.0 400 Bad request received from browser\r\n"
+   "Proxy-Agent: Privoxy " VERSION "\r\n"
    "Connection: close\r\n\r\n"
    "Bad request. Privoxy was unable to extract the destination.\r\n";
 
+/* XXX: should be a template */
+const char NO_SERVER_DATA_RESPONSE[] =
+   "HTTP/1.0 502 Server or forwarder response empty\r\n"
+   "Proxy-Agent: Privoxy " VERSION "\r\n"
+   "Connection: close\r\n\r\n"
+   "Empty server or forwarder response.\r\n"
+   "The connection was closed without sending any data.\r\n";
 
 #if !defined(_WIN32) && !defined(__OS2__) && !defined(AMIGA)
 /*********************************************************************
@@ -1501,10 +1519,15 @@ static void chat(struct client_state *csp)
 
    if (csp->sfd == JB_INVALID_SOCKET)
    {
-      log_error(LOG_LEVEL_CONNECT, "connect to: %s failed: %E",
-                http->hostport);
+      if (fwd->type != SOCKS_NONE)
+      {
+         /* Socks error. */
+         rsp = error_response(csp, "forwarding-failed", errno);
 
-      if (errno == EINVAL)
+         log_error(LOG_LEVEL_CLF, "%s - - [%T] \"%s\" 503 0",
+            csp->ip_addr_str, http->ocmd);
+      }
+      else if (errno == EINVAL)
       {
          rsp = error_response(csp, "no-such-domain", errno);
 
@@ -1514,6 +1537,9 @@ static void chat(struct client_state *csp)
       else
       {
          rsp = error_response(csp, "connect-failed", errno);
+
+         log_error(LOG_LEVEL_CONNECT, "connect to: %s failed: %E",
+                http->hostport);
 
          log_error(LOG_LEVEL_CLF, "%s - - [%T] \"%s\" 503 0",
                    csp->ip_addr_str, http->ocmd);
@@ -1534,8 +1560,6 @@ static void chat(struct client_state *csp)
       freez(hdr);
       return;
    }
-
-   log_error(LOG_LEVEL_CONNECT, "OK");
 
    if (fwd->forward_host || (http->ssl == 0))
    {
@@ -1585,6 +1609,8 @@ static void chat(struct client_state *csp)
       }
       IOB_RESET(csp);
    }
+
+   log_error(LOG_LEVEL_CONNECT, "to %s successful", http->hostport);
 
    /* we're finished with the client's header */
    freez(hdr);
@@ -1901,6 +1927,17 @@ static void chat(struct client_state *csp)
                    */
                   continue;
                }
+            }
+
+            /* Did we actually get anything? */
+            if (NULL == csp->headers->first)
+            {
+               log_error(LOG_LEVEL_ERROR, "Empty server or forwarder response.");
+               log_error(LOG_LEVEL_CLF, "%s - - [%T] \"%s\" 502 0", csp->ip_addr_str, http->cmd);
+               strcpy(buf, NO_SERVER_DATA_RESPONSE);
+               write_socket(csp->cfd, buf, strlen(buf));
+               free_http_request(http);
+               return;
             }
 
             /* we have now received the entire header.
@@ -2691,7 +2728,7 @@ static void listen_loop(void)
          bfd = bind_port_helper(config);
       }
 
-      log_error(LOG_LEVEL_CONNECT, "accept connection ... ");
+      log_error(LOG_LEVEL_CONNECT, "Listening for new connections ... ");
 
       if (!accept_connection(csp, bfd))
       {
@@ -2708,7 +2745,7 @@ static void listen_loop(void)
       }
       else
       {
-         log_error(LOG_LEVEL_CONNECT, "OK");
+         log_error(LOG_LEVEL_CONNECT, "accepted connection from %s", csp->ip_addr_str);
       }
 
 #ifdef FEATURE_TOGGLE
