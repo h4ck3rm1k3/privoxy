@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.84 2007/01/24 12:56:52 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.85 2007/01/26 15:33:46 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -45,6 +45,11 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.84 2007/01/24 12:56:52 fabiankeil
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.85  2007/01/26 15:33:46  fabiankeil
+ *    Stop filter_header() from unintentionally removing
+ *    empty header lines that were enlisted by the continue
+ *    hack.
+ *
  *    Revision 1.84  2007/01/24 12:56:52  fabiankeil
  *    - Repeat the request URL before logging any headers.
  *      Makes reading the log easier in case of simultaneous requests.
@@ -1507,7 +1512,12 @@ jb_err filter_header(struct client_state *csp, char **header)
       }
    }
 
-   if ( 0 == size )
+   /*
+    * Additionally checking for hits is important because if
+    * the continue hack is triggered, server headers can
+    * arrive empty to separate multiple heads from each other.
+    */
+   if ((0 == size) && hits)
    {
       log_error(LOG_LEVEL_HEADER, "Removing empty header %s", *header);
       freez(*header);
