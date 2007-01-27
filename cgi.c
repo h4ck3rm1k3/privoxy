@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.90 2007/01/25 13:47:26 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.91 2007/01/27 13:09:16 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,10 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.90 2007/01/25 13:47:26 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.91  2007/01/27 13:09:16  fabiankeil
+ *    Add new config option "templdir" to
+ *    change the templates directory.
+ *
  *    Revision 1.90  2007/01/25 13:47:26  fabiankeil
  *    Added "forwarding-failed" template support for error_response().
  *
@@ -2112,9 +2116,8 @@ void free_http_response(struct http_response *rsp)
  * Function    :  template_load
  *
  * Description :  CGI support function that loads a given HTML
- *                template from the confdir, ignoring comment
- *                lines and following #include statements up to
- *                a depth of 1.
+ *                template, ignoring comment lines and following
+ *                #include statements up to a depth of 1.
  *
  * Parameters  :
  *          1  :  csp = Current client state (buffers, headers, etc...)
@@ -2161,11 +2164,23 @@ jb_err template_load(struct client_state *csp, char **template_ptr,
       }
    }
 
-   /* Generate full path */
+   /*
+    * Generate full path using either templdir
+    * or confdir/templates as base directory.
+    */
+   if (NULL != csp->config->templdir)
+   {
+      templates_dir_path = strdup(csp->config->templdir);
+   }
+   else
+   {
+      templates_dir_path = make_path(csp->config->confdir, "templates");
+   }
 
-   templates_dir_path = make_path(csp->config->confdir, "templates");
    if (templates_dir_path == NULL)
    {
+      log_error(LOG_LEVEL_ERROR, "Out of memory while generating template path for %s.",
+         templatename);
       return JB_ERR_MEMORY;
    }
 
@@ -2173,6 +2188,8 @@ jb_err template_load(struct client_state *csp, char **template_ptr,
    free(templates_dir_path);
    if (full_path == NULL)
    {
+      log_error(LOG_LEVEL_ERROR, "Out of memory while generating full template path for %s.",
+         templatename);
       return JB_ERR_MEMORY;
    }
 
@@ -2181,6 +2198,7 @@ jb_err template_load(struct client_state *csp, char **template_ptr,
    file_buffer = strdup("");
    if (file_buffer == NULL)
    {
+      log_error(LOG_LEVEL_ERROR, "Not enough free memory to buffer %s.", full_path);
       free(full_path);
       return JB_ERR_MEMORY;
    }

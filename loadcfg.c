@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.59 2006/12/31 17:56:38 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.60 2007/01/27 13:09:16 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -8,7 +8,7 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.59 2006/12/31 17:56:38 fabiankeil
  *                routine to load the configuration and the global
  *                variables it writes to.
  *
- * Copyright   :  Written by and Copyright (C) 2001 the SourceForge
+ * Copyright   :  Written by and Copyright (C) 2001-2007 the SourceForge
  *                Privoxy team. http://www.privoxy.org/
  *
  *                Based on the Internet Junkbuster originally written
@@ -35,6 +35,10 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.59 2006/12/31 17:56:38 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.60  2007/01/27 13:09:16  fabiankeil
+ *    Add new config option "templdir" to
+ *    change the templates directory.
+ *
  *    Revision 1.59  2006/12/31 17:56:38  fabiankeil
  *    Added config option accept-intercepted-requests
  *    and disabled it by default.
@@ -496,6 +500,7 @@ static struct file_list *current_configfile = NULL;
 #define hash_single_threaded             4250084780ul /* "single-threaded" */
 #define hash_split_large_cgi_forms        671658948ul /* "split-large-cgi-forms" */
 #define hash_suppress_blocklists         1948693308ul /* "suppress-blocklists" */
+#define hash_templdir                      11067889ul /* "templdir" */
 #define hash_toggle                          447966ul /* "toggle" */
 #define hash_trust_info_url               430331967ul /* "trust-info-url" */
 #define hash_trustfile                     56494766ul /* "trustfile" */
@@ -566,6 +571,7 @@ void unload_configfile (void * data)
 
    freez(config->confdir);
    freez(config->logdir);
+   freez(config->templdir);
 
    freez(config->haddr);
    freez(config->logfile);
@@ -1349,6 +1355,14 @@ struct configuration_spec * load_config(void)
             {
                config->feature_flags &= ~RUNTIME_FEATURE_SPLIT_LARGE_FORMS;
             }
+            continue;
+
+/* *************************************************************************
+ * templdir directory-name
+ * *************************************************************************/
+         case hash_templdir :
+            freez(config->templdir);
+            config->templdir = make_path(NULL, arg);
             continue;
 
 /* *************************************************************************
