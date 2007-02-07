@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.88 2007/02/07 11:27:12 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.89 2007/02/07 16:52:11 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -45,6 +45,10 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.88 2007/02/07 11:27:12 fabiankeil
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.89  2007/02/07 16:52:11  fabiankeil
+ *    Fix log messages regarding the cookie time format
+ *    (cookie and request URL were mixed up).
+ *
  *    Revision 1.88  2007/02/07 11:27:12  fabiankeil
  *    - Let decompress_iob()
  *      - not corrupt the content if decompression fails
@@ -3424,20 +3428,20 @@ jb_err server_set_cookie(struct client_state *csp, char **header)
             {
                log_error(LOG_LEVEL_HEADER,
                   "cookie \'%s\' send by %s appears to be using time format 1.",
-                  csp->http->url, *header);
+                  *header, csp->http->url);
             }
             else if (NULL != (match = strptime(cur_tag, "expires=%A, %e-%b-%Y %H:%M:%S ", &tm_cookie)))
             {
                log_error(LOG_LEVEL_HEADER,
                   "cookie \'%s\' send by %s appears to be using time format 2.",
-                  csp->http->url, *header);
+                  *header, csp->http->url);
 
             }
             else if (NULL != (match = strptime(cur_tag, "expires=%a, %e-%b-%Y %H:%M:%S ", &tm_cookie)))
             {
                log_error(LOG_LEVEL_HEADER,
                   "cookie \'%s\' send by %s appears to be using time format 3.",
-                  csp->http->url, *header);
+                   *header, csp->http->url);
             }
 
             /* Did any of them match? */
