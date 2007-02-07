@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.92 2007/01/28 13:41:17 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.93 2007/02/07 10:45:22 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,14 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.92 2007/01/28 13:41:17 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.93  2007/02/07 10:45:22  fabiankeil
+ *    - Save the reason for generating http_responses.
+ *    - Fix --disable-toggle (again).
+ *    - Use TBL birthday hack for 403 responses as well.
+ *    - Uglify the @menu@ again to fix JavaScript
+ *      errors on the "blocked" template.
+ *    - Escape an ampersand in cgi_error_unknown().
+ *
  *    Revision 1.92  2007/01/28 13:41:17  fabiankeil
  *    - Add HEAD support to finish_http_response.
  *    - Add error favicon to internal HTML error messages.
@@ -1021,10 +1029,6 @@ static struct http_response *dispatch_known_cgi(struct client_state * csp,
       return cgi_error_memory();
    }
 
-   log_error(LOG_LEVEL_GPC, "%s%s cgi call", csp->http->hostport, csp->http->path);
-   log_error(LOG_LEVEL_CLF, "%s - - [%T] \"%s\" 200 3", 
-                            csp->ip_addr_str, csp->http->cmd); 
-
    /* 
     * Find and start the right CGI function
     */
@@ -1074,6 +1078,7 @@ static struct http_response *dispatch_known_cgi(struct client_state * csp,
          if (!err)
          {
             /* It worked */
+            rsp->reason = RSP_REASON_CGI_CALL;
             return finish_http_response(csp, rsp);
          }
          else
@@ -1361,11 +1366,13 @@ struct http_response *error_response(struct client_state *csp,
       return cgi_error_memory();
    }
 
+#ifdef FEATURE_FORCE_LOAD
    if (csp->flags & CSP_FLAG_FORCED)
    {
       path = strdup(FORCE_PREFIX);
    }
    else
+#endif /* def FEATURE_FORCE_LOAD */
    {
       path = strdup("");
    }
@@ -1403,6 +1410,7 @@ struct http_response *error_response(struct client_state *csp,
          free_http_response(rsp);
          return cgi_error_memory();
       }
+      rsp->reason = RSP_REASON_NO_SUCH_DOMAIN;
    }
    else if (!strcmp(templatename, "forwarding-failed"))
    {
@@ -1443,6 +1451,7 @@ struct http_response *error_response(struct client_state *csp,
          free_http_response(rsp);
          return cgi_error_memory();
       }
+      rsp->reason = RSP_REASON_FORWARDING_FAILED;
    }
    else if (!strcmp(templatename, "connect-failed"))
    {
@@ -1453,6 +1462,7 @@ struct http_response *error_response(struct client_state *csp,
          free_http_response(rsp);
          return cgi_error_memory();
       }
+      rsp->reason = RSP_REASON_CONNECT_FAILED;
    }
 
    err = template_fill_for_cgi(csp, templatename, exports, rsp);
@@ -1545,6 +1555,7 @@ void cgi_init_error_messages(void)
       strlen(cgi_error_memory_response->head);
    cgi_error_memory_response->content_length =
       strlen(cgi_error_memory_response->body);
+   cgi_error_memory_response->reason = RSP_REASON_OUT_OF_MEMORY;
 }
 
 
@@ -1694,7 +1705,7 @@ jb_err cgi_error_unknown(struct client_state *csp,
    static const char body_suffix[] =
       "</b></p>\r\n"
       "<p>Please "
-      "<a href=\"http://sourceforge.net/tracker/?group_id=11118&atid=111118\">"
+      "<a href=\"http://sourceforge.net/tracker/?group_id=11118&amp;atid=111118\">"
       "file a bug report</a>.</p>\r\n"
       "</body>\r\n"
       "</html>\r\n";
@@ -1709,6 +1720,7 @@ jb_err cgi_error_unknown(struct client_state *csp,
    rsp->content_length = 0;
    rsp->head_length = 0;
    rsp->is_static = 0;
+   rsp->reason = RSP_REASON_INTERNAL_ERROR;
 
    snprintf(errnumbuf, sizeof(errnumbuf), "%d", error_to_report);
 
@@ -1989,7 +2001,7 @@ struct http_response *finish_http_response(const struct client_state *csp, struc
       rsp->content_length = 0;
    }
 
-   if ((rsp->status != NULL) && strncmpic(rsp->status, "302", 3))
+   if (strncmpic(rsp->status, "302", 3))
    {
      /*
       * If it's not a redirect without any content,
@@ -2050,7 +2062,7 @@ struct http_response *finish_http_response(const struct client_state *csp, struc
        * is older than Privoxy's error message, the server would send status code
        * 304 and the browser would display the outdated error message again and again.
        *
-       * For documents delivered with status code 404 or 503 we set "Last-Modified"
+       * For documents delivered with status code 403, 404 and 503 we set "Last-Modified"
        * to Tim Berners-Lee's birthday, which predates the age of any page on the web
        * and can be safely used to "revalidate" without getting a status code 304.
        *
@@ -2061,7 +2073,9 @@ struct http_response *finish_http_response(const struct client_state *csp, struc
 
       get_http_time(0, buf);
       if (!err) err = enlist_unique_header(rsp->headers, "Date", buf);
-      if (!strncmpic(rsp->status, "404", 3) || !strncmpic(rsp->status, "503", 3))
+      if (!strncmpic(rsp->status, "403", 3)
+       || !strncmpic(rsp->status, "404", 3)
+       || !strncmpic(rsp->status, "503", 3))
       {
          if (!err) err = enlist_unique_header(rsp->headers, "Last-Modified", "Wed, 08 Jun 1955 12:00:00 GMT");
       }
@@ -2735,6 +2749,10 @@ char *make_menu(const char *self, const unsigned feature_flags)
       {
          char *html_encoded_prefix;
 
+         /*
+          * Line breaks would be great, but break
+          * the "blocked" template's JavaScript.
+          */
          string_append(&result, "<li><a href=\"");
          html_encoded_prefix = html_encode(CGI_PREFIX);
          if (html_encoded_prefix == NULL)
@@ -2749,7 +2767,7 @@ char *make_menu(const char *self, const unsigned feature_flags)
          string_append(&result, d->name);
          string_append(&result, "\">");
          string_append(&result, d->description);
-         string_append(&result, "</a></li>\n");
+         string_append(&result, "</a></li>");
       }
    }
 
