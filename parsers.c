@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.87 2007/01/31 16:21:38 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.88 2007/02/07 11:27:12 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -45,6 +45,14 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.87 2007/01/31 16:21:38 fabiankeil
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.88  2007/02/07 11:27:12  fabiankeil
+ *    - Let decompress_iob()
+ *      - not corrupt the content if decompression fails
+ *        early. (the first byte(s) were lost).
+ *      - use pointer arithmetics with defined outcome for
+ *        a change.
+ *    - Use a different kludge to remember a failed decompression.
+ *
  *    Revision 1.87  2007/01/31 16:21:38  fabiankeil
  *    Search for Max-Forwards headers case-insensitive,
  *    don't generate the "501 unsupported" message for invalid
@@ -852,6 +860,8 @@ jb_err add_to_iob(struct client_state *csp, char *buf, int n)
 jb_err decompress_iob(struct client_state *csp)
 {
    char  *buf;       /* new, uncompressed buffer */
+   char  *cur;       /* Current iob position (to keep the original 
+                      * iob->cur unmodified if we return early) */
    size_t bufsize;   /* allocated size of the new buffer */
    size_t skip_size; /* Number of bytes at the beginning of the iob
                         that we should NOT decompress. */
@@ -860,6 +870,8 @@ jb_err decompress_iob(struct client_state *csp)
 
    bufsize = csp->iob->size;
    skip_size = (size_t)(csp->iob->cur - csp->iob->buf);
+
+   cur = csp->iob->cur;
 
    if (bufsize < 10)
    {
@@ -885,16 +897,16 @@ jb_err decompress_iob(struct client_state *csp)
        * Strip off the gzip header. Please see RFC 1952 for more
        * explanation of the appropriate fields.
        */
-      if ((*csp->iob->cur++ != (char)0x1f)
-       || (*csp->iob->cur++ != (char)0x8b)
-       || (*csp->iob->cur++ != Z_DEFLATED))
+      if ((*cur++ != (char)0x1f)
+       || (*cur++ != (char)0x8b)
+       || (*cur++ != Z_DEFLATED))
       {
          log_error (LOG_LEVEL_ERROR, "Invalid gzip header when decompressing");
          return JB_ERR_COMPRESS;
       }
       else
       {
-         int flags = *csp->iob->cur++;
+         int flags = *cur++;
          /*
           * XXX: These magic numbers should be replaced
           * with macros to give a better idea what they do.
@@ -902,10 +914,10 @@ jb_err decompress_iob(struct client_state *csp)
          if (flags & 0xe0)
          {
             /* The gzip header has reserved bits set; bail out. */
-            log_error (LOG_LEVEL_ERROR, "Invalid gzip header when decompressing");
+            log_error (LOG_LEVEL_ERROR, "Invalid gzip header flags when decompressing");
             return JB_ERR_COMPRESS;
          }
-         csp->iob->cur += 6;
+         cur += 6;
 
          /* Skip extra fields if necessary. */
          if (flags & 0x04)
@@ -914,26 +926,63 @@ jb_err decompress_iob(struct client_state *csp)
              * Skip a given number of bytes, specified
              * as a 16-bit little-endian value.
              */
-            csp->iob->cur += *csp->iob->cur++ + (*csp->iob->cur++ << 8);
+            /*
+             * XXX: This code used to be:
+             * 
+             * csp->iob->cur += *csp->iob->cur++ + (*csp->iob->cur++ << 8);
+             *
+             * which I had to change into:
+             *
+             * cur += *cur++ + (*cur++ << 8);
+             *
+             * at which point gcc43 finally noticed that the value
+             * of cur is undefined (it depends on which of the
+             * summands is evaluated first).
+             *
+             * I haven't come across a site where this
+             * code is actually executed yet, but I hope
+             * it works anyway.
+             */
+            int skip_bytes;
+            skip_bytes = *cur++;
+            skip_bytes = *cur++ << 8;
+
+            assert(skip_bytes == *csp->iob->cur-2 + ((*csp->iob->cur-1) << 8));
+
+            /*
+             * The number of bytes to skip should be positive
+             * and we'd like to stay in the buffer.
+             */
+            if((skip_bytes < 0) || (skip_bytes >= (csp->iob->eod - cur)))
+            {
+               log_error (LOG_LEVEL_ERROR,
+                  "Unreasonable amount of bytes to skip (%d). Stopping decompression",
+                  skip_bytes);
+               return JB_ERR_COMPRESS;
+            }
+            log_error (LOG_LEVEL_INFO,
+               "Skipping %d bytes for gzip compression. Does this sound right?",
+               skip_bytes);
+            cur += skip_bytes;
          }
 
          /* Skip the filename if necessary. */
          if (flags & 0x08)
          {
             /* A null-terminated string follows. */
-            while (*csp->iob->cur++);
+            while (*cur++);
          }
 
          /* Skip the comment if necessary. */
          if (flags & 0x10)
          {
-            while (*csp->iob->cur++);
+            while (*cur++);
          }
 
          /* Skip the CRC if necessary. */
          if (flags & 0x02)
          {
-            csp->iob->cur += 2;
+            cur += 2;
          }
       }
    }
@@ -943,7 +992,7 @@ jb_err decompress_iob(struct client_state *csp)
        * XXX: The debug level should be lowered
        * before the next stable release.
        */
-      log_error (LOG_LEVEL_INFO, "Decompressing deflated iob: %d", *csp->iob->cur);
+      log_error (LOG_LEVEL_INFO, "Decompressing deflated iob: %d", *cur);
       /*
        * In theory (that is, according to RFC 1950), deflate-compressed
        * data should begin with a two-byte zlib header and have an
@@ -969,8 +1018,8 @@ jb_err decompress_iob(struct client_state *csp)
    }
 
    /* Set up the fields required by zlib. */
-   zstr.next_in  = (Bytef *)csp->iob->cur;
-   zstr.avail_in = (unsigned int)(csp->iob->eod - csp->iob->cur);
+   zstr.next_in  = (Bytef *)cur;
+   zstr.avail_in = (unsigned int)(csp->iob->eod - cur);
    zstr.zalloc   = Z_NULL;
    zstr.zfree    = Z_NULL;
    zstr.opaque   = Z_NULL;
@@ -1806,8 +1855,8 @@ jb_err server_transfer_coding(struct client_state *csp, char **header)
 jb_err server_content_encoding(struct client_state *csp, char **header)
 {
 #ifdef FEATURE_ZLIB
-   /* XXX: Why would we modify the content if it was taboo? */
-   if ((csp->flags & CSP_FLAG_MODIFIED) && !(csp->content_type & CT_TABOO))
+   if ((csp->flags & CSP_FLAG_MODIFIED)
+    && (csp->content_type & (CT_GZIP | CT_DEFLATE)))
    {
       /*
        * We successfully decompressed the content,
