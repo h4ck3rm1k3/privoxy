@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.79 2007/01/31 16:21:38 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.80 2007/02/07 10:55:20 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -13,7 +13,7 @@ const char filters_rcs[] = "$Id: filters.c,v 1.79 2007/01/31 16:21:38 fabiankeil
  *                   `jpeg_inspect_response', `execute_single_pcrs_command',
  *                   `rewrite_url', `get_last_url'
  *
- * Copyright   :  Written by and Copyright (C) 2001, 2004-2006 the SourceForge
+ * Copyright   :  Written by and Copyright (C) 2001, 2004-2007 the SourceForge
  *                Privoxy team. http://www.privoxy.org/
  *
  *                Based on the Internet Junkbuster originally written
@@ -40,6 +40,11 @@ const char filters_rcs[] = "$Id: filters.c,v 1.79 2007/01/31 16:21:38 fabiankeil
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.80  2007/02/07 10:55:20  fabiankeil
+ *    - Save the reason for generating http_responses.
+ *    - Block (+block) with status code 403 instead of 404.
+ *    - Use a different kludge to remember a failed decompression.
+ *
  *    Revision 1.79  2007/01/31 16:21:38  fabiankeil
  *    Search for Max-Forwards headers case-insensitive,
  *    don't generate the "501 unsupported" message for invalid
@@ -983,7 +988,7 @@ struct http_response *block_url(struct client_state *csp)
       }
       else
       {
-         rsp->status = strdup("404 Request for blocked URL");
+         rsp->status = strdup("403 Request for blocked URL");
       }
 
       if (rsp->status == NULL)
@@ -1026,6 +1031,7 @@ struct http_response *block_url(struct client_state *csp)
          return cgi_error_memory();
       }
    }
+   rsp->reason = RSP_REASON_BLOCKED;
 
    return finish_http_response(csp, rsp);
 
@@ -1173,6 +1179,7 @@ struct http_response *trust_url(struct client_state *csp)
       free_http_response(rsp);
       return cgi_error_memory();
    }
+   rsp->reason = RSP_REASON_UNTRUSTED;
 
    return finish_http_response(csp, rsp);
 }
@@ -1475,7 +1482,9 @@ struct http_response *redirect_url(struct client_state *csp)
             free_http_response(rsp);
             return cgi_error_memory();
          }
+         rsp->reason = RSP_REASON_REDIRECTED;
          freez(new_url);
+
          return finish_http_response(csp, rsp);
       }
    }
@@ -1665,6 +1674,7 @@ int is_untrusted_url(const struct client_state *csp)
          return 0;
       }
    }
+
    return 1;
 }
 #endif /* def FEATURE_TRUST */
@@ -1758,19 +1768,24 @@ char *pcrs_filter_response(struct client_state *csp)
     * uncompress it first, adjusting size and iob->eod.
     * Note that decompression occurs after de-chunking.
     */
-   if (csp->content_type & CT_GZIP || csp->content_type & CT_DEFLATE)
+   if (csp->content_type & (CT_GZIP | CT_DEFLATE))
    {
       /* Notice that we at least tried to decompress. */
       if (JB_ERR_OK != decompress_iob(csp))
       {
          /*
           * We failed to decompress the data; there's no point
-          * in continuing since we can't filter. This is
-          * slightly tricky because we need to remember not to
-          * modify the Content-Encoding header later; using
-          * CT_TABOO flag is a kludge for this purpose.
+          * in continuing since we can't filter.
+          *
+          * XXX: Actually the Accept-Encoding header may
+          * just be incorrect in which case we could continue
+          * with filtering.
+          *
+          * Unset CT_GZIP and CT_DEFLATE to remember not
+          * to modify the Content-Encoding header later.
           */
-          csp->content_type |= CT_TABOO;
+          csp->content_type &= ~CT_GZIP;
+          csp->content_type &= ~CT_DEFLATE;
           return(NULL);
       }
       log_error(LOG_LEVEL_RE_FILTER, "Decompressing successful");
@@ -2282,6 +2297,8 @@ struct http_response *direct_response(struct client_state *csp)
                }
 
                rsp->is_static = 1;
+               rsp->reason = RSP_REASON_UNSUPPORTED;
+
                return(finish_http_response(csp, rsp));
             }
          }
