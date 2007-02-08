@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.89 2007/02/07 16:52:11 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.90 2007/02/08 19:12:35 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -45,6 +45,11 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.89 2007/02/07 16:52:11 fabiankeil
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.90  2007/02/08 19:12:35  fabiankeil
+ *    Don't run server_content_length() the first time
+ *    sed() parses server headers; only adjust the
+ *    Content-Length header if the page was modified.
+ *
  *    Revision 1.89  2007/02/07 16:52:11  fabiankeil
  *    Fix log messages regarding the cookie time format
  *    (cookie and request URL were mixed up).
@@ -692,7 +697,6 @@ const struct parsers server_patterns[] = {
    { "set-cookie:",              11, server_set_cookie },
    { "connection:",              11, crumble },
    { "Content-Type:",            13, server_content_type },
-   { "Content-Length:",          15, server_content_length },
    { "Content-MD5:",             12, server_content_md5 },
    { "Content-Encoding:",        17, server_content_encoding },
    { "Transfer-Encoding:",       18, server_transfer_coding },
@@ -1927,12 +1931,10 @@ jb_err server_content_encoding(struct client_state *csp, char **header)
 jb_err server_content_length(struct client_state *csp, char **header)
 {
    const size_t max_header_length = 80;
-   if (csp->content_length != 0) /* Content length could have been modified */
+
+   /* Regenerate header if the content was modified. */
+   if (csp->flags & CSP_FLAG_MODIFIED)
    {
-      /*
-       * XXX: Shouldn't we check if csp->content_length
-       * is different than the original value?
-       */
       freez(*header);
       *header = (char *) zalloc(max_header_length);
       if (*header == NULL)
