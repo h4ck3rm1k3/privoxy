@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.51 2007/02/10 16:55:22 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.52 2007/02/13 15:10:26 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,10 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.51 2007/02/10 16:55:22 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.52  2007/02/13 15:10:26  fabiankeil
+ *    Apparently fopen()ing in "binary" mode doesn't require
+ *    #ifdefs, it's already done without them in cgiedit.c.
+ *
  *    Revision 1.51  2007/02/10 16:55:22  fabiankeil
  *    - Show forwarding settings on the show-url-info page
  *    - Fix some HTML syntax errors.
@@ -909,15 +913,7 @@ jb_err cgi_send_user_manual(struct client_state *csp,
    }
 
    /* Open user-manual file */
-#ifdef WIN32
-   /*
-    * XXX: Do we support other operating systems that
-    * require special treatment to fopen in binary mode?
-    */
    if (NULL == (fp = fopen(full_path, "rb")))
-#else
-   if (NULL == (fp = fopen(full_path, "r")))
-#endif /* def WIN32 */
    {
       log_error(LOG_LEVEL_ERROR, "Cannot open user-manual file %s: %E", full_path);
       err = cgi_error_no_template(csp, rsp, full_path);
@@ -941,7 +937,7 @@ jb_err cgi_send_user_manual(struct client_state *csp,
    if (!fread(rsp->body, length, 1, fp))
    {
       /*
-       * This happens if we didn't fopen in binary mode.
+       * May happen if the file size changes between fseek() and fread().
        * If it does, we just log it and serve what we got.
        */
       log_error(LOG_LEVEL_ERROR, "Couldn't completely read user-manual file %s.", full_path);
