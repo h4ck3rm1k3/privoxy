@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.95 2007/02/10 17:01:37 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.96 2007/03/08 17:41:05 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,9 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.95 2007/02/10 17:01:37 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.96  2007/03/08 17:41:05  fabiankeil
+ *    Use sizeof() more often.
+ *
  *    Revision 1.95  2007/02/10 17:01:37  fabiankeil
  *    Don't overlook map result for the forwarding-type.
  *
@@ -1878,6 +1881,9 @@ char *add_help_link(const char *item,
  *                HTTP header - e.g.:
  *                "Sun, 06 Nov 1994 08:49:37 GMT"
  *
+ *                XXX: Should probably get a third parameter for
+ *                the buffer size.
+ *
  * Parameters  :  
  *          1  :  time_offset = Time returned will be current time
  *                              plus this number of seconds.
@@ -2548,7 +2554,7 @@ struct map *default_exports(const struct client_state *csp, const char *caller)
    if (!err) err = map_block_killer(exports, "can-toggle");
 #endif
 
-   snprintf(buf, 20, "%d", csp->config->hport);
+   snprintf(buf, sizeof(buf), "%d", csp->config->hport);
    if (!err) err = map(exports, "my-port", 1, buf, 1);
 
    if(!strcmp(CODE_STATUS, "stable"))
@@ -2617,7 +2623,7 @@ jb_err map_block_killer(struct map *exports, const char *name)
    assert(name);
    assert(strlen(name) < 490);
 
-   snprintf(buf, 1000, "if-%s-start.*if-%s-end", name, name);
+   snprintf(buf, sizeof(buf), "if-%s-start.*if-%s-end", name, name);
    return map(exports, buf, 1, "", 1);
 }
 
@@ -2647,7 +2653,7 @@ jb_err map_block_keep(struct map *exports, const char *name)
    assert(name);
    assert(strlen(name) < 490);
 
-   snprintf(buf, 500, "if-%s-start", name);
+   snprintf(buf, sizeof(buf), "if-%s-start", name);
    err = map(exports, buf, 1, "", 1);
 
    if (err)
@@ -2655,7 +2661,7 @@ jb_err map_block_keep(struct map *exports, const char *name)
       return err;
    }
 
-   snprintf(buf, 500, "if-%s-end", name);
+   snprintf(buf, sizeof(buf), "if-%s-end", name);
    return map(exports, buf, 1, "", 1);
 }
 
@@ -2694,7 +2700,7 @@ jb_err map_conditional(struct map *exports, const char *name, int choose_first)
    assert(name);
    assert(strlen(name) < 480);
 
-   snprintf(buf, 1000, (choose_first
+   snprintf(buf, sizeof(buf), (choose_first
       ? "else-not-%s@.*@endif-%s"
       : "if-%s-then@.*@else-not-%s"),
       name, name);
@@ -2705,7 +2711,7 @@ jb_err map_conditional(struct map *exports, const char *name, int choose_first)
       return err;
    }
 
-   snprintf(buf, 1000, (choose_first ? "if-%s-then" : "endif-%s"), name);
+   snprintf(buf, sizeof(buf), (choose_first ? "if-%s-then" : "endif-%s"), name);
    return map(exports, buf, 1, "", 1);
 }
 
