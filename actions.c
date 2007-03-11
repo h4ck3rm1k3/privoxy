@@ -1,4 +1,4 @@
-const char actions_rcs[] = "$Id: actions.c,v 1.36 2006/12/28 17:15:42 fabiankeil Exp $";
+const char actions_rcs[] = "$Id: actions.c,v 1.37 2007/03/11 15:56:12 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/actions.c,v $
@@ -6,7 +6,7 @@ const char actions_rcs[] = "$Id: actions.c,v 1.36 2006/12/28 17:15:42 fabiankeil
  * Purpose     :  Declares functions to work with actions files
  *                Functions declared include: FIXME
  *
- * Copyright   :  Written by and Copyright (C) 2001 the SourceForge
+ * Copyright   :  Written by and Copyright (C) 2001-2007 the SourceForge
  *                Privoxy team. http://www.privoxy.org/
  *
  *                Based on the Internet Junkbuster originally written
@@ -33,6 +33,9 @@ const char actions_rcs[] = "$Id: actions.c,v 1.36 2006/12/28 17:15:42 fabiankeil
  *
  * Revisions   :
  *    $Log: actions.c,v $
+ *    Revision 1.37  2007/03/11 15:56:12  fabiankeil
+ *    Add kludge to log unknown aliases and actions before exiting.
+ *
  *    Revision 1.36  2006/12/28 17:15:42  fabiankeil
  *    Fix gcc43 conversion warning.
  *
@@ -739,6 +742,16 @@ jb_err get_actions(char *line,
             else
             {
                /* Bad action name */
+               /*
+                * XXX: This is a fatal error and Privoxy will later on exit
+                * in load_one_actions_file() because of an "invalid line".
+                *
+                * It would be preferable to name the offending option in that
+                * error message, but currently there is no way to do that and
+                * we have to live with two error messages for basically the
+                * same reason.
+                */
+               log_error(LOG_LEVEL_ERROR, "Unknown action or alias: %s", option);
                return JB_ERR_PARSE;
             }
          }
