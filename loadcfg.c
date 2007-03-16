@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.60 2007/01/27 13:09:16 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.61 2007/03/16 16:47:35 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,10 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.60 2007/01/27 13:09:16 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.61  2007/03/16 16:47:35  fabiankeil
+ *    - Mention other reasons why acl directive loading might have failed.
+ *    - Don't log the acl source if the acl destination is to blame.
+ *
  *    Revision 1.60  2007/01/27 13:09:16  fabiankeil
  *    Add new config option "templdir" to
  *    change the templates directory.
@@ -867,11 +871,11 @@ struct configuration_spec * load_config(void)
 
             if (acl_addr(vec[0], cur_acl->src) < 0)
             {
-               log_error(LOG_LEVEL_ERROR, "Invalid source IP for deny-access "
-                     "directive in configuration file: \"%s\"", vec[0]);
+               log_error(LOG_LEVEL_ERROR, "Invalid source address, port or netmask "
+                  "for deny-access directive in configuration file: \"%s\"", vec[0]);
                string_append(&config->proxy_args,
-                  "<br>\nWARNING: Invalid source IP for deny-access directive"
-                  " in configuration file: \"");
+                  "<br>\nWARNING: Invalid source address, port or netmask "
+                  "for deny-access directive in configuration file: \"");
                string_append(&config->proxy_args,
                   vec[0]);
                string_append(&config->proxy_args,
@@ -883,13 +887,13 @@ struct configuration_spec * load_config(void)
             {
                if (acl_addr(vec[1], cur_acl->dst) < 0)
                {
-                  log_error(LOG_LEVEL_ERROR, "Invalid destination IP for deny-access "
-                        "directive in configuration file: \"%s\"", vec[0]);
+                  log_error(LOG_LEVEL_ERROR, "Invalid destination address, port or netmask "
+                     "for deny-access directive in configuration file: \"%s\"", vec[1]);
                   string_append(&config->proxy_args,
-                     "<br>\nWARNING: Invalid destination IP for deny-access directive"
-                     " in configuration file: \"");
+                     "<br>\nWARNING: Invalid destination address, port or netmask "
+                     "for deny-access directive in configuration file: \"");
                   string_append(&config->proxy_args,
-                     vec[0]);
+                     vec[1]);
                   string_append(&config->proxy_args,
                      "\"<br><br>\n");
                   freez(cur_acl);
@@ -1282,11 +1286,11 @@ struct configuration_spec * load_config(void)
 
             if (acl_addr(vec[0], cur_acl->src) < 0)
             {
-               log_error(LOG_LEVEL_ERROR, "Invalid source IP for permit-access "
-                     "directive in configuration file: \"%s\"", vec[0]);
+               log_error(LOG_LEVEL_ERROR, "Invalid source address, port or netmask "
+                  "for permit-access directive in configuration file: \"%s\"", vec[0]);
                string_append(&config->proxy_args,
-                  "<br>\nWARNING: Invalid source IP for permit-access directive"
-                  " in configuration file: \"");
+                  "<br>\nWARNING: Invalid source address, port or netmask for "
+                  "permit-access directive in configuration file: \"");
                string_append(&config->proxy_args,
                   vec[0]);
                string_append(&config->proxy_args,
@@ -1298,14 +1302,13 @@ struct configuration_spec * load_config(void)
             {
                if (acl_addr(vec[1], cur_acl->dst) < 0)
                {
-                  log_error(LOG_LEVEL_ERROR, "Invalid destination IP for "
-                        "permit-access directive in configuration file: \"%s\"",
-                        vec[0]);
+                  log_error(LOG_LEVEL_ERROR, "Invalid destination address, port or netmask "
+                     "for permit-access directive in configuration file: \"%s\"", vec[1]);
                   string_append(&config->proxy_args,
-                     "<br>\nWARNING: Invalid destination IP for permit-access directive"
-                     " in configuration file: \"");
+                     "<br>\nWARNING: Invalid destination address, port or netmask for "
+                     "permit-access directive in configuration file: \"");
                   string_append(&config->proxy_args,
-                     vec[0]);
+                     vec[1]);
                   string_append(&config->proxy_args,
                      "\"<br><br>\n");
                   freez(cur_acl);
