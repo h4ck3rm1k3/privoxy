@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.61 2007/03/16 16:47:35 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.62 2007/03/17 15:20:05 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.61 2007/03/16 16:47:35 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.62  2007/03/17 15:20:05  fabiankeil
+ *    New config option: enforce-blocks.
+ *
  *    Revision 1.61  2007/03/16 16:47:35  fabiankeil
  *    - Mention other reasons why acl directive loading might have failed.
  *    - Don't log the acl source if the acl destination is to blame.
@@ -490,6 +493,7 @@ static struct file_list *current_configfile = NULL;
 #define hash_enable_edit_actions         2517097536ul /* "enable-edit-actions" */
 #define hash_enable_remote_toggle        2979744683ul /* "enable-remote-toggle" */
 #define hash_enable_remote_http_toggle    110543988ul /* "enable-remote-http-toggle" */
+#define hash_enforce_blocks              1862427469ul /* "enforce-blocks" */
 #define hash_filterfile                   250887266ul /* "filterfile" */
 #define hash_forward                        2029845ul /* "forward" */
 #define hash_forward_socks4              3963965521ul /* "forward-socks4" */
@@ -961,6 +965,22 @@ struct configuration_spec * load_config(void)
                config->feature_flags &= ~RUNTIME_FEATURE_HTTP_TOGGLE;
             }
             continue;
+
+/* *************************************************************************
+ * hash_enforce_blocks 0|1
+ * *************************************************************************/
+#ifdef FEATURE_FORCE_LOAD
+         case hash_enforce_blocks:
+            if ((*arg != '\0') && (0 != atoi(arg)))
+            {
+               config->feature_flags |= RUNTIME_FEATURE_ENFORCE_BLOCKS;
+            }
+            else
+            {
+               config->feature_flags &= ~RUNTIME_FEATURE_ENFORCE_BLOCKS;
+            }
+            continue;
+#endif /* def FEATURE_FORCE_LOAD */
 
 /* *************************************************************************
  * filterfile file-name
