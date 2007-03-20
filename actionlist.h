@@ -39,6 +39,11 @@
  *
  * Revisions   :
  *    $Log: actionlist.h,v $
+ *    Revision 1.24  2007/03/20 15:16:34  fabiankeil
+ *    Use dedicated header filter actions instead of abusing "filter".
+ *    Replace "filter-client-headers" and "filter-client-headers"
+ *    with "server-header-filter" and "client-header-filter".
+ *
  *    Revision 1.23  2006/10/09 10:26:18  fabiankeil
  *    Changed the path in set-image-blocker's redirection default to
  *    "send-banner?type=pattern" instead of "show-banner?type=pattern"
@@ -148,6 +153,7 @@
 
 DEFINE_ACTION_MULTI      ("add-header",                 ACTION_MULTI_ADD_HEADER)
 DEFINE_ACTION_BOOL       ("block",                      ACTION_BLOCK)
+DEFINE_ACTION_MULTI      ("client-header-filter",       ACTION_MULTI_CLIENT_HEADER_FILTER)
 DEFINE_ACTION_STRING     ("content-type-overwrite",     ACTION_CONTENT_TYPE_OVERWRITE, ACTION_STRING_CONTENT_TYPE)
 DEFINE_CGI_PARAM_NO_RADIO("content-type-overwrite",     ACTION_CONTENT_TYPE_OVERWRITE, ACTION_STRING_CONTENT_TYPE,    "text/html")
 DEFINE_ACTION_STRING     ("crunch-client-header",       ACTION_CRUNCH_CLIENT_HEADER, ACTION_STRING_CLIENT_HEADER)
@@ -165,8 +171,6 @@ DEFINE_ACTION_STRING     ("fast-redirects",             ACTION_FAST_REDIRECTS,  
 DEFINE_CGI_PARAM_RADIO   ("fast-redirects",             ACTION_FAST_REDIRECTS,  ACTION_STRING_FAST_REDIRECTS, "simple-check",  0)
 DEFINE_CGI_PARAM_RADIO   ("fast-redirects",             ACTION_FAST_REDIRECTS,  ACTION_STRING_FAST_REDIRECTS, "check-decoded-url",  1)
 DEFINE_ACTION_MULTI      ("filter",                     ACTION_MULTI_FILTER)
-DEFINE_ACTION_BOOL       ("filter-client-headers",      ACTION_FILTER_CLIENT_HEADERS)
-DEFINE_ACTION_BOOL       ("filter-server-headers",      ACTION_FILTER_SERVER_HEADERS)
 DEFINE_ACTION_BOOL       ("force-text-mode",            ACTION_FORCE_TEXT_MODE)
 DEFINE_ACTION_BOOL       ("handle-as-empty-document",   ACTION_HANDLE_AS_EMPTY_DOCUMENT)
 DEFINE_ACTION_BOOL       ("handle-as-image",            ACTION_IMAGE)
@@ -203,6 +207,7 @@ DEFINE_ACTION_STRING     ("redirect",                   ACTION_REDIRECT,        
 DEFINE_CGI_PARAM_NO_RADIO("redirect",                   ACTION_REDIRECT,        ACTION_STRING_REDIRECT,  "http://localhost/")
 DEFINE_ACTION_BOOL       ("send-vanilla-wafer",         ACTION_VANILLA_WAFER)
 DEFINE_ACTION_MULTI      ("send-wafer",                 ACTION_MULTI_WAFER)
+DEFINE_ACTION_MULTI      ("server-header-filter",       ACTION_MULTI_SERVER_HEADER_FILTER)
 DEFINE_ACTION_BOOL       ("session-cookies-only",       ACTION_NO_COOKIE_KEEP)
 DEFINE_ACTION_STRING     ("set-image-blocker",          ACTION_IMAGE_BLOCKER,   ACTION_STRING_IMAGE_BLOCKER)
 DEFINE_CGI_PARAM_RADIO   ("set-image-blocker",          ACTION_IMAGE_BLOCKER,   ACTION_STRING_IMAGE_BLOCKER, "pattern", 1)
@@ -219,6 +224,12 @@ DEFINE_ACTION_BOOL       ("treat-forbidden-connects-like-blocks",   ACTION_TREAT
 DEFINE_ACTION_BOOL       ("kill-popup",      ACTION_NO_POPUPS)
 DEFINE_ACTION_STRING     ("hide-referer",   ACTION_HIDE_REFERER,    ACTION_STRING_REFERER)
 DEFINE_ACTION_BOOL       ("prevent-keeping-cookies", ACTION_NO_COOKIE_KEEP)
+
+/* 
+ * Pre-3.0.7 (pseudo) compatibility
+ */
+DEFINE_ACTION_MULTI      ("filter-client-headers",       ACTION_MULTI_CLIENT_HEADER_FILTER)
+DEFINE_ACTION_MULTI      ("filter-server-headers",       ACTION_MULTI_SERVER_HEADER_FILTER)
 
 /* 
  * Pre-3.0 compatibility
