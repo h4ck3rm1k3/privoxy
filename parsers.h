@@ -1,6 +1,6 @@
 #ifndef PARSERS_H_INCLUDED
 #define PARSERS_H_INCLUDED
-#define PARSERS_H_VERSION "$Id: parsers.h,v 1.36 2007/03/05 13:25:32 fabiankeil Exp $"
+#define PARSERS_H_VERSION "$Id: parsers.h,v 1.37 2007/03/20 15:22:17 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.h,v $
@@ -43,6 +43,11 @@
  *
  * Revisions   :
  *    $Log: parsers.h,v $
+ *    Revision 1.37  2007/03/20 15:22:17  fabiankeil
+ *    - Remove filter_client_header() and filter_client_header(),
+ *      filter_header() now checks the shiny new
+ *      CSP_FLAG_CLIENT_HEADER_PARSING_DONE flag instead.
+ *
  *    Revision 1.36  2007/03/05 13:25:32  fabiankeil
  *    - Cosmetical changes for LOG_LEVEL_RE_FILTER messages.
  *    - Handle "Cookie:" and "Connection:" headers a bit smarter
@@ -273,8 +278,6 @@ extern jb_err client_if_modified_since(struct client_state *csp, char **header);
 extern jb_err client_accept_language  (struct client_state *csp, char **header);
 extern jb_err client_if_none_match    (struct client_state *csp, char **header);
 extern jb_err crunch_client_header    (struct client_state *csp, char **header);
-extern jb_err filter_client_header    (struct client_state *csp, char **header);
-extern jb_err filter_server_header    (struct client_state *csp, char **header);
 extern jb_err client_x_filter         (struct client_state *csp, char **header);
 
 
