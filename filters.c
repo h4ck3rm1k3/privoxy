@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.84 2007/03/20 15:16:34 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.85 2007/03/21 12:24:47 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -40,6 +40,10 @@ const char filters_rcs[] = "$Id: filters.c,v 1.84 2007/03/20 15:16:34 fabiankeil
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.85  2007/03/21 12:24:47  fabiankeil
+ *    - Log the content size after decompression in decompress_iob()
+ *      instead of pcrs_filter_response().
+ *
  *    Revision 1.84  2007/03/20 15:16:34  fabiankeil
  *    Use dedicated header filter actions instead of abusing "filter".
  *    Replace "filter-client-headers" and "filter-client-headers"
@@ -1845,9 +1849,6 @@ char *pcrs_filter_response(struct client_state *csp)
           csp->content_type &= ~CT_DEFLATE;
           return(NULL);
       }
-      log_error(LOG_LEVEL_RE_FILTER,
-         "Decompression successful. Old size: %d, new size: %d.",
-         size, csp->iob->eod - csp->iob->cur);
 
       /*
        * Decompression gives us a completely new iob,
