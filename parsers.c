@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.93 2007/03/20 15:21:44 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.94 2007/03/21 12:23:53 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,13 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.93 2007/03/20 15:21:44 fabiankeil
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.94  2007/03/21 12:23:53  fabiankeil
+ *    - Add better protection against malicious gzip headers.
+ *    - Stop logging the first hundred bytes of decompressed content.
+ *      It looks like it's working and there is always debug 16.
+ *    - Log the content size after decompression in decompress_iob()
+ *      instead of pcrs_filter_response().
+ *
  *    Revision 1.93  2007/03/20 15:21:44  fabiankeil
  *    - Use dedicated header filter actions instead of abusing "filter".
  *      Replace "filter-client-headers" and "filter-client-headers"
@@ -889,6 +896,7 @@ jb_err decompress_iob(struct client_state *csp)
    char  *cur;       /* Current iob position (to keep the original 
                       * iob->cur unmodified if we return early) */
    size_t bufsize;   /* allocated size of the new buffer */
+   size_t old_size;  /* Content size before decompression */
    size_t skip_size; /* Number of bytes at the beginning of the iob
                         that we should NOT decompress. */
    int status;       /* return status of the inflate() call */
@@ -899,6 +907,7 @@ jb_err decompress_iob(struct client_state *csp)
 
    bufsize = csp->iob->size;
    skip_size = (size_t)(csp->iob->cur - csp->iob->buf);
+   old_size = (size_t)(csp->iob->eod - csp->iob->cur);
 
    cur = csp->iob->cur;
 
@@ -976,7 +985,7 @@ jb_err decompress_iob(struct client_state *csp)
             skip_bytes = *cur++;
             skip_bytes = *cur++ << 8;
 
-            assert(skip_bytes == *csp->iob->cur-2 + ((*csp->iob->cur-1) << 8));
+            assert(skip_bytes == *csp->iob->cur - 2 + ((*csp->iob->cur - 1) << 8));
 
             /*
              * The number of bytes to skip should be positive
@@ -998,20 +1007,34 @@ jb_err decompress_iob(struct client_state *csp)
          /* Skip the filename if necessary. */
          if (flags & 0x08)
          {
-            /* A null-terminated string follows. */
-            while (*cur++);
+            /* A null-terminated string is supposed to follow. */
+            while (*cur++ && (cur < csp->iob->eod));
+
          }
 
          /* Skip the comment if necessary. */
          if (flags & 0x10)
          {
-            while (*cur++);
+            /* A null-terminated string is supposed to follow. */
+            while (*cur++ && (cur < csp->iob->eod));
          }
 
          /* Skip the CRC if necessary. */
          if (flags & 0x02)
          {
             cur += 2;
+         }
+
+         if (cur >= csp->iob->eod)
+         {
+            /*
+             * If the current position pointer reached or passed
+             * the buffer end, we were obviously tricked to skip
+             * too much.
+             */
+            log_error (LOG_LEVEL_ERROR,
+               "Malformed gzip header detected. Aborting decompression.");
+            return JB_ERR_COMPRESS;
          }
       }
    }
@@ -1194,15 +1217,18 @@ jb_err decompress_iob(struct client_state *csp)
     && (csp->iob->cur <= csp->iob->eod)
     && (csp->iob->eod <= csp->iob->buf + csp->iob->size))
    {
-      char t = csp->iob->cur[100];
-      csp->iob->cur[100] = '\0';
-      /*
-       * XXX: The debug level should be lowered
-       * before the next stable release.
-       */
-      log_error(LOG_LEVEL_INFO, "Sucessfully decompressed: %s", csp->iob->cur);
-      csp->iob->cur[100] = t;
-      return JB_ERR_OK;
+      const size_t new_size = (size_t)(csp->iob->eod - csp->iob->cur);
+      if (new_size > 0)
+      {
+         log_error(LOG_LEVEL_RE_FILTER,
+            "Decompression successful. Old size: %d, new size: %d.",
+            old_size, new_size);
+      }
+      else
+      {
+         /* zlib thinks this is OK, so lets do the same. */
+         log_error(LOG_LEVEL_INFO, "Decompression didn't result in any content.");
+      }
    }
    else
    {
@@ -1213,6 +1239,8 @@ jb_err decompress_iob(struct client_state *csp)
          csp->iob->eod, csp->iob->buf + csp->iob->size);
       return JB_ERR_COMPRESS;
    }
+
+   return JB_ERR_OK;
 
 }
 #endif /* defined(FEATURE_ZLIB) */
