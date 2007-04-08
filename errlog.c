@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.48 2007/03/31 13:33:28 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.49 2007/04/08 16:44:15 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,9 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.48 2007/03/31 13:33:28 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.49  2007/04/08 16:44:15  fabiankeil
+ *    We need <sys/time.h> for gettimeofday(), not <time.h>.
+ *
  *    Revision 1.48  2007/03/31 13:33:28  fabiankeil
  *    Add alternative log_error() with timestamps
  *    that contain milliseconds and without using
@@ -278,7 +281,8 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.48 2007/03/31 13:33:28 fabiankeil E
 
 #if defined(HAVE_STRLCPY) && defined(HAVE_GETTIMEOFDAY)
 #define USE_NEW_LOG_ERROR
-#include <time.h>
+/* For gettimeofday() */
+#include <sys/time.h>
 #endif /* defined(HAVE_STRLCPY) && defined(HAVE_GETTIMEOFDAY) */
 
 #if !defined(_WIN32) && !defined(__OS2__)
