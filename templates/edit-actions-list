@@ -31,6 +31,11 @@
 #
 # Revisions   :
 #    $Log: edit-actions-list,v $
+#    Revision 1.33  2007/04/08 13:21:06  fabiankeil
+#    Reference action files in CGI URLs by id instead
+#    of using the first part of the file name.
+#    Fixes BR 1694250 and BR 1590556.
+#
 #    Revision 1.32  2007/01/23 16:03:16  fabiankeil
 #    - Add favicon links.
 #    - Remove useless W3C validator links.
@@ -334,7 +339,7 @@ function a_p(link,section)
     <tr>
       <td class="box">
         <div class="buttons">
-          <h2>Editing Actions File @f@.action</h2>
+          <h2>Editing Actions File @actions-file@</h2>
           <!-- @if-all-urls-present-then@@else-not-all-urls-present@ -->
           <p><a class="cmd" href="edit-actions-section-add?f=@f@&amp;v=@v@&amp;s=0">Insert new section at top</a></p>
           <!-- @endif-all-urls-present@ -->

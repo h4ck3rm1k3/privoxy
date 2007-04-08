@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.52 2007/02/13 15:10:26 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.53 2007/04/08 13:21:04 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,11 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.52 2007/02/13 15:10:26 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.53  2007/04/08 13:21:04  fabiankeil
+ *    Reference action files in CGI URLs by id instead
+ *    of using the first part of the file name.
+ *    Fixes BR 1694250 and BR 1590556.
+ *
  *    Revision 1.52  2007/02/13 15:10:26  fabiankeil
  *    Apparently fopen()ing in "binary" mode doesn't require
  *    #ifdefs, it's already done without them in cgiedit.c.
@@ -1204,7 +1209,8 @@ jb_err cgi_show_status(struct client_state *csp,
       {
          if (!err) err = string_append(&s, "<tr><td>");
          if (!err) err = string_join(&s, html_encode(csp->actions_list[i]->filename));
-         snprintf(buf, 100, "</td><td class=\"buttons\"><a href=\"/show-status?file=actions&amp;index=%d\">View</a>", i);
+         snprintf(buf, sizeof(buf),
+            "</td><td class=\"buttons\"><a href=\"/show-status?file=actions&amp;index=%d\">View</a>", i);
          if (!err) err = string_append(&s, buf);
 
 #ifdef FEATURE_CGI_EDIT_ACTIONS
@@ -1214,8 +1220,7 @@ jb_err cgi_show_status(struct client_state *csp,
             if (access(csp->config->actions_file[i], W_OK) == 0)
             {
 #endif /* def HAVE_ACCESS */
-               snprintf(buf, 100, "&nbsp;&nbsp;<a href=\"/edit-actions-list?f=%s\">Edit</a>",
-                  csp->config->actions_file_short[i]);
+               snprintf(buf, sizeof(buf), "&nbsp;&nbsp;<a href=\"/edit-actions-list?f=%d\">Edit</a>", i);
                if (!err) err = string_append(&s, buf);
 #ifdef HAVE_ACCESS
             }
