@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.62 2007/03/17 15:20:05 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.63 2007/04/09 18:11:36 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.62 2007/03/17 15:20:05 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.63  2007/04/09 18:11:36  fabiankeil
+ *    Don't mistake VC++'s _snprintf() for a snprintf() replacement.
+ *
  *    Revision 1.62  2007/03/17 15:20:05  fabiankeil
  *    New config option: enforce-blocks.
  *
@@ -412,9 +415,6 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.62 2007/03/17 15:20:05 fabiankeil
 # ifndef _WIN_CONSOLE
 #  include "w32log.h"
 # endif /* ndef _WIN_CONSOLE */
-
-/* VC++ has "_snprintf", not "snprintf" */
-#define snprintf _snprintf
 
 #else /* ifndef _WIN32 */
 

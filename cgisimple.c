@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.53 2007/04/08 13:21:04 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.54 2007/04/09 18:11:35 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,9 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.53 2007/04/08 13:21:04 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.54  2007/04/09 18:11:35  fabiankeil
+ *    Don't mistake VC++'s _snprintf() for a snprintf() replacement.
+ *
  *    Revision 1.53  2007/04/08 13:21:04  fabiankeil
  *    Reference action files in CGI URLs by id instead
  *    of using the first part of the file name.
@@ -308,10 +311,6 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.53 2007/04/08 13:21:04 fabian
 #ifdef HAVE_ACCESS
 #include <unistd.h>
 #endif /* def HAVE_ACCESS */
-
-#ifdef _WIN32
-#define snprintf _snprintf
-#endif /* def _WIN32 */
 
 #include "project.h"
 #include "cgi.h"

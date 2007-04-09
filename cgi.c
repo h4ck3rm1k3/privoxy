@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.96 2007/03/08 17:41:05 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.97 2007/04/09 18:11:35 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,9 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.96 2007/03/08 17:41:05 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.97  2007/04/09 18:11:35  fabiankeil
+ *    Don't mistake VC++'s _snprintf() for a snprintf() replacement.
+ *
  *    Revision 1.96  2007/03/08 17:41:05  fabiankeil
  *    Use sizeof() more often.
  *
@@ -582,10 +585,6 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.96 2007/03/08 17:41:05 fabiankeil Exp $";
 #include <string.h>
 #include <limits.h>
 #include <assert.h>
-
-#ifdef _WIN32
-#define snprintf _snprintf
-#endif /* def _WIN32 */
 
 #include "project.h"
 #include "cgi.h"
