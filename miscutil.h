@@ -1,6 +1,6 @@
 #ifndef MISCUTIL_H_INCLUDED
 #define MISCUTIL_H_INCLUDED
-#define MISCUTIL_H_VERSION "$Id: miscutil.h,v 1.26 2007/04/08 17:04:51 fabiankeil Exp $"
+#define MISCUTIL_H_VERSION "$Id: miscutil.h,v 1.27 2007/04/09 17:48:51 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/miscutil.h,v $
@@ -37,6 +37,10 @@
  *
  * Revisions   :
  *    $Log: miscutil.h,v $
+ *    Revision 1.27  2007/04/09 17:48:51  fabiankeil
+ *    Check for HAVE_SNPRINTF instead of __OS2__
+ *    before including the portable snprintf() code.
+ *
  *    Revision 1.26  2007/04/08 17:04:51  fabiankeil
  *    Add macro for strlcpy() in case the libc lacks it.
  *
@@ -205,9 +209,9 @@ long int pick_from_range(long int range);
 extern char *strdup(const char *s);
 #endif /* def __MINGW32__ */
 
-#ifdef __OS2__
+#ifndef HAVE_SNPRINTF
 extern int snprintf(char *, size_t, const char *, /*args*/ ...);
-#endif /* def __OS2__ */
+#endif /* ndef HAVE_SNPRINTF */
 
 #if !defined(HAVE_TIMEGM) && defined(HAVE_TZSET) && defined(HAVE_PUTENV)
 time_t timegm(struct tm *tm);
