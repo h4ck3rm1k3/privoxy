@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.95 2007/03/25 14:26:40 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.96 2007/04/12 12:53:58 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,11 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.95 2007/03/25 14:26:40 fabiankeil
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.96  2007/04/12 12:53:58  fabiankeil
+ *    Log a warning if the content is compressed, filtering is
+ *    enabled and Privoxy was compiled without zlib support.
+ *    Closes FR#1673938.
+ *
  *    Revision 1.95  2007/03/25 14:26:40  fabiankeil
  *    - Fix warnings when compiled with glibc.
  *    - Don't use crumble() for cookie crunching.
@@ -1983,8 +1988,20 @@ jb_err server_content_encoding(struct client_state *csp, char **header)
        * Body is compressed, turn off pcrs and gif filtering.
        */
       csp->content_type |= CT_TABOO;
+
+      /*
+       * Log a warning if the user expects the content to be filtered.
+       */
+      if ((csp->rlist != NULL) &&
+         (!list_is_empty(csp->action->multi[ACTION_MULTI_FILTER])))
+      {
+         log_error(LOG_LEVEL_INFO,
+            "Compressed content detected, content filtering disabled. "
+            "Consider recompiling Privoxy with zlib support or "
+            "enable the prevent-compression action.");
+      }
    }
-#endif /* !defined(FEATURE_ZLIB) */
+#endif /* defined(FEATURE_ZLIB) */
 
    return JB_ERR_OK;
 
