@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.54 2007/04/09 18:11:35 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.55 2007/04/13 13:36:46 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,11 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.54 2007/04/09 18:11:35 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.55  2007/04/13 13:36:46  fabiankeil
+ *    Reference action files in CGI URLs by id instead
+ *    of using the first part of the file name.
+ *    Fixes BR 1694250 and BR 1590556.
+ *
  *    Revision 1.54  2007/04/09 18:11:35  fabiankeil
  *    Don't mistake VC++'s _snprintf() for a snprintf() replacement.
  *
@@ -1514,9 +1519,9 @@ jb_err cgi_show_url_info(struct client_state *csp,
                string_append(&matches, buf);
                string_append(&matches, "View</a>");
 #ifdef FEATURE_CGI_EDIT_ACTIONS
-               string_append(&matches, " <a class=\"cmd\" href=\"/edit-actions-list?f=");
-               string_join  (&matches, html_encode(csp->config->actions_file_short[i]));
-               string_append(&matches, "\">Edit</a>");
+               snprintf(buf, sizeof(buf), " <a class=\"cmd\" href=\"/edit-actions-list?f=%d\">", i);
+               string_append(&matches, buf);
+               string_append(&matches, "Edit</a>");
 #endif
                string_append(&matches, "</th></tr>\n");
 
