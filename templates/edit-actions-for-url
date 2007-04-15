@@ -32,6 +32,11 @@
 #
 # Revisions   :
 #    $Log: edit-actions-for-url,v $
+#    Revision 1.44  2007/04/15 16:39:21  fabiankeil
+#    Introduce tags as alternative way to specify which
+#    actions apply to a request. At the moment tags can be
+#    created based on client and server headers.
+#
 #    Revision 1.43  2007/03/29 11:40:34  fabiankeil
 #    Divide @filter-params@ into @client-header-filter-params@
 #    @content-filter-params@ and @server-header-filter-params@.
@@ -519,6 +524,7 @@ function show_send_wafer_opts(tf)
     </tr>
 
 @client-header-filter-params@
+@client-header-tagger-params@
 
    <tr class="bg1" align="left" valign="top">
       <td class="en1" align="center" valign="middle"><input type="radio"
@@ -1204,6 +1210,7 @@ function show_send_wafer_opts(tf)
     </tr>
 
 @server-header-filter-params@
+@server-header-tagger-params@
 
     <tr class="bg1" align="left" valign="top">
       <td class="en1" align="center" valign="middle"><input type="radio"

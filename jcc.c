@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.128 2007/03/25 16:55:54 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.129 2007/04/15 16:39:20 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,11 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.128 2007/03/25 16:55:54 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.129  2007/04/15 16:39:20  fabiankeil
+ *    Introduce tags as alternative way to specify which
+ *    actions apply to a request. At the moment tags can be
+ *    created based on client and server headers.
+ *
  *    Revision 1.128  2007/03/25 16:55:54  fabiankeil
  *    Don't CLF-log CONNECT requests twice.
  *
@@ -1870,6 +1875,13 @@ static void chat(struct client_state *csp)
       enlist(csp->action->multi[ACTION_MULTI_WAFER], VANILLA_WAFER);
    }
 
+   hdr = sed(client_patterns, add_client_headers, csp);
+   if (hdr == NULL)
+   {
+      /* FIXME Should handle error properly */
+      log_error(LOG_LEVEL_FATAL, "Out of memory parsing client header");
+   }
+   csp->flags |= CSP_FLAG_CLIENT_HEADER_PARSING_DONE;
 
 #ifdef FEATURE_KILL_POPUPS
    block_popups               = ((csp->action->flags & ACTION_NO_POPUPS) != 0);
@@ -1926,14 +1938,10 @@ static void chat(struct client_state *csp)
       csp->flags |= CSP_FLAG_REJECTED;
 #endif /* def FEATURE_STATISTICS */
 
-      return;
-   }
+      freez(hdr);
+      list_remove_all(csp->headers);
 
-   hdr = sed(client_patterns, add_client_headers, csp);
-   if (hdr == NULL)
-   {
-      /* FIXME Should handle error properly */
-      log_error(LOG_LEVEL_FATAL, "Out of memory parsing client header");
+      return;
    }
 
    list_remove_all(csp->headers);

@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.16 2007/02/13 13:59:24 fabiankeil Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.17 2007/04/15 16:39:21 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -33,6 +33,11 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.16 2007/02/13 13:59:24 fabianke
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.17  2007/04/15 16:39:21  fabiankeil
+ *    Introduce tags as alternative way to specify which
+ *    actions apply to a request. At the moment tags can be
+ *    created based on client and server headers.
+ *
  *    Revision 1.16  2007/02/13 13:59:24  fabiankeil
  *    Remove redundant log message.
  *
@@ -744,6 +749,9 @@ static int domain_match(const struct url_spec *pattern, const struct http_reques
 jb_err create_url_spec(struct url_spec * url, const char * buf)
 {
    char *p;
+   int errcode;
+   size_t errlen;
+   char rebuf[BUFFER_SIZE];
 
    assert(url);
    assert(buf);
@@ -761,6 +769,38 @@ jb_err create_url_spec(struct url_spec * url, const char * buf)
       return JB_ERR_MEMORY;
    }
 
+   /* Is it tag pattern? */
+   if (0 == strncmpic("TAG:", url->spec, 4))
+   {
+      if (NULL == (url->tag_regex = zalloc(sizeof(*url->tag_regex))))
+      {
+         freez(url->spec);
+         return JB_ERR_MEMORY;
+      }
+
+      /* buf + 4 to skip "TAG:" */
+      errcode = regcomp(url->tag_regex, buf + 4, (REG_EXTENDED|REG_NOSUB|REG_ICASE));
+      if (errcode)
+      {
+         errlen = regerror(errcode, url->preg, rebuf, sizeof(rebuf));
+         if (errlen > (sizeof(rebuf) - 1))
+         {
+            errlen = sizeof(rebuf) - 1;
+         }
+         rebuf[errlen] = '\0';
+
+         log_error(LOG_LEVEL_ERROR, "error compiling %s: %s", url->spec, rebuf);
+
+         freez(url->spec);
+         regfree(url->tag_regex);
+         freez(url->tag_regex);
+
+         return JB_ERR_PARSE;
+      }
+      return JB_ERR_OK;
+   }
+
+   /* Only reached for URL patterns */
    if ((p = strchr(buf, '/')) != NULL)
    {
       if (NULL == (url->path = strdup(p)))
@@ -778,9 +818,6 @@ jb_err create_url_spec(struct url_spec * url, const char * buf)
    }
    if (url->path)
    {
-      int errcode;
-      char rebuf[BUFFER_SIZE];
-
       if (NULL == (url->preg = zalloc(sizeof(*url->preg))))
       {
          freez(url->spec);
@@ -794,8 +831,7 @@ jb_err create_url_spec(struct url_spec * url, const char * buf)
             (REG_EXTENDED|REG_NOSUB|REG_ICASE));
       if (errcode)
       {
-         size_t errlen = regerror(errcode,
-            url->preg, rebuf, sizeof(rebuf));
+         errlen = regerror(errcode, url->preg, rebuf, sizeof(rebuf));
 
          if (errlen > (sizeof(rebuf) - (size_t)1))
          {
@@ -937,6 +973,11 @@ void free_url_spec(struct url_spec *url)
       regfree(url->preg);
       freez(url->preg);
    }
+   if (url->tag_regex)
+   {
+      regfree(url->tag_regex);
+      freez(url->tag_regex);
+   }
 }
 
 
@@ -950,12 +991,18 @@ void free_url_spec(struct url_spec *url)
  *          1  :  pattern = a URL pattern
  *          2  :  url = URL to match
  *
- * Returns     :  0 iff the URL matches the pattern, else nonzero.
+ * Returns     :  Nonzero if the URL matches the pattern, else 0.
  *
  *********************************************************************/
 int url_match(const struct url_spec *pattern,
               const struct http_request *url)
 {
+   if (pattern->tag_regex != NULL)
+   {
+      /* It's a tag pattern and shouldn't be matched against URLs */
+      return 0;
+   } 
+
    return ((pattern->port == 0) || (pattern->port == url->port))
        && ((pattern->dbuffer == NULL) || (domain_match(pattern, url) == 0))
        && ((pattern->path == NULL) ||
