@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.130 2007/04/19 13:47:34 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.131 2007/04/22 13:24:50 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.130 2007/04/19 13:47:34 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.131  2007/04/22 13:24:50  fabiankeil
+ *    Make HTTP snippets static (again). Add a Content-Type for those
+ *    with content so the browser doesn't guess it based on the URL.
+ *
  *    Revision 1.130  2007/04/19 13:47:34  fabiankeil
  *    Move crunching and request line rebuilding out of chat().
  *
@@ -959,50 +963,57 @@ static const char VANILLA_WAFER[] =
    "(copyright_or_otherwise)_applying_to_any_cookie._";
 
 /* HTTP snipplets. */
-const char CSUCCEED[] =
+const static char CSUCCEED[] =
    "HTTP/1.0 200 Connection established\n"
    "Proxy-Agent: Privoxy/" VERSION "\r\n\r\n";
 
-const char CHEADER[] =
+const static char CHEADER[] =
    "HTTP/1.0 400 Invalid header received from browser\r\n"
+   "Proxy-Agent: Privoxy " VERSION "\r\n"
+   "Content-Type: text/plain\r\n"
    "Connection: close\r\n\r\n"
    "Invalid header received from browser.\r\n";
 
-const char CFORBIDDEN[] =
+const static char CFORBIDDEN[] =
    "HTTP/1.0 403 Connection not allowable\r\n"
    "Proxy-Agent: Privoxy " VERSION "\r\n"
    "X-Hint: If you read this message interactively, then you know why this happens ,-)\r\n"
    "Connection: close\r\n\r\n";
 
-const char FTP_RESPONSE[] =
+const static char FTP_RESPONSE[] =
    "HTTP/1.0 400 Invalid request received from browser\r\n"
+   "Content-Type: text/plain\r\n"
    "Connection: close\r\n\r\n"
    "Invalid request. Privoxy doesn't support FTP.\r\n";
 
-const char GOPHER_RESPONSE[] =
+const static char GOPHER_RESPONSE[] =
    "HTTP/1.0 400 Invalid request received from browser\r\n"
+   "Content-Type: text/plain\r\n"
    "Connection: close\r\n\r\n"
    "Invalid request. Privoxy doesn't support gopher.\r\n";
 
 /* XXX: should be a template */
-const char MISSING_DESTINATION_RESPONSE[] =
+const static char MISSING_DESTINATION_RESPONSE[] =
    "HTTP/1.0 400 Bad request received from browser\r\n"
    "Proxy-Agent: Privoxy " VERSION "\r\n"
+   "Content-Type: text/plain\r\n"
    "Connection: close\r\n\r\n"
    "Bad request. Privoxy was unable to extract the destination.\r\n";
 
 /* XXX: should be a template */
-const char NO_SERVER_DATA_RESPONSE[] =
+const static char NO_SERVER_DATA_RESPONSE[] =
    "HTTP/1.0 502 Server or forwarder response empty\r\n"
    "Proxy-Agent: Privoxy " VERSION "\r\n"
+   "Content-Type: text/plain\r\n"
    "Connection: close\r\n\r\n"
    "Empty server or forwarder response.\r\n"
    "The connection was closed without sending any data.\r\n";
 
 /* XXX: should be a template */
-const char NULL_BYTE_RESPONSE[] =
+const static char NULL_BYTE_RESPONSE[] =
    "HTTP/1.0 400 Bad request received from browser\r\n"
    "Proxy-Agent: Privoxy " VERSION "\r\n"
+   "Content-Type: text/plain\r\n"
    "Connection: close\r\n\r\n"
    "Bad request. Null byte(s) before end of request.\r\n";
 
