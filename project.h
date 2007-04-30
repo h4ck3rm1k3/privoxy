@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.94 2007/04/15 16:39:21 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.95 2007/04/30 15:02:19 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,9 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.95  2007/04/30 15:02:19  fabiankeil
+ *    Introduce dynamic pcrs jobs that can resolve variables.
+ *
  *    Revision 1.94  2007/04/15 16:39:21  fabiankeil
  *    Introduce tags as alternative way to specify which
  *    actions apply to a request. At the moment tags can be
@@ -1491,6 +1494,8 @@ struct re_filterfile_spec
    struct list patterns[1];         /**< The patterns from the re_filterfile. */
    pcrs_job *joblist;               /**< The resulting compiled pcrs_jobs. */
    int type;                        /**< Filter type (content, client-header, server-header). */
+   int dynamic;                     /**< Set to one if the pattern might contain variables
+                                         and has to be recompiled for every request. */
    struct re_filterfile_spec *next; /**< The pointer for chaining. */
 };
 

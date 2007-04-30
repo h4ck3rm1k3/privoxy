@@ -1,4 +1,4 @@
-const char loaders_rcs[] = "$Id: loaders.c,v 1.61 2007/04/15 16:39:21 fabiankeil Exp $";
+const char loaders_rcs[] = "$Id: loaders.c,v 1.62 2007/04/30 15:02:18 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loaders.c,v $
@@ -35,6 +35,9 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.61 2007/04/15 16:39:21 fabiankeil
  *
  * Revisions   :
  *    $Log: loaders.c,v $
+ *    Revision 1.62  2007/04/30 15:02:18  fabiankeil
+ *    Introduce dynamic pcrs jobs that can resolve variables.
+ *
  *    Revision 1.61  2007/04/15 16:39:21  fabiankeil
  *    Introduce tags as alternative way to specify which
  *    actions apply to a request. At the moment tags can be
@@ -1382,6 +1385,7 @@ int load_re_filterfile(struct client_state *csp)
    return 0;
 }
 
+
 /*********************************************************************
  *
  * Function    :  load_one_re_filterfile
@@ -1528,12 +1532,46 @@ int load_one_re_filterfile(struct client_state *csp, int fileid)
        */
       if (bl != NULL)
       {
-         enlist(bl->patterns, buf);
+         error = enlist(bl->patterns, buf);
+         if (JB_ERR_MEMORY == error)
+         {
+            log_error(LOG_LEVEL_FATAL,
+               "Out of memory while enlisting re_filter job \'%s\' for filter %s.", buf, bl->name);
+         }
+         assert(JB_ERR_OK == error);
+
+         if (pcrs_job_is_dynamic(buf))
+         {
+            /*
+             * Dynamic pattern that might contain variables
+             * and has to be recompiled for every request
+             */
+            if (bl->joblist != NULL)
+            {
+                pcrs_free_joblist(bl->joblist);
+                bl->joblist = NULL;
+            }
+            bl->dynamic = 1;
+            log_error(LOG_LEVEL_RE_FILTER,
+               "Adding dynamic re_filter job \'%s\' to filter %s succeeded.", buf, bl->name);
+            continue;             
+         }
+         else if (bl->dynamic)
+         {
+            /*
+             * A previous job was dynamic and as we
+             * recompile the whole filter anyway, it
+             * makes no sense to compile this job now.
+             */
+            log_error(LOG_LEVEL_RE_FILTER,
+               "Adding static re_filter job \'%s\' to dynamic filter %s succeeded.", buf, bl->name);
+            continue;
+         }
 
          if ((dummy = pcrs_compile_command(buf, &error)) == NULL)
          {
             log_error(LOG_LEVEL_ERROR,
-                      "Adding re_filter job %s to filter %s failed with error %d.", buf, bl->name, error);
+               "Adding re_filter job \'%s\' to filter %s failed with error %d.", buf, bl->name, error);
             continue;
          }
          else
@@ -1547,7 +1585,7 @@ int load_one_re_filterfile(struct client_state *csp, int fileid)
                lastjob->next = dummy;
             }
             lastjob = dummy;
-            log_error(LOG_LEVEL_RE_FILTER, "Adding re_filter job %s to filter %s succeeded.", buf, bl->name);
+            log_error(LOG_LEVEL_RE_FILTER, "Adding re_filter job \'%s\' to filter %s succeeded.", buf, bl->name);
          }
       }
       else
