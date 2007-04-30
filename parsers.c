@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.99 2007/04/30 15:06:26 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.100 2007/04/30 15:53:11 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,9 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.99 2007/04/30 15:06:26 fabiankeil
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.100  2007/04/30 15:53:11  fabiankeil
+ *    Make sure filters with dynamic jobs actually use them.
+ *
  *    Revision 1.99  2007/04/30 15:06:26  fabiankeil
  *    - Introduce dynamic pcrs jobs that can resolve variables.
  *    - Remove unnecessary update_action_bits_for_all_tags() call.
@@ -1833,7 +1836,7 @@ jb_err filter_header(struct client_state *csp, char **header)
 
                if (b->dynamic) joblist = compile_dynamic_pcrs_job_list(csp, b);
 
-               if ( NULL == b->joblist )
+               if (NULL == joblist)
                {
                   log_error(LOG_LEVEL_RE_FILTER, "Filter %s has empty joblist. Nothing to do.", b->name);
                   continue;
@@ -1843,7 +1846,7 @@ jb_err filter_header(struct client_state *csp, char **header)
                          *header, size, b->name);
 
                /* Apply all jobs from the joblist */
-               for (job = b->joblist; NULL != job; job = job->next)
+               for (job = joblist; NULL != job; job = job->next)
                {
                   matches = pcrs_execute(job, *header, size, &newheader, &size);
                   if ( 0 < matches )
