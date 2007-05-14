@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.95 2007/04/30 15:02:19 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.96 2007/05/14 10:41:15 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,9 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.96  2007/05/14 10:41:15  fabiankeil
+ *    Ditch the csp member cookie_list[] which isn't used anymore.
+ *
  *    Revision 1.95  2007/04/30 15:02:19  fabiankeil
  *    Introduce dynamic pcrs jobs that can resolve variables.
  *
@@ -1283,9 +1286,6 @@ struct client_state
 
    /** List of all tags that apply to this request */
    struct list tags[1];
-
-   /** List of all cookies for this request */
-   struct list cookie_list[1];
 
    /** MIME-Type key, see CT_* above */
    unsigned int content_type;
