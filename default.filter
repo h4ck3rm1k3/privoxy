@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.41 2007/05/17 15:45:41 fabiankeil Exp $
+#  $Id: default.filter,v 1.42 2007/05/17 15:55:36 fabiankeil Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -721,17 +721,21 @@ s@Accept:\s*image/.*@IMAGE-REQUEST@i
 
 #################################################################################
 #
-# text-requests: Tags detected CSS requests as "TEXT-REQUEST". Whether
+# css-requests:  Tags detected CSS requests as "CSS-REQUEST". Whether
 #                or not the detection actually works depends on the browser.
 #
 #################################################################################
-CLIENT-HEADER-TAGGER: text-requests Tags detected requests for text documents as "TEXT-REQUEST".
-s@Accept:\s*text/.*@TEXT-REQUEST@i
+CLIENT-HEADER-TAGGER: text-requests Tags detected CSS requests as "CSS-REQUEST".
+s@Accept:\s*text/css.*@CSS-REQUEST@i
 
 ############################################################################## 
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.42  2007/05/17 15:55:36  fabiankeil
+#     Undo an improperly tested last-minute change
+#     and turn "text-requests" back into "css-requests".
+#
 #     Revision 1.41  2007/05/17 15:45:41  fabiankeil
 #     - Mention new filter types and the 'D' option.
 #     - Header filters are now case-insensitive and accept a
