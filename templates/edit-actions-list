@@ -31,6 +31,13 @@
 #
 # Revisions   :
 #    $Log: edit-actions-list,v $
+#    Revision 1.34  2007/05/21 10:54:46  fabiankeil
+#    - Use strlcpy() instead of strcpy().
+#    - Stop treating actions files special. Expect a complete file name
+#      (with or without path) like it's done for the rest of the files.
+#      Closes FR#588084.
+#    - Don't rerun sed() in cgi_show_request().
+#
 #    Revision 1.33  2007/04/08 13:21:06  fabiankeil
 #    Reference action files in CGI URLs by id instead
 #    of using the first part of the file name.
@@ -202,7 +209,7 @@
   <link rel="stylesheet" type="text/css" href="@default-cgi@send-stylesheet">
   <link rel="shortcut icon" href="@default-cgi@favicon.ico" type="image/x-icon">
 
-  <title>Privoxy: Edit actions file @f@.action</title>
+  <title>Privoxy: Edit actions file @actions-file@</title>
 
   <style type="text/css">
 
