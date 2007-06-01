@@ -1,6 +1,6 @@
 #ifndef PARSERS_H_INCLUDED
 #define PARSERS_H_INCLUDED
-#define PARSERS_H_VERSION "$Id: parsers.h,v 1.38 2007/03/25 14:27:11 fabiankeil Exp $"
+#define PARSERS_H_VERSION "$Id: parsers.h,v 1.39 2007/06/01 16:31:55 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.h,v $
@@ -43,6 +43,9 @@
  *
  * Revisions   :
  *    $Log: parsers.h,v $
+ *    Revision 1.39  2007/06/01 16:31:55  fabiankeil
+ *    Change sed() to return a jb_err in preparation for forward-override{}.
+ *
  *    Revision 1.38  2007/03/25 14:27:11  fabiankeil
  *    Let parse_header_time() return a jb_err code
  *    instead of a pointer that can only be used to
@@ -259,7 +262,7 @@ extern jb_err add_to_iob(struct client_state *csp, char *buf, int n);
 extern jb_err decompress_iob(struct client_state *csp);
 extern char *get_header(struct client_state *csp);
 extern char *get_header_value(const struct list *header_list, const char *header_name);
-extern char *sed(const struct parsers pats[], const add_header_func_ptr more_headers[], struct client_state *csp);
+extern jb_err sed(const struct parsers pats[], const add_header_func_ptr more_headers[], struct client_state *csp);
 extern void get_http_time(int time_offset, char *buf);
 extern jb_err parse_header_time(const char *header_time, time_t *result);
 extern jb_err get_destination_from_headers(const struct list *headers, struct http_request *http);
@@ -267,7 +270,7 @@ extern jb_err get_destination_from_headers(const struct list *headers, struct ht
 /* XXX: Why do we export these anyway? */
 extern jb_err crumble                (struct client_state *csp, char **header);
 extern jb_err connection             (struct client_state *csp, char **header);
-extern jb_err filter_header           (struct client_state *csp, char **header);
+extern jb_err filter_header          (struct client_state *csp, char **header);
 
 extern jb_err client_referrer        (struct client_state *csp, char **header);
 extern jb_err client_uagent          (struct client_state *csp, char **header);
