@@ -1,6 +1,6 @@
 #ifndef JCC_H_INCLUDED
 #define JCC_H_INCLUDED
-#define JCC_H_VERSION "$Id: jcc.h,v 1.21 2007/04/22 13:18:06 fabiankeil Exp $"
+#define JCC_H_VERSION "$Id: jcc.h,v 1.22 2007/06/01 18:16:36 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.h,v $
@@ -35,6 +35,12 @@
  *
  * Revisions   :
  *    $Log: jcc.h,v $
+ *    Revision 1.22  2007/06/01 18:16:36  fabiankeil
+ *    Use the same mutex for gethostbyname() and gethostbyaddr() to prevent
+ *    deadlocks and crashes on OpenBSD and possibly other OS with neither
+ *    gethostbyname_r() nor gethostaddr_r(). Closes BR#1729174.
+ *    Thanks to Ralf Horstmann for report and solution.
+ *
  *    Revision 1.21  2007/04/22 13:18:06  fabiankeil
  *    Keep the HTTP snippets local.
  *
@@ -193,13 +199,9 @@ extern pthread_mutex_t gmtime_mutex;
 extern pthread_mutex_t localtime_mutex;
 #endif /* ndef HAVE_GMTIME_R */
 
-#ifndef HAVE_GETHOSTBYADDR_R
-extern pthread_mutex_t gethostbyaddr_mutex;
-#endif /* ndef HAVE_GETHOSTBYADDR_R */
-
-#ifndef HAVE_GETHOSTBYNAME_R
-extern pthread_mutex_t gethostbyname_mutex;
-#endif /* ndef HAVE_GETHOSTBYNAME_R */
+#if !defined(HAVE_GETHOSTBYADDR_R) || !defined(HAVE_GETHOSTBYNAME_R)
+extern pthread_mutex_t resolver_mutex;
+#endif /* !defined(HAVE_GETHOSTBYADDR_R) || !defined(HAVE_GETHOSTBYNAME_R) */
 
 #ifndef HAVE_RANDOM
 extern pthread_mutex_t rand_mutex;

@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.42 2007/04/01 17:37:07 fabiankeil Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.43 2007/06/01 18:16:36 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -35,6 +35,12 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.42 2007/04/01 17:37:07 fabian
  *
  * Revisions   :
  *    $Log: jbsockets.c,v $
+ *    Revision 1.43  2007/06/01 18:16:36  fabiankeil
+ *    Use the same mutex for gethostbyname() and gethostbyaddr() to prevent
+ *    deadlocks and crashes on OpenBSD and possibly other OS with neither
+ *    gethostbyname_r() nor gethostaddr_r(). Closes BR#1729174.
+ *    Thanks to Ralf Horstmann for report and solution.
+ *
  *    Revision 1.42  2007/04/01 17:37:07  fabiankeil
  *    - Add DNS retries for Solaris and other systems
  *      whose gethostbyname_r version takes five arguments.
@@ -774,10 +780,10 @@ int accept_connection(struct client_state * csp, jb_socket fd)
          host = NULL;
       }
 #elif FEATURE_PTHREAD
-      pthread_mutex_lock(&gethostbyaddr_mutex);
+      pthread_mutex_lock(&resolver_mutex);
       host = gethostbyaddr((const char *)&server.sin_addr, 
                            sizeof(server.sin_addr), AF_INET);
-      pthread_mutex_unlock(&gethostbyaddr_mutex);
+      pthread_mutex_unlock(&resolver_mutex);
 #else
       host = gethostbyaddr((const char *)&server.sin_addr, 
                            sizeof(server.sin_addr), AF_INET);
@@ -870,7 +876,7 @@ unsigned long resolve_hostname_to_ip(const char *host)
          hostp = NULL;
       }
 #elif FEATURE_PTHREAD
-      pthread_mutex_lock(&gethostbyname_mutex);
+      pthread_mutex_lock(&resolver_mutex);
       while (NULL == (hostp = gethostbyname(host))
              && (h_errno == TRY_AGAIN) && (dns_retries++ < MAX_DNS_RETRIES))
       {   
@@ -878,7 +884,7 @@ unsigned long resolve_hostname_to_ip(const char *host)
             "Timeout #%u while trying to resolve %s. Trying again.",
             dns_retries, host);
       }
-      pthread_mutex_unlock(&gethostbyname_mutex);
+      pthread_mutex_unlock(&resolver_mutex);
 #else
       while (NULL == (hostp = gethostbyname(host))
              && (h_errno == TRY_AGAIN) && (dns_retries++ < MAX_DNS_RETRIES))
