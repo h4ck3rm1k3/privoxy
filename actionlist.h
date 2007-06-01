@@ -39,6 +39,12 @@
  *
  * Revisions   :
  *    $Log: actionlist.h,v $
+ *    Revision 1.26  2007/06/01 16:54:28  fabiankeil
+ *    Add forward-override{} to change the forwarding settings through
+ *    action sections. This is mainly interesting to forward different
+ *    clients differently (for example based on User-Agent or request
+ *    origin).
+ *
  *    Revision 1.25  2007/04/15 16:39:20  fabiankeil
  *    Introduce tags as alternative way to specify which
  *    actions apply to a request. At the moment tags can be
@@ -178,6 +184,8 @@ DEFINE_CGI_PARAM_RADIO   ("fast-redirects",             ACTION_FAST_REDIRECTS,  
 DEFINE_CGI_PARAM_RADIO   ("fast-redirects",             ACTION_FAST_REDIRECTS,  ACTION_STRING_FAST_REDIRECTS, "check-decoded-url",  1)
 DEFINE_ACTION_MULTI      ("filter",                     ACTION_MULTI_FILTER)
 DEFINE_ACTION_BOOL       ("force-text-mode",            ACTION_FORCE_TEXT_MODE)
+DEFINE_ACTION_STRING     ("forward-override",           ACTION_FORWARD_OVERRIDE, ACTION_STRING_FORWARD_OVERRIDE)
+DEFINE_CGI_PARAM_CUSTOM  ("forward-override",           ACTION_FORWARD_OVERRIDE, ACTION_STRING_FORWARD_OVERRIDE, ".")
 DEFINE_ACTION_BOOL       ("handle-as-empty-document",   ACTION_HANDLE_AS_EMPTY_DOCUMENT)
 DEFINE_ACTION_BOOL       ("handle-as-image",            ACTION_IMAGE)
 DEFINE_ACTION_STRING     ("hide-accept-language",       ACTION_HIDE_ACCEPT_LANGUAGE, ACTION_STRING_LANGUAGE)
