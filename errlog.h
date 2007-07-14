@@ -1,6 +1,6 @@
 #ifndef ERRLOG_H_INCLUDED
 #define ERRLOG_H_INCLUDED
-#define ERRLOG_H_VERSION "$Id: errlog.h,v 1.17 2007/03/31 13:33:28 fabiankeil Exp $"
+#define ERRLOG_H_VERSION "$Id: errlog.h,v 1.18 2007/07/14 07:28:47 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.h,v $
@@ -35,6 +35,9 @@
  *
  * Revisions   :
  *    $Log: errlog.h,v $
+ *    Revision 1.18  2007/07/14 07:28:47  fabiankeil
+ *    Add translation function for JB_ERR_FOO codes.
+ *
  *    Revision 1.17  2007/03/31 13:33:28  fabiankeil
  *    Add alternative log_error() with timestamps
  *    that contain milliseconds and without using
@@ -176,6 +179,7 @@ extern "C" {
 
 extern void init_error_log(const char *prog_name, const char *logfname, int debuglevel);
 extern void log_error(int loglevel, const char *fmt, ...);
+extern const char *jb_err_to_string(int error);
 
 /* Revision control strings from this header and associated .c file */
 extern const char errlog_rcs[];
