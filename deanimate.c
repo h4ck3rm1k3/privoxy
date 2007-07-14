@@ -1,4 +1,4 @@
-const char deanimate_rcs[] = "$Id: deanimate.c,v 1.15 2007/01/03 14:39:19 fabiankeil Exp $";
+const char deanimate_rcs[] = "$Id: deanimate.c,v 1.16 2007/07/14 08:01:58 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/deanimate.c,v $
@@ -40,6 +40,9 @@ const char deanimate_rcs[] = "$Id: deanimate.c,v 1.15 2007/01/03 14:39:19 fabian
  *
  * Revisions   :
  *    $Log: deanimate.c,v $
+ *    Revision 1.16  2007/07/14 08:01:58  fabiankeil
+ *    s@failiure@failure@
+ *
  *    Revision 1.15  2007/01/03 14:39:19  fabiankeil
  *    Fix a gcc43 warning and mark the binbuffer
  *    as immutable for buf_getbyte().
@@ -150,7 +153,7 @@ void buf_free(struct binbuffer *buf)
  *          2  :  length = Desired minimum size
  *                
  *
- * Returns     :  0 on success, 1 on failiure.
+ * Returns     :  0 on success, 1 on failure.
  *
  *********************************************************************/
 int buf_extend(struct binbuffer *buf, size_t length)
@@ -191,7 +194,7 @@ int buf_extend(struct binbuffer *buf, size_t length)
  *          2  :  dst = Pointer to the destination binbuffer
  *          3  :  length = Number of bytes to be copied
  *
- * Returns     :  0 on success, 1 on failiure.
+ * Returns     :  0 on success, 1 on failure.
  *
  *********************************************************************/
 int buf_copy(struct binbuffer *src, struct binbuffer *dst, size_t length)
@@ -237,7 +240,7 @@ int buf_copy(struct binbuffer *src, struct binbuffer *dst, size_t length)
  *          1  :  src = Pointer to the source binbuffer
  *          2  :  offset = Offset to the desired byte
  *
- * Returns     :  The byte on success, or 0 on failiure
+ * Returns     :  The byte on success, or 0 on failure
  *
  *********************************************************************/
 unsigned char buf_getbyte(const struct binbuffer *src, size_t offset)
@@ -266,7 +269,7 @@ unsigned char buf_getbyte(const struct binbuffer *src, size_t offset)
  * Parameters  :
  *          1  :  buf = Pointer to the binbuffer
  *
- * Returns     :  0 on success, or 1 on failiure
+ * Returns     :  0 on success, or 1 on failure
  *
  *********************************************************************/
 int gif_skip_data_block(struct binbuffer *buf)
@@ -306,13 +309,13 @@ int gif_skip_data_block(struct binbuffer *buf)
  *          1  :  src = Pointer to the source binbuffer
  *          2  :  dst = Pointer to the destination binbuffer
  *
- * Returns     :  0 on success, or 1 on failiure
+ * Returns     :  0 on success, or 1 on failure
  *
  *********************************************************************/
 int gif_extract_image(struct binbuffer *src, struct binbuffer *dst)
 {
    unsigned char c;
-   
+
    /*
     * Remember the colormap flag and copy the image head
     */
@@ -371,7 +374,7 @@ int gif_extract_image(struct binbuffer *src, struct binbuffer *dst)
  *          3  :  get_first_image = Flag: If set, get the first image
  *                                        If unset (default), get the last
  *
- * Returns     :  0 on success, or 1 on failiure
+ * Returns     :  0 on success, or 1 on failure
  *
  *********************************************************************/
 int gif_deanimate(struct binbuffer *src, struct binbuffer *dst, int get_first_image)
@@ -537,7 +540,7 @@ write:
  * Parameters  :
  *          1  :  src = Pointer to the image binbuffer
  *
- * Returns     :  0 on success, or 1 on failiure
+ * Returns     :  0 on success, or 1 on failure
  *
  *********************************************************************/
 int jpeg_inspect(struct binbuffer *src, struct binbuffer *dst)
