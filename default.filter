@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.43 2007/06/01 14:17:04 fabiankeil Exp $
+#  $Id: default.filter,v 1.44 2007/07/18 11:06:56 hal9 Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -208,8 +208,8 @@ s+([^'"]\s*</html>)(?!\s*(\\n|'|"))+$1<script>function PrivoxyWindowOpen(a, b, c
 FILTER: all-popups Kill all popups in JavaScript and HTML
 
 s@((\W\s*)(?:map)?(window|this|parent)\.?)open\s*\\?\(@$1concat(@ig  # JavaScript
-s/\starget\s*=\s*(['"]?)_?(blank|new)\1?/ notarget/ig        # HTML
-
+#s/\starget\s*=\s*(['"]?)_?(blank|new)\1?/ notarget/ig        # HTML
+s/\starget\s*=\s*(['"]?)_?(blank|new)\1?/ /ig        # (X)HTML
 
 ##################################################################################
 #
@@ -738,6 +738,10 @@ s@Accept:\s*text/css.*@CSS-REQUEST@i
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.44  2007/07/18 11:06:56  hal9
+#     Replace notarget with '' in all popups filter to keep from breaking xhmtl per
+#     report from Siegfried Gipp.
+#
 #     Revision 1.43  2007/06/01 14:17:04  fabiankeil
 #     Mention possible delimiter conflicts with variables in dynamic pcrs commands.
 #
