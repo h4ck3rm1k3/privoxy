@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.57 2007/06/01 16:53:05 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.58 2007/07/21 12:19:50 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,11 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.57 2007/06/01 16:53:05 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.58  2007/07/21 12:19:50  fabiankeil
+ *    If show-url-info is called with an URL that Privoxy
+ *    would reject as invalid, don't show unresolved forwarding
+ *    variables, "final matches" or claim the site's secure.
+ *
  *    Revision 1.57  2007/06/01 16:53:05  fabiankeil
  *    Adjust cgi_show_url_info() to show what forward-override{}
  *    would do with the requested URL (instead of showing how the
@@ -1485,6 +1490,7 @@ jb_err cgi_show_url_info(struct client_state *csp,
 
          err = map(exports, "matches", 1, "<b>[Invalid URL specified!]</b>" , 1);
          if (!err) err = map(exports, "final", 1, lookup(exports, "default"), 1);
+         if (!err) err = map_block_killer(exports, "valid-url");
 
          free_current_action(action);
          free_http_request(url_to_query);
@@ -1499,7 +1505,7 @@ jb_err cgi_show_url_info(struct client_state *csp,
       }
 
       /*
-       * We have a warning about SSL paths.  Hide it for insecure sites.
+       * We have a warning about SSL paths.  Hide it for unencrypted sites.
        */
       if (!url_to_query->ssl)
       {
