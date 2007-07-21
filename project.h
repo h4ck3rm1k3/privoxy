@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.98 2007/07/14 07:31:26 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.99 2007/07/21 11:51:36 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,12 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.99  2007/07/21 11:51:36  fabiankeil
+ *    As Hal noticed, checking dispatch_cgi() as the last cruncher
+ *    looks like a bug if CGI requests are blocked unintentionally,
+ *    so don't do it unless the user enabled the new config option
+ *    "allow-cgi-request-crunching".
+ *
  *    Revision 1.98  2007/07/14 07:31:26  fabiankeil
  *    Add new csp->content_type flag (CT_DECLARED).
  *
@@ -1581,6 +1587,9 @@ struct access_control_list
 
 /** configuration_spec::feature_flags: Don't allow to circumvent blocks with the force prefix. */
 #define RUNTIME_FEATURE_ENFORCE_BLOCKS              32
+
+/** configuration_spec::feature_flags: Allow to block or redirect CGI requests. */
+#define RUNTIME_FEATURE_CGI_CRUNCHING               64
 
 
 /**

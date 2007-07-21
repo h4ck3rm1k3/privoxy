@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.64 2007/05/21 10:44:08 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.65 2007/07/21 11:51:36 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,12 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.64 2007/05/21 10:44:08 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.65  2007/07/21 11:51:36  fabiankeil
+ *    As Hal noticed, checking dispatch_cgi() as the last cruncher
+ *    looks like a bug if CGI requests are blocked unintentionally,
+ *    so don't do it unless the user enabled the new config option
+ *    "allow-cgi-request-crunching".
+ *
  *    Revision 1.64  2007/05/21 10:44:08  fabiankeil
  *    - Use strlcpy() instead of strcpy().
  *    - Stop treating actions files special. Expect a complete file name
@@ -495,6 +501,7 @@ static struct file_list *current_configfile = NULL;
 #define hash_actions_file                1196306641ul /* "actionsfile" */
 #define hash_accept_intercepted_requests 1513024973ul /* "accept-intercepted-requests" */
 #define hash_admin_address               4112573064ul /* "admin-address" */
+#define hash_allow_cgi_request_crunching  258915987ul /* "allow-cgi-request-crunching" */
 #define hash_buffer_limit                1881726070ul /* "buffer-limit */
 #define hash_confdir                        1978389ul /* "confdir" */
 #define hash_debug                            78263ul /* "debug" */
@@ -825,6 +832,20 @@ struct configuration_spec * load_config(void)
          case hash_admin_address :
             freez(config->admin_address);
             config->admin_address = strdup(arg);
+            continue;
+
+/* *************************************************************************
+ * allow-cgi-request-crunching
+ * *************************************************************************/
+         case hash_allow_cgi_request_crunching:
+            if ((*arg != '\0') && (0 != atoi(arg)))
+            {
+               config->feature_flags |= RUNTIME_FEATURE_CGI_CRUNCHING;
+            }
+            else
+            {
+               config->feature_flags &= ~RUNTIME_FEATURE_CGI_CRUNCHING;
+            }
             continue;
 
 /* *************************************************************************
