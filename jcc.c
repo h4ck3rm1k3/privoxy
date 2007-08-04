@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.140 2007/07/21 11:51:36 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.141 2007/08/04 09:56:23 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,13 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.140 2007/07/21 11:51:36 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.141  2007/08/04 09:56:23  fabiankeil
+ *    - Log rejected CONNECT requests with LOG_LEVEL_INFO
+ *      and explain why they were rejected in the first place.
+ *    - Fix the LOG_LEVEL_CLF message for crunches of unallowed
+ *      CONNECT requests. The request line was missing.
+ *    - Add two more XXX reminders as we don't have enough already.
+ *
  *    Revision 1.140  2007/07/21 11:51:36  fabiankeil
  *    As Hal noticed, checking dispatch_cgi() as the last cruncher
  *    looks like a bug if CGI requests are blocked unintentionally,
@@ -2167,20 +2174,31 @@ static void chat(struct client_state *csp)
             /*
              * The response may confuse some clients,
              * but makes unblocking easier.
+             *
+             * XXX: It seems to work with all major browsers,
+             * so we should consider returning a body by default someday ... 
              */
-            log_error(LOG_LEVEL_ERROR, "Marking suspicious CONNECT request from %s for blocking.",
-               csp->ip_addr_str);
+            log_error(LOG_LEVEL_INFO, "Request from %s marked for blocking. "
+               "limit-connect{%s} doesn't allow CONNECT requests to port %d.",
+               csp->ip_addr_str, csp->action->string[ACTION_STRING_LIMIT_CONNECT],
+               csp->http->port);
             csp->action->flags |= ACTION_BLOCK;
             http->ssl = 0;
          }
          else
          {
             write_socket(csp->cfd, CFORBIDDEN, strlen(CFORBIDDEN));
-            log_error(LOG_LEVEL_CONNECT, "Denying suspicious CONNECT request from %s", csp->ip_addr_str);
-            log_error(LOG_LEVEL_CLF, "%s - - [%T] \" \" 403 0", csp->ip_addr_str);
+            log_error(LOG_LEVEL_INFO, "Request from %s denied. "
+               "limit-connect{%s} doesn't allow CONNECT requests to port %d.",
+               csp->ip_addr_str, csp->action->string[ACTION_STRING_LIMIT_CONNECT],
+               csp->http->port);
+            assert(NULL != csp->http->ocmd);
+            log_error(LOG_LEVEL_CLF, "%s - - [%T] \"%s\" 403 0", csp->ip_addr_str, csp->http->ocmd);
 
             list_remove_all(csp->headers);
-
+            /*
+             * XXX: For consistency we might want to log a crunch message here.
+             */
             return;
          }
       }
