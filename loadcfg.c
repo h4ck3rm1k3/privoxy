@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.65 2007/07/21 11:51:36 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.66 2007/08/05 14:02:09 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.65 2007/07/21 11:51:36 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.66  2007/08/05 14:02:09  fabiankeil
+ *    #1763173 from Stefan Huehner: declare unload_configfile() static.
+ *
  *    Revision 1.65  2007/07/21 11:51:36  fabiankeil
  *    As Hal noticed, checking dispatch_cgi() as the last cruncher
  *    looks like a bug if CGI requests are blocked unintentionally,
@@ -555,7 +558,7 @@ static void savearg(char *command, char *argument, struct configuration_spec * c
  * Returns     :  N/A
  *
  *********************************************************************/
-void unload_configfile (void * data)
+static void unload_configfile (void * data)
 {
    struct configuration_spec * config = (struct configuration_spec *)data;
    struct forward_spec *cur_fwd = config->forward;
