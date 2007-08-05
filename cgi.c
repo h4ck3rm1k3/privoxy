@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.98 2007/05/14 10:33:51 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.99 2007/08/05 13:42:22 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,9 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.98 2007/05/14 10:33:51 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.99  2007/08/05 13:42:22  fabiankeil
+ *    #1763173 from Stefan Huehner: declare some more functions static.
+ *
  *    Revision 1.98  2007/05/14 10:33:51  fabiankeil
  *    - Use strlcpy() and strlcat() instead of strcpy() and strcat().
  *
@@ -901,7 +904,7 @@ struct http_response *dispatch_cgi(struct client_state *csp)
  * Returns     :  pointer to value (no copy!), or NULL if none found.
  *
  *********************************************************************/
-char *grep_cgi_referrer(const struct client_state *csp)
+static char *grep_cgi_referrer(const struct client_state *csp)
 {
    struct list_entry *p;
 
@@ -933,7 +936,7 @@ char *grep_cgi_referrer(const struct client_state *csp)
  *                FALSE if the referrer is unsafe or not set.
  *
  *********************************************************************/
-int referrer_is_safe (const struct client_state *csp)
+static int referrer_is_safe(const struct client_state *csp)
 {
    char *referrer;
    const char alternative_prefix[] = "http://" CGI_SITE_1_HOST "/";
