@@ -1,4 +1,4 @@
-const char pcrs_rcs[] = "$Id: pcrs.c,v 1.26 2007/07/01 13:29:54 fabiankeil Exp $";
+const char pcrs_rcs[] = "$Id: pcrs.c,v 1.27 2007/08/05 13:47:04 fabiankeil Exp $";
 
 /*********************************************************************
  *
@@ -38,6 +38,9 @@ const char pcrs_rcs[] = "$Id: pcrs.c,v 1.26 2007/07/01 13:29:54 fabiankeil Exp $
  *
  * Revisions   :
  *    $Log: pcrs.c,v $
+ *    Revision 1.27  2007/08/05 13:47:04  fabiankeil
+ *    #1763173 from Stefan Huehner: s@const static@static const@.
+ *
  *    Revision 1.26  2007/07/01 13:29:54  fabiankeil
  *    Add limited hex notation support for the PCRS
  *    substitution text ('\x7e' = '~'). Closes #1627140.
@@ -1236,7 +1239,7 @@ char *pcrs_execute_single_command(const char *subject, const char *pcrs_command,
 }
 
 
-const static char warning[] = "... [too long, truncated]";
+static const char warning[] = "... [too long, truncated]";
 /*********************************************************************
  *
  * Function    :  pcrs_compile_dynamic_command
