@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.142 2007/08/05 13:50:26 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.143 2007/08/05 13:58:19 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.142 2007/08/05 13:50:26 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.143  2007/08/05 13:58:19  fabiankeil
+ *    Comment out request_contains_null_bytes() until it's used again.
+ *
  *    Revision 1.142  2007/08/05 13:50:26  fabiankeil
  *    #1763173 from Stefan Huehner: s@const static@static const@
  *    and declare some more functions static.
@@ -1534,12 +1537,15 @@ static void send_crunch_response(struct client_state *csp, struct http_response 
 }
 
 
+#if 0
 /*********************************************************************
  *
  * Function    :  request_contains_null_bytes
  *
  * Description :  Checks for NULL bytes in the request and sends
  *                an error message to the client if any were found.
+ *
+ *                XXX: currently not used, see comment in chat().
  *
  * Parameters  :
  *          1  :  csp = Current client state (buffers, headers, etc...)
@@ -1590,6 +1596,7 @@ static int request_contains_null_bytes(const struct client_state *csp, char *buf
 
    return FALSE;
 }
+#endif
 
 
 /*********************************************************************
