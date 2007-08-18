@@ -1,5 +1,4 @@
-const char pcrs_rcs[] = "$Id: pcrs.c,v 1.27 2007/08/05 13:47:04 fabiankeil Exp $";
-
+const char pcrs_rcs[] = "$Id: pcrs.c,v 1.28 2007/08/18 14:37:27 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/pcrs.c,v $
@@ -38,6 +37,9 @@ const char pcrs_rcs[] = "$Id: pcrs.c,v 1.27 2007/08/05 13:47:04 fabiankeil Exp $
  *
  * Revisions   :
  *    $Log: pcrs.c,v $
+ *    Revision 1.28  2007/08/18 14:37:27  fabiankeil
+ *    Ditch hex_to_byte() in favour of xtoi().
+ *
  *    Revision 1.27  2007/08/05 13:47:04  fabiankeil
  *    #1763173 from Stefan Huehner: s@const static@static const@.
  *
@@ -189,6 +191,8 @@ const char pcrs_rcs[] = "$Id: pcrs.c,v 1.27 2007/08/05 13:47:04 fabiankeil Exp $
 
 /* For snprintf only */
 #include "miscutil.h"
+/* For xtoi */
+#include "encode.h"
 
 #include <string.h>
 #include <ctype.h>
@@ -206,7 +210,6 @@ static int              pcrs_parse_perl_options(const char *optstring, int *flag
 static pcrs_substitute *pcrs_compile_replacement(const char *replacement, int trivialflag,
                         int capturecount, int *errptr);
 static int              is_hex_sequence(const char *sequence);
-static char             hex_to_byte(const char *sequence);
 
 /*********************************************************************
  *
@@ -436,7 +439,16 @@ static pcrs_substitute *pcrs_compile_replacement(const char *replacement, int tr
                }
                else if (is_hex_sequence(&replacement[i]))
                {
-                  text[k++] = hex_to_byte(&replacement[i+2]);
+                  /*
+                   * Replace a hex sequence with a single
+                   * character with the sequence's ascii value.
+                   * e.g.: '\x7e' => '~'
+                   */
+                  const int ascii_value = xtoi(&replacement[i+2]);
+
+                  assert(ascii_value > 0);
+                  assert(ascii_value < 256);
+                  text[k++] = (char)ascii_value;
                   i += 4;
                }               
                else
@@ -1055,57 +1067,6 @@ static int is_hex_sequence(const char *sequence)
            sequence[1] == 'x'  &&
            is_hex_digit(sequence[2]) &&
            is_hex_digit(sequence[3]));
-}
-
-
-/*********************************************************************
- *
- * Function    :  hex_to_byte
- *
- * Description :  Converts two bytes in hex into a single byte
- *                with that value. For example '40' is converted
- *                into '@'.
- *
- *                Based on Werner Koch's _gpgme_hextobyte()
- *                in gpgme's conversion.c.
- *
- * Parameters  :
- *          1  :  hex_sequence = Pointer to the two bytes to convert.
- *
- * Returns     :  The byte value.
- *
- *********************************************************************/
-static char hex_to_byte(const char *hex_sequence)
-{
-   const char *current_position = hex_sequence;
-   int value = 0;
-
-   do
-   {
-      const char current_digit = (char)toupper(*current_position);
-
-      if ((current_digit >= '0') && (current_digit <= '9'))
-      {
-         value += current_digit - '0';
-      }
-      else if ((current_digit >= 'A') && (current_digit <= 'F'))
-      {
-         value += current_digit - 'A' + 10; /* + 10 for the hex offset */
-      }
-
-      if (current_position == hex_sequence)
-      {
-         /*
-          * As 0xNM is N * 16**1 + M * 16**0, the value
-          * of the first byte has to be multiplied.
-          */
-         value *= 16;
-      }
-
-   } while (current_position++ < hex_sequence + 1);
-
-   return (char)value;
-
 }
 
 
