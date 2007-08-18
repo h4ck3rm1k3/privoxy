@@ -1,4 +1,4 @@
-const char encode_rcs[] = "$Id: encode.c,v 1.12 2007/08/04 10:15:51 fabiankeil Exp $";
+const char encode_rcs[] = "$Id: encode.c,v 1.13 2007/08/18 14:34:27 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/encode.c,v $
@@ -33,6 +33,9 @@ const char encode_rcs[] = "$Id: encode.c,v 1.12 2007/08/04 10:15:51 fabiankeil E
  *
  * Revisions   :
  *    $Log: encode.c,v $
+ *    Revision 1.13  2007/08/18 14:34:27  fabiankeil
+ *    Make xtoi() extern so it can be used in pcrs.c.
+ *
  *    Revision 1.12  2007/08/04 10:15:51  fabiankeil
  *    Use strlcpy() instead of strcpy().
  *
@@ -429,7 +432,7 @@ static int xdtoi(const int d)
  * Returns     :  The integer value, or 0 for non-hex strings.
  *
  *********************************************************************/
-static int xtoi(const char *s)
+int xtoi(const char *s)
 {
    int d1, d2;
 
