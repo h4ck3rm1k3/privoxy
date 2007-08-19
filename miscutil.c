@@ -1,4 +1,4 @@
-const char miscutil_rcs[] = "$Id: miscutil.c,v 1.51 2007/06/17 16:12:22 fabiankeil Exp $";
+const char miscutil_rcs[] = "$Id: miscutil.c,v 1.52 2007/08/19 12:32:34 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/miscutil.c,v $
@@ -44,6 +44,9 @@ const char miscutil_rcs[] = "$Id: miscutil.c,v 1.51 2007/06/17 16:12:22 fabianke
  *
  * Revisions   :
  *    $Log: miscutil.c,v $
+ *    Revision 1.52  2007/08/19 12:32:34  fabiankeil
+ *    Fix a conversion warning.
+ *
  *    Revision 1.51  2007/06/17 16:12:22  fabiankeil
  *    #ifdef _WIN32 the last commit. According to David Shaw,
  *    one of the gnupg developers, the changes are mingw32-specific.
@@ -764,7 +767,7 @@ char *string_toupper(const char *string)
 
    while (*q != '\0')
    {
-      *p++ = toupper((int) *q++);
+      *p++ = (char)toupper((int) *q++);
    }
 
    return result;
