@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.106 2007/08/18 14:30:32 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.107 2007/08/28 18:16:32 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,10 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.106 2007/08/18 14:30:32 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.107  2007/08/28 18:16:32  fabiankeil
+ *    Fix possible memory corruption in server_http, make sure it's not
+ *    executed for ordinary server headers and mark some problems for later.
+ *
  *    Revision 1.106  2007/08/18 14:30:32  fabiankeil
  *    Let content-type-overwrite{} honour force-text-mode again.
  *
@@ -819,7 +823,7 @@ const struct parsers client_patterns[] = {
 };
 
 const struct parsers server_patterns[] = {
-   { "HTTP",                      4, server_http },
+   { "HTTP/",                     5, server_http },
    { "set-cookie:",              11, server_set_cookie },
    { "connection:",              11, connection },
    { "Content-Type:",            13, server_content_type },
@@ -3706,6 +3710,7 @@ static jb_err connection_close_adder(struct client_state *csp)
  *********************************************************************/
 static jb_err server_http(struct client_state *csp, char **header)
 {
+   /* XXX: Doesn't belong here. */
    sscanf(*header, "HTTP/%*d.%*d %d", &(csp->http->status));
    if (csp->http->status == 206)
    {
@@ -3714,8 +3719,21 @@ static jb_err server_http(struct client_state *csp, char **header)
 
    if ((csp->action->flags & ACTION_DOWNGRADE) != 0)
    {
-      (*header)[7] = '0';
-      log_error(LOG_LEVEL_HEADER, "Downgraded answer to HTTP/1.0");
+      /* XXX: Should we do a real validity check here? */
+      if (strlen(*header) > 8)
+      {
+         (*header)[7] = '0';
+         log_error(LOG_LEVEL_HEADER, "Downgraded answer to HTTP/1.0");
+      }
+      else
+      {
+         /*
+          * XXX: Should we block the request or
+          * enlist a valid status code line here?
+          */
+         log_error(LOG_LEVEL_INFO, "Malformed server response detected. "
+            "Downgrading to HTTP/1.0 impossible.");
+      }
    }
 
    return JB_ERR_OK;
