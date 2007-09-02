@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.19 2007/09/02 13:42:11 fabiankeil Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.20 2007/09/02 15:31:20 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -33,6 +33,10 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.19 2007/09/02 13:42:11 fabianke
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.20  2007/09/02 15:31:20  fabiankeil
+ *    Move match_portlist() from filter.c to urlmatch.c.
+ *    It's used for url matching, not for filtering.
+ *
  *    Revision 1.19  2007/09/02 13:42:11  fabiankeil
  *    - Allow port lists in url patterns.
  *    - Ditch unused url_spec member pathlen.
@@ -170,10 +174,6 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.19 2007/09/02 13:42:11 fabianke
 #include "ssplit.h"
 #include "miscutil.h"
 #include "errlog.h"
-/*
- * XXX: only for match_portlist() which I will relocate soonish.
- */
-#include "filters.h"
 
 const char urlmatch_h_rcs[] = URLMATCH_H_VERSION;
 
@@ -1038,6 +1038,86 @@ int url_match(const struct url_spec *pattern,
    path_matches = (NULL == pattern->path) || (0 == regexec(pattern->preg, url->path, 0, NULL, 0));
 
    return (port_matches && domain_matches && path_matches);
+
+}
+
+
+/*********************************************************************
+ *
+ * Function    :  match_portlist
+ *
+ * Description :  Check if a given number is covered by a comma
+ *                separated list of numbers and ranges (a,b-c,d,..)
+ *
+ * Parameters  :
+ *          1  :  portlist = String with list
+ *          2  :  port = port to check
+ *
+ * Returns     :  0 => no match
+ *                1 => match
+ *
+ *********************************************************************/
+int match_portlist(const char *portlist, int port)
+{
+   char *min, *max, *next, *portlist_copy;
+
+   min = next = portlist_copy = strdup(portlist);
+
+   /*
+    * Zero-terminate first item and remember offset for next
+    */
+   if (NULL != (next = strchr(portlist_copy, (int) ',')))
+   {
+      *next++ = '\0';
+   }
+
+   /*
+    * Loop through all items, checking for match
+    */
+   while(min)
+   {
+      if (NULL == (max = strchr(min, (int) '-')))
+      {
+         /*
+          * No dash, check for equality
+          */
+         if (port == atoi(min))
+         {
+            free(portlist_copy);
+            return(1);
+         }
+      }
+      else
+      {
+         /*
+          * This is a range, so check if between min and max,
+          * or, if max was omitted, between min and 65K
+          */
+         *max++ = '\0';
+         if(port >= atoi(min) && port <= (atoi(max) ? atoi(max) : 65535))
+         {
+            free(portlist_copy);
+            return(1);
+         }
+
+      }
+
+      /*
+       * Jump to next item
+       */
+      min = next;
+
+      /*
+       * Zero-terminate next item and remember offset for n+1
+       */
+      if ((NULL != next) && (NULL != (next = strchr(next, (int) ','))))
+      {
+         *next++ = '\0';
+      }
+   }
+
+   free(portlist_copy);
+   return 0;
 
 }
 
