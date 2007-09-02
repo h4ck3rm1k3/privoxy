@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.99 2007/07/21 11:51:36 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.100 2007/09/02 13:42:11 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,10 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.100  2007/09/02 13:42:11  fabiankeil
+ *    - Allow port lists in url patterns.
+ *    - Ditch unused url_spec member pathlen.
+ *
  *    Revision 1.99  2007/07/21 11:51:36  fabiankeil
  *    As Hal noticed, checking dispatch_cgi() as the last cruncher
  *    looks like a bug if CGI requests are blocked unintentionally,
@@ -900,10 +904,9 @@ struct url_spec
    int    dcount;      /**< How many parts to this domain? (length of dvec)   */
    int    unanchored;  /**< Bitmap - flags are ANCHOR_LEFT and ANCHOR_RIGHT.  */
 
-   int   port;         /**< The port number, or 0 to match all ports.         */
+   char  *port_list;   /**< List of acceptable ports, or NULL to match all ports */
 
-   char *path;         /**< The source for the regex.                         */
-   size_t pathlen;     /**< ==strlen(path).  Needed for prefix matching.  FIXME: Now obsolete?     */
+   char  *path;        /**< The source for the regex.                         */
    regex_t *preg;      /**< Regex for matching path part                      */
    regex_t *tag_regex; /**< Regex for matching tags                           */
 };
@@ -911,7 +914,7 @@ struct url_spec
 /**
  * If you declare a static url_spec, this is the value to initialize it to zero.
  */
-#define URL_SPEC_INITIALIZER { NULL, NULL, NULL, 0, 0, 0, NULL, 0, NULL, NULL }
+#define URL_SPEC_INITIALIZER { NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL }
 
 /**
  * Constant for host part matching in URLs.  If set, indicates that the start of
