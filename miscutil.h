@@ -1,6 +1,6 @@
 #ifndef MISCUTIL_H_INCLUDED
 #define MISCUTIL_H_INCLUDED
-#define MISCUTIL_H_VERSION "$Id: miscutil.h,v 1.28 2007/05/11 11:48:16 fabiankeil Exp $"
+#define MISCUTIL_H_VERSION "$Id: miscutil.h,v 1.29 2007/09/09 18:20:20 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/miscutil.h,v $
@@ -37,6 +37,10 @@
  *
  * Revisions   :
  *    $Log: miscutil.h,v $
+ *    Revision 1.29  2007/09/09 18:20:20  fabiankeil
+ *    Turn privoxy_strlcpy() into a function and try to work with
+ *    b0rked snprintf() implementations too. Reported by icmp30.
+ *
  *    Revision 1.28  2007/05/11 11:48:16  fabiankeil
  *    - Delete strsav() which was replaced
  *      by string_append() years ago.
@@ -225,7 +229,9 @@ time_t timegm(struct tm *tm);
 
 /* Here's looking at you, Ulrich. */
 #if !defined(HAVE_STRLCPY)
-#define strlcpy(dst, src, size) (size_t)snprintf((dst), (size), "%s", (src))
+size_t privoxy_strlcpy(char *destination, const char *source, size_t size);
+#define strlcpy privoxy_strlcpy
+#define USE_PRIVOXY_STRLCPY 1
 #define HAVE_STRLCPY 1
 #endif /* ndef HAVE_STRLCPY*/
 
