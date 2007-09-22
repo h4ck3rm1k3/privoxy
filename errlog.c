@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.53 2007/08/05 13:53:14 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.54 2007/09/22 16:15:34 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,10 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.53 2007/08/05 13:53:14 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.54  2007/09/22 16:15:34  fabiankeil
+ *    - Let it compile with pcc.
+ *    - Move our includes below system includes to prevent macro conflicts.
+ *
  *    Revision 1.53  2007/08/05 13:53:14  fabiankeil
  *    #1763173 from Stefan Huehner: declare some more functions
  *    static and use void instead of empty parameter lists.
@@ -286,13 +290,13 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.53 2007/08/05 13:53:14 fabiankeil E
  *********************************************************************/
 
 
-#include "config.h"
-#include "miscutil.h"
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+
+#include "config.h"
+#include "miscutil.h"
 
 #if defined(HAVE_STRLCPY) && defined(HAVE_GETTIMEOFDAY)
 #define USE_NEW_LOG_ERROR
@@ -565,9 +569,11 @@ static inline size_t get_log_timestamp(char *buffer, size_t buffer_size)
    time_t now; 
    struct tm tm_now;
    struct timeval tv_now; /* XXX: stupid name */
-   gettimeofday(&tv_now, NULL);
-   long msecs = tv_now.tv_usec / 1000;
+   long msecs;
    int msecs_length = 0;
+
+   gettimeofday(&tv_now, NULL);
+   msecs = tv_now.tv_usec / 1000;
 
    time(&now);
 
