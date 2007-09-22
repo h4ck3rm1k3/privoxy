@@ -1,4 +1,4 @@
-const char pcrs_rcs[] = "$Id: pcrs.c,v 1.28 2007/08/18 14:37:27 fabiankeil Exp $";
+const char pcrs_rcs[] = "$Id: pcrs.c,v 1.29 2007/09/22 16:17:19 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/pcrs.c,v $
@@ -37,6 +37,9 @@ const char pcrs_rcs[] = "$Id: pcrs.c,v 1.28 2007/08/18 14:37:27 fabiankeil Exp $
  *
  * Revisions   :
  *    $Log: pcrs.c,v $
+ *    Revision 1.29  2007/09/22 16:17:19  fabiankeil
+ *    Move our includes below system includes to prevent macro conflicts.
+ *
  *    Revision 1.28  2007/08/18 14:37:27  fabiankeil
  *    Ditch hex_to_byte() in favour of xtoi().
  *
@@ -183,6 +186,10 @@ const char pcrs_rcs[] = "$Id: pcrs.c,v 1.28 2007/08/18 14:37:27 fabiankeil Exp $
  *********************************************************************/
 
 
+#include <string.h>
+#include <ctype.h>
+#include <assert.h>
+
 /*
  * Include project.h just so that the right pcre.h gets
  * included from there
@@ -193,10 +200,6 @@ const char pcrs_rcs[] = "$Id: pcrs.c,v 1.28 2007/08/18 14:37:27 fabiankeil Exp $
 #include "miscutil.h"
 /* For xtoi */
 #include "encode.h"
-
-#include <string.h>
-#include <ctype.h>
-#include <assert.h>
 
 #include "pcrs.h"
 
