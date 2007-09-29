@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.109 2007/09/08 14:25:48 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.110 2007/09/29 10:42:37 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,10 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.109 2007/09/08 14:25:48 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.110  2007/09/29 10:42:37  fabiankeil
+ *    - Remove "scanning headers for" log message again.
+ *    - Some more whitespace fixes.
+ *
  *    Revision 1.109  2007/09/08 14:25:48  fabiankeil
  *    Refactor client_referrer() and add conditional-forge parameter.
  *
@@ -868,7 +872,6 @@ const add_header_func_ptr add_client_headers[] = {
    NULL
 };
 
-
 const add_header_func_ptr add_server_headers[] = {
    connection_close_adder,
    NULL
@@ -1107,7 +1110,7 @@ jb_err decompress_iob(struct client_state *csp)
              * The number of bytes to skip should be positive
              * and we'd like to stay in the buffer.
              */
-            if((skip_bytes < 0) || (skip_bytes >= (csp->iob->eod - cur)))
+            if ((skip_bytes < 0) || (skip_bytes >= (csp->iob->eod - cur)))
             {
                log_error(LOG_LEVEL_ERROR,
                   "Unreasonable amount of bytes to skip (%d). Stopping decompression",
@@ -1484,8 +1487,6 @@ static jb_err scan_headers(struct client_state *csp)
    struct list_entry *h; /* Header */
    jb_err err = JB_ERR_OK;
 
-   log_error(LOG_LEVEL_HEADER, "scanning headers for: %s", csp->http->url);
-
    for (h = csp->headers->first; (err == JB_ERR_OK) && (h != NULL) ; h = h->next)
    {
       /* Header crunch()ed in previous run? -> ignore */
@@ -1509,6 +1510,8 @@ static jb_err scan_headers(struct client_state *csp)
  *
  *                As a side effect it frees the space used by the original
  *                header lines.
+ *
+ *                XXX: should be split to remove the first_run hack.
  *
  * Parameters  :
  *          1  :  pats = list of patterns to match against headers
@@ -1939,7 +1942,7 @@ static jb_err filter_header(struct client_state *csp, char **header)
                      /* RegEx failure */
                      log_error(LOG_LEVEL_ERROR, "Filtering \'%s\' with \'%s\' didn't work out: %s",
                         *header, b->name, pcrs_strerror(matches));
-                     if( newheader != NULL)
+                     if (newheader != NULL)
                      {
                         log_error(LOG_LEVEL_ERROR, "Freeing what's left: %s", newheader);
                         freez(newheader);
@@ -2044,6 +2047,7 @@ static jb_err crumble(struct client_state *csp, char **header)
    freez(*header);
    return JB_ERR_OK;
 }
+
 
 /*********************************************************************
  *
@@ -2401,6 +2405,7 @@ static jb_err server_content_md5(struct client_state *csp, char **header)
    return JB_ERR_OK;
 }
 
+
 /*********************************************************************
  *
  * Function    :  server_content_disposition
@@ -2463,6 +2468,7 @@ static jb_err server_content_disposition(struct client_state *csp, char **header
    }
    return (*header == NULL) ? JB_ERR_MEMORY : JB_ERR_OK;
 }
+
 
 /*********************************************************************
  *
@@ -2583,7 +2589,7 @@ static jb_err server_last_modified(struct client_state *csp, char **header)
                return JB_ERR_MEMORY;  
             }
 
-            if(LOG_LEVEL_HEADER & debug) /* Save cycles if the user isn't interested. */
+            if (LOG_LEVEL_HEADER & debug) /* Save cycles if the user isn't interested. */
             {
                days    = rtime / (3600 * 24);
                hours   = rtime / 3600 % 24;
@@ -2907,6 +2913,7 @@ static jb_err client_uagent(struct client_state *csp, char **header)
    return (*header == NULL) ? JB_ERR_MEMORY : JB_ERR_OK;
 }
 
+
 /*********************************************************************
  *
  * Function    :  client_ua
@@ -3200,6 +3207,7 @@ static jb_err client_host(struct client_state *csp, char **header)
    return JB_ERR_OK;
 }
 
+
 /*********************************************************************
  *
  * Function    :  client_if_modified_since
@@ -3264,11 +3272,11 @@ static jb_err client_if_modified_since(struct client_state *csp, char **header)
          else
          {
             rtime = strtol(newval, &endptr, 0);
-            if(rtime)
+            if (rtime)
             {
                log_error(LOG_LEVEL_HEADER, "Randomizing: %s (random range: %d minut%s)",
                   *header, rtime, (rtime == 1 || rtime == -1) ? "e": "es");
-               if(rtime < 0)
+               if (rtime < 0)
                {
                   rtime *= -1; 
                   negative = 1;
@@ -3303,7 +3311,7 @@ static jb_err client_if_modified_since(struct client_state *csp, char **header)
                return JB_ERR_MEMORY;  
             }
 
-            if(LOG_LEVEL_HEADER & debug) /* Save cycles if the user isn't interested. */
+            if (LOG_LEVEL_HEADER & debug) /* Save cycles if the user isn't interested. */
             {
                hours   = rtime / 3600;
                minutes = rtime / 60 % 60;
@@ -3319,6 +3327,7 @@ static jb_err client_if_modified_since(struct client_state *csp, char **header)
 
    return JB_ERR_OK;
 }
+
 
 /*********************************************************************
  *
@@ -3347,6 +3356,7 @@ static jb_err client_if_none_match(struct client_state *csp, char **header)
 
    return JB_ERR_OK;
 }
+
 
 /*********************************************************************
  *
@@ -3953,6 +3963,7 @@ int strclean(const char *string, const char *substring)
 }
 #endif /* def FEATURE_FORCE_LOAD */
 
+
 /*********************************************************************
  *
  * Function    :  parse_header_time
@@ -4001,6 +4012,7 @@ static jb_err parse_header_time(const char *header_time, time_t *result)
    return JB_ERR_OK;
 
 }
+
 
 /*********************************************************************
  *
