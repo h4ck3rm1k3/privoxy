@@ -1,6 +1,6 @@
 #ifndef FILTERS_H_INCLUDED
 #define FILTERS_H_INCLUDED
-#define FILTERS_H_VERSION "$Id: filters.h,v 1.29 2007/09/28 16:38:55 fabiankeil Exp $"
+#define FILTERS_H_VERSION "$Id: filters.h,v 1.30 2007/09/29 10:21:16 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.h,v $
@@ -39,6 +39,11 @@
  *
  * Revisions   :
  *    $Log: filters.h,v $
+ *    Revision 1.30  2007/09/29 10:21:16  fabiankeil
+ *    - Move get_filter_function() from jcc.c to filters.c
+ *      so the filter functions can be static.
+ *    - Don't bother filtering body-less responses.
+ *
  *    Revision 1.29  2007/09/28 16:38:55  fabiankeil
  *    - Execute content filters through execute_content_filter().
  *    - Add prepare_for_filtering() so filter functions don't have to
@@ -310,9 +315,7 @@ extern const struct forward_spec *forward_url(struct http_request *http, struct 
 typedef char *(*filter_function_ptr)();
 extern char *execute_content_filter(struct client_state *csp, filter_function_ptr content_filter);
 
-extern char *pcrs_filter_response(struct client_state *csp);
-extern char *gif_deanimate_response(struct client_state *csp);
-extern char *jpeg_inspect_response(struct client_state *csp);
+extern filter_function_ptr get_filter_function(struct client_state *csp);
 extern char *execute_single_pcrs_command(char *subject, const char *pcrs_command, int *hits);
 extern char *rewrite_url(char *old_url, const char *pcrs_command);
 extern char *get_last_url(char *subject, const char *redirect_mode);
