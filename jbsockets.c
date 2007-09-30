@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.44 2007/09/15 13:01:31 fabiankeil Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.45 2007/09/30 16:59:22 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -35,6 +35,10 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.44 2007/09/15 13:01:31 fabian
  *
  * Revisions   :
  *    $Log: jbsockets.c,v $
+ *    Revision 1.45  2007/09/30 16:59:22  fabiankeil
+ *    Set the maximum listen() backlog to 128. Apparently SOMAXCONN is
+ *    neither high enough, nor a hard limit on mingw32. Again for BR#1795281.
+ *
  *    Revision 1.44  2007/09/15 13:01:31  fabiankeil
  *    Increase listen() backlog to SOMAXCONN (or 128) to decrease
  *    chances of dropped connections under load. Problem reported
@@ -311,10 +315,8 @@ const char jbsockets_h_rcs[] = JBSOCKETS_H_VERSION;
  */
 #define MAX_DNS_RETRIES 10
 
-#ifndef SOMAXCONN
-/* XXX: Might not be necessary. */
-#define SOMAXCONN 128
-#endif
+#define MAX_LISTEN_BACKLOG 128
+
 
 /*********************************************************************
  *
@@ -692,7 +694,7 @@ int bind_port(const char *hostnam, int portnum, jb_socket *pfd)
       }
    }
 
-   while (listen(fd, SOMAXCONN) == -1)
+   while (listen(fd, MAX_LISTEN_BACKLOG) == -1)
    {
       if (errno != EINTR)
       {
