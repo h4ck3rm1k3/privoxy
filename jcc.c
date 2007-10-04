@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.151 2007/09/29 10:21:16 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.152 2007/10/04 18:03:34 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,14 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.151 2007/09/29 10:21:16 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.152  2007/10/04 18:03:34  fabiankeil
+ *    - Fix a crash when parsing invalid requests whose first header
+ *      is rejected by get_header(). Regression (re?)introduced
+ *      in r1.143 by yours truly.
+ *    - Move ACTION_VANILLA_WAFER handling into parsers.c's
+ *      client_cookie_adder() to make sure send-vanilla-wafer can be
+ *      controlled through tags (and thus regression-tested).
+ *
  *    Revision 1.151  2007/09/29 10:21:16  fabiankeil
  *    - Move get_filter_function() from jcc.c to filters.c
  *      so the filter functions can be static.
@@ -1065,16 +1073,6 @@ const char *pidfile = NULL;
 int received_hup_signal = 0;
 #endif /* defined unix */
 
-/* The vanilla wafer. */
-static const char VANILLA_WAFER[] =
-   "NOTICE=TO_WHOM_IT_MAY_CONCERN_"
-   "Do_not_send_me_any_copyrighted_information_other_than_the_"
-   "document_that_I_am_requesting_or_any_of_its_necessary_components._"
-   "In_particular_do_not_send_me_any_cookies_that_"
-   "are_subject_to_a_claim_of_copyright_by_anybody._"
-   "Take_notice_that_I_refuse_to_be_bound_by_any_license_condition_"
-   "(copyright_or_otherwise)_applying_to_any_cookie._";
-
 /* HTTP snipplets. */
 static const char CSUCCEED[] =
    "HTTP/1.0 200 Connection established\n"
@@ -1901,7 +1899,7 @@ static void chat(struct client_state *csp)
 
    } while ((NULL != req) && ('\0' == *req));
 
-   if (NULL != req)
+   if ((NULL != req) && ('\0' != *req))
    {
       /* Request received. Validate and parse it. */
 
@@ -2063,16 +2061,6 @@ static void chat(struct client_state *csp)
    /* Append the previously read headers */
    list_append_list_unique(csp->headers, headers);
    destroy_list(headers);
-
-   /*
-    * If the user has not supplied any wafers, and the user has not
-    * told us to suppress the vanilla wafer, then send the vanilla wafer.
-    */
-   if (list_is_empty(csp->action->multi[ACTION_MULTI_WAFER])
-       && ((csp->action->flags & ACTION_VANILLA_WAFER) != 0))
-   {
-      enlist(csp->action->multi[ACTION_MULTI_WAFER], VANILLA_WAFER);
-   }
 
    err = sed(client_patterns, add_client_headers, csp);
    if (JB_ERR_OK != err)
