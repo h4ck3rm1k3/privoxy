@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.110 2007/09/29 10:42:37 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.111 2007/10/04 18:07:00 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,11 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.110 2007/09/29 10:42:37 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.111  2007/10/04 18:07:00  fabiankeil
+ *    Move ACTION_VANILLA_WAFER handling from jcc's chat() into
+ *    client_cookie_adder() to make sure send-vanilla-wafer can be
+ *    controlled through tags (and thus regression-tested).
+ *
  *    Revision 1.110  2007/09/29 10:42:37  fabiankeil
  *    - Remove "scanning headers for" log message again.
  *    - Some more whitespace fixes.
@@ -876,6 +881,16 @@ const add_header_func_ptr add_server_headers[] = {
    connection_close_adder,
    NULL
 };
+
+/* The vanilla wafer. */
+static const char VANILLA_WAFER[] =
+   "NOTICE=TO_WHOM_IT_MAY_CONCERN_"
+   "Do_not_send_me_any_copyrighted_information_other_than_the_"
+   "document_that_I_am_requesting_or_any_of_its_necessary_components._"
+   "In_particular_do_not_send_me_any_cookies_that_"
+   "are_subject_to_a_claim_of_copyright_by_anybody._"
+   "Take_notice_that_I_refuse_to_be_bound_by_any_license_condition_"
+   "(copyright_or_otherwise)_applying_to_any_cookie._";
 
 /*********************************************************************
  *
@@ -3475,8 +3490,20 @@ jb_err client_cookie_adder(struct client_state *csp)
 {
    char *tmp;
    struct list_entry *wafer;
-   struct list_entry *wafer_list = csp->action->multi[ACTION_MULTI_WAFER]->first;
+   struct list_entry *wafer_list;
    jb_err err;
+
+   /*
+    * If the user has not supplied any wafers, and the user has not
+    * told us to suppress the vanilla wafer, then send the vanilla wafer.
+    */
+   if ((0 != (csp->action->flags & ACTION_VANILLA_WAFER))
+      && list_is_empty(csp->action->multi[ACTION_MULTI_WAFER]))
+   {
+      enlist(csp->action->multi[ACTION_MULTI_WAFER], VANILLA_WAFER);
+   }
+
+   wafer_list = csp->action->multi[ACTION_MULTI_WAFER]->first;
 
    if (NULL == wafer_list)
    {
