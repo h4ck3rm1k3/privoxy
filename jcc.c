@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.152 2007/10/04 18:03:34 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.153 2007/10/14 14:12:41 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.152 2007/10/04 18:03:34 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.153  2007/10/14 14:12:41  fabiankeil
+ *    When in daemon mode, close stderr after the configuration file has been
+ *    parsed the first time. If logfile isn't set, stop logging. Fixes BR#897436.
+ *
  *    Revision 1.152  2007/10/04 18:03:34  fabiankeil
  *    - Fix a crash when parsing invalid requests whose first header
  *      is rejected by get_header(). Regression (re?)introduced
@@ -2946,6 +2950,8 @@ int main(int argc, const char *argv[])
 #endif
       ;
 
+   init_log_module(Argv[0]);
+
    /*
     * Parse the command line arguments
     *
@@ -3211,10 +3217,9 @@ int main(int argc, const char *argv[])
          close ( fd );
       }
 #endif /* 1 */
-      /* FIXME: should close stderr (fd 2) here too, but the test
-       * for existence
-       * and load config file is done in listen_loop() and puts
-       * some messages on stderr there.
+      /*
+       * stderr (fd 2) will be closed later on, when the
+       * log file has been parsed.
        */
 
       close( 0 );
@@ -3453,7 +3458,7 @@ static void listen_loop(void)
        */
       if (received_hup_signal)
       {
-         init_error_log(Argv[0], config->logfile, config->debug);
+         init_error_log(Argv[0], config->logfile);
          received_hup_signal = 0;
       }
 #endif

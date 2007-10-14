@@ -1,6 +1,6 @@
 #ifndef ERRLOG_H_INCLUDED
 #define ERRLOG_H_INCLUDED
-#define ERRLOG_H_VERSION "$Id: errlog.h,v 1.18 2007/07/14 07:28:47 fabiankeil Exp $"
+#define ERRLOG_H_VERSION "$Id: errlog.h,v 1.19 2007/10/14 14:12:41 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.h,v $
@@ -35,6 +35,10 @@
  *
  * Revisions   :
  *    $Log: errlog.h,v $
+ *    Revision 1.19  2007/10/14 14:12:41  fabiankeil
+ *    When in daemon mode, close stderr after the configuration file has been
+ *    parsed the first time. If logfile isn't set, stop logging. Fixes BR#897436.
+ *
  *    Revision 1.18  2007/07/14 07:28:47  fabiankeil
  *    Add translation function for JB_ERR_FOO codes.
  *
@@ -177,7 +181,10 @@ extern "C" {
 #define LOG_LEVEL_ERROR   0x2000
 #define LOG_LEVEL_FATAL   0x4000 /* Exits after writing log */
 
-extern void init_error_log(const char *prog_name, const char *logfname, int debuglevel);
+extern void init_error_log(const char *prog_name, const char *logfname);
+extern void set_debug_level(int debuglevel);
+void disable_logging(void);
+void init_log_module(const char *prog_name);
 extern void log_error(int loglevel, const char *fmt, ...);
 extern const char *jb_err_to_string(int error);
 
