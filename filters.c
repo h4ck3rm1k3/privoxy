@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.94 2007/09/29 13:20:20 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.95 2007/10/17 19:31:20 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -40,6 +40,10 @@ const char filters_rcs[] = "$Id: filters.c,v 1.94 2007/09/29 13:20:20 fabiankeil
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.95  2007/10/17 19:31:20  fabiankeil
+ *    Omitting the zero chunk that ends the chunk transfer encoding seems
+ *    to be the new black. Log the problem and continue filtering anyway.
+ *
  *    Revision 1.94  2007/09/29 13:20:20  fabiankeil
  *    Remove two redundant and one useless log messages.
  *
@@ -2185,8 +2189,8 @@ static jb_err remove_chunked_transfer_coding(char *buffer, size_t *size)
 
       if (sscanf(from_p, "%x", &chunksize) != 1)
       {
-         log_error(LOG_LEVEL_ERROR, "Parse error while stripping \"chunked\" transfer coding");
-         return JB_ERR_PARSE;
+         log_error(LOG_LEVEL_INFO, "Invalid \"chunked\" transfer encoding detected and ignored.");
+         break;
       }
    }
    
@@ -2304,7 +2308,6 @@ char *execute_content_filter(struct client_state *csp, filter_function_ptr conte
    {
       /*
        * failed to de-chunk or decompress.
-       * XXX: if possible, we should continue anyway.
        */
       return NULL;
    }
