@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.99 2007/08/05 13:42:22 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.100 2007/10/17 18:40:53 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,10 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.99 2007/08/05 13:42:22 fabiankeil Exp $";
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.100  2007/10/17 18:40:53  fabiankeil
+ *    - Send CGI pages as HTTP/1.1 unless the client asked for HTTP/1.0.
+ *    - White space fix.
+ *
  *    Revision 1.99  2007/08/05 13:42:22  fabiankeil
  *    #1763173 from Stefan Huehner: declare some more functions static.
  *
@@ -1988,9 +1992,12 @@ struct http_response *finish_http_response(const struct client_state *csp, struc
    }
 
    /* 
-    * Fill in the HTTP Status
+    * Fill in the HTTP Status, using HTTP/1.1
+    * unless the client asked for HTTP/1.0.
     */
-   snprintf(buf, sizeof(buf), "HTTP/1.0 %s", rsp->status ? rsp->status : "200 OK");
+   snprintf(buf, sizeof(buf), "%s %s",
+      strcmpic(csp->http->ver, "HTTP/1.0") ? "HTTP/1.1" : "HTTP/1.0",
+      rsp->status ? rsp->status : "200 OK");
    err = enlist_first(rsp->headers, buf);
 
    /* 
@@ -2026,12 +2033,12 @@ struct http_response *finish_http_response(const struct client_state *csp, struc
 
    if (strncmpic(rsp->status, "302", 3))
    {
-     /*
-      * If it's not a redirect without any content,
-      * set the Content-Type to text/html if it's
-      * not already specified.
-      */
-     if (!err) err = enlist_unique(rsp->headers, "Content-Type: text/html", 13);
+      /*
+       * If it's not a redirect without any content,
+       * set the Content-Type to text/html if it's
+       * not already specified.
+       */
+      if (!err) err = enlist_unique(rsp->headers, "Content-Type: text/html", 13);
    }
 
    /*
