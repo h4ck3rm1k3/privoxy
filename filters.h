@@ -1,6 +1,6 @@
 #ifndef FILTERS_H_INCLUDED
 #define FILTERS_H_INCLUDED
-#define FILTERS_H_VERSION "$Id: filters.h,v 1.30 2007/09/29 10:21:16 fabiankeil Exp $"
+#define FILTERS_H_VERSION "$Id: filters.h,v 1.31 2007/10/19 16:53:28 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.h,v $
@@ -39,6 +39,9 @@
  *
  * Revisions   :
  *    $Log: filters.h,v $
+ *    Revision 1.31  2007/10/19 16:53:28  fabiankeil
+ *    Add helper function to check if any content filters are enabled.
+ *
  *    Revision 1.30  2007/09/29 10:21:16  fabiankeil
  *    - Move get_filter_function() from jcc.c to filters.c
  *      so the filter functions can be static.
@@ -322,6 +325,7 @@ extern char *get_last_url(char *subject, const char *redirect_mode);
 
 extern pcrs_job *compile_dynamic_pcrs_job_list(const struct client_state *csp, const struct re_filterfile_spec *b);
 
+extern inline int content_filters_enabled(const struct client_state *csp);
 
 /*
  * Handling Max-Forwards:

@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.95 2007/10/17 19:31:20 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.96 2007/10/19 16:53:28 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -40,6 +40,9 @@ const char filters_rcs[] = "$Id: filters.c,v 1.95 2007/10/17 19:31:20 fabiankeil
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.96  2007/10/19 16:53:28  fabiankeil
+ *    Add helper function to check if any content filters are enabled.
+ *
  *    Revision 1.95  2007/10/17 19:31:20  fabiankeil
  *    Omitting the zero chunk that ends the chunk transfer encoding seems
  *    to be the new black. Log the problem and continue filtering anyway.
@@ -2649,6 +2652,26 @@ struct http_response *direct_response(struct client_state *csp)
    return NULL;
 }
 
+
+/*********************************************************************
+ *
+ * Function    :  content_filters_enabled
+ *
+ * Description :  Checks whether there are any content filters
+ *                enabled for the current request.
+ *
+ * Parameters  :  
+ *          1  :  csp = Current client state (buffers, headers, etc...)
+ *
+ * Returns     :  TRUE for yes, FALSE otherwise
+ *
+ *********************************************************************/
+inline int content_filters_enabled(const struct client_state *csp)
+{
+   return (((csp->rlist != NULL) &&
+      (!list_is_empty(csp->action->multi[ACTION_MULTI_FILTER]))) ||
+      (csp->action->flags & (ACTION_DEANIMATE|ACTION_JPEG_INSPECT|ACTION_NO_POPUPS)));
+}
 
 /*
   Local Variables:
