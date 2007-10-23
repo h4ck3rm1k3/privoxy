@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.154 2007/10/19 17:00:08 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.155 2007/10/23 20:12:45 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.154 2007/10/19 17:00:08 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.155  2007/10/23 20:12:45  fabiankeil
+ *    Fix first CSUCCEED line to end in \r\n as required by RFC1945.
+ *    Reported by Bert van Leeuwen in BR#1818808.
+ *
  *    Revision 1.154  2007/10/19 17:00:08  fabiankeil
  *    Downgrade "Flushing header and buffers" message to LOG_LEVEL_INFO.
  *
@@ -1082,7 +1086,7 @@ int received_hup_signal = 0;
 
 /* HTTP snipplets. */
 static const char CSUCCEED[] =
-   "HTTP/1.0 200 Connection established\n"
+   "HTTP/1.0 200 Connection established\r\n"
    "Proxy-Agent: Privoxy/" VERSION "\r\n\r\n";
 
 static const char CHEADER[] =
