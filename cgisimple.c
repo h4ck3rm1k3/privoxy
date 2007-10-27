@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.59 2007/10/19 16:42:36 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.60 2007/10/27 13:12:13 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,10 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.59 2007/10/19 16:42:36 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.60  2007/10/27 13:12:13  fabiankeil
+ *    Finish 1.49 and check write access before
+ *    showing edit buttons on show-url-info page.
+ *
  *    Revision 1.59  2007/10/19 16:42:36  fabiankeil
  *    Plug memory leak I introduced five months ago.
  *    Yay Valgrind and Privoxy-Regression-Test.
@@ -1543,10 +1547,22 @@ jb_err cgi_show_url_info(struct client_state *csp,
                string_append(&matches, buf);
                string_append(&matches, "View</a>");
 #ifdef FEATURE_CGI_EDIT_ACTIONS
-               snprintf(buf, sizeof(buf), " <a class=\"cmd\" href=\"/edit-actions-list?f=%d\">", i);
-               string_append(&matches, buf);
-               string_append(&matches, "Edit</a>");
-#endif
+#ifdef HAVE_ACCESS
+               if (access(csp->config->actions_file[i], W_OK) == 0)
+               {
+#endif /* def HAVE_ACCESS */
+                  snprintf(buf, sizeof(buf), " <a class=\"cmd\" href=\"/edit-actions-list?f=%d\">", i);
+                  string_append(&matches, buf);
+                  string_append(&matches, "Edit</a>");
+#ifdef HAVE_ACCESS
+               }
+               else
+               {
+                  string_append(&matches, " <strong>No write access.</strong>");
+               }
+#endif /* def HAVE_ACCESS */
+#endif /* FEATURE_CGI_EDIT_ACTIONS */
+
                string_append(&matches, "</th></tr>\n");
 
                hits = 0;
