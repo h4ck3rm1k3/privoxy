@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.156 2007/11/01 18:20:58 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.157 2007/11/03 17:34:49 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.156 2007/11/01 18:20:58 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.157  2007/11/03 17:34:49  fabiankeil
+ *    Log the "weak randomization factor" warning only
+ *    once for mingw32 and provide some more details.
+ *
  *    Revision 1.156  2007/11/01 18:20:58  fabiankeil
  *    Initialize log module after initializing mutexes, future
  *    deadlocks in that code should now work cross-platform.
@@ -3107,6 +3111,7 @@ int main(int argc, const char *argv[])
    files->next = NULL;
    clients->next = NULL;
 
+   /* XXX: factor out initialising after the next stable release. */
 #ifdef AMIGA
    InitAmiga();
 #elif defined(_WIN32)
@@ -3122,6 +3127,15 @@ int main(int argc, const char *argv[])
    random_seed = (unsigned int)time(NULL);
 #ifdef HAVE_RANDOM
    srandom(random_seed);
+#elif defined (_WIN32)
+   /*
+    * See pick_from_range() in miscutil.c for details.
+    */
+   log_error(LOG_LEVEL_INFO,
+      "No thread-safe PRNG implemented for your platform. "
+      "Using weak \'randomization\' factor which will "
+      "limit the already questionable usefulness of "
+      "header-time-randomizing actions (disabled by default).");
 #else
    srand(random_seed);
 #endif /* ifdef HAVE_RANDOM */
