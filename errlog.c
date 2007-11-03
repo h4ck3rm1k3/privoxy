@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.59 2007/11/01 12:50:56 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.60 2007/11/03 19:03:31 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,12 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.59 2007/11/01 12:50:56 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.60  2007/11/03 19:03:31  fabiankeil
+ *    - Prevent the Windows GUI from showing the version two times in a row.
+ *    - Stop using the imperative in the "(Re-)Open logfile" message.
+ *    - Ditch the "Switching to daemon mode" message as the detection
+ *      whether or not we're already in daemon mode doesn't actually work.
+ *
  *    Revision 1.59  2007/11/01 12:50:56  fabiankeil
  *    Here's looking at you, deadlock.
  *
@@ -557,14 +563,9 @@ void init_error_log(const char *prog_name, const char *logfname)
 
    lock_loginit();
 
-   if (logfp == stderr)
+   if (logfp != NULL)
    {
-      log_error(LOG_LEVEL_INFO,
-         "Switching to daemon mode. Log messages will be written to: %s", logfname);
-   }
-   else if (logfp != NULL)
-   {
-      log_error(LOG_LEVEL_INFO, "(Re-)Open logfile \'%s\'", logfname ? logfname : "none");
+      log_error(LOG_LEVEL_INFO, "(Re-)Opening logfile \'%s\'", logfname);
    }
 
    /* set the designated log file */
@@ -585,7 +586,18 @@ void init_error_log(const char *prog_name, const char *logfname)
    logfp = fp;
    unlock_logfile();
 
+#if !defined(_WIN32)
+   /*
+    * Prevent the Windows GUI from showing the version two
+    * times in a row on startup. It already displayed the show_version()
+    * call from init_log_module() that other systems write to stderr.
+    *
+    * This means mingw32 users will never see the version in their
+    * log file, but I assume they wouldn't look for it there anyway
+    * and simply use the "Help/About Privoxy" menu.
+    */
    show_version(prog_name);
+#endif /* def unix */
 
    unlock_loginit();
 
