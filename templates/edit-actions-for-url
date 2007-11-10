@@ -32,6 +32,10 @@
 #
 # Revisions   :
 #    $Log: edit-actions-for-url,v $
+#    Revision 1.46  2007/11/10 15:06:10  fabiankeil
+#    - Add support for +hide-referrer{conditional-forge}.
+#    - Minor rewordings.
+#
 #    Revision 1.45  2007/05/24 13:38:45  fabiankeil
 #    Two minor fixes.
 #
@@ -523,7 +527,7 @@ function show_send_wafer_opts(tf)
         name="block" value="X" @block-x@
         ></td>
       <td class="action"><a href="@user-manual@@actions-help-prefix@BLOCK">block</a></td>
-      <td>Block the request</td>
+      <td>Block the request.</td>
     </tr>
 
 @client-header-filter-params@
@@ -601,7 +605,7 @@ function show_send_wafer_opts(tf)
         name="crunch_incoming_cookies" value="X" @crunch-incoming-cookies-x@
         ></td>
       <td class="action"><a href="@user-manual@@actions-help-prefix@CRUNCH-INCOMING-COOKIES">crunch-incoming-cookies</a></td>
-      <td>Prevent the website from setting cookies on your system.</td>
+      <td>Prevent the website from setting HTTP cookies on your system.</td>
     </tr>
     <tr class="bg1" align="left" valign="top">
       <td class="en1" align="center" valign="middle"><input type="radio"
@@ -614,7 +618,7 @@ function show_send_wafer_opts(tf)
         name="crunch_outgoing_cookies" value="X" @crunch-outgoing-cookies-x@
         ></td>
       <td class="action"><a href="@user-manual@@actions-help-prefix@CRUNCH-OUTGOING-COOKIES">crunch-outgoing-cookies</a></td>
-      <td>Prevent the website from reading cookies from your system.</td>
+      <td>Prevent the website from reading HTTP cookies from your system.</td>
     </tr>
     <tr class="bg1" align="left" valign="top">
       <td class="en1" align="center" valign="middle"><input type="radio"
@@ -823,7 +827,7 @@ function show_send_wafer_opts(tf)
         ></td>
       <td class="action"><a href="@user-manual@@actions-help-prefix@HIDE-ACCEPT-LANGUAGE">hide-accept-language</a></td>
       <td>Pretend to have different language settings. (Makes a fake User-Agent more believable,
-          but can lead to foreign content.)</td>
+          but you may end up with content in the language you pretended to understand.)</td>
     </tr>
     <tr class="bg1" align="left" valign="top" id="hide_accept-language_opts">
       <td class="en1">&nbsp;</td>
@@ -1022,7 +1026,13 @@ function show_send_wafer_opts(tf)
         @hide-referrer-param-conditional-block@ id="hide_referrer_mode_conditional-block"><label
         for="hide_referrer_mode_conditional-block">Remove completely if host has changed,
         but don't touch in-site referrers.
-        Less suspicious than the options above.</label><br></td>
+        Less suspicious than the options above.</label><br>
+        <input type="radio" name="hide_referrer_mode" value="conditional-forge"
+        onclick="hide_referrer_param_disable(true)"
+        @hide-referrer-param-conditional-forge@ id="hide_referrer_mode_conditional-forge"><label
+        for="hide_referrer_mode_conditional-forge">Forge referrer if host has
+        changed, but don't touch in-site referrers.</label><br>
+      </td>
     </tr>
     <tr class="bg1" align="left" valign="top">
       <td class="en1" align="center" valign="middle"><input type="radio"
@@ -1035,8 +1045,7 @@ function show_send_wafer_opts(tf)
         name="hide_user_agent" value="X" @hide-user-agent-x@
         onclick="show_user_agent_opts(false)"></td>
       <td class="action"><a href="@user-manual@@actions-help-prefix@HIDE-USER-AGENT">hide-user-agent</a></td>
-      <td>Pretend to be using a different web browser.&nbsp; (Breaks many web
-        sites).</td>
+      <td>Pretend to be using a different web browser.&nbsp; (May cause problems with broken web sites).</td>
     </tr>
     <tr class="bg1" align="left" valign="top" id="user_agent_opts">
       <td class="en1">&nbsp;</td>
@@ -1072,7 +1081,7 @@ function show_send_wafer_opts(tf)
         ></td>
       <td class="action"><a href="@user-manual@@actions-help-prefix@KILL-POPUPS">kill-popups</a></td>
       <td>Filter the website through a built-in filter to disable many JavaScript
-        pop-up windows.</td>
+        pop-up windows. Not recommended.</td>
     </tr>
     <tr class="bg1" align="left" valign="top">
       <td class="en1" align="center" valign="middle"><input type="radio"
@@ -1086,8 +1095,7 @@ function show_send_wafer_opts(tf)
         onclick="show_limit_connect_opts(false)"></td>
       <td class="action"><a href="@user-manual@@actions-help-prefix@LIMIT-CONNECT">limit-connect</a></td>
       <td>Specify which ports are allowed for SSL (HTTP CONNECT) access.
-        Note that this allows arbitrary tunnelling, so opening all
-        ports would be a security hole.</td>
+        Note that this allows arbitrary tunnelling.</td>
     </tr>
     <tr class="bg1" align="left" valign="top" id="limit_connect_opts">
       <td class="en1">&nbsp;</td>
@@ -1149,9 +1157,8 @@ function show_send_wafer_opts(tf)
       <td class="action"><a href="@user-manual@@actions-help-prefix@PREVENT-COMPRESSION">prevent-compression</a></td>
       <td>Disables compression.  Compressed web pages are faster to
         download, but cannot be filtered with <a href="@user-manual@@actions-help-prefix@FILTER"><b>filter</b></a>
-        or <a href="@user-manual@@actions-help-prefix@KILL-POPUPS"><b>kill-popups</b></a>.
-        This setting only affects the few web sites which support
-        compression.</td>
+        or <a href="@user-manual@@actions-help-prefix@KILL-POPUPS"><b>kill-popups</b></a>
+        if your Privoxy version was build without zlib support.</td>
     </tr>
    <tr class="bg1" align="left" valign="top">
       <td class="en1" align="center" valign="middle"><input type="radio"
@@ -1187,7 +1194,7 @@ function show_send_wafer_opts(tf)
         name="send_vanilla_wafer" value="X" @send-vanilla-wafer-x@
         ></td>
       <td class="action"><a href="@user-manual@@actions-help-prefix@SEND-VANILLA-WAFER">send-vanilla-wafer</a></td>
-      <td>Adds a special wafer (standard cookie) to all your requests.</td>
+      <td>Adds a special wafer (standard cookie) to all your requests. Not recommended.</td>
     </tr>
     <tr class="bg1" align="left" valign="top">
       <td class="en1" align="center" valign="middle"><input type="radio"
@@ -1226,7 +1233,7 @@ function show_send_wafer_opts(tf)
         name="session_cookies_only" value="X" @session-cookies-only-x@
         ></td>
       <td class="action"><a href="@user-manual@@actions-help-prefix@SESSION-COOKIES-ONLY">session-cookies-only</a></td>
-      <td>Any cookies set by the website are changed to temporary
+      <td>HTTP cookies set by the website are changed to temporary
         ("per-session") ones, which only last until you close your web
         browser.  This will allow you to use sites that require cookies, but
         sites will not be able to track you across sessions.  For this to
