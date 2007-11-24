@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.158 2007/11/11 16:44:17 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.159 2007/11/24 14:34:09 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.158 2007/11/11 16:44:17 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.159  2007/11/24 14:34:09  fabiankeil
+ *    In the HTTP snipplets, refer to the client as client.
+ *
  *    Revision 1.158  2007/11/11 16:44:17  fabiankeil
  *    Emit a log message when activating the MS IIS5 hack.
  *
@@ -1101,11 +1104,11 @@ static const char CSUCCEED[] =
    "Proxy-Agent: Privoxy/" VERSION "\r\n\r\n";
 
 static const char CHEADER[] =
-   "HTTP/1.0 400 Invalid header received from browser\r\n"
+   "HTTP/1.0 400 Invalid header received from client\r\n"
    "Proxy-Agent: Privoxy " VERSION "\r\n"
    "Content-Type: text/plain\r\n"
    "Connection: close\r\n\r\n"
-   "Invalid header received from browser.\r\n";
+   "Invalid header received from client.\r\n";
 
 static const char CFORBIDDEN[] =
    "HTTP/1.0 403 Connection not allowable\r\n"
@@ -1114,20 +1117,20 @@ static const char CFORBIDDEN[] =
    "Connection: close\r\n\r\n";
 
 static const char FTP_RESPONSE[] =
-   "HTTP/1.0 400 Invalid request received from browser\r\n"
+   "HTTP/1.0 400 Invalid request received from client\r\n"
    "Content-Type: text/plain\r\n"
    "Connection: close\r\n\r\n"
    "Invalid request. Privoxy doesn't support FTP.\r\n";
 
 static const char GOPHER_RESPONSE[] =
-   "HTTP/1.0 400 Invalid request received from browser\r\n"
+   "HTTP/1.0 400 Invalid request received from client\r\n"
    "Content-Type: text/plain\r\n"
    "Connection: close\r\n\r\n"
    "Invalid request. Privoxy doesn't support gopher.\r\n";
 
 /* XXX: should be a template */
 static const char MISSING_DESTINATION_RESPONSE[] =
-   "HTTP/1.0 400 Bad request received from browser\r\n"
+   "HTTP/1.0 400 Bad request received from client\r\n"
    "Proxy-Agent: Privoxy " VERSION "\r\n"
    "Content-Type: text/plain\r\n"
    "Connection: close\r\n\r\n"
@@ -1145,7 +1148,7 @@ static const char NO_SERVER_DATA_RESPONSE[] =
 #if 0
 /* XXX: should be a template */
 static const char NULL_BYTE_RESPONSE[] =
-   "HTTP/1.0 400 Bad request received from browser\r\n"
+   "HTTP/1.0 400 Bad request received from client\r\n"
    "Proxy-Agent: Privoxy " VERSION "\r\n"
    "Content-Type: text/plain\r\n"
    "Connection: close\r\n\r\n"
