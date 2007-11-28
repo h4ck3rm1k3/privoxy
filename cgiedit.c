@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.57 2007/10/27 13:32:23 fabiankeil Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.58 2007/11/28 17:57:01 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,10 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.57 2007/10/27 13:32:23 fabiankeil
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.58  2007/11/28 17:57:01  fabiankeil
+ *    Fix double free in cgi_edit_actions_list().
+ *    Reported by adlab in BR#1840145.
+ *
  *    Revision 1.57  2007/10/27 13:32:23  fabiankeil
  *    Plug minor 5-year-old memory leak. Spotted by
  *    Valgrind and triggered by Privoxy-Regression-Test.
@@ -2839,7 +2843,6 @@ jb_err cgi_edit_actions_list(struct client_state *csp,
       free(url_template);
       edit_free_file(file);
       free_map(exports);
-      free(url_template);
       return err;
    }
 
