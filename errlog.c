@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.61 2007/11/04 19:03:01 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.62 2007/11/30 15:33:46 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,10 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.61 2007/11/04 19:03:01 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.62  2007/11/30 15:33:46  fabiankeil
+ *    Unbreak LOG_LEVEL_FATAL. It wasn't fatal with logging disabled
+ *    and on mingw32 fatal log messages didn't end up in the log file.
+ *
  *    Revision 1.61  2007/11/04 19:03:01  fabiankeil
  *    Fix another deadlock Hal spotted and that mysteriously didn't affect FreeBSD.
  *
@@ -434,10 +438,12 @@ static void fatal_error(const char * error_message)
 
    /* Cleanup - remove taskbar icon etc. */
    TermLogWindow();
-
-#else /* if !defined(_WIN32) || defined(_WIN_CONSOLE) */
-   fputs(error_message, logfp);
 #endif /* defined(_WIN32) && !defined(_WIN_CONSOLE) */
+
+   if (logfp != NULL)
+   {
+      fputs(error_message, logfp);
+   }
 
 #if defined(unix)
    if (pidfile)
@@ -903,7 +909,8 @@ void log_error(int loglevel, const char *fmt, ...)
     * settings and that logging is enabled.
     * Bail out otherwise.
     */
-   if ((0 == (loglevel & debug)) || (logfp == NULL))
+   if ((loglevel != LOG_LEVEL_FATAL) &&
+       ((0 == (loglevel & debug)) || (logfp == NULL)))
    {
       return;
    }
@@ -922,9 +929,6 @@ void log_error(int loglevel, const char *fmt, ...)
          snprintf(tempbuf, sizeof(tempbuf),
             "%s Privoxy(%08lx) Fatal error: log_error() failed to allocate buffer memory.\n"
             "\nExiting.", timestamp, thread_id);
-         assert(NULL != logfp);
-         fputs(tempbuf, logfp);
-         unlock_logfile();
          fatal_error(tempbuf); /* Exit */
       }
    }
@@ -1142,7 +1146,7 @@ void log_error(int loglevel, const char *fmt, ...)
       loglevel = LOG_LEVEL_FATAL;
    }
 
-   assert(NULL != logfp);
+   assert(NULL != logfp || loglevel == LOG_LEVEL_FATAL);
 
    if (loglevel == LOG_LEVEL_FATAL)
    {
