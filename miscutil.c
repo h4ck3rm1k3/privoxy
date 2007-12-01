@@ -1,4 +1,4 @@
-const char miscutil_rcs[] = "$Id: miscutil.c,v 1.55 2007/11/03 17:34:49 fabiankeil Exp $";
+const char miscutil_rcs[] = "$Id: miscutil.c,v 1.56 2007/12/01 12:59:05 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/miscutil.c,v $
@@ -44,6 +44,9 @@ const char miscutil_rcs[] = "$Id: miscutil.c,v 1.55 2007/11/03 17:34:49 fabianke
  *
  * Revisions   :
  *    $Log: miscutil.c,v $
+ *    Revision 1.56  2007/12/01 12:59:05  fabiankeil
+ *    Some sanity checks for pick_from_range().
+ *
  *    Revision 1.55  2007/11/03 17:34:49  fabiankeil
  *    Log the "weak randomization factor" warning only
  *    once for mingw32 and provide some more details.
@@ -1092,6 +1095,12 @@ char * make_path(const char * dir, const char * file)
 long int pick_from_range(long int range)
 {
    long int number;
+
+   assert(range != 0);
+   assert(range > 0);
+
+   if (range <= 0) return 0;
+
 #ifdef HAVE_RANDOM
    number = random() % range + 1; 
 #elif defined(FEATURE_PTHREAD)
@@ -1124,7 +1133,7 @@ long int pick_from_range(long int range)
 
 #endif /* (def HAVE_RANDOM) */
 
-   return (number);
+   return number;
 }
 
 
