@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.115 2007/11/02 16:52:50 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.116 2007/12/01 13:04:22 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,9 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.115 2007/11/02 16:52:50 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.116  2007/12/01 13:04:22  fabiankeil
+ *    Fix a crash on mingw32 with some Last Modified times in the future.
+ *
  *    Revision 1.115  2007/11/02 16:52:50  fabiankeil
  *    Remove a "can't happen" error block which, over
  *    time, mutated into a "guaranteed to happen" block.
@@ -2599,7 +2602,16 @@ static jb_err server_last_modified(struct client_state *csp, char **header)
          rtime = (long int)difftime(now, last_modified);
          if (rtime)
          {
+            int negative = 0;
+
+            if (rtime < 0)
+            {
+               rtime *= -1; 
+               negative = 1;
+               log_error(LOG_LEVEL_HEADER, "Server time in the future.");
+            }
             rtime = pick_from_range(rtime);
+            if (negative) rtime *= -1;
             last_modified += rtime;
 #ifdef HAVE_GMTIME_R
             timeptr = gmtime_r(&last_modified, &gmt);
