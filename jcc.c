@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.160 2007/11/29 18:00:29 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.161 2007/12/04 19:44:22 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.160 2007/11/29 18:00:29 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.161  2007/12/04 19:44:22  fabiankeil
+ *    Unbreak trustfile which previously didn't work without
+ *    FEATURE_TOGGLE. Fixes BR#1843585, reported by Lee.
+ *
  *    Revision 1.160  2007/11/29 18:00:29  fabiankeil
  *    Plug memory leak. Spotted by Valgrind, triggered by
  *    Privoxy-Regression-Test feeding proxyfuzz.py.
@@ -3574,10 +3578,10 @@ static void listen_loop(void)
 
 #ifdef FEATURE_TOGGLE
       if (global_toggle_state)
+#endif /* def FEATURE_TOGGLE */
       {
          csp->flags |= CSP_FLAG_TOGGLED_ON;
       }
-#endif /* def FEATURE_TOGGLE */
 
       if (run_loader(csp))
       {
