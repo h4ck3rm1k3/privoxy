@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.116 2007/12/01 13:04:22 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.117 2007/12/06 18:11:50 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,10 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.116 2007/12/01 13:04:22 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.117  2007/12/06 18:11:50  fabiankeil
+ *    Garbage-collect the code to add a X-Forwarded-For
+ *    header as it seems to be mostly used by accident.
+ *
  *    Revision 1.116  2007/12/01 13:04:22  fabiankeil
  *    Fix a crash on mingw32 with some Last Modified times in the future.
  *
@@ -829,7 +833,6 @@ static jb_err server_content_disposition(struct client_state *csp, char **header
 static jb_err client_host_adder       (struct client_state *csp);
 static jb_err client_cookie_adder     (struct client_state *csp);
 static jb_err client_xtra_adder       (struct client_state *csp);
-static jb_err client_x_forwarded_adder(struct client_state *csp);
 static jb_err connection_close_adder  (struct client_state *csp); 
 
 static jb_err create_forged_referrer(char **header, const char *hostport);
@@ -890,7 +893,6 @@ const struct parsers server_patterns_light[] = {
 const add_header_func_ptr add_client_headers[] = {
    client_host_adder,
    client_cookie_adder,
-   client_x_forwarded_adder,
    client_xtra_adder,
    /* Temporarily disabled:    client_accept_encoding_adder, */
    connection_close_adder,
@@ -3088,19 +3090,7 @@ static jb_err client_send_cookie(struct client_state *csp, char **header)
  *********************************************************************/
 jb_err client_x_forwarded(struct client_state *csp, char **header)
 {
-   if ((csp->action->flags & ACTION_HIDE_FORWARDED) == 0)
-   {
-      /* Save it so we can re-add it later */
-      freez(csp->x_forwarded);
-      csp->x_forwarded = *header;
-
-      /*
-       * Always set *header = NULL, since this information
-       * will be sent at the end of the header.
-       */
-      *header = NULL;
-   }
-   else
+   if ((csp->action->flags & ACTION_HIDE_FORWARDED) != 0)
    {
       freez(*header);
       log_error(LOG_LEVEL_HEADER, "crunched x-forwarded-for!");
@@ -3648,53 +3638,6 @@ static jb_err client_xtra_adder(struct client_state *csp)
    }
 
    return JB_ERR_OK;
-}
-
-
-/*********************************************************************
- *
- * Function    :  client_x_forwarded_adder
- *
- * Description :  Used in the add_client_headers list.  Called from `sed'.
- *
- * Parameters  :
- *          1  :  csp = Current client state (buffers, headers, etc...)
- *
- * Returns     :  JB_ERR_OK on success, or
- *                JB_ERR_MEMORY on out-of-memory error.
- *
- *********************************************************************/
-static jb_err client_x_forwarded_adder(struct client_state *csp)
-{
-   char *p = NULL;
-   jb_err err;
-
-   if ((csp->action->flags & ACTION_HIDE_FORWARDED) != 0)
-   {
-      return JB_ERR_OK;
-   }
-
-   if (csp->x_forwarded)
-   {
-      p = strdup(csp->x_forwarded);
-      string_append(&p, ", ");
-   }
-   else
-   {
-      p = strdup("X-Forwarded-For: ");
-   }
-   string_append(&p, csp->ip_addr_str);
-
-   if (p == NULL)
-   {
-      return JB_ERR_MEMORY;
-   }
-
-   log_error(LOG_LEVEL_HEADER, "addh: %s", p);
-   err = enlist(csp->headers, p);
-   free(p);
-
-   return err;
 }
 
 
