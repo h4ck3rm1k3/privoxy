@@ -2,7 +2,7 @@ Privoxy Frequently Asked Questions
 
 [ Copyright   2001-2007 by Privoxy Developers ]
 
-$Id: faq.txt,v 1.52 2007/12/07 11:57:45 hal9 Exp $
+$Id: faq.txt,v 1.53 2007/12/08 14:40:11 hal9 Exp $
 
 This FAQ gives quick answers to frequently asked questions about Privoxy. It is
 not a substitute for the Privoxy User Manual.

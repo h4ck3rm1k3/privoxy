@@ -2,7 +2,7 @@ Privoxy Developer Manual
 
 [ Copyright   2001-2007 by Privoxy Developers ]
 
-$Id: developer-manual.txt,v 1.39 2007/12/07 11:57:45 hal9 Exp $
+$Id: developer-manual.txt,v 1.40 2007/12/08 14:40:10 hal9 Exp $
 
 The developer manual provides guidance on coding, testing, packaging,
 documentation and other issues of importance to those involved with Privoxy
@@ -1444,7 +1444,7 @@ from the project).
 
 Example for file comments:
 
-const char FILENAME_rcs[] = "$Id: developer-manual.txt,v 1.39 2007/12/07 11:57:45 hal9 Exp $";
+const char FILENAME_rcs[] = "$Id: developer-manual.txt,v 1.40 2007/12/08 14:40:10 hal9 Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/doc/text/Attic/developer-manual.txt,v $
@@ -1479,8 +1479,8 @@ const char FILENAME_rcs[] = "$Id: developer-manual.txt,v 1.39 2007/12/07 11:57:4
  *
  * Revisions   :
  *    $Log: developer-manual.txt,v $
- *    Revision 1.39  2007/12/07 11:57:45  hal9
- *    For stable release.
+ *    Revision 1.40  2007/12/08 14:40:10  hal9
+ *    Updated for 3.0.7 beta
  *
  *
  *********************************************************************/
@@ -1506,7 +1506,7 @@ Example for file header comments:
 
 #ifndef _FILENAME_H
 #define _FILENAME_H
-#define FILENAME_H_VERSION "$Id: developer-manual.txt,v 1.39 2007/12/07 11:57:45 hal9 Exp $"
+#define FILENAME_H_VERSION "$Id: developer-manual.txt,v 1.40 2007/12/08 14:40:10 hal9 Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/doc/text/Attic/developer-manual.txt,v $
@@ -1541,8 +1541,8 @@ Example for file header comments:
  *
  * Revisions   :
  *    $Log: developer-manual.txt,v $
- *    Revision 1.39  2007/12/07 11:57:45  hal9
- *    For stable release.
+ *    Revision 1.40  2007/12/08 14:40:10  hal9
+ *    Updated for 3.0.7 beta
  *
  *
  *********************************************************************/
@@ -2049,7 +2049,7 @@ First, make sure that you have freshly exported the right version into an empty
 directory. (See "Building and releasing packages" above). Then add a log entry
 to debian/changelog, if it is not already there, for example by running:
 
-  debchange -v 3.0.7-stable-1 "New upstream version"
+  debchange -v 3.0.7-beta-1 "New upstream version"
 
 
 Then, run:
@@ -2057,7 +2057,7 @@ Then, run:
   dpkg-buildpackage -rfakeroot -us -uc -b
 
 
-This will create ../privoxy_3.0.7-stable-1_i386.deb which can be uploaded. To
+This will create ../privoxy_3.0.7-beta-1_i386.deb which can be uploaded. To
 upload the package to Sourceforge, simply issue
 
   make debian-upload
