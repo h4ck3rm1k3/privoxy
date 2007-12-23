@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.70 2007/12/15 14:24:05 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.71 2007/12/23 15:24:56 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,10 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.70 2007/12/15 14:24:05 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.71  2007/12/23 15:24:56  fabiankeil
+ *    Reword "unrecognized directive" warning, use better
+ *    mark up and add a <br>. Fixes parts of #1856559.
+ *
  *    Revision 1.70  2007/12/15 14:24:05  fabiankeil
  *    Plug memory leak if listen-address only specifies the port.
  *
@@ -1611,7 +1615,7 @@ struct configuration_spec * load_config(void)
             log_error(LOG_LEVEL_ERROR, "Ignoring unrecognized directive '%s' (%luul) in line %lu "
                   "in configuration file (%s).",  buf, hash_string(cmd), linenum, configfile);
             string_append(&config->proxy_args,
-               " <b><font color=\"red\">WARNING: unrecognized directive, ignored</font></b>");
+               " <strong class='warning'>Warning: ignored unrecognized directive above.</strong><br>");
             continue;
 
 /* *************************************************************************/
