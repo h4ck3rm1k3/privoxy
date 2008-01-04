@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.119 2007/12/28 18:32:51 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.120 2008/01/04 17:43:45 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,10 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.119 2007/12/28 18:32:51 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.120  2008/01/04 17:43:45  fabiankeil
+ *    Improve the warning messages that get logged if the action files
+ *    "enable" filters but no filters of that type have been loaded.
+ *
  *    Revision 1.119  2007/12/28 18:32:51  fabiankeil
  *    In server_content_type():
  *    - Don't require leading white space when detecting image content types.
@@ -1703,7 +1707,8 @@ static jb_err header_tagger(struct client_state *csp, char *header)
 
    if (0 == found_filters)
    {
-      log_error(LOG_LEVEL_ERROR, "Unable to get current state of regex tagging.");
+      log_error(LOG_LEVEL_ERROR, "Inconsistent configuration: "
+         "tagging enabled, but no taggers available.");
       return(JB_ERR_OK);
    }
 
@@ -1920,7 +1925,8 @@ static jb_err filter_header(struct client_state *csp, char **header)
 
    if (0 == found_filters)
    {
-      log_error(LOG_LEVEL_ERROR, "Unable to get current state of regexp filtering.");
+      log_error(LOG_LEVEL_ERROR, "Inconsistent configuration: "
+         "header filtering enabled, but no matching filters available.");
       return(JB_ERR_OK);
    }
 
