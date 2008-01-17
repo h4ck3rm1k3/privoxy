@@ -3,9 +3,9 @@
 
  Purpose     :  Used with other docs and files only.
 
- $Id: p-config.sgml,v 2.26 2007/12/16 15:49:24 fabiankeil Exp $
+ $Id: p-config.sgml,v 2.27 2008/01/17 01:49:51 hal9 Exp $
 
- Copyright (C) 2001-2007 Privoxy Developers http://www.privoxy.org/
+ Copyright (C) 2001-2008 Privoxy Developers http://www.privoxy.org/
  See LICENSE.
 
  ========================================================================
@@ -95,10 +95,10 @@
  Sample Configuration File for Privoxy v&p-version;
 </title>
 <para>
- $Id: p-config.sgml,v 2.26 2007/12/16 15:49:24 fabiankeil Exp $
+ $Id: p-config.sgml,v 2.27 2008/01/17 01:49:51 hal9 Exp $
 </para>
 <para>
-Copyright (C) 2001-2007 Privoxy Developers http://www.privoxy.org/
+Copyright (C) 2001-2008 Privoxy Developers http://www.privoxy.org/
 </para>
 
 <para>
