@@ -1,8 +1,8 @@
 Privoxy 3.0.8 User Manual
 
-[ Copyright   2001 - 2007 by Privoxy Developers ]
+[ Copyright   2001 - 2008 by Privoxy Developers ]
 
-$Id: user-manual.txt,v 1.72 2008/01/19 15:30:42 hal9 Exp $
+$Id: user-manual.txt,v 1.73 2008/01/19 17:52:32 hal9 Exp $
 
 The Privoxy User Manual gives users information on how to install, configure
 and use Privoxy.
@@ -901,8 +901,7 @@ Settings
 
 With Firefox, this is typically set under:
 
- Tools -> Options -> General -> Connection Settings -> Manual Proxy
-Configuration
+ Tools -> Options ->  Advanced -> Network ->Connection -> Settings
  
 
 Or optionally on some platforms:
@@ -6226,7 +6225,7 @@ group_id=11118.
 
 12. Privoxy Copyright, License and History
 
-Copyright   2001-2007 by Privoxy Developers <
+Copyright   2001-2008 by Privoxy Developers <
 ijbswa-developers@lists.sourceforge.net>
 
 Some source code is based on code Copyright   1997 by Anonymous Coders and
