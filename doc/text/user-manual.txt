@@ -2,7 +2,7 @@ Privoxy 3.0.8 User Manual
 
 [ Copyright   2001 - 2007 by Privoxy Developers ]
 
-$Id: user-manual.txt,v 1.71 2008/01/19 15:06:17 hal9 Exp $
+$Id: user-manual.txt,v 1.72 2008/01/19 15:30:42 hal9 Exp $
 
 The Privoxy User Manual gives users information on how to install, configure
 and use Privoxy.
@@ -6294,6 +6294,7 @@ Current Privoxy Team:
  David Schmidt, developer
  
  Hal Burgiss
+ Gerry Murphy
  Roland Rosenfeld
  J rg Strohmayer
 
