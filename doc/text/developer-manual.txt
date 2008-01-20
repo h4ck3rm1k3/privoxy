@@ -1,8 +1,8 @@
                             Privoxy Developer Manual
 
-   [Copyright[ © 2001-2008 by Privoxy Developers]]
+   [Copyright[ (c) 2001-2008 by Privoxy Developers]]
 
-   $Id: developer-manual.txt,v 1.43 2008/01/19 21:41:36 hal9 Exp $
+   $Id: developer-manual.txt,v 1.44 2008/01/20 08:42:48 fabiankeil Exp $
 
    The developer manual provides guidance on coding, testing, packaging,
    documentation and other issues of importance to those involved with
@@ -1501,7 +1501,7 @@
 
    Example for file comments:
 
-const char FILENAME_rcs[] = "$Id: developer-manual.txt,v 1.43 2008/01/19 21:41:36 hal9 Exp $";
+const char FILENAME_rcs[] = "$Id: developer-manual.txt,v 1.44 2008/01/20 08:42:48 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/doc/text/Attic/developer-manual.txt,v $
@@ -1536,6 +1536,9 @@ const char FILENAME_rcs[] = "$Id: developer-manual.txt,v 1.43 2008/01/19 21:41:3
  *
  * Revisions   :
  *    $Log: developer-manual.txt,v $
+ *    Revision 1.44  2008/01/20 08:42:48  fabiankeil
+ *    s@©@(c)@
+ *
  *    Revision 1.43  2008/01/19 21:41:36  hal9
  *    Re-commit to solve various last minute issues for charsets, etc.
  *
@@ -1563,7 +1566,7 @@ const char FILENAME_h_rcs[] = FILENAME_H_VERSION;
 
 #ifndef _FILENAME_H
 #define _FILENAME_H
-#define FILENAME_H_VERSION "$Id: developer-manual.txt,v 1.43 2008/01/19 21:41:36 hal9 Exp $"
+#define FILENAME_H_VERSION "$Id: developer-manual.txt,v 1.44 2008/01/20 08:42:48 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/doc/text/Attic/developer-manual.txt,v $
@@ -1598,6 +1601,9 @@ const char FILENAME_h_rcs[] = FILENAME_H_VERSION;
  *
  * Revisions   :
  *    $Log: developer-manual.txt,v $
+ *    Revision 1.44  2008/01/20 08:42:48  fabiankeil
+ *    s@©@(c)@
+ *
  *    Revision 1.43  2008/01/19 21:41:36  hal9
  *    Re-commit to solve various last minute issues for charsets, etc.
  *
@@ -2453,10 +2459,10 @@ extern const char FILENAME_h_rcs[];
 
 9. Privoxy Copyright, License and History
 
-   Copyright © 2001-2008 by Privoxy Developers
+   Copyright (c) 2001-2008 by Privoxy Developers
    <ijbswa-developers@lists.sourceforge.net>
 
-   Some source code is based on code Copyright © 1997 by Anonymous Coders
+   Some source code is based on code Copyright (c) 1997 by Anonymous Coders
    and Junkbusters, Inc. and licensed under the GNU General Public License.
 
    --------------------------------------------------------------------------
