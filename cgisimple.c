@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.60 2007/10/27 13:12:13 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.61 2008/01/26 11:13:25 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,9 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.60 2007/10/27 13:12:13 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.61  2008/01/26 11:13:25  fabiankeil
+ *    If enable-edit-actions is disabled, hide the edit buttons and explain why.
+ *
  *    Revision 1.60  2007/10/27 13:12:13  fabiankeil
  *    Finish 1.49 and check write access before
  *    showing edit buttons on show-url-info page.
@@ -1244,7 +1247,9 @@ jb_err cgi_show_status(struct client_state *csp,
          if (!err) err = string_append(&s, buf);
 
 #ifdef FEATURE_CGI_EDIT_ACTIONS
-         if (NULL == strstr(csp->actions_list[i]->filename, "standard.action") && NULL != csp->config->actions_file_short[i])
+         if ((csp->config->feature_flags & RUNTIME_FEATURE_CGI_EDIT_ACTIONS)
+            && (NULL == strstr(csp->actions_list[i]->filename, "standard.action"))
+            && (NULL != csp->config->actions_file_short[i]))
          {
 #ifdef HAVE_ACCESS
             if (access(csp->config->actions_file[i], W_OK) == 0)
@@ -1314,6 +1319,13 @@ jb_err cgi_show_status(struct client_state *csp,
 #else
    if (!err) err = map_block_killer(exports, "trust-support");
 #endif /* ndef FEATURE_TRUST */
+
+#ifdef FEATURE_CGI_EDIT_ACTIONS
+   if (!err && (csp->config->feature_flags & RUNTIME_FEATURE_CGI_EDIT_ACTIONS))
+   {
+      err = map_block_killer(exports, "cgi-editor-is-disabled");
+   }
+#endif /* ndef CGI_EDIT_ACTIONS */
 
    if (err)
    {
