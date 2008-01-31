@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.64 2008/01/21 18:56:46 david__schmidt Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.65 2008/01/31 14:44:33 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,9 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.64 2008/01/21 18:56:46 david__schmi
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.65  2008/01/31 14:44:33  fabiankeil
+ *    Use (a != b) instead of !(a == b) so the sanity check looks less insane.
+ *
  *    Revision 1.64  2008/01/21 18:56:46  david__schmidt
  *    Swap #def from negative to positive, re-joined it so it didn't span an assertion (compilation failure on OS/2)
  *
@@ -1137,9 +1140,9 @@ void log_error(int loglevel, const char *fmt, ...)
    length += strlcpy(outbuf + length, "\n", log_buffer_size - length);
 
    /* Some sanity checks */
-   if (!(length < log_buffer_size)
-    || !(outbuf[log_buffer_size-1] == '\0')
-    || !(outbuf[log_buffer_size] == '\0')
+   if ((length >= log_buffer_size)
+    || (outbuf[log_buffer_size-1] != '\0')
+    || (outbuf[log_buffer_size] != '\0')
       )
    {
       /* Repeat as assertions */
