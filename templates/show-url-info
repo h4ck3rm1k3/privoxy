@@ -27,6 +27,9 @@
 #
 # Revisions   :
 #    $Log: show-url-info,v $
+#    Revision 1.23  2008/02/01 06:04:31  fabiankeil
+#    If edit buttons on the show-url-info CGI page are hidden, explain why.
+#
 #    Revision 1.22  2007/12/08 14:29:06  fabiankeil
 #    Use CSS to let the URL and pattern input fields scale with
 #    the browser width and try to prevent vertical scroll bars
@@ -218,6 +221,14 @@
 <!-- if-valid-url-end@ -->
         <h2>Matches for <a href="@url@">@url@</a>:</h2>
         @matches@
+<!-- @if-cgi-editor-is-disabled-start -->
+        <p>
+          The CGI editor is currently disabled, thus no edit buttons are shown.<br>
+          Please have a look at the
+           <a href="@user-manual@config.html#ENABLE-EDIT-ACTIONS">enable-edit-actions documentation</a>
+          to learn how to enable it and what the risks are.
+        </p>
+<!--  if-cgi-editor-is-disabled-end@ -->
       </td>
     </tr>
 <!-- @if-valid-url-start -->
