@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.61 2008/01/26 11:13:25 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.62 2008/02/01 05:52:40 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,10 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.61 2008/01/26 11:13:25 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.62  2008/02/01 05:52:40  fabiankeil
+ *    Hide edit buttons on the show-url-info CGI page if enable-edit-action
+ *    is disabled. Patch by Lee with additional white space adjustments.
+ *
  *    Revision 1.61  2008/01/26 11:13:25  fabiankeil
  *    If enable-edit-actions is disabled, hide the edit buttons and explain why.
  *
@@ -1559,20 +1563,24 @@ jb_err cgi_show_url_info(struct client_state *csp,
                string_append(&matches, buf);
                string_append(&matches, "View</a>");
 #ifdef FEATURE_CGI_EDIT_ACTIONS
-#ifdef HAVE_ACCESS
-               if (access(csp->config->actions_file[i], W_OK) == 0)
+               if (csp->config->feature_flags & RUNTIME_FEATURE_CGI_EDIT_ACTIONS)
                {
-#endif /* def HAVE_ACCESS */
-                  snprintf(buf, sizeof(buf), " <a class=\"cmd\" href=\"/edit-actions-list?f=%d\">", i);
-                  string_append(&matches, buf);
-                  string_append(&matches, "Edit</a>");
 #ifdef HAVE_ACCESS
-               }
-               else
-               {
-                  string_append(&matches, " <strong>No write access.</strong>");
-               }
+                  if (access(csp->config->actions_file[i], W_OK) == 0)
+                  {
 #endif /* def HAVE_ACCESS */
+                     snprintf(buf, sizeof(buf),
+                        " <a class=\"cmd\" href=\"/edit-actions-list?f=%d\">", i);
+                     string_append(&matches, buf);
+                     string_append(&matches, "Edit</a>");
+#ifdef HAVE_ACCESS
+                  }
+                  else
+                  {
+                     string_append(&matches, " <strong>No write access.</strong>");
+                  }
+#endif /* def HAVE_ACCESS */
+               }
 #endif /* FEATURE_CGI_EDIT_ACTIONS */
 
                string_append(&matches, "</th></tr>\n");
