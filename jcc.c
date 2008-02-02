@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.164 2007/12/16 18:32:46 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.165 2008/02/02 19:36:56 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,11 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.164 2007/12/16 18:32:46 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.165  2008/02/02 19:36:56  fabiankeil
+ *    Remove the "Listening ... for local connections only" log message.
+ *    Whether or not remote connections are able to reach Privoxy is up
+ *    to the operating system.
+ *
  *    Revision 1.164  2007/12/16 18:32:46  fabiankeil
  *    Prevent the log messages for CONNECT requests to unacceptable
  *    ports from printing the limit-connect argument as [null] if
@@ -3408,16 +3413,7 @@ static jb_socket bind_port_helper(struct configuration_spec * config)
    int result;
    jb_socket bfd;
 
-   if ( (config->haddr != NULL)
-     && (config->haddr[0] == '1')
-     && (config->haddr[1] == '2')
-     && (config->haddr[2] == '7')
-     && (config->haddr[3] == '.') )
-   {
-      log_error(LOG_LEVEL_INFO, "Listening on port %d for local connections only",
-                config->hport);
-   }
-   else if (config->haddr == NULL)
+   if (config->haddr == NULL)
    {
       log_error(LOG_LEVEL_INFO, "Listening on port %d on all IP addresses",
                 config->hport);
