@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.57 2008/01/26 15:45:39 fabiankeil Exp $
+#  $Id: default.filter,v 1.58 2008/02/02 15:27:19 fabiankeil Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -598,7 +598,7 @@ s@</head>@\n<style type="text/css">\n\
  \#symadbn, \#ymadbn, .yschbox, .yschhd, .bbox, \#yschsec, \#sec,\
  \#yschanswr, .yschftad, .yschspn, .yschspns, \#ygrp-sponsored-links,\
  \#ks-ypn-ads, .ad, \#east, \#ygrp-vital {display: none !important;}\n\
- \#yschpri, \#yschweb, \#pri, \#web {width: 100% !important; max-width: 100% !important;}\n\
+ \#yschpri, \#yschweb, \#pri, \#web, \#main {width: 100% !important; max-width: 100% !important;}\n\
  \#yschqcon, \#yschtg {width: auto !important; /* No useless horizontal scrollbar please */}\n\
 </style>\n$0@
 
@@ -830,6 +830,9 @@ s@^X-Privoxy-Control:.*@@i
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.58  2008/02/02 15:27:19  fabiankeil
+#     Yet another yahoo update to get the width limitation removal working again.
+#
 #     Revision 1.57  2008/01/26 15:45:39  fabiankeil
 #     Don't let the less-download-windows filter mess up
 #     "Content-Type: application/x-shockwave-flash" headers.
