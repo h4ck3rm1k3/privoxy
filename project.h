@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.101 2007/12/07 18:29:23 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.102 2008/02/03 13:46:14 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,9 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.102  2008/02/03 13:46:14  fabiankeil
+ *    Add SOCKS5 support. Patch #1862863 by Eric M. Hopper with minor changes.
+ *
  *    Revision 1.101  2007/12/07 18:29:23  fabiankeil
  *    Remove now-obsolete csp member x_forwarded.
  *
@@ -1474,6 +1477,7 @@ struct block_spec
 #define SOCKS_NONE    0    /**< Don't use a SOCKS server               */
 #define SOCKS_4      40    /**< original SOCKS 4 protocol              */
 #define SOCKS_4A     41    /**< as modified for hosts w/o external DNS */
+#define SOCKS_5      50    /**< as modified for hosts w/o external DNS */
 
 
 /**
@@ -1484,7 +1488,7 @@ struct forward_spec
    /** URL pattern that this forward_spec is for. */
    struct url_spec url[1];
 
-   /** Connection type.  Must be SOCKS_NONE, SOCKS_4, or SOCKS_4A. */
+   /** Connection type.  Must be SOCKS_NONE, SOCKS_4, SOCKS_4A or SOCKS_5. */
    int   type;
 
    /** SOCKS server hostname.  Only valid if "type" is SOCKS_4 or SOCKS_4A. */
