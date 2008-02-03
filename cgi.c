@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.100 2007/10/17 18:40:53 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.101 2008/02/03 15:45:06 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,9 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.100 2007/10/17 18:40:53 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.101  2008/02/03 15:45:06  fabiankeil
+ *    Add SOCKS5 support for "Forwarding failure" CGI page.
+ *
  *    Revision 1.100  2007/10/17 18:40:53  fabiankeil
  *    - Send CGI pages as HTTP/1.1 unless the client asked for HTTP/1.0.
  *    - White space fix.
@@ -1433,6 +1436,7 @@ struct http_response *error_response(struct client_state *csp,
    else if (!strcmp(templatename, "forwarding-failed"))
    {
       const struct forward_spec * fwd = forward_url(csp->http, csp);
+      char *socks_type = NULL;
       if (fwd == NULL)
       {
          log_error(LOG_LEVEL_FATAL, "gateway spec is NULL. This shouldn't happen!");
@@ -1458,8 +1462,27 @@ struct http_response *error_response(struct client_state *csp,
          csp->error_message = strdup("Failure reason missing. Check the log file for details.");
       }
       if (!err) err = map(exports, "gateway", 1, fwd->gateway_host, 1);
-      if (!err) err = map(exports, "forwarding-type", 1, (fwd->type == SOCKS_4) ?
-                         "socks4-" : "socks4a-", 1);
+
+      /*
+       * XXX: this is almost the same code as in cgi_show_url_info()
+       * and thus should be factored out and shared.
+       */
+      switch (fwd->type)
+      {
+         case SOCKS_4:
+            socks_type = "socks4-";
+            break;
+         case SOCKS_4A:
+            socks_type = "socks4a-";
+            break;
+         case SOCKS_5:
+            socks_type = "socks5-";
+            break;
+         default:
+            log_error(LOG_LEVEL_FATAL, "Unknown socks type: %d.", fwd->type);
+      }
+
+      if (!err) err = map(exports, "forwarding-type", 1, socks_type, 1);
       if (!err) err = map(exports, "error-message", 1, html_encode(csp->error_message), 0);
 
       if (!err) rsp->status = strdup("503 Forwarding failure");
