@@ -27,6 +27,10 @@
 #
 # Revisions   :
 #    $Log: show-url-info,v $
+#    Revision 1.24  2008/02/10 17:26:52  fabiankeil
+#    Reduce superfluous white space by not marking
+#    up the final results list as paragraph.
+#
 #    Revision 1.23  2008/02/01 06:04:31  fabiankeil
 #    If edit buttons on the show-url-info CGI page are hidden, explain why.
 #
@@ -235,7 +239,7 @@
     <tr>
       <td class="box">
         <h2>Final results:</h2>
-        <p><b>@final@</b></p>
+        <b>@final@</b>
       </td>
     </tr>
 <!-- if-valid-url-end@ -->
