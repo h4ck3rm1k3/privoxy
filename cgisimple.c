@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.64 2008/02/03 13:56:07 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.65 2008/02/23 16:33:43 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,10 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.64 2008/02/03 13:56:07 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.65  2008/02/23 16:33:43  fabiankeil
+ *    Let forward_url() use the standard parameter ordering
+ *    and mark its second parameter immutable.
+ *
  *    Revision 1.64  2008/02/03 13:56:07  fabiankeil
  *    Add SOCKS5 support for show-url-info CGI page.
  *
@@ -1652,7 +1656,7 @@ jb_err cgi_show_url_info(struct client_state *csp,
        * display the proxy port and an eventual second forwarder.
        */
       {
-         const struct forward_spec * fwd = forward_url(url_to_query, csp);
+         const struct forward_spec *fwd = forward_url(csp, url_to_query);
 
          if ((fwd->gateway_host == NULL) && (fwd->forward_host == NULL))
          {

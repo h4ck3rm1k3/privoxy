@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.101 2008/02/03 15:45:06 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.102 2008/02/23 16:33:43 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,10 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.101 2008/02/03 15:45:06 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.102  2008/02/23 16:33:43  fabiankeil
+ *    Let forward_url() use the standard parameter ordering
+ *    and mark its second parameter immutable.
+ *
  *    Revision 1.101  2008/02/03 15:45:06  fabiankeil
  *    Add SOCKS5 support for "Forwarding failure" CGI page.
  *
@@ -1435,7 +1439,7 @@ struct http_response *error_response(struct client_state *csp,
    }
    else if (!strcmp(templatename, "forwarding-failed"))
    {
-      const struct forward_spec * fwd = forward_url(csp->http, csp);
+      const struct forward_spec *fwd = forward_url(csp, csp->http);
       char *socks_type = NULL;
       if (fwd == NULL)
       {

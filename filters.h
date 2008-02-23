@@ -1,6 +1,6 @@
 #ifndef FILTERS_H_INCLUDED
 #define FILTERS_H_INCLUDED
-#define FILTERS_H_VERSION "$Id: filters.h,v 1.31 2007/10/19 16:53:28 fabiankeil Exp $"
+#define FILTERS_H_VERSION "$Id: filters.h,v 1.32 2008/02/23 16:33:43 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.h,v $
@@ -39,6 +39,10 @@
  *
  * Revisions   :
  *    $Log: filters.h,v $
+ *    Revision 1.32  2008/02/23 16:33:43  fabiankeil
+ *    Let forward_url() use the standard parameter ordering
+ *    and mark its second parameter immutable.
+ *
  *    Revision 1.31  2007/10/19 16:53:28  fabiankeil
  *    Add helper function to check if any content filters are enabled.
  *
@@ -309,7 +313,8 @@ extern void apply_url_actions(struct current_action_spec *action,
 /*
  * Determining parent proxies
  */
-extern const struct forward_spec *forward_url(struct http_request *http, struct client_state *csp);
+extern const struct forward_spec *forward_url(struct client_state *csp,
+                                              const struct http_request *http);
 
 /*
  * Content modification
@@ -330,7 +335,7 @@ extern inline int content_filters_enabled(const struct client_state *csp);
 /*
  * Handling Max-Forwards:
  */
-extern struct http_response *direct_response( struct client_state *csp);
+extern struct http_response *direct_response(struct client_state *csp);
 
 
 /*

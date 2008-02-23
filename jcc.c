@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.165 2008/02/02 19:36:56 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.166 2008/02/23 16:33:43 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.165 2008/02/02 19:36:56 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.166  2008/02/23 16:33:43  fabiankeil
+ *    Let forward_url() use the standard parameter ordering
+ *    and mark its second parameter immutable.
+ *
  *    Revision 1.165  2008/02/02 19:36:56  fabiankeil
  *    Remove the "Listening ... for local connections only" log message.
  *    Whether or not remote connections are able to reach Privoxy is up
@@ -2140,7 +2144,8 @@ static void chat(struct client_state *csp)
    }
 
    /* decide how to route the HTTP request */
-   if (NULL == (fwd = forward_url(http, csp)))
+   fwd = forward_url(csp, http);
+   if (NULL == fwd)
    {
       log_error(LOG_LEVEL_FATAL, "gateway spec is NULL!?!?  This can't happen!");
       /* Never get here - LOG_LEVEL_FATAL causes program exit */
