@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.166 2008/02/23 16:33:43 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.167 2008/02/23 16:57:12 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.166 2008/02/23 16:33:43 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.167  2008/02/23 16:57:12  fabiankeil
+ *    Rename url_actions() to get_url_actions() and let it
+ *    use the standard parameter ordering.
+ *
  *    Revision 1.166  2008/02/23 16:33:43  fabiankeil
  *    Let forward_url() use the standard parameter ordering
  *    and mark its second parameter immutable.
@@ -2099,7 +2103,7 @@ static void chat(struct client_state *csp)
    else
 #endif /* ndef FEATURE_TOGGLE */
    {
-      url_actions(http, csp);
+      get_url_actions(csp, http);
    }
 
    /* 

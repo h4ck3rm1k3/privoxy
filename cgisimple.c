@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.65 2008/02/23 16:33:43 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.66 2008/02/23 16:57:12 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,10 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.65 2008/02/23 16:33:43 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.66  2008/02/23 16:57:12  fabiankeil
+ *    Rename url_actions() to get_url_actions() and let it
+ *    use the standard parameter ordering.
+ *
  *    Revision 1.65  2008/02/23 16:33:43  fabiankeil
  *    Let forward_url() use the standard parameter ordering
  *    and mark its second parameter immutable.
@@ -1640,7 +1644,7 @@ jb_err cgi_show_url_info(struct client_state *csp,
        * but luckily it's no longer required later on anyway.
        */
       free_current_action(csp->action);
-      url_actions(url_to_query, csp);
+      get_url_actions(csp, url_to_query);
 
       /*
        * Fill in forwarding settings.
