@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.167 2008/02/23 16:57:12 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.168 2008/03/02 12:25:25 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.167 2008/02/23 16:57:12 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.168  2008/03/02 12:25:25  fabiankeil
+ *    Also use shiny new connect_port_is_forbidden() in jcc.c.
+ *
  *    Revision 1.167  2008/02/23 16:57:12  fabiankeil
  *    Rename url_actions() to get_url_actions() and let it
  *    use the standard parameter ordering.
@@ -2192,16 +2195,9 @@ static void chat(struct client_state *csp)
     *
     */
 
-   /*
-    * Check if a CONNECT request is allowable:
-    * In the absence of a +limit-connect action, allow only port 443.
-    * If there is an action, allow whatever matches the specificaton.
-    */
-   if(http->ssl)
+   if (http->ssl)
    {
-      if(  ( !(csp->action->flags & ACTION_LIMIT_CONNECT) && csp->http->port != 443)
-           || (csp->action->flags & ACTION_LIMIT_CONNECT
-              && !match_portlist(csp->action->string[ACTION_STRING_LIMIT_CONNECT], csp->http->port)) )
+      if (connect_port_is_forbidden(csp))
       {
          const char *acceptable_connect_ports =
             csp->action->string[ACTION_STRING_LIMIT_CONNECT] ?
