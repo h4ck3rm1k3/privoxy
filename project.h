@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.103 2008/03/01 14:00:45 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.104 2008/03/04 18:30:40 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,10 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.104  2008/03/04 18:30:40  fabiankeil
+ *    Remove the treat-forbidden-connects-like-blocks action. We now
+ *    use the "blocked" page for forbidden CONNECT requests by default.
+ *
  *    Revision 1.103  2008/03/01 14:00:45  fabiankeil
  *    Let the block action take the reason for the block
  *    as argument and show it on the "blocked" page.
@@ -1059,10 +1063,8 @@ struct iob
 #define  ACTION_HANDLE_AS_EMPTY_DOCUMENT             0x08000000UL
 /** Action bitmap: Redirect request. */
 #define  ACTION_REDIRECT                             0x10000000UL
-/** Action bitmap: Answer blocked Connects verbosely */
-#define ACTION_TREAT_FORBIDDEN_CONNECTS_LIKE_BLOCKS  0x20000000UL
 /** Action bitmap: Override the forward settings in the config file */
-#define ACTION_FORWARD_OVERRIDE                      0x40000000UL
+#define ACTION_FORWARD_OVERRIDE                      0x20000000UL
 
 
 /** Action string index: How to deanimate GIFs */

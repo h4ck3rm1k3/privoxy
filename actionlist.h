@@ -39,6 +39,10 @@
  *
  * Revisions   :
  *    $Log: actionlist.h,v $
+ *    Revision 1.30  2008/03/04 18:30:34  fabiankeil
+ *    Remove the treat-forbidden-connects-like-blocks action. We now
+ *    use the "blocked" page for forbidden CONNECT requests by default.
+ *
  *    Revision 1.29  2008/03/01 14:00:43  fabiankeil
  *    Let the block action take the reason for the block
  *    as argument and show it on the "blocked" page.
@@ -241,8 +245,6 @@ DEFINE_ACTION_STRING     ("set-image-blocker",          ACTION_IMAGE_BLOCKER,   
 DEFINE_CGI_PARAM_RADIO   ("set-image-blocker",          ACTION_IMAGE_BLOCKER,   ACTION_STRING_IMAGE_BLOCKER, "pattern", 1)
 DEFINE_CGI_PARAM_RADIO   ("set-image-blocker",          ACTION_IMAGE_BLOCKER,   ACTION_STRING_IMAGE_BLOCKER, "blank", 0)
 DEFINE_CGI_PARAM_CUSTOM  ("set-image-blocker",          ACTION_IMAGE_BLOCKER,   ACTION_STRING_IMAGE_BLOCKER,  CGI_PREFIX "send-banner?type=pattern")
-DEFINE_ACTION_BOOL       ("treat-forbidden-connects-like-blocks",   ACTION_TREAT_FORBIDDEN_CONNECTS_LIKE_BLOCKS)
-
 
 #if DEFINE_ACTION_ALIAS
 
