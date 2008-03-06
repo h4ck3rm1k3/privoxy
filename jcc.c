@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.169 2008/03/04 18:30:39 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.170 2008/03/06 16:33:46 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.169 2008/03/04 18:30:39 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.170  2008/03/06 16:33:46  fabiankeil
+ *    If limit-connect isn't used, don't limit CONNECT requests to port 443.
+ *
  *    Revision 1.169  2008/03/04 18:30:39  fabiankeil
  *    Remove the treat-forbidden-connects-like-blocks action. We now
  *    use the "blocked" page for forbidden CONNECT requests by default.
@@ -2196,9 +2199,8 @@ static void chat(struct client_state *csp)
    if (http->ssl && connect_port_is_forbidden(csp))
    {
       const char *acceptable_connect_ports =
-         csp->action->string[ACTION_STRING_LIMIT_CONNECT] ?
-         csp->action->string[ACTION_STRING_LIMIT_CONNECT] :
-         "443 (implied default)";
+         csp->action->string[ACTION_STRING_LIMIT_CONNECT];
+      assert(NULL != acceptable_connect_ports);
       log_error(LOG_LEVEL_INFO, "Request from %s marked for blocking. "
          "limit-connect{%s} doesn't allow CONNECT requests to port %d.",
          csp->ip_addr_str, acceptable_connect_ports, csp->http->port);
