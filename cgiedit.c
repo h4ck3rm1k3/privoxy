@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.58 2007/11/28 17:57:01 fabiankeil Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.59 2008/03/08 16:25:56 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,9 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.58 2007/11/28 17:57:01 fabiankeil
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.59  2008/03/08 16:25:56  fabiankeil
+ *    After three file modification time mismatches, turn the CGI editor off.
+ *
  *    Revision 1.58  2007/11/28 17:57:01  fabiankeil
  *    Fix double free in cgi_edit_actions_list().
  *    Reported by adlab in BR#1840145.
@@ -499,6 +502,11 @@ struct file_line
 /** This file_line is in a {{description}} block. */
 #define FILE_LINE_DESCRIPTION_ENTRY    10
 
+/*
+ * Number of file modification time mismatches
+ * before the CGI editor gets turned off.
+ */
+#define ACCEPTABLE_TIMESTAMP_MISMATCHES 3
 
 /**
  * A configuration file, in a format that can be edited and written back to
@@ -2014,6 +2022,7 @@ jb_err edit_read_actions_file(struct client_state *csp,
 {
    jb_err err;
    struct editable_file *file;
+   static int acceptable_failures = ACCEPTABLE_TIMESTAMP_MISMATCHES - 1;
 
    assert(csp);
    assert(parameters);
@@ -2031,7 +2040,24 @@ jb_err edit_read_actions_file(struct client_state *csp,
       }
       else if (err == JB_ERR_MODIFIED)
       {
+         assert(require_version);
          err = cgi_error_modified(csp, rsp, lookup(parameters, "f"));
+         log_error(LOG_LEVEL_ERROR,
+            "Blocking CGI edit request due to modification time mismatch.");
+         if (acceptable_failures > 0)
+         {
+            log_error(LOG_LEVEL_INFO,
+               "The CGI editor will be turned off after another %d mismatche(s).",
+               acceptable_failures);
+            acceptable_failures--;
+         }
+         else
+         {
+            log_error(LOG_LEVEL_INFO,
+               "Timestamp mismatch limit reached, turning CGI editor off. "
+               "Reload the configuration file to reenable it.");
+            csp->config->feature_flags &= ~RUNTIME_FEATURE_CGI_EDIT_ACTIONS;
+         }
       }
       if (err == JB_ERR_OK)
       {
