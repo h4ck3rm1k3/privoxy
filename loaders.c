@@ -1,4 +1,4 @@
-const char loaders_rcs[] = "$Id: loaders.c,v 1.65 2007/12/07 18:29:23 fabiankeil Exp $";
+const char loaders_rcs[] = "$Id: loaders.c,v 1.66 2008/03/21 11:16:30 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loaders.c,v $
@@ -35,6 +35,9 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.65 2007/12/07 18:29:23 fabiankeil
  *
  * Revisions   :
  *    $Log: loaders.c,v $
+ *    Revision 1.66  2008/03/21 11:16:30  fabiankeil
+ *    Garbage-collect csp->my_ip_addr_str and csp->my_hostname.
+ *
  *    Revision 1.65  2007/12/07 18:29:23  fabiankeil
  *    Remove now-obsolete csp member x_forwarded.
  *
@@ -503,8 +506,6 @@ void sweep(void)
          last_active->next = csp->next;
 
          freez(csp->ip_addr_str);
-         freez(csp->my_ip_addr_str);
-         freez(csp->my_hostname);
          freez(csp->iob->buf);
          freez(csp->error_message);
 
