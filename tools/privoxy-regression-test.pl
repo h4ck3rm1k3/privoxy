@@ -7,7 +7,7 @@
 # A regression test "framework" for Privoxy. For documentation see:
 # perldoc privoxy-regression-test.pl
 #
-# $Id: privoxy-regression-test.pl,v 1.9 2008/03/21 13:00:37 fabiankeil Exp $
+# $Id: privoxy-regression-test.pl,v 1.10 2008/03/25 17:17:46 fabiankeil Exp $
 #
 # Wish list:
 #
@@ -1421,14 +1421,18 @@ header to a trusted value.
 
 If no explicit status code expectation is set, B<200> is used.
 
+To verify that a URL is blocked, use:
+
+    # Blocked URL = http://www.example.com/blocked
+
 Additionally all tests have test levels to let the user
 control which ones to execute (see I<OPTIONS> below). 
 Test levels are either set with the B<Level> directive,
 or implicitly through the test type.
 
-Fetch tests default to level 6, tests for trusted
-CGI requests to level 3 and client-header-action tests
-to level 1.
+Block tests default to level 7, fetch tests to level 6,
+tests for trusted CGI requests to level 3 and
+client-header-action tests to level 1.
 
 =head1 OPTIONS
 
