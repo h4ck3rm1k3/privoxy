@@ -7,7 +7,7 @@
 # A regression test "framework" for Privoxy. For documentation see:
 # perldoc privoxy-regression-test.pl
 #
-# $Id: privoxy-regression-test.pl,v 1.12 2008/03/26 18:38:35 fabiankeil Exp $
+# $Id: privoxy-regression-test.pl,v 1.13 2008/03/26 19:05:51 fabiankeil Exp $
 #
 # Wish list:
 #
@@ -632,7 +632,7 @@ sub execute_method_test ($) {
     my $expected_status_code = $test{'expected-status-code'};
 
     $curl_parameters .= '--request ' . $method . ' ';
-    # Don't complain in about the 'missing' body
+    # Don't complain about the 'missing' body
     $curl_parameters .= '--head ' if ($method =~ /^HEAD$/i);
 
     $curl_parameters .= PRIVOXY_CGI_URL;
