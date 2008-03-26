@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.46 2008/03/21 11:13:57 fabiankeil Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.47 2008/03/26 18:07:07 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -35,6 +35,9 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.46 2008/03/21 11:13:57 fabian
  *
  * Revisions   :
  *    $Log: jbsockets.c,v $
+ *    Revision 1.47  2008/03/26 18:07:07  fabiankeil
+ *    Add hostname directive. Closes PR#1918189.
+ *
  *    Revision 1.46  2008/03/21 11:13:57  fabiankeil
  *    Only gather host information if it's actually needed.
  *    Also move the code out of accept_connection() so it's less likely
@@ -729,7 +732,8 @@ int bind_port(const char *hostnam, int portnum, jb_socket *pfd)
  *          2  :  ip_address = Pointer to return the pointer to
  *                             the ip address string.
  *          3  :  hostname =   Pointer to return the pointer to
- *                             the hostname.
+ *                             the hostname or NULL if the caller
+ *                             isn't interested in it.
  *
  * Returns     :  void.
  *
@@ -755,12 +759,24 @@ void get_host_information(jb_socket afd, char **ip_address, char **hostname)
 #endif /* def HAVE_GETHOSTBYADDR_R_(8|7|5)_ARGS */
    s_length = sizeof(server);
 
-   *hostname = NULL;
+   if (NULL != hostname)
+   {
+      *hostname = NULL;
+   }
    *ip_address = NULL;
 
    if (!getsockname(afd, (struct sockaddr *) &server, &s_length))
    {
       *ip_address = strdup(inet_ntoa(server.sin_addr));
+
+      if (NULL == hostname)
+      {
+         /*
+          * We're done here, the caller isn't
+          * interested in knowing the hostname.
+          */
+         return;
+      }
 #if defined(HAVE_GETHOSTBYADDR_R_8_ARGS)
       gethostbyaddr_r((const char *)&server.sin_addr,
                       sizeof(server.sin_addr), AF_INET,

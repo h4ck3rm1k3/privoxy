@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.73 2008/02/16 16:54:51 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.74 2008/03/26 18:07:07 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -8,7 +8,7 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.73 2008/02/16 16:54:51 fabiankeil
  *                routine to load the configuration and the global
  *                variables it writes to.
  *
- * Copyright   :  Written by and Copyright (C) 2001-2007 the SourceForge
+ * Copyright   :  Written by and Copyright (C) 2001-2008 the SourceForge
  *                Privoxy team. http://www.privoxy.org/
  *
  *                Based on the Internet Junkbuster originally written
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.73 2008/02/16 16:54:51 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.74  2008/03/26 18:07:07  fabiankeil
+ *    Add hostname directive. Closes PR#1918189.
+ *
  *    Revision 1.73  2008/02/16 16:54:51  fabiankeil
  *    Fix typo.
  *
@@ -543,6 +546,7 @@ static struct file_list *current_configfile = NULL;
 #define hash_forward_socks4a             2639958518ul /* "forward-socks4a" */
 #define hash_forward_socks5              3963965522ul /* "forward-socks5" */
 #define hash_forwarded_connect_retries    101465292ul /* "forwarded-connect-retries" */
+#define hash_hostname                      10308071ul /* "hostname" */
 #define hash_jarfile                        2046641ul /* "jarfile" */
 #define hash_listen_address              1255650842ul /* "listen-address" */
 #define hash_logdir                          422889ul /* "logdir" */
@@ -624,6 +628,7 @@ static void unload_configfile (void * data)
    freez(config->confdir);
    freez(config->logdir);
    freez(config->templdir);
+   freez(config->hostname);
 
    freez(config->haddr);
    freez(config->logfile);
@@ -1298,6 +1303,18 @@ struct configuration_spec * load_config(void)
  * *************************************************************************/
          case hash_forwarded_connect_retries :
             config->forwarded_connect_retries = atoi(arg);
+            continue;
+
+/* *************************************************************************
+ * hostname hostname-to-show-on-cgi-pages
+ * *************************************************************************/
+         case hash_hostname :
+            freez(config->hostname);
+            config->hostname = strdup(arg);
+            if (NULL == config->hostname)
+            {
+               log_error(LOG_LEVEL_FATAL, "Out of memory saving hostname.");
+            }
             continue;
 
 /* *************************************************************************
