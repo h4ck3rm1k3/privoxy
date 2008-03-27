@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.170 2008/03/06 16:33:46 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.171 2008/03/27 18:27:25 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -6,7 +6,7 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.170 2008/03/06 16:33:46 fabiankeil Exp $"
  * Purpose     :  Main file.  Contains main() method, main loop, and
  *                the main connection-handling function.
  *
- * Copyright   :  Written by and Copyright (C) 2001-2007 the SourceForge
+ * Copyright   :  Written by and Copyright (C) 2001-2008 the SourceForge
  *                Privoxy team. http://www.privoxy.org/
  *
  *                Based on the Internet Junkbuster originally written
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.170 2008/03/06 16:33:46 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.171  2008/03/27 18:27:25  fabiankeil
+ *    Remove kill-popups action.
+ *
  *    Revision 1.170  2008/03/06 16:33:46  fabiankeil
  *    If limit-connect isn't used, don't limit CONNECT requests to port 443.
  *
@@ -1047,7 +1050,6 @@ http://www.fabiankeil.de/sourcecode/privoxy/
 #include "filters.h"
 #include "loaders.h"
 #include "parsers.h"
-#include "killpopup.h"
 #include "miscutil.h"
 #include "errlog.h"
 #include "jbsockets.h"
@@ -1919,9 +1921,6 @@ static void chat(struct client_state *csp)
    struct http_request *http;
    int len; /* for buffer sizes (and negative error codes) */
    jb_err err;
-#ifdef FEATURE_KILL_POPUPS
-   int block_popups_now = 0; /* bool, 1==currently blocking popups */
-#endif /* def FEATURE_KILL_POPUPS */
 
    /* Function that does the content filtering for the current request */
    filter_function_ptr content_filter = NULL;
@@ -2446,14 +2445,6 @@ static void chat(struct client_state *csp)
           */
          buf[len] = '\0';
 
-#ifdef FEATURE_KILL_POPUPS
-         /* Filter the popups on this read. */
-         if (block_popups_now)
-         {
-            filter_popups(buf, csp);
-         }
-#endif /* def FEATURE_KILL_POPUPS */
-
          /* Normally, this would indicate that we've read
           * as much as the server has sent us and we can
           * close the client connection.  However, Microsoft
@@ -2700,20 +2691,6 @@ static void chat(struct client_state *csp)
 
             if (!http->ssl) /* We talk plaintext */
             {
-
-#ifdef FEATURE_KILL_POPUPS
-               /* Start blocking popups if appropriate. */
-               if ((csp->content_type & CT_TEXT) &&               /* It's a text / * MIME-Type */
-                   (csp->action->flags & ACTION_NO_POPUPS) != 0)  /* Policy allows */
-               {
-                  block_popups_now = 1;
-                  /*
-                   * Filter the part of the body that came in the same read
-                   * as the last headers:
-                   */
-                  filter_popups(csp->iob->cur, csp);
-               }
-#endif /* def FEATURE_KILL_POPUPS */
                content_filter = get_filter_function(csp);
             }
             /*
