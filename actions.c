@@ -1,4 +1,4 @@
-const char actions_rcs[] = "$Id: actions.c,v 1.46 2008/03/27 18:27:20 fabiankeil Exp $";
+const char actions_rcs[] = "$Id: actions.c,v 1.47 2008/03/28 15:13:37 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/actions.c,v $
@@ -33,6 +33,9 @@ const char actions_rcs[] = "$Id: actions.c,v 1.46 2008/03/27 18:27:20 fabiankeil
  *
  * Revisions   :
  *    $Log: actions.c,v $
+ *    Revision 1.47  2008/03/28 15:13:37  fabiankeil
+ *    Remove inspect-jpegs action.
+ *
  *    Revision 1.46  2008/03/27 18:27:20  fabiankeil
  *    Remove kill-popups action.
  *
@@ -651,8 +654,9 @@ jb_err get_action_token(char **line, char **name, char **value)
  *********************************************************************/
 static int action_used_to_be_valid(const char *action)
 {
-   return (0 == strcmpic(action, "treat-forbidden-connects-like-blocks")
-        || 0 == strcmpic(action, "kill-popups"));
+   return ((0 == strcmpic(action, "treat-forbidden-connects-like-blocks"))
+        || (0 == strcmpic(action, "kill-popups"))
+        || (0 == strcmpic(action, "inspect-jpegs")));
 }
 
 /*********************************************************************

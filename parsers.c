@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.121 2008/01/05 21:37:03 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.122 2008/03/28 15:13:39 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,9 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.121 2008/01/05 21:37:03 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.122  2008/03/28 15:13:39  fabiankeil
+ *    Remove inspect-jpegs action.
+ *
  *    Revision 1.121  2008/01/05 21:37:03  fabiankeil
  *    Let client_range() also handle Request-Range headers
  *    which apparently are still supported by many servers.
@@ -2211,10 +2214,6 @@ static jb_err server_content_type(struct client_state *csp, char **header)
       else if (strstr(*header, "image/gif"))
       {
          csp->content_type |= CT_GIF;
-      }
-      else if (strstr(*header, "image/jpeg"))
-      {
-         csp->content_type |= CT_JPEG;
       }
    }
 
