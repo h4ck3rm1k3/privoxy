@@ -39,6 +39,9 @@
  *
  * Revisions   :
  *    $Log: actionlist.h,v $
+ *    Revision 1.33  2008/03/29 12:13:45  fabiankeil
+ *    Remove send-wafer and send-vanilla-wafer actions.
+ *
  *    Revision 1.32  2008/03/28 15:13:42  fabiankeil
  *    Remove inspect-jpegs action.
  *
@@ -240,8 +243,6 @@ DEFINE_CGI_PARAM_RADIO   ("overwrite-last-modified",    ACTION_OVERWRITE_LAST_MO
 DEFINE_ACTION_BOOL       ("prevent-compression",        ACTION_NO_COMPRESSION)
 DEFINE_ACTION_STRING     ("redirect",                   ACTION_REDIRECT,        ACTION_STRING_REDIRECT)
 DEFINE_CGI_PARAM_NO_RADIO("redirect",                   ACTION_REDIRECT,        ACTION_STRING_REDIRECT,  "http://localhost/")
-DEFINE_ACTION_BOOL       ("send-vanilla-wafer",         ACTION_VANILLA_WAFER)
-DEFINE_ACTION_MULTI      ("send-wafer",                 ACTION_MULTI_WAFER)
 DEFINE_ACTION_MULTI      ("server-header-filter",       ACTION_MULTI_SERVER_HEADER_FILTER)
 DEFINE_ACTION_MULTI      ("server-header-tagger",       ACTION_MULTI_SERVER_HEADER_TAGGER)
 DEFINE_ACTION_BOOL       ("session-cookies-only",       ACTION_NO_COOKIE_KEEP)
@@ -280,8 +281,6 @@ DEFINE_ACTION_BOOL       ("no-compression",          ACTION_NO_COMPRESSION)
 DEFINE_ACTION_BOOL       ("no-cookies-keep",         ACTION_NO_COOKIE_KEEP)
 DEFINE_ACTION_BOOL       ("no-cookies-read",         ACTION_NO_COOKIE_READ)
 DEFINE_ACTION_BOOL       ("no-cookies-set",          ACTION_NO_COOKIE_SET)
-DEFINE_ACTION_BOOL       ("vanilla-wafer",           ACTION_VANILLA_WAFER)
-DEFINE_ACTION_MULTI      ("wafer",                   ACTION_MULTI_WAFER)
 #endif /* if DEFINE_ACTION_ALIAS */
 
 #undef DEFINE_ACTION_MULTI
