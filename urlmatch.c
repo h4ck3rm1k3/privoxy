@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.21 2007/12/24 16:34:23 fabiankeil Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.22 2008/03/30 15:02:32 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -33,6 +33,9 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.21 2007/12/24 16:34:23 fabianke
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.22  2008/03/30 15:02:32  fabiankeil
+ *    SZitify unknown_method().
+ *
  *    Revision 1.21  2007/12/24 16:34:23  fabiankeil
  *    Band-aid (and micro-optimization) that makes it less likely to run out of
  *    stack space with overly-complex path patterns. Probably masks the problem
@@ -518,11 +521,10 @@ static int unknown_method(const char *method)
        */
       "VERSION-CONTROL", "REPORT", "CHECKOUT", "CHECKIN", "UNCHECKOUT",
       "MKWORKSPACE", "UPDATE", "LABEL", "MERGE", "BASELINE-CONTROL", "MKACTIVITY",
-      NULL
    };
    int i;
 
-   for (i = 0; NULL != known_http_methods[i]; i++)
+   for (i = 0; i < SZ(known_http_methods); i++)
    {
       if (0 == strcmpic(method, known_http_methods[i]))
       {
