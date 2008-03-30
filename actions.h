@@ -1,6 +1,6 @@
 #ifndef ACTIONS_H_INCLUDED
 #define ACTIONS_H_INCLUDED
-#define ACTIONS_H_VERSION "$Id: actions.h,v 1.17 2008/01/28 20:17:40 fabiankeil Exp $"
+#define ACTIONS_H_VERSION "$Id: actions.h,v 1.18 2008/03/30 14:52:00 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/actions.h,v $
@@ -35,6 +35,10 @@
  *
  * Revisions   :
  *    $Log: actions.h,v $
+ *    Revision 1.18  2008/03/30 14:52:00  fabiankeil
+ *    Rename load_actions_file() and load_re_filterfile()
+ *    as they load multiple files "now".
+ *
  *    Revision 1.17  2008/01/28 20:17:40  fabiankeil
  *    - Mark some parameters as immutable.
  *    - Hide update_action_bits_for_all_tags() while it's unused.
@@ -158,7 +162,7 @@ extern char * current_action_to_html(const struct client_state *csp,
 
 extern jb_err get_action_token(char **line, char **name, char **value);
 extern void unload_actions_file(void *file_data);
-extern int load_actions_file(struct client_state *csp);
+extern int load_action_files(struct client_state *csp);
 
 #ifdef FEATURE_GRACEFUL_TERMINATION
 void unload_current_actions_file(void);

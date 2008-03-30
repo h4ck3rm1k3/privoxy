@@ -1,4 +1,4 @@
-const char actions_rcs[] = "$Id: actions.c,v 1.49 2008/03/29 12:13:45 fabiankeil Exp $";
+const char actions_rcs[] = "$Id: actions.c,v 1.50 2008/03/30 14:52:00 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/actions.c,v $
@@ -33,6 +33,10 @@ const char actions_rcs[] = "$Id: actions.c,v 1.49 2008/03/29 12:13:45 fabiankeil
  *
  * Revisions   :
  *    $Log: actions.c,v $
+ *    Revision 1.50  2008/03/30 14:52:00  fabiankeil
+ *    Rename load_actions_file() and load_re_filterfile()
+ *    as they load multiple files "now".
+ *
  *    Revision 1.49  2008/03/29 12:13:45  fabiankeil
  *    Remove send-wafer and send-vanilla-wafer actions.
  *
@@ -1222,7 +1226,7 @@ void free_alias_list(struct action_alias *alias_list)
 
 /*********************************************************************
  *
- * Function    :  load_actions_file
+ * Function    :  load_action_files
  *
  * Description :  Read and parse all the action files and add to files
  *                list.
@@ -1233,7 +1237,7 @@ void free_alias_list(struct action_alias *alias_list)
  * Returns     :  0 => Ok, everything else is an error.
  *
  *********************************************************************/
-int load_actions_file(struct client_state *csp)
+int load_action_files(struct client_state *csp)
 {
    int i;
    int result;
