@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.111 2008/04/06 14:54:26 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.112 2008/04/06 15:18:34 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,10 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.112  2008/04/06 15:18:34  fabiankeil
+ *    Oh well, rename the --enable-pcre-host-patterns option to
+ *    --enable-extended-host-patterns as it's not really PCRE syntax.
+ *
  *    Revision 1.111  2008/04/06 14:54:26  fabiankeil
  *    Use PCRE syntax in host patterns when configured
  *    with --enable-pcre-host-patterns.
@@ -937,14 +941,14 @@ struct url_spec
        Used for debugging or display only.  */
    char  *spec;
 
-#ifdef FEATURE_PCRE_HOST_PATTERNS
+#ifdef FEATURE_EXTENDED_HOST_PATTERNS
    regex_t *host_regex;/**< Regex for host matching                          */
 #else
    char  *dbuffer;     /**< Buffer with '\0'-delimited domain name, or NULL to match all hosts. */
    char **dvec;        /**< List of pointers to the strings in dbuffer.       */
    int    dcount;      /**< How many parts to this domain? (length of dvec)   */
    int    unanchored;  /**< Bitmap - flags are ANCHOR_LEFT and ANCHOR_RIGHT.  */
-#endif /* defined FEATURE_PCRE_HOST_PATTERNS */
+#endif /* defined FEATURE_EXTENDED_HOST_PATTERNS */
 
    char  *port_list;   /**< List of acceptable ports, or NULL to match all ports */
 
@@ -956,11 +960,11 @@ struct url_spec
 /**
  * If you declare a static url_spec, this is the value to initialize it to zero.
  */
-#ifndef FEATURE_PCRE_HOST_PATTERNS
+#ifndef FEATURE_EXTENDED_HOST_PATTERNS
 #define URL_SPEC_INITIALIZER { NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL }
 #else
 #define URL_SPEC_INITIALIZER { NULL, NULL, NULL, NULL, NULL, NULL }
-#endif /* def FEATURE_PCRE_HOST_PATTERNS */
+#endif /* def FEATURE_EXTENDED_HOST_PATTERNS */
 
 /**
  * Constant for host part matching in URLs.  If set, indicates that the start of
