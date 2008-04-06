@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.23 2008/04/05 12:19:20 fabiankeil Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.24 2008/04/06 14:54:26 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -6,7 +6,7 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.23 2008/04/05 12:19:20 fabianke
  * Purpose     :  Declares functions to match URLs against URL
  *                patterns.
  *
- * Copyright   :  Written by and Copyright (C) 2001-2003, 2006-2007 the SourceForge
+ * Copyright   :  Written by and Copyright (C) 2001-2003, 2006-2008 the SourceForge
  *                Privoxy team. http://www.privoxy.org/
  *
  *                Based on the Internet Junkbuster originally written
@@ -33,6 +33,10 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.23 2008/04/05 12:19:20 fabianke
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.24  2008/04/06 14:54:26  fabiankeil
+ *    Use PCRE syntax in host patterns when configured
+ *    with --enable-pcre-host-patterns.
+ *
  *    Revision 1.23  2008/04/05 12:19:20  fabiankeil
  *    Factor compile_host_pattern() out of create_url_spec().
  *
@@ -635,6 +639,62 @@ jb_err parse_http_request(const char *req,
 }
 
 
+#ifdef FEATURE_PCRE_HOST_PATTERNS
+/*********************************************************************
+ *
+ * Function    :  compile_host_pattern
+ *
+ * Description :  Parses and compiles a PCRE host pattern..
+ *
+ * Parameters  :
+ *          1  :  url = Target url_spec to be filled in.
+ *          2  :  host_pattern = Host pattern to compile.
+ *
+ * Returns     :  JB_ERR_OK - Success
+ *                JB_ERR_MEMORY - Out of memory
+ *                JB_ERR_PARSE - Cannot parse regex
+ *
+ *********************************************************************/
+static jb_err compile_host_pattern(struct url_spec *url, const char *host_pattern)
+{
+   int errcode;
+   char rebuf[BUFFER_SIZE];
+
+   assert(host_pattern);
+   assert(strlen(host_pattern) < sizeof(rebuf) - 2);
+
+   url->host_regex = zalloc(sizeof(*url->host_regex));
+   if (NULL == url->host_regex)
+   {
+      free_url_spec(url);
+      return JB_ERR_MEMORY;
+   }
+
+   snprintf(rebuf, sizeof(rebuf), "%s$", host_pattern);
+
+   errcode = regcomp(url->host_regex, rebuf,
+      (REG_EXTENDED|REG_NOSUB|REG_ICASE));
+
+   if (errcode)
+   {
+      size_t errlen = regerror(errcode, url->host_regex, rebuf, sizeof(rebuf));
+      if (errlen > (sizeof(rebuf) - (size_t)1))
+      {
+         errlen = sizeof(rebuf) - (size_t)1;
+      }
+      rebuf[errlen] = '\0';
+      log_error(LOG_LEVEL_ERROR, "error compiling %s: %s", url->spec, rebuf);
+      free_url_spec(url);
+
+      return JB_ERR_PARSE;
+   }
+
+   return JB_ERR_OK;
+
+}
+
+#else
+
 /*********************************************************************
  *
  * Function    :  compile_host_pattern
@@ -851,6 +911,7 @@ static int domain_match(const struct url_spec *pattern, const struct http_reques
    }
 
 }
+#endif /* def FEATURE_PCRE_HOST_PATTERNS */
 
 
 /*********************************************************************
@@ -1024,8 +1085,16 @@ void free_url_spec(struct url_spec *url)
    if (url == NULL) return;
 
    freez(url->spec);
+#ifdef FEATURE_PCRE_HOST_PATTERNS
+   if (url->host_regex)
+   {
+      regfree(url->host_regex);
+      freez(url->host_regex);
+   }
+#else
    freez(url->dbuffer);
    freez(url->dvec);
+#endif /* ndef FEATURE_PCRE_HOST_PATTERNS */
    freez(url->path);
    freez(url->port_list);
    if (url->preg)
@@ -1059,7 +1128,11 @@ int url_match(const struct url_spec *pattern,
 {
    /* XXX: these should probably be functions. */
 #define PORT_MATCHES ((NULL == pattern->port_list) || match_portlist(pattern->port_list, url->port))
+#ifdef FEATURE_PCRE_HOST_PATTERNS
+#define DOMAIN_MATCHES ((NULL == pattern->host_regex) || (0 == regexec(pattern->host_regex, url->host, 0, NULL, 0)))
+#else
 #define DOMAIN_MATCHES ((NULL == pattern->dbuffer) || (0 == domain_match(pattern, url)))
+#endif
 #define PATH_MATCHES ((NULL == pattern->path) || (0 == regexec(pattern->preg, url->path, 0, NULL, 0)))
 
    if (pattern->tag_regex != NULL)
