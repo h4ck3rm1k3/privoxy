@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.25 2008/04/06 15:18:38 fabiankeil Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.26 2008/04/07 16:57:18 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -33,6 +33,10 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.25 2008/04/06 15:18:38 fabianke
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.26  2008/04/07 16:57:18  fabiankeil
+ *    - Use free_url_spec() more consistently.
+ *    - Let it reset url->dcount just in case.
+ *
  *    Revision 1.25  2008/04/06 15:18:38  fabiankeil
  *    Oh well, rename the --enable-pcre-host-patterns option to
  *    --enable-extended-host-patterns as it's not really PCRE syntax.
@@ -738,10 +742,7 @@ static jb_err compile_host_pattern(struct url_spec *url, const char *host_patter
    url->dbuffer = strdup(host_pattern);
    if (NULL == url->dbuffer)
    {
-      freez(url->spec);
-      freez(url->path);
-      regfree(url->preg);
-      freez(url->preg);
+      free_url_spec(url);
       return JB_ERR_MEMORY;
    }
 
@@ -760,12 +761,7 @@ static jb_err compile_host_pattern(struct url_spec *url, const char *host_patter
 
    if (url->dcount < 0)
    {
-      freez(url->spec);
-      freez(url->path);
-      regfree(url->preg);
-      freez(url->preg);
-      freez(url->dbuffer);
-      url->dcount = 0;
+      free_url_spec(url);
       return JB_ERR_MEMORY;
    }
    else if (url->dcount != 0)
@@ -778,12 +774,7 @@ static jb_err compile_host_pattern(struct url_spec *url, const char *host_patter
       url->dvec = (char **)malloc(size);
       if (NULL == url->dvec)
       {
-         freez(url->spec);
-         freez(url->path);
-         regfree(url->preg);
-         freez(url->preg);
-         freez(url->dbuffer);
-         url->dcount = 0;
+         free_url_spec(url);
          return JB_ERR_MEMORY;
       }
 
@@ -983,12 +974,8 @@ jb_err create_url_spec(struct url_spec * url, const char * buf)
             errlen = sizeof(rebuf) - 1;
          }
          rebuf[errlen] = '\0';
-
          log_error(LOG_LEVEL_ERROR, "error compiling %s: %s", url->spec, rebuf);
-
-         freez(url->spec);
-         regfree(url->tag_regex);
-         freez(url->tag_regex);
+         free_url_spec(url);
 
          return JB_ERR_PARSE;
       }
@@ -1002,7 +989,7 @@ jb_err create_url_spec(struct url_spec * url, const char * buf)
       url->path = strdup(p);
       if (NULL == url->path)
       {
-         freez(url->spec);
+         free_url_spec(url);
          return JB_ERR_MEMORY;
       }
       *p = '\0';
@@ -1015,8 +1002,7 @@ jb_err create_url_spec(struct url_spec * url, const char * buf)
    {
       if (NULL == (url->preg = zalloc(sizeof(*url->preg))))
       {
-         freez(url->spec);
-         freez(url->path);
+         free_url_spec(url);
          return JB_ERR_MEMORY;
       }
 
@@ -1033,14 +1019,9 @@ jb_err create_url_spec(struct url_spec * url, const char * buf)
             errlen = sizeof(rebuf) - (size_t)1;
          }
          rebuf[errlen] = '\0';
-
          log_error(LOG_LEVEL_ERROR, "error compiling %s: %s",
             url->spec, rebuf);
-
-         freez(url->spec);
-         freez(url->path);
-         regfree(url->preg);
-         freez(url->preg);
+         free_url_spec(url);
 
          return JB_ERR_PARSE;
       }
@@ -1098,6 +1079,7 @@ void free_url_spec(struct url_spec *url)
 #else
    freez(url->dbuffer);
    freez(url->dvec);
+   url->dcount = 0;
 #endif /* ndef FEATURE_EXTENDED_HOST_PATTERNS */
    freez(url->path);
    freez(url->port_list);
