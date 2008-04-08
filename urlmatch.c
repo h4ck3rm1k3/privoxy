@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.26 2008/04/07 16:57:18 fabiankeil Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.27 2008/04/08 15:44:33 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -33,6 +33,10 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.26 2008/04/07 16:57:18 fabianke
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.27  2008/04/08 15:44:33  fabiankeil
+ *    Save a bit of memory (and a few cpu cycles) by not bothering to
+ *    compile slash-only path regexes that don't affect the result.
+ *
  *    Revision 1.26  2008/04/07 16:57:18  fabiankeil
  *    - Use free_url_spec() more consistently.
  *    - Let it reset url->dcount just in case.
@@ -986,11 +990,23 @@ jb_err create_url_spec(struct url_spec * url, const char * buf)
    p = strchr(buf, '/');
    if (NULL != p)
    {
-      url->path = strdup(p);
-      if (NULL == url->path)
+      if (*(p+1) != '\0')
       {
-         free_url_spec(url);
-         return JB_ERR_MEMORY;
+         url->path = strdup(p);
+         if (NULL == url->path)
+         {
+            free_url_spec(url);
+            return JB_ERR_MEMORY;
+         }
+      }
+      else
+      {
+         /*
+          * The path pattern is a single slash and can
+          * be ignored as it won't affect the result.
+          */
+         assert(NULL == url->path);
+         url->path = NULL;
       }
       *p = '\0';
    }
