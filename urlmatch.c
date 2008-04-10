@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.30 2008/04/10 04:24:24 fabiankeil Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.31 2008/04/10 14:41:04 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -33,6 +33,9 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.30 2008/04/10 04:24:24 fabianke
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.31  2008/04/10 14:41:04  fabiankeil
+ *    Ditch url_spec's path member now that it's no longer used.
+ *
  *    Revision 1.30  2008/04/10 04:24:24  fabiankeil
  *    Stop duplicating the plain text representation of the path regex
  *    (and keeping the copy around). Once the regex is compiled it's no
@@ -1095,7 +1098,6 @@ void free_url_spec(struct url_spec *url)
    freez(url->dvec);
    url->dcount = 0;
 #endif /* ndef FEATURE_EXTENDED_HOST_PATTERNS */
-   freez(url->path);
    freez(url->port_list);
    if (url->preg)
    {
