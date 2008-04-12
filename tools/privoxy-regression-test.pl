@@ -7,7 +7,7 @@
 # A regression test "framework" for Privoxy. For documentation see:
 # perldoc privoxy-regression-test.pl
 #
-# $Id: privoxy-regression-test.pl,v 1.16 2008/04/04 17:26:20 fabiankeil Exp $
+# $Id: privoxy-regression-test.pl,v 1.17 2008/04/12 12:29:22 fabiankeil Exp $
 #
 # Wish list:
 #
@@ -703,7 +703,7 @@ sub get_final_results ($) {
     my %final_results = ();
     my $final_results_reached = 0;
 
-    die "Unacceptable characterss in $url" if $url =~ m@[\\'"]@;
+    die "Unacceptable characters in $url" if $url =~ m@[\\'"]@;
     # XXX: should be URL-encoded properly
     $url =~ s@%@%25@g;
     $url =~ s@\s@%20@g;
@@ -711,7 +711,7 @@ sub get_final_results ($) {
     $url =~ s@:@%3A@g;
     $url =~ s@/@%2F@g;
 
-    $curl_parameters .= "'" . PRIVOXY_CGI_URL . 'show-url-info?url=' . $url . "'";
+    $curl_parameters .= quote(PRIVOXY_CGI_URL . 'show-url-info?url=' . $url);
 
     foreach (@{get_cgi_page_or_else($curl_parameters)}) {
 
@@ -726,10 +726,10 @@ sub get_final_results ($) {
             
             if (defined $parameter) {
                 # In case the caller needs to check
-                # the action and it's parameter
+                # the action and its parameter
                 $final_results{$action . $parameter} = 1;
             }
-            # In case the action doesn't have paramters
+            # In case the action doesn't have parameters
             # or the caller doesn't care for the parameter.
             $final_results{$action} = 1;
         }
