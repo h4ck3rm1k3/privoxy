@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.35 2008/04/14 18:11:21 fabiankeil Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.36 2008/04/14 18:19:48 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -33,6 +33,9 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.35 2008/04/14 18:11:21 fabianke
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.36  2008/04/14 18:19:48  fabiankeil
+ *    Remove now-pointless cast in create_url_spec().
+ *
  *    Revision 1.35  2008/04/14 18:11:21  fabiankeil
  *    The compiler might not notice it, but the buffer passed to
  *    create_url_spec() is modified later on and thus shouldn't
@@ -1109,7 +1112,7 @@ jb_err create_url_spec(struct url_spec *url, char *buf)
    }
 
    /* If it isn't a tag pattern it must be a URL pattern. */
-   return compile_url_pattern(url, (char *)buf);
+   return compile_url_pattern(url, buf);
 }
 
 
