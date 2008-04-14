@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.34 2008/04/13 13:32:07 fabiankeil Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.35 2008/04/14 18:11:21 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -33,6 +33,11 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.34 2008/04/13 13:32:07 fabianke
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.35  2008/04/14 18:11:21  fabiankeil
+ *    The compiler might not notice it, but the buffer passed to
+ *    create_url_spec() is modified later on and thus shouldn't
+ *    be declared immutable.
+ *
  *    Revision 1.34  2008/04/13 13:32:07  fabiankeil
  *    Factor URL pattern compilation out of create_url_spec().
  *
@@ -1073,7 +1078,7 @@ static int domain_match(const struct url_spec *pattern, const struct http_reques
  *                      function.  If this function succeeds, the
  *                      buffer is copied to url->spec.  If this
  *                      function fails, the contents of the buffer
- *                      are lost forever. XXX: Why is this const?
+ *                      are lost forever.
  *
  * Returns     :  JB_ERR_OK - Success
  *                JB_ERR_MEMORY - Out of memory
@@ -1081,7 +1086,7 @@ static int domain_match(const struct url_spec *pattern, const struct http_reques
  *                               written to system log)
  *
  *********************************************************************/
-jb_err create_url_spec(struct url_spec * url, const char * buf)
+jb_err create_url_spec(struct url_spec *url, char *buf)
 {
    assert(url);
    assert(buf);

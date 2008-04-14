@@ -1,6 +1,6 @@
 #ifndef URLMATCH_H_INCLUDED
 #define URLMATCH_H_INCLUDED
-#define URLMATCH_H_VERSION "$Id: urlmatch.h,v 1.9 2008/04/08 16:07:39 fabiankeil Exp $"
+#define URLMATCH_H_VERSION "$Id: urlmatch.h,v 1.10 2008/04/14 18:11:21 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.h,v $
@@ -35,6 +35,11 @@
  *
  * Revisions   :
  *    $Log: urlmatch.h,v $
+ *    Revision 1.10  2008/04/14 18:11:21  fabiankeil
+ *    The compiler might not notice it, but the buffer passed to
+ *    create_url_spec() is modified later on and thus shouldn't
+ *    be declared immutable.
+ *
  *    Revision 1.9  2008/04/08 16:07:39  fabiankeil
  *    Make it harder to mistake url_match()'s
  *    second parameter for an url_spec.
@@ -99,7 +104,7 @@ extern jb_err parse_http_url(const char * url,
 extern int url_match(const struct url_spec *pattern,
                      const struct http_request *http);
 
-extern jb_err create_url_spec(struct url_spec * url, const char * buf);
+extern jb_err create_url_spec(struct url_spec *url, char *buf);
 extern void free_url_spec(struct url_spec *url);
 extern int match_portlist(const char *portlist, int port);
 
