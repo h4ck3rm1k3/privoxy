@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.171 2008/03/27 18:27:25 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.172 2008/04/16 16:38:21 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.171 2008/03/27 18:27:25 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.172  2008/04/16 16:38:21  fabiankeil
+ *    Don't pass the whole csp structure to flush_socket()
+ *    when it only needs a file descriptor and a buffer.
+ *
  *    Revision 1.171  2008/03/27 18:27:25  fabiankeil
  *    Remove kill-popups action.
  *
@@ -2302,7 +2306,7 @@ static void chat(struct client_state *csp)
        */
 
       if (write_socket(csp->sfd, hdr, strlen(hdr))
-       || (flush_socket(csp->sfd, csp) <  0))
+       || (flush_socket(csp->sfd, csp->iob) <  0))
       {
          log_error(LOG_LEVEL_CONNECT, "write header to: %s failed: %E",
                     http->hostport);
@@ -2576,7 +2580,7 @@ static void chat(struct client_state *csp)
                   hdrlen = strlen(hdr);
 
                   if (write_socket(csp->cfd, hdr, hdrlen)
-                   || ((flushed = flush_socket(csp->cfd, csp)) < 0)
+                   || ((flushed = flush_socket(csp->cfd, csp->iob)) < 0)
                    || (write_socket(csp->cfd, buf, (size_t)len)))
                   {
                      log_error(LOG_LEVEL_CONNECT, "Flush header and buffers to client failed: %E");
@@ -2704,7 +2708,7 @@ static void chat(struct client_state *csp)
                 */
 
                if (write_socket(csp->cfd, hdr, strlen(hdr))
-                || ((len = flush_socket(csp->cfd, csp)) < 0))
+                || ((len = flush_socket(csp->cfd, csp->iob)) < 0))
                {
                   log_error(LOG_LEVEL_CONNECT, "write header to client failed: %E");
 
