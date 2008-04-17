@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.104 2008/03/26 18:07:06 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.105 2008/04/17 14:40:47 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,10 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.104 2008/03/26 18:07:06 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.105  2008/04/17 14:40:47  fabiankeil
+ *    Provide get_http_time() with the buffer size so it doesn't
+ *    have to blindly assume that the buffer is big enough.
+ *
  *    Revision 1.104  2008/03/26 18:07:06  fabiankeil
  *    Add hostname directive. Closes PR#1918189.
  *
@@ -1932,19 +1936,18 @@ char *add_help_link(const char *item,
  *                HTTP header - e.g.:
  *                "Sun, 06 Nov 1994 08:49:37 GMT"
  *
- *                XXX: Should probably get a third parameter for
- *                the buffer size.
- *
  * Parameters  :  
  *          1  :  time_offset = Time returned will be current time
  *                              plus this number of seconds.
- *          2  :  buf = Destination for result.  Must be long enough
- *                      to hold 29 characters plus a trailing zero.
+ *          2  :  buf = Destination for result.
+ *          3  :  buffer_size = Size of the buffer above. Must be big
+ *                              enough to hold 29 characters plus a
+ *                              trailing zero.
  *
  * Returns     :  N/A
  *
  *********************************************************************/
-void get_http_time(int time_offset, char *buf)
+void get_http_time(int time_offset, char *buf, size_t buffer_size)
 {
    static const char day_names[7][4] =
       { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
@@ -1965,6 +1968,7 @@ void get_http_time(int time_offset, char *buf)
 #endif
 
    assert(buf);
+   assert(buffer_size > 29);
 
    time(&current_time); /* get current time */
 
@@ -1984,7 +1988,7 @@ void get_http_time(int time_offset, char *buf)
    }
 
    /* Format: "Sun, 06 Nov 1994 08:49:37 GMT" */
-   snprintf(buf, 30,
+   snprintf(buf, buffer_size,
       "%s, %02d %s %4d %02d:%02d:%02d GMT",
       day_names[t->tm_wday],
       t->tm_mday,
@@ -2096,7 +2100,7 @@ struct http_response *finish_http_response(const struct client_state *csp, struc
 
       if (!err)
       {
-         get_http_time(0, buf);
+         get_http_time(0, buf, sizeof(buf));
          err = enlist_unique_header(rsp->headers, "Date", buf);
       }
 
@@ -2105,13 +2109,13 @@ struct http_response *finish_http_response(const struct client_state *csp, struc
 
       if (!err)
       {
-         get_http_time(10 * 60, buf); /* 10 * 60sec = 10 minutes */
+         get_http_time(10 * 60, buf, sizeof(buf)); /* 10 * 60sec = 10 minutes */
          err = enlist_unique_header(rsp->headers, "Expires", buf);
       }
    }
    else if (!strncmpic(rsp->status, "302", 3))
    {
-      get_http_time(0, buf);
+      get_http_time(0, buf, sizeof(buf));
       if (!err) err = enlist_unique_header(rsp->headers, "Date", buf);
    }
    else
@@ -2137,7 +2141,7 @@ struct http_response *finish_http_response(const struct client_state *csp, struc
        */
       if (!err) err = enlist_unique_header(rsp->headers, "Cache-Control", "no-cache");
 
-      get_http_time(0, buf);
+      get_http_time(0, buf, sizeof(buf));
       if (!err) err = enlist_unique_header(rsp->headers, "Date", buf);
       if (!strncmpic(rsp->status, "403", 3)
        || !strncmpic(rsp->status, "404", 3)

@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.68 2008/03/27 18:27:21 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.69 2008/04/17 14:40:48 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,10 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.68 2008/03/27 18:27:21 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.69  2008/04/17 14:40:48  fabiankeil
+ *    Provide get_http_time() with the buffer size so it doesn't
+ *    have to blindly assume that the buffer is big enough.
+ *
  *    Revision 1.68  2008/03/27 18:27:21  fabiankeil
  *    Remove kill-popups action.
  *
@@ -1798,7 +1802,7 @@ jb_err cgi_robots_txt(struct client_state *csp,
 
    rsp->is_static = 1;
 
-   get_http_time(7 * 24 * 60 * 60, buf); /* 7 days into future */
+   get_http_time(7 * 24 * 60 * 60, buf, sizeof(buf)); /* 7 days into future */
    if (!err) err = enlist_unique_header(rsp->headers, "Expires", buf);
 
    return (err ? JB_ERR_MEMORY : JB_ERR_OK);
