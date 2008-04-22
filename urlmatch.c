@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.38 2008/04/18 05:17:18 fabiankeil Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.39 2008/04/22 16:27:42 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -33,6 +33,10 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.38 2008/04/18 05:17:18 fabianke
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.39  2008/04/22 16:27:42  fabiankeil
+ *    In parse_http_request(), remove a pointless
+ *    temporary variable and free the buffer earlier.
+ *
  *    Revision 1.38  2008/04/18 05:17:18  fabiankeil
  *    Mark simplematch()'s parameters as immutable.
  *
@@ -628,7 +632,6 @@ jb_err parse_http_request(const char *req,
    char *v[10]; /* XXX: Why 10? We should only need three. */
    int n;
    jb_err err;
-   int is_connect = 0;
 
    memset(http, '\0', sizeof(*http));
 
@@ -661,11 +664,6 @@ jb_err parse_http_request(const char *req,
       return JB_ERR_PARSE;
    }
 
-   if (strcmpic(v[0], "CONNECT") == 0)
-   {
-      is_connect = 1;
-   }
-
    err = parse_http_url(v[1], http, csp);
    if (err)
    {
@@ -676,20 +674,20 @@ jb_err parse_http_request(const char *req,
    /*
     * Copy the details into the structure
     */
-   http->ssl = is_connect;
+   http->ssl = !strcmpic(v[0], "CONNECT");
    http->cmd = strdup(req);
    http->gpc = strdup(v[0]);
    http->ver = strdup(v[2]);
+
+   freez(buf);
 
    if ( (http->cmd == NULL)
      || (http->gpc == NULL)
      || (http->ver == NULL) )
    {
-      free(buf);
       return JB_ERR_MEMORY;
    }
 
-   free(buf);
    return JB_ERR_OK;
 
 }
