@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.73 2008/04/26 12:21:55 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.74 2008/04/26 15:50:56 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,9 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.73 2008/04/26 12:21:55 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.74  2008/04/26 15:50:56  fabiankeil
+ *    Fix macro name in cgi_show_file() error path.
+ *
  *    Revision 1.73  2008/04/26 12:21:55  fabiankeil
  *    Forget about JB_ERR_PARSE. JB_ERR_CGI_PARAMS to the rescue.
  *
@@ -2083,7 +2086,7 @@ static jb_err cgi_show_file(struct client_state *csp,
 
       if ((fp = fopen(filename, "rb")) == NULL)
       {
-         if (map(exports, "content", 1, "<h1>ERROR OPENING FILE!</h1>", 1))
+         if (map(exports, "contents", 1, "<h1>ERROR OPENING FILE!</h1>", 1))
          {
             free_map(exports);
             return JB_ERR_MEMORY;
