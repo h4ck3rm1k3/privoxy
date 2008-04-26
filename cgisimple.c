@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.72 2008/04/26 10:34:15 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.73 2008/04/26 12:21:55 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,9 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.72 2008/04/26 10:34:15 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.73  2008/04/26 12:21:55  fabiankeil
+ *    Forget about JB_ERR_PARSE. JB_ERR_CGI_PARAMS to the rescue.
+ *
  *    Revision 1.72  2008/04/26 10:34:15  fabiankeil
  *    If zlib support is unavailable and there are content filters active
  *    but the prevent-compression action is disabled, include a warning
@@ -2132,11 +2135,7 @@ static jb_err cgi_show_file(struct client_state *csp,
       return template_fill_for_cgi(csp, "show-status-file", exports, rsp);
    }
 
-   /*
-    * XXX: should return JB_ERR_PARSE but CGI handlers
-    * currently aren't expected to do that.
-    */
-   return JB_ERR_OK;
+   return JB_ERR_CGI_PARAMS;
 }
  
 
