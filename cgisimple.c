@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.71 2008/04/25 13:33:56 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.72 2008/04/26 10:34:15 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,11 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.71 2008/04/25 13:33:56 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.72  2008/04/26 10:34:15  fabiankeil
+ *    If zlib support is unavailable and there are content filters active
+ *    but the prevent-compression action is disabled, include a warning
+ *    on the show-url-info page that compression might prevent filtering.
+ *
  *    Revision 1.71  2008/04/25 13:33:56  fabiankeil
  *    - Factor cgi_show_file() out of cgi_show_status().
  *    - Adjust cgi_show_status()'s parameter description to match reality.
@@ -1685,6 +1690,23 @@ jb_err cgi_show_url_info(struct client_state *csp,
          err = map_block_killer(exports, "cgi-editor-is-disabled");
       }
 #endif /* FEATURE_CGI_EDIT_ACTIONS */
+
+      /*
+       * If zlib support is available, if no content filters
+       * are enabled or if the prevent-compression action is enabled,
+       * suppress the "compression could prevent filtering" warning.
+       *
+       * XXX: Change content_filters_enabled()'s prototype so we can
+       * use it here.
+       */
+#ifndef FEATURE_ZLIB
+      if ((list_is_empty(action->multi[ACTION_MULTI_FILTER])
+             && !(action->flags & ACTION_DEANIMATE))
+         || (action->flags & ACTION_NO_COMPRESSION))
+#endif
+      {
+         if (!err) err = map_block_killer(exports, "filters-might-be-ineffective");
+      }
 
       if (err || map(exports, "matches", 1, matches , 0))
       {
