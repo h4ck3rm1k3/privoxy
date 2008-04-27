@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.67 2008/03/27 18:27:23 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.68 2008/04/27 16:50:46 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,11 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.67 2008/03/27 18:27:23 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.68  2008/04/27 16:50:46  fabiankeil
+ *    Remove an incorrect assertion. The value of debug may change if
+ *    the configuration is reloaded in another thread. While we could
+ *    cache the initial value, the assertion doesn't seem worth it.
+ *
  *    Revision 1.67  2008/03/27 18:27:23  fabiankeil
  *    Remove kill-popups action.
  *
@@ -1166,7 +1171,6 @@ void log_error(int loglevel, const char *fmt, ...)
       loglevel = LOG_LEVEL_FATAL;
    }
 
-   assert(loglevel & debug);
 #ifndef _WIN32
    /*
     * On Windows this is acceptable in case
