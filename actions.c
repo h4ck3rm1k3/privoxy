@@ -1,4 +1,4 @@
-const char actions_rcs[] = "$Id: actions.c,v 1.51 2008/04/27 16:20:19 fabiankeil Exp $";
+const char actions_rcs[] = "$Id: actions.c,v 1.52 2008/04/27 16:26:59 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/actions.c,v $
@@ -33,6 +33,9 @@ const char actions_rcs[] = "$Id: actions.c,v 1.51 2008/04/27 16:20:19 fabiankeil
  *
  * Revisions   :
  *    $Log: actions.c,v $
+ *    Revision 1.52  2008/04/27 16:26:59  fabiankeil
+ *    White space fix for the last commit.
+ *
  *    Revision 1.51  2008/04/27 16:20:19  fabiankeil
  *    Complain about every block action without reason found.
  *
@@ -763,9 +766,9 @@ jb_err get_actions(char *line,
                          * XXX: should include line number.
                          */
                         value = "No reason specified.";
-                        log_error(LOG_LEVEL_ERROR, "block action without "
-                           "reason found. This may become a fatal error"
-                           "in future versions.");
+                        log_error(LOG_LEVEL_ERROR,
+                           "block action without reason found. This may "
+                           "become a fatal error in future versions.");
                      }
                      else
                      {
