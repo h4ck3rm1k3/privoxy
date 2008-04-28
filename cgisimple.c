@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.75 2008/04/27 13:52:52 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.76 2008/04/28 09:13:30 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,10 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.75 2008/04/27 13:52:52 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.76  2008/04/28 09:13:30  fabiankeil
+ *    In load_file(), remember the error reason and fclose()
+ *    and return later on instead of right away.
+ *
  *    Revision 1.75  2008/04/27 13:52:52  fabiankeil
  *    Move CGI file loading code into load_file() and
  *    add checks for unexpected errors.
@@ -2119,6 +2123,7 @@ static jb_err load_file(const char *filename, char **buffer, size_t *length)
 {
    FILE *fp;
    int ret;
+   jb_err err = JB_ERR_OK;
 
    fp = fopen(filename, "rb");
    if (NULL == fp)
@@ -2153,11 +2158,9 @@ static jb_err load_file(const char *filename, char **buffer, size_t *length)
    *buffer = (char *)zalloc(*length + 1);
    if (NULL == *buffer)
    {
-      fclose(fp);
-      return JB_ERR_MEMORY;
+      err = JB_ERR_MEMORY;
    }
-
-   if (!fread(*buffer, *length, 1, fp))
+   else if (!fread(*buffer, *length, 1, fp))
    {
       /*
        * May happen if the file size changes between fseek() and
@@ -2165,13 +2168,12 @@ static jb_err load_file(const char *filename, char **buffer, size_t *length)
        */
       log_error(LOG_LEVEL_ERROR,
          "Couldn't completely read file %s.", filename);
-      fclose(fp);
-      return JB_ERR_FILE;
+      err = JB_ERR_FILE;
    }
 
    fclose(fp);
 
-   return JB_ERR_OK;
+   return err;
 
 }
 
