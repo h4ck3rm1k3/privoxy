@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.76 2008/04/28 09:13:30 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.77 2008/05/02 09:47:48 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,11 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.76 2008/04/28 09:13:30 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.77  2008/05/02 09:47:48  fabiankeil
+ *    In cgi_show_url_info, pass an initialized http structure
+ *    to parse_http_url() as that will be required soonish and
+ *    assert that https URLs are recognized correctly.
+ *
  *    Revision 1.76  2008/04/28 09:13:30  fabiankeil
  *    In load_file(), remember the error reason and fclose()
  *    and return later on instead of right away.
@@ -1464,7 +1469,9 @@ jb_err cgi_show_url_info(struct client_state *csp,
          return JB_ERR_MEMORY;
       }
 
+      memset(url_to_query, '\0', sizeof(url_to_query));
       err = parse_http_url(url_param, url_to_query, csp);
+      assert(url_to_query->ssl == !strncmp(url_param, "https://", 8));
 
       free(url_param);
 
