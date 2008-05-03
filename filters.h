@@ -1,6 +1,6 @@
 #ifndef FILTERS_H_INCLUDED
 #define FILTERS_H_INCLUDED
-#define FILTERS_H_VERSION "$Id: filters.h,v 1.34 2008/03/02 12:25:25 fabiankeil Exp $"
+#define FILTERS_H_VERSION "$Id: filters.h,v 1.35 2008/05/03 16:40:45 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.h,v $
@@ -39,6 +39,12 @@
  *
  * Revisions   :
  *    $Log: filters.h,v $
+ *    Revision 1.35  2008/05/03 16:40:45  fabiankeil
+ *    Change content_filters_enabled()'s parameter from
+ *    csp->action to action so it can be also used in the
+ *    CGI code. Don't bother checking if there are filters
+ *    loaded, as that's somewhat besides the point.
+ *
  *    Revision 1.34  2008/03/02 12:25:25  fabiankeil
  *    Also use shiny new connect_port_is_forbidden() in jcc.c.
  *
@@ -338,7 +344,7 @@ extern char *get_last_url(char *subject, const char *redirect_mode);
 
 extern pcrs_job *compile_dynamic_pcrs_job_list(const struct client_state *csp, const struct re_filterfile_spec *b);
 
-extern inline int content_filters_enabled(const struct client_state *csp);
+extern int content_filters_enabled(const struct current_action_spec *action);
 
 /*
  * Handling Max-Forwards:

@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.125 2008/04/17 14:40:49 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.126 2008/05/03 16:40:45 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,12 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.125 2008/04/17 14:40:49 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.126  2008/05/03 16:40:45  fabiankeil
+ *    Change content_filters_enabled()'s parameter from
+ *    csp->action to action so it can be also used in the
+ *    CGI code. Don't bother checking if there are filters
+ *    loaded, as that's somewhat besides the point.
+ *
  *    Revision 1.125  2008/04/17 14:40:49  fabiankeil
  *    Provide get_http_time() with the buffer size so it doesn't
  *    have to blindly assume that the buffer is big enough.
@@ -3475,7 +3481,7 @@ jb_err client_x_filter(struct client_state *csp, char **header)
  *********************************************************************/
 static jb_err client_range(struct client_state *csp, char **header)
 {
-   if (content_filters_enabled(csp))
+   if (content_filters_enabled(csp->action))
    {
       log_error(LOG_LEVEL_HEADER, "Content filtering is enabled."
          " Crunching: \'%s\' to prevent range-mismatch problems.", *header);
