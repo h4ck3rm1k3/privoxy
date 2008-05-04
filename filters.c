@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.106 2008/05/03 16:40:44 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.107 2008/05/04 17:52:56 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -40,6 +40,9 @@ const char filters_rcs[] = "$Id: filters.c,v 1.106 2008/05/03 16:40:44 fabiankei
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.107  2008/05/04 17:52:56  fabiankeil
+ *    Adjust parse_http_url() call to new prototype.
+ *
  *    Revision 1.106  2008/05/03 16:40:44  fabiankeil
  *    Change content_filters_enabled()'s parameter from
  *    csp->action to action so it can be also used in the
@@ -1741,7 +1744,7 @@ int is_untrusted_url(const struct client_state *csp)
    /*
     * If not, do we maybe trust its referrer?
     */
-   err = parse_http_url(referer, rhttp, csp);
+   err = parse_http_url(referer, rhttp, REQUIRE_PROTOCOL);
    if (err)
    {
       return 1;
