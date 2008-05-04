@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.41 2008/05/02 09:51:34 fabiankeil Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.42 2008/05/04 13:24:16 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -33,6 +33,9 @@ const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.41 2008/05/02 09:51:34 fabianke
  *
  * Revisions   :
  *    $Log: urlmatch.c,v $
+ *    Revision 1.42  2008/05/04 13:24:16  fabiankeil
+ *    If the method isn't CONNECT, reject URLs without protocol.
+ *
  *    Revision 1.41  2008/05/02 09:51:34  fabiankeil
  *    In parse_http_url(), don't muck around with values
  *    that are none of its business: require an initialized
@@ -448,6 +451,11 @@ jb_err parse_http_url(const char * url,
          http->host = NULL;
          host_available = 0;
       }
+      else if (!http->ssl)
+      {
+         freez(buf);
+         return JB_ERR_PARSE;
+      }
 
       url_path = strchr(url_noproto, '/');
       if (url_path != NULL)
@@ -661,6 +669,8 @@ jb_err parse_http_request(const char *req,
       return JB_ERR_PARSE;
    }
 
+   http->ssl = !strcmpic(v[0], "CONNECT");
+
    err = parse_http_url(v[1], http, csp);
    if (err)
    {
@@ -671,7 +681,6 @@ jb_err parse_http_request(const char *req,
    /*
     * Copy the details into the structure
     */
-   http->ssl = !strcmpic(v[0], "CONNECT");
    http->cmd = strdup(req);
    http->gpc = strdup(v[0]);
    http->ver = strdup(v[2]);
