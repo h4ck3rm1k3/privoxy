@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.174 2008/05/07 18:05:53 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.175 2008/05/09 18:53:59 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.174 2008/05/07 18:05:53 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.175  2008/05/09 18:53:59  fabiankeil
+ *    Fix comment grammar.
+ *
  *    Revision 1.174  2008/05/07 18:05:53  fabiankeil
  *    Remove the pointless buffer in client_protocol_is_unsupported().
  *
@@ -3007,7 +3010,7 @@ int main(int argc, const char *argv[])
     * Parse the command line arguments
     *
     * XXX: simply printing usage information in case of
-    * invalid arguments isn't particular user friendly.
+    * invalid arguments isn't particularly user friendly.
     */
    while (++argc_pos < argc)
    {
