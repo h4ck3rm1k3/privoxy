@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.177 2008/05/10 11:51:12 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.178 2008/05/10 13:23:38 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.177 2008/05/10 11:51:12 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.178  2008/05/10 13:23:38  fabiankeil
+ *    Don't provide get_header() with the whole client state
+ *    structure when it only needs access to csp->iob.
+ *
  *    Revision 1.177  2008/05/10 11:51:12  fabiankeil
  *    Make the "read the rest of the headers" loop a bit more readable.
  *
@@ -1480,7 +1484,7 @@ static jb_err get_server_headers(struct client_state *csp)
    int continue_hack_in_da_house = 0;
    char * header;
 
-   while (((header = get_header(csp)) != NULL) || continue_hack_in_da_house)
+   while (((header = get_header(csp->iob)) != NULL) || continue_hack_in_da_house)
    {
       if (header == NULL)
       {
@@ -1988,7 +1992,7 @@ static void chat(struct client_state *csp)
          return;
       }
 
-      req = get_header(csp);
+      req = get_header(csp->iob);
 
    } while ((NULL != req) && ('\0' == *req));
 
@@ -2076,7 +2080,7 @@ static void chat(struct client_state *csp)
    init_list(headers);
    for (;;)
    {
-      p = get_header(csp);
+      p = get_header(csp->iob);
 
       if (p == NULL)
       {

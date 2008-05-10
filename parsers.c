@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.126 2008/05/03 16:40:45 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.127 2008/05/10 13:23:38 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,10 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.126 2008/05/03 16:40:45 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.127  2008/05/10 13:23:38  fabiankeil
+ *    Don't provide get_header() with the whole client state
+ *    structure when it only needs access to csp->iob.
+ *
  *    Revision 1.126  2008/05/03 16:40:45  fabiankeil
  *    Change content_filters_enabled()'s parameter from
  *    csp->action to action so it can be also used in the
@@ -1439,7 +1443,7 @@ jb_err decompress_iob(struct client_state *csp)
  * Description :  This (odd) routine will parse the csp->iob
  *
  * Parameters  :
- *          1  :  csp = Current client state (buffers, headers, etc...)
+ *          1  :  iob = The I/O buffer to parse, usually csp->iob.
  *
  * Returns     :  Any one of the following:
  *
@@ -1449,11 +1453,9 @@ jb_err decompress_iob(struct client_state *csp)
  *          a complete header line.
  *
  *********************************************************************/
-char *get_header(struct client_state *csp)
+char *get_header(struct iob *iob)
 {
-   struct iob *iob;
    char *p, *q, *ret;
-   iob = csp->iob;
 
    if ((iob->cur == NULL)
       || ((p = strchr(iob->cur, '\n')) == NULL))
