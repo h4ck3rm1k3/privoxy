@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.75 2008/03/30 14:52:05 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.76 2008/05/10 09:03:16 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,10 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.75 2008/03/30 14:52:05 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.76  2008/05/10 09:03:16  fabiankeil
+ *    - Merge three string_append() calls.
+ *    - Remove useless assertion.
+ *
  *    Revision 1.75  2008/03/30 14:52:05  fabiankeil
  *    Rename load_actions_file() and load_re_filterfile()
  *    as they load multiple files "now".
@@ -1845,7 +1849,6 @@ static void savearg(char *command, char *argument, struct configuration_spec * c
    char * s;
 
    assert(command);
-   assert(*command);
    assert(argument);
 
    /*
@@ -1860,9 +1863,7 @@ static void savearg(char *command, char *argument, struct configuration_spec * c
    }
    else
    {
-      string_append(&buf, "http://");
-      string_append(&buf, CGI_SITE_2_HOST);
-      string_append(&buf, "/user-manual/");
+      string_append(&buf, "http://" CGI_SITE_2_HOST "/user-manual/");
    }
    string_append(&buf, CONFIG_HELP_PREFIX);
    string_join  (&buf, string_toupper(command));
