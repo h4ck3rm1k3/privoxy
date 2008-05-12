@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.82 2008/05/10 20:01:47 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.83 2008/05/12 14:51:30 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,10 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.82 2008/05/10 20:01:47 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.83  2008/05/12 14:51:30  fabiankeil
+ *    Don't complain about an invalid URL if show-url-info is requested
+ *    without parameters. Regression introduced in 1.81 by yours truly.
+ *
  *    Revision 1.82  2008/05/10 20:01:47  fabiankeil
  *    Fix an assertion that could erroneously
  *    trigger in case of memory shortage.
@@ -1414,7 +1418,7 @@ jb_err cgi_show_url_info(struct client_state *csp,
          url_param[0] = '\0';
       }
    }
-   else if (NULL == strstr(url_param, "://"))
+   else if ((url_param[0] != '\0') && (NULL == strstr(url_param, "://")))
    {
       /* No prefix - assume http:// */
       char *url_param_prefixed = strdup("http://");
