@@ -7,7 +7,7 @@
 # A regression test "framework" for Privoxy. For documentation see:
 # perldoc privoxy-regression-test.pl
 #
-# $Id: privoxy-regression-test.pl,v 1.19 2008/05/05 10:10:57 fabiankeil Exp $
+# $Id: privoxy-regression-test.pl,v 1.20 2008/05/17 14:13:23 fabiankeil Exp $
 #
 # Wish list:
 #
@@ -803,8 +803,6 @@ sub check_header_result ($$) {
     my $expect_header = $test{'expect-header'};
     my $success = 0;
 
-    $header =~ s@   @ @g if defined($header);
-
     if ($expect_header eq 'NO CHANGE') {
 
         if (defined($header) and $header eq $test{'data'}) {
@@ -918,6 +916,9 @@ sub get_header ($$) {
         # Ditch tags and leading/trailing white space.
         s@^\s*<.*?>@@g;
         s@\s*$@@g;
+
+        # Decode characters we care about. 
+        s@&quot;@"@g;
 
         $filtered_request .=  "\n" . $_;
          
