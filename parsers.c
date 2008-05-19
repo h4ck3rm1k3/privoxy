@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.129 2008/05/17 14:02:07 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.130 2008/05/19 17:18:04 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,10 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.129 2008/05/17 14:02:07 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.130  2008/05/19 17:18:04  fabiankeil
+ *    Wrap memmove() calls in string_move()
+ *    to document the purpose in one place.
+ *
  *    Revision 1.129  2008/05/17 14:02:07  fabiankeil
  *    Normalize linear header white space.
  *
@@ -1446,6 +1450,31 @@ jb_err decompress_iob(struct client_state *csp)
 
 /*********************************************************************
  *
+ * Function    :  string_move
+ *
+ * Description :  memmove wrapper to move the last part of a string
+ *                towards the beginning, overwriting the part in
+ *                the middle. strlcpy() can't be used here as the
+ *                strings overlap.
+ *
+ * Parameters  :
+ *          1  :  dst = Destination to overwrite
+ *          2  :  src = Source to move.
+ *
+ * Returns     :  N/A
+ *
+ *********************************************************************/
+static void string_move(char *dst, char *src)
+{
+   assert(dst < src);
+
+   /* +1 to copy the terminating nul as well. */
+   memmove(dst, src, strlen(src)+1);
+}
+
+
+/*********************************************************************
+ *
  * Function    :  normalize_lws
  *
  * Description :  Reduces unquoted linear white space in headers
@@ -1476,7 +1505,7 @@ static void normalize_lws(char *header)
             q++;
          }
          log_error(LOG_LEVEL_HEADER, "Reducing white space in '%s'", header);
-         memmove(p+1, q, strlen(q)+1);
+         string_move(p+1, q);
       }
 
       if (*p == '\t')
@@ -1510,7 +1539,7 @@ static void normalize_lws(char *header)
        * There's still space before the colon.
        * We don't want it.
        */
-      memmove(p-1, p, strlen(p)+1);
+      string_move(p-1, p);
    }
 }
 
@@ -3981,7 +4010,7 @@ static jb_err server_set_cookie(struct client_state *csp, char **header)
                 */
                log_error(LOG_LEVEL_ERROR,
                   "Can't parse \'%s\', send by %s. Unsupported time format?", cur_tag, csp->http->url);
-               memmove(cur_tag, next_tag, strlen(next_tag) + 1);
+               string_move(cur_tag, next_tag);
                changed = 1;
             }
             else
@@ -4032,12 +4061,8 @@ static jb_err server_set_cookie(struct client_state *csp, char **header)
                   /*
                    * Still valid, delete expiration date by copying
                    * the rest of the string over it.
-                   *
-                   * (Note that we cannot just use "strcpy(cur_tag, next_tag)",
-                   * since the behaviour of strcpy is undefined for overlapping
-                   * strings.)
                    */
-                  memmove(cur_tag, next_tag, strlen(next_tag) + 1);
+                  string_move(cur_tag, next_tag);
 
                   /* That changed the header, need to issue a log message */
                   changed = 1;
