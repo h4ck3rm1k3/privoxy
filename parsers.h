@@ -1,6 +1,6 @@
 #ifndef PARSERS_H_INCLUDED
 #define PARSERS_H_INCLUDED
-#define PARSERS_H_VERSION "$Id: parsers.h,v 1.43 2008/05/10 13:23:38 fabiankeil Exp $"
+#define PARSERS_H_VERSION "$Id: parsers.h,v 1.44 2008/05/20 16:05:09 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.h,v $
@@ -43,6 +43,9 @@
  *
  * Revisions   :
  *    $Log: parsers.h,v $
+ *    Revision 1.44  2008/05/20 16:05:09  fabiankeil
+ *    Move parsers structure definition from project.h to parsers.h.
+ *
  *    Revision 1.43  2008/05/10 13:23:38  fabiankeil
  *    Don't provide get_header() with the whole client state
  *    structure when it only needs access to csp->iob.
@@ -265,6 +268,22 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * List of functions to run on a list of headers.
+ * XXX: make parsers local to parsers.c.
+ */
+struct parsers
+{
+   /** The header prefix to match */
+   const char *str;
+   
+   /** The length of the prefix to match */
+   const size_t len;
+   
+   /** The function to apply to this line */
+   const parser_func_ptr parser;
+};
 
 extern const struct parsers client_patterns[];
 extern const struct parsers server_patterns[];
