@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.180 2008/05/21 15:26:32 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.181 2008/05/21 15:47:15 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.180 2008/05/21 15:26:32 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.181  2008/05/21 15:47:15  fabiankeil
+ *    Streamline sed()'s prototype and declare
+ *    the header parse and add structures static.
+ *
  *    Revision 1.180  2008/05/21 15:26:32  fabiankeil
  *    - Mark csp as immutable for send_crunch_response().
  *    - Fix comment spelling.
@@ -2183,7 +2187,7 @@ static void chat(struct client_state *csp)
    list_append_list_unique(csp->headers, headers);
    destroy_list(headers);
 
-   err = sed(client_patterns, add_client_headers, csp);
+   err = sed(csp, FILTER_CLIENT_HEADERS);
    if (JB_ERR_OK != err)
    {
       assert(err == JB_ERR_PARSE);
@@ -2737,10 +2741,11 @@ static void chat(struct client_state *csp)
                return;
             }
 
-            /* we have now received the entire header.
+            /*
+             * We have now received the entire server header,
              * filter it and send the result to the client
              */
-            if (JB_ERR_OK != sed(server_patterns, add_server_headers, csp))
+            if (JB_ERR_OK != sed(csp, FILTER_SERVER_HEADERS))
             {
                log_error(LOG_LEVEL_FATAL, "Failed to parse server headers.");
             }
