@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.133 2008/05/21 15:50:47 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.134 2008/05/21 19:27:25 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,9 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.133 2008/05/21 15:50:47 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.134  2008/05/21 19:27:25  fabiankeil
+ *    As the wafer actions are gone, we can stop including encode.h.
+ *
  *    Revision 1.133  2008/05/21 15:50:47  fabiankeil
  *    Ditch cast from (char **) to (char **).
  *
@@ -836,7 +839,6 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.133 2008/05/21 15:50:47 fabiankei
 #endif /* def FEATURE_PTHREAD */
 #include "list.h"
 #include "parsers.h"
-#include "encode.h"
 #include "ssplit.h"
 #include "errlog.h"
 #include "jbsockets.h"
