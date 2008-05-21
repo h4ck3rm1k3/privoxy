@@ -1,4 +1,4 @@
-const char deanimate_rcs[] = "$Id: deanimate.c,v 1.18 2008/03/28 15:13:38 fabiankeil Exp $";
+const char deanimate_rcs[] = "$Id: deanimate.c,v 1.19 2008/05/21 15:29:35 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/deanimate.c,v $
@@ -39,6 +39,9 @@ const char deanimate_rcs[] = "$Id: deanimate.c,v 1.18 2008/03/28 15:13:38 fabian
  *
  * Revisions   :
  *    $Log: deanimate.c,v $
+ *    Revision 1.19  2008/05/21 15:29:35  fabiankeil
+ *    Fix gcc43 warnings.
+ *
  *    Revision 1.18  2008/03/28 15:13:38  fabiankeil
  *    Remove inspect-jpegs action.
  *
@@ -335,7 +338,14 @@ static int gif_extract_image(struct binbuffer *src, struct binbuffer *dst)
     */
    if (c & 0x80)
    {
-      if (buf_copy(src, dst, (size_t) 3 * (1 << ((c & 0x07) + 1))))
+      int map_length = 3 * (1 << ((c & 0x07) + 1));
+      if (map_length <= 0)
+      {
+         log_error(LOG_LEVEL_DEANIMATE,
+            "colormap length = %d (%c)?", map_length, c);
+         return 1;
+      }
+      if (buf_copy(src, dst, (size_t)map_length))
       {
          return 1;
       }           
@@ -414,7 +424,14 @@ int gif_deanimate(struct binbuffer *src, struct binbuffer *dst, int get_first_im
     */
    if(c & 0x80)
    {
-      if (buf_copy(src, dst, (size_t) 3 * (1 << ((c & 0x07) + 1))))
+      int map_length = 3 * (1 << ((c & 0x07) + 1));
+      if (map_length <= 0)
+      {
+         log_error(LOG_LEVEL_DEANIMATE,
+            "colormap length = %d (%c)?", map_length, c);
+         return 1;
+      }
+      if (buf_copy(src, dst, (size_t)map_length))
       {
          return 1;
       }
