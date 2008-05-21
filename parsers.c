@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.132 2008/05/21 15:47:14 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.133 2008/05/21 15:50:47 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,9 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.132 2008/05/21 15:47:14 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.133  2008/05/21 15:50:47  fabiankeil
+ *    Ditch cast from (char **) to (char **).
+ *
  *    Revision 1.132  2008/05/21 15:47:14  fabiankeil
  *    Streamline sed()'s prototype and declare
  *    the header parse and add structures static.
@@ -1817,7 +1820,7 @@ jb_err sed(struct client_state *csp, int filter_server_headers)
          if ((strncmpic(p->str, v->str, v->len) == 0) ||
              (v->len == CHECK_EVERY_HEADER_REMAINING))
          {
-            err = v->parser(csp, (char **)&(p->str));
+            err = v->parser(csp, &(p->str));
          }
       }
       v++;
