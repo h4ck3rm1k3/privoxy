@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.107 2008/05/04 17:52:56 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.108 2008/05/21 15:35:08 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -40,6 +40,10 @@ const char filters_rcs[] = "$Id: filters.c,v 1.107 2008/05/04 17:52:56 fabiankei
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.108  2008/05/21 15:35:08  fabiankeil
+ *    - Mark csp as immutable for block_acl().
+ *    - Remove an obsolete complaint about filter_popups().
+ *
  *    Revision 1.107  2008/05/04 17:52:56  fabiankeil
  *    Adjust parse_http_url() call to new prototype.
  *
@@ -706,7 +710,7 @@ static jb_err prepare_for_filtering(struct client_state *csp);
  * Returns     : 0 = FALSE (don't block) and 1 = TRUE (do block)
  *
  *********************************************************************/
-int block_acl(struct access_control_addr *dst, struct client_state *csp)
+int block_acl(const struct access_control_addr *dst, const struct client_state *csp)
 {
    struct access_control_list *acl = csp->config->acl;
 
@@ -2078,12 +2082,6 @@ static char *gif_deanimate_response(struct client_state *csp)
  *
  * Description :  Decides which content filter function has
  *                to be applied (if any).
- *
- *                XXX: Doesn't handle filter_popups()
- *                because of the different prototype. Probably
- *                we should ditch filter_popups() anyway, it's
- *                even less reliable than popup blocking based
- *                on pcrs filters.
  *
  * Parameters  :
  *          1  :  csp = Current client state (buffers, headers, etc...)
