@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.134 2008/05/21 19:27:25 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.135 2008/05/21 20:12:10 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,11 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.134 2008/05/21 19:27:25 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.135  2008/05/21 20:12:10  fabiankeil
+ *    The whole point of strclean() is to modify the
+ *    first parameter, so don't mark it immutable,
+ *    even though the compiler lets us get away with it.
+ *
  *    Revision 1.134  2008/05/21 19:27:25  fabiankeil
  *    As the wafer actions are gone, we can stop including encode.h.
  *
@@ -4154,7 +4159,7 @@ static jb_err server_set_cookie(struct client_state *csp, char **header)
  * Returns     :  Number of eliminations
  *
  *********************************************************************/
-int strclean(const char *string, const char *substring)
+int strclean(char *string, const char *substring)
 {
    int hits = 0;
    size_t len;
