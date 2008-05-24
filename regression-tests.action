@@ -1,5 +1,5 @@
 #############################################################################
-# $Id: regression-tests.action,v 1.10 2008/05/17 14:16:29 fabiankeil Exp $
+# $Id: regression-tests.action,v 1.11 2008/05/24 18:28:14 fabiankeil Exp $
 #############################################################################
 #
 # This is a configuration file for Privoxy-Regression-Test
@@ -676,11 +676,11 @@ invalid-forward5-gateway-port.example
 {+forward-override{forward-socks5 :12345 127.0.0.1:12345}}
 forward5-null-gateway-host.example
 
-# Fetch Test = http://www.forbidden-connect.example:444/forbidden-connect
+# Fetch Test = http://www.forbidden-connect.example:444/
 # Method = CONNECT
 # Expect Status Code = 403
 {+limit-connect{443}}
-www.forbidden-connect.example/forbidden-connect
+www.forbidden-connect.example/
 
 # Fetch Test = http://www.blocked-request.example/blocked-request
 # Expect Status Code = 403
