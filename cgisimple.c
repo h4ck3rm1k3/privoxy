@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.83 2008/05/12 14:51:30 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.84 2008/05/26 16:16:55 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,9 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.83 2008/05/12 14:51:30 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.84  2008/05/26 16:16:55  fabiankeil
+ *    Spell error correctly.
+ *
  *    Revision 1.83  2008/05/12 14:51:30  fabiankeil
  *    Don't complain about an invalid URL if show-url-info is requested
  *    without parameters. Regression introduced in 1.81 by yours truly.
@@ -2155,7 +2158,7 @@ static jb_err load_file(const char *filename, char **buffer, size_t *length)
    if (fseek(fp, 0, SEEK_END))
    {
       log_error(LOG_LEVEL_FATAL,
-         "Unexpected erro while fseek()ing to the end of %s: %E",
+         "Unexpected error while fseek()ing to the end of %s: %E",
          filename);
    }
    ret = ftell(fp);
