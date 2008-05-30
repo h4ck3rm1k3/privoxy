@@ -1,6 +1,6 @@
 #ifndef PARSERS_H_INCLUDED
 #define PARSERS_H_INCLUDED
-#define PARSERS_H_VERSION "$Id: parsers.h,v 1.47 2008/05/21 20:12:11 fabiankeil Exp $"
+#define PARSERS_H_VERSION "$Id: parsers.h,v 1.48 2008/05/30 15:57:23 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.h,v $
@@ -43,6 +43,9 @@
  *
  * Revisions   :
  *    $Log: parsers.h,v $
+ *    Revision 1.48  2008/05/30 15:57:23  fabiankeil
+ *    Remove now-useless reference to debug.
+ *
  *    Revision 1.47  2008/05/21 20:12:11  fabiankeil
  *    The whole point of strclean() is to modify the
  *    first parameter, so don't mark it immutable,
@@ -303,8 +306,6 @@ extern int strclean(char *string, const char *substring);
 /* Revision control strings from this header and associated .c file */
 extern const char parsers_rcs[];
 extern const char parsers_h_rcs[];
-
-extern int debug;
 
 #ifdef __cplusplus
 } /* extern "C" */
