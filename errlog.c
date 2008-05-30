@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.68 2008/04/27 16:50:46 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.69 2008/05/30 15:55:25 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,9 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.68 2008/04/27 16:50:46 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.69  2008/05/30 15:55:25  fabiankeil
+ *    Declare variable "debug" static and complain about its name.
+ *
  *    Revision 1.68  2008/04/27 16:50:46  fabiankeil
  *    Remove an incorrect assertion. The value of debug may change if
  *    the configuration is reloaded in another thread. While we could
@@ -401,8 +404,8 @@ const char errlog_h_rcs[] = ERRLOG_H_VERSION;
 /* where to log (default: stderr) */
 static FILE *logfp = NULL;
 
-/* logging detail level.  */
-int debug = (LOG_LEVEL_FATAL | LOG_LEVEL_ERROR | LOG_LEVEL_INFO);  
+/* logging detail level. XXX: stupid name. */
+static int debug = (LOG_LEVEL_FATAL | LOG_LEVEL_ERROR | LOG_LEVEL_INFO);  
 
 /* static functions */
 static void fatal_error(const char * error_message);
