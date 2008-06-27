@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.62 2008/06/21 17:02:03 fabiankeil Exp $
+#  $Id: default.filter,v 1.63 2008/06/27 12:53:41 fabiankeil Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -737,7 +737,7 @@ s@^(Content-Type:)\s*(?:message/(?:news|rfc822)|text/x-.*|application/x-sh(?:\s|
 #################################################################################
 CLIENT-HEADER-TAGGER: image-requests Tags detected image requests as "IMAGE-REQUEST".
 
-s@Accept:\s*image/.*@IMAGE-REQUEST@i
+s@^Accept:\s*image/.*@IMAGE-REQUEST@i
 
 #################################################################################
 #
@@ -747,7 +747,7 @@ s@Accept:\s*image/.*@IMAGE-REQUEST@i
 #################################################################################
 CLIENT-HEADER-TAGGER: css-requests Tags detected CSS requests as "CSS-REQUEST".
 
-s@Accept:\s*text/css.*@CSS-REQUEST@i
+s@^Accept:\s*text/css.*@CSS-REQUEST@i
 
 #################################################################################
 #
@@ -830,6 +830,10 @@ s@^X-Privoxy-Control:.*@@i
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.63  2008/06/27 12:53:41  fabiankeil
+#     Make sure the taggers css-requests and image-requests
+#     only match at the beginning of the header.
+#
 #     Revision 1.62  2008/06/21 17:02:03  fabiankeil
 #     Fix typo.
 #
