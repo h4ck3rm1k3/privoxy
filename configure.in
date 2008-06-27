@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl 
-dnl $Id: configure.in,v 1.117 2008/06/14 12:47:30 fabiankeil Exp $
+dnl $Id: configure.in,v 1.118 2008/06/27 12:50:44 fabiankeil Exp $
 dnl 
 dnl Written by and Copyright (C) 2001-2008 the SourceForge
 dnl Privoxy team. http://www.privoxy.org/
@@ -28,6 +28,10 @@ dnl or write to the Free Software Foundation, Inc., 59
 dnl Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 dnl 
 dnl $Log: configure.in,v $
+dnl Revision 1.118  2008/06/27 12:50:44  fabiankeil
+dnl Here's looking at you, Gentoo Linux: Show a warning if
+dnl --disable-pthread is used even though pthreads are available.
+dnl
 dnl Revision 1.117  2008/06/14 12:47:30  fabiankeil
 dnl Set CODE_STATUS to beta.
 dnl
@@ -537,7 +541,7 @@ dnl =================================================================
 dnl AutoConf Initialization
 dnl =================================================================
 
-AC_REVISION($Revision: 1.117 $)
+AC_REVISION($Revision: 1.118 $)
 AC_INIT(jcc.c)
 
 if test ! -f config.h.in; then
@@ -925,6 +929,10 @@ AC_ARG_ENABLE(pthread,
 [  --disable-pthread               Don't use POSIX threads (pthreads)],
 [if test $enableval = no; then
   # Disable pthreads
+  if test $have_pthread = yes; then
+     AC_MSG_WARN([pthreads seem to be available but you are using --disable-pthread.]) 
+     AC_MSG_WARN([This is almost always a mistake and can render Privoxy unacceptable slow.])
+  fi
   have_pthread=no
 fi])
 
