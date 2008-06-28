@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.70 2008/06/28 17:10:29 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.71 2008/06/28 17:17:15 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,9 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.70 2008/06/28 17:10:29 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.71  2008/06/28 17:17:15  fabiankeil
+ *    Remove another stray semicolon.
+ *
  *    Revision 1.70  2008/06/28 17:10:29  fabiankeil
  *    Remove stray semicolon in get_log_timestamp().
  *    Reported by Jochen Voss in #2005221.
@@ -802,7 +805,7 @@ static inline size_t get_clf_timestamp(char *buffer, size_t buffer_size)
 
    length = strftime(buffer, buffer_size, "%d/%b/%Y:%H:%M:%S ", tm_now);
 
-   if (length > 0);
+   if (length > 0)
    {
       tz_length = snprintf(buffer+length, buffer_size-length,
                      "%+03d%02d", mins / 60, abs(mins) % 60);
