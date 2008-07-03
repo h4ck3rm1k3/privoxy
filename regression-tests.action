@@ -1,5 +1,5 @@
 #############################################################################
-# $Id: regression-tests.action,v 1.12 2008/05/28 17:07:03 fabiankeil Exp $
+# $Id: regression-tests.action,v 1.13 2008/07/03 11:10:43 fabiankeil Exp $
 #############################################################################
 #
 # This is a configuration file for Privoxy-Regression-Test
@@ -46,6 +46,7 @@ for-privoxy-version=3.0.9
 }
 config.privoxy.org/
 p.p/
+127.0.0.1/
 
 {-hide-user-agent}
 TAG:^User-Agent: Privoxy-Regression-Test
@@ -493,8 +494,11 @@ TAG:^Max-Forwards header without TRACE method$
 # Fetch Test = http://p.p/show-url-info
 # Fetch Test = http://p.p/show-url-info?url=www.privoxy.org%2F
 # Fetch Test = http://p.p/show-url-info?url=http:%2F%2Fwww.privoxy.org%2F
+# Fetch Test = http://p.p/show-url-info?url=HTTp:%2F%2Fwww.privoxy.org%2F
 # Fetch Test = http://p.p/show-url-info?url=https:%2F%2Fwww.privoxy.org%2F
+# Fetch Test = http://p.p/show-url-info?url=HtTps:%2F%2Fwww.privoxy.org%2F
 # Fetch Test = http://p.p/show-url-info?url=ftp:%2F%2Fwww.privoxy.org%2F
+# Fetch Test = http://p.p/show-url-info?url=FTp:%2F%2Fwww.privoxy.org%2F
 # Fetch Test = http://p.p/show-url-info?url=
 # Fetch Test = http://p.p/show-url-info?url=%2F
 # Fetch Test = http://p.p/toggle
