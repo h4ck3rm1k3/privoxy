@@ -2,7 +2,7 @@
 # 
 #  File        :  $Source: /cvsroot/ijbswa/current/default.filter,v $
 # 
-#  $Id: default.filter,v 1.64 2008/07/12 15:49:09 fabiankeil Exp $
+#  $Id: default.filter,v 1.65 2008/07/21 13:43:44 fabiankeil Exp $
 #
 #  Purpose     :  Rules to process the content of web pages
 # 
@@ -226,7 +226,7 @@ FILTER: img-reorder Reorder attributes in <img> tags to make the banners-by-* fi
 s|<img\s+?([^>]*) src\s*=\s*(['"])([^>\\\2]+)\2|<img src=$2$3$2 $1|siUg
 s|<img\s+?([^>]*) src\s*=\s*([^'">\\\s]+)|<img src=$2 $1|sig
 
-s|<img (src=(?:(['"])[^>\\\\2]*\2\|[^'">\\\s]+?))([^>]*)\s+width\s*=\s*((["']?)\d+?\5[\s>])|<img $1 width=$4$3|siUg
+s|<img (src=(?:(['"])[^>\\\\2]*\2\|[^'">\\\s]+?))([^>]*)\s+width\s*=\s*((["']?)\d+?\5)(?=[\s>])|<img $1 width=$4$3|siUg
 
 
 #################################################################################
@@ -830,6 +830,11 @@ s@^X-Privoxy-Control:.*@@i
 #
 #  Revisions   :
 #     $Log: default.filter,v $
+#     Revision 1.65  2008/07/21 13:43:44  fabiankeil
+#     Fix img-reorder regression introduced with my last commit.
+#     Some tags were terminated too soon, letting the browser render
+#     some of their arguments as text. Oops.
+#
 #     Revision 1.64  2008/07/12 15:49:09  fabiankeil
 #     - Don't let img-reorder touch width attributes
 #       that aren't followed by either whitespace or '>',
