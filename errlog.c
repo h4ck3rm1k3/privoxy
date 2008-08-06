@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.73 2008/08/04 19:06:55 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.74 2008/08/06 18:33:36 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,11 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.73 2008/08/04 19:06:55 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.74  2008/08/06 18:33:36  fabiankeil
+ *    If the "close fd first" workaround doesn't work,
+ *    the fatal error message will be lost, so we better
+ *    explain the consequences while we still can.
+ *
  *    Revision 1.73  2008/08/04 19:06:55  fabiankeil
  *    Add a lame workaround for the "can't open an already open
  *    logfile on OS/2" problem reported by Maynard in #2028842
@@ -644,6 +649,10 @@ void init_error_log(const char *prog_name, const char *logfname)
        * reopen it if the file name changed or if the
        * configuration reloas was caused by a SIGHUP.
        */
+      log_error(LOG_LEVEL_INFO, "Failed to reopen logfile: \'%s\'. "
+         "Retrying after closing the old file descriptor first. If that "
+         "doesn't work, Privoxy will exit without being able to log a message.",
+         logfname);
       lock_logfile();
       fclose(logfp);
       logfp = NULL;
