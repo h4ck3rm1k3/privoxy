@@ -8,7 +8,7 @@
 #
 # http://www.fabiankeil.de/sourcecode/privoxy-log-parser/
 #
-# $Id: privoxy-log-parser.pl,v 1.1 2008/08/02 08:30:36 fabiankeil Exp $
+# $Id: privoxy-log-parser.pl,v 1.2 2008/08/13 16:28:06 fabiankeil Exp $
 #
 # TODO:
 #       - LOG_LEVEL_CGI, LOG_LEVEL_ERROR, LOG_LEVEL_WRITE content highlighting
@@ -1456,7 +1456,7 @@ sub handle_loglevel_info ($) {
     } elsif ($c =~ m/^Privoxy version/) {
         
         # Privoxy version 3.0.7
-        $c =~ s@(?<=Privoxy version )(\d.\d.\d)@$h{'version'}$1$h{'Standard'}@;
+        $c =~ s@(?<=^Privoxy version )(\d+\.\d+\.\d+)$@$h{'version'}$1$h{'Standard'}@;
 
     } elsif ($c =~ m/^Program name: /) {
 
