@@ -1,4 +1,4 @@
-const char gateway_rcs[] = "$Id: gateway.c,v 1.25 2008/02/07 18:09:46 fabiankeil Exp $";
+const char gateway_rcs[] = "$Id: gateway.c,v 1.26 2008/08/18 17:42:06 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/gateway.c,v $
@@ -34,6 +34,9 @@ const char gateway_rcs[] = "$Id: gateway.c,v 1.25 2008/02/07 18:09:46 fabiankeil
  *
  * Revisions   :
  *    $Log: gateway.c,v $
+ *    Revision 1.26  2008/08/18 17:42:06  fabiankeil
+ *    Fix typo in macro name.
+ *
  *    Revision 1.25  2008/02/07 18:09:46  fabiankeil
  *    In socks5_connect:
  *    - make the buffers quite a bit smaller.
@@ -211,7 +214,7 @@ static jb_socket socks5_connect(const struct forward_spec *fwd,
 #define SOCKS5_REQUEST_DENIED              2
 #define SOCKS5_REQUEST_NETWORK_UNREACHABLE 3
 #define SOCKS5_REQUEST_HOST_UNREACHABLE    4
-#define SOCKS5_REQUEST_CONNECTION_REFUSEDD 5
+#define SOCKS5_REQUEST_CONNECTION_REFUSED  5
 #define SOCKS5_REQUEST_TTL_EXPIRED         6
 #define SOCKS5_REQUEST_PROTOCOL_ERROR      7
 #define SOCKS5_REQUEST_BAD_ADDRESS_TYPE    8
@@ -519,7 +522,7 @@ static const char *translate_socks5_error(int socks_error)
          return "SOCKS5 network unreachable";
       case SOCKS5_REQUEST_HOST_UNREACHABLE:
          return "SOCKS5 host unreachable";
-      case SOCKS5_REQUEST_CONNECTION_REFUSEDD:
+      case SOCKS5_REQUEST_CONNECTION_REFUSED:
          return "SOCKS5 connection refused";
       case SOCKS5_REQUEST_TTL_EXPIRED:
          return "SOCKS5 TTL expired";
