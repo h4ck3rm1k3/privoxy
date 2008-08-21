@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.182 2008/06/27 11:13:56 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.183 2008/08/21 07:09:35 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.182 2008/06/27 11:13:56 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.183  2008/08/21 07:09:35  fabiankeil
+ *    Accept Shoutcast responses again. Problem reported
+ *    and fix suggested by Stefan in #2062860.
+ *
  *    Revision 1.182  2008/06/27 11:13:56  fabiankeil
  *    Fix possible NULL-pointer dereference reported
  *    by din_a4 in #2003937. Pointy hat to me.
@@ -2729,10 +2733,11 @@ static void chat(struct client_state *csp)
 
             assert(csp->headers->first->str);
             assert(!http->ssl);
-            if (strncmpic(csp->headers->first->str, "HTTP", 4))
+            if (strncmpic(csp->headers->first->str, "HTTP", 4) &&
+                strncmpic(csp->headers->first->str, "ICY", 3))
             {
                /*
-                * It doesn't look like a HTTP response:
+                * It doesn't look like a HTTP (or Shoutcast) response:
                 * tell the client and log the problem.
                 */
                if (strlen(csp->headers->first->str) > 30)
