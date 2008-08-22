@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.183 2008/08/21 07:09:35 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.184 2008/08/22 15:34:45 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,12 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.183 2008/08/21 07:09:35 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.184  2008/08/22 15:34:45  fabiankeil
+ *    - Silence LLVM/Clang complaint.
+ *    - Make received_hup_signal static.
+ *    - Hide definitions for basedir, pidfile and received_hup_signal
+ *      from __EMX__ as they only seem to be used in case of #ifdef unix.
+ *
  *    Revision 1.183  2008/08/21 07:09:35  fabiankeil
  *    Accept Shoutcast responses again. Problem reported
  *    and fix suggested by Stefan in #2062860.
@@ -1183,10 +1189,10 @@ pthread_mutex_t rand_mutex;
 
 #endif /* FEATURE_PTHREAD */
 
-#if defined(unix) || defined(__EMX__)
+#if defined(unix)
 const char *basedir = NULL;
 const char *pidfile = NULL;
-int received_hup_signal = 0;
+static int received_hup_signal = 0;
 #endif /* defined unix */
 
 /* HTTP snipplets. */
@@ -1295,6 +1301,13 @@ static const struct cruncher crunchers_light[] = {
 };
 
 
+/*
+ * XXX: Don't we really mean
+ *
+ * #if defined(unix)
+ *
+ * here?
+ */
 #if !defined(_WIN32) && !defined(__OS2__) && !defined(AMIGA)
 /*********************************************************************
  *
@@ -1328,7 +1341,9 @@ static void sig_handler(int the_signal)
          break;
 
       case SIGHUP:
+#if defined(unix)
          received_hup_signal = 1;
+#endif
          break;         
 
       default:
