@@ -1,6 +1,6 @@
-#        Sample Configuration File for Privoxy v3.0.10
+#        Sample Configuration File for Privoxy v3.0.11
 #
-#  $Id: config,v 1.66 2008/08/14 10:35:28 hal9 Exp $
+#  $Id: config,v 1.67 2008/08/30 15:31:53 fabiankeil Exp $
 #
 #  Copyright (C) 2001-2008 Privoxy Developers http://www.privoxy.org/
 #
@@ -305,8 +305,8 @@ confdir .
 #
 #  Specifies:
 #
-#      The directory where all logging takes place (i.e. where logfile
-#      and jarfile are located).
+#      The directory where all logging takes place (i.e. where the
+#      logfile is located).
 #
 #  Type of value:
 #
@@ -468,40 +468,7 @@ filterfile default.filter
 logfile logfile
 #
 #
-#  2.7. jarfile
-#  =============
-#
-#  Specifies:
-#
-#      The file to store intercepted cookies in
-#
-#  Type of value:
-#
-#      File name, relative to logdir
-#
-#  Default value:
-#
-#      Unset (commented out). When activated: jarfile (Unix) or
-#      privoxy.jar (Windows).
-#
-#  Effect if unset:
-#
-#      Intercepted cookies are not stored in a dedicated log file.
-#
-#  Notes:
-#
-#      The jarfile may grow to ridiculous sizes over time.
-#
-#      If debug 8 (show header parsing) is enabled, cookies are also
-#      written to the logfile with the rest of the headers. Therefore
-#      this option isn't very useful and may be removed in future
-#      releases. Please report to the developers if you are still
-#      using it.
-#
-#jarfile jarfile
-#
-#
-#  2.8. trustfile
+#  2.7. trustfile
 #  ===============
 #
 #  Specifies:
