@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.184 2008/08/22 15:34:45 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.185 2008/08/30 12:03:07 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.184 2008/08/22 15:34:45 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.185  2008/08/30 12:03:07  fabiankeil
+ *    Remove FEATURE_COOKIE_JAR.
+ *
  *    Revision 1.184  2008/08/22 15:34:45  fabiankeil
  *    - Silence LLVM/Clang complaint.
  *    - Make received_hup_signal static.
@@ -3583,23 +3586,6 @@ static void listen_loop(void)
       }
 #endif
 
-#ifdef __OS2__
-#ifdef FEATURE_COOKIE_JAR
-      /*
-       * Need a workaround here: we have to fclose() the jarfile, or we die because it's
-       * already open.  I think unload_configfile() is not being run, which should do
-       * this work.  Until that can get resolved, we'll use this workaround.
-       */
-       if (csp)
-         if(csp->config)
-           if (csp->config->jar)
-           {
-             fclose(csp->config->jar);
-             csp->config->jar = NULL;
-           }
-#endif /* FEATURE_COOKIE_JAR */
-#endif /* __OS2__ */
-
       if ( NULL == (csp = (struct client_state *) zalloc(sizeof(*csp))) )
       {
          log_error(LOG_LEVEL_FATAL, "malloc(%d) for csp failed: %E", sizeof(*csp));
@@ -3896,13 +3882,6 @@ static void listen_loop(void)
    freez(basedir);
 #endif
    freez(configfile);
-
-#ifdef FEATURE_COOKIE_JAR
-   if (NULL != config->jar)
-   {
-      fclose(config->jar);
-   }
-#endif
 
 #if defined(_WIN32) && !defined(_WIN_CONSOLE)
    /* Cleanup - remove taskbar icon etc. */

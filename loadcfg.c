@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.78 2008/08/02 08:23:22 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.79 2008/08/30 12:03:07 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.78 2008/08/02 08:23:22 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.79  2008/08/30 12:03:07  fabiankeil
+ *    Remove FEATURE_COOKIE_JAR.
+ *
  *    Revision 1.78  2008/08/02 08:23:22  fabiankeil
  *    If the enforce-blocks directive is used with FEATURE_FORCE_LOAD
  *    disabled, log a message that blocks will always be enforced
@@ -564,7 +567,6 @@ static struct file_list *current_configfile = NULL;
 #define hash_forward_socks5              3963965522ul /* "forward-socks5" */
 #define hash_forwarded_connect_retries    101465292ul /* "forwarded-connect-retries" */
 #define hash_hostname                      10308071ul /* "hostname" */
-#define hash_jarfile                        2046641ul /* "jarfile" */
 #define hash_listen_address              1255650842ul /* "listen-address" */
 #define hash_logdir                          422889ul /* "logdir" */
 #define hash_logfile                        2114766ul /* "logfile" */
@@ -634,14 +636,6 @@ static void unload_configfile (void * data)
    }
    config->forward = NULL;
 
-#ifdef FEATURE_COOKIE_JAR
-   if ( NULL != config->jar )
-   {
-      fclose( config->jar );
-      config->jar = NULL;
-   }
-#endif /* def FEATURE_COOKIE_JAR */
-
    freez(config->confdir);
    freez(config->logdir);
    freez(config->templdir);
@@ -662,10 +656,6 @@ static void unload_configfile (void * data)
    freez(config->proxy_info_url);
    freez(config->proxy_args);
    freez(config->usermanual);
-
-#ifdef FEATURE_COOKIE_JAR
-   freez(config->jarfile);
-#endif /* def FEATURE_COOKIE_JAR */
 
 #ifdef FEATURE_TRUST
    freez(config->trustfile);
@@ -1338,17 +1328,6 @@ struct configuration_spec * load_config(void)
             continue;
 
 /* *************************************************************************
- * jarfile jar-file-name
- * In logdir by default
- * *************************************************************************/
-#ifdef FEATURE_COOKIE_JAR
-         case hash_jarfile :
-            freez(config->jarfile);
-            config->jarfile = make_path(config->logdir, arg);
-            continue;
-#endif /* def FEATURE_COOKIE_JAR */
-
-/* *************************************************************************
  * listen-address [ip][:port]
  * *************************************************************************/
          case hash_listen_address :
@@ -1624,9 +1603,6 @@ struct configuration_spec * load_config(void)
          case hash_enable_edit_actions:
          case hash_enable_remote_toggle:
 #endif /* def FEATURE_CGI_EDIT_ACTIONS */
-#ifndef FEATURE_COOKIE_JAR
-         case hash_jarfile :
-#endif /* ndef FEATURE_COOKIE_JAR */
 #ifndef FEATURE_ACL
          case hash_permit_access:
 #endif /* ndef FEATURE_ACL */
@@ -1715,18 +1691,6 @@ struct configuration_spec * load_config(void)
       add_loader(load_trustfile, config);
    }
 #endif /* def FEATURE_TRUST */
-
-#ifdef FEATURE_COOKIE_JAR
-   if ( NULL != config->jarfile )
-   {
-      if ( NULL == (config->jar = fopen(config->jarfile, "a")) )
-      {
-         log_error(LOG_LEVEL_FATAL, "can't open jarfile '%s': %E", config->jarfile);
-         /* Never get here - LOG_LEVEL_FATAL causes program exit */
-      }
-      setbuf(config->jar, NULL);
-   }
-#endif /* def FEATURE_COOKIE_JAR */
 
    if ( NULL == config->haddr )
    {

@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.137 2008/05/30 15:50:08 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.138 2008/08/30 12:03:07 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,9 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.137 2008/05/30 15:50:08 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.138  2008/08/30 12:03:07  fabiankeil
+ *    Remove FEATURE_COOKIE_JAR.
+ *
  *    Revision 1.137  2008/05/30 15:50:08  fabiankeil
  *    Remove questionable micro-optimizations
  *    whose usefulness has never been measured.
@@ -3971,35 +3974,8 @@ static jb_err server_set_cookie(struct client_state *csp, char **header)
 {
    time_t now;
    time_t cookie_time; 
-   struct tm tm_now; 
+
    time(&now);
-
-#ifdef FEATURE_COOKIE_JAR
-   if (csp->config->jar)
-   {
-      /*
-       * Write timestamp into outbuf.
-       *
-       * Complex because not all OSs have tm_gmtoff or
-       * the %z field in strftime()
-       */
-      char tempbuf[ BUFFER_SIZE ];
- 
-#ifdef HAVE_LOCALTIME_R
-      tm_now = *localtime_r(&now, &tm_now);
-#elif FEATURE_PTHREAD
-      pthread_mutex_lock(&localtime_mutex);
-      tm_now = *localtime (&now);
-      pthread_mutex_unlock(&localtime_mutex);
-#else
-      tm_now = *localtime (&now);
-#endif
-      strftime(tempbuf, BUFFER_SIZE-6, "%b %d %H:%M:%S ", &tm_now); 
-
-      /* strlen("set-cookie: ") = 12 */
-      fprintf(csp->config->jar, "%s %s\t%s\n", tempbuf, csp->http->host, *header + 12);
-   }
-#endif /* def FEATURE_COOKIE_JAR */
 
    if ((csp->action->flags & ACTION_NO_COOKIE_SET) != 0)
    {
