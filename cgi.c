@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.110 2008/08/31 14:55:43 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.111 2008/08/31 15:59:02 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,10 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.110 2008/08/31 14:55:43 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.111  2008/08/31 15:59:02  fabiankeil
+ *    There's no reason to let remote toggling support depend
+ *    on FEATURE_CGI_EDIT_ACTIONS, so make sure it doesn't.
+ *
  *    Revision 1.110  2008/08/31 14:55:43  fabiankeil
  *    Add a @date@ symbol to include a date(1)-like time string
  *    in templates. Modified version of the patch Endre Szabo
@@ -647,9 +651,9 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.110 2008/08/31 14:55:43 fabiankeil Exp $"
 #include "miscutil.h"
 #include "cgisimple.h"
 #include "jbsockets.h"
-#ifdef FEATURE_CGI_EDIT_ACTIONS
+#if defined(FEATURE_CGI_EDIT_ACTIONS) || defined(FEATURE_TOGGLE)
 #include "cgiedit.h"
-#endif /* def FEATURE_CGI_EDIT_ACTIONS */
+#endif /* defined(FEATURE_CGI_EDIT_ACTIONS) || defined (FEATURE_TOGGLE) */
 #include "loadcfg.h"
 /* loadcfg.h is for global_toggle_state only */
 #ifdef FEATURE_PTHREAD
@@ -695,13 +699,13 @@ static const struct cgi_dispatcher cgi_dispatchers[] = {
          cgi_show_url_info, 
          "Look up which actions apply to a URL and why",
          TRUE },
-#ifdef FEATURE_CGI_EDIT_ACTIONS
 #ifdef FEATURE_TOGGLE
    { "toggle",
          cgi_toggle, 
          "Toggle Privoxy on or off",
          FALSE },
 #endif /* def FEATURE_TOGGLE */
+#ifdef FEATURE_CGI_EDIT_ACTIONS
    { "edit-actions", /* Edit the actions list */
          cgi_edit_actions, 
          NULL, FALSE },

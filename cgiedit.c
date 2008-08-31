@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.61 2008/03/24 18:12:52 fabiankeil Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.62 2008/08/31 15:59:02 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,10 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.61 2008/03/24 18:12:52 fabiankeil
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.62  2008/08/31 15:59:02  fabiankeil
+ *    There's no reason to let remote toggling support depend
+ *    on FEATURE_CGI_EDIT_ACTIONS, so make sure it doesn't.
+ *
  *    Revision 1.61  2008/03/24 18:12:52  fabiankeil
  *    Use sizeof() more often.
  *
@@ -4514,75 +4518,6 @@ jb_err cgi_edit_actions_section_swap(struct client_state *csp,
    return cgi_redirect(rsp, target);
 }
 
-#ifdef FEATURE_TOGGLE
-/*********************************************************************
- *
- * Function    :  cgi_toggle
- *
- * Description :  CGI function that adds a new empty section to
- *                an actions file.
- *
- * Parameters  :
- *          1  :  csp = Current client state (buffers, headers, etc...)
- *          2  :  rsp = http_response data structure for output
- *          3  :  parameters = map of cgi parameters
- *
- * CGI Parameters :
- *         set : If present, how to change toggle setting:
- *               "enable", "disable", "toggle", or none (default).
- *        mini : If present, use mini reply template.
- *
- * Returns     :  JB_ERR_OK     on success
- *                JB_ERR_MEMORY on out-of-memory
- *
- *********************************************************************/
-jb_err cgi_toggle(struct client_state *csp,
-                  struct http_response *rsp,
-                  const struct map *parameters)
-{
-   struct map *exports;
-   char mode;
-   const char *template_name;
-
-   assert(csp);
-   assert(rsp);
-   assert(parameters);
-
-   if (0 == (csp->config->feature_flags & RUNTIME_FEATURE_CGI_TOGGLE))
-   {
-      return cgi_error_disabled(csp, rsp);
-   }
-
-   mode = get_char_param(parameters, "set");
-
-   if (mode == 'E')
-   {
-      /* Enable */
-      global_toggle_state = 1;
-   }
-   else if (mode == 'D')
-   {
-      /* Disable */
-      global_toggle_state = 0;
-   }
-   else if (mode == 'T')
-   {
-      /* Toggle */
-      global_toggle_state = !global_toggle_state;
-   }
-
-   if (NULL == (exports = default_exports(csp, "toggle")))
-   {
-      return JB_ERR_MEMORY;
-   }
-
-   template_name = (get_char_param(parameters, "mini")
-                 ? "toggle-mini"
-                 : "toggle");
-
-   return template_fill_for_cgi(csp, template_name, exports, rsp);
-}
-#endif /* def FEATURE_TOGGLE */
 
 /*********************************************************************
  *
@@ -4897,9 +4832,78 @@ static jb_err actions_from_radio(const struct map * parameters,
 
    return err;
 }
-
-
 #endif /* def FEATURE_CGI_EDIT_ACTIONS */
+
+
+#ifdef FEATURE_TOGGLE
+/*********************************************************************
+ *
+ * Function    :  cgi_toggle
+ *
+ * Description :  CGI function that adds a new empty section to
+ *                an actions file.
+ *
+ * Parameters  :
+ *          1  :  csp = Current client state (buffers, headers, etc...)
+ *          2  :  rsp = http_response data structure for output
+ *          3  :  parameters = map of cgi parameters
+ *
+ * CGI Parameters :
+ *         set : If present, how to change toggle setting:
+ *               "enable", "disable", "toggle", or none (default).
+ *        mini : If present, use mini reply template.
+ *
+ * Returns     :  JB_ERR_OK     on success
+ *                JB_ERR_MEMORY on out-of-memory
+ *
+ *********************************************************************/
+jb_err cgi_toggle(struct client_state *csp,
+                  struct http_response *rsp,
+                  const struct map *parameters)
+{
+   struct map *exports;
+   char mode;
+   const char *template_name;
+
+   assert(csp);
+   assert(rsp);
+   assert(parameters);
+
+   if (0 == (csp->config->feature_flags & RUNTIME_FEATURE_CGI_TOGGLE))
+   {
+      return cgi_error_disabled(csp, rsp);
+   }
+
+   mode = get_char_param(parameters, "set");
+
+   if (mode == 'E')
+   {
+      /* Enable */
+      global_toggle_state = 1;
+   }
+   else if (mode == 'D')
+   {
+      /* Disable */
+      global_toggle_state = 0;
+   }
+   else if (mode == 'T')
+   {
+      /* Toggle */
+      global_toggle_state = !global_toggle_state;
+   }
+
+   if (NULL == (exports = default_exports(csp, "toggle")))
+   {
+      return JB_ERR_MEMORY;
+   }
+
+   template_name = (get_char_param(parameters, "mini")
+                 ? "toggle-mini"
+                 : "toggle");
+
+   return template_fill_for_cgi(csp, template_name, exports, rsp);
+}
+#endif /* def FEATURE_TOGGLE */
 
 
 /*
