@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.112 2008/08/31 16:08:12 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.113 2008/09/04 08:13:58 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,10 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.112 2008/08/31 16:08:12 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.113  2008/09/04 08:13:58  fabiankeil
+ *    Prepare for critical sections on Windows by adding a
+ *    layer of indirection before the pthread mutex functions.
+ *
  *    Revision 1.112  2008/08/31 16:08:12  fabiankeil
  *    "View the request headers" isn't more equal than the other
  *    menu items and thus doesn't need a trailing dot either.
@@ -2005,9 +2009,9 @@ void get_http_time(int time_offset, char *buf, size_t buffer_size)
 #if HAVE_GMTIME_R
    t = gmtime_r(&current_time, &dummy);
 #elif FEATURE_PTHREAD
-   pthread_mutex_lock(&gmtime_mutex);
+   privoxy_mutex_lock(&gmtime_mutex);
    t = gmtime(&current_time);
-   pthread_mutex_unlock(&gmtime_mutex);
+   privoxy_mutex_unlock(&gmtime_mutex);
 #else
    t = gmtime(&current_time);
 #endif
@@ -2061,9 +2065,9 @@ static void get_locale_time(char *buf, size_t buffer_size)
 #if HAVE_LOCALTIME_R
    timeptr = localtime_r(&current_time, &dummy);
 #elif FEATURE_PTHREAD
-   pthread_mutex_lock(&localtime_mutex);
+   privoxy_mutex_lock(&localtime_mutex);
    timeptr = localtime(&current_time);
-   pthread_mutex_unlock(&localtime_mutex);
+   privoxy_mutex_unlock(&localtime_mutex);
 #else
    timeptr = localtime(&current_time);
 #endif

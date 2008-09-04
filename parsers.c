@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.138 2008/08/30 12:03:07 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.139 2008/09/04 08:13:58 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,10 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.138 2008/08/30 12:03:07 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.139  2008/09/04 08:13:58  fabiankeil
+ *    Prepare for critical sections on Windows by adding a
+ *    layer of indirection before the pthread mutex functions.
+ *
  *    Revision 1.138  2008/08/30 12:03:07  fabiankeil
  *    Remove FEATURE_COOKIE_JAR.
  *
@@ -2863,9 +2867,9 @@ static jb_err server_last_modified(struct client_state *csp, char **header)
 #ifdef HAVE_GMTIME_R
       timeptr = gmtime_r(&now, &gmt);
 #elif FEATURE_PTHREAD
-      pthread_mutex_lock(&gmtime_mutex);
+      privoxy_mutex_lock(&gmtime_mutex);
       timeptr = gmtime(&now);
-      pthread_mutex_unlock(&gmtime_mutex);
+      privoxy_mutex_unlock(&gmtime_mutex);
 #else
       timeptr = gmtime(&now);
 #endif
@@ -2893,9 +2897,9 @@ static jb_err server_last_modified(struct client_state *csp, char **header)
 #ifdef HAVE_GMTIME_R
             timeptr = gmtime_r(&last_modified, &gmt);
 #elif FEATURE_PTHREAD
-            pthread_mutex_lock(&gmtime_mutex);
+            privoxy_mutex_lock(&gmtime_mutex);
             timeptr = gmtime(&last_modified);
-            pthread_mutex_unlock(&gmtime_mutex);
+            privoxy_mutex_unlock(&gmtime_mutex);
 #else
             timeptr = gmtime(&last_modified);
 #endif
@@ -3589,9 +3593,9 @@ static jb_err client_if_modified_since(struct client_state *csp, char **header)
 #ifdef HAVE_GMTIME_R
             timeptr = gmtime_r(&tm, &gmt);
 #elif FEATURE_PTHREAD
-            pthread_mutex_lock(&gmtime_mutex);
+            privoxy_mutex_lock(&gmtime_mutex);
             timeptr = gmtime(&tm);
-            pthread_mutex_unlock(&gmtime_mutex);
+            privoxy_mutex_unlock(&gmtime_mutex);
 #else
             timeptr = gmtime(&tm);
 #endif
