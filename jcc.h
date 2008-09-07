@@ -1,6 +1,6 @@
 #ifndef JCC_H_INCLUDED
 #define JCC_H_INCLUDED
-#define JCC_H_VERSION "$Id: jcc.h,v 1.23 2008/09/04 08:13:58 fabiankeil Exp $"
+#define JCC_H_VERSION "$Id: jcc.h,v 1.24 2008/09/07 12:35:05 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.h,v $
@@ -35,6 +35,9 @@
  *
  * Revisions   :
  *    $Log: jcc.h,v $
+ *    Revision 1.24  2008/09/07 12:35:05  fabiankeil
+ *    Add mutex lock support for _WIN32.
+ *
  *    Revision 1.23  2008/09/04 08:13:58  fabiankeil
  *    Prepare for critical sections on Windows by adding a
  *    layer of indirection before the pthread mutex functions.
@@ -190,10 +193,19 @@ extern int no_daemon;
 extern int g_terminate;
 #endif
 
+#if defined(FEATURE_PTHREAD) || defined(_WIN32)
+#define MUTEX_LOCKS_AVAILABLE
+
 #ifdef FEATURE_PTHREAD
 #include <pthread.h>
 
 typedef pthread_mutex_t privoxy_mutex_t;
+
+#else
+
+typedef CRITICAL_SECTION privoxy_mutex_t;
+
+#endif
 
 extern void privoxy_mutex_lock(privoxy_mutex_t *mutex);
 extern void privoxy_mutex_unlock(privoxy_mutex_t *mutex);

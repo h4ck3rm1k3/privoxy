@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.75 2008/09/04 08:13:58 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.76 2008/09/07 12:35:05 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,9 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.75 2008/09/04 08:13:58 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.76  2008/09/07 12:35:05  fabiankeil
+ *    Add mutex lock support for _WIN32.
+ *
  *    Revision 1.75  2008/09/04 08:13:58  fabiankeil
  *    Prepare for critical sections on Windows by adding a
  *    layer of indirection before the pthread mutex functions.
@@ -440,7 +443,7 @@ static char *w32_socket_strerr(int errcode, char *tmp_buf);
 static char *os2_socket_strerr(int errcode, char *tmp_buf);
 #endif
 
-#ifdef FEATURE_PTHREAD
+#ifdef MUTEX_LOCKS_AVAILABLE
 static inline void lock_logfile(void)
 {
    privoxy_mutex_lock(&log_mutex);
@@ -457,7 +460,7 @@ static inline void unlock_loginit(void)
 {
    privoxy_mutex_unlock(&log_init_mutex);
 }
-#else /* ! FEATURE_PTHREAD */
+#else /* ! MUTEX_LOCKS_AVAILABLE */
 /*
  * FIXME we need a cross-platform locking mechanism.
  * The locking/unlocking functions below should be 
