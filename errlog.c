@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.76 2008/09/07 12:35:05 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.77 2008/09/07 12:43:44 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,10 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.76 2008/09/07 12:35:05 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.77  2008/09/07 12:43:44  fabiankeil
+ *    Move the LogPutString() call in log_error() into the locked
+ *    region so the Windows GUI log is consistent with the logfile.
+ *
  *    Revision 1.76  2008/09/07 12:35:05  fabiankeil
  *    Add mutex lock support for _WIN32.
  *
@@ -1249,12 +1253,13 @@ void log_error(int loglevel, const char *fmt, ...)
    {
       fputs(outbuf_save, logfp);
    }
-   unlock_logfile();
 
 #if defined(_WIN32) && !defined(_WIN_CONSOLE)
    /* Write to display */
    LogPutString(outbuf_save);
 #endif /* defined(_WIN32) && !defined(_WIN_CONSOLE) */
+
+   unlock_logfile();
 
 }
 
