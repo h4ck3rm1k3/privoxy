@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.139 2008/09/04 08:13:58 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.140 2008/09/12 17:51:43 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,10 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.139 2008/09/04 08:13:58 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.140  2008/09/12 17:51:43  fabiankeil
+ *    - A few style fixes.
+ *    - Remove a pointless cast.
+ *
  *    Revision 1.139  2008/09/04 08:13:58  fabiankeil
  *    Prepare for critical sections on Windows by adding a
  *    layer of indirection before the pthread mutex functions.
@@ -983,7 +987,7 @@ static const struct parsers server_patterns[] = {
    { "Last-Modified:",           14, server_last_modified },
    { "*",                         0, crunch_server_header },
    { "*",                         0, filter_header },
-   { NULL, 0, NULL }
+   { NULL,                        0, NULL }
 };
 
 static const add_header_func_ptr add_client_headers[] = {
@@ -1700,10 +1704,10 @@ static char *get_header_line(struct iob *iob)
    if (*ret == '\0')
    {
       freez(ret);
-      return(NULL);
+      return NULL;
    }
 
-   return(ret);
+   return ret;
 
 }
 
@@ -1744,9 +1748,9 @@ char *get_header_value(const struct list *header_list, const char *header_name)
             /*
              * Found: return pointer to start of value
              */
-            ret = (char *) (cur_entry->str + length);
+            ret = cur_entry->str + length;
             while (*ret && ijb_isspace(*ret)) ret++;
-            return(ret);
+            return ret;
          }
       }
    }
@@ -1881,7 +1885,7 @@ jb_err update_server_headers(struct client_state *csp)
 #ifdef FEATURE_ZLIB
       { "Content-Encoding:",  17, server_content_encoding },
 #endif /* def FEATURE_ZLIB */
-      { NULL, 0, NULL }
+      { NULL,                  0, NULL }
    };
 
    if (strncmpic(csp->http->cmd, "HEAD", 4))
@@ -1969,7 +1973,7 @@ static jb_err header_tagger(struct client_state *csp, char *header)
    {
       log_error(LOG_LEVEL_ERROR, "Inconsistent configuration: "
          "tagging enabled, but no taggers available.");
-      return(JB_ERR_OK);
+      return JB_ERR_OK;
    }
 
    for (i = 0; i < MAX_AF_FILES; i++)
@@ -2187,7 +2191,7 @@ static jb_err filter_header(struct client_state *csp, char **header)
    {
       log_error(LOG_LEVEL_ERROR, "Inconsistent configuration: "
          "header filtering enabled, but no matching filters available.");
-      return(JB_ERR_OK);
+      return JB_ERR_OK;
    }
 
    for (i = 0; i < MAX_AF_FILES; i++)
@@ -2287,7 +2291,7 @@ static jb_err filter_header(struct client_state *csp, char **header)
       freez(*header);
    }
 
-   return(JB_ERR_OK);
+   return JB_ERR_OK;
 }
 
 
