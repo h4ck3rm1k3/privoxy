@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.117 2008/08/30 12:03:07 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.118 2008/09/19 15:26:29 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,11 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.118  2008/09/19 15:26:29  fabiankeil
+ *    Add change-x-forwarded-for{} action to block or add
+ *    X-Forwarded-For headers. Mostly based on code removed
+ *    before 3.0.7.
+ *
  *    Revision 1.117  2008/08/30 12:03:07  fabiankeil
  *    Remove FEATURE_COOKIE_JAR.
  *
@@ -1108,6 +1113,8 @@ struct iob
 #define ACTION_OVERWRITE_LAST_MODIFIED               0x02000000UL
 /** Action bitmap: Replace or block Accept-Language header */
 #define ACTION_HIDE_ACCEPT_LANGUAGE                  0x04000000UL
+/** Action bitmap: Remove or add "X-Forwarded-For" header. */
+#define ACTION_CHANGE_X_FORWARDED_FOR                0x08000000UL
 
 
 /** Action string index: How to deanimate GIFs */
@@ -1144,8 +1151,10 @@ struct iob
 #define ACTION_STRING_FORWARD_OVERRIDE     15
 /** Action string index: Reason for the block. */
 #define ACTION_STRING_BLOCK                16
+/** Action string index: what to do with the "X-Forwarded-For" header. */
+#define ACTION_STRING_CHANGE_X_FORWARDED_FOR 17
 /** Number of string actions. */
-#define ACTION_STRING_COUNT                17
+#define ACTION_STRING_COUNT                18
 
 
 /* To make the ugly hack in sed easier to understand */
@@ -1377,6 +1386,13 @@ struct client_state
 
    /** MIME-Type key, see CT_* above */
    unsigned int content_type;
+
+   /** The "X-Forwarded-For:" header sent by the client */
+   /*
+    * XXX: this is a hack that causes problems if
+    * there's more than one X-Forwarded-For header.
+    */
+   char *x_forwarded_for;
 
    /** Actions files associated with this client */
    struct file_list *actions_list[MAX_AF_FILES];
