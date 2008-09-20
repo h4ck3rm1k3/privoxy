@@ -1,4 +1,4 @@
-const char actions_rcs[] = "$Id: actions.c,v 1.53 2008/05/26 16:04:04 fabiankeil Exp $";
+const char actions_rcs[] = "$Id: actions.c,v 1.54 2008/09/20 10:04:33 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/actions.c,v $
@@ -33,6 +33,10 @@ const char actions_rcs[] = "$Id: actions.c,v 1.53 2008/05/26 16:04:04 fabiankeil
  *
  * Revisions   :
  *    $Log: actions.c,v $
+ *    Revision 1.54  2008/09/20 10:04:33  fabiankeil
+ *    Remove hide-forwarded-for-headers action which has
+ *    been obsoleted by change-x-forwarded-for{block}.
+ *
  *    Revision 1.53  2008/05/26 16:04:04  fabiankeil
  *    s@memorey@memory@
  *
@@ -874,6 +878,12 @@ jb_err get_actions(char *line,
             {
                log_error(LOG_LEVEL_ERROR, "Action '%s' is no longer valid "
                   "in this Privoxy release. Ignored.", option+1);
+            }
+            else if ((2 < strlen(option)) && 0 == strcmpic(option+1, "hide-forwarded-for-headers"))
+            {
+               log_error(LOG_LEVEL_FATAL, "The action 'hide-forwarded-for-headers' "
+                  "is no longer valid in this Privoxy release. "
+                  "Use 'change-x-forwarded-for' instead.");
             }
             else
             {

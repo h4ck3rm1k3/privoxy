@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.118 2008/09/19 15:26:29 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.119 2008/09/20 10:04:33 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,10 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.119  2008/09/20 10:04:33  fabiankeil
+ *    Remove hide-forwarded-for-headers action which has
+ *    been obsoleted by change-x-forwarded-for{block}.
+ *
  *    Revision 1.118  2008/09/19 15:26:29  fabiankeil
  *    Add change-x-forwarded-for{} action to block or add
  *    X-Forwarded-For headers. Mostly based on code removed
@@ -1067,8 +1071,8 @@ struct iob
 #define ACTION_DOWNGRADE                             0x00000004UL
 /** Action bitmap: Fast redirects. */
 #define ACTION_FAST_REDIRECTS                        0x00000008UL
-/** Action bitmap: Remove existing "Forwarded" header, and do not add another. */
-#define ACTION_HIDE_FORWARDED                        0x00000010UL
+/** Action bitmap: Remove or add "X-Forwarded-For" header. */
+#define ACTION_CHANGE_X_FORWARDED_FOR                0x00000010UL
 /** Action bitmap: Hide "From" header. */
 #define ACTION_HIDE_FROM                             0x00000020UL
 /** Action bitmap: Hide "Referer" header.  (sic - follow HTTP, not English). */
@@ -1113,8 +1117,6 @@ struct iob
 #define ACTION_OVERWRITE_LAST_MODIFIED               0x02000000UL
 /** Action bitmap: Replace or block Accept-Language header */
 #define ACTION_HIDE_ACCEPT_LANGUAGE                  0x04000000UL
-/** Action bitmap: Remove or add "X-Forwarded-For" header. */
-#define ACTION_CHANGE_X_FORWARDED_FOR                0x08000000UL
 
 
 /** Action string index: How to deanimate GIFs */

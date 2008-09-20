@@ -39,6 +39,10 @@
  *
  * Revisions   :
  *    $Log: actionlist.h,v $
+ *    Revision 1.36  2008/09/20 10:04:33  fabiankeil
+ *    Remove hide-forwarded-for-headers action which has
+ *    been obsoleted by change-x-forwarded-for{block}.
+ *
  *    Revision 1.35  2008/09/19 15:43:54  fabiankeil
  *    Fix sorting.
  *
@@ -230,7 +234,6 @@ DEFINE_CGI_PARAM_CUSTOM  ("hide-accept-language",       ACTION_HIDE_ACCEPT_LANGU
 DEFINE_ACTION_STRING     ("hide-content-disposition",   ACTION_HIDE_CONTENT_DISPOSITION, ACTION_STRING_CONTENT_DISPOSITION)
 DEFINE_CGI_PARAM_RADIO   ("hide-content-disposition",   ACTION_HIDE_CONTENT_DISPOSITION, ACTION_STRING_CONTENT_DISPOSITION,    "block", 0)
 DEFINE_CGI_PARAM_CUSTOM  ("hide-content-disposition",   ACTION_HIDE_CONTENT_DISPOSITION, ACTION_STRING_CONTENT_DISPOSITION,    "attachment; filename=WHATEVER.txt")
-DEFINE_ACTION_BOOL       ("hide-forwarded-for-headers", ACTION_HIDE_FORWARDED)
 DEFINE_ACTION_STRING     ("hide-from-header",           ACTION_HIDE_FROM,       ACTION_STRING_FROM)
 DEFINE_CGI_PARAM_RADIO   ("hide-from-header",           ACTION_HIDE_FROM,       ACTION_STRING_FROM,          "block", 1)
 DEFINE_CGI_PARAM_CUSTOM  ("hide-from-header",           ACTION_HIDE_FROM,       ACTION_STRING_FROM,          "spam_me_senseless@sittingduck.xyz")
@@ -284,7 +287,6 @@ DEFINE_ACTION_BOOL       ("no-cookie-set",           ACTION_NO_COOKIE_SET)
 DEFINE_ACTION_BOOL       ("prevent-reading-cookies", ACTION_NO_COOKIE_READ)
 DEFINE_ACTION_BOOL       ("prevent-setting-cookies", ACTION_NO_COOKIE_SET)
 DEFINE_ACTION_BOOL       ("downgrade",               ACTION_DOWNGRADE)
-DEFINE_ACTION_BOOL       ("hide-forwarded",          ACTION_HIDE_FORWARDED)
 DEFINE_ACTION_STRING     ("hide-from",               ACTION_HIDE_FROM,       ACTION_STRING_FROM)
 DEFINE_ACTION_BOOL       ("image",                   ACTION_IMAGE)
 DEFINE_ACTION_STRING     ("image-blocker",           ACTION_IMAGE_BLOCKER,   ACTION_STRING_IMAGE_BLOCKER)
