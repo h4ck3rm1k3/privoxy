@@ -1,4 +1,4 @@
-const char loaders_rcs[] = "$Id: loaders.c,v 1.68 2008/09/19 15:26:28 fabiankeil Exp $";
+const char loaders_rcs[] = "$Id: loaders.c,v 1.69 2008/09/21 13:36:52 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loaders.c,v $
@@ -35,6 +35,12 @@ const char loaders_rcs[] = "$Id: loaders.c,v 1.68 2008/09/19 15:26:28 fabiankeil
  *
  * Revisions   :
  *    $Log: loaders.c,v $
+ *    Revision 1.69  2008/09/21 13:36:52  fabiankeil
+ *    If change-x-forwarded-for{add} is used and the client
+ *    sends multiple X-Forwarded-For headers, append the client's
+ *    IP address to each one of them. "Traditionally" we would
+ *    lose all but the last one.
+ *
  *    Revision 1.68  2008/09/19 15:26:28  fabiankeil
  *    Add change-x-forwarded-for{} action to block or add
  *    X-Forwarded-For headers. Mostly based on code removed
@@ -516,7 +522,6 @@ void sweep(void)
 
          freez(csp->ip_addr_str);
          freez(csp->iob->buf);
-         freez(csp->x_forwarded_for);
          freez(csp->error_message);
 
          if (csp->action->flags & ACTION_FORWARD_OVERRIDE &&
