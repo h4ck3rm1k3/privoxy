@@ -1,4 +1,4 @@
-const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.88 2008/08/30 12:03:07 fabiankeil Exp $";
+const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.89 2008/10/11 11:31:14 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgisimple.c,v $
@@ -36,6 +36,10 @@ const char cgisimple_rcs[] = "$Id: cgisimple.c,v 1.88 2008/08/30 12:03:07 fabian
  *
  * Revisions   :
  *    $Log: cgisimple.c,v $
+ *    Revision 1.89  2008/10/11 11:31:14  fabiankeil
+ *    Add FEATURE_CONNECTION_KEEP_ALIVE to the list
+ *    of conditional defines on the show-status page.
+ *
  *    Revision 1.88  2008/08/30 12:03:07  fabiankeil
  *    Remove FEATURE_COOKIE_JAR.
  *
@@ -1879,6 +1883,12 @@ static jb_err show_defines(struct map *exports)
 #else /* ifndef FEATURE_CGI_EDIT_ACTIONS */
    if (!err) err = map_conditional(exports, "FEATURE_CGI_EDIT_ACTIONS", 0);
 #endif /* ndef FEATURE_CGI_EDIT_ACTIONS */
+
+#ifdef FEATURE_CONNECTION_KEEP_ALIVE
+   if (!err) err = map_conditional(exports, "FEATURE_CONNECTION_KEEP_ALIVE", 1);
+#else /* ifndef FEATURE_CGI_EDIT_ACTIONS */
+   if (!err) err = map_conditional(exports, "FEATURE_CONNECTION_KEEP_ALIVE", 0);
+#endif /* ndef FEATURE_CONNECTION_KEEP_ALIVE */
 
 #ifdef FEATURE_FAST_REDIRECTS
    if (!err) err = map_conditional(exports, "FEATURE_FAST_REDIRECTS", 1);
