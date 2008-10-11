@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.191 2008/10/11 18:00:14 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.192 2008/10/11 18:19:14 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.191 2008/10/11 18:00:14 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.192  2008/10/11 18:19:14  fabiankeil
+ *    Even more chat() cosmetics.
+ *
  *    Revision 1.191  2008/10/11 18:00:14  fabiankeil
  *    Reformat some comments in chat().
  *
@@ -2469,12 +2472,11 @@ static void chat(struct client_state *csp)
       if (write_socket(csp->sfd, hdr, strlen(hdr))
        || (flush_socket(csp->sfd, csp->iob) <  0))
       {
-         log_error(LOG_LEVEL_CONNECT, "write header to: %s failed: %E",
-                    http->hostport);
+         log_error(LOG_LEVEL_CONNECT,
+            "write header to: %s failed: %E", http->hostport);
 
          rsp = error_response(csp, "connect-failed", errno);
-
-         if(rsp)
+         if (rsp)
          {
             send_crunch_response(csp, rsp);
          }
@@ -2503,7 +2505,7 @@ static void chat(struct client_state *csp)
    /* we're finished with the client's header */
    freez(hdr);
 
-   maxfd = ( csp->cfd > csp->sfd ) ? csp->cfd : csp->sfd;
+   maxfd = (csp->cfd > csp->sfd) ? csp->cfd : csp->sfd;
 
    /* pass data between the client and server
     * until one or the other shuts down the connection.
@@ -2577,7 +2579,7 @@ static void chat(struct client_state *csp)
        */
       if (FD_ISSET(csp->sfd, &rfds))
       {
-         fflush( 0 );
+         fflush(0);
          len = read_socket(csp->sfd, buf, sizeof(buf) - 1);
 
          if (len < 0)
@@ -2610,7 +2612,6 @@ static void chat(struct client_state *csp)
             }
 
             rsp = error_response(csp, "connect-failed", errno);
-
             if (rsp)
             {
                send_crunch_response(csp, rsp);
@@ -2747,7 +2748,8 @@ static void chat(struct client_state *csp)
                   size_t hdrlen;
                   int flushed;
 
-                  log_error(LOG_LEVEL_INFO, "Flushing header and buffers. Stepping back from filtering.");
+                  log_error(LOG_LEVEL_INFO,
+                     "Flushing header and buffers. Stepping back from filtering.");
 
                   hdr = list_to_text(csp->headers);
                   if (hdr == NULL)
@@ -2768,8 +2770,8 @@ static void chat(struct client_state *csp)
                    || ((flushed = flush_socket(csp->cfd, csp->iob)) < 0)
                    || (write_socket(csp->cfd, buf, (size_t)len)))
                   {
-                     log_error(LOG_LEVEL_CONNECT, "Flush header and buffers to client failed: %E");
-
+                     log_error(LOG_LEVEL_CONNECT,
+                        "Flush header and buffers to client failed: %E");
                      freez(hdr);
                      return;
                   }
