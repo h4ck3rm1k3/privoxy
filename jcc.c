@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.193 2008/10/12 15:57:35 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.194 2008/10/12 18:35:18 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.193 2008/10/12 15:57:35 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.194  2008/10/12 18:35:18  fabiankeil
+ *    The last commit was a bit too ambitious, apparently the content
+ *    length adjustment is only necessary if we aren't buffering.
+ *
  *    Revision 1.193  2008/10/12 15:57:35  fabiankeil
  *    Fix content length calculation if we read headers
  *    and the start of the body at once. Now that we have
@@ -2845,16 +2849,6 @@ static void chat(struct client_state *csp)
                   continue;
                }
             }
-            else
-            {
-               /*
-                * XXX: the header lenght should probably
-                * be calculated by get_server_headers().
-                */
-               int header_length = csp->iob->cur - header_start;
-               assert(csp->iob->cur > header_start);
-               byte_count += len - header_length;
-            }
 
             /* Did we actually get anything? */
             if (NULL == csp->headers->first)
@@ -2947,6 +2941,16 @@ static void chat(struct client_state *csp)
                }
 
                byte_count += (size_t)len;
+            }
+            else
+            {
+               /*
+                * XXX: the header lenght should probably
+                * be calculated by get_server_headers().
+                */
+               int header_length = csp->iob->cur - header_start;
+               assert(csp->iob->cur > header_start);
+               byte_count += len - header_length;
             }
 
             /* we're finished with the server's header */
