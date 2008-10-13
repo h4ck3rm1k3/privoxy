@@ -1,4 +1,4 @@
-const char gateway_rcs[] = "$Id: gateway.c,v 1.29 2008/10/11 16:59:41 fabiankeil Exp $";
+const char gateway_rcs[] = "$Id: gateway.c,v 1.30 2008/10/13 17:31:03 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/gateway.c,v $
@@ -34,6 +34,11 @@ const char gateway_rcs[] = "$Id: gateway.c,v 1.29 2008/10/11 16:59:41 fabiankeil
  *
  * Revisions   :
  *    $Log: gateway.c,v $
+ *    Revision 1.30  2008/10/13 17:31:03  fabiankeil
+ *    If a remembered connection is no longer usable and
+ *    has been marked closed, don't bother checking if the
+ *    destination matches.
+ *
  *    Revision 1.29  2008/10/11 16:59:41  fabiankeil
  *    Add missing dots for two log messages.
  *
@@ -614,6 +619,7 @@ static jb_socket get_reusable_connection(const struct http_request *http,
                   reusable_connection[slot].sfd, reusable_connection[slot].host,
                   reusable_connection[slot].port, slot);
                mark_connection_closed(&reusable_connection[slot]);
+               continue;
             }
          }
          else
@@ -623,7 +629,6 @@ static jb_socket get_reusable_connection(const struct http_request *http,
                reusable_connection[slot].sfd, reusable_connection[slot].host,
                reusable_connection[slot].port, slot);
          }
-
 
          if (connection_destination_matches(&reusable_connection[slot], http, fwd))
          {
