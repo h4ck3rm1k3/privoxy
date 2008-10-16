@@ -1,4 +1,4 @@
-const char gateway_rcs[] = "$Id: gateway.c,v 1.30 2008/10/13 17:31:03 fabiankeil Exp $";
+const char gateway_rcs[] = "$Id: gateway.c,v 1.31 2008/10/16 07:31:11 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/gateway.c,v $
@@ -34,6 +34,11 @@ const char gateway_rcs[] = "$Id: gateway.c,v 1.30 2008/10/13 17:31:03 fabiankeil
  *
  * Revisions   :
  *    $Log: gateway.c,v $
+ *    Revision 1.31  2008/10/16 07:31:11  fabiankeil
+ *    - Factor socket_is_still_usable() out of get_reusable_connection().
+ *    - If poll() isn't available, show a warning and assume the socket
+ *      is still usable.
+ *
  *    Revision 1.30  2008/10/13 17:31:03  fabiankeil
  *    If a remembered connection is no longer usable and
  *    has been marked closed, don't bother checking if the
@@ -206,10 +211,13 @@ const char gateway_rcs[] = "$Id: gateway.c,v 1.30 2008/10/13 17:31:03 fabiankeil
 #include "gateway.h"
 #include "miscutil.h"
 #ifdef FEATURE_CONNECTION_KEEP_ALIVE
-#ifdef __GLIBC__
+#ifdef HAVE_POLL
+#ifdef __GLIBC__ 
 #include <sys/poll.h>
-#endif /* __GLIBC__ */
+#else
 #include <poll.h>
+#endif /* def __GLIBC__ */
+#endif /* HAVE_POLL */
 #endif /* def FEATURE_CONNECTION_KEEP_ALIVE */
 
 const char gateway_h_rcs[] = GATEWAY_H_VERSION;
@@ -574,6 +582,49 @@ static int connection_destination_matches(const struct reusable_connection *conn
 
 }
 
+
+/*********************************************************************
+ *
+ * Function    :  socket_is_still_usable
+ *
+ * Description :  Decides whether or not an open socket is still usable.
+ *
+ * Parameters  :
+ *          1  :  sfd = The socket to check.
+ *
+ * Returns     :  TRUE for yes, otherwise FALSE.
+ *
+ *********************************************************************/
+static int socket_is_still_usable(jb_socket sfd)
+{
+#ifdef HAVE_POLL
+   int poll_result;
+   struct pollfd poll_fd[1];
+   memset(poll_fd, 0, sizeof(poll_fd));
+   poll_fd[0].fd = sfd;
+   poll_fd[0].events = POLLIN;
+
+   poll_result = poll(poll_fd, 1, 0);
+
+   if (-1 != poll_result)
+   {
+      return !(poll_fd[0].revents & POLLIN);
+   }
+   else
+   {
+      log_error(LOG_LEVEL_CONNECT, "Polling socket %d failed.", sfd);
+      return FALSE;
+   }
+#else
+   log_error(LOG_LEVEL_INFO,
+      "Detecting already dead sockets isn't implemented for your "
+      "platform yet. Assuming sockets stay alive forever, expect "
+      "an increase in connection problems.");
+   return TRUE;
+#endif /* def HAVE_POLL */
+}
+
+
 /*********************************************************************
  *
  * Function    :  get_reusable_connection
@@ -602,32 +653,14 @@ static jb_socket get_reusable_connection(const struct http_request *http,
       if (!reusable_connection[slot].in_use
          && (JB_INVALID_SOCKET != reusable_connection[slot].sfd))
       {
-         int poll_result;
-         struct pollfd poll_fd[1];
-         memset(poll_fd, 0, sizeof(poll_fd));
-         poll_fd[0].fd = reusable_connection[slot].sfd;
-         poll_fd[0].events = POLLIN;
-
-         poll_result = poll(poll_fd, 1, 0);
-
-         if (-1 != poll_result)
-         {
-            if ((poll_fd[0].revents & POLLIN))
-            {
-               log_error(LOG_LEVEL_CONNECT,
-                  "Socket %d for %s:%d in slot %d is no longer usable. Closing.",
-                  reusable_connection[slot].sfd, reusable_connection[slot].host,
-                  reusable_connection[slot].port, slot);
-               mark_connection_closed(&reusable_connection[slot]);
-               continue;
-            }
-         }
-         else
+         if (!socket_is_still_usable(reusable_connection[slot].sfd))
          {
             log_error(LOG_LEVEL_CONNECT,
-               "Failed to poll socket %d for %s:%d in slot %d.",
+               "Socket %d for %s:%d in slot %d is no longer usable. Closing.",
                reusable_connection[slot].sfd, reusable_connection[slot].host,
                reusable_connection[slot].port, slot);
+            mark_connection_closed(&reusable_connection[slot]);
+            continue;
          }
 
          if (connection_destination_matches(&reusable_connection[slot], http, fwd))
