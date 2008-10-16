@@ -1,4 +1,4 @@
-const char gateway_rcs[] = "$Id: gateway.c,v 1.32 2008/10/16 16:27:22 fabiankeil Exp $";
+const char gateway_rcs[] = "$Id: gateway.c,v 1.33 2008/10/16 16:34:21 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/gateway.c,v $
@@ -34,6 +34,9 @@ const char gateway_rcs[] = "$Id: gateway.c,v 1.32 2008/10/16 16:27:22 fabiankeil
  *
  * Revisions   :
  *    $Log: gateway.c,v $
+ *    Revision 1.33  2008/10/16 16:34:21  fabiankeil
+ *    Fix two gcc44 warnings.
+ *
  *    Revision 1.32  2008/10/16 16:27:22  fabiankeil
  *    Fix compiler warning.
  *
@@ -1190,8 +1193,8 @@ static jb_socket socks5_connect(const struct forward_spec *fwd,
    /* Using strncpy because we really want the nul byte padding. */
    strncpy(cbuf + client_pos, target_host, sizeof(cbuf) - client_pos);
    client_pos += (hostlen & 0xffu);
-   cbuf[client_pos++] = (char)((target_port >> 8) & 0xffu);
-   cbuf[client_pos++] = (char)((target_port     ) & 0xffu);
+   cbuf[client_pos++] = (char)((target_port >> 8) & 0xff);
+   cbuf[client_pos++] = (char)((target_port     ) & 0xff);
 
    if (write_socket(sfd, cbuf, client_pos))
    {
