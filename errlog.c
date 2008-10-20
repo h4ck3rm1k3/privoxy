@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.78 2008/09/07 16:59:31 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.79 2008/10/20 17:09:25 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,9 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.78 2008/09/07 16:59:31 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.79  2008/10/20 17:09:25  fabiankeil
+ *    Update init_error_log() description to match reality.
+ *
  *    Revision 1.78  2008/09/07 16:59:31  fabiankeil
  *    Update a comment to reflect that we
  *    have mutex support on mingw32 now.
@@ -623,8 +626,7 @@ void disable_logging(void)
  *
  * Parameters  :
  *          1  :  prog_name  = The program name.
- *          2  :  logfname   = The logfile name, or NULL for stderr.
- *          3  :  debuglevel = The debugging level.
+ *          2  :  logfname   = The logfile to (re)open.
  *
  * Returns     :  N/A
  *
