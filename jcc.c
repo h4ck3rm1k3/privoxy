@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.197 2008/10/20 17:02:40 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.198 2008/10/22 15:19:55 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,11 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.197 2008/10/20 17:02:40 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.198  2008/10/22 15:19:55  fabiankeil
+ *    Once More, With Feeling: if there is no logfile
+ *    because the user didn't specify one, we shouldn't
+ *    call init_error_log() after receiving SIGHUP either.
+ *
  *    Revision 1.197  2008/10/20 17:02:40  fabiankeil
  *    If SIGHUP is received while we aren't running in daemon
  *    mode, calling init_error_log() would be a mistake.
@@ -3807,12 +3812,8 @@ static void listen_loop(void)
        */
       if (received_hup_signal)
       {
-         if (!no_daemon)
+         if (NULL != config->logfile)
          {
-            /*
-             * If we aren't in daemon mode, there is no log to re-open.
-             * XXX: Probably we should ignore SIGHUP then.
-             */
             init_error_log(Argv[0], config->logfile);
          }
          received_hup_signal = 0;
