@@ -1,4 +1,4 @@
-const char gateway_rcs[] = "$Id: gateway.c,v 1.36 2008/10/18 19:49:15 fabiankeil Exp $";
+const char gateway_rcs[] = "$Id: gateway.c,v 1.37 2008/10/23 17:40:53 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/gateway.c,v $
@@ -34,6 +34,11 @@ const char gateway_rcs[] = "$Id: gateway.c,v 1.36 2008/10/18 19:49:15 fabiankeil
  *
  * Revisions   :
  *    $Log: gateway.c,v $
+ *    Revision 1.37  2008/10/23 17:40:53  fabiankeil
+ *    Fix forget_connection() and mark_connection_unused(),
+ *    which would both under certain circumstances access
+ *    reusable_connection[MAX_REUSABLE_CONNECTIONS]. Oops.
+ *
  *    Revision 1.36  2008/10/18 19:49:15  fabiankeil
  *    - Factor close_unusable_connections() out of
  *      get_reusable_connection() to make sure we really check
@@ -505,23 +510,20 @@ void forget_connection(jb_socket sfd)
       if (reusable_connection[slot].sfd == sfd)
       {
          assert(reusable_connection[slot].in_use);
-         break;
+
+         log_error(LOG_LEVEL_CONNECT,
+            "Forgetting socket %d for %s:%d in slot %d.",
+            sfd, reusable_connection[slot].host,
+            reusable_connection[slot].port, slot);
+         mark_connection_closed(&reusable_connection[slot]);
+         privoxy_mutex_unlock(&connection_reuse_mutex);
+
+         return;
       }
    }
 
-   if (reusable_connection[slot].sfd != sfd)
-   {
-      log_error(LOG_LEVEL_CONNECT,
-        "Socket %d already forgotten or never remembered.", sfd);
-      privoxy_mutex_unlock(&connection_reuse_mutex);
-      return;
-   }
-
    log_error(LOG_LEVEL_CONNECT,
-      "Forgetting socket %d for %s:%d in slot %d.",
-      sfd, reusable_connection[slot].host, reusable_connection[slot].port, slot);
-
-   mark_connection_closed(&reusable_connection[slot]);
+      "Socket %d already forgotten or never remembered.", sfd);
 
    privoxy_mutex_unlock(&connection_reuse_mutex);
 }
@@ -802,18 +804,15 @@ static int mark_connection_unused(jb_socket sfd)
       if (reusable_connection[slot].sfd == sfd)
       {
          assert(reusable_connection[slot].in_use);
+         socket_found = TRUE;
+         log_error(LOG_LEVEL_CONNECT,
+            "Marking open socket %d for %s:%d in slot %d as unused.",
+            sfd, reusable_connection[slot].host,
+            reusable_connection[slot].port, slot);
+         reusable_connection[slot].in_use = 0;
+         reusable_connection[slot].timestamp = time(NULL);
          break;
       }
-   }
-
-   if (reusable_connection[slot].sfd == sfd)
-   {
-      socket_found = TRUE;
-      log_error(LOG_LEVEL_CONNECT,
-         "Marking open socket %d for %s:%d in slot %d as unused.",
-         sfd, reusable_connection[slot].host, reusable_connection[slot].port, slot);
-      reusable_connection[slot].in_use = 0;
-      reusable_connection[slot].timestamp = time(NULL);
    }
 
    privoxy_mutex_unlock(&connection_reuse_mutex);
