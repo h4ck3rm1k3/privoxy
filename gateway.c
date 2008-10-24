@@ -1,4 +1,4 @@
-const char gateway_rcs[] = "$Id: gateway.c,v 1.37 2008/10/23 17:40:53 fabiankeil Exp $";
+const char gateway_rcs[] = "$Id: gateway.c,v 1.38 2008/10/24 17:33:00 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/gateway.c,v $
@@ -34,6 +34,12 @@ const char gateway_rcs[] = "$Id: gateway.c,v 1.37 2008/10/23 17:40:53 fabiankeil
  *
  * Revisions   :
  *    $Log: gateway.c,v $
+ *    Revision 1.38  2008/10/24 17:33:00  fabiankeil
+ *    - Tone the "keep-alive support is experimental" warning
+ *      down a bit as hackish 0-chunk detection has been
+ *      implemented recently.
+ *    - Only show the "ndef HAVE_POLL" warning once on start-up.
+ *
  *    Revision 1.37  2008/10/23 17:40:53  fabiankeil
  *    Fix forget_connection() and mark_connection_unused(),
  *    which would both under certain circumstances access
@@ -340,8 +346,12 @@ extern void initialize_reusable_connections(void)
    unsigned int slot = 0;
 
    log_error(LOG_LEVEL_INFO,
-      "Support for 'Connection: keep-alive' is experimental, "
-      "incomplete and known not to work properly in some situations.");
+      "Support for 'Connection: keep-alive' is experimental."
+#ifndef HAVE_POLL
+      " Detecting already dead connections might not work"
+      " correctly on your platform."
+#endif /* ndef HAVE_POLL */
+   );
 
    for (slot = 0; slot < SZ(reusable_connection); slot++)
    {
@@ -717,11 +727,6 @@ static int socket_is_still_usable(jb_socket sfd)
     * but apparently it does.
     */
    socket_is_alive = !FD_ISSET(sfd, &readable_fds);
-
-   log_error(LOG_LEVEL_INFO,
-      "Detecting already dead sockets might not work correctly "
-      "on your platform. Anyway, socket %d appears to be %s.",
-      sfd, (socket_is_alive ? "still alive" : "already dead"));
 
    return socket_is_alive;
 #endif /* def HAVE_POLL */
