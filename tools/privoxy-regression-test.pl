@@ -7,7 +7,7 @@
 # A regression test "framework" for Privoxy. For documentation see:
 # perldoc privoxy-regression-test.pl
 #
-# $Id: privoxy-regression-test.pl,v 1.29 2008/10/25 15:42:05 fabiankeil Exp $
+# $Id: privoxy-regression-test.pl,v 1.30 2008/10/25 15:45:04 fabiankeil Exp $
 #
 # Wish list:
 #
@@ -568,8 +568,9 @@ sub dependency_unsatisfied ($) {
     } elsif (defined ($dependencies{$level}{'feature status'})) {
 
         my $dependency = $dependencies{$level}{'feature status'};
-        $dependency_problem = 1;
         my ($feature, $status) = $dependency =~ /([^\s]*)\s+(Yes|No)/;
+
+        $dependency_problem = 1;
 
         if (defined($privoxy_features{$feature})
             and ($privoxy_features{$feature} eq $status))
