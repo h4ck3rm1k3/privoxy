@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.199 2008/10/26 15:36:10 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.200 2008/10/26 16:53:18 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.199 2008/10/26 15:36:10 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.200  2008/10/26 16:53:18  fabiankeil
+ *    Fix gcc44 warning.
+ *
  *    Revision 1.199  2008/10/26 15:36:10  fabiankeil
  *    Remove two debug messages with LOG_LEVEL_INFO.
  *
@@ -2965,7 +2968,7 @@ static void chat(struct client_state *csp)
                 */
                int header_length = csp->iob->cur - header_start;
                assert(csp->iob->cur > header_start);
-               byte_count += (size_t)len - header_length;
+               byte_count += (size_t)(len - header_length);
             }
 
             /* we're finished with the server's header */
