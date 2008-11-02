@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.200 2008/10/26 16:53:18 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.201 2008/11/02 16:48:20 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.200 2008/10/26 16:53:18 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.201  2008/11/02 16:48:20  fabiankeil
+ *    Revert revision 1.195 and try again.
+ *
  *    Revision 1.200  2008/10/26 16:53:18  fabiankeil
  *    Fix gcc44 warning.
  *
@@ -2068,6 +2071,28 @@ static int server_response_is_complete(struct client_state *csp, size_t content_
 }
 #endif /* FEATURE_CONNECTION_KEEP_ALIVE */
 
+/*********************************************************************
+ *
+ * Function    :  mark_server_socket_tainted
+ *
+ * Description :  Makes sure we don't reuse a server socket
+ *                (if we didn't read everything the server sent
+ *                us reusing the socket would lead to garbage).
+ *
+ * Parameters  :
+ *          1  :  csp = Current client state (buffers, headers, etc...)
+ *
+ * Returns     :  void.
+ *
+ *********************************************************************/
+static void mark_server_socket_tainted(struct client_state *csp)
+{
+   if ((csp->flags & CSP_FLAG_SERVER_CONNECTION_KEEP_ALIVE))
+   {
+      log_error(LOG_LEVEL_CONNECT, "Unsetting keep-alive flag.");
+      csp->flags &= ~CSP_FLAG_SERVER_CONNECTION_KEEP_ALIVE;
+   }
+}
 
 /*********************************************************************
  *
@@ -2578,7 +2603,8 @@ static void chat(struct client_state *csp)
       if (n < 0)
       {
          log_error(LOG_LEVEL_ERROR, "select() failed!: %E");
-         break;
+         mark_server_socket_tainted(csp);
+         return;
       }
 
       /*
@@ -2591,13 +2617,16 @@ static void chat(struct client_state *csp)
 
          if (len <= 0)
          {
+            /* XXX: not sure if this is necessary. */
+            mark_server_socket_tainted(csp);
             break; /* "game over, man" */
          }
 
          if (write_socket(csp->sfd, buf, (size_t)len))
          {
             log_error(LOG_LEVEL_ERROR, "write to: %s failed: %E", http->host);
-            break;
+            mark_server_socket_tainted(csp);
+            return;
          }
          continue;
       }
@@ -2638,7 +2667,8 @@ static void chat(struct client_state *csp)
                 */
                log_error(LOG_LEVEL_ERROR, "Already forwarded the original headers. "
                   "Unable to tell the client about the problem.");
-               break;
+               mark_server_socket_tainted(csp);
+               return;
             }
 
             rsp = error_response(csp, "connect-failed", errno);
@@ -2733,7 +2763,8 @@ static void chat(struct client_state *csp)
                      log_error(LOG_LEVEL_ERROR, "write modified content to client failed: %E");
                      freez(hdr);
                      freez(p);
-                     break;
+                     mark_server_socket_tainted(csp);
+                     return;
                   }
 
                   freez(hdr);
@@ -2790,7 +2821,8 @@ static void chat(struct client_state *csp)
                      log_error(LOG_LEVEL_ERROR, "Out of memory while trying to flush.");
                      rsp = cgi_error_memory();
                      send_crunch_response(csp, rsp);
-                     break;
+                     mark_server_socket_tainted(csp);
+                     return;
                   }
                   hdrlen = strlen(hdr);
 
@@ -2801,7 +2833,8 @@ static void chat(struct client_state *csp)
                      log_error(LOG_LEVEL_CONNECT,
                         "Flush header and buffers to client failed: %E");
                      freez(hdr);
-                     break;
+                     mark_server_socket_tainted(csp);
+                     return;
                   }
 
                   /*
@@ -2820,7 +2853,8 @@ static void chat(struct client_state *csp)
                if (write_socket(csp->cfd, buf, (size_t)len))
                {
                   log_error(LOG_LEVEL_ERROR, "write to client failed: %E");
-                  break;
+                  mark_server_socket_tainted(csp);
+                  return;
                }
             }
             byte_count += (size_t)len;
@@ -2839,7 +2873,8 @@ static void chat(struct client_state *csp)
                log_error(LOG_LEVEL_ERROR, "Out of memory while looking for end of server headers.");
                rsp = cgi_error_memory();
                send_crunch_response(csp, rsp);               
-               break;
+               mark_server_socket_tainted(csp);
+               return;
             }
 
             header_start = csp->iob->cur;
@@ -2875,7 +2910,8 @@ static void chat(struct client_state *csp)
                log_error(LOG_LEVEL_CLF, "%s - - [%T] \"%s\" 502 0", csp->ip_addr_str, http->cmd);
                write_socket(csp->cfd, NO_SERVER_DATA_RESPONSE, strlen(NO_SERVER_DATA_RESPONSE));
                free_http_request(http);
-               break;
+               mark_server_socket_tainted(csp);
+               return;
             }
 
             assert(csp->headers->first->str);
@@ -2899,7 +2935,8 @@ static void chat(struct client_state *csp)
                write_socket(csp->cfd, INVALID_SERVER_HEADERS_RESPONSE,
                   strlen(INVALID_SERVER_HEADERS_RESPONSE));
                free_http_request(http);
-               break;
+               mark_server_socket_tainted(csp);
+               return;
             }
 
             /*
@@ -2926,7 +2963,8 @@ static void chat(struct client_state *csp)
                 * and are done here after cleaning up.
                 */
                 freez(hdr);
-                break;
+                mark_server_socket_tainted(csp);
+                return;
             }
             /* Buffer and pcrs filter this if appropriate. */
 
@@ -2955,7 +2993,8 @@ static void chat(struct client_state *csp)
                    * to the client... it probably can't hear us anyway.
                    */
                   freez(hdr);
-                  break;
+                  mark_server_socket_tainted(csp);
+                  return;
                }
 
                byte_count += (size_t)len;
@@ -2990,17 +3029,8 @@ static void chat(struct client_state *csp)
          }
          continue;
       }
-      /*
-       * If we reach this point, the server socket is tainted
-       * (most likely because we didn't read everything the
-       * server sent us) and reusing it would lead to garbage.
-       */
-      if ((csp->flags & CSP_FLAG_SERVER_CONNECTION_KEEP_ALIVE))
-      {
-         log_error(LOG_LEVEL_CONNECT, "Unsetting keep-alive flag.");
-         csp->flags &= ~CSP_FLAG_SERVER_CONNECTION_KEEP_ALIVE;
-      }
-      return;
+      mark_server_socket_tainted(csp);
+      return; /* huh? we should never get here */
    }
 
    if (csp->content_length == 0)
