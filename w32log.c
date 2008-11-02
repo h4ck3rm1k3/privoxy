@@ -1,4 +1,4 @@
-const char w32log_rcs[] = "$Id: w32log.c,v 1.27 2006/07/18 14:48:48 david__schmidt Exp $";
+const char w32log_rcs[] = "$Id: w32log.c,v 1.28 2008/11/02 14:37:47 ler762 Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/w32log.c,v $
@@ -32,6 +32,17 @@ const char w32log_rcs[] = "$Id: w32log.c,v 1.27 2006/07/18 14:48:48 david__schmi
  *
  * Revisions   :
  *    $Log: w32log.c,v $
+ *    Revision 1.28  2008/11/02 14:37:47  ler762
+ *    commit the part of the patches I've been using that were written by torford and gjmurphy
+ *      [ 1824315 ] Minor code cleanup
+ *      [ 1781135 ] Patch - Add clear log, select all, and Accelerators for w32
+ *        http://sourceforge.net/tracker/?func=detail&atid=311118&aid=1781135&group_id=11118
+ *    The full patch adds control keys A(select all), C(copy) and D(delete all) to the
+ *    Privoxy log window menu.  Select all and copy work for me without the patch
+ *    (albeit without showing the accelerator keys on the menu), so the only part of the
+ *    patch I've been using for the last year or so has been the ctrl-d to delete
+ *    everything in the Privoxy log window.
+ *
  *    Revision 1.27  2006/07/18 14:48:48  david__schmidt
  *    Reorganizing the repository: swapping out what was HEAD (the old 3.1 branch)
  *    with what was really the latest development (the v_3_0_branch branch)
@@ -1298,8 +1309,16 @@ LRESULT CALLBACK LogRichEditProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
          pt.y = HIWORD(lParam);
          ClientToScreen(hwnd, &pt);
          OnLogRButtonUp(wParam, pt.x, pt.y);
+         return 0;
       }
-      return 0;
+      case WM_CHAR:
+      {
+         if ((GetKeyState(VK_CONTROL) != 0) && (wParam == 4)) /* ctrl+d */
+         {
+             OnLogCommand(ID_VIEW_CLEARLOG);
+             return 0;
+         }
+      }
    }
    return CallWindowProc(g_fnLogBox, hwnd, uMsg, wParam, lParam);
 
@@ -1375,6 +1394,14 @@ LRESULT CALLBACK LogWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
             case SC_MINIMIZE:
                ShowLogWindow(FALSE);
                return 0;
+         }
+         break;
+
+      case WM_CHAR:
+         if ((GetKeyState(VK_CONTROL) != 0) && (wParam == 4)) /* ctrl+d */
+         {
+             OnLogCommand(ID_VIEW_CLEARLOG);
+             return 0;
          }
          break;
    }
