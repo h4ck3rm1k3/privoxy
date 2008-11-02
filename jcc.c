@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.201 2008/11/02 16:48:20 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.202 2008/11/02 18:40:34 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.201 2008/11/02 16:48:20 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.202  2008/11/02 18:40:34  fabiankeil
+ *    If we received a different amount of data than we expected,
+ *    log a warning and make sure the server socket isn't reused.
+ *
  *    Revision 1.201  2008/11/02 16:48:20  fabiankeil
  *    Revert revision 1.195 and try again.
  *
@@ -3040,6 +3044,15 @@ static void chat(struct client_state *csp)
        * byte_count is still correct.
        */
       csp->content_length = byte_count;
+   }
+
+   if ((csp->flags & CSP_FLAG_CONTENT_LENGTH_SET)
+      && (csp->expected_content_length != byte_count))
+   {
+      log_error(LOG_LEVEL_ERROR,
+         "Received %d bytes while expecting %d.",
+         byte_count, csp->expected_content_length);
+      mark_server_socket_tainted(csp);
    }
 
    log_error(LOG_LEVEL_CLF, "%s - - [%T] \"%s\" 200 %d",
