@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.48 2008/09/04 08:13:58 fabiankeil Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.49 2008/11/10 17:03:57 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -35,6 +35,9 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.48 2008/09/04 08:13:58 fabian
  *
  * Revisions   :
  *    $Log: jbsockets.c,v $
+ *    Revision 1.49  2008/11/10 17:03:57  fabiankeil
+ *    Fix a gcc44 warning and remove a now-obsolete cast.
+ *
  *    Revision 1.48  2008/09/04 08:13:58  fabiankeil
  *    Prepare for critical sections on Windows by adding a
  *    layer of indirection before the pthread mutex functions.
@@ -339,7 +342,7 @@ const char jbsockets_h_rcs[] = JBSOCKETS_H_VERSION;
  *
  * Parameters  :
  *          1  :  host = hostname to connect to
- *          2  :  portnum = port to connent on
+ *          2  :  portnum = port to connent on (XXX: should be unsigned)
  *          3  :  csp = Current client state (buffers, headers, etc...)
  *                      Not modified, only used for source IP and ACL.
  *
@@ -351,7 +354,7 @@ jb_socket connect_to(const char *host, int portnum, struct client_state *csp)
 {
    struct sockaddr_in inaddr;
    jb_socket fd;
-   int addr;
+   unsigned int addr;
    fd_set wfds;
    struct timeval tv[1];
 #if !defined(_WIN32) && !defined(__BEOS__) && !defined(AMIGA)
@@ -371,7 +374,7 @@ jb_socket connect_to(const char *host, int portnum, struct client_state *csp)
    }
 
 #ifdef FEATURE_ACL
-   dst->addr = ntohl((unsigned long) addr);
+   dst->addr = ntohl(addr);
    dst->port = portnum;
 
    if (block_acl(dst, csp))
