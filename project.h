@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.122 2008/10/16 07:11:34 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.123 2008/11/10 16:55:59 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,9 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.123  2008/11/10 16:55:59  fabiankeil
+ *    Fix a gcc44 warning (in filters.c).
+ *
  *    Revision 1.122  2008/10/16 07:11:34  fabiankeil
  *    Fix a bunch of gcc44 conversion warnings.
  *
@@ -1401,7 +1404,7 @@ struct client_state
    char *ip_addr_str;
    /** Client PC's IP address, as reported by the accept() function.
        As a number. */
-   long  ip_addr_long;
+   unsigned long ip_addr_long;
 
    /** The URL that was requested */
    struct http_request http[1];
