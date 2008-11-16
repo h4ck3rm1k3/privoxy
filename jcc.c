@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.204 2008/11/06 19:42:17 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.205 2008/11/16 12:43:49 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,11 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.204 2008/11/06 19:42:17 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.205  2008/11/16 12:43:49  fabiankeil
+ *    Turn keep-alive support into a runtime feature
+ *    that is disabled by setting keep-alive-timeout
+ *    to a negative value.
+ *
  *    Revision 1.204  2008/11/06 19:42:17  fabiankeil
  *    Fix last-chunk detection hack to also apply
  *    if buf[] contains nothing but the last-chunk.
@@ -3162,7 +3167,8 @@ static void serve(struct client_state *csp)
    if (csp->sfd != JB_INVALID_SOCKET)
    {
 #ifdef FEATURE_CONNECTION_KEEP_ALIVE
-      if ((csp->flags & CSP_FLAG_SERVER_CONNECTION_KEEP_ALIVE))
+      if ((csp->config->feature_flags & RUNTIME_FEATURE_CONNECTION_KEEP_ALIVE)
+       && (csp->flags & CSP_FLAG_SERVER_CONNECTION_KEEP_ALIVE))
       {
          remember_connection(csp->sfd, csp->http, forward_url(csp, csp->http));
       }

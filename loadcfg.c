@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.81 2008/11/13 09:08:42 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.82 2008/11/16 12:43:49 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,11 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.81 2008/11/13 09:08:42 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.82  2008/11/16 12:43:49  fabiankeil
+ *    Turn keep-alive support into a runtime feature
+ *    that is disabled by setting keep-alive-timeout
+ *    to a negative value.
+ *
  *    Revision 1.81  2008/11/13 09:08:42  fabiankeil
  *    Add new config option: keep-alive-timeout.
  *
@@ -1349,12 +1354,12 @@ struct configuration_spec * load_config(void)
                int timeout = atoi(arg);
                if (0 <= timeout)
                {
+                  config->feature_flags |= RUNTIME_FEATURE_CONNECTION_KEEP_ALIVE;
                   keep_alive_timeout = timeout;
                }
                else
                {
-                  log_error(LOG_LEVEL_FATAL,
-                     "Invalid keep-alive-timeout value: %s.", arg);
+                  config->feature_flags &= ~RUNTIME_FEATURE_CONNECTION_KEEP_ALIVE;
                }
             }
             continue;

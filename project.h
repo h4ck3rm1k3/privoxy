@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.123 2008/11/10 16:55:59 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.124 2008/11/16 12:43:49 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,11 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.124  2008/11/16 12:43:49  fabiankeil
+ *    Turn keep-alive support into a runtime feature
+ *    that is disabled by setting keep-alive-timeout
+ *    to a negative value.
+ *
  *    Revision 1.123  2008/11/10 16:55:59  fabiankeil
  *    Fix a gcc44 warning (in filters.c).
  *
@@ -1685,6 +1690,8 @@ struct access_control_list
 /** configuration_spec::feature_flags: Allow to block or redirect CGI requests. */
 #define RUNTIME_FEATURE_CGI_CRUNCHING               64U
 
+/** configuration_spec::feature_flags: Try to keep the connection to the server alive. */
+#define RUNTIME_FEATURE_CONNECTION_KEEP_ALIVE      128U
 
 /**
  * Data loaded from the configuration file.
