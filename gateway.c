@@ -1,4 +1,4 @@
-const char gateway_rcs[] = "$Id: gateway.c,v 1.43 2008/11/13 09:15:51 fabiankeil Exp $";
+const char gateway_rcs[] = "$Id: gateway.c,v 1.44 2008/11/22 11:54:04 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/gateway.c,v $
@@ -34,6 +34,9 @@ const char gateway_rcs[] = "$Id: gateway.c,v 1.43 2008/11/13 09:15:51 fabiankeil
  *
  * Revisions   :
  *    $Log: gateway.c,v $
+ *    Revision 1.44  2008/11/22 11:54:04  fabiankeil
+ *    Move log message around to include the socket number.
+ *
  *    Revision 1.43  2008/11/13 09:15:51  fabiankeil
  *    Make keep_alive_timeout static.
  *
@@ -888,13 +891,7 @@ jb_socket forwarded_connect(const struct forward_spec * fwd,
 
 #ifdef FEATURE_CONNECTION_KEEP_ALIVE
    sfd = get_reusable_connection(http, fwd);
-   if (JB_INVALID_SOCKET == sfd)
-   {
-      log_error(LOG_LEVEL_CONNECT,
-         "No reusable socket for %s:%d found. Opening a new one.",
-         http->host, http->port);
-   }
-   else
+   if (JB_INVALID_SOCKET != sfd)
    {
       return sfd;
    }
@@ -931,6 +928,13 @@ jb_socket forwarded_connect(const struct forward_spec * fwd,
          /* Should never get here */
          log_error(LOG_LEVEL_FATAL,
             "SOCKS4 impossible internal error - bad SOCKS type.");
+   }
+
+   if (JB_INVALID_SOCKET != sfd)
+   {
+      log_error(LOG_LEVEL_CONNECT,
+         "Created new connection to %s:%d on socket %d.",
+         http->host, http->port, sfd);
    }
 
    return sfd;
