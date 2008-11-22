@@ -8,7 +8,7 @@
 #
 # http://www.fabiankeil.de/sourcecode/privoxy-log-parser/
 #
-# $Id: privoxy-log-parser.pl,v 1.11 2008/11/10 17:17:31 fabiankeil Exp $
+# $Id: privoxy-log-parser.pl,v 1.12 2008/11/22 11:56:11 fabiankeil Exp $
 #
 # TODO:
 #       - LOG_LEVEL_CGI, LOG_LEVEL_ERROR, LOG_LEVEL_WRITE content highlighting
@@ -1422,6 +1422,12 @@ sub handle_loglevel_connect ($) {
     } elsif ($c =~ m/^socks5_connect:/) {
     
         $c =~ s@(?<=socks5_connect: )(.*)@$h{'error'}$1$h{'Standard'}@;
+
+    } elsif ($c =~ m/^Created new connection to/) {
+
+        # Created new connection to www.privoxy.org:80 on socket 11.
+        $c = highlight_matched_host($c, '(?<=connection to )[^\s]+');
+        $c =~ s@(?<=on socket )(\d+)@$h{'Number'}$1$h{'Standard'}@;
 
     } elsif ($c =~ m/^Found reusable socket/) {
 
