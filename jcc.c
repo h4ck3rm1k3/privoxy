@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.207 2008/11/25 17:25:16 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.208 2008/11/26 18:24:17 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,11 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.207 2008/11/25 17:25:16 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.208  2008/11/26 18:24:17  fabiankeil
+ *    Recognize that the server response is complete if the
+ *    last chunk is read together with the server headers.
+ *    Reported by Lee.
+ *
  *    Revision 1.207  2008/11/25 17:25:16  fabiankeil
  *    Don't convert the client-header list to text until we need to.
  *
@@ -2667,6 +2672,16 @@ static void chat(struct client_state *csp)
       FD_SET(csp->sfd, &rfds);
 
 #ifdef FEATURE_CONNECTION_KEEP_ALIVE
+      if (((csp->iob->eod - csp->iob->cur) >= 5)
+         && !memcmp(csp->iob->eod-5, "0\r\n\r\n", 5))
+      {
+         log_error(LOG_LEVEL_CONNECT,
+            "Looks like we read the last chunk together with "
+            "the server headers. We better stop reading.");
+         byte_count = (size_t)(csp->iob->eod - csp->iob->cur);
+         csp->expected_content_length = byte_count;
+         csp->flags |= CSP_FLAG_CONTENT_LENGTH_SET;
+      }
       if (server_body && server_response_is_complete(csp, byte_count))
       {
          log_error(LOG_LEVEL_CONNECT,
