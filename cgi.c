@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.113 2008/09/04 08:13:58 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.114 2008/12/04 18:15:04 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,9 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.113 2008/09/04 08:13:58 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.114  2008/12/04 18:15:04  fabiankeil
+ *    Fix some cparser warnings.
+ *
  *    Revision 1.113  2008/09/04 08:13:58  fabiankeil
  *    Prepare for critical sections on Windows by adding a
  *    layer of indirection before the pthread mutex functions.
@@ -1999,7 +2002,7 @@ void get_http_time(int time_offset, char *buf, size_t buffer_size)
 #endif
 
    assert(buf);
-   assert(buffer_size > 29);
+   assert(buffer_size > (size_t)29);
 
    time(&current_time);
 
@@ -2058,7 +2061,7 @@ static void get_locale_time(char *buf, size_t buffer_size)
 #endif
 
    assert(buf);
-   assert(buffer_size > 29);
+   assert(buffer_size > (size_t)29);
 
    time(&current_time);
 
@@ -2769,7 +2772,7 @@ jb_err map_block_killer(struct map *exports, const char *name)
 
    assert(exports);
    assert(name);
-   assert(strlen(name) < 490);
+   assert(strlen(name) < (size_t)490);
 
    snprintf(buf, sizeof(buf), "if-%s-start.*if-%s-end", name, name);
    return map(exports, buf, 1, "", 1);
@@ -2799,7 +2802,7 @@ jb_err map_block_keep(struct map *exports, const char *name)
 
    assert(exports);
    assert(name);
-   assert(strlen(name) < 490);
+   assert(strlen(name) < (size_t)490);
 
    snprintf(buf, sizeof(buf), "if-%s-start", name);
    err = map(exports, buf, 1, "", 1);
@@ -2846,7 +2849,7 @@ jb_err map_conditional(struct map *exports, const char *name, int choose_first)
 
    assert(exports);
    assert(name);
-   assert(strlen(name) < 480);
+   assert(strlen(name) < (size_t)480);
 
    snprintf(buf, sizeof(buf), (choose_first
       ? "else-not-%s@.*@endif-%s"

@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.62 2008/08/31 15:59:02 fabiankeil Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.63 2008/12/04 18:15:38 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,9 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.62 2008/08/31 15:59:02 fabiankeil
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.63  2008/12/04 18:15:38  fabiankeil
+ *    Fix some cparser warnings.
+ *
  *    Revision 1.62  2008/08/31 15:59:02  fabiankeil
  *    There's no reason to let remote toggling support depend
  *    on FEATURE_CGI_EDIT_ACTIONS, so make sure it doesn't.
@@ -896,7 +899,7 @@ jb_err cgi_edit_actions_url_form(struct client_state *csp,
 
    if ( (cur_line == NULL)
      || (line_number != patternid)
-     || (patternid < 1)
+     || (patternid < 1U)
      || (cur_line->type != FILE_LINE_URL))
    {
       /* Invalid "patternid" parameter */
@@ -1056,7 +1059,7 @@ jb_err cgi_edit_actions_remove_url_form(struct client_state *csp,
 
    if ( (cur_line == NULL)
      || (line_number != patternid)
-     || (patternid < 1)
+     || (patternid < 1U)
      || (cur_line->type != FILE_LINE_URL))
    {
       /* Invalid "patternid" parameter */
@@ -1716,7 +1719,7 @@ jb_err edit_parse_actions_file(struct editable_file * file)
          text++;
          len--;
       }
-      while ( (len > 0)
+      while ( (len > (size_t)0)
            && ( (text[len - 1] == ' ')
              || (text[len - 1] == '\t') ) )
       {
