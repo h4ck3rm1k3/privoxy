@@ -8,7 +8,7 @@
 #
 # http://www.fabiankeil.de/sourcecode/privoxy-log-parser/
 #
-# $Id: privoxy-log-parser.pl,v 1.15 2008/12/06 11:31:26 fabiankeil Exp $
+# $Id: privoxy-log-parser.pl,v 1.16 2008/12/06 16:19:18 fabiankeil Exp $
 #
 # TODO:
 #       - LOG_LEVEL_CGI, LOG_LEVEL_ERROR, LOG_LEVEL_WRITE content highlighting
@@ -1488,6 +1488,12 @@ sub handle_loglevel_connect ($) {
         $c =~ s@(?<=byte_count: )(\d+)@$h{'Number'}$1$h{'Standard'}@;
         $c =~ s@(?<=header_offset: )(\d+)@$h{'Number'}$1$h{'Standard'}@;
         $c =~ s@(?<=len: )(\d+)@$h{'Number'}$1$h{'Standard'}@;
+
+    } elsif ($c =~ m/^Received \d+ bytes while/) {
+
+        # Received 206 bytes while expecting 12103.
+        $c =~ s@(?<=Received )(\d+)@$h{'Number'}$1$h{'Standard'}@;
+        $c =~ s@(?<=expecting )(\d+)@$h{'Number'}$1$h{'Standard'}@;
 
     } elsif ($c =~ m/^Looks like we rea/ or
              $c =~ m/^Unsetting keep-alive flag/) {
