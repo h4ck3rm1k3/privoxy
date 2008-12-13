@@ -1,4 +1,4 @@
-const char gateway_rcs[] = "$Id: gateway.c,v 1.45 2008/12/04 18:17:07 fabiankeil Exp $";
+const char gateway_rcs[] = "$Id: gateway.c,v 1.46 2008/12/13 11:07:23 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/gateway.c,v $
@@ -34,6 +34,10 @@ const char gateway_rcs[] = "$Id: gateway.c,v 1.45 2008/12/04 18:17:07 fabiankeil
  *
  * Revisions   :
  *    $Log: gateway.c,v $
+ *    Revision 1.46  2008/12/13 11:07:23  fabiankeil
+ *    Remove duplicated debugging checks
+ *    in connection_destination_matches().
+ *
  *    Revision 1.45  2008/12/04 18:17:07  fabiankeil
  *    Fix some cparser warnings.
  *
@@ -564,7 +568,7 @@ void forget_connection(jb_socket sfd)
  * Function    :  connection_destination_matches
  *
  * Description :  Determines whether a remembered connection can
- *                be reused. That is whether the destination and
+ *                be reused. That is, whether the destination and
  *                the forwarding settings match.
  *
  * Parameters  :
@@ -579,39 +583,6 @@ static int connection_destination_matches(const struct reusable_connection *conn
                                           const struct http_request *http,
                                           const struct forward_spec *fwd)
 {
-   /* XXX: Start of duplicated checks for debugging purposes. */
-   if (strcmpic(connection->host, http->host))
-   {
-      return FALSE;
-   }
-
-   if (connection->forwarder_type != fwd->type)
-   {
-      log_error(LOG_LEVEL_CONNECT, "Type mismatch: %d %d (%s)",
-         connection->forwarder_type, fwd->type, http->host);
-      return FALSE;
-   }
-   if (connection->gateway_port   != fwd->gateway_port)
-   {
-      log_error(LOG_LEVEL_CONNECT, "Gateway port mismatch: %d %d (%s)",
-         connection->gateway_port, fwd->gateway_port, http->host);
-      return FALSE;
-   }
-   if (connection->forward_port   != fwd->forward_port)
-   {
-      log_error(LOG_LEVEL_CONNECT, "Forward port mismatch: %d %d (%s)",
-         connection->forward_port, fwd->forward_port, http->host);
-      return FALSE;
-   }
-   if (connection->port != http->port)
-   {
-      log_error(LOG_LEVEL_CONNECT, "Server port mismatch: %d %d (%s)",
-         connection->port, http->port, http->host);
-      return FALSE;
-   }
-
-   /* XXX: End of duplicated checks for debugging purposes. */
-
    if ((connection->forwarder_type != fwd->type)
     || (connection->gateway_port   != fwd->gateway_port)
     || (connection->forward_port   != fwd->forward_port)
