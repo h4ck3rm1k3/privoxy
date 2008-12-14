@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.83 2008/12/04 18:14:32 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.84 2008/12/14 15:46:22 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,9 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.83 2008/12/04 18:14:32 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.84  2008/12/14 15:46:22  fabiankeil
+ *    Give crunched requests their own log level.
+ *
  *    Revision 1.83  2008/12/04 18:14:32  fabiankeil
  *    Fix some cparser warnings.
  *
@@ -955,6 +958,9 @@ static inline const char *get_log_level_string(int loglevel)
       case LOG_LEVEL_DEANIMATE:
          log_level_string = "Gif-Deanimate";
          break;
+      case LOG_LEVEL_CRUNCH:
+         log_level_string = "Crunch";
+         break;
       case LOG_LEVEL_CGI:
          log_level_string = "CGI";
          break;
@@ -1005,7 +1011,7 @@ void log_error(int loglevel, const char *fmt, ...)
     * the taskbar icon animate.  (There is an option to disable
     * this but checking that is handled inside LogShowActivity()).
     */
-   if (loglevel == LOG_LEVEL_GPC)
+   if ((loglevel == LOG_LEVEL_GPC) || (loglevel == LOG_LEVEL_CRUNCH))
    {
       LogShowActivity();
    }

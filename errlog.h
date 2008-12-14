@@ -1,6 +1,6 @@
 #ifndef ERRLOG_H_INCLUDED
 #define ERRLOG_H_INCLUDED
-#define ERRLOG_H_VERSION "$Id: errlog.h,v 1.20 2008/03/27 18:27:23 fabiankeil Exp $"
+#define ERRLOG_H_VERSION "$Id: errlog.h,v 1.21 2008/12/14 15:46:22 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.h,v $
@@ -35,6 +35,9 @@
  *
  * Revisions   :
  *    $Log: errlog.h,v $
+ *    Revision 1.21  2008/12/14 15:46:22  fabiankeil
+ *    Give crunched requests their own log level.
+ *
  *    Revision 1.20  2008/03/27 18:27:23  fabiankeil
  *    Remove kill-popups action.
  *
@@ -160,6 +163,7 @@ extern "C" {
 
 /* Debug level for errors */
 
+/* XXX: Should be renamed. */
 #define LOG_LEVEL_GPC        0x0001
 #define LOG_LEVEL_CONNECT    0x0002
 #define LOG_LEVEL_IO         0x0004
@@ -172,6 +176,7 @@ extern "C" {
 #define LOG_LEVEL_REDIRECTS  0x0080
 #define LOG_LEVEL_DEANIMATE  0x0100
 #define LOG_LEVEL_CLF        0x0200 /* Common Log File format */
+#define LOG_LEVEL_CRUNCH     0x0400
 #define LOG_LEVEL_CGI        0x0800 /* CGI / templates */
 
 /* Following are always on: */
