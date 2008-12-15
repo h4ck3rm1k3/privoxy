@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.212 2008/12/14 15:46:22 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.213 2008/12/15 18:45:51 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.212 2008/12/14 15:46:22 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.213  2008/12/15 18:45:51  fabiankeil
+ *    When logging crunches, log the whole URL, so one can easily
+ *    differentiate between vanilla HTTP and CONNECT requests.
+ *
  *    Revision 1.212  2008/12/14 15:46:22  fabiankeil
  *    Give crunched requests their own log level.
  *
@@ -1824,8 +1828,7 @@ static void send_crunch_response(const struct client_state *csp, struct http_res
       }
 
       /* Log that the request was crunched and why. */
-      log_error(LOG_LEVEL_CRUNCH, "%s: %s%s",
-         crunch_reason(rsp), http->hostport, http->path);
+      log_error(LOG_LEVEL_CRUNCH, "%s: %s", crunch_reason(rsp), http->url);
       log_error(LOG_LEVEL_CLF, "%s - - [%T] \"%s\" %s %d",
          csp->ip_addr_str, http->ocmd, status_code, rsp->content_length);
 
