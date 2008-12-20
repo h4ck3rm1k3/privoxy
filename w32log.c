@@ -1,4 +1,4 @@
-const char w32log_rcs[] = "$Id: w32log.c,v 1.28 2008/11/02 14:37:47 ler762 Exp $";
+const char w32log_rcs[] = "$Id: w32log.c,v 1.29 2008/12/20 15:27:40 ler762 Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/w32log.c,v $
@@ -32,6 +32,10 @@ const char w32log_rcs[] = "$Id: w32log.c,v 1.28 2008/11/02 14:37:47 ler762 Exp $
  *
  * Revisions   :
  *    $Log: w32log.c,v $
+ *    Revision 1.29  2008/12/20 15:27:40  ler762
+ *    The crunch log message format changed, so update the strings to highlight
+ *    in the log window.
+ *
  *    Revision 1.28  2008/11/02 14:37:47  ler762
  *    commit the part of the patches I've been using that were written by torford and gjmurphy
  *      [ 1824315 ] Minor code cleanup
@@ -314,7 +318,16 @@ static struct _Pattern
    { RE_URL,                STYLE_LINK },
 /* { "[a-zA-Z0-9]+\\.[a-zA-Z0-9]+\\.[a-zA-Z0-9]+\\.[^ \n\r]*", STYLE_LINK }, */
    /* interesting text to highlight */
-   { "crunch!",           STYLE_HIGHLIGHT },
+   /*   see jcc.c crunch_reason for the full list */
+   { "Crunch: Blocked:",            STYLE_HIGHLIGHT },
+   { "Crunch: Untrusted",           STYLE_HIGHLIGHT },
+   { "Crunch: Redirected:",         STYLE_HIGHLIGHT },
+   { "Crunch: DNS failure",         STYLE_HIGHLIGHT },
+   { "Crunch: Forwarding failed",   STYLE_HIGHLIGHT },
+   { "Crunch: Connection failure",  STYLE_HIGHLIGHT },
+   { "Crunch: Out of memory",       STYLE_HIGHLIGHT },
+   /* what are all the possible error strings?? */
+   { "Error:",                      STYLE_HIGHLIGHT },
    /* http headers */
    { "referer:",            STYLE_HEADER },
    { "proxy-connection:",   STYLE_HEADER },
