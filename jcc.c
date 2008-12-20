@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.213 2008/12/15 18:45:51 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.214 2008/12/20 14:53:55 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,11 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.213 2008/12/15 18:45:51 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.214  2008/12/20 14:53:55  fabiankeil
+ *    Add config option socket-timeout to control the time
+ *    Privoxy waits for data to arrive on a socket. Useful
+ *    in case of stale ssh tunnels or when fuzz-testing.
+ *
  *    Revision 1.213  2008/12/15 18:45:51  fabiankeil
  *    When logging crunches, log the whole URL, so one can easily
  *    differentiate between vanilla HTTP and CONNECT requests.
@@ -2165,6 +2170,13 @@ static char *get_request_line(struct client_state *csp)
 
    do
    {
+      if (!data_is_available(csp->cfd, csp->config->socket_timeout))
+      {
+         log_error(LOG_LEVEL_ERROR,
+            "Stopped waiting for the request line.");
+         return '\0';
+      }
+
       len = read_socket(csp->cfd, buf, sizeof(buf) - 1);
 
       if (len <= 0) return NULL;
@@ -2297,6 +2309,13 @@ static jb_err receive_client_request(struct client_state *csp)
           * We didn't receive a complete header
           * line yet, get the rest of it.
           */
+         if (!data_is_available(csp->cfd, csp->config->socket_timeout))
+         {
+            log_error(LOG_LEVEL_ERROR,
+               "Stopped grabbing the client headers.");
+            return JB_ERR_PARSE;
+         }
+
          len = read_socket(csp->cfd, buf, sizeof(buf) - 1);
          if (len <= 0)
          {
@@ -2478,8 +2497,11 @@ static void chat(struct client_state *csp)
 
    /* Skeleton for HTTP response, if we should intercept the request */
    struct http_response *rsp;
+   struct timeval timeout;
 
    memset(buf, 0, sizeof(buf));
+   memset(&timeout, 0, sizeof(timeout));
+   timeout.tv_sec = csp->config->socket_timeout;
 
    http = csp->http;
 
@@ -2720,9 +2742,15 @@ static void chat(struct client_state *csp)
       }
 #endif  /* FEATURE_CONNECTION_KEEP_ALIVE */
 
-      n = select((int)maxfd+1, &rfds, NULL, NULL, NULL);
+      n = select((int)maxfd+1, &rfds, NULL, NULL, &timeout);
 
-      if (n < 0)
+      if (n == 0)
+      {
+         log_error(LOG_LEVEL_ERROR, "Didn't receive data in time.");
+         mark_server_socket_tainted(csp);
+         return;
+      }
+      else if (n < 0)
       {
          log_error(LOG_LEVEL_ERROR, "select() failed!: %E");
          mark_server_socket_tainted(csp);

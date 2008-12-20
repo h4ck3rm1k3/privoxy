@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.126 2008/12/14 17:02:54 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.127 2008/12/20 14:53:55 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,11 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.127  2008/12/20 14:53:55  fabiankeil
+ *    Add config option socket-timeout to control the time
+ *    Privoxy waits for data to arrive on a socket. Useful
+ *    in case of stale ssh tunnels or when fuzz-testing.
+ *
  *    Revision 1.126  2008/12/14 17:02:54  fabiankeil
  *    Fix a cparser warning.
  *
@@ -1790,6 +1795,9 @@ struct configuration_spec
 
    /** Number of retries in case a forwarded connection attempt fails */
    int         forwarded_connect_retries;
+
+   /* Timeout when waiting on sockets for data to become available. */
+   int socket_timeout;
 
    /** All options from the config file, HTML-formatted. */
    char *proxy_args;
