@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.215 2008/12/24 17:06:19 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.216 2008/12/24 22:13:11 ler762 Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.215 2008/12/24 17:06:19 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.216  2008/12/24 22:13:11  ler762
+ *    fix GCC 3.4.4 warning
+ *
  *    Revision 1.215  2008/12/24 17:06:19  fabiankeil
  *    Keep a thread around to timeout alive connections
  *    even if no new requests are coming in.
@@ -2494,7 +2497,7 @@ static void chat(struct client_state *csp)
    int max_forwarded_connect_retries = csp->config->forwarded_connect_retries;
    const struct forward_spec *fwd;
    struct http_request *http;
-   int len; /* for buffer sizes (and negative error codes) */
+   int len = 0; /* for buffer sizes (and negative error codes) */
 
    /* Function that does the content filtering for the current request */
    filter_function_ptr content_filter = NULL;
