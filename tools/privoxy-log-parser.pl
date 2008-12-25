@@ -8,7 +8,7 @@
 #
 # http://www.fabiankeil.de/sourcecode/privoxy-log-parser/
 #
-# $Id: privoxy-log-parser.pl,v 1.19 2008/12/25 18:38:42 fabiankeil Exp $
+# $Id: privoxy-log-parser.pl,v 1.20 2008/12/25 19:54:28 fabiankeil Exp $
 #
 # TODO:
 #       - LOG_LEVEL_CGI, LOG_LEVEL_ERROR, LOG_LEVEL_WRITE content highlighting
@@ -1488,7 +1488,7 @@ sub handle_loglevel_connect ($) {
         $c = highlight_matched_host($c, '(?<=connection to )[^\s]+');
         $c =~ s@(?<=in slot )(\d+)@$h{'Number'}$1$h{'Standard'}@;
         $c =~ s@(?<=Closing socket )(\d+)@$h{'Number'}$1$h{'Standard'}@;
-        $c =~ s@(?<=Timeout is )(\d+)@$h{'Number'}$1$h{'Standard'}@;
+        $c =~ s@(?<=Timeout is: )(\d+)@$h{'Number'}$1$h{'Standard'}@;
 
     } elsif ($c =~ m/^Waiting for/) {
 
