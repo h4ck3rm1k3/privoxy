@@ -1,6 +1,6 @@
 #ifndef W32RES_H_INCLUDED
 #define W32RES_H_INCLUDED
-#define W32RES_H_VERSION "$Id: w32res.h,v 1.16 2008/11/02 14:37:47 ler762 Exp $"
+#define W32RES_H_VERSION "$Id: w32res.h,v 1.17 2009/01/01 15:09:23 ler762 Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/w32res.h,v $
@@ -34,6 +34,9 @@
  *
  * Revisions   :
  *    $Log: w32res.h,v $
+ *    Revision 1.17  2009/01/01 15:09:23  ler762
+ *    Change the Windows taskbar icon when privoxy is toggled off.
+ *
  *    Revision 1.16  2008/11/02 14:37:47  ler762
  *    commit the part of the patches I've been using that were written by torford and gjmurphy
  *      [ 1824315 ] Minor code cleanup
@@ -151,6 +154,7 @@
 #define IDI_ANIMATED6                     206
 #define IDI_ANIMATED7                     207
 #define IDI_ANIMATED8                     208
+#define IDI_OFF                           209
 
 #define ID_TOGGLE_SHOWWINDOW              4000
 #define ID_HELP_ABOUT                     4001
