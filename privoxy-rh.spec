@@ -1,4 +1,4 @@
-# $Id: privoxy-rh.spec,v 1.60 2008/08/30 12:46:49 fabiankeil Exp $
+# $Id: privoxy-rh.spec,v 1.61 2009/01/13 16:47:34 fabiankeil Exp $
 #
 # Written by and Copyright (C) 2001-2006 the SourceForge
 # Privoxy team. http://www.privoxy.org/
@@ -271,7 +271,6 @@ fi
 # -- morcego
 # WARNING ! WARNING ! WARNING ! WARNING ! WARNING ! WARNING ! WARNING !
 %config(noreplace) %{privoxyconf}/config
-%config %{privoxyconf}/standard.action
 %config(noreplace) %{privoxyconf}/user.action
 %config %{privoxyconf}/default.action
 %config %{privoxyconf}/default.filter
@@ -765,6 +764,9 @@ fi
 	additional "-r @" flag.
 
 # $Log: privoxy-rh.spec,v $
+# Revision 1.61  2009/01/13 16:47:34  fabiankeil
+# The standard.action file is gone.
+#
 # Revision 1.60  2008/08/30 12:46:49  fabiankeil
 # The jarfile directive is gone. Update accordingly.
 #
