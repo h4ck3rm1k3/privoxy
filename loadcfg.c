@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.84 2009/01/14 16:14:36 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.85 2009/01/22 12:06:26 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.84 2009/01/14 16:14:36 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.85  2009/01/22 12:06:26  fabiankeil
+ *    Don't keep connections alive when running single-threaded.
+ *
  *    Revision 1.84  2009/01/14 16:14:36  fabiankeil
  *    Due to the standard.action file removal, the other action
  *    files changed their position in config->actions_file[].
@@ -1725,9 +1728,6 @@ struct configuration_spec * load_config(void)
    fclose(configfp);
 
    set_debug_level(config->debug);
-#ifdef FEATURE_CONNECTION_KEEP_ALIVE
-   set_keep_alive_timeout(keep_alive_timeout);
-#endif
 
    freez(config->logfile);
 
@@ -1743,6 +1743,28 @@ struct configuration_spec * load_config(void)
          disable_logging();
       }
    }
+
+#ifdef FEATURE_CONNECTION_KEEP_ALIVE
+   if (config->feature_flags & RUNTIME_FEATURE_CONNECTION_KEEP_ALIVE)
+   {
+      if (config->multi_threaded)
+      {
+         set_keep_alive_timeout(keep_alive_timeout);
+      }
+      else
+      {
+         /*
+          * While we could use keep-alive without multiple threads
+          * if we didn't bother with enforcing the connection timeout,
+          * that might make Tor users sad, even though they shouldn't
+          * enable the single-threaded option anyway.
+          */
+         config->feature_flags &= ~RUNTIME_FEATURE_CONNECTION_KEEP_ALIVE;
+         log_error(LOG_LEVEL_ERROR,
+            "Config option single-threaded disables connection keep-alive.");
+      }
+   }
+#endif
 
    if (NULL == config->proxy_args)
    {
