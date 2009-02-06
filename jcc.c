@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.220 2009/02/04 18:29:07 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.221 2009/02/06 18:02:58 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,11 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.220 2009/02/04 18:29:07 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.221  2009/02/06 18:02:58  fabiankeil
+ *    When dropping privileges, also give up membership in supplementary
+ *    groups. Thanks to Matthias Drochner for reporting the problem,
+ *    providing the initial patch and testing the final version.
+ *
  *    Revision 1.220  2009/02/04 18:29:07  fabiankeil
  *    Initialize the log module before parsing arguments.
  *    Thanks to Matthias Drochner for the report.
@@ -3862,6 +3867,17 @@ int main(int argc, const char *argv[])
       if (setgid((NULL != grp) ? grp->gr_gid : pw->pw_gid))
       {
          log_error(LOG_LEVEL_FATAL, "Cannot setgid(): Insufficient permissions.");
+      }
+      if (NULL != grp)
+      {
+         if (setgroups(1, &grp->gr_gid))
+         {
+            log_error(LOG_LEVEL_FATAL, "setgroups() failed: %E");
+         }
+      }
+      else if (initgroups(pw->pw_name, pw->pw_gid))
+      {
+         log_error(LOG_LEVEL_FATAL, "initgroups() failed: %E");
       }
       if (do_chroot)
       {
