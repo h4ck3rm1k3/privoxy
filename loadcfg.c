@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.85 2009/01/22 12:06:26 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.86 2009/02/08 19:18:57 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,12 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.85 2009/01/22 12:06:26 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.86  2009/02/08 19:18:57  fabiankeil
+ *    Now that we have the match-all.action file, the other action
+ *    files changed their position in config->actions_file[] back
+ *    to the way it was before standard.action got removed and the
+ *    changes from revision 1.84 have to be reverted.
+ *
  *    Revision 1.85  2009/01/22 12:06:26  fabiankeil
  *    Don't keep connections alive when running single-threaded.
  *
@@ -1839,8 +1845,8 @@ struct configuration_spec * load_config(void)
 /* FIXME: this is a kludge for win32 */
 #if defined(_WIN32) && !defined (_WIN_CONSOLE)
 
-   g_default_actions_file  = config->actions_file[0]; /* FIXME Hope this is default.action */
-   g_user_actions_file = config->actions_file[1]; /* FIXME Hope this is user.action */
+   g_default_actions_file = config->actions_file[1]; /* FIXME Hope this is default.action */
+   g_user_actions_file = config->actions_file[2]; /* FIXME Hope this is user.action */
    g_re_filterfile    = config->re_filterfile[0]; /* FIXME Hope this is default.filter */
 
 #ifdef FEATURE_TRUST
