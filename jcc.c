@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.222 2009/02/08 12:56:51 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.223 2009/02/09 21:21:16 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -6,7 +6,7 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.222 2009/02/08 12:56:51 fabiankeil Exp $"
  * Purpose     :  Main file.  Contains main() method, main loop, and
  *                the main connection-handling function.
  *
- * Copyright   :  Written by and Copyright (C) 2001-2008 the SourceForge
+ * Copyright   :  Written by and Copyright (C) 2001-2009 the SourceForge
  *                Privoxy team. http://www.privoxy.org/
  *
  *                Based on the Internet Junkbuster originally written
@@ -33,6 +33,11 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.222 2009/02/08 12:56:51 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.223  2009/02/09 21:21:16  fabiankeil
+ *    Now that init_log_module() is called earlier, call show_version()
+ *    later on from main() directly so it doesn't get called for --help
+ *    or --version.
+ *
  *    Revision 1.222  2009/02/08 12:56:51  fabiankeil
  *    Call initialize_mutexes() before init_log_module() again.
  *    Broken since r220, might be the cause of Lee's #2579448.
@@ -3584,7 +3589,7 @@ int main(int argc, const char *argv[])
    initialize_mutexes();
 
    /* Enable logging until further notice. */
-   init_log_module(Argv[0]);
+   init_log_module();
 
    /*
     * Parse the command line arguments
@@ -3696,6 +3701,8 @@ int main(int argc, const char *argv[])
       }
 
    } /* -END- while (more arguments) */
+
+   show_version(Argv[0]);
 
 #if defined(unix)
    if ( *configfile != '/' )
