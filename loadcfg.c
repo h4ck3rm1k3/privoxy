@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.86 2009/02/08 19:18:57 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.87 2009/02/15 07:56:13 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.86 2009/02/08 19:18:57 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.87  2009/02/15 07:56:13  fabiankeil
+ *    Increase default socket timeout to 300 seconds.
+ *
  *    Revision 1.86  2009/02/08 19:18:57  fabiankeil
  *    Now that we have the match-all.action file, the other action
  *    files changed their position in config->actions_file[] back
@@ -808,7 +811,7 @@ struct configuration_spec * load_config(void)
    config->usermanual                = strdup(USER_MANUAL_URL);
    config->proxy_args                = strdup("");
    config->forwarded_connect_retries = 0;
-   config->socket_timeout            = 180;
+   config->socket_timeout            = 300; /* XXX: Should be a macro. */
    config->feature_flags            &= ~RUNTIME_FEATURE_CGI_TOGGLE;
    config->feature_flags            &= ~RUNTIME_FEATURE_SPLIT_LARGE_FORMS;
    config->feature_flags            &= ~RUNTIME_FEATURE_ACCEPT_INTERCEPTED_REQUESTS;
