@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.150 2008/12/04 18:12:19 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.151 2009/02/15 14:46:35 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -17,7 +17,7 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.150 2008/12/04 18:12:19 fabiankei
  *                   `client_if_none_match', `get_destination_from_headers',
  *                   `parse_header_time', `decompress_iob' and `server_set_cookie'.
  *
- * Copyright   :  Written by and Copyright (C) 2001-2008 the SourceForge
+ * Copyright   :  Written by and Copyright (C) 2001-2009 the
  *                Privoxy team. http://www.privoxy.org/
  *
  *                Based on the Internet Junkbuster originally written
@@ -44,6 +44,10 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.150 2008/12/04 18:12:19 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.151  2009/02/15 14:46:35  fabiankeil
+ *    Don't let hide-referrer{conditional-*}} pass
+ *    Referer headers without http URLs.
+ *
  *    Revision 1.150  2008/12/04 18:12:19  fabiankeil
  *    Fix some cparser warnings.
  *
@@ -4647,6 +4651,7 @@ static jb_err handle_conditional_hide_referrer_parameter(char **header,
 {
    char *referer = strdup(*header);
    const size_t hostlenght = strlen(host);
+   const char *referer_url = NULL;
 
    if (NULL == referer)
    {
@@ -4655,7 +4660,7 @@ static jb_err handle_conditional_hide_referrer_parameter(char **header,
    }
 
    /* referer begins with 'Referer: http[s]://' */
-   if (hostlenght < (strlen(referer)-17))
+   if ((hostlenght+17) < strlen(referer))
    {
       /*
        * Shorten referer to make sure the referer is blocked
@@ -4664,9 +4669,10 @@ static jb_err handle_conditional_hide_referrer_parameter(char **header,
        */
       referer[hostlenght+17] = '\0';
    }
-   if (NULL == strstr(referer, host))
+   referer_url = strstr(referer, "http://");
+   if ((NULL == referer_url) || (NULL == strstr(referer_url, host)))
    {
-      /* Host has changed */
+      /* Host has changed, Referer is invalid or a https URL. */
       if (parameter_conditional_block)
       {
          log_error(LOG_LEVEL_HEADER, "New host is: %s. Crunching %s!", host, *header);
