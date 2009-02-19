@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.224 2009/02/14 15:32:04 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.225 2009/02/19 18:09:32 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.224 2009/02/14 15:32:04 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.225  2009/02/19 18:09:32  fabiankeil
+ *    Unbreak build without FEATURE_CONNECTION_KEEP_ALIVE.
+ *    Noticed by David.
+ *
  *    Revision 1.224  2009/02/14 15:32:04  fabiankeil
  *    Add the request URL to the timeout message in chat().
  *    Suggested by Lee.
@@ -2172,7 +2176,37 @@ static int server_response_is_complete(struct client_state *csp, size_t content_
    return (content_length_known && ((0 == csp->expected_content_length)
             || (csp->expected_content_length <= content_length)));
 }
+
+
+/*********************************************************************
+ *
+ * Function    :  wait_for_alive_connections
+ *
+ * Description :  Waits for alive connections to timeout.
+ *
+ * Parameters  :  N/A
+ *
+ * Returns     :  N/A
+ *
+ *********************************************************************/
+static void wait_for_alive_connections()
+{
+   int connections_alive = close_unusable_connections();
+
+   while (0 < connections_alive)
+   {
+      log_error(LOG_LEVEL_CONNECT,
+         "Waiting for %d connections to timeout.",
+         connections_alive);
+      sleep(60);
+      connections_alive = close_unusable_connections();
+   }
+
+   log_error(LOG_LEVEL_CONNECT, "No connections to wait for left.");
+
+}
 #endif /* FEATURE_CONNECTION_KEEP_ALIVE */
+
 
 /*********************************************************************
  *
@@ -3245,6 +3279,7 @@ static void chat(struct client_state *csp)
       csp->content_length = byte_count;
    }
 
+#ifdef FEATURE_CONNECTION_KEEP_ALIVE
    if ((csp->flags & CSP_FLAG_CONTENT_LENGTH_SET)
       && (csp->expected_content_length != byte_count))
    {
@@ -3253,39 +3288,12 @@ static void chat(struct client_state *csp)
          byte_count, csp->expected_content_length);
       mark_server_socket_tainted(csp);
    }
+#endif
 
    log_error(LOG_LEVEL_CLF, "%s - - [%T] \"%s\" 200 %d",
       csp->ip_addr_str, http->ocmd, csp->content_length);
 }
 
-
-/*********************************************************************
- *
- * Function    :  wait_for_alive_connections
- *
- * Description :  Waits for alive connections to timeout.
- *
- * Parameters  :  N/A
- *
- * Returns     :  N/A
- *
- *********************************************************************/
-static void wait_for_alive_connections()
-{
-   int connections_alive = close_unusable_connections();
-
-   while (0 < connections_alive)
-   {
-      log_error(LOG_LEVEL_CONNECT,
-         "Waiting for %d connections to timeout.",
-         connections_alive);
-      sleep(60);
-      connections_alive = close_unusable_connections();
-   }
-
-   log_error(LOG_LEVEL_CONNECT, "No connections to wait for left.");
-
-}
 
 /*********************************************************************
  *
