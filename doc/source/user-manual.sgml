@@ -34,7 +34,7 @@
                 This file belongs into
                 ijbswa.sourceforge.net:/home/groups/i/ij/ijbswa/htdocs/
 
- $Id: user-manual.sgml,v 2.100 2009/02/19 17:14:11 fabiankeil Exp $
+ $Id: user-manual.sgml,v 2.101 2009/02/25 19:01:56 fabiankeil Exp $
 
  Copyright (C) 2001-2009 Privoxy Developers http://www.privoxy.org/
  See LICENSE.
@@ -60,7 +60,7 @@
  </subscript>
 </pubdate>
 
-<pubdate>$Id: user-manual.sgml,v 2.100 2009/02/19 17:14:11 fabiankeil Exp $</pubdate>
+<pubdate>$Id: user-manual.sgml,v 2.101 2009/02/25 19:01:56 fabiankeil Exp $</pubdate>
 
 <!--
 
@@ -5231,7 +5231,7 @@ new action
     <quote>reset-to-request-time</quote> overwrites the value of the
     <quote>Last-Modified:</quote> header with the current time. You could use
     this option together with
-    <literal><link linkend="hide-if-modified-since">hided-if-modified-since</link></literal>
+    <literal><link linkend="hide-if-modified-since">hide-if-modified-since</link></literal>
     to further customize your random range.
    </para>
    <para>
@@ -8513,6 +8513,9 @@ In file: user.action <guibutton>[ View ]</guibutton> <guibutton>[ Edit ]</guibut
  USA
 
  $Log: user-manual.sgml,v $
+ Revision 2.101  2009/02/25 19:01:56  fabiankeil
+ Fix typo.
+
  Revision 2.100  2009/02/19 17:14:11  fabiankeil
  - Copy the release cycle description from announce.txt into
    the "What's New" section.
