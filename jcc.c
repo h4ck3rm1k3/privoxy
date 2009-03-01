@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.225 2009/02/19 18:09:32 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.226 2009/03/01 18:28:24 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.225 2009/02/19 18:09:32 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.226  2009/03/01 18:28:24  fabiankeil
+ *    Help clang understand that we aren't dereferencing
+ *    NULL pointers here.
+ *
  *    Revision 1.225  2009/02/19 18:09:32  fabiankeil
  *    Unbreak build without FEATURE_CONNECTION_KEEP_ALIVE.
  *    Noticed by David.
@@ -2595,6 +2599,7 @@ static void chat(struct client_state *csp)
    {
       log_error(LOG_LEVEL_FATAL, "gateway spec is NULL!?!?  This can't happen!");
       /* Never get here - LOG_LEVEL_FATAL causes program exit */
+      return;
    }
 
    /*

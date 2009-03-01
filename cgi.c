@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.114 2008/12/04 18:15:04 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.115 2009/03/01 18:28:23 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -38,6 +38,10 @@ const char cgi_rcs[] = "$Id: cgi.c,v 1.114 2008/12/04 18:15:04 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: cgi.c,v $
+ *    Revision 1.115  2009/03/01 18:28:23  fabiankeil
+ *    Help clang understand that we aren't dereferencing
+ *    NULL pointers here.
+ *
  *    Revision 1.114  2008/12/04 18:15:04  fabiankeil
  *    Fix some cparser warnings.
  *
@@ -1504,6 +1508,7 @@ struct http_response *error_response(struct client_state *csp,
        * XXX: While the template is called forwarding-failed,
        * it currently only handles socks forwarding failures.
        */
+      assert(fwd != NULL);
       assert(fwd->type != SOCKS_NONE);
 
       /*
