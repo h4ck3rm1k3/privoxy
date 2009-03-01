@@ -1,4 +1,4 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.63 2008/12/04 18:15:38 fabiankeil Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.64 2009/03/01 18:43:09 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
@@ -42,6 +42,9 @@ const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.63 2008/12/04 18:15:38 fabiankeil
  *
  * Revisions   :
  *    $Log: cgiedit.c,v $
+ *    Revision 1.64  2009/03/01 18:43:09  fabiankeil
+ *    Fix cparser warnings.
+ *
  *    Revision 1.63  2008/12/04 18:15:38  fabiankeil
  *    Fix some cparser warnings.
  *
@@ -2640,6 +2643,7 @@ jb_err cgi_edit_actions(struct client_state *csp,
                         struct http_response *rsp,
                         const struct map *parameters)
 {
+   (void)parameters;
 
    if (0 == (csp->config->feature_flags & RUNTIME_FEATURE_CGI_EDIT_ACTIONS))
    {
