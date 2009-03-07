@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.89 2009/03/01 18:46:33 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.90 2009/03/07 17:58:02 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,11 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.89 2009/03/01 18:46:33 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.90  2009/03/07 17:58:02  fabiankeil
+ *    Fix two mingw32-only buffer overflows. Note that triggering
+ *    them requires control over the configuration file in which
+ *    case all bets are off anyway.
+ *
  *    Revision 1.89  2009/03/01 18:46:33  fabiankeil
  *    - Help clang understand that we aren't
  *      dereferencing NULL pointers here.
@@ -1649,10 +1654,16 @@ struct configuration_spec * load_config(void)
             break;
 
 /* *************************************************************************
- * log-font-name fontnane
+ * log-font-name fontname
  * *************************************************************************/
          case hash_log_font_name :
-            strcpy( g_szFontFaceName, arg );
+            if (strlcpy(g_szFontFaceName, arg,
+                   sizeof(g_szFontFaceName)) >= sizeof(g_szFontFaceName))
+            {
+               log_error(LOG_LEVEL_FATAL,
+                  "log-font-name argument '%s' is longer than %u characters.",
+                  arg, sizeof(g_szFontFaceName)-1);
+            }
             break;
 
 /* *************************************************************************
