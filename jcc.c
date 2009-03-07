@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.228 2009/03/06 20:30:13 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.229 2009/03/07 11:17:01 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.228 2009/03/06 20:30:13 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.229  2009/03/07 11:17:01  fabiankeil
+ *    Fix compiler warning.
+ *
  *    Revision 1.228  2009/03/06 20:30:13  fabiankeil
  *    Log unsigned values as such.
  *
@@ -2163,7 +2166,7 @@ static jb_err change_request_destination(struct client_state *csp)
  *********************************************************************/
 static int server_response_is_complete(struct client_state *csp, size_t content_length)
 {
-   int content_length_known = (csp->flags & CSP_FLAG_CONTENT_LENGTH_SET);
+   int content_length_known = !!(csp->flags & CSP_FLAG_CONTENT_LENGTH_SET);
 
    if (!strcmpic(csp->http->gpc, "HEAD"))
    {
