@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.87 2009/03/01 18:28:24 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.88 2009/03/07 11:34:36 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,9 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.87 2009/03/01 18:28:24 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.88  2009/03/07 11:34:36  fabiankeil
+ *    Omit timestamp and thread id in the mingw32 message box.
+ *
  *    Revision 1.87  2009/03/01 18:28:24  fabiankeil
  *    Help clang understand that we aren't dereferencing
  *    NULL pointers here.
@@ -517,8 +520,8 @@ static inline void unlock_loginit() {}
  * Function    :  fatal_error
  *
  * Description :  Displays a fatal error to standard error (or, on 
- *                a WIN32 GUI, to a dialog box), and exits
- *                JunkBuster with status code 1.
+ *                a WIN32 GUI, to a dialog box), and exits Privoxy
+ *                with status code 1.
  *
  * Parameters  :
  *          1  :  error_message = The error message to display.
@@ -526,10 +529,17 @@ static inline void unlock_loginit() {}
  * Returns     :  Does not return.
  *
  *********************************************************************/
-static void fatal_error(const char * error_message)
+static void fatal_error(const char *error_message)
 {
 #if defined(_WIN32) && !defined(_WIN_CONSOLE)
-   MessageBox(g_hwndLogFrame, error_message, "Privoxy Error", 
+   /* Skip timestamp and thread id for the message box. */
+   const char *box_message = strstr(error_message, "Fatal error");
+   if (NULL == box_message)
+   {
+      /* Shouldn't happen but ... */
+      box_message = error_message;
+   }
+   MessageBox(g_hwndLogFrame, box_message, "Privoxy Error", 
       MB_OK | MB_ICONERROR | MB_TASKMODAL | MB_SETFOREGROUND | MB_TOPMOST);  
 
    /* Cleanup - remove taskbar icon etc. */
