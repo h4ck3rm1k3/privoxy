@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.127 2008/12/20 14:53:55 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.128 2009/03/07 13:09:17 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,12 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.128  2009/03/07 13:09:17  fabiankeil
+ *    Change csp->expected_content and_csp->expected_content_length from
+ *    size_t to unsigned long long to reduce the likelihood of integer
+ *    overflows that would let us close the connection prematurely.
+ *    Bug found while investigating #2669131, reported by cyberpatrol.
+ *
  *    Revision 1.127  2008/12/20 14:53:55  fabiankeil
  *    Add config option socket-timeout to control the time
  *    Privoxy waits for data to arrive on a socket. Useful
@@ -1448,14 +1454,14 @@ struct client_state
    struct file_list *rlist[MAX_AF_FILES];
 
    /** Length after content modification. */
-   size_t content_length;
+   unsigned long long content_length;
 
 #ifdef FEATURE_CONNECTION_KEEP_ALIVE
    /** Expected length of content after which we
     * should stop reading from the server socket.
     */
    /* XXX: is this the right location? */
-   size_t expected_content_length;
+   unsigned long long expected_content_length;
 #endif /* def FEATURE_CONNECTION_KEEP_ALIVE */
 
 #ifdef FEATURE_TRUST
