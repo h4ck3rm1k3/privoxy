@@ -1,4 +1,4 @@
-const char errlog_rcs[] = "$Id: errlog.c,v 1.88 2009/03/07 11:34:36 fabiankeil Exp $";
+const char errlog_rcs[] = "$Id: errlog.c,v 1.89 2009/03/07 12:56:12 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/errlog.c,v $
@@ -33,6 +33,9 @@ const char errlog_rcs[] = "$Id: errlog.c,v 1.88 2009/03/07 11:34:36 fabiankeil E
  *
  * Revisions   :
  *    $Log: errlog.c,v $
+ *    Revision 1.89  2009/03/07 12:56:12  fabiankeil
+ *    Add log_error() support for unsigned long long (%lld).
+ *
  *    Revision 1.88  2009/03/07 11:34:36  fabiankeil
  *    Omit timestamp and thread id in the mingw32 message box.
  *
@@ -1132,7 +1135,7 @@ void log_error(int loglevel, const char *fmt, ...)
             snprintf(tempbuf, sizeof(tempbuf), "%u", uval);
             break;
          case 'l':
-            /* this is a modifier that must be followed by u or d */
+            /* this is a modifier that must be followed by u, lu, or d */
             ch = *src++;
             if (ch == 'd')
             {
@@ -1143,6 +1146,12 @@ void log_error(int loglevel, const char *fmt, ...)
             {
                ulval = va_arg( ap, unsigned long );
                snprintf(tempbuf, sizeof(tempbuf), "%lu", ulval);
+            }
+            else if ((ch == 'l') && (*src == 'u'))
+            {
+               unsigned long long lluval = va_arg(ap, unsigned long long);
+               snprintf(tempbuf, sizeof(tempbuf), "%llu", lluval);
+               ch = *src++;
             }
             else
             {
