@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.231 2009/03/08 14:19:23 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.232 2009/03/08 19:29:16 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,11 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.231 2009/03/08 14:19:23 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.232  2009/03/08 19:29:16  fabiankeil
+ *    Reinitialize the timeout structure every time before passing
+ *    it to select(). Apparently some implementations mess with it.
+ *    Probably fixes #2669131 reported by cyberpatrol.
+ *
  *    Revision 1.231  2009/03/08 14:19:23  fabiankeil
  *    Fix justified (but harmless) compiler warnings
  *    on platforms where sizeof(int) < sizeof(long).
@@ -2600,8 +2605,6 @@ static void chat(struct client_state *csp)
    struct timeval timeout;
 
    memset(buf, 0, sizeof(buf));
-   memset(&timeout, 0, sizeof(timeout));
-   timeout.tv_sec = csp->config->socket_timeout;
 
    http = csp->http;
 
@@ -2843,6 +2846,8 @@ static void chat(struct client_state *csp)
       }
 #endif  /* FEATURE_CONNECTION_KEEP_ALIVE */
 
+      timeout.tv_sec = csp->config->socket_timeout;
+      timeout.tv_usec = 0;
       n = select((int)maxfd+1, &rfds, NULL, NULL, &timeout);
 
       if (n == 0)
