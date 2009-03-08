@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.230 2009/03/07 13:09:17 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.231 2009/03/08 14:19:23 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,10 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.230 2009/03/07 13:09:17 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.231  2009/03/08 14:19:23  fabiankeil
+ *    Fix justified (but harmless) compiler warnings
+ *    on platforms where sizeof(int) < sizeof(long).
+ *
  *    Revision 1.230  2009/03/07 13:09:17  fabiankeil
  *    Change csp->expected_content and_csp->expected_content_length from
  *    size_t to unsigned long long to reduce the likelihood of integer
@@ -3153,7 +3157,7 @@ static void chat(struct client_state *csp)
                    * Since we have to wait for more from the server before
                    * we can parse the headers we just continue here.
                    */
-                  int header_offset = csp->iob->cur - header_start;
+                  long header_offset = csp->iob->cur - header_start;
                   assert(csp->iob->cur >= header_start);
                   byte_count += (unsigned long long)(len - header_offset);
                   log_error(LOG_LEVEL_CONNECT, "Continuing buffering headers. "
@@ -3265,7 +3269,7 @@ static void chat(struct client_state *csp)
                 * XXX: the header lenght should probably
                 * be calculated by get_server_headers().
                 */
-               int header_length = csp->iob->cur - header_start;
+               long header_length = csp->iob->cur - header_start;
                assert(csp->iob->cur > header_start);
                byte_count += (unsigned long long)(len - header_length);
             }
