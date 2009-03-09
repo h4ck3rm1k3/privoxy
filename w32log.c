@@ -1,4 +1,4 @@
-const char w32log_rcs[] = "$Id: w32log.c,v 1.31 2009/03/07 17:58:02 fabiankeil Exp $";
+const char w32log_rcs[] = "$Id: w32log.c,v 1.32 2009/03/09 18:32:48 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/w32log.c,v $
@@ -32,6 +32,10 @@ const char w32log_rcs[] = "$Id: w32log.c,v 1.31 2009/03/07 17:58:02 fabiankeil E
  *
  * Revisions   :
  *    $Log: w32log.c,v $
+ *    Revision 1.32  2009/03/09 18:32:48  fabiankeil
+ *    Use the Privoxy icon in the alt+tab window.
+ *    Patch submitted by Burberry in #2674342.
+ *
  *    Revision 1.31  2009/03/07 17:58:02  fabiankeil
  *    Fix two mingw32-only buffer overflows. Note that triggering
  *    them requires control over the configuration file in which
@@ -851,7 +855,7 @@ HWND CreateHiddenLogOwnerWindow(HINSTANCE hInstance)
    wc.cbClsExtra     = 0;
    wc.cbWndExtra     = 0;
    wc.hInstance      = hInstance;
-   wc.hIcon          = 0;
+   wc.hIcon          = g_hiconApp;
    wc.hCursor        = 0;
    wc.hbrBackground  = 0;
    wc.lpszMenuName   = 0;
