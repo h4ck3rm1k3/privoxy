@@ -1,4 +1,4 @@
-const char parsers_rcs[] = "$Id: parsers.c,v 1.153 2009/03/07 13:09:17 fabiankeil Exp $";
+const char parsers_rcs[] = "$Id: parsers.c,v 1.154 2009/03/13 14:10:07 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/parsers.c,v $
@@ -44,6 +44,9 @@ const char parsers_rcs[] = "$Id: parsers.c,v 1.153 2009/03/07 13:09:17 fabiankei
  *
  * Revisions   :
  *    $Log: parsers.c,v $
+ *    Revision 1.154  2009/03/13 14:10:07  fabiankeil
+ *    Fix some more harmless warnings on amd64.
+ *
  *    Revision 1.153  2009/03/07 13:09:17  fabiankeil
  *    Change csp->expected_content and_csp->expected_content_length from
  *    size_t to unsigned long long to reduce the likelihood of integer
@@ -1089,9 +1092,9 @@ static const add_header_func_ptr add_server_headers[] = {
  *                file, the results are not portable.
  *
  *********************************************************************/
-int flush_socket(jb_socket fd, struct iob *iob)
+long flush_socket(jb_socket fd, struct iob *iob)
 {
-   int len = iob->eod - iob->cur;
+   long len = iob->eod - iob->cur;
 
    if (len <= 0)
    {
@@ -1124,7 +1127,7 @@ int flush_socket(jb_socket fd, struct iob *iob)
  *                or buffer limit reached.
  *
  *********************************************************************/
-jb_err add_to_iob(struct client_state *csp, char *buf, int n)
+jb_err add_to_iob(struct client_state *csp, char *buf, long n)
 {
    struct iob *iob = csp->iob;
    size_t used, offset, need, want;

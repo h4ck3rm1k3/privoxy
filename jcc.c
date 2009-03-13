@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.232 2009/03/08 19:29:16 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.233 2009/03/13 14:10:07 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.232 2009/03/08 19:29:16 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.233  2009/03/13 14:10:07  fabiankeil
+ *    Fix some more harmless warnings on amd64.
+ *
  *    Revision 1.232  2009/03/08 19:29:16  fabiankeil
  *    Reinitialize the timeout structure every time before passing
  *    it to select(). Apparently some implementations mess with it.
@@ -2595,7 +2598,7 @@ static void chat(struct client_state *csp)
    int max_forwarded_connect_retries = csp->config->forwarded_connect_retries;
    const struct forward_spec *fwd;
    struct http_request *http;
-   int len = 0; /* for buffer sizes (and negative error codes) */
+   long len = 0; /* for buffer sizes (and negative error codes) */
 
    /* Function that does the content filtering for the current request */
    filter_function_ptr content_filter = NULL;
@@ -3069,7 +3072,7 @@ static void chat(struct client_state *csp)
                if (add_to_iob(csp, buf, len))
                {
                   size_t hdrlen;
-                  int flushed;
+                  long flushed;
 
                   log_error(LOG_LEVEL_INFO,
                      "Flushing header and buffers. Stepping back from filtering.");
