@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.92 2009/03/18 20:43:19 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.93 2009/03/18 21:46:26 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.92 2009/03/18 20:43:19 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.93  2009/03/18 21:46:26  fabiankeil
+ *    Revert the last commit as there's a better way.
+ *
  *    Revision 1.92  2009/03/18 20:43:19  fabiankeil
  *    Don't enable LOG_LEVEL_INFO by default and don't apply the user's
  *    debug settings until the logfile has been opened (if there is one).
@@ -1780,6 +1783,8 @@ struct configuration_spec * load_config(void)
 
    fclose(configfp);
 
+   set_debug_level(config->debug);
+
    freez(config->logfile);
 
    if (!no_daemon)
@@ -1794,8 +1799,6 @@ struct configuration_spec * load_config(void)
          disable_logging();
       }
    }
-
-   set_debug_level(config->debug);
 
 #ifdef FEATURE_CONNECTION_KEEP_ALIVE
    if (config->feature_flags & RUNTIME_FEATURE_CONNECTION_KEEP_ALIVE)
