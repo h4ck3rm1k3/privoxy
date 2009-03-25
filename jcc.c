@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.235 2009/03/18 21:01:20 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.236 2009/03/25 17:30:24 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,12 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.235 2009/03/18 21:01:20 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.236  2009/03/25 17:30:24  fabiankeil
+ *    In serve(), keep the client socket open until we marked the
+ *    server socket as unused. This should increase the chances
+ *    that we reuse the connection for the client's next request
+ *    to the same destination.
+ *
  *    Revision 1.235  2009/03/18 21:01:20  fabiankeil
  *    Comment fix. Spotted by Roland.
  *
@@ -3342,7 +3348,8 @@ static void chat(struct client_state *csp)
  * Function    :  serve
  *
  * Description :  This is little more than chat.  We only "serve" to
- *                to close any socket that chat may have opened.
+ *                to close (or remember) any socket that chat may have
+ *                opened.
  *
  * Parameters  :
  *          1  :  csp = Current client state (buffers, headers, etc...)
@@ -3357,7 +3364,6 @@ static void serve(struct client_state *csp)
 #endif /* def AMIGA */
 {
    chat(csp);
-   close_socket(csp->cfd);
 
    if (csp->sfd != JB_INVALID_SOCKET)
    {
@@ -3368,6 +3374,8 @@ static void serve(struct client_state *csp)
        && (csp->flags & CSP_FLAG_SERVER_CONNECTION_KEEP_ALIVE))
       {
          remember_connection(csp->sfd, csp->http, forward_url(csp, csp->http));
+         close_socket(csp->cfd);
+         csp->cfd = JB_INVALID_SOCKET;
          privoxy_mutex_lock(&connection_reuse_mutex);
          if (!monitor_thread_running)
          {
@@ -3387,6 +3395,11 @@ static void serve(struct client_state *csp)
 #else
       close_socket(csp->sfd);
 #endif /* def FEATURE_CONNECTION_KEEP_ALIVE */
+   }
+
+   if (csp->cfd != JB_INVALID_SOCKET)
+   {
+      close_socket(csp->cfd);
    }
 
    csp->flags &= ~CSP_FLAG_ACTIVE;
