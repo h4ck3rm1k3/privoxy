@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.237 2009/03/27 14:32:04 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.238 2009/03/27 14:42:30 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.237 2009/03/27 14:32:04 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.238  2009/03/27 14:42:30  fabiankeil
+ *    Correct the status code for CONNECTION_TIMEOUT_RESPONSE.
+ *
  *    Revision 1.237  2009/03/27 14:32:04  fabiankeil
  *    If spawning a child in listen_loop() fails, send a real
  *    HTTP response to the client and continue listening for
@@ -1488,7 +1491,7 @@ static const char TOO_MANY_CONNECTIONS_RESPONSE[] =
 
 /* XXX: should be a template */
 static const char CONNECTION_TIMEOUT_RESPONSE[] =
-   "HTTP/1.0 502 Connection timeout\r\n"
+   "HTTP/1.0 504 Connection timeout\r\n"
    "Proxy-Agent: Privoxy " VERSION "\r\n"
    "Content-Type: text/plain\r\n"
    "Connection: close\r\n\r\n"
