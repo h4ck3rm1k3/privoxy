@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.238 2009/03/27 14:42:30 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.239 2009/04/07 11:43:50 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,11 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.238 2009/03/27 14:42:30 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.239  2009/04/07 11:43:50  fabiankeil
+ *    If the server rudely resets the connection directly after sending the
+ *    headers, pass the mess to the client instead of sending an incorrect
+ *    connect-failed message. Fixes #2698674 reported by mybugaccount.
+ *
  *    Revision 1.238  2009/03/27 14:42:30  fabiankeil
  *    Correct the status code for CONNECTION_TIMEOUT_RESPONSE.
  *
@@ -2963,14 +2968,11 @@ static void chat(struct client_state *csp)
                mark_server_socket_tainted(csp);
                return;
             }
-
-            rsp = error_response(csp, "connect-failed", errno);
-            if (rsp)
-            {
-               send_crunch_response(csp, rsp);
-            }
-
-            return;
+            /*
+             * XXX: Consider handling the cases above the same.
+             */
+            mark_server_socket_tainted(csp);
+            len = 0;
          }
 
 #ifdef FEATURE_CONNECTION_KEEP_ALIVE
