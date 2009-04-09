@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.239 2009/04/07 11:43:50 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.240 2009/04/09 10:12:54 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,11 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.239 2009/04/07 11:43:50 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.240  2009/04/09 10:12:54  fabiankeil
+ *    Fix two cases in which an invalid server response would result
+ *    in the client connection being closed without sending an error
+ *    message first.
+ *
  *    Revision 1.239  2009/04/07 11:43:50  fabiankeil
  *    If the server rudely resets the connection directly after sending the
  *    headers, pass the mess to the client instead of sending an incorrect
@@ -3185,9 +3190,14 @@ static void chat(struct client_state *csp)
                    * The header is incomplete and there isn't anything
                    * we can do about it.
                    */
-                  log_error(LOG_LEVEL_INFO,
-                     "MS IIS5 hack didn't produce valid headers.");
-                  break;
+                  log_error(LOG_LEVEL_ERROR, "Invalid server headers. "
+                     "Applying the MS IIS5 hack didn't help.");
+                  log_error(LOG_LEVEL_CLF,
+                     "%s - - [%T] \"%s\" 502 0", csp->ip_addr_str, http->cmd);
+                  write_socket(csp->cfd, INVALID_SERVER_HEADERS_RESPONSE,
+                     strlen(INVALID_SERVER_HEADERS_RESPONSE));
+                  mark_server_socket_tainted(csp);
+                  return;
                }
                else
                {
@@ -3324,9 +3334,15 @@ static void chat(struct client_state *csp)
              */
             if (ms_iis5_hack)
             {
-               log_error(LOG_LEVEL_INFO,
-                  "Closed server connection detected with MS IIS5 hack enabled.");
-               break;
+               log_error(LOG_LEVEL_ERROR,
+                  "Closed server connection detected. "
+                  "Applying the MS IIS5 hack didn't help.");
+               log_error(LOG_LEVEL_CLF,
+                  "%s - - [%T] \"%s\" 502 0", csp->ip_addr_str, http->cmd);
+               write_socket(csp->cfd, INVALID_SERVER_HEADERS_RESPONSE,
+                  strlen(INVALID_SERVER_HEADERS_RESPONSE));
+               mark_server_socket_tainted(csp);
+               return;
             }
          }
          continue;
