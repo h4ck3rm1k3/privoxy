@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.240 2009/04/09 10:12:54 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.241 2009/04/11 10:37:23 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.240 2009/04/09 10:12:54 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.241  2009/04/11 10:37:23  fabiankeil
+ *    When dropping connections due to ACL, don't leak csp->ip_addr_str.
+ *
  *    Revision 1.240  2009/04/09 10:12:54  fabiankeil
  *    Fix two cases in which an invalid server response would result
  *    in the client connection being closed without sending an error
@@ -4286,6 +4289,7 @@ static void listen_loop(void)
       {
          log_error(LOG_LEVEL_CONNECT, "Connection from %s dropped due to ACL", csp->ip_addr_str);
          close_socket(csp->cfd);
+         freez(csp->ip_addr_str);
          freez(csp);
          continue;
       }
