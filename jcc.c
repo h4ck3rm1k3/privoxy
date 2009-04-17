@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.242 2009/04/11 10:44:47 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.243 2009/04/17 11:27:49 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.242 2009/04/11 10:44:47 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.243  2009/04/17 11:27:49  fabiankeil
+ *    Petr Pisar's privoxy-3.0.12-ipv6-3.diff.
+ *
  *    Revision 1.242  2009/04/11 10:44:47  fabiankeil
  *    Update a comment. We're not in Kansas anymore.
  *
@@ -2747,7 +2750,7 @@ static void chat(struct client_state *csp)
 
    if (fwd->forward_host)
    {
-      log_error(LOG_LEVEL_CONNECT, "via %s:%d to: %s",
+      log_error(LOG_LEVEL_CONNECT, "via [%s]:%d to: %s",
          fwd->forward_host, fwd->forward_port, http->hostport);
    }
    else
@@ -4536,4 +4539,6 @@ static void listen_loop(void)
   Local Variables:
   tab-width: 3
   end:
+
+  vim:softtabstop=3 shiftwidth=3
 */
