@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.114 2009/04/17 11:27:49 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.115 2009/04/17 11:29:18 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -40,6 +40,9 @@ const char filters_rcs[] = "$Id: filters.c,v 1.114 2009/04/17 11:27:49 fabiankei
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.115  2009/04/17 11:29:18  fabiankeil
+ *    Compile fix for BSD libc.
+ *
  *    Revision 1.114  2009/04/17 11:27:49  fabiankeil
  *    Petr Pisar's privoxy-3.0.12-ipv6-3.diff.
  *
@@ -825,14 +828,14 @@ int match_sockaddr(const struct sockaddr_storage *network,
 
    /* Check for family */
    if (network->ss_family == AF_INET && address->ss_family == AF_INET6 &&
-         IN6_IS_ADDR_V4MAPPED(address_addr))
+         IN6_IS_ADDR_V4MAPPED((struct in6_addr *)address_addr))
    {
       /* Map AF_INET6 V4MAPPED address into AF_INET */
       address_addr += 12;
       addr_len = 4;
    }
    else if (network->ss_family == AF_INET6 && address->ss_family == AF_INET &&
-         IN6_IS_ADDR_V4MAPPED(network_addr))
+         IN6_IS_ADDR_V4MAPPED((struct in6_addr *)network_addr))
    {
       /* Map AF_INET6 V4MAPPED network into AF_INET */
       network_addr += 12;
