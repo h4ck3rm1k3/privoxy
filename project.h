@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.131 2009/04/17 11:34:35 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.132 2009/04/17 11:45:19 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -37,6 +37,10 @@
  *
  * Revisions   :
  *    $Log: project.h,v $
+ *    Revision 1.132  2009/04/17 11:45:19  fabiankeil
+ *    Replace HAVE_GETADDRINFO and HAVE_GETNAMEINFO macros
+ *    with HAVE_RFC2553 macro. Original patch by Petr Pisar.
+ *
  *    Revision 1.131  2009/04/17 11:34:35  fabiankeil
  *    Style cosmetics for the IPv6 code.
  *
@@ -716,7 +720,7 @@
 /* Needed for pcre choice */
 #include "config.h"
 
-#ifdef HAVE_GETADDRINFO
+#ifdef HAVE_RFC2553
 /* Need for struct sockaddr_storage */
 #include <sys/socket.h>
 #endif
@@ -1430,7 +1434,7 @@ struct client_state
    /** Client PC's IP address, as reported by the accept() function.
        As a string. */
    char *ip_addr_str;
-#ifdef HAVE_GETADDRINFO
+#ifdef HAVE_RFC2553
    /** Client PC's TCP address, as reported by the accept() function.
        As a sockaddr. */
    struct sockaddr_storage tcp_addr;
@@ -1438,7 +1442,7 @@ struct client_state
    /** Client PC's IP address, as reported by the accept() function.
        As a number. */
    unsigned long ip_addr_long;
-#endif /* def HAVE_GETADDRINFO */
+#endif /* def HAVE_RFC2553 */
 
    /** The URL that was requested */
    struct http_request http[1];
@@ -1672,14 +1676,14 @@ struct re_filterfile_spec
  */
 struct access_control_addr
 {
-#ifdef HAVE_GETADDRINFO
+#ifdef HAVE_RFC2553
    struct sockaddr_storage addr; /* <The TCP address in network order. */
    struct sockaddr_storage mask; /* <The TCP mask in network order. */
 #else
    unsigned long addr;  /**< The IP address as an integer. */
    unsigned long mask;  /**< The network mask as an integer. */
    unsigned long port;  /**< The port number. */
-#endif /* HAVE_GETADDRINFO */
+#endif /* HAVE_RFC2553 */
 };
 
 /**
@@ -1691,7 +1695,7 @@ struct access_control_list
 {
    struct access_control_addr src[1];  /**< Client IP address */
    struct access_control_addr dst[1];  /**< Website or parent proxy IP address */
-#ifdef HAVE_GETADDRINFO
+#ifdef HAVE_RFC2553
    int wildcard_dst;                   /** < dst address is wildcard */
 #endif
 

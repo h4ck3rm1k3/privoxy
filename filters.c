@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.119 2009/04/17 11:38:28 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.120 2009/04/17 11:45:19 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -40,6 +40,10 @@ const char filters_rcs[] = "$Id: filters.c,v 1.119 2009/04/17 11:38:28 fabiankei
  *
  * Revisions   :
  *    $Log: filters.c,v $
+ *    Revision 1.120  2009/04/17 11:45:19  fabiankeil
+ *    Replace HAVE_GETADDRINFO and HAVE_GETNAMEINFO macros
+ *    with HAVE_RFC2553 macro. Original patch by Petr Pisar.
+ *
  *    Revision 1.119  2009/04/17 11:38:28  fabiankeil
  *    Add and use parse_forwarder_address() to reduce code duplication.
  *
@@ -683,10 +687,10 @@ const char filters_rcs[] = "$Id: filters.c,v 1.119 2009/04/17 11:38:28 fabiankei
 #include <string.h>
 #include <assert.h>
 
-#ifdef HAVE_GETADDRINFO
+#ifdef HAVE_RFC2553
 #include <netdb.h>
 #include <sys/socket.h>
-#endif /* def HAVE_GETADDRINFO */
+#endif /* def HAVE_RFC2553 */
 
 #ifndef _WIN32
 #ifndef __OS2__
@@ -735,7 +739,7 @@ static jb_err remove_chunked_transfer_coding(char *buffer, size_t *size);
 static jb_err prepare_for_filtering(struct client_state *csp);
 
 #ifdef FEATURE_ACL
-#ifdef HAVE_GETADDRINFO
+#ifdef HAVE_RFC2553
 /*********************************************************************
  *
  * Function    :  sockaddr_storage_to_ip
@@ -877,7 +881,7 @@ int match_sockaddr(const struct sockaddr_storage *network,
 
    return 1;
 }
-#endif /* def HAVE_GETADDRINFO */
+#endif /* def HAVE_RFC2553 */
 
 
 /*********************************************************************
@@ -910,7 +914,7 @@ int block_acl(const struct access_control_addr *dst, const struct client_state *
    while (acl != NULL)
    {
       if (
-#ifdef HAVE_GETADDRINFO
+#ifdef HAVE_RFC2553
             match_sockaddr(&acl->src->addr, &acl->src->mask, &csp->tcp_addr)
 #else
             (csp->ip_addr_long & acl->src->mask) == acl->src->addr
@@ -926,7 +930,7 @@ int block_acl(const struct access_control_addr *dst, const struct client_state *
             }
          }
          else if (
-#ifdef HAVE_GETADDRINFO
+#ifdef HAVE_RFC2553
                /*
                 * XXX: An undefined acl->dst is full of zeros and should be
                 * considered a wildcard address. sockaddr_storage_to_ip()
@@ -977,18 +981,18 @@ int block_acl(const struct access_control_addr *dst, const struct client_state *
 int acl_addr(const char *aspec, struct access_control_addr *aca)
 {
    int i, masklength;
-#ifdef HAVE_GETADDRINFO
+#ifdef HAVE_RFC2553
    struct addrinfo hints, *result;
    uint8_t *mask_data;
    in_port_t *mask_port;
    unsigned int addr_len;
 #else
    long port;
-#endif /* def HAVE_GETADDRINFO */
+#endif /* def HAVE_RFC2553 */
    char *p;
    char *acl_spec = NULL;
 
-#ifdef HAVE_GETADDRINFO
+#ifdef HAVE_RFC2553
    /* XXX: Depend on ai_family */
    masklength = 128;
 #else
@@ -1019,7 +1023,7 @@ int acl_addr(const char *aspec, struct access_control_addr *aca)
    }
 
    if ((masklength < 0) ||
-#ifdef HAVE_GETADDRINFO
+#ifdef HAVE_RFC2553
          (masklength > 128)
 #else
          (masklength > 32)
@@ -1045,7 +1049,7 @@ int acl_addr(const char *aspec, struct access_control_addr *aca)
       p = strchr(acl_spec, ':');
    }
 
-#ifdef HAVE_GETADDRINFO
+#ifdef HAVE_RFC2553
    memset(&hints, 0, sizeof(struct addrinfo));
    hints.ai_family = AF_UNSPEC;
    hints.ai_socktype = SOCK_STREAM;
@@ -1088,10 +1092,10 @@ int acl_addr(const char *aspec, struct access_control_addr *aca)
       /* XXX: This will be logged as parse error. */
       return(-1);
    }
-#endif /* def HAVE_GETADDRINFO */
+#endif /* def HAVE_RFC2553 */
 
    /* build the netmask */
-#ifdef HAVE_GETADDRINFO
+#ifdef HAVE_RFC2553
    /* Clip masklength according to current family. */
    if ((aca->addr.ss_family == AF_INET) && (masklength > 32))
    {
@@ -1148,7 +1152,7 @@ int acl_addr(const char *aspec, struct access_control_addr *aca)
     * (i.e. save on the network portion of the address).
     */
    aca->addr = aca->addr & aca->mask;
-#endif /* def HAVE_GETADDRINFO */
+#endif /* def HAVE_RFC2553 */
 
    return(0);
 
