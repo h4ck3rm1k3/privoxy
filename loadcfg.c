@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.97 2009/04/17 11:45:19 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.98 2009/04/24 15:29:43 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.97 2009/04/17 11:45:19 fabiankeil
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.98  2009/04/24 15:29:43  fabiankeil
+ *    Allow to limit the number of of client connections.
+ *
  *    Revision 1.97  2009/04/17 11:45:19  fabiankeil
  *    Replace HAVE_GETADDRINFO and HAVE_GETNAMEINFO macros
  *    with HAVE_RFC2553 macro. Original patch by Petr Pisar.
@@ -647,6 +650,7 @@ static struct file_list *current_configfile = NULL;
 #define hash_listen_address              1255650842ul /* "listen-address" */
 #define hash_logdir                          422889ul /* "logdir" */
 #define hash_logfile                        2114766ul /* "logfile" */
+#define hash_max_client_connections      3595884446ul /* "max-client-connections" */
 #define hash_permit_access               3587953268ul /* "permit-access" */
 #define hash_proxy_info_url              3903079059ul /* "proxy-info-url" */
 #define hash_single_threaded             4250084780ul /* "single-threaded" */
@@ -852,6 +856,7 @@ struct configuration_spec * load_config(void)
    config->usermanual                = strdup(USER_MANUAL_URL);
    config->proxy_args                = strdup("");
    config->forwarded_connect_retries = 0;
+   config->max_client_connections    = 0;
    config->socket_timeout            = 300; /* XXX: Should be a macro. */
    config->feature_flags            &= ~RUNTIME_FEATURE_CGI_TOGGLE;
    config->feature_flags            &= ~RUNTIME_FEATURE_SPLIT_LARGE_FORMS;
@@ -1423,6 +1428,20 @@ struct configuration_spec * load_config(void)
                if (NULL == logfile)
                {
                   log_error(LOG_LEVEL_FATAL, "Out of memory while creating logfile path");
+               }
+            }
+            break;
+
+/* *************************************************************************
+ * max-client-connections number
+ * *************************************************************************/
+         case hash_max_client_connections :
+            if (*arg != '\0')
+            {
+               int max_client_connections = atoi(arg);
+               if (0 <= max_client_connections)
+               {
+                  config->max_client_connections = max_client_connections;
                }
             }
             break;
