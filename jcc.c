@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.247 2009/05/10 10:19:23 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.248 2009/05/10 10:25:19 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -33,6 +33,9 @@ const char jcc_rcs[] = "$Id: jcc.c,v 1.247 2009/05/10 10:19:23 fabiankeil Exp $"
  *
  * Revisions   :
  *    $Log: jcc.c,v $
+ *    Revision 1.248  2009/05/10 10:25:19  fabiankeil
+ *    Change wait_for_alive_connection() prototype to use (void).
+ *
  *    Revision 1.247  2009/05/10 10:19:23  fabiankeil
  *    Reenable server-side-only keep-alive support, but only share
  *    outgoing connections if the connection-sharing option is set.
@@ -2283,7 +2286,7 @@ static int server_response_is_complete(struct client_state *csp,
  * Returns     :  N/A
  *
  *********************************************************************/
-static void wait_for_alive_connections()
+static void wait_for_alive_connections(void)
 {
    int connections_alive = close_unusable_connections();
 
