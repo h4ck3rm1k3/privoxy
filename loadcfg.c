@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.100 2009/05/10 10:19:23 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.101 2009/05/13 18:20:54 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -35,6 +35,9 @@ const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.100 2009/05/10 10:19:23 fabiankei
  *
  * Revisions   :
  *    $Log: loadcfg.c,v $
+ *    Revision 1.101  2009/05/13 18:20:54  fabiankeil
+ *    There's no reason for keep_alive_timeout to be signed.
+ *
  *    Revision 1.100  2009/05/10 10:19:23  fabiankeil
  *    Reenable server-side-only keep-alive support, but only share
  *    outgoing connections if the connection-sharing option is set.
@@ -1418,7 +1421,7 @@ struct configuration_spec * load_config(void)
                if (0 <= timeout)
                {
                   config->feature_flags |= RUNTIME_FEATURE_CONNECTION_KEEP_ALIVE;
-                  config->keep_alive_timeout = timeout;
+                  config->keep_alive_timeout = (unsigned int)timeout;
                }
                else
                {
