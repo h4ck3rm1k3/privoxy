@@ -1,6 +1,6 @@
 ##############################################################################
 #
-# File        :  $Source: /cvsroot/ijbswa/current/templates/edit-actions-list-url,v $
+# File        :  $Source: /cvsroot/ijbswa/current/templates/edit-actions-list-button,v $
 #
 # Purpose     :  Template which forms part of edit-actions-list
 # 
@@ -30,25 +30,4 @@
 #                Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
 #############################################################################
-#
-# Available variables include:
-#
-# filename
-# ver
-# sectionid
-# urls
-#
-#############################################################################
-#
-# ** Important note: **
-#
-# It is *extremely* important to keep this file small.  That's why all the
-# identifiers in the HTML are short and cryptic.  Currently, the main
-# edit-actions page is ~300k.  Before it was optimized, it was ~550k.
-#
-#############################################################################
-<tr class="url" valign="top">
-<td class="indentbuttons"><a name="l@p@"
-href="ear?f=@f@&amp;v=@v@&amp;p=@p@" onclick="return rm_p(this, @p@,'@url@');">Remove</a>&nbsp;&nbsp;&nbsp;<a
-href="eau?f=@f@&amp;v=@v@&amp;p=@p@" onclick="return  e_p(this, @p@,'@url@');">Edit</a>&nbsp; @url-html@</td>
-</tr>
+ &nbsp; <a href="eas?f=@f@&amp;v=@v@&amp;s=@all-urls-s@&amp;p=@button-name@#l@all-urls-s@">Set to @button-name@</a>
