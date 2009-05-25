@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.58 2009/05/19 17:20:35 fabiankeil Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.59 2009/05/25 15:43:34 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -310,7 +310,7 @@ jb_socket connect_to(const char *host, int portnum, struct client_state *csp)
    freeaddrinfo(result);
    if (!rp)
    {
-      log_error(LOG_LEVEL_INFO, "Could not connect to [%s]:%s.",
+      log_error(LOG_LEVEL_CONNECT, "Could not connect to [%s]:%s.",
          host, service);
       return(JB_INVALID_SOCKET);
    }
