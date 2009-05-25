@@ -7,7 +7,7 @@
 # A regression test "framework" for Privoxy. For documentation see:
 # perldoc privoxy-regression-test.pl
 #
-# $Id: privoxy-regression-test.pl,v 1.38 2009/05/19 14:45:16 fabiankeil Exp $
+# $Id: privoxy-regression-test.pl,v 1.39 2009/05/25 19:33:08 fabiankeil Exp $
 #
 # Wish list:
 #
@@ -730,15 +730,18 @@ sub execute_sticky_actions_test ($) {
     my $final_results = get_final_results($url);
 
     foreach my $sticky_action (@sticky_actions) {
+
         if (defined $final_results->{$sticky_action}) {
             # Exact match
             $verified_actions++;
-        }elsif ($sticky_action =~ /-.*\{/ and
-                not defined $final_results->{$sticky_action}) {
+
+        } elsif ($sticky_action =~ /-.*\{/ {
+
             # Disabled multi actions aren't explicitly listed as
             # disabled and thus have to be checked by verifying
             # that they aren't enabled.
             $verified_actions++;
+
         } else {
             l(LL_VERBOSE_FAILURE,
               "Ooops. '$sticky_action' is not among the final results.");
