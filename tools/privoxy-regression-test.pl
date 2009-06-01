@@ -7,7 +7,7 @@
 # A regression test "framework" for Privoxy. For documentation see:
 # perldoc privoxy-regression-test.pl
 #
-# $Id: privoxy-regression-test.pl,v 1.43 2009/05/28 17:26:04 fabiankeil Exp $
+# $Id: privoxy-regression-test.pl,v 1.44 2009/06/01 10:49:07 fabiankeil Exp $
 #
 # Wish list:
 #
@@ -164,6 +164,10 @@ sub load_regressions_tests () {
 
     l(LL_STATUS, "Asking Privoxy for the number of action files available ...");
 
+    # Dear Privoxy, please reload the config file if necessary ...
+    get_cgi_page_or_else($curl_url);
+
+    # ... so we get the latest one here.
     foreach (@{get_cgi_page_or_else($curl_url)}) {
 
         chomp;
