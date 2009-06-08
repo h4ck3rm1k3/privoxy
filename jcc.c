@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.251 2009/06/03 16:42:49 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.252 2009/06/08 16:48:50 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -1307,6 +1307,7 @@ static jb_err receive_client_request(struct client_state *csp)
          {
             log_error(LOG_LEVEL_ERROR,
                "Stopped grabbing the client headers.");
+            destroy_list(headers);
             return JB_ERR_PARSE;
          }
 
