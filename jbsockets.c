@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.61 2009/05/28 21:13:34 fabiankeil Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.62 2009/06/10 22:36:01 david__schmidt Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -102,6 +102,11 @@ const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.61 2009/05/28 21:13:34 fabian
 #include "filters.h"
 #include "errlog.h"
 #include "miscutil.h"
+
+/* Mac OSX doesn't define AI_NUMERICSESRV */
+#ifndef AI_NUMERICSERV
+#define AI_NUMERICSERV 0
+#endif
 
 const char jbsockets_h_rcs[] = JBSOCKETS_H_VERSION;
 
