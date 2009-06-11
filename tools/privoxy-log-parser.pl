@@ -8,7 +8,7 @@
 #
 # http://www.fabiankeil.de/sourcecode/privoxy-log-parser/
 #
-# $Id: privoxy-log-parser.pl,v 1.30 2009/06/08 17:22:52 fabiankeil Exp $
+# $Id: privoxy-log-parser.pl,v 1.31 2009/06/11 18:29:13 fabiankeil Exp $
 #
 # TODO:
 #       - LOG_LEVEL_CGI, LOG_LEVEL_ERROR, LOG_LEVEL_WRITE content highlighting
@@ -370,7 +370,7 @@ sub get_missing_css_lines () {
 
     my $css_line;
 
-    $css_line .= '.' . 'default' . ' {'; # XXX: lc() shouldn't be necessary
+    $css_line .= '.' . 'default' . ' {';
     $css_line .= 'color:' . HEADER_DEFAULT_COLOUR . ';';
     $css_line .= 'background-color:' . get_css_colour(DEFAULT_BACKGROUND) . ';';
     $css_line .= '}' . "\n"; 
