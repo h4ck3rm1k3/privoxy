@@ -7,7 +7,7 @@
 # A regression test "framework" for Privoxy. For documentation see:
 # perldoc privoxy-regression-test.pl
 #
-# $Id: privoxy-regression-test.pl,v 1.48 2009/06/10 16:38:08 fabiankeil Exp $
+# $Id: privoxy-regression-test.pl,v 1.49 2009/06/14 14:33:01 fabiankeil Exp $
 #
 # Wish list:
 #
@@ -225,7 +225,7 @@ sub tokenize ($) {
     s@&amp;@&@g;
 
     # Tokenize
-    if (/^\#\s*([^=:#]*?)\s*[=]\s*([^#]+)$/) {
+    if (/^\#\s*([^=:#]*?)\s*[=]\s*([^#]+)(?:#.*)?$/) {
 
         $token = $1;
         $value = $2;
