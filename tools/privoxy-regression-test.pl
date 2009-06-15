@@ -7,7 +7,7 @@
 # A regression test "framework" for Privoxy. For documentation see:
 # perldoc privoxy-regression-test.pl
 #
-# $Id: privoxy-regression-test.pl,v 1.49 2009/06/14 14:33:01 fabiankeil Exp $
+# $Id: privoxy-regression-test.pl,v 1.50 2009/06/15 17:12:45 fabiankeil Exp $
 #
 # Wish list:
 #
@@ -923,7 +923,7 @@ sub check_header_result ($$) {
 
         } else {
 
-            $header = "'No matching header'" unless defined $header; # XXX: No header detected to be precise
+            $header = "No matching header" unless defined $header; # XXX: No header detected to be precise
             l(LL_VERBOSE_FAILURE,
               "Ooops. Got: '" . $header . "' while expecting: '" . $expect_header . "'");
         }
