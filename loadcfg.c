@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.102 2009/05/16 13:27:20 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.103 2009/06/15 20:50:56 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -908,7 +908,7 @@ struct configuration_spec * load_config(void)
             if (*arg != '\0')
             {
                int timeout = atoi(arg);
-               if (0 <= timeout)
+               if (0 < timeout)
                {
                   config->feature_flags |= RUNTIME_FEATURE_CONNECTION_KEEP_ALIVE;
                   config->keep_alive_timeout = (unsigned int)timeout;
