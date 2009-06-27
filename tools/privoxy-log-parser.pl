@@ -8,7 +8,7 @@
 #
 # http://www.fabiankeil.de/sourcecode/privoxy-log-parser/
 #
-# $Id: privoxy-log-parser.pl,v 1.31 2009/06/11 18:29:13 fabiankeil Exp $
+# $Id: privoxy-log-parser.pl,v 1.32 2009/06/27 15:09:33 fabiankeil Exp $
 #
 # TODO:
 #       - LOG_LEVEL_CGI, LOG_LEVEL_ERROR, LOG_LEVEL_WRITE content highlighting
@@ -1855,19 +1855,20 @@ sub parse_loop () {
     my %log_level_count;
 
     my %log_level_handlers = (
-        'Re-Filter'     => \&handle_loglevel_re_filter,
-        'Header'        => \&handle_loglevel_header,
-        'Connect'       => \&handle_loglevel_connect,
-        'Redirect'      => \&handle_loglevel_redirect,
-        'Request'       => \&handle_loglevel_request,
-        'Crunch'        => \&handle_loglevel_crunch,
-        'Gif-Deanimate' => \&handle_loglevel_gif_deanimate,
-        'Info'          => \&handle_loglevel_info,
-        'CGI'           => \&handle_loglevel_cgi,
-        'Force'         => \&handle_loglevel_force,
-        'Error'         => \&handle_loglevel_ignore,
-        'Fatal error'   => \&handle_loglevel_ignore,
-        'Writing'       => \&handle_loglevel_ignore,
+        'Re-Filter'         => \&handle_loglevel_re_filter,
+        'Header'            => \&handle_loglevel_header,
+        'Connect'           => \&handle_loglevel_connect,
+        'Redirect'          => \&handle_loglevel_redirect,
+        'Request'           => \&handle_loglevel_request,
+        'Crunch'            => \&handle_loglevel_crunch,
+        'Gif-Deanimate'     => \&handle_loglevel_gif_deanimate,
+        'Info'              => \&handle_loglevel_info,
+        'CGI'               => \&handle_loglevel_cgi,
+        'Force'             => \&handle_loglevel_force,
+        'Error'             => \&handle_loglevel_ignore,
+        'Fatal error'       => \&handle_loglevel_ignore,
+        'Writing'           => \&handle_loglevel_ignore,
+        'Unknown log level' => \&handle_loglevel_ignore,
     );
 
     while (<>) {
