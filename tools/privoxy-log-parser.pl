@@ -8,7 +8,7 @@
 #
 # http://www.fabiankeil.de/sourcecode/privoxy-log-parser/
 #
-# $Id: privoxy-log-parser.pl,v 1.32 2009/06/27 15:09:33 fabiankeil Exp $
+# $Id: privoxy-log-parser.pl,v 1.33 2009/06/27 15:10:16 fabiankeil Exp $
 #
 # TODO:
 #       - LOG_LEVEL_CGI, LOG_LEVEL_ERROR, LOG_LEVEL_WRITE content highlighting
@@ -1006,6 +1006,11 @@ sub handle_loglevel_header ($) {
 
        $content =~ s@(?<= from )(\d+)@$h{'Number'}$1$h{'Standard'}@;
        $content =~ s@(?<= to )(\d+)@$h{'Number'}$1$h{'Standard'}@;
+
+    } elsif ($c =~ m/^Appended client IP address to/) {
+
+       # Appended client IP address to X-Forwarded-For: 10.0.0.2, 10.0.0.1
+       $content =~ s@(?<=X-Forwarded-For )(\d+)@$h{'Host'}$1$h{'Standard'}@;
 
     } else {
 
