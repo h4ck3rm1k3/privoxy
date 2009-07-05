@@ -8,7 +8,7 @@
 #
 # http://www.fabiankeil.de/sourcecode/privoxy-log-parser/
 #
-# $Id: privoxy-log-parser.pl,v 1.35 2009/06/30 19:08:37 fabiankeil Exp $
+# $Id: privoxy-log-parser.pl,v 1.36 2009/07/05 12:11:18 fabiankeil Exp $
 #
 # TODO:
 #       - LOG_LEVEL_CGI, LOG_LEVEL_ERROR, LOG_LEVEL_WRITE content highlighting
@@ -1583,6 +1583,12 @@ sub handle_loglevel_connect ($) {
 
         $c =~ s@(?<=server socket )(\d+)@$h{'Number'}$1$h{'Standard'}@;
         $c = highlight_matched_host($c, '(?<=to )[^\s]+');
+
+    } elsif ($c =~ m/^Marking the server socket/) {
+
+        # Marking the server socket 7 tainted.
+
+        $c =~ s@(?<=server socket )(\d+)@$h{'Number'}$1$h{'Standard'}@;
 
     } elsif ($c =~ m/^Looks like we rea/ or
              $c =~ m/^Unsetting keep-alive flag/ or
