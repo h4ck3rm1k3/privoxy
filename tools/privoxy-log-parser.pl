@@ -8,7 +8,7 @@
 #
 # http://www.fabiankeil.de/sourcecode/privoxy-log-parser/
 #
-# $Id: privoxy-log-parser.pl,v 1.36 2009/07/05 12:11:18 fabiankeil Exp $
+# $Id: privoxy-log-parser.pl,v 1.37 2009/07/08 17:26:46 fabiankeil Exp $
 #
 # TODO:
 #       - LOG_LEVEL_CGI, LOG_LEVEL_ERROR, LOG_LEVEL_WRITE content highlighting
@@ -995,9 +995,10 @@ sub handle_loglevel_header ($) {
         # XXX: Could highlight more here.
         $content =~ s@(?<=^Content-Type: )(.*)(?= not replaced)@$h{'content-type'}$1$h{'Standard'}@;
 
-    } elsif ($c =~ m/^Server keep-alive timeout is/) {
+    } elsif ($c =~ m/^(Server|Client) keep-alive timeout is/) {
 
        # Server keep-alive timeout is 5. Sticking with 10.
+       # Client keep-alive timeout is 20. Sticking with 10.
 
        $content =~ s@(?<=timeout is )(\d+)@$h{'Number'}$1$h{'Standard'}@;
        $content =~ s@(?<=Sticking with )(\d+)@$h{'Number'}$1$h{'Standard'}@;
