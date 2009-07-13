@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.143 2009/06/28 14:31:43 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.144 2009/07/13 17:12:28 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -639,7 +639,11 @@ struct reusable_connection
 {
    jb_socket sfd;
    int       in_use;
-   time_t    timestamp;
+   time_t    timestamp; /* XXX: rename? */
+
+   time_t    request_sent;
+   time_t    response_received;
+
    /*
     * Number of seconds after which this
     * connection will no longer be reused.
