@@ -8,7 +8,7 @@
 #
 # http://www.fabiankeil.de/sourcecode/privoxy-log-parser/
 #
-# $Id: privoxy-log-parser.pl,v 1.40 2009/07/14 18:40:48 fabiankeil Exp $
+# $Id: privoxy-log-parser.pl,v 1.41 2009/07/21 13:55:59 fabiankeil Exp $
 #
 # TODO:
 #       - LOG_LEVEL_CGI, LOG_LEVEL_ERROR, LOG_LEVEL_WRITE content highlighting
@@ -1401,9 +1401,10 @@ sub handle_loglevel_connect ($) {
 
         $c =~ s@(?<=failed: )(.*)@$h{'error'}$1$h{'Standard'}@;
 
-    } elsif ($c =~ m/^to ([^\s]*) successful$/) {
+    } elsif ($c =~ m/^to ([^\s]*)( successful)?$/) {
 
         # Connect: to www.nzherald.co.nz successful
+        # Connect: to archiv.radiotux.de
 
         return '' if SUPPRESS_SUCCESSFUL_CONNECTIONS;
         $c = highlight_matched_host($c, '(?<=to )[^\s]+');
