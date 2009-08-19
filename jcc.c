@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.275 2009/07/22 22:31:54 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.276 2009/08/19 15:57:13 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -2398,6 +2398,7 @@ static void serve(struct client_state *csp)
             csp->content_type = 0;
             csp->content_length = 0;
             csp->expected_content_length = 0;
+            csp->expected_client_content_length = 0;
             list_remove_all(csp->headers);
             freez(csp->iob->buf);
             memset(csp->iob, 0, sizeof(csp->iob));
