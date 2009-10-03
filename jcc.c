@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.296 2009/10/01 16:07:34 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.297 2009/10/03 10:37:49 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -2563,7 +2563,7 @@ static void serve(struct client_state *csp)
                   break;
                }
 
-               remember_connection(csp, forward_url(csp, csp->http));
+               remember_connection(&csp->server_connection);
                csp->sfd = JB_INVALID_SOCKET;
                close_socket(csp->cfd);
                csp->cfd = JB_INVALID_SOCKET;
