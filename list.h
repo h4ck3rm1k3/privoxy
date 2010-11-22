@@ -1,6 +1,6 @@
 #ifndef LIST_H_INCLUDED
 #define LIST_H_INCLUDED
-#define LIST_H_VERSION "$Id: list.h,v 1.16 2009/05/16 13:27:20 fabiankeil Exp $"
+#define LIST_H_VERSION "$Id: list.h,v 1.17 2010/11/22 10:32:40 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/list.h,v $
