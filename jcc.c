@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.331 2010/11/06 11:48:32 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.332 2010/12/26 15:30:28 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -2513,6 +2513,11 @@ static void serve(struct client_state *csp)
             }
             continue_chatting = (latency < csp->server_connection.keep_alive_timeout);
          }
+      }
+
+      if (continue_chatting && any_loaded_file_changed(csp->config->config_file_list))
+      {
+         continue_chatting = 0;
       }
 
       if (continue_chatting)
