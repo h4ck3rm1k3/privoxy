@@ -1,6 +1,7 @@
-$Id: TODO,v 1.33 2011/02/10 22:16:55 fabiankeil Exp $
+$Id: TODO,v 1.34 2011/02/10 22:18:30 fabiankeil Exp $
 
-Some Privoxy related tasks, not ordered in any way.
+Some Privoxy related tasks, sorted by the time they
+have been added, not by priority.
 
 1)  Add some regression tests. Filters should be tested automatically
     (variables too). Could probably reuse large parts of Privoxy-Filter-Test.
