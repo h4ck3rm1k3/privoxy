@@ -1,6 +1,6 @@
 #ifndef LOADERS_H_INCLUDED
 #define LOADERS_H_INCLUDED
-#define LOADERS_H_VERSION "$Id: loaders.h,v 1.26 2010/12/26 15:30:28 fabiankeil Exp $"
+#define LOADERS_H_VERSION "$Id: loaders.h,v 1.27 2011/03/03 14:38:36 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loaders.h,v $
@@ -49,7 +49,7 @@ struct configuration_spec;
 struct url_spec;
 
 extern unsigned int sweep(void);
-extern char *read_config_line(char *buf, size_t buflen, FILE *fp, unsigned long *linenum);
+extern char *read_config_line(FILE *fp, unsigned long *linenum, char **buf);
 extern int check_file_changed(const struct file_list * current,
                               const char * filename,
                               struct file_list ** newfl);
