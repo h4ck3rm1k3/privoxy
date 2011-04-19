@@ -1,4 +1,4 @@
-const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.59 2009/06/10 13:17:17 fabiankeil Exp $";
+const char urlmatch_rcs[] = "$Id: urlmatch.c,v 1.60 2011/04/19 13:00:47 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/urlmatch.c,v $
@@ -929,7 +929,7 @@ static int simplematch(const char *pattern, const char *text)
       ||   ((*pat == ']') && (charmap[*txt / 8] & (1 << (*txt % 8)))) )
       {
          /* 
-          * Sucess: Go ahead
+          * Success: Go ahead
           */
          pat++;
       }
