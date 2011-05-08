@@ -7,7 +7,7 @@
 # A regression test "framework" for Privoxy. For documentation see:
 # perldoc privoxy-regression-test.pl
 #
-# $Id: privoxy-regression-test.pl,v 1.65 2011/04/19 13:10:11 fabiankeil Exp $
+# $Id: privoxy-regression-test.pl,v 1.66 2011/05/08 13:27:10 fabiankeil Exp $
 #
 # Wish list:
 #
@@ -593,11 +593,11 @@ sub level_is_unacceptable ($) {
 
     } elsif ($level < $min_level) {
 
-        $reason = "Level to low (" . $level . " < " . $min_level . ")";
+        $reason = "Level too low (" . $level . " < " . $min_level . ")";
 
     } elsif ($level > $max_level) {
 
-        $reason = "Level to high (" . $level . " > " . $max_level . ")";
+        $reason = "Level too high (" . $level . " > " . $max_level . ")";
 
     } else {
 
