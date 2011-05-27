@@ -1,4 +1,4 @@
-const char w32log_rcs[] = "$Id: w32log.c,v 1.38 2010/08/14 23:28:52 ler762 Exp $";
+const char w32log_rcs[] = "$Id: w32log.c,v 1.39 2011/05/27 11:34:16 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/w32log.c,v $
@@ -370,12 +370,12 @@ int LogPutString(const char *pszText)
    int i;
    int result = 0;
 
-   if (pszText == NULL || strlen(pszText) == 0)
+   if (!g_bLogMessages)
    {
       return 1;
    }
 
-   if (!g_bLogMessages)
+   if (pszText == NULL || strlen(pszText) == 0)
    {
       return 1;
    }
