@@ -1,4 +1,4 @@
-const char jcc_rcs[] = "$Id: jcc.c,v 1.351 2011/05/03 10:15:54 fabiankeil Exp $";
+const char jcc_rcs[] = "$Id: jcc.c,v 1.352 2011/05/27 11:34:39 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jcc.c,v $
@@ -2901,7 +2901,7 @@ int main(int argc, char **argv)
             pName++;
          exit( (install_service(pName)) ? 0 : 1 );
       }
-      else if (strncmp(argv[argc_pos], "--uninstall", + 11) == 0)
+      else if (strncmp(argv[argc_pos], "--uninstall", 11) == 0)
       {
          const char *pName = argv[argc_pos] + 11;
          if (*pName == ':')
