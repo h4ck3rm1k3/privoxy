@@ -1,7 +1,7 @@
 #ifndef PROJECT_H_INCLUDED
 #define PROJECT_H_INCLUDED
 /** Version string. */
-#define PROJECT_H_VERSION "$Id: project.h,v 1.166 2011/07/03 17:54:29 fabiankeil Exp $"
+#define PROJECT_H_VERSION "$Id: project.h,v 1.167 2011/07/03 17:55:23 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/project.h,v $
@@ -186,12 +186,6 @@ typedef int jb_err;
  * Max length of CGI parameters (arbitrary limit).
  */
 #define CGI_PARAM_LEN_MAX 500U
-
-/**
- * Minimum length which a buffer has to reach before
- * Privoxy bothers to (re-)compress it. Completely arbitrary.
- */
-#define LOWER_LENGTH_LIMIT_FOR_COMPRESSION 1024U
 
 /**
  * Buffer size for capturing struct hostent data in the
