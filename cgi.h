@@ -1,6 +1,6 @@
 #ifndef CGI_H_INCLUDED
 #define CGI_H_INCLUDED
-#define CGI_H_VERSION "$Id: cgi.h,v 1.39 2011/07/03 17:55:23 fabiankeil Exp $"
+#define CGI_H_VERSION "$Id: cgi.h,v 1.40 2011/07/08 13:27:31 fabiankeil Exp $"
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.h,v $
@@ -107,7 +107,7 @@ extern char   get_char_param(const struct map *parameters,
  * we bother to (re-)compress it. Completely arbitrary.
  */
 extern const size_t LOWER_LENGTH_LIMIT_FOR_COMPRESSION;
-extern char *compress_buffer(char *buffer, size_t *buffer_length);
+extern char *compress_buffer(char *buffer, size_t *buffer_length, int compression_level);
 #endif
 
 /*
