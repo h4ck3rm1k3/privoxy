@@ -7,7 +7,7 @@
 # A regression test "framework" for Privoxy. For documentation see:
 # perldoc privoxy-regression-test.pl
 #
-# $Id: privoxy-regression-test.pl,v 1.76 2011/06/29 20:31:05 fabiankeil Exp $
+# $Id: privoxy-regression-test.pl,v 1.77 2011/07/17 13:52:11 fabiankeil Exp $
 #
 # Wish list:
 #
@@ -1210,8 +1210,9 @@ sub get_page_with_curl ($) {
     my $retries_left = get_cli_option('retries') + 1;
     my $failure_reason;
 
-    $curl_line .= ' --proxy ' . $proxy if (defined $proxy);
-
+    if (defined $proxy) {
+        $curl_line .= ' --proxy ' . quote($proxy);
+    }
     # We want to see the HTTP status code
     $curl_line .= " --include ";
     # Let Privoxy emit two log messages less.
