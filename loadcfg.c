@@ -1,4 +1,4 @@
-const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.119 2011/07/17 13:37:14 fabiankeil Exp $";
+const char loadcfg_rcs[] = "$Id: loadcfg.c,v 1.120 2011/07/19 11:00:20 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/loadcfg.c,v $
@@ -1551,7 +1551,7 @@ struct configuration_spec * load_config(void)
       }
    }
 
-   for (i = 0; i < MAX_LISTENING_SOCKETS && NULL != config->haddr[i]; i++ )
+   for (i = 0; i < MAX_LISTENING_SOCKETS && NULL != config->haddr[i]; i++)
    {
       if ((*config->haddr[i] == '[')
          && (NULL != (p = strchr(config->haddr[i], ']')))
