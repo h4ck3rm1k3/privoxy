@@ -1,4 +1,4 @@
-const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.107 2011/07/17 13:36:48 fabiankeil Exp $";
+const char jbsockets_rcs[] = "$Id: jbsockets.c,v 1.108 2011/07/30 15:12:02 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/jbsockets.c,v $
@@ -313,6 +313,7 @@ static jb_socket rfc2553_connect_to(const char *host, int portnum, struct client
 
          if (errno != EINTR)
          {
+            socket_error = errno;
             close_socket(fd);
             connect_failed = 1;
             break;
