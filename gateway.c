@@ -1,4 +1,4 @@
-const char gateway_rcs[] = "$Id: gateway.c,v 1.77 2011/09/06 18:46:17 fabiankeil Exp $";
+const char gateway_rcs[] = "$Id: gateway.c,v 1.78 2011/09/18 14:42:43 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/gateway.c,v $
@@ -659,7 +659,7 @@ jb_socket forwarded_connect(const struct forward_spec * fwd,
       default:
          /* Should never get here */
          log_error(LOG_LEVEL_FATAL,
-            "SOCKS4 impossible internal error - bad SOCKS type.");
+            "Internal error in forwarded_connect(). Bad proxy type: %d", fwd->type);
    }
 
    if (JB_INVALID_SOCKET != sfd)
