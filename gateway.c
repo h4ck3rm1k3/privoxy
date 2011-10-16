@@ -1,4 +1,4 @@
-const char gateway_rcs[] = "$Id: gateway.c,v 1.78 2011/09/18 14:42:43 fabiankeil Exp $";
+const char gateway_rcs[] = "$Id: gateway.c,v 1.79 2011/10/16 12:37:12 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/gateway.c,v $
@@ -338,16 +338,12 @@ void forget_connection(jb_socket sfd)
             sfd, reusable_connection[slot].host,
             reusable_connection[slot].port, slot);
          mark_connection_closed(&reusable_connection[slot]);
-         privoxy_mutex_unlock(&connection_reuse_mutex);
-
-         return;
+         break;
       }
    }
 
-   log_error(LOG_LEVEL_CONNECT,
-      "Socket %d already forgotten or never remembered.", sfd);
-
    privoxy_mutex_unlock(&connection_reuse_mutex);
+
 }
 #endif /* def FEATURE_CONNECTION_SHARING */
 
