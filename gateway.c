@@ -1,4 +1,4 @@
-const char gateway_rcs[] = "$Id: gateway.c,v 1.81 2011/10/23 11:21:09 fabiankeil Exp $";
+const char gateway_rcs[] = "$Id: gateway.c,v 1.82 2011/10/23 11:21:28 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/gateway.c,v $
@@ -1093,10 +1093,8 @@ static jb_socket socks5_connect(const struct forward_spec *fwd,
    if (server_size != sizeof(sbuf))
    {
       errstr = "SOCKS5 negotiation read failed";
-      err = 1;
    }
-
-   if (!err)
+   else
    {
       if (sbuf[0] != '\x05')
       {
