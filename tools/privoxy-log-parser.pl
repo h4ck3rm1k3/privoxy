@@ -8,7 +8,7 @@
 #
 # http://www.fabiankeil.de/sourcecode/privoxy-log-parser/
 #
-# $Id: privoxy-log-parser.pl,v 1.121 2011/08/18 11:41:18 fabiankeil Exp $
+# $Id: privoxy-log-parser.pl,v 1.122 2011/11/12 12:55:46 fabiankeil Exp $
 #
 # TODO:
 #       - LOG_LEVEL_CGI, LOG_LEVEL_ERROR, LOG_LEVEL_WRITE content highlighting
@@ -1875,7 +1875,13 @@ sub handle_loglevel_error ($) {
         #  Closing client socket 15 without sending data.
         $c =~ s@(?<=on socket )(\d+)@$h{'Number'}$1$h{'Standard'}@;
         $c =~ s@(?<=client socket )(\d+)@$h{'Number'}$1$h{'Standard'}@;
+
+    } elsif ($c =~ m/^Didn't receive data in time:/) {
+
+        # Didn't receive data in time: a.fsdn.com:443
+        $c =~ s@(?<=in time: )(.*)@$h{'destination'}$1$h{'Standard'}@;
     }
+
     # XXX: There are probably more messages that deserve highlighting.
 
     return $c;
