@@ -1,11 +1,9 @@
-const char list_rcs[] = "$Id: list.c,v 1.25 2011/09/04 11:10:56 fabiankeil Exp $";
+const char list_rcs[] = "$Id: list.c,v 1.26 2011/12/31 14:47:44 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/list.c,v $
  *
  * Purpose     :  Declares functions to handle lists.
- *                Functions declared include:
- *                   `destroy_list', `enlist' and `list_to_text'
  *
  * Copyright   :  Written by and Copyright (C) 2001-2007 the SourceForge
  *                Privoxy team. http://www.privoxy.org/

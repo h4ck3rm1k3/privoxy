@@ -1,11 +1,9 @@
-const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.71 2011/11/18 16:47:08 fabiankeil Exp $";
+const char cgiedit_rcs[] = "$Id: cgiedit.c,v 1.72 2011/12/31 14:47:44 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgiedit.c,v $
  *
  * Purpose     :  CGI-based actionsfile editor.
- *
- *                Functions declared include: cgi_edit_*
  *
  *                NOTE: The CGIs in this file use parameter names
  *                such as "f" and "s" which are really *BAD* choices.
