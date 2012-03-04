@@ -1,4 +1,4 @@
-const char miscutil_rcs[] = "$Id: miscutil.c,v 1.68 2011/09/04 11:10:56 fabiankeil Exp $";
+const char miscutil_rcs[] = "$Id: miscutil.c,v 1.69 2012/03/04 11:41:57 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/miscutil.c,v $
@@ -72,7 +72,6 @@ const char miscutil_h_rcs[] = MISCUTIL_H_VERSION;
  * Function    :  zalloc
  *
  * Description :  Malloc some memory and set it to '\0'.
- *                The way calloc() ought to be -acjc
  *
  * Parameters  :
  *          1  :  size = Size of memory chunk to return.
