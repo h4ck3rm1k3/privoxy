@@ -1,4 +1,4 @@
-const char filters_rcs[] = "$Id: filters.c,v 1.170 2012/03/09 17:55:50 fabiankeil Exp $";
+const char filters_rcs[] = "$Id: filters.c,v 1.171 2012/03/18 13:47:33 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/filters.c,v $
@@ -1109,7 +1109,8 @@ char *get_last_url(char *subject, const char *redirect_mode)
 
       if (NULL == url_segments)
       {
-         log_error(LOG_LEVEL_ERROR, "Out of memory while decoding URL: %s", new_url);
+         log_error(LOG_LEVEL_ERROR,
+            "Out of memory while decoding URL: %s", subject);
          freez(subject);
          return NULL;
       }
