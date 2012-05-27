@@ -1,4 +1,4 @@
-const char w32log_rcs[] = "$Id: w32log.c,v 1.47 2012/05/27 15:38:53 fabiankeil Exp $";
+const char w32log_rcs[] = "$Id: w32log.c,v 1.48 2012/05/27 15:45:05 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/w32log.c,v $
@@ -550,14 +550,6 @@ int LogPutStringNoMatch(const char *pszText, int style)
  *********************************************************************/
 void LogShowActivity(void)
 {
-   int i;
-
-   /* Try to figure out if SetIdleIcon() is thread-safe */
-   for (i = 0; i < 1000; i++)
-   {
-      SetIdleIcon();
-   }
-
    /* Start some activity timers */
    if (g_bShowActivityAnimation)
    {
