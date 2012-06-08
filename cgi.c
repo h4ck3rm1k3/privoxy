@@ -1,4 +1,4 @@
-const char cgi_rcs[] = "$Id: cgi.c,v 1.150 2012/03/09 17:55:49 fabiankeil Exp $";
+const char cgi_rcs[] = "$Id: cgi.c,v 1.151 2012/06/08 15:07:53 fabiankeil Exp $";
 /*********************************************************************
  *
  * File        :  $Source: /cvsroot/ijbswa/current/cgi.c,v $
@@ -614,6 +614,11 @@ static struct map *parse_cgi_parameters(char *argstring)
    }
 
    pairs = ssplit(argstring, "&", vector, SZ(vector), 1, 1);
+   if (pairs == -1)
+   {
+      free_map(cgi_params);
+      return NULL;
+   }
 
    for (i = 0; i < pairs; i++)
    {
